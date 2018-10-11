@@ -11,38 +11,42 @@ context('Aliasing', () => {
     })
 
     beforeEach(() => {
-        cy.visit( Cypress.env('BASE_URL') + '/mpi', {
+        cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
     })
 
-    it('login complete', () => {
-        cy.get('plex-text input[type=text]').first().type('botta').should('have.value', 'botta');
+    it('crear agenda', () => {
+        // cy.get('plex-text input[type=text]').first().type('botta').should('have.value', 'botta');
 
         // cy.get('div.alert.alert-danger').should('exist');
 
-        cy.get('plex-button[label="Registrar paciente temporal"]').click();
+        cy.get('plex-button[label="Crear una nueva agenda"]').click();
 
-        cy.get('plex-int[name="documento"] input').type('hola').should('have.value', '');
+        cy.get('plex-dateTime[name="modelo.fecha"] input').type('11/10/2018').should('have.value', '11/10/2018');
 
-        cy.get('plex-int[name="documento"] input').type('34934522').should('have.value', '34934522');
+        cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('0800').should('have.value', '0800');
 
-        cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
+        cy.get('plex-dateTime[name="modelo.horaFin"] input').type('1900').should('have.value', '1900');
 
-        cy.server();
-        cy.route('**/api/modules//fuentesAutenticas/renaper**').as('renaper')
+        cy.get('plex-select[label="Tipos de prestación"]').children().children('.selectize-control').click()
+            .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click()
 
-        cy.get('plex-button[label="Validar con servicios de Renaper"]').click();
+            cy.get('plex-int[label="Cantidad de Turnos"] input').type(10)
+            cy.get('plex-int[name="accesoDirectoDelDia"] input').type(10);
 
-        cy.wait('@renaper').then(function(xhr) {
-            expect(xhr.status).to.eq(200);
-        });
+            
 
-        // cy.get('table').find('tbody').find('tr').first().find('td').eq(0).find('span').should('have.text', 'Temporal').should('have.class','badge-warning');
+        cy.get('plex-button[label="Guardar"]').click();
 
-        // cy.get('table').find('tbody').find('tr').first().find('td').eq(1).find('span').should('have.text', '34934522');
+        cy.wait(2000)
+        cy.get('table tr').contains('Consulta de medicina general').first().click()
+        cy.get('.mdi-arrow-up-bold-circle').click();
+        cy.get('button').contains('CONFIRMAR').click();
+
+
     })
 
     // it('Mock api', () => {
@@ -57,7 +61,7 @@ context('Aliasing', () => {
     //     cy.get('table').find('tbody').find('tr').should('have.length', 2);
 
     // });
-  
-    
+
+
 
 })
