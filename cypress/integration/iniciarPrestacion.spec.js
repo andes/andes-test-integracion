@@ -33,13 +33,6 @@ context('Aliasing', () => {
         cy.get('plex-button').contains('Validar Consulta de medicina general').first().click();
         cy.get('button').contains('CONFIRMAR').click()
 
-        
-        
-        
-
-
-        
-
     })
 
     // it('Mock api', () => {
