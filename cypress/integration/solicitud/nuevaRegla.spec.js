@@ -11,23 +11,28 @@ context('Aliasing', () => {
     })
 
     beforeEach(() => {
-        cy.visit(Cypress.env('BASE_URL') + '/citas/puntoInicio', {
+        cy.viewport(1280, 720)
+
+        cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
     })
 
-    it('dar turno agenda dinamica', () => {
-        cy.get('plex-text input[type=text]').first().type('38906735').should('have.value', '38906735');
-        cy.get('tr').first().click()
-        cy.get('plex-button').first().click()
-        cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click()
-        .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click()
-        cy.get('.outline-success ').click();
-        cy.get('plex-button[label="Dar Turno"]').click();
-        cy.get('plex-button[label="Confirmar"]').click();
+    it('crear nueva regla solicitud', () => {
 
+        cy.get('plex-button[label="Reglas"]').click();
+
+        cy.get('plex-select[label="Prestación Destino"]').children().children().children('.selectize-input').click({ force: true }).get('.option[data-value="59ee2d9bf00c415246fd3d94"]').click({ force: true })
+        cy.get('plex-select[name="organizacion"] input').type('castro')
+        cy.get('plex-select[name="organizacion"]').children().children().children('.selectize-input').click({ force: true }).get('.option[data-value="57e9670e52df311059bc8964"]').click({ force: true })
+        cy.wait(2000);
+        cy.get('.mdi-plus').first().click();
+        cy.get('plex-select[name="prestacionOrigen"] input').type('adolescencia')
+        cy.get('plex-select[name="prestacionOrigen"]').children().children().children('.selectize-input').click({ force: true }).get('.option[data-value="59ee2d9bf00c415246fd3d94"]').eq(1).click({ force: true })
+        cy.get('.mdi-plus').last().click();
+        cy.get('plex-button[label="Guardar"]').click();
 
     })
 

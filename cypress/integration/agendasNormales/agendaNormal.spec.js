@@ -18,14 +18,22 @@ context('Aliasing', () => {
         });
     })
 
-    it('crear agenda dinamica', () => {
+    it('crear agenda', () => {
         // cy.get('plex-text input[type=text]').first().type('botta').should('have.value', 'botta');
 
         // cy.get('div.alert.alert-danger').should('exist');
 
         cy.get('plex-button[label="Crear una nueva agenda"]').click();
+        
+        cy.get('div').then(($body) => {
+            if ($body.hasClass('swal2-container')) {
+                 cy.get('.swal2-cancel').click({ force: true })
+            } else {
+            }
+        })
+        const hoy = Cypress.moment().format('DD/MM/YYYY')
 
-        cy.get('plex-dateTime[name="modelo.fecha"] input').type('11/10/2018').should('have.value', '11/10/2018');
+        cy.get('plex-dateTime[name="modelo.fecha"] input').type(hoy).should('have.value', hoy);
 
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('0800').should('have.value', '0800');
 
@@ -34,14 +42,10 @@ context('Aliasing', () => {
         cy.get('plex-select[label="Tipos de prestación"]').children().children('.selectize-control').click()
             .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click()
 
-        cy.get('plex-bool[name="dinamica"] input[type="checkbox"]').check({ force: true }).should('be.checked')
+            cy.get('plex-int[label="Cantidad de Turnos"] input').type(10)
+            cy.get('plex-int[name="accesoDirectoDelDia"] input').type(10);
 
-        cy.get('plex-text[name="descripcion"] input').eq(0).type('soy una descripcion', { force: true }).should('have.value', 'soy una descripcion');
-
-
-        cy.get('plex-bool[name="cupo"] input[type="checkbox"]').check({ force: true }).should('be.checked')
-
-        cy.get('plex-int[name="cupoMaximo"] input').type('8').should('have.value', '8');
+            
 
         cy.get('plex-button[label="Guardar"]').click();
 

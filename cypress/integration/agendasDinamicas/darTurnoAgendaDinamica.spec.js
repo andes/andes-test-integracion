@@ -18,14 +18,14 @@ context('Aliasing', () => {
         });
     })
 
-    it('dar turno agenda normal', () => {
+    it('dar turno agenda dinamica', () => {
         cy.get('plex-text input[type=text]').first().type('38906735').should('have.value', '38906735');
         cy.get('tr').first().click()
         cy.get('plex-button').first().click()
         cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click()
         .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click()
-        cy.get('.outline-success ').click();
-        cy.get('div').contains('08:00').first().click()
+        cy.get('.outline-success ').first().click();
+        cy.get('plex-button[label="Dar Turno"]').click();
         cy.get('plex-button[label="Confirmar"]').click();
 
 
