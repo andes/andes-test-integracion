@@ -28,8 +28,6 @@ services:
   andes_nginx:  
     image: "andesnqn/nginx:${APP}"
     container_name: andes_nginx
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
       - "80:80"  
   andes_api:  
