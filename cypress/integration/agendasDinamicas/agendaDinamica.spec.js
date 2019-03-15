@@ -39,7 +39,7 @@ context('Aliasing', () => {
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('1900').should('have.value', '1900');
 
         cy.get('plex-select[label="Tipos de prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click()
+            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click()
 
         cy.get('plex-bool[name="dinamica"] input[type="checkbox"]').check({ force: true }).should('be.checked')
 

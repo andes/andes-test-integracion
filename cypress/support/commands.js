@@ -26,10 +26,10 @@
 
 Cypress.Commands.add("login", (usuario, password) => {
     let token;
-    return cy.request('POST', Cypress.env('BASE_URL')+'/api/auth/login', { usuario, password }).then((response) => {
+    return cy.request('POST', Cypress.env('API_SERVER')+'/api/auth/login', { usuario, password }).then((response) => {
         token = response.body.token;
         return response = cy.request({
-            url: Cypress.env('BASE_URL')+'/api/auth/organizaciones',
+            url: Cypress.env('API_SERVER')+'/api/auth/organizaciones',
             method: 'GET',
             headers: {
                 Authorization: 'JWT ' + token
@@ -37,7 +37,7 @@ Cypress.Commands.add("login", (usuario, password) => {
         }).then((response) => {
             let org = response.body[0];
             return response = cy.request({
-                url: Cypress.env('BASE_URL')+'/api/auth/organizaciones',
+                url: Cypress.env('API_SERVER')+'/api/auth/organizaciones',
                 method: 'POST',
                 headers: {
                     Authorization: 'JWT ' + token

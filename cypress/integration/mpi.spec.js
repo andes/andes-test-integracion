@@ -5,29 +5,29 @@
 context('Aliasing', () => {
     let token
     before(() => {
-        cy.login('38906735', 'asd').then(t => {
+        cy.login('34934522', 'asd').then(t => {
             token = t;
         })
     })
 
     beforeEach(() => {
-        cy.visit( Cypress.env('BASE_URL') + '/mpi', {
+        cy.visit( Cypress.env('BASE_URL') + '/apps/mpi', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
     })
 
-    it('login complete', () => {
-        cy.get('plex-text input[type=text]').first().type('botta').should('have.value', 'botta');
+    it('registro de paciente', () => {
+        cy.get('plex-text input[type="text"]').first().type('botta').should('have.value', 'botta');
 
-        // cy.get('div.alert.alert-danger').should('exist');
+        cy.get('div.alert.alert-danger').should('exist');
 
         cy.get('plex-button[label="Registrar paciente temporal"]').click();
 
         cy.get('plex-int[name="documento"] input').type('hola').should('have.value', '');
 
-        cy.get('plex-int[name="documento"] input').type('34934522').should('have.value', '34934522');
+        cy.get('plex-int[name="documento"] input').type('38906735').should('have.value', '38906735');
 
         cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
 

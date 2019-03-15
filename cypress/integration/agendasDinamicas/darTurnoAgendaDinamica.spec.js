@@ -23,7 +23,7 @@ context('Aliasing', () => {
         cy.get('tr').first().click()
         cy.get('plex-button').first().click()
         cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click()
-        .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click()
+        .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click()
         cy.get('.outline-success ').first().click();
         cy.get('plex-button[label="Dar Turno"]').click();
         cy.get('plex-button[label="Confirmar"]').click();
