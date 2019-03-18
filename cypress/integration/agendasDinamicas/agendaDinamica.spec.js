@@ -54,8 +54,8 @@ context('Aliasing', () => {
 
         cy.wait(2000)
         cy.get('table tr').contains('Exámen médico del adulto').first().click()
-        cy.get('.mdi-arrow-up-bold-circle').click();
-        cy.get('button').contains('CONFIRMAR').click();
+        cy.get('plex-button[title="Cambiar a disponible"]').click();
+        // cy.get('button').contains('CONFIRMAR').click();
 
 
     })
