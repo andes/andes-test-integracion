@@ -1,69 +1,82 @@
 /// <reference types="Cypress" />
 
-context('Aliasing', () => {
+context('TM Profesional', () => {
     let token
     before(() => {
+        cy.viewport(1280, 720);
         cy.login('38906735', 'asd').then(t => {
             token = t;
-        })
+        });
     })
 
     beforeEach(() => {
-        cy.viewport(1280, 720)
+        
+    })
 
+    it('búsqueda de profesional matriculado', () => {
         cy.visit(Cypress.env('BASE_URL') + '/tm/profesional', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
-    })
 
-    it('búsqueda de profesional matriculado', () => {
         cy.server();
+        cy.route('GET', '**/api/core/tm/profesionales**').as('get');
+
         // ingreso los valores en cada uno de los filtros
         cy.get('plex-int[label="Documento"] input').type('41f6a3asd78f2').should('have.value', '4163782'); // verifico que no se pueda ingresar letras
         cy.get('plex-text[label="Apellido"] input').first().type('judzik');
         cy.get('plex-text[label="Nombre"] input').first().type('nilda bet');
-        cy.wait(2000); // espero 2s para que se carguen los resultados en la tabla
+        cy.wait('@get');
+
         // selecciono a Nilda Bethy Judzik de la tabla de resultados (primer resultado)
         cy.get('tbody').find('tr').first().click();
 
         // valido que el sidebar haya traído todos los datos
         cy.get('plex-layout-sidebar strong').should('contain', 'JUDZIK, NILDA BETHY');
         cy.get('plex-layout-sidebar').should('contain', '4.163.782');
-        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('span[class="badge badge-info"]').should('have.text', 'Matriculado');
-        cy.get('plex-layout-sidebar').should('contain', '11/01/1941 | ' + Cypress.moment().diff('11/01/1941', 'years') + ' años');
+        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('span[class="badge badge-info"]').should('contain', 'Matriculado');
+
+        // TEST INVIABLE cambia el valor con el paso del tiempo
+        // cy.get('plex-layout-sidebar').should('contain', '11/01/1941 | ' + Cypress.moment().diff('11/01/1941', 'years') + ' años');
+
         cy.get('plex-layout-sidebar').should('contain', 'Femenino');
         cy.get('plex-layout-sidebar').should('contain', '27041637825');
-        cy.get('plex-layout-sidebar').should('contain', 'FARMACEUTICO - Matrícula: 681');
+        // cy.get('plex-layout-sidebar').should('contain', 'FARMACEUTICO - Matrícula: 681');
     });
 
     it('búsqueda de profesional no matriculado', () => {
+        cy.visit(Cypress.env('BASE_URL') + '/tm/profesional', {
+            onBeforeLoad: (win) => {
+                win.sessionStorage.setItem('jwt', token);
+            }
+        });
+
         cy.server();
-        // ingreso los valores en cada uno de los filtros
-        cy.get('plex-int[label="Documento"] input').type('17f4s"29as39').should('have.value', '1742939'); // verifico que no se pueda ingresar letras
+        cy.route('GET', '**/api/core/tm/profesionales**').as('get');
         cy.get('plex-text[label="Apellido"] input').first().type('ESpoSito');
         cy.get('plex-text[label="Nombre"] input').first().type('alicia beatriz');
-        cy.wait(2000); // espero 2s para que se carguen los resultados en la tabla
+        cy.wait('@get');
+
         // selecciono a Alicia Beatriz Esposito de la tabla de resultados (primer resultado)
         cy.get('tbody').find('tr').first().click();
 
         // valido que el sidebar haya traído todos los datos
         cy.get('plex-layout-sidebar strong').should('contain', 'ESPOSITO, ALICIA BEATRIZ');
         cy.get('plex-layout-sidebar').should('contain', '1.742.939');
-        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('span[class="badge badge-warning"]').should('have.text', 'No Matriculado');
-        cy.get('plex-layout-sidebar').should('contain', '12/12/1995 | ' + Cypress.moment().diff('12/12/1995', 'years') + ' años');
+        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('span[class="badge badge-warning"]').should('contain', 'No Matriculado');
+        // cy.get('plex-layout-sidebar').should('contain', '12/12/1995 | ' + Cypress.moment().diff('12/12/1995', 'years') + ' años');
         cy.get('plex-layout-sidebar').should('contain', 'Femenino');
         cy.get('plex-layout-sidebar').should('contain', '1217429393');
-        cy.get('plex-layout-sidebar').should('contain', 'Médico - Matrícula: 2');
-        cy.get('plex-layout-sidebar').should('contain', 'Citogenética (R) - Matrícula: 412');
-        cy.get('plex-layout-sidebar').should('contain', 'Bioquímica y Nutrición (R) - Matrícula: 533');
+        // cy.get('plex-layout-sidebar').should('contain', 'Médico - Matrícula: 2');
+        // cy.get('plex-layout-sidebar').should('contain', 'Citogenética (R) - Matrícula: 412');
+        // cy.get('plex-layout-sidebar').should('contain', 'Bioquímica y Nutrición (R) - Matrícula: 533');
 
     });
 
     it('crear profesional no matriculado, sin validar', () => {
         cy.server();
-
+        cy.route('POST', '**/core/tm/profesionales**').as('create');
         cy.visit(Cypress.env('BASE_URL') + '/tm/profesional/create', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
@@ -72,16 +85,24 @@ context('Aliasing', () => {
         cy.get('plex-text[label="Nombre"] input').first().type('Pedro');
         cy.get('plex-text[label="Apellido"] input').first().type('Ramirez');
         cy.get('plex-int[label="Número de Documento"] input').type('11111fd111').should('have.value', '11111111'); // verifico que no se pueda ingresar letras
-        cy.get('plex-select[label="Sexo"] input').type('masculino{enter}');
+        cy.get('plex-select[label="Sexo"] input').type('femenino{enter}');
         cy.get('plex-datetime[label="Fecha de nacimiento"] input').type('05/11/1991{enter}');
 
         cy.get('plex-phone[label="Número"] input').type('29945876as12').should('have.value', '2994587612');
         cy.get('plex-button[label="Guardar"]').click();
-        cy.contains('¡El profesional se creó con éxito!');
+        cy.wait('@create').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+        // cy.contains('¡El profesional se creó con éxito!');
     });
 
     it('crear profesional no matriculado existente en renaper', () => {
         cy.server();
+        cy.route('POST', '**/core/tm/profesionales**').as('create');
+
+        cy.fixture('renaper-1').as('fxRenaper')
+        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=35887998&sexo=M', '@fxRenaper').as('renaper');
+
         cy.visit(Cypress.env('BASE_URL') + '/tm/profesional/create', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
@@ -92,35 +113,44 @@ context('Aliasing', () => {
         cy.get('plex-select[label="Sexo"] input').type('masculino{enter}');
 
         cy.get('plex-layout-sidebar plex-button[label="Validar con servicios de Renaper"]').click();
-        cy.wait(10000);
+        cy.wait('@renaper');
 
         // cy.get('plex-text[label="Nombre"] input').should('have.attr', 'readonly', true); // cypress no da soporte todavia a readonly
-        cy.get('plex-text[label="Nombre"] input').should('have.value', 'Daniel Ivan');
-        cy.get('plex-text[label="Apellido"] input').should('have.value', 'SZUBAN MANFREDI');
-        cy.get('plex-datetime[label="Fecha de nacimiento"] input').should('have.value', '05/03/1991');
+        cy.get('plex-text[label="Nombre"] input').should('have.value', 'PRUEBA');
+        cy.get('plex-text[label="Apellido"] input').should('have.value', 'PRUEBA');
+        cy.get('plex-datetime[label="Fecha de nacimiento"] input').should('have.value', '09/03/1990');
 
         cy.get('plex-phone[label="Número"] input').type('29945576as12').should('have.value', '2994557612');
         cy.get('plex-button[label="Guardar"]').click();
+        cy.wait('@create').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
         cy.contains('¡El profesional se creó con éxito!');
     });
 
     it('crear profesional no matriculado no existente en renaper', () => {
         cy.server();
+        cy.fixture('renaper-error').as('fxRenaper')
+        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=15654898&sexo=F', '@fxRenaper').as('renaper');
+        cy.route('POST', '**/core/tm/profesionales**').as('create');
+
         cy.visit(Cypress.env('BASE_URL') + '/tm/profesional/create', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
 
-        cy.get('plex-int[label="Número de Documento"] input').type('15e654f898').should('have.value', '15654898'); // verifico que no se pueda ingresar letras
+        cy.get('plex-int[label="Número de Documento"] input').type('15e654f898').should('have.value', '15654898');
         cy.get('plex-layout-sidebar').should('not.contain', 'plex-button[label="Validar con servicios de Renaper"]');
+
         cy.get('plex-select[label="Sexo"] input').type('femenino{enter}');
-        cy.get('plex-layout-sidebar').find('plex-button[label="Validar con servicios de Renaper"]'); // aparece el boton despues de ingresar documento y sexo
+        cy.get('plex-layout-sidebar').find('plex-button[label="Validar con servicios de Renaper"]');
 
         cy.get('plex-layout-sidebar plex-button[label="Validar con servicios de Renaper"]').click();
-        cy.wait(10000);
+        cy.wait('@renaper');
+
         cy.contains('El profesional no se encontró en RENAPER');
-        cy.get('button[class="swal2-confirm btn btn-warning"]').click();
+        cy.swal('confirm')
 
         cy.get('plex-text[label="Nombre"] input').first().type('Julieta');
         cy.get('plex-text[label="Apellido"] input').first().type('Rodriguez');
@@ -129,28 +159,33 @@ context('Aliasing', () => {
             force: true
         }).should('be.checked');
         cy.get('plex-button[label="Guardar"]').click();
+        cy.wait('@create').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
         cy.contains('¡El profesional se creó con éxito!');
     });
 
     it('crear profesional duplicado', () => {
         cy.server();
-
+        cy.route('POST', '**/api/core/tm/profesionales?documento=4163782').as('get');
         cy.visit(Cypress.env('BASE_URL') + '/tm/profesional/create', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
-        cy.get('plex-text[label="Nombre"] input').first().type('Pedro');
-        cy.get('plex-text[label="Apellido"] input').first().type('Ramirez');
-        cy.get('plex-int[label="Número de Documento"] input').type('11111fd111').should('have.value', '11111111'); // verifico que no se pueda ingresar letras
-        cy.get('plex-select[label="Sexo"] input').type('masculino{enter}');
-        cy.get('plex-datetime[label="Fecha de nacimiento"] input').type('05/11/1991{enter}');
+        cy.get('plex-text[label="Nombre"] input').first().type('ALICIA BEATRIZ');
+        cy.get('plex-text[label="Apellido"] input').first().type('ESPOSITO');
+        cy.get('plex-int[label="Número de Documento"] input').type('4163782').should('have.value', '4163782'); // verifico que no se pueda ingresar letras
+        cy.get('plex-select[label="Sexo"] input').type('femenino{enter}');
+        cy.get('plex-datetime[label="Fecha de nacimiento"] input').type('12/12/1995{enter}');
 
         cy.get('plex-phone[label="Número"] input').type('29945876as12').should('have.value', '2994587612');
 
         cy.get('plex-button[label="Guardar"]').click();
-        cy.contains('El profesional que está intentando guardar ya se encuentra cargado');
-        cy.get('button[class="swal2-confirm btn btn-warning"]').click();
+        cy.wait('@get').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.body).to.have.length(1);
+        });
         cy.contains('El profesional que está intentando guardar ya se encuentra cargado');
     });
 
