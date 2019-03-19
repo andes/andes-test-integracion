@@ -49,3 +49,11 @@ Cypress.Commands.add("login", (usuario, password) => {
         });
     });
 })
+
+Cypress.Commands.add('swal', (acction) => {
+    return cy.get('div').then(($body) => {
+        if ($body.hasClass('swal2-container')) {
+             cy.get(`.swal2-${acction}`).click({ force: true })
+        }
+    });
+})
