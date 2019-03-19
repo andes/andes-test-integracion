@@ -2,5 +2,10 @@
     "env": {
         "BASE_URL": "http://localhost:4200",
         "API_SERVER": "http://localhost:3002"
+    },
+    "reporter": "junit",
+    "reporterOptions": {
+        "mochaFile": "results/cypress-report.xml",
+        "toConsole": true
     }
 }
