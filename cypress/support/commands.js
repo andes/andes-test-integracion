@@ -48,7 +48,20 @@ Cypress.Commands.add("login", (usuario, password) => {
             });
         });
     });
-})
+});
+
+Cypress.Commands.add('createPaciente', (name, token) => {
+    return cy.fixture(name).then((paciente) => {
+        cy.request({ 
+            method: 'POST', 
+            url: Cypress.env('API_SERVER') + '/api/core/mpi/pacientes', 
+            body: paciente,
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        });
+    });
+});
 
 Cypress.Commands.add('swal', (acction) => {
     return cy.get('div').then(($body) => {

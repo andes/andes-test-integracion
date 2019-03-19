@@ -5,16 +5,7 @@ context('Agenda dinamicas', () => {
     before(() => {
         cy.login('38906735', 'asd').then(t => {
             token = t;
-            cy.fixture('paciente-dinamico').then((paciente) => {
-                cy.request({ 
-                    method: 'POST', 
-                    url: Cypress.env('API_SERVER') + '/api/core/mpi/pacientes', 
-                    body: paciente,
-                    headers: {
-                        Authorization: `JWT ${token}`
-                    }
-                });
-            })
+            cy.createPaciente('paciente-dinamico', token);
         });
     })
 
@@ -32,6 +23,7 @@ context('Agenda dinamicas', () => {
         cy.server();
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
         cy.route('POST', '**/api/modules/turnos/agenda**').as('crear');
+        cy.route('GET', '**/api/modules/turnos/agenda**').as('get');
         
         cy.get('plex-button[label="Crear una nueva agenda"]').click();
         cy.swal('cancel');
@@ -59,8 +51,9 @@ context('Agenda dinamicas', () => {
         cy.wait('@crear').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
-        
-        cy.get('table tr').contains('Exámen médico del adulto').first().click()
+        cy.wait('@get');
+
+        cy.get('table tr').contains('En planificación').first().click();
         cy.get('plex-button[title="Publicar"]').click(); 
         cy.swal('confirm');
 
