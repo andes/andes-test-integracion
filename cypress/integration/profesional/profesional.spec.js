@@ -14,11 +14,7 @@ context('TM Profesional', () => {
     })
 
     it('búsqueda de profesional matriculado', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/tm/profesional', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
+        cy.goto('/tm/profesional', token);
 
         cy.server();
         cy.route('GET', '**/api/core/tm/profesionales**').as('get');
@@ -46,11 +42,7 @@ context('TM Profesional', () => {
     });
 
     it('búsqueda de profesional no matriculado', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/tm/profesional', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
+        cy.goto('/tm/profesional', token);
 
         cy.server();
         cy.route('GET', '**/api/core/tm/profesionales**').as('get');
@@ -75,13 +67,11 @@ context('TM Profesional', () => {
     });
 
     it('crear profesional no matriculado, sin validar', () => {
+        cy.goto('/tm/profesional/create', token);
+        
         cy.server();
         cy.route('POST', '**/core/tm/profesionales**').as('create');
-        cy.visit(Cypress.env('BASE_URL') + '/tm/profesional/create', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
+
         cy.get('plex-text[label="Nombre"] input').first().type('Pedro');
         cy.get('plex-text[label="Apellido"] input').first().type('Ramirez');
         cy.get('plex-int[label="Número de Documento"] input').type('11111fd111').should('have.value', '11111111'); // verifico que no se pueda ingresar letras
@@ -97,17 +87,13 @@ context('TM Profesional', () => {
     });
 
     it('crear profesional no matriculado existente en renaper', () => {
+        cy.goto('/tm/profesional/create', token);
+
         cy.server();
         cy.route('POST', '**/core/tm/profesionales**').as('create');
-
         cy.fixture('renaper-1').as('fxRenaper')
         cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=35887998&sexo=M', '@fxRenaper').as('renaper');
 
-        cy.visit(Cypress.env('BASE_URL') + '/tm/profesional/create', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
 
         cy.get('plex-int[label="Número de Documento"] input').type('3588fs799af8').should('have.value', '35887998'); // verifico que no se pueda ingresar letras
         cy.get('plex-select[label="Sexo"] input').type('masculino{enter}');
@@ -129,16 +115,12 @@ context('TM Profesional', () => {
     });
 
     it('crear profesional no matriculado no existente en renaper', () => {
+        cy.goto('/tm/profesional/create', token);
+
         cy.server();
         cy.fixture('renaper-error').as('fxRenaper')
         cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=15654898&sexo=F', '@fxRenaper').as('renaper');
         cy.route('POST', '**/core/tm/profesionales**').as('create');
-
-        cy.visit(Cypress.env('BASE_URL') + '/tm/profesional/create', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
 
         cy.get('plex-int[label="Número de Documento"] input').type('15e654f898').should('have.value', '15654898');
         cy.get('plex-layout-sidebar').should('not.contain', 'plex-button[label="Validar con servicios de Renaper"]');
@@ -166,13 +148,11 @@ context('TM Profesional', () => {
     });
 
     it('crear profesional duplicado', () => {
+        cy.goto('/tm/profesional/create', token);
+        
         cy.server();
         cy.route('POST', '**/api/core/tm/profesionales?documento=4163782').as('get');
-        cy.visit(Cypress.env('BASE_URL') + '/tm/profesional/create', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
+        
         cy.get('plex-text[label="Nombre"] input').first().type('ALICIA BEATRIZ');
         cy.get('plex-text[label="Apellido"] input').first().type('ESPOSITO');
         cy.get('plex-int[label="Número de Documento"] input').type('4163782').should('have.value', '4163782'); // verifico que no se pueda ingresar letras

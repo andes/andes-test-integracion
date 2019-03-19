@@ -16,11 +16,7 @@ context('Agendas Normal', () => {
     })
 
     it('crear agenda', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
+        cy.goto('/citas/gestor_agendas', token);
 
         cy.server();
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
@@ -69,11 +65,7 @@ context('Agendas Normal', () => {
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
         
-        cy.visit(Cypress.env('BASE_URL') + '/citas/puntoInicio', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
+        cy.goto('/citas/puntoInicio', token);
 
         cy.get('plex-text input[type=text]').first().type('38906734').should('have.value', '38906734');
         cy.get('tr').first().click();

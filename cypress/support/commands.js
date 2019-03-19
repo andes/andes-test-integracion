@@ -70,3 +70,11 @@ Cypress.Commands.add('swal', (acction) => {
         }
     });
 })
+
+Cypress.Commands.add('goto', (url, token) => {
+    return cy.visit( Cypress.env('BASE_URL') + url, {
+        onBeforeLoad: (win) => {
+            win.sessionStorage.setItem('jwt', token);
+        }
+    }); 
+});
