@@ -1,27 +1,33 @@
-
-
 /// <reference types="Cypress" />
 
-context('Aliasing', () => {
+context('Agenda dinamicas', () => {
     let token
     before(() => {
         cy.login('38906735', 'asd').then(t => {
             token = t;
-        })
+            cy.fixture('paciente-dinamico').then((paciente) => {
+                cy.request({ 
+                    method: 'POST', 
+                    url: Cypress.env('API_SERVER') + '/api/core/mpi/pacientes', 
+                    body: paciente,
+                    headers: {
+                        Authorization: `JWT ${token}`
+                    }
+                });
+            })
+        });
     })
 
     beforeEach(() => {
+        
+    })
+
+    it('crear agenda dinamica', () => {
         cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
-    })
-
-    it('crear agenda dinamica', () => {
-        // cy.get('plex-text input[type=text]').first().type('botta').should('have.value', 'botta');
-
-        // cy.get('div.alert.alert-danger').should('exist');
 
         cy.get('plex-button[label="Crear una nueva agenda"]').click();
 
@@ -54,11 +60,27 @@ context('Aliasing', () => {
 
         cy.wait(2000)
         cy.get('table tr').contains('Exámen médico del adulto').first().click()
-        cy.get('plex-button[title="Cambiar a disponible"]').click();
-        // cy.get('button').contains('CONFIRMAR').click();
+        cy.get('plex-button[title="Cambiar a disponible"]').click(); 
+    });
 
+    it('dar turno agenda dinamica', () => {
+    
+        cy.visit(Cypress.env('BASE_URL') + '/citas/puntoInicio', {
+            onBeforeLoad: (win) => {
+                win.sessionStorage.setItem('jwt', token);
+            }
+        });
 
-    })
+        cy.get('plex-text input[type=text]').first().type('38906735').should('have.value', '38906735');
+        cy.get('tr').first().click();
+        cy.get('plex-button[title="Dar Turno"]').click();
+        cy.wait(500);
+        cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click()
+          .find('.option[data-value="5951051aa784f4e1a8e2afe1"]').click();
+        cy.get('.outline-success ').first().click();
+        cy.get('plex-button[label="Dar Turno"]').click();
+        cy.get('plex-button[label="Confirmar"]').click();
+    });
 
     // it('Mock api', () => {
     //     cy.server();
@@ -76,3 +98,5 @@ context('Aliasing', () => {
 
 
 })
+
+

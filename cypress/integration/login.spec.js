@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-context('Aliasing', () => {
+context('Pagina de login', () => {
     beforeEach(() => {
         cy.visit(Cypress.env('BASE_URL'), {
             onBeforeLoad: (win) => {
