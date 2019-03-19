@@ -14,10 +14,12 @@ context('Pagina de login', () => {
         cy.server();
 
         cy.route('POST', '**/api/auth/login').as('login');
+        cy.route('GET', '**/api/auth/organizaciones').as('organizaciones');
 
+        
         cy.get('[name="usuario"] input').type('hola').should('have.value', '');
 
-        cy.get('[name="usuario"] input').type('34934522').should('have.value', '34934522');
+        cy.get('[name="usuario"] input').type('38906735').should('have.value', '38906735');
 
         cy.get('[name="password"] input[type="password"]').type('anypasswordfornow').should('have.value', 'anypasswordfornow');
 
@@ -26,9 +28,10 @@ context('Pagina de login', () => {
 
         cy.wait('@login').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
-        })
-
-        cy.get('.page-title').should('have.text', 'Seleccione una organización');
+        });
+        cy.wait('@organizaciones');
+        
+        cy.get('ul.list-group li').should('have.length', 3);
     })
 
     it('login failed', () => {
