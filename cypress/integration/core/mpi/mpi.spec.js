@@ -120,6 +120,7 @@ context('MPI', () => {
 
         cy.get('plex-button[label="Actualizar"]').click();
 
+        cy.wait(1000);
         cy.get('plex-button[label="Guardar"]').click();
 
         cy.contains('Los datos se actualizaron correctamente');
@@ -171,7 +172,7 @@ context('MPI', () => {
 
         cy.get('plex-select[name="tipoIdentificacion"] input[type="text"]').type('pasaporte{enter}');
 
-        cy.get('plex-int[name="numeroIdentificacion"] input').first().type('35466578').should('have.value', '35466578');
+        cy.get('plex-text[name="numeroIdentificacion"] input').first().type('35466578').should('have.value', '35466578');
 
         cy.get('plex-bool[name="noPoseeContacto"]').click();
 
@@ -207,7 +208,7 @@ context('MPI', () => {
 
         cy.get('plex-select[name="tipoIdentificacion"] input[type="text"]').type('pasaporte{enter}');
 
-        cy.get('plex-int[name="numeroIdentificacion"] input').first().type('112233').should('have.value', '112233');
+        cy.get('plex-text[name="numeroIdentificacion"] input').first().type('112233').should('have.value', '112233');
 
         cy.get('plex-bool[name="noPoseeContacto"]').click();
 
@@ -262,13 +263,13 @@ context('MPI', () => {
 
         // SE INGRESAN VALORES EN CADA CAMPO REQUERIDO
 
-        cy.get('plex-int[name="documento"] input').first().type('1j2j3f4e53').should('have.value', '123453');
+        cy.get('plex-int[name="documento"] input').first().type('41436751').should('have.value', '41436751');
 
-        cy.get('plex-text[name="apellido"] input').first().type('Prueba').should('have.value', 'Prueba');
+        cy.get('plex-text[name="apellido"] input').first().type('Hugo').should('have.value', 'Hugo');
 
-        cy.get('plex-text[name="nombre"] input').first().type('Pruebita').should('have.value', 'Pruebita');
+        cy.get('plex-text[name="nombre"] input').first().type('Agustin').should('have.value', 'Agustin');
 
-        cy.get('plex-datetime[name="fechaNacimiento"] input').first().type('19/05/1993').should('have.value', '19/05/1993');
+        cy.get('plex-datetime[name="fechaNacimiento"] input').first().type('01/02/1999').should('have.value', '01/02/1999');
 
         cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
 
