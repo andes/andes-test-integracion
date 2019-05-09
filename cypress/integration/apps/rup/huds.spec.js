@@ -13,11 +13,7 @@ context('HUDS', () => {
 
     it('Color-icono de registros de prestaciones', () => {
 
-        cy.visit(Cypress.env('BASE_URL') + '/rup/vista/586e6e9a27d3107fde18e080', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        })
+        cy.goto('/rup/vista/586e6e9a27d3107fde18e080', token);
         cy.wait(5000);
         cy.get('button[class="btn btn-block p-0 btn-procedimiento"]').click();
     });
