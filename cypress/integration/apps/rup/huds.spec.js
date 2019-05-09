@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 
+
 // Test realizado para prueba de issue #1111 basado en la huds de un usuario en la DB de testing-sss.
 
 context('HUDS', () => {
@@ -18,5 +19,4 @@ context('HUDS', () => {
         cy.wait(5000);
         cy.get('button[class="btn btn-block p-0 btn-procedimiento"]').click();
     });
-
 });
