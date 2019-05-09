@@ -10,10 +10,11 @@ context('HUDS', () => {
         })
     })
 
+    beforeEach(() => {
+        cy.goto('/rup/vista/586e6e9a27d3107fde18e080', token);
+    })
 
     it('Color-icono de registros de prestaciones', () => {
-
-        cy.goto('/rup/vista/586e6e9a27d3107fde18e080', token);
         cy.wait(5000);
         cy.get('button[class="btn btn-block p-0 btn-procedimiento"]').click();
     });
