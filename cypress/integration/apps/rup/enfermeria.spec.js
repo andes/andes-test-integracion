@@ -17,11 +17,7 @@ context('Registro de prestaciones', () => {
 
     it("Campo 'minutos' en consulta de enfermería", () => {
 
-        cy.visit(Cypress.env('BASE_URL') + '/rup/ejecucion/5cd0466acc826c1fc2cfe5fc', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        })
+        cy.goto('/rup/ejecucion/5cd0466acc826c1fc2cfe5fc', token);
         cy.wait(3000);
         cy.get('plex-int[name="asistenciaPracticas"] input[type="text"]').type('120');
     });
