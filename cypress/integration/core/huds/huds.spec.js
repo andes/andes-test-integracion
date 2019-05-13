@@ -1,21 +1,26 @@
-import { testearPermisoAccesoModulo } from './../../util'
+import {
+    testearPermisoAccesoModulo
+} from './../../util'
+import {
+    USER_USR_LOGIN,
+    USER_PWRD_LOGIN
+} from '../../../../config.private';
 
 /// <reference types="Cypress" />
 
 context('HUDS', () => {
-    let token
+    let token;
     before(() => {
-        cy.login(Cypress.env('USER_USR_LOGIN'), Cypress.env('USER_PWRD_LOGIN')).then(t => {
-            token = t;
-        })
+        cy.login(USER_USR_LOGIN, USER_PWRD_LOGIN);
     })
 
-    beforeEach(() => {
-    });
+    beforeEach(() => {});
 
     const permiso = "huds:visualizacionHuds";
     const modulo = "huds";
     const ruta = Cypress.env('ROUTE_HUDS');
 
-    it('Testear permisos de acceso al modulo', () => { testearPermisoAccesoModulo(permiso, modulo, ruta) });
+    it('Testear permisos de acceso al módulo', () => {
+        testearPermisoAccesoModulo(permiso, modulo, ruta)
+    });
 })

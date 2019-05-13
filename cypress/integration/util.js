@@ -1,4 +1,8 @@
-     /**
+import {
+    ANDES_KEY
+} from "../../config.private";
+
+/**
  * Utiliza función testearPermiso para testear permiso de acceso,
  * enviando como parametro 2 y 3, respectivamente
  *  - Una funcion que valida que al navegar a la ruta dada redirija a inicio (permiso denegado)
@@ -11,13 +15,17 @@
  */
 export const testearPermisoAccesoModulo = (permiso, modulo, ruta) => {
     testearPermiso(
-        permiso, 
+        permiso,
         modulo,
-        (token) => { 
-            cy.goto(ruta, token).then( () => { cy.url().should('eq', Cypress.env('BASE_URL') + Cypress.env('ROUTE_INICIO')) }); 
+        (token) => {
+            cy.goto(ruta, token).then(() => {
+                cy.url().should('eq', Cypress.env('BASE_URL') + Cypress.env('ROUTE_INICIO'))
+            });
         },
-        (token) => { 
-            cy.goto(ruta, token).then( () => { cy.url().should('eq', Cypress.env('BASE_URL') + ruta); }) 
+        (token) => {
+            cy.goto(ruta, token).then(() => {
+                cy.url().should('eq', Cypress.env('BASE_URL') + ruta);
+            })
         }
     );
 };
@@ -33,32 +41,36 @@ export const testearPermisoAccesoModulo = (permiso, modulo, ruta) => {
 export const testearPermiso = (permiso, modulo, cbPermisoDenegado, cbPermisoPermitido) => {
     const url = `/api/core/tm/permisos/usuario/${Cypress.env('USER_OBJECT_ID')}/organizacion/${Cypress.env('ORGANIZACION_OBJECT_ID')}/modulo/${modulo}`;
 
-    const actualizarPermisos = (_permisos, token) => {
+    const actualizarPermisos = (_permisos) => {
         return cy.request({
             url: Cypress.env('API_SERVER') + url,
             method: 'PATCH',
-            headers: { Authorization: 'JWT ' + token },
-            body: { permisos: _permisos }
+            headers: {
+                Authorization: 'JWT ' + ANDES_KEY
+            },
+            body: {
+                permisos: _permisos
+            }
         })
     };
 
     const foo = (cb) => {
         cy.login(Cypress.env('USER_USR_LOGIN'), Cypress.env('USER_PWRD_LOGIN')) // relog para recargar permisos
-        .then(t => { cb(t) });
+            .then(t => {
+                cb(t)
+            });
     }
 
-    foo( (token) => {
-        actualizarPermisos([], token) // limpia permisos
-        .then((xhr) => { 
+    actualizarPermisos([]) // limpia permisos
+        .then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            foo(( token2 ) => {
-                cbPermisoDenegado(token2);
-                actualizarPermisos([permiso], token2) // agrega permisos
-                .then((xhr) => {
-                    expect(xhr.status).to.be.eq(200);
-                    foo(cbPermisoPermitido);
-                });
+            foo((token) => {
+                cbPermisoDenegado(token);
+                actualizarPermisos([permiso]) // agrega permisos
+                    .then((xhr) => {
+                        expect(xhr.status).to.be.eq(200);
+                        foo(cbPermisoPermitido);
+                    });
             });
         });
-    })
-  }
+}
