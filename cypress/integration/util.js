@@ -1,5 +1,7 @@
 import {
-    ANDES_KEY
+    ANDES_KEY,
+    USER_USR_LOGIN,
+    USER_PWRD_LOGIN
 } from "../../config.private";
 
 /**
@@ -55,10 +57,7 @@ export const testearPermiso = (permiso, modulo, cbPermisoDenegado, cbPermisoPerm
     };
 
     const foo = (cb) => {
-        cy.login(Cypress.env('USER_USR_LOGIN'), Cypress.env('USER_PWRD_LOGIN')) // relog para recargar permisos
-            .then(t => {
-                cb(t)
-            });
+        cy.login(USER_USR_LOGIN, USER_PWRD_LOGIN).then(t => { cb(t) });
     }
 
     actualizarPermisos([]) // limpia permisos
