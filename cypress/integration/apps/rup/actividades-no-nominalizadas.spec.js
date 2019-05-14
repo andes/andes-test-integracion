@@ -11,7 +11,7 @@ context('Actividades no nominalizadas', () => {
     before(() => {
         cy.login(USER_USR_LOGIN, USER_PWRD_LOGIN).then(t => {
             token = t;
-            cy.createAgenda('agenda-no-nominalizada', token);
+            cy.createAgenda('agenda-no-nominalizada', ANDES_KEY);
 
         })
     })
@@ -20,7 +20,7 @@ context('Actividades no nominalizadas', () => {
         cy.viewport(1280, 720)
         cy.visit(Cypress.env('BASE_URL') + '/rup', {
             onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', ANDES_KEY);
+                win.sessionStorage.setItem('jwt', token);
             }
         });
     })
