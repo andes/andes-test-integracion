@@ -63,6 +63,26 @@ Cypress.Commands.add('createPaciente', (name, token) => {
     });
 });
 
+Cypress.Commands.add('createAgenda', (name, token) => {
+    return cy.fixture(name).then((agenda) => {
+        agenda.horaInicio = Cypress.moment().utcOffset(0);
+        agenda.horaInicio.set({ hour: 7, minute: 0, second: 0, millisecond: 0});
+
+        agenda.horaFin = Cypress.moment().utcOffset(0);
+        agenda.horaFin.set({ hour: 20   , minute: 0, second: 0, millisecond: 0});
+
+        cy.request({ 
+            method: 'POST', 
+            url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda', 
+            body: agenda,
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        });
+    });
+});
+
+
 Cypress.Commands.add('swal', (acction) => {
     return cy.get('div').then(($body) => {
         if ($body.hasClass('swal2-container')) {

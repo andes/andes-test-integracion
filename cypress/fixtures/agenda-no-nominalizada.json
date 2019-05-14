@@ -1,0 +1,81 @@
+{
+    "nominalizada": false,
+    "estado": "publicada",
+    "dinamica": false,
+    "profesionales" : [ 
+        {
+            "_id" : "5ba38d407d5bf92c0bbb2d43",
+            "nombre" : "Marco",
+            "apellido" : "Santarelli "
+        }
+    ],
+    "bloques": [{
+        "indice": 0,
+        "cantidadTurnos": 0,
+        "horaInicio": "2019-05-14T11:00:00.000Z",
+        "horaFin": "2019-05-15T01:00:00.000Z",
+        "duracionTurno": 0,
+        "cantidadSimultaneos": null,
+        "cantidadBloque": null,
+        "accesoDirectoDelDia": 0,
+        "accesoDirectoDelDiaPorc": 0,
+        "accesoDirectoProgramado": 0,
+        "accesoDirectoProgramadoPorc": 0,
+        "reservadoGestion": 0,
+        "reservadoGestionPorc": 0,
+        "reservadoProfesional": 0,
+        "reservadoProfesionalPorc": 0,
+        "tipoPrestaciones": [{
+            "_id": "5b574e50bd7c1f8e59407f5a",
+            "fsn": "procedimiento de salud comunitaria (procedimiento)",
+            "semanticTag": "procedimiento",
+            "conceptId": "389067005",
+            "term": "actividades con la comunidad",
+            "noNominalizada": true,
+            "nombre": "actividades con la comunidad",
+            "id": "5b574e50bd7c1f8e59407f5a",
+            "activo": true
+        }],
+        "descripcion": "agenda no nominalizada",
+        "turnos": [{
+            "estado": "disponible",
+            "horaInicio": "2019-05-14T11:00:00.000Z",
+            "tipoPrestacion": {
+                "_id": "5b574e50bd7c1f8e59407f5a",
+                "fsn": "procedimiento de salud comunitaria (procedimiento)",
+                "semanticTag": "procedimiento",
+                "conceptId": "389067005",
+                "term": "actividades con la comunidad",
+                "noNominalizada": true,
+                "nombre": "actividades con la comunidad",
+                "id": "5b574e50bd7c1f8e59407f5a",
+                "activo": true
+            }
+        }],
+        "turnosMobile": false,
+        "restantesDelDia": 0,
+        "restantesProgramados": 0,
+        "restantesGestion": 0,
+        "restantesProfesional": 0,
+        "restantesMobile": 0
+    }],
+    "fecha": "2019-05-14T12:11:49.662Z",
+    "horaInicio": "2019-05-14T11:00:00.000Z",
+    "horaFin": "2019-05-15T01:00:00.000Z",
+    "tipoPrestaciones": [{
+        "_id": "5b574e50bd7c1f8e59407f5a",
+        "fsn": "procedimiento de salud comunitaria (procedimiento)",
+        "semanticTag": "procedimiento",
+        "conceptId": "389067005",
+        "term": "actividades con la comunidad",
+        "noNominalizada": true,
+        "nombre": "actividades con la comunidad",
+        "id": "5b574e50bd7c1f8e59407f5a"
+    }],
+    "espacioFisico": null,
+    "organizacion": {
+        "_id": "57e9670e52df311059bc8964",
+        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+        "id": "57e9670e52df311059bc8964"
+    }
+}
