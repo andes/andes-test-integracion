@@ -1,18 +1,19 @@
 
+import { USER_USR_LOGIN, USER_PWRD_LOGIN } from '../../../../../config.private'
 
 /// <reference types="Cypress" />
 
 context('Agendas Normal', () => {
     let token
     before(() => {
-        cy.login('38906735', 'asd').then(t => {
+        cy.login(USER_USR_LOGIN, USER_PWRD_LOGIN).then(t => {
             token = t;
             cy.createPaciente('paciente-normal', token);
         })
     })
 
     beforeEach(() => {
-        
+
     })
 
     it('crear agenda', () => {
@@ -22,7 +23,7 @@ context('Agendas Normal', () => {
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
         cy.route('POST', '**/api/modules/turnos/agenda**').as('crear');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('get');
-    
+
         cy.get('plex-button[label="Crear una nueva agenda"]').click();
         cy.swal('cancel');
         const hoy = Cypress.moment().format('DD/MM/YYYY')
@@ -39,7 +40,7 @@ context('Agendas Normal', () => {
         cy.get('plex-int[label="Cantidad de Turnos"] input').type(10)
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type(10);
 
-            
+
 
         cy.get('plex-button[label="Guardar"]').click();
 
@@ -49,7 +50,7 @@ context('Agendas Normal', () => {
 
         cy.wait('@get');
         cy.get('table tr').contains('En planificación').first().click();
-        cy.get('plex-button[title="Publicar"]').click(); 
+        cy.get('plex-button[title="Publicar"]').click();
         cy.swal('confirm');
 
         // Espero a la respuesta de publicar y confirmo que sea StatusCode 200
@@ -64,7 +65,7 @@ context('Agendas Normal', () => {
         cy.server();
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
-        
+
         cy.goto('/citas/puntoInicio', token);
 
         cy.get('plex-text input[type=text]').first().type('38906734').should('have.value', '38906734');
