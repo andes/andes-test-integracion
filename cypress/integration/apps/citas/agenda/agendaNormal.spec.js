@@ -1,6 +1,5 @@
+import { USER_USR_LOGIN, USER_PWRD_LOGIN } from '../../../../../config.private'
 /// <reference types="Cypress" />
-import { USER_USR_LOGIN, USER_PWRD_LOGIN } from '../../../../../config.private';
-
 context('Agendas Normal', () => {
     let token
     before(() => {
