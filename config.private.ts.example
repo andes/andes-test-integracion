@@ -1,3 +1,0 @@
-export const USER_USR_LOGIN = 'unUsuario';
-export const USER_PWRD_LOGIN = 'unaClave';
-export const ANDES_KEY = 'unToken';
