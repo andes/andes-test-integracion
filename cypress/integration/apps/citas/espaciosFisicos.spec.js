@@ -1,4 +1,4 @@
-
+import { USER_USR_LOGIN, USER_PWRD_LOGIN } from '../../../../config.private'
 /// <reference types="Cypress" />
 // Prueba para realizar desde la organización Hospital Castro Rendón.
 
@@ -6,7 +6,7 @@ context('CITAS - Espacios físicos', () => {
     let token
     before(() => {
         cy.viewport(1280, 720);
-        cy.login('34377650', '159753000').then(t => {
+        cy.login(USER_USR_LOGIN, USER_PWRD_LOGIN).then(t => {
             token = t;
             cy.createPaciente('paciente-rup', token);
         })
