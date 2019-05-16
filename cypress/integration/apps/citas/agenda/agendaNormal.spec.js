@@ -1,11 +1,10 @@
-
-
 /// <reference types="Cypress" />
+import { USER_USR_LOGIN, USER_PWRD_LOGIN } from '../../../../../config.private';
 
 context('Agendas Normal', () => {
     let token
     before(() => {
-        cy.login('34377650', '159753000').then(t => { //cy.login('38906735', 'asd').then(t => {
+        cy.login(USER_USR_LOGIN, USER_PWRD_LOGIN).then(t => {
             token = t;
         })
     })
