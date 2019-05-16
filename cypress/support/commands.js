@@ -78,3 +78,58 @@ Cypress.Commands.add('goto', (url, token) => {
         }
     }); 
 });
+
+
+Cypress.Commands.add('post', (path, value, token) => {
+    cy.log('POST')
+    return  cy.request({ 
+            method: 'POST', 
+            url: Cypress.env('API_SERVER') + path, 
+            body: value,
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        });
+
+   
+});
+
+Cypress.Commands.add('get', (path, id, token) => {
+    return cy.request({ 
+        method: 'GET', 
+        url: Cypress.env('API_SERVER') + path + id, 
+        headers: {
+            Authorization: `JWT ${token}`
+        },
+        failOnStatusCode: false
+    });
+
+});
+
+Cypress.Commands.add('patch', (path, body, token) => {
+    return cy.request({ 
+        method: 'PATCH', 
+        url: Cypress.env('API_SERVER') + path, 
+        body: body,
+        headers: {
+            Authorization: `JWT ${token}`
+        }
+    });
+
+});
+
+Cypress.Commands.add('put', (path, body, token) => {
+    return cy.request({ 
+        method: 'PUT', 
+        url: Cypress.env('API_SERVER') + path, 
+        body: body,
+        headers: {
+            Authorization: `JWT ${token}`
+        }
+    });
+
+});
+
+
+
+
