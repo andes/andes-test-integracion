@@ -81,23 +81,22 @@ Cypress.Commands.add('goto', (url, token) => {
 
 
 Cypress.Commands.add('post', (path, value, token) => {
-    cy.log('POST')
     return  cy.request({ 
-            method: 'POST', 
-            url: Cypress.env('API_SERVER') + path, 
-            body: value,
-            headers: {
-                Authorization: `JWT ${token}`
-            }
-        });
-
-   
+        method: 'POST', 
+        url: Cypress.env('API_SERVER') + path, 
+        body: value,
+        failOnStatusCode: false,
+        headers: {
+            Authorization: `JWT ${token}`
+        }
+    });
 });
 
-Cypress.Commands.add('get', (path, id, token) => {
+Cypress.Commands.add('get', (path, token, query = null) => {
     return cy.request({ 
         method: 'GET', 
-        url: Cypress.env('API_SERVER') + path + id, 
+        qs: query,
+        url: Cypress.env('API_SERVER') + path, 
         headers: {
             Authorization: `JWT ${token}`
         },
@@ -111,6 +110,7 @@ Cypress.Commands.add('patch', (path, body, token) => {
         method: 'PATCH', 
         url: Cypress.env('API_SERVER') + path, 
         body: body,
+        failOnStatusCode: false,
         headers: {
             Authorization: `JWT ${token}`
         }
@@ -123,13 +123,22 @@ Cypress.Commands.add('put', (path, body, token) => {
         method: 'PUT', 
         url: Cypress.env('API_SERVER') + path, 
         body: body,
+        failOnStatusCode: false,
         headers: {
             Authorization: `JWT ${token}`
         }
     });
-
 });
 
-
+Cypress.Commands.add('delete', (path, token) => {
+    return cy.request({ 
+        method: 'DELETE', 
+        url: Cypress.env('API_SERVER') + path, 
+        failOnStatusCode: false,
+        headers: {
+            Authorization: `JWT ${token}`
+        }
+    });
+});
 
 
