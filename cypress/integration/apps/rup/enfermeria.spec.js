@@ -1,3 +1,5 @@
+import { USER_USR_LOGIN, USER_PWRD_LOGIN, } from '../../../../../config.private'
+
 /// <reference types="Cypress" />
 
 /* Test realizado para prueba de issue #909 basado en un usuario de la DB de testing-sss.
@@ -9,16 +11,16 @@
 context('Registro de prestaciones', () => {
     let token
     before(() => {
-        cy.login('34377650', '159753000').then(t => {
+        cy.login(USER_USR_LOGIN, USER_PWRD_LOGIN).then(t => {
             token = t;
         })
     })
 
+    beforeEach(() => {
+        cy.goto('/rup/ejecucion/5cd0466acc826c1fc2cfe5fc', token);
+    })
 
     it("Campo 'minutos' en consulta de enfermería", () => {
-
-        cy.goto('/rup/ejecucion/5cd0466acc826c1fc2cfe5fc', token);
-        cy.wait(3000);
         cy.get('plex-int[name="asistenciaPracticas"] input[type="text"]').type('120');
     });
 
