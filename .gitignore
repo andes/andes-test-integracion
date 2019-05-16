@@ -1,7 +1,5 @@
 
 # Archivos de configuración
-config.private.js
-
 .vscode
 node_modules
 config.private.?s
