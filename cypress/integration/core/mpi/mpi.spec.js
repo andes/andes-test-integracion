@@ -471,4 +471,32 @@ DEJAR COMENTADO HASTA QUE SE SUBA LA ACTUALIZACION DE MPI 2
 
 //     });
 
+//     it('Habilitar boton validar renaper', () => {
+
+//         cy.server();
+//         //Rutas para control
+//         cy.route('GET', '**api/core/mpi/pacientes**').as('habilitarBotonRenaper');
+
+//         // Buscador
+//         cy.get('plex-text[name="buscador"] input').first().type('36593546').should('have.value', '36593546');
+//         cy.wait('@habilitarBotonRenaper').then((xhr) => {
+//             expect(xhr.status).to.be.eq(200);
+//         });
+
+//         cy.get('div').contains('36593546').click();
+
+//         cy.get('button[class="btn btn-info  waves-effect"]').should('have.prop', 'disabled', false);
+
+//         cy.get('plex-int[name="documento"] input').clear();
+
+//         cy.get('button[class="btn btn-info  waves-effect"]').should('have.prop', 'disabled', true);
+
+//         cy.get('plex-int[name="documento"] input').type('36593546').should('have.value', '36593546');
+
+//         cy.get('button[class="btn btn-info  waves-effect"]').should('have.prop', 'disabled', false);
+
+//         cy.swal('confirm');
+
+//     });
+
 // })
