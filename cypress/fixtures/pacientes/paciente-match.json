@@ -1,0 +1,19 @@
+{
+    "entidadesValidadoras" : [],
+    "documento" : "54739999",
+    "apellido" : "CHAVEZ",
+    "nombre" : "MARIA",
+    "sexo" : "femenino",
+    "fechaNacimiento" : "2014-11-20T00:00:00.000Z",
+    "estado" : "validado",
+    "genero" : "femenino",
+    "activo" : true,
+    "identificadores" : [],
+    "contacto" : [],
+    "direccion" : [],
+    "relaciones" : [ 
+    ],
+    "financiador" : [],
+    "carpetaEfectores" : [],
+    "notas" : []
+}
