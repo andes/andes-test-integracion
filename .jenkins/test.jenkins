@@ -1,0 +1,71 @@
+pipeline {
+    agent any
+    environment {
+        app = "${APP_BRANCH}"
+        api = "${API_BRANCH}"
+    }
+    stages {
+        stage('Build images') {
+            parallel {
+                stage('Build app') {
+                    steps {
+                        build( job: "andes-app", parameters: [string(name: 'GIT_BRANCH', value: app  )]  )
+                    }
+                }
+                stage('build api') {
+                    steps {
+                         build job: "andes-api", parameters: [string(name: 'GIT_BRANCH', value: api )] 
+                    }
+                }
+            }
+        } 
+        stage('Clone') {
+            steps {
+                git (
+                    url: 'https://github.com/andes/andes-test-integracion.git',
+                    branch: '${TEST_BRANCH}'
+                )
+            }
+        }
+ 
+        stage('build api') {
+            steps {
+                sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} .'
+                sh 'API=$api APP=$app docker-compose -f docker/docker.compose.yml up -d'
+            }
+        }
+        
+        stage('seed dabatase') {
+            steps {
+                sh 'sleep 20'
+                sh 'curl -XPUT "http://172.16.1.116:9200/andes/" -d @docker/andes-index.json'
+                sh 'docker exec andes_db mongo --eval "rs.initiate();"'
+                sh 'docker cp docker/andes.gz andes_db:/andes.gz'
+                sh 'docker exec andes_db mongorestore --gzip --archive=/andes.gz --db andes'
+            }
+        }
+        
+        stage('run test') {
+            agent {
+                docker {
+                    image 'cypress/base:10'
+                    reuseNode true
+                }
+            }
+            environment {
+                HOME="${env.WORKSPACE}"
+            }
+            steps {
+                sh 'npm ci'
+                sh 'npx cypress run --env BASE_URL="http://172.16.1.116",API_SERVER="http://172.16.1.116" --config video=false'
+            }
+        }
+    }
+    post { 
+        always { 
+            sh 'cd docker'
+            sh 'API=$api APP=$app docker-compose -f docker/docker.compose.yml down -v'
+            junit 'results/cypress-report.xml'
+        }
+    }
+}

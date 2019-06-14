@@ -1,0 +1,25 @@
+pipeline {
+  environment {
+    registryCredential = "dockerhub"
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git (
+            url: 'https://github.com/andes/app.git',
+            branch: '${GIT_BRANCH}'
+        )
+      }
+    }
+    stage('Building image') {
+      steps{
+          sh 'docker build -t ${IMAGE_NAME}:${GIT_BRANCH} . --build-arg ENVIRONMENT=${ENVIRONMENT}'
+      }
+    } 
+       
+  }
+}
+
+ 
+    
