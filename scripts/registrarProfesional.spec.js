@@ -121,7 +121,7 @@ context('Aliasing', () => {
         cy.get('plex-button[label="completar domicilios"]').click();
 
 
-        //DATOS PROFESION 
+        //DATOS PROFESIÓN 
 
         cy.get('plex-select[name="formacionPosgrado"] input').first().type('Kinesiólogo{enter}');
         cy.get('plex-text[name="titulo"] input').first().type('Licenciatura de Kinesiologia');

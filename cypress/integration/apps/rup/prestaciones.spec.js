@@ -17,7 +17,7 @@ context('Aliasing', () => {
     })
 
     // Necesita tener cargada una agenda para colonoscopia, publicada. Que tenga el horario 15:00 disponible
-    it('iniciar Colonoscopía', () => {
+    it('Registrar Prestación de Colonoscopia', () => {
         cy.server();
         // doy turno
         cy.get('plex-text input[type=text]').first().type('50002123');

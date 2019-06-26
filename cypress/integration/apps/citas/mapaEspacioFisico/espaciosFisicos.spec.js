@@ -1,20 +1,15 @@
-import { USER_USR_LOGIN, USER_PWRD_LOGIN } from '../../../../config.private'
-/// <reference types="Cypress" />
-// Prueba para realizar desde la organización Hospital Castro Rendón.
-
 context('CITAS - Espacios físicos', () => {
     let token
     before(() => {
-        cy.viewport(1280, 720);
-        cy.login(USER_USR_LOGIN, USER_PWRD_LOGIN).then(t => {
+        cy.login('30643636', 'asd').then(t => {
             token = t;
-            cy.createPaciente('paciente-rup', token);
-        })
-    })
+        });
+        cy.viewport(1280, 720);
+    });
 
     beforeEach(() => {
         cy.goto('/tm/mapa_espacio_fisico', token);
-    })
+    });
 
     it('Filtrar espacios físicos', () => {
         cy.server()

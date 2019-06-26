@@ -13,7 +13,7 @@ context('Agenda dinamicas', () => {
 
 
 
-    it('dar turno agenda dinamica', () => {
+    it.only('dar turno agenda dinámica', () => {
         cy.server();
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');

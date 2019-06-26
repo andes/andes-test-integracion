@@ -11,7 +11,7 @@ context('Aliasing', () => {
         cy.viewport(1280, 720)
     })
 
-    it('Registrar paciente', () => {
+    it.only('Registrar paciente desde punto de Inicio de Turnos', () => {
         cy.visit(Cypress.env('BASE_URL') + '/citas/puntoInicio', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
