@@ -7,5 +7,7 @@
     "reporterOptions": {
         "mochaFile": "results/cypress-report.xml",
         "toConsole": true
-    }
+    },
+    "chromeWebSecurity": false,
+    "modifyObstructiveCode": false
 }
