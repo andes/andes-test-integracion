@@ -10,7 +10,7 @@ context('RUP - Punto de inicio', () => {
         })
     })
 
-    it('Iniciar prestación - Fuera de agenda', () => {
+    it.skip('Iniciar prestación - Fuera de agenda', () => {
         cy.goto('/rup', token);
 
         cy.server();
