@@ -3,7 +3,7 @@
 context('Aliasing', () => {
     let token
     before(() => {
-        cy.login('38906735', 'asd').then(t => {
+        cy.login('30643636', 'asd').then(t => {
             token = t;
         })
     })
@@ -11,8 +11,8 @@ context('Aliasing', () => {
         cy.viewport(1280, 720)
     })
 
-    it.only('Registrar paciente desde punto de Inicio de Turnos', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/citas/puntoInicio', {
+    it.skip('Registrar paciente desde punto de Inicio de Turnos', () => { // TODO: actualizar mpi nuevo, una prueba por tipo de paciente
+        cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
@@ -56,7 +56,7 @@ context('Aliasing', () => {
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('12');
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('14');
         cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general{enter}');
-        cy.get('plex-select[name="modelo.profesionales"] input').type('alvarez angelica vanesa', {
+        cy.get('plex-select[name="modelo.profesionales"] input').type('huenchuman natalia', {
             force: true
         });
         cy.wait(1000); // TODO no darle enter hasta que se haya cargado el profesional
@@ -67,29 +67,27 @@ context('Aliasing', () => {
         cy.get('plex-button[label="Guardar"]').click();
 
         // publico la agenda
-        cy.get('table tbody div').contains('ALVAREZ, ANGELICA VANESA').click();
+        cy.get('table tbody div').contains('Huenchuman, Natalia').click();
         cy.get('botones-agenda plex-button[title="Publicar"]').click();
         cy.get('button').contains('CONFIRMAR').click();
     })
 
     it('dar turno de día', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/citas/puntoInicio', {
+        cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
         cy.server();
 
-        cy.route('GET', '**/api/core/mpi/pacientes?type=multimatch&cadenaInput=99879546').as('consultaPaciente');
-        cy.get('paciente-search-turnos input').first().type('99879546');
+        cy.route('GET', '**/api/core/mpi/pacientes?type=multimatch&cadenaInput=12325484').as('consultaPaciente');
+        cy.get('paciente-buscar input').first().type('12325484');
         cy.wait('@consultaPaciente').then(() => {
-            cy.get('table tbody').contains('99.879.546').click();
+            cy.get('table tbody').contains('12325484').click();
         });
         cy.get('plex-button[title="Dar Turno"]').click();
-        cy.get('plex-select[name = "profesional"] input').first().type('ALVAREZ ANGELICA VANESA');
-        cy.wait(1000);
-        cy.get('plex-select[name = "profesional"] input').first().type('{enter}');
-        cy.wait(1000);
+        cy.get('plex-select[placeholder="Tipos de Prestación"]').children().children('.selectize-control').click()
+            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
 
         cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
             force: true
@@ -122,7 +120,7 @@ context('Aliasing', () => {
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('10');
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('15');
         cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general (procedimiento){enter}');
-        cy.get('plex-select[name="modelo.profesionales"] input').type('alvarez angelica vanesa', {
+        cy.get('plex-select[name="modelo.profesionales"] input').type('prueba usuario', {
             force: true
         });
         cy.wait(1000); // TODO no darle enter hasta que se haya cargado el profesional
@@ -141,8 +139,8 @@ context('Aliasing', () => {
         cy.get('plex-datetime[name="fechaDesde"] input').type('{selectall}{backspace}' + proximaSemana);
         cy.get('plex-datetime[name="fechaHasta"] input').type('{selectall}{backspace}' + proximaSemana);
         cy.wait(15000);
-        cy.route('GET', '**/api/modules/turnos/agenda/5c2ca5df9b2ff016c7198f0f').as('botonAgenda');
-        cy.get('table tbody div').contains('ALVAREZ, ANGELICA VANESA').click({
+        cy.route('GET', '**/api/modules/turnos/agenda/**').as('botonAgenda');
+        cy.get('table tbody div').contains('USUARIO, PRUEBA').click({
             force: true
         });
 
