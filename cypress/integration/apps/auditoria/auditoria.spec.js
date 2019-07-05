@@ -3,7 +3,7 @@
 context('Aliasing', () => {
     let token
     before(() => {
-        cy.login('36429722', 'pkwt9163').then(t => {
+        cy.login('30643636', 'asd').then(t => {
             token = t;
         })
     })
@@ -16,7 +16,7 @@ context('Aliasing', () => {
             }
         });
     })
-    it('vincular dos pacientes validados', () => {
+    it.skip('vincular dos pacientes validados', () => {
         cy.server();
         cy.get('paciente-buscar').get('plex-text input').first().type('39130233');
         cy.wait(2000); // espero 2s para que se carguen los resultados en la tabla
@@ -33,7 +33,7 @@ context('Aliasing', () => {
         cy.get('plex-button[label="Desactivar"]').should('have.attr', 'type', 'warning');
     });
 
-    it('vincular un paciente temporal con uno temporal', () => {
+    it.skip('vincular un paciente temporal con uno temporal', () => {
         cy.server();
         cy.get('paciente-buscar').get('plex-text input').first().type('36606632'); // paciente temporal
         cy.wait(2000); // espero 2s para que se carguen los resultados en la tabla
@@ -51,7 +51,7 @@ context('Aliasing', () => {
         cy.get('plex-button[label="Desactivar"]').should('have.attr', 'type', 'warning');
     });
 
-    it('vincular un paciente validado con uno temporal', () => {
+    it.skip('vincular un paciente validado con uno temporal', () => {
         cy.server();
         cy.get('paciente-buscar').get('plex-text input').first().type('31965283'); // paciente validado
         cy.wait(2000); // espero 2s para que se carguen los resultados en la tabla
