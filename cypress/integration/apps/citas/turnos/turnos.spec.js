@@ -56,20 +56,28 @@ context('Aliasing', () => {
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('12');
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('14');
         cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general{enter}');
+
+        cy.route('GET', '**/api/core/tm/profesionales*').as('profesional')
         cy.get('plex-select[name="modelo.profesionales"] input').type('huenchuman natalia', {
             force: true
         });
-        cy.wait(1000); // TODO no darle enter hasta que se haya cargado el profesional
-        cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}');
+        cy.wait('@profesional').then(() => {
+            cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}', {
+                force: true
+            });
+        });
         cy.get('plex-int[name="cantidadTurnos"] input').type('4');
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type('4');
         cy.wait(1000);
+        cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('filtroAgendas');
         cy.get('plex-button[label="Guardar"]').click();
 
         // publico la agenda
+        cy.wait('@filtroAgendas').then(() => {
         cy.get('table tbody div').contains('Huenchuman, Natalia').click();
         cy.get('botones-agenda plex-button[title="Publicar"]').click();
         cy.get('button').contains('CONFIRMAR').click();
+        });
     })
 
     it('dar turno de día', () => {
