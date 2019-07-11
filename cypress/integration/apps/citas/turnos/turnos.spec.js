@@ -11,28 +11,58 @@ context('Aliasing', () => {
         cy.viewport(1280, 720)
     })
 
-    it.skip('Registrar paciente desde punto de Inicio de Turnos', () => { // TODO: actualizar mpi nuevo, una prueba por tipo de paciente
+    it('Registrar bebé desde punto de Inicio de Turnos', () => {
         cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
         cy.server();
+        // Rutas para control
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
+        cy.route('PATCH', '**api/core/mpi/pacientes/**').as('relacionProgenitor');
+        cy.route('POST', '**api/core/mpi/pacientes').as('bebeAgregado');
 
-        cy.get('plex-button[label="Nuevo Paciente temporal"]').click();
-        cy.get('plex-int[label="Número de Documento"] input').type('99fs879546').should('have.value', '99879546');
-        cy.get('plex-text[label="Nombre"] input').first().type('Rogelio');
-        cy.get('plex-text[label="Apellido"] input').first().type('Gutierrez');
-        cy.get('plex-datetime[label="Fecha de Nacimiento"] input').type('18/01/1995');
+        cy.get('paciente-buscar input').first().type('4659874562');
+        cy.get('div').contains('NUEVO PACIENTE').click();
+        cy.get('div').contains('BEBÉ').click();
+
+        // Se completa datos básicos
+        cy.get('plex-text[name="apellido"] input').first().type('apellidoBebe12').should('have.value', 'apellidoBebe12');
+
+        cy.get('plex-text[name="nombre"] input').first().type('nombreBebe12').should('have.value', 'nombreBebe12');
+
         cy.get('plex-select[label="Sexo"] input').type('masculino{enter}');
-        cy.get('plex-bool[label="No posee ningún tipo de contacto"] input[type="checkbox"]').check({
-            force: true
+
+        cy.get('plex-datetime[name="fechaNacimiento"] input').type(Cypress.moment().format('DD/MM/YYYY'));
+
+        // Se completa datos
+        cy.get('paciente-buscar[label="Buscar"] input').first().type('11181222');
+
+        //Espera confirmación de la búsqueda correcta del progenitor
+        cy.wait('@busquedaProgenitor').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        // Se selecciona el progenitor 
+        cy.get('paciente-listado').find('td').contains('11181222').click();
+
+
+        // Se actualizan los datos del domicilio
+        cy.get('plex-button[label="Actualizar"]').click();
+
+        cy.get('plex-button[label="Guardar"]').click();
+
+        // Se espera la actualización de la relación del progenitor con el bebé
+        cy.wait('@relacionProgenitor').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.relaciones).to.have.length(1)
         });
 
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('guardarPaciente'); // **/api/core/mpi/pacientes?type=suggest&claveBlocking=documento&percentage=true&apellido=GUTIERREZ&nombre=ROGELIO&documento=99879546&sexo=masculino&fechaNacimiento=1995-01-18T03:00:00.000Z
-        cy.get('plex-button[label="Guardar"]').click().click();
-        cy.wait('@guardarPaciente').then(() => {
-            cy.get('div').should('contain', 'Los datos se actualizaron correctamente');
+        // Se espera confirmación de que se agrego nuevo paciente(bebe) correctamente
+        cy.wait('@bebeAgregado').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.apellido).to.contains("BEBE");
+            expect(xhr.response.body.nombre).to.contains("BEBE");
         });
     });
 
@@ -77,8 +107,8 @@ context('Aliasing', () => {
             cy.get('@fila').find('td').eq(2).should('contain', 'Huenchuman, Natalia').click();
             // cy.get('@fila').find('td').eq(3).find('badge').should('contain', 'EN PLANIFICACIÓN').click();
             // cy.get('table tbody div').contains('Huenchuman, Natalia').and('14:00 a 15:00 hs').click();
-        cy.get('botones-agenda plex-button[title="Publicar"]').click();
-        cy.get('button').contains('CONFIRMAR').click();
+            cy.get('botones-agenda plex-button[title="Publicar"]').click();
+            cy.get('button').contains('CONFIRMAR').click();
         });
     })
 
