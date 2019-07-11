@@ -66,6 +66,61 @@ context('Aliasing', () => {
         });
     });
 
+    it('Registrar paciente sin dni argentino desde punto de Inicio de Turnos', () => {
+        cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
+            onBeforeLoad: (win) => {
+                win.sessionStorage.setItem('jwt', token);
+            }
+        });
+        cy.server();
+        //Rutas para control
+        cy.route('POST', '**api/core/mpi/pacientes').as('sinDniGuardar');
+        // Buscador
+        cy.get('plex-text input[type="text"]').first().type('1232548').should('have.value', '1232548');
+        cy.get('div').contains('NUEVO PACIENTE').click();
+        cy.get('div').contains('SIN DNI ARGENTINO').click();
+
+        //Se completa datos básicos
+        cy.get('plex-text[name="apellido"] input').first().type('sinDni').should('have.value', 'sinDni');
+
+        cy.get('plex-text[name="nombre"] input').first().type('paciente').should('have.value', 'paciente');
+
+        cy.get('plex-datetime[name="fechaNacimiento"] input').first().type('11/06/1992').should('have.value', '11/06/1992');
+
+        cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
+
+        // Se completa datos de contacto
+        cy.get('plex-select[ng-reflect-name="tipo-0"]').children().children('.selectize-control').click().find('div[data-value="fijo"]').click();
+
+        cy.get('plex-phone[ng-reflect-name="valor-0"] input').first().type('02994351614').should('have.value', '02994351614');
+
+        // Se agrega nuevo contacto
+        cy.get('plex-button[name="agregarContacto"]').click();
+
+        cy.get('plex-select[ng-reflect-name="tipo-1"]').children().children('.selectize-control').click()
+            .find('div[data-value="email"]').click();
+
+        cy.get('plex-text[ng-reflect-name="valor-1"] input').first().type('mail@ejemplo.com').should('have.value', 'mail@ejemplo.com');
+
+        // Se completa los datos de domicilio
+        cy.get('plex-bool[name="viveProvActual"]').click();
+
+        cy.get('plex-bool[name="viveLocActual"]').click();
+
+        cy.get('plex-select[name="barrio"] input[type="text"]').type('alta barda{enter}');
+
+        cy.get('plex-text[name="direccion"] input[type="text"]').first().type('Avenida las Flores 1200').should('have.value', 'Avenida las Flores 1200');
+
+        cy.get('plex-button[label="Actualizar"]').click();
+
+        // Se guardan los cambios
+        cy.get('plex-button[label="Guardar"]').click();
+        // Se espera confirmación de que se agrego nuevo paciente SIN DNI correctamente
+        cy.wait('@sinDniGuardar').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.apellido).to.be.eq('SINDNI');
+        });
+    });
     it('Crear agenda hoy y publicarla', () => {
         cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
             onBeforeLoad: (win) => {
