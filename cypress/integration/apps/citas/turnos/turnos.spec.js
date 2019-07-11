@@ -121,6 +121,61 @@ context('Aliasing', () => {
             expect(xhr.response.body.apellido).to.be.eq('SINDNI');
         });
     });
+
+    it('Registrar paciente con dni argentino desde punto de Inicio de Turnos', () => {
+        cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
+            onBeforeLoad: (win) => {
+                win.sessionStorage.setItem('jwt', token);
+            }
+        });
+        cy.server();
+        //Rutas para control
+        cy.route('POST', '**api/core/mpi/pacientes').as('conDniGuardar');
+
+        // Buscador
+        cy.get('plex-text input[type="text"]').first().type('79546213').should('have.value', '79546213');
+
+        cy.get('div.alert.alert-danger').should('exist');
+
+        cy.get('div').contains('NUEVO PACIENTE').click();
+
+        cy.get('div').contains('CON DNI ARGENTINO').click();
+
+        // Se completa datos básicos
+        cy.get('plex-int[name="documento"] input').type('79546213');
+
+        cy.get('plex-text[name="apellido"] input').first().type('Chiessa');
+
+        cy.get('plex-text[name="nombre"] input').first().type('Mario');
+
+        cy.get('plex-datetime[name="fechaNacimiento"] input').first().type('23/02/1998').should('have.value', '23/02/1998');
+
+        cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
+
+        // Se completa datos de contacto
+        cy.get('plex-phone[ng-reflect-name="valor-0"] input').first().type('02991489753').should('have.value', '02991489753');
+
+        // Se completa los datos de domicilio
+        cy.get('plex-bool[name="viveProvActual"]').click();
+
+        cy.get('plex-bool[name="viveLocActual"]').click();
+
+        cy.get('plex-select[name="barrio"] input[type="text"]').type('alta barda{enter}');
+
+        cy.get('plex-text[name="direccion"] input[type="text"]').first().type('Avenida las Flores 1200').should('have.value', 'Avenida las Flores 1200');
+
+        // Se guardan cambios
+        cy.get('plex-button[label="Guardar"]').click();
+        cy.wait('@conDniGuardar').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.documento).to.be.eq("79546213");
+            expect(xhr.response.body.apellido).to.be.eq("CHIESSA");
+        });
+
+        // Se verifica que aparezca el cartel de que se creó correctamente
+        cy.contains('Los datos se actualizaron correctamente');
+    });
+
     it('Crear agenda hoy y publicarla', () => {
         cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
             onBeforeLoad: (win) => {
