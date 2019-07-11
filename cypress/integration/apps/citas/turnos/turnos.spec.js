@@ -53,11 +53,10 @@ context('Aliasing', () => {
             }
         })
         cy.get('plex-dateTime[name="modelo.fecha"] input').type(Cypress.moment().format('DD/MM/YYYY'));
-        cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('12');
-        cy.get('plex-dateTime[name="modelo.horaFin"] input').type('14');
+        cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('14');
+        cy.get('plex-dateTime[name="modelo.horaFin"] input').type('15');
         cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general{enter}');
-
-        cy.route('GET', '**/api/core/tm/profesionales*').as('profesional')
+        cy.route('GET', '**/api/core/tm/profesionales**').as('profesional')
         cy.get('plex-select[name="modelo.profesionales"] input').type('huenchuman natalia', {
             force: true
         });
@@ -72,9 +71,12 @@ context('Aliasing', () => {
         cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('filtroAgendas');
         cy.get('plex-button[label="Guardar"]').click();
 
-        // publico la agenda
+        // // publico la agenda
         cy.wait('@filtroAgendas').then(() => {
-        cy.get('table tbody div').contains('Huenchuman, Natalia').click();
+            cy.get('table tbody tr').find('td').contains('14:00 a 15:00 hs').parent().parent().as('fila');
+            cy.get('@fila').find('td').eq(2).should('contain', 'Huenchuman, Natalia').click();
+            // cy.get('@fila').find('td').eq(3).find('badge').should('contain', 'EN PLANIFICACIÓN').click();
+            // cy.get('table tbody div').contains('Huenchuman, Natalia').and('14:00 a 15:00 hs').click();
         cy.get('botones-agenda plex-button[title="Publicar"]').click();
         cy.get('button').contains('CONFIRMAR').click();
         });
