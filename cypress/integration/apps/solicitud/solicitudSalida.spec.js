@@ -5,7 +5,7 @@
 context('Aliasing', () => {
     let token
     before(() => {
-        cy.login('38906735', 'asd').then(t => {
+        cy.login('30643636', 'asd').then(t => {
             token = t;
         })
     })
