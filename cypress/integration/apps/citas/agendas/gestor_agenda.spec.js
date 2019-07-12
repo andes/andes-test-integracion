@@ -157,8 +157,10 @@ describe('CITAS - Gestor Agendas', () => {
         });
     });
 
-    it.skip('crea agenda semana próxima y publicarla', () => { // TODO: no aparece el boton guardar al correr con npx cypress run
+    it('crea agenda semana próxima y publicarla', () => {
         cy.server();
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1**').as('getPrestacion');
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
         cy.get('plex-button[label="Crear una nueva agenda"]').click();
         cy.get('div').then(($body) => {
@@ -172,12 +174,16 @@ describe('CITAS - Gestor Agendas', () => {
         cy.get('plex-dateTime[name="modelo.fecha"] input').type(proximaSemana);
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('10');
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('15');
-        cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general {enter}');
+        cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general');
+        cy.wait('@getPrestacion').then(() => {
+            cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('{enter}');
+        });
         cy.get('plex-select[name="modelo.profesionales"] input').type('perez maria', {
             force: true
         });
-        cy.wait(1000); // TODO no darle enter hasta que se haya cargado el profesional
-        cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}');
+        cy.wait('@getProfesional').then(() => {
+            cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}');
+        });
         cy.get('plex-int[name="cantidadTurnos"] input').type('10');
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type('2');
         cy.get('plex-int[name="accesoDirectoProgramado"] input').type('3');
