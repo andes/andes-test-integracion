@@ -1,7 +1,7 @@
 context('Agenda dinamicas', () => {
     let token
     before(() => {
-        cy.login('38906735', 'asd').then(t => {
+        cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('paciente-dinamico', token);
         });
@@ -18,7 +18,7 @@ context('Agenda dinamicas', () => {
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
 
-        cy.goto('/citas/puntoInicio', token);
+        cy.goto('/citas/punto-inicio', token);
 
         cy.get('plex-text input[type=text]').first().type('38906735').should('have.value', '38906735');
         cy.get('tr').first().click();

@@ -26,10 +26,10 @@
 
 Cypress.Commands.add("login", (usuario, password) => {
     let token;
-    return cy.request('POST', Cypress.env('API_SERVER')+'/api/auth/login', { usuario, password }).then((response) => {
+    return cy.request('POST', Cypress.env('API_SERVER') + '/api/auth/login', { usuario, password }).then((response) => {
         token = response.body.token;
         return response = cy.request({
-            url: Cypress.env('API_SERVER')+'/api/auth/organizaciones',
+            url: Cypress.env('API_SERVER') + '/api/auth/organizaciones',
             method: 'GET',
             headers: {
                 Authorization: 'JWT ' + token
@@ -37,7 +37,7 @@ Cypress.Commands.add("login", (usuario, password) => {
         }).then((response) => {
             let org = response.body[0];
             return response = cy.request({
-                url: Cypress.env('API_SERVER')+'/api/auth/organizaciones',
+                url: Cypress.env('API_SERVER') + '/api/auth/organizaciones',
                 method: 'POST',
                 headers: {
                     Authorization: 'JWT ' + token
@@ -52,10 +52,10 @@ Cypress.Commands.add("login", (usuario, password) => {
 
 Cypress.Commands.add('createPaciente', (name, token) => {
     return cy.fixture(name).then((paciente) => {
-        cy.request({ 
-            method: 'POST', 
-            url: Cypress.env('API_SERVER') + '/api/core/mpi/pacientes', 
-            body: paciente,
+        cy.request({
+            method: 'POST',
+            url: Cypress.env('API_SERVER') + '/api/core/mpi/pacientes',
+            body: { paciente },
             headers: {
                 Authorization: `JWT ${token}`
             }
@@ -66,15 +66,15 @@ Cypress.Commands.add('createPaciente', (name, token) => {
 Cypress.Commands.add('swal', (acction) => {
     return cy.get('div').then(($body) => {
         if ($body.hasClass('swal2-container')) {
-             cy.get(`.swal2-${acction}`).click({ force: true })
+            cy.get(`.swal2-${acction}`).click({ force: true })
         }
     });
 })
 
 Cypress.Commands.add('goto', (url, token) => {
-    return cy.visit( Cypress.env('BASE_URL') + url, {
+    return cy.visit(Cypress.env('BASE_URL') + url, {
         onBeforeLoad: (win) => {
             win.sessionStorage.setItem('jwt', token);
         }
-    }); 
+    });
 });
