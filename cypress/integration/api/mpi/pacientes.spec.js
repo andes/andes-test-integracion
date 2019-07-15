@@ -49,13 +49,18 @@ context('MPI - Pacientes', () => {
             expect(xhr.body).to.have.property('id', id);
             expect(xhr.body).to.have.property('nombre', 'MARIA');
             expect(xhr.body).to.not.have.property('documento');
-            cy.log(xhr.body)
         });
         cy.get('/api/core_v2/mpi/pacientes/' + id, token, { fields: '-financiador' }).then(xhr => {
             expect(xhr.status).to.eq(200);
             expect(xhr.body).to.have.property('id', id)
         });
+    });
 
+    it('get paciente - subrecurso contacto', () => {
+        cy.get('/api/core_v2/mpi/pacientes/' + paciente_a.id + '/contactos', token).then(xhr => {
+            expect(xhr.status).to.eq(200);
+            expect(xhr.body).to.have.lengthOf(1);
+        });
     });
 
     it('search paciente partial name', () => {
