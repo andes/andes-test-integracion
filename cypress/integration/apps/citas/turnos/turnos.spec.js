@@ -185,6 +185,9 @@ context('Aliasing', () => {
             }
         });
         cy.server();
+        cy.route('GET', '**//api/core/tm/tiposPrestaciones?turneable=1').as('prestacion');
+        cy.route('GET', '**/api/core/tm/profesionales**').as('profesional')
+        cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('filtroAgendas');
 
         cy.get('plex-button[label="Crear una nueva agenda"]').click();
         cy.get('div').then(($body) => {
@@ -197,8 +200,10 @@ context('Aliasing', () => {
         cy.get('plex-dateTime[name="modelo.fecha"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('14');
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('15');
-        cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general{enter}');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('profesional')
+        cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general');
+        cy.wait('@prestacion').then(() => {
+            cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('{enter}');
+        });
         cy.get('plex-select[name="modelo.profesionales"] input').type('huenchuman natalia', {
             force: true
         });
@@ -210,21 +215,18 @@ context('Aliasing', () => {
         cy.get('plex-int[name="cantidadTurnos"] input').type('4');
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type('4');
         cy.wait(1000);
-        cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('filtroAgendas');
         cy.get('plex-button[label="Guardar"]').click();
 
         // // publico la agenda
         cy.wait('@filtroAgendas').then(() => {
             cy.get('table tbody tr').find('td').contains('14:00 a 15:00 hs').parent().parent().as('fila');
             cy.get('@fila').find('td').eq(2).should('contain', 'Huenchuman, Natalia').click();
-            // cy.get('@fila').find('td').eq(3).find('badge').should('contain', 'EN PLANIFICACIÓN').click();
-            // cy.get('table tbody div').contains('Huenchuman, Natalia').and('14:00 a 15:00 hs').click();
             cy.get('botones-agenda plex-button[title="Publicar"]').click();
             cy.get('button').contains('CONFIRMAR').click();
         });
     })
 
-    it.skip('dar turno de día', () => { // TODO: no encuentra agenda para los filtros ingresados por mas que se cree en el caso de prueba anterior
+    it('dar turno de día', () => { // TODO: no encuentra agenda para los filtros ingresados por mas que se cree en el caso de prueba anterior
         cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
@@ -232,23 +234,30 @@ context('Aliasing', () => {
         });
         cy.server();
 
-        cy.route('GET', '**/api/core/mpi/pacientes?type=multimatch&cadenaInput=12325484').as('consultaPaciente');
-        cy.get('paciente-buscar input').first().type('12325484');
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+        cy.get('paciente-buscar input').first().type('79546213');
         cy.wait('@consultaPaciente').then(() => {
-            cy.get('table tbody').contains('12325484').click();
+            cy.get('table tbody').contains('79546213').click();
         });
         cy.get('plex-button[title="Dar Turno"]').click();
-        cy.get('plex-select[placeholder="Tipos de Prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
-
+        // cy.get('plex-select[placeholder="Tipos de Prestación"]').children().children('.selectize-control').click()
+        //     .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
+        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');
+        cy.get('plex-select[placeholder="Equipo de Salud"] input').type('huenchuman natalia');
+        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('agendas');
+        cy.wait('@getProfesional').then(() => {
+            cy.get('plex-select[placeholder="Equipo de Salud"] input').type('{enter}');
+        });
+        cy.wait('@agendas').then(() => {
         cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
             force: true
         });
-        cy.get('dar-turnos div').contains('13:30').click();
+            cy.get('dar-turnos div').contains('14:00').click();
         cy.get('plex-button[label="Confirmar"]').click();
 
         // Confirmo que se le dio el turno
         cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
+    });
     });
 
     it.skip('Crear agenda semana próxima y publicarla', () => { // TODO: no aparece el boton de guardar cuando se ejecuta desde consola $npx cypress run --browser chrome --spec [url this spec]
