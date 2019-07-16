@@ -37,18 +37,20 @@ context('Aliasing', () => {
         cy.get('plex-datetime[name="fechaNacimiento"] input').type(Cypress.moment().format('DD/MM/YYYY'));
 
         // Se completa datos
-        cy.get('paciente-buscar[label="Buscar"] input').first().type('11181222');
+        cy.get('paciente-buscar[label="Buscar"] input').first().type('38906735');
 
         //Espera confirmación de la búsqueda correcta del progenitor
         cy.wait('@busquedaProgenitor').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         // Se selecciona el progenitor 
-        cy.get('paciente-listado').find('td').contains('11181222').click();
+        cy.get('paciente-listado').find('td').contains('38906735').click();
 
+        cy.get('plex-bool[name="noPoseeContacto"]').click();
 
         // Se actualizan los datos del domicilio
-        cy.get('plex-button[label="Actualizar"]').click();
+        cy.get('plex-bool[name="viveProvActual"]').click();
+        cy.get('plex-bool[name="viveLocActual"]').click();
 
         cy.get('plex-button[label="Guardar"]').click();
 
