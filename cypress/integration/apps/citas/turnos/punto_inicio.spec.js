@@ -17,6 +17,7 @@ context('Agenda dinamicas', () => {
         cy.server();
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
+        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
 
         cy.goto('/citas/punto-inicio', token);
@@ -32,9 +33,10 @@ context('Agenda dinamicas', () => {
 
         cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click()
             .find('.option[data-value="5951051aa784f4e1a8e2afe1"]').click();
-
-        cy.get('.outline-success ').first().click();
-        cy.get('dar-turnos div').contains('08:00').click();
+        cy.wait('@cargaAgendas');
+        cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
+        cy.get('plex-button[title="Agenda siguiente"]').click();
+        cy.get('plex-button[label="Dar Turno"]').click();
         cy.get('plex-button[label="Confirmar"]').click();
 
         // Confirmo que se dio el turno desde la API
