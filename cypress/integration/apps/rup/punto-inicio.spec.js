@@ -10,7 +10,7 @@ context('RUP - Punto de inicio', () => {
         })
     })
 
-    it.skip('Iniciar prestación - Fuera de agenda', () => {
+    it('Iniciar prestación - Fuera de agenda', () => {
         cy.goto('/rup', token);
 
         cy.server();
@@ -27,7 +27,7 @@ context('RUP - Punto de inicio', () => {
         cy.get('plex-text input').first().type('11181222');
         cy.get('table tbody tr').first().click();
 
-        cy.get('plex-button[label="INICIAR PRESTACIÓN"]').click();
+        cy.get('plex-button[type="success"]').contains('INICIAR PRESTACIÓN').click(); // con [label="INICIAR PRESTACIÓN"] no lo encuentra, es un label dinámico
 
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200);

@@ -249,18 +249,18 @@ context('Aliasing', () => {
             cy.get('plex-select[placeholder="Equipo de Salud"] input').type('{enter}');
         });
         cy.wait('@agendas').then(() => {
-        cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
-            force: true
-        });
+            cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
+                force: true
+            });
             cy.get('dar-turnos div').contains('14:00').click();
-        cy.get('plex-button[label="Confirmar"]').click();
+            cy.get('plex-button[label="Confirmar"]').click();
 
-        // Confirmo que se le dio el turno
-        cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
-    });
+            // Confirmo que se le dio el turno
+            cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
+        });
     });
 
-    it.skip('Crear agenda semana próxima y publicarla', () => { // TODO: no aparece el boton de guardar cuando se ejecuta desde consola $npx cypress run --browser chrome --spec [url this spec]
+    it.only('Crear agenda semana próxima y publicarla', () => { // TODO: no aparece el boton de guardar cuando se ejecuta desde consola $npx cypress run --browser chrome --spec [url this spec]
         cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
@@ -280,6 +280,8 @@ context('Aliasing', () => {
         cy.get('plex-dateTime[name="modelo.fecha"] input').type(proximaSemana);
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('10');
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('15');
+        cy.get('plex-select[placeholder="Tipos de Prestación"]').children().children('.selectize-control').click()
+            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
         cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general (procedimiento){enter}');
         cy.get('plex-select[name="modelo.profesionales"] input').type('prueba usuario', {
             force: true
@@ -320,8 +322,8 @@ context('Aliasing', () => {
         cy.server();
 
         cy.get('plex-button[label="Nueva Solicitud"]').click();
-        cy.get('pacientesSearch plex-text[placeholder="Escanee un documento digital, o escriba un documento/apellido/nombre"] input').first().type('99879546');
-        cy.get('table tbody td span').contains('99879546').click();
+        cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('12325484');
+        cy.get('table tbody td span').contains('12325484').click();
         cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
 
         // Prestación Destino (solicitada)
@@ -331,7 +333,6 @@ context('Aliasing', () => {
         });
         cy.wait('@prestacion').then(() => {
             cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').first().type('{enter}');
-
         });
         // Organización Origen
         cy.get('plex-select[name="organizacionOrigen"] input').type('Castro Rendon');
@@ -345,12 +346,12 @@ context('Aliasing', () => {
         });
         // Profesional Origen
         cy.route('GET', '**/api/core/tm/profesionales*').as('profesional')
-        cy.get('plex-select[name="profesionalOrigen"] input').first().type('Yang So Min');
+        cy.get('plex-select[name="profesionalOrigen"] input').first().type('Perez Maria');
         cy.wait('@profesional').then(() => {
             cy.get('plex-select[name="profesionalOrigen"] input').first().type('{enter}');
         });
         // Profesional Destino
-        cy.get('plex-select[name="profesional"] input').type('ALVAREZ ANGELICA VANESA');
+        cy.get('plex-select[name="profesional"] input').type('huenchuman natalia');
         cy.wait('@profesional').then(() => {
             cy.get('plex-select[name="profesional"] input').type('{enter}');
         });
@@ -414,8 +415,8 @@ context('Aliasing', () => {
         cy.server();
 
         cy.get('plex-button[label="Nueva Solicitud"]').click();
-        cy.get('pacientesSearch plex-text[placeholder="Escanee un documento digital, o escriba un documento/apellido/nombre"] input').first().type('99879546');
-        cy.get('table tbody td span').contains('99879546').click();
+        cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('12325484');
+        cy.get('table tbody td span').contains('12325484').click();
         cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('plex-bool[name="autocitado"] input').check({
             force: true
@@ -432,7 +433,7 @@ context('Aliasing', () => {
         });
         // Profesional Origen
         cy.route('GET', '**/api/core/tm/profesionales*').as('profesional')
-        cy.get('plex-select[name="profesionalOrigen"] input').first().type('ALVAREZ ANGELICA VANESA');
+        cy.get('plex-select[name="profesionalOrigen"] input').first().type('huenchuman natalia');
         cy.wait('@profesional').then(() => {
             cy.get('plex-select[name="profesionalOrigen"] input').first().type('{enter}');
         });
