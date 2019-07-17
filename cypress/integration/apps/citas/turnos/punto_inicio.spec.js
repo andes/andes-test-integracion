@@ -13,7 +13,7 @@ context('Agenda dinamicas', () => {
 
 
 
-    it.only('dar turno agenda dinámica', () => {
+    it('dar turno agenda dinámica', () => {
         cy.server();
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
@@ -27,7 +27,7 @@ context('Agenda dinamicas', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.get('paciente-listado').find('td').contains('38906735').click();
-        
+
         cy.get('plex-button[title="Dar Turno"]').click();
         cy.wait('@prestaciones');
 
@@ -47,21 +47,32 @@ context('Agenda dinamicas', () => {
 
     it('dar turno programado', () => {
         cy.server();
-        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
+        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
 
-        cy.goto('/citas/puntoInicio', token);
+        cy.goto('/citas/punto-inicio', token);
 
-        cy.get('plex-text input[type=text]').first().type('38906734').should('have.value', '38906734');
-        cy.get('tr').first().click();
+        cy.get('plex-text input[type=text]').first().type('38906735').should('have.value', '38906735');
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').find('td').contains('38906735').click();
+
         cy.get('plex-button[title="Dar Turno"]').click();
         cy.wait('@prestaciones');
 
         cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click()
-            .find('.option[data-value="5951051aa784f4e1a8e2afe1"]').click();
+            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
 
-        cy.get('.outline-success ').first().click();
-        cy.get('div').contains('08:00').first().click()
+        // Hay una agenda creada dentro de los 7 dias y puede caer en el proximo mes
+        if (Cypress.moment().add(7, 'days').month() > Cypress.moment().month()) {
+            cy.get('plex-button[icon="chevron-right"]').click();
+        }
+        cy.wait('@cargaAgendas');
+        cy.get('app-calendario .dia').contains(Cypress.moment().add(7, 'days').date()).click();
+        cy.get('div').contains('10:00').first().click()
         cy.get('plex-button[label="Confirmar"]').click();
 
         // Confirmo que se dio el turno desde la API
