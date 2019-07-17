@@ -162,6 +162,7 @@ describe('CITAS - Gestor Agendas', () => {
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1**').as('getPrestacion');
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
+        cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('getAgendas');
         cy.get('plex-button[label="Crear una nueva agenda"]').click();
         cy.get('div').then(($body) => {
             if ($body.hasClass('swal2-container')) {
@@ -174,10 +175,8 @@ describe('CITAS - Gestor Agendas', () => {
         cy.get('plex-dateTime[name="modelo.fecha"] input').type(proximaSemana);
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('10');
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('15');
-        cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general');
-        cy.wait('@getPrestacion').then(() => {
-            cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('{enter}');
-        });
+        cy.get('plex-select[name="modelo.tipoPrestaciones"]').children().children('.selectize-control').click()
+            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
         cy.get('plex-select[name="modelo.profesionales"] input').type('perez maria', {
             force: true
         });
@@ -197,6 +196,7 @@ describe('CITAS - Gestor Agendas', () => {
 
         cy.get('plex-datetime[name="fechaDesde"] input').type('{selectall}{backspace}' + proximaSemana);
         cy.get('plex-datetime[name="fechaHasta"] input').type('{selectall}{backspace}' + proximaSemana);
+        cy.wait('@getAgendas');
         cy.get('table tbody div').contains('PEREZ, MARIA').click({
             force: true
         });
