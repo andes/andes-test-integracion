@@ -260,59 +260,6 @@ context('Aliasing', () => {
         });
     });
 
-    it.only('Crear agenda semana próxima y publicarla', () => { // TODO: no aparece el boton de guardar cuando se ejecuta desde consola $npx cypress run --browser chrome --spec [url this spec]
-        cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
-        cy.server();
-
-        cy.get('plex-button[label="Crear una nueva agenda"]').click();
-        cy.get('div').then(($body) => {
-            if ($body.hasClass('swal2-container')) {
-                cy.get('.swal2-cancel').click({
-                    force: true
-                })
-            }
-        })
-        let proximaSemana = Cypress.moment().add(7, 'days').format('DD/MM/YYYY');
-        cy.get('plex-dateTime[name="modelo.fecha"] input').type(proximaSemana);
-        cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('10');
-        cy.get('plex-dateTime[name="modelo.horaFin"] input').type('15');
-        cy.get('plex-select[placeholder="Tipos de Prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
-        cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general (procedimiento){enter}');
-        cy.get('plex-select[name="modelo.profesionales"] input').type('prueba usuario', {
-            force: true
-        });
-        cy.wait(1000); // TODO no darle enter hasta que se haya cargado el profesional
-        cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}');
-        cy.get('plex-int[name="cantidadTurnos"] input').type('10');
-        cy.get('plex-int[name="accesoDirectoDelDia"] input').type('2');
-        cy.get('plex-int[name="accesoDirectoProgramado"] input').type('3');
-        cy.get('plex-int[name="reservadoGestion"] input').type('3');
-        cy.get('plex-int[name="reservadoProfesional"] input').type('2');
-        cy.get('plex-button[label="Guardar"]').click({
-            force: true
-        });
-
-        // publico la agenda
-
-        cy.get('plex-datetime[name="fechaDesde"] input').type('{selectall}{backspace}' + proximaSemana);
-        cy.get('plex-datetime[name="fechaHasta"] input').type('{selectall}{backspace}' + proximaSemana);
-        cy.wait(15000);
-        cy.route('GET', '**/api/modules/turnos/agenda/**').as('botonAgenda');
-        cy.get('table tbody div').contains('USUARIO, PRUEBA').click({
-            force: true
-        });
-
-        cy.wait('@botonAgenda').then(() => {
-            cy.get('botones-agenda plex-button[title="Publicar"]').click();
-            cy.get('button').contains('CONFIRMAR').click();
-        });
-    })
-
     it.skip('Crear solicitud diferente profesional y prestación, misma organización', () => { // TODO: Hay que sacar el wizard
         cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
             onBeforeLoad: (win) => {
