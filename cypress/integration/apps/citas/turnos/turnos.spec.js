@@ -178,54 +178,6 @@ context('Aliasing', () => {
         cy.contains('Los datos se actualizaron correctamente');
     });
 
-    it('Crear agenda hoy y publicarla', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
-        cy.server();
-        cy.route('GET', '**//api/core/tm/tiposPrestaciones?turneable=1').as('prestacion');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('profesional')
-        cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('filtroAgendas');
-
-        cy.get('plex-button[label="Crear una nueva agenda"]').click();
-        cy.get('div').then(($body) => {
-            if ($body.hasClass('swal2-container')) {
-                cy.get('.swal2-cancel').click({
-                    force: true
-                })
-            }
-        })
-        cy.get('plex-dateTime[name="modelo.fecha"] input').type(Cypress.moment().format('DD/MM/YYYY'));
-        cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('14');
-        cy.get('plex-dateTime[name="modelo.horaFin"] input').type('15');
-        cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general');
-        cy.wait('@prestacion').then(() => {
-            cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('{enter}');
-        });
-        cy.get('plex-select[name="modelo.profesionales"] input').type('huenchuman natalia', {
-            force: true
-        });
-        cy.wait('@profesional').then(() => {
-            cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}', {
-                force: true
-            });
-        });
-        cy.get('plex-int[name="cantidadTurnos"] input').type('4');
-        cy.get('plex-int[name="accesoDirectoDelDia"] input').type('4');
-        cy.wait(1000);
-        cy.get('plex-button[label="Guardar"]').click();
-
-        // // publico la agenda
-        cy.wait('@filtroAgendas').then(() => {
-            cy.get('table tbody tr').find('td').contains('14:00 a 15:00 hs').parent().parent().as('fila');
-            cy.get('@fila').find('td').eq(2).should('contain', 'Huenchuman, Natalia').click();
-            cy.get('botones-agenda plex-button[title="Publicar"]').click();
-            cy.get('button').contains('CONFIRMAR').click();
-        });
-    })
-
     it('dar turno de día', () => { // TODO: no encuentra agenda para los filtros ingresados por mas que se cree en el caso de prueba anterior
         cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
             onBeforeLoad: (win) => {
@@ -252,7 +204,7 @@ context('Aliasing', () => {
             cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
                 force: true
             });
-            cy.get('dar-turnos div').contains('14:00').click();
+            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
             cy.get('plex-button[label="Confirmar"]').click();
 
             // Confirmo que se le dio el turno

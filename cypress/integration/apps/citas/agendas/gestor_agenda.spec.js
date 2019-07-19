@@ -106,6 +106,57 @@ describe('CITAS - Gestor Agendas', () => {
         cy.swal('confirm');
     });
 
+    it('Crear agenda hoy y publicarla', () => {
+        cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
+            onBeforeLoad: (win) => {
+                win.sessionStorage.setItem('jwt', token);
+            }
+        });
+        cy.server();
+        cy.route('GET', '**//api/core/tm/tiposPrestaciones?turneable=1').as('prestacion');
+        cy.route('GET', '**/api/core/tm/profesionales**').as('profesional')
+        cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('filtroAgendas');
+
+        cy.get('plex-button[label="Crear una nueva agenda"]').click();
+        cy.get('div').then(($body) => {
+            if ($body.hasClass('swal2-container')) {
+                cy.get('.swal2-cancel').click({
+                    force: true
+                })
+            }
+        })
+
+        cy.get('plex-dateTime[name="modelo.fecha"] input').type(Cypress.moment().format('DD/MM/YYYY'));
+        let ahora = Cypress.moment();
+        cy.get('plex-dateTime[name="modelo.horaInicio"] input').type(ahora.hour());
+        cy.get('plex-dateTime[name="modelo.horaFin"] input').type(ahora.add(1, 'hour').hour());
+
+        cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general');
+        cy.wait('@prestacion').then(() => {
+            cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('{enter}');
+        });
+        cy.get('plex-select[name="modelo.profesionales"] input').type('huenchuman natalia', {
+            force: true
+        });
+        cy.wait('@profesional').then(() => {
+            cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}', {
+                force: true
+            });
+        });
+        cy.get('plex-int[name="cantidadTurnos"] input').type('4');
+        cy.get('plex-int[name="accesoDirectoDelDia"] input').type('4');
+        cy.wait(1000);
+        cy.get('plex-button[label="Guardar"]').click();
+
+        // // publico la agenda
+        cy.wait('@filtroAgendas').then(() => {
+            cy.get('table tbody tr').find('td').contains(`${ahora.add(-1, 'hour').format('HH')}:00 a ${ahora.add(1, 'hour').format('HH')}:00 hs`).parent().parent().as('fila');
+            cy.get('@fila').find('td').eq(2).should('contain', 'Huenchuman, Natalia').click();
+            cy.get('botones-agenda plex-button[title="Publicar"]').click();
+            cy.get('button').contains('CONFIRMAR').click();
+        });
+    })
+
     it('crea agenda dinámica para la fecha actual', () => {
 
         cy.server();
