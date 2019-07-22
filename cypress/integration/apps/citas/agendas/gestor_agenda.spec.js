@@ -3,6 +3,11 @@ describe('CITAS - Gestor Agendas', () => {
     before(() => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
+            cy.createAgenda('agendasClonar/agendaClonar1', 16, token);
+            cy.createAgenda('agendasClonar/agendaClonar2', 17, token);
+            cy.createAgenda('agendasClonar/agendaClonar3', 17, token);
+            cy.createAgenda('agendasClonar/agendaClonar4', 17, token);
+            cy.createAgenda('agendasClonar/agendaClonar5', 16, token);
         });
         cy.viewport(1280, 720);
     })
@@ -212,6 +217,7 @@ describe('CITAS - Gestor Agendas', () => {
         cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1**').as('getPrestacion');
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.route('GET', '**/api/modules/turnos/espacioFisico?activo=**').as('getEspaciosFisicos');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
         cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('getAgendas');
         cy.get('plex-button[label="Crear una nueva agenda"]').click();
@@ -234,6 +240,10 @@ describe('CITAS - Gestor Agendas', () => {
         cy.wait('@getProfesional').then(() => {
             cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}');
         });
+        cy.get('plex-select[name="espacioFisico"] input').type('aula 1 docencia');
+        cy.wait('@getEspaciosFisicos');
+        cy.get('plex-select[name="espacioFisico"] input').type('{enter}');
+
         cy.get('plex-int[name="cantidadTurnos"] input').type('10');
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type('2');
         cy.get('plex-int[name="accesoDirectoProgramado"] input').type('3');
@@ -396,4 +406,69 @@ describe('CITAS - Gestor Agendas', () => {
     //     cy.get('button').contains('CONFIRMAR').click();
     // })
 
+    it('clonación de agendas con y sin conflictos', () => {
+        cy.server();
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.route('GET', '**/api/modules/turnos/espacioFisico?activo=**').as('getEspaciosFisicos');
+        cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('getAgendas');
+        cy.route('POST', '**/api/modules/turnos/agenda/clonar').as('clonar');
+
+        // cy.get('plex-button[class="mdi mdi-chevron-down"]').click(); // esta comentado porque no logro clickear el botón "Filtros avanzados"
+        // cy.get('plex-button[icon="chevron-down"]').click();
+        // cy.get('plex-select[label="Equipo de Salud"] input').type('perez maria');
+        // cy.wait('@getProfesional');
+        // cy.get('plex-select[label="Equipo de Salud"] input').type('{enter}');
+
+        // cy.get('plex-select[label="Espacio Físico"] input').type('aula 1 docencia');
+        // cy.wait('@getEspaciosFisicos');
+        // cy.get('plex-select[label="Espacio Físico"] input').type('{enter}');
+
+        let proximaSemana = Cypress.moment().add(7, 'days').format('DD/MM/YYYY');
+        cy.get('plex-datetime[name="fechaDesde"] input').type('{selectall}{backspace}' + proximaSemana);
+        cy.get('plex-datetime[name="fechaHasta"] input').type('{selectall}{backspace}' + proximaSemana);
+        cy.wait('@getAgendas');
+        cy.get('table tbody div').contains('PEREZ, MARIA').click({
+            force: true
+        });
+
+        cy.get('botones-agenda plex-button[title="Clonar"]').click();
+        let fechaClonadaConflicto = Cypress.moment().add(17, 'days');
+        if (fechaClonadaConflicto.month() > Cypress.moment().month()) {
+            cy.get('plex-button[icon="chevron-right"]').click();
+        }
+        cy.wait('@getAgendas');
+
+        cy.get('table td div').contains(fechaClonadaConflicto.date()).click();
+        cy.get('div').contains('Agendas en conflicto');
+        cy.get(`plex-panel[ng-reflect-titulo-principal="${fechaClonadaConflicto.format('DD/MM/YYYY')} 09:00 - 11:00"]`).click({
+            force: true
+        });
+        cy.get('li').contains('Conflicto con Equipo de Salud');
+        cy.get(`plex-panel[ng-reflect-titulo-principal="${fechaClonadaConflicto.format('DD/MM/YYYY')} 12:00 - 14:00"]`).click({
+            force: true
+        });
+        cy.get('li').contains('Conflicto con Espacio Físico');
+        cy.get(`plex-panel[ng-reflect-titulo-principal="${fechaClonadaConflicto.format('DD/MM/YYYY')} 12:00 - 14:00"]`);
+
+
+        cy.get('plex-button[label="Clonar Agenda"]').click();
+        cy.contains('Seleccione al menos un día válido del calendario');
+        cy.get('button').contains('Aceptar').click();
+
+        let fechaClonadaSinConflicto = Cypress.moment().add(16, 'days');
+        if (fechaClonadaSinConflicto.month() === Cypress.moment().month() && fechaClonadaConflicto.month() > Cypress.moment().month()) {
+            cy.get('plex-button[icon="chevron-left"]').click();
+            cy.wait('@getAgendas');
+        }
+        cy.get('table td div').contains(fechaClonadaSinConflicto.date()).click();
+        cy.get('plex-button[label="Clonar Agenda"]').click();
+        cy.get('button').contains('CONFIRMAR').click();
+
+        cy.wait('@clonar').then((xhr) => {
+            expect(xhr.response.body).to.have.length(1);
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.contains('La Agenda se clonó correctamente');
+        cy.swal('confirm');
+    })
 })
