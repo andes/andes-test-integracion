@@ -263,6 +263,57 @@ describe('CITAS - Gestor Agendas', () => {
 
     })
 
+    it('crea agenda no nominalizada', () => {
+        cy.server();
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
+        cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('getAgendas');
+
+        cy.get('plex-button[label="Crear una nueva agenda"]').click();
+        cy.get('div').then(($body) => {
+            if ($body.hasClass('swal2-container')) {
+                cy.get('.swal2-cancel').click({
+                    force: true
+                })
+            }
+        })
+
+        let hoy = Cypress.moment().format('DD/MM/YYYY');
+        cy.get('plex-dateTime[name="modelo.fecha"] input').type(hoy);
+        cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('15');
+        cy.get('plex-dateTime[name="modelo.horaFin"] input').type('17');
+        cy.get('plex-select[name="modelo.tipoPrestaciones"]').children().children('.selectize-control').click()
+            .find('.option[data-value="5b61d59968954f3e6ea84586"]').click();
+
+        cy.get('legend').contains('Acceso Directo').should('not.be.visible');
+        cy.get('legend').contains('Reservado').should('not.be.visible');
+        cy.get('legend').contains('Bloque').should('be.visible');
+
+        cy.get('plex-select[name="modelo.profesionales"] input').type('perez maria', {
+            force: true
+        });
+        cy.wait('@getProfesional').then(() => {
+            cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}');
+        });
+
+        cy.get('plex-button[label="Guardar"]').click({
+            force: true
+        });
+
+        cy.wait('@getAgendas');
+        cy.get('table tbody div').contains('actividades con la comunidad').click({
+            force: true
+        });
+
+        cy.get('botones-agenda plex-button[title="Cambiar a disponible"]').click();
+
+        cy.wait('@publicar').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+    })
+
+
+
     // it('clona agenda para una fecha posterior', () => {
     //     cy.server();
     //     cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
