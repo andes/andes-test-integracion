@@ -471,4 +471,34 @@ describe('CITAS - Gestor Agendas', () => {
         cy.contains('La Agenda se clonó correctamente');
         cy.swal('confirm');
     })
+
+    it('Dar sobreturno', () => {
+        cy.server();
+        cy.route('GET', '**/api/core/mpi/pacientes?type=multimatch&cadenaInput=**').as('getPaciente');
+        cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('guardarSobreturno');
+
+        cy.get('table span').should('have.class', 'badge-success').contains('Publicada').click();
+        cy.get('botones-agenda plex-button[title="Agregar Sobreturno"]').click();
+
+        cy.get('sobreturno paciente-buscar plex-text[name="buscador"] input').first().type('38906735');
+        cy.wait('@getPaciente');
+        cy.get('table td').contains('PRUEBA, PRUEBA').click();
+
+        cy.get('plex-datetime[name="horaTurno"] input').type('05:00');
+        cy.get('div[class="form-control-feedback"]').contains('El valor debe ser mayor a 08:00');
+
+        cy.get('plex-datetime[name="horaTurno"] input').type('{selectall}{backspace}20:00');
+        cy.get('div[class="form-control-feedback"]').contains('El valor debe ser menor a 19:00');
+        cy.get('plex-button[label="Guardar"]').click();
+        cy.contains('Debe completar los datos requeridos');
+        cy.swal('confirm');
+
+        cy.get('plex-datetime[name="horaTurno"] input').type('{selectall}{backspace}08:00');
+        cy.get('plex-button[label="Guardar"]').click();
+
+        cy.wait('@guardarSobreturno').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.sobreturnos).to.have.length(1);
+        });
+    })
 })
