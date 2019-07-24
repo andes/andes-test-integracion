@@ -32,7 +32,7 @@ context('RUP - Punto de inicio', () => {
             .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
 
         cy.get('plex-button[label="SELECCIONAR PACIENTE"]').click();
-        cy.get('plex-text input').first().type('11181222');
+        cy.get('plex-text input').first().type('3399661');
         cy.get('table tbody tr').first().click();
 
         cy.get('plex-button[type="success"]').contains('INICIAR PRESTACIÓN').click();
@@ -40,7 +40,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.turno).to.be.undefined;
             expect(xhr.response.body.solicitud.tipoPrestacion.id).to.be.eq('598ca8375adc68e2a0c121b8');
-            expect(xhr.response.body.paciente.documento).to.be.eq('11181222');
+            expect(xhr.response.body.paciente.documento).to.be.eq('3399661');
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
         });
 
