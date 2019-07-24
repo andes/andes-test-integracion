@@ -5,6 +5,7 @@ context('Aliasing', () => {
     before(() => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
+            cy.createAgenda48hs('agendaProfesional', token);
         })
     })
     beforeEach(() => {
@@ -77,6 +78,8 @@ context('Aliasing', () => {
         cy.server();
         //Rutas para control
         cy.route('POST', '**api/core/mpi/pacientes').as('sinDniGuardar');
+        cy.route('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
+
         // Buscador
         cy.get('plex-text input[type="text"]').first().type('1232548').should('have.value', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
@@ -115,6 +118,10 @@ context('Aliasing', () => {
 
         cy.get('plex-button[label="Actualizar"]').click();
 
+        cy.wait('@geoReferencia').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+
         // Se guardan los cambios
         cy.get('plex-button[label="Guardar"]').click();
         // Se espera confirmación de que se agrego nuevo paciente SIN DNI correctamente
@@ -133,6 +140,7 @@ context('Aliasing', () => {
         cy.server();
         //Rutas para control
         cy.route('POST', '**api/core/mpi/pacientes').as('conDniGuardar');
+        cy.route('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
 
         // Buscador
         cy.get('plex-text input[type="text"]').first().type('79546213').should('have.value', '79546213');
@@ -165,6 +173,12 @@ context('Aliasing', () => {
         cy.get('plex-select[name="barrio"] input[type="text"]').type('alta barda{enter}');
 
         cy.get('plex-text[name="direccion"] input[type="text"]').first().type('Avenida las Flores 1200').should('have.value', 'Avenida las Flores 1200');
+
+        cy.get('plex-button[label="Actualizar"]').click();
+
+        cy.wait('@geoReferencia').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
 
         // Se guardan cambios
         cy.get('plex-button[label="Guardar"]').click();
@@ -255,9 +269,8 @@ context('Aliasing', () => {
             cy.get('plex-select[name="profesional"] input').type('{enter}');
         });
 
-        cy.get('plex-text[name="motivo"] input').first().type('Prueba', {
-            force: true
-        });
+        cy.get('plex-text[name="motivo"] input').type('Motivo de la solicitud');
+
         cy.get('plex-button[label="Guardar"]').click();
         cy.get('div[class="simple-notification toast success"]').contains('Solicitud guardada');
 
@@ -305,75 +318,105 @@ context('Aliasing', () => {
     //     cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
     // });
 
-    it.skip('Crear solicitud autocitado', () => { // TODO: no encuentra pacienteSearch
+    it('Crear solicitud autocitado', () => {
         cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
         cy.server();
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('prestacion');
+        cy.route('GET', '**/api/core/tm/profesionales?**').as('profesional');
+        cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglasOrganizacionDestino');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
 
         cy.get('plex-button[label="Nueva Solicitud"]').click();
-        cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('12325484');
-        cy.get('table tbody td span').contains('12325484').click();
+        cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('79546213');
+
+        cy.wait('@busquedaPaciente');
+
+        cy.get('table tbody td span').contains('79546213').click();
         cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
-        cy.get('plex-bool[name="autocitado"] input').check({
+        -
+            cy.get('plex-bool[name="autocitado"] input').check({
+                force: true
+            });
+
+        // Tipo de prestación solicitada
+        cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
+            force: true
+        }).get('.option[data-value="598ca8375adc68e2a0c121bc"]').click({
+            force: true
+        })
+
+        cy.wait('@getReglasOrganizacionDestino');
+
+        // Profesional Solicitante
+        cy.get('plex-select[label="Profesional solicitante"] input').type('PEREZ MARIA', {
             force: true
         });
 
-        // Prestación Destino (solicitada)
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('prestacion');
-        cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').first().type('consulta de medicina general (procedimiento)', {
+        cy.wait('@profesional');
+
+        cy.get('plex-select[label="Profesional solicitante"]').children().children().children('.selectize-input').click({
+            force: true
+        }).get('.option[data-value="5c82a5a53c524e4c57f08cf3"]').click({
+            force: true
+        })
+
+        // Motivo de la solicitud
+        cy.get('textarea').last().type('Motivo Solcitud', {
             force: true
         });
-        cy.wait('@prestacion').then(() => {
-            cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').first().type('{enter}');
 
-        });
-        // Profesional Origen
-        cy.route('GET', '**/api/core/tm/profesionales*').as('profesional')
-        cy.get('plex-select[name="profesionalOrigen"] input').first().type('huenchuman natalia');
-        cy.wait('@profesional').then(() => {
-            cy.get('plex-select[name="profesionalOrigen"] input').first().type('{enter}');
-        });
-
-        cy.get('plex-text[name="motivo"] input').first().type('Prueba', {
+        cy.get('plex-button[label="Guardar"]').click({
             force: true
         });
-        cy.get('plex-button[label="Guardar"]').click();
-        cy.get('div[class="simple-notification toast success"]').contains('Solicitud guardada');
 
+        cy.wait('@guardarSolicitud').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
     });
 
-    // it('FALLA: dar turno autocitado', () => { // TODO
-    //     cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
-    //         onBeforeLoad: (win) => {
-    //             win.sessionStorage.setItem('jwt', token);
-    //         }
-    //     });
-    //     cy.server();
+    it('dar turno autocitado', () => {
+        cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
+            onBeforeLoad: (win) => {
+                win.sessionStorage.setItem('jwt', token);
+            }
+        });
+        cy.server();
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
+        cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
+        cy.route('GET', '**api/modules/carpetas/carpetasPacientes**').as('carpetasPacientes');
 
-    //     cy.get('plex-button[type="default"]').click();
-    //     cy.get('plex-select[label="Estado"] input').type('pendiente{enter}');
+        cy.get('plex-button[type="default"]').click();
+        cy.get('plex-select[label="Estado"] input').type('pendiente{enter}');
 
-    //     cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'ALVAREZ, ANGELICA VANESA');
-    //     cy.get('plex-button[title="Dar Turno"]').click({
-    //         force: true
-    //     });
+        cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
+        cy.get('plex-button[title="Dar Turno"]').click({
+            force: true
+        });
 
+        cy.wait('@carpetasPacientes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
 
-    //     // dar turno 
-    //     cy.route('GET', '**/api/modules/turnos/agenda*').as('agenda');
-    //     cy.get('div[class="dia"]').contains(Cypress.moment().add(7, 'days').format('D')).click({
-    //         force: true
-    //     });
-    //         cy.wait('@agenda').then(() => {
-    //             cy.get('dar-turnos div').contains('13:30').click({
-    //                 force: true
-    //             }); // no carga el sidebar
-    //         });
-    //     cy.get('plex-button[label="Confirmar"]').click();
-    //     cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
-    // });
+        cy.wait('@getPrestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+
+        cy.wait('@agendas').then(() => {
+            cy.get('div[class="dia"]').contains(Cypress.moment().add(2, 'days').format('D')).click({
+                force: true
+            });
+
+            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+            cy.get('plex-button[label="Confirmar"]').click();
+
+            // Confirmo que se le dio el turno
+            cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
+        });
+    });
 
 })
