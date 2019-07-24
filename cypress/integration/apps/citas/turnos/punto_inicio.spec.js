@@ -3,7 +3,6 @@ context('Agenda dinamicas', () => {
     before(() => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
-            cy.createPaciente('paciente-dinamico', token);
         });
     })
 

@@ -8,6 +8,7 @@ describe('CITAS - Gestor Agendas', () => {
             cy.createAgenda('agendasClonar/agendaClonar3', 17, token);
             cy.createAgenda('agendasClonar/agendaClonar4', 17, token);
             cy.createAgenda('agendasClonar/agendaClonar5', 16, token);
+            cy.createPaciente('paciente-dinamico', token);
         });
         cy.viewport(1280, 720);
     })
