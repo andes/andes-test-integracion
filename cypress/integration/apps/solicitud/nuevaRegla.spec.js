@@ -18,31 +18,37 @@ context('Aliasing', () => {
         });
     })
 
-    it.skip('crear nueva regla solicitud', () => { // TODO: Carga mal la prestacion destino (concepto turneable)
+    it('crear nueva regla solicitud', () => {
+        cy.server();
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
+        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglasOrganizacionDestino');
+        cy.route('GET', '**/api/core/tm/organizaciones').as('getOrganizaciones');
+        cy.route('POST', '**/api/modules/top/reglas').as('guardarRegla');
 
         cy.get('plex-button[label="Reglas"]').click();
 
         cy.get('plex-select[label="Prestación Destino"]').children().children().children('.selectize-input').click({
             force: true
-        }).get('.option[data-value="59ee2d9bf00c415246fd3d94"]').click({
+        }).get('.option[data-value="5a26e113291f463c1b982d98"]').click({
             force: true
         })
-        cy.get('plex-select[name="organizacion"] input').type('castro')
-        cy.get('plex-select[name="organizacion"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="57e9670e52df311059bc8964"]').click({
-            force: true
-        })
-        cy.wait(2000);
-        cy.get('.mdi-plus').first().click();
-        cy.get('plex-select[name="prestacionOrigen"] input').type('adolescencia')
-        cy.get('plex-select[name="prestacionOrigen"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="59ee2d9bf00c415246fd3d94"]').eq(1).click({
-            force: true
-        })
-        cy.get('.mdi-plus').last().click();
+        cy.wait('@getReglasOrganizacionDestino');
+
+        cy.get('plex-select[name="organizacion"] input').type('hospital dr. horacio heller');
+        cy.wait('@getOrganizaciones');
+        cy.get('plex-select[name="organizacion"] input').type('{enter}');
+
+        cy.get('plex-button[title="Agregar Organización"]').click();
+        cy.get('plex-select[name="prestacionOrigen"] input').type('medicina general');
+        cy.wait('@getPrestaciones');
+        cy.get('plex-select[name="prestacionOrigen"] input').type('{enter}');
+
+        cy.get('plex-button[title="Agregar Prestación"]').click();
         cy.get('plex-button[label="Guardar"]').click();
+        cy.wait('@guardarRegla').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
 
     })
 
