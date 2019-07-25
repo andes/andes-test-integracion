@@ -48,7 +48,46 @@ context('Aliasing', () => {
         cy.wait('@guardarRegla').then(xhr => {
             expect(xhr.status).to.be.eq(200);
         });
+    })
 
+    it('crear solicitud de entrada', () => {
+        cy.server();
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+
+        cy.get('plex-button[label="Nueva Solicitud"]').click();
+        cy.get('paciente-buscar plex-text[name="buscador"] input').first().type('38906735');
+        cy.wait('@consultaPaciente');
+        cy.get('table tbody').contains('38906735').click();
+
+        cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
+
+        cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
+        cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
+            force: true
+        }).get('.option[data-value="5a26e113291f463c1b982d98"]').click({
+            force: true
+        });
+        cy.wait('@getReglas');
+        cy.get('plex-select[name="organizacionOrigen"] input').type('hospital dr. horacio heller{enter}');
+        cy.get('plex-select[label="Tipos de Prestación Origen"] input').type('consulta de medicina general{enter}');
+        cy.get('plex-select[name="profesionalOrigen"] input').type('perez maria');
+        cy.wait('@getProfesional');
+        cy.get('plex-select[name="profesionalOrigen"] input').type('{enter}');
+
+        cy.get('plex-select[name="profesional"] input').type('natalia huenchuman');
+        cy.wait('@getProfesional');
+        cy.get('plex-select[name="profesional"] input').type('{enter}');
+        cy.get('textarea').last().type('Motivo de la solicitud', {
+            force: true
+        });
+        cy.get('plex-button[label="Guardar"]').click();
+        cy.wait('@guardarSolicitud').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
+        });
 
     })
 
