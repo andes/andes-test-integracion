@@ -494,7 +494,9 @@ describe('CITAS - Gestor Agendas', () => {
         cy.contains('Debe completar los datos requeridos');
         cy.swal('confirm');
 
-        cy.get('plex-datetime[name="horaTurno"] input').type('{selectall}{backspace}08:00');
+        cy.get('plex-datetime[name="horaTurno"] input').type('{selectall}{backspace}08:00', {
+            force: true
+        });
         cy.get('plex-button[label="Guardar"]').click();
 
         cy.wait('@guardarSobreturno').then(xhr => {
