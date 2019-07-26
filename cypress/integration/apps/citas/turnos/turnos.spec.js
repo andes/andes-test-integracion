@@ -5,7 +5,6 @@ context('Aliasing', () => {
     before(() => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
-            cy.createAgenda48hs('agendaProfesional', token);
         })
     })
     beforeEach(() => {
@@ -317,106 +316,4 @@ context('Aliasing', () => {
     //     cy.get('plex-button[label="Confirmar"]').click();
     //     cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
     // });
-
-    it('Crear solicitud autocitado', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
-        cy.server();
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('prestacion');
-        cy.route('GET', '**/api/core/tm/profesionales?**').as('profesional');
-        cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglasOrganizacionDestino');
-        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
-
-        cy.get('plex-button[label="Nueva Solicitud"]').click();
-        cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('79546213');
-
-        cy.wait('@busquedaPaciente');
-
-        cy.get('table tbody td span').contains('79546213').click();
-        cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
-        -
-            cy.get('plex-bool[name="autocitado"] input').check({
-                force: true
-            });
-
-        // Tipo de prestación solicitada
-        cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="598ca8375adc68e2a0c121bc"]').click({
-            force: true
-        })
-
-        cy.wait('@getReglasOrganizacionDestino');
-
-        // Profesional Solicitante
-        cy.get('plex-select[label="Profesional solicitante"] input').type('PEREZ MARIA', {
-            force: true
-        });
-
-        cy.wait('@profesional');
-
-        cy.get('plex-select[label="Profesional solicitante"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="5c82a5a53c524e4c57f08cf3"]').click({
-            force: true
-        })
-
-        // Motivo de la solicitud
-        cy.get('textarea').last().type('Motivo Solcitud', {
-            force: true
-        });
-
-        cy.get('plex-button[label="Guardar"]').click({
-            force: true
-        });
-
-        cy.wait('@guardarSolicitud').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        });
-    });
-
-    it('dar turno autocitado', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
-        cy.server();
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
-        cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
-        cy.route('GET', '**api/modules/carpetas/carpetasPacientes**').as('carpetasPacientes');
-
-        cy.get('plex-button[type="default"]').click();
-        cy.get('plex-select[label="Estado"] input').type('pendiente{enter}');
-
-        cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
-        cy.get('plex-button[title="Dar Turno"]').click({
-            force: true
-        });
-
-        cy.wait('@carpetasPacientes').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        });
-
-        cy.wait('@getPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        });
-
-        cy.wait('@agendas').then(() => {
-            cy.get('div[class="dia"]').contains(Cypress.moment().add(2, 'days').format('D')).click({
-                force: true
-            });
-
-            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
-            cy.get('plex-button[label="Confirmar"]').click();
-
-            // Confirmo que se le dio el turno
-            cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
-        });
-    });
-
 })
