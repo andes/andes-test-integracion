@@ -23,7 +23,8 @@ context('RUP - Punto de inicio', () => {
         cy.route(/api\/core\/term\/snomed\?/, fixtures).as('search');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
-
+        cy.route('GET', '/api/modules/obraSocial/os/**', []).as('obraSocial');
+        cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
 
         cy.get('plex-button[label="PACIENTE FUERA DE AGENDA"]').click();
 
