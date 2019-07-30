@@ -17,9 +17,11 @@ describe('CITAS - Gestor Agendas', () => {
         });
     })
 
-    it('crea agenda de turnos programados', () => {
+    it('crea agenda de turnos programados y publicarla', () => {
         cy.server();
         cy.route('POST', '**/api/modules/turnos/agenda**').as('crear');
+        cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
+        cy.route('GET', '**/api/modules/turnos/agenda**').as('get');
 
         cy.get('plex-button[label="Crear una nueva agenda"]').click();
         cy.swal('cancel');
@@ -42,14 +44,8 @@ describe('CITAS - Gestor Agendas', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.contains('La agenda se guardó');
-        cy.swal('confirm')
-    });
+        cy.swal('confirm');
 
-    it('publica una agenda con turnos programados', () => {
-        cy.server();
-        cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
-        cy.route('GET', '**/api/modules/turnos/agenda**').as('get');
-        // Se filtran las agendas por prestación
         cy.get('plex-select[label="Prestación"]').children().children('.selectize-control').click()
             .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click()
         cy.wait('@get');
