@@ -29,6 +29,8 @@ context('Aliasing', () => {
 
         cy.get('plex-button[label="Reglas"]').click();
 
+        cy.wait('@getPrestaciones');
+
         cy.get('plex-select[label="Prestación Destino"]').children().children().children('.selectize-input').click({
             force: true
         }).get('.option[data-value="5a26e113291f463c1b982d98"]').click({
@@ -41,12 +43,17 @@ context('Aliasing', () => {
         cy.get('plex-select[name="organizacion"] input').type('{enter}');
 
         cy.get('plex-button[title="Agregar Organización"]').click();
+
+        cy.wait('@getPrestaciones');
+
         cy.get('plex-select[name="prestacionOrigen"] input').type('medicina general');
         cy.wait('@getPrestaciones');
         cy.get('plex-select[name="prestacionOrigen"] input').type('{enter}');
 
         cy.get('plex-button[title="Agregar Prestación"]').click();
+
         cy.get('plex-button[label="Guardar"]').click();
+
         cy.wait('@guardarRegla').then(xhr => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -60,9 +67,9 @@ context('Aliasing', () => {
         cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
 
         cy.get('plex-button[label="Nueva Solicitud"]').click();
-        cy.get('paciente-buscar plex-text[name="buscador"] input').first().type('38906735');
+        cy.get('paciente-buscar plex-text[name="buscador"] input').first().type('32589654');
         cy.wait('@consultaPaciente');
-        cy.get('table tbody').contains('38906735').click();
+        cy.get('table tbody').contains('32589654').click();
 
         cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
 
@@ -72,6 +79,7 @@ context('Aliasing', () => {
         }).get('.option[data-value="5a26e113291f463c1b982d98"]').click({
             force: true
         });
+
         cy.wait('@getReglas');
         cy.get('plex-select[name="organizacionOrigen"] input').type('hospital dr. horacio heller{enter}');
         cy.get('plex-select[label="Tipos de Prestación Origen"] input').type('consulta de medicina general{enter}');
