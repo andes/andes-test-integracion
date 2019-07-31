@@ -5,6 +5,8 @@ context('Aliasing', () => {
     before(() => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
+            cy.createPaciente('solicitudes/paciente-solicitud', token);
+            cy.createAgenda48hs('solicitudes/agendaProfesional', token);
         })
     })
 
@@ -106,8 +108,8 @@ context('Aliasing', () => {
         cy.get('plex-dateTime[name="fechaSolicitud"] input').type('25/10/2018').should('have.value', '25/10/2018');
 
         cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children('.selectize-control').click({
-                force: true
-            })
+            force: true
+        })
             .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click({
                 force: true
             })
@@ -144,11 +146,6 @@ context('Aliasing', () => {
     })
 
     it('Crear solicitud autocitado', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
         cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('prestacion');
         cy.route('GET', '**/api/core/tm/profesionales?**').as('profesional');
@@ -157,20 +154,20 @@ context('Aliasing', () => {
         cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
 
         cy.get('plex-button[label="Nueva Solicitud"]').click();
-        cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('79546213');
+        cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('32589654');
 
         cy.wait('@busquedaPaciente');
 
-        cy.get('table tbody td span').contains('79546213').click();
+        cy.get('table tbody td span').contains('32589654').click();
         cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY')); -
-        cy.get('plex-bool[name="autocitado"] input').check({
-            force: true
-        });
+            cy.get('plex-bool[name="autocitado"] input').check({
+                force: true
+            });
 
         // Tipo de prestación solicitada
         cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
             force: true
-        }).get('.option[data-value="598ca8375adc68e2a0c121bc"]').click({
+        }).get('.option[data-value="59ee2d9bf00c415246fd3d6b"]').click({
             force: true
         })
 
@@ -204,44 +201,40 @@ context('Aliasing', () => {
     });
 
     it('dar turno autocitado', () => {
-        cy.createAgenda48hs('agendaProfesional', token);
-        cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
         cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
-        cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
+        cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
         cy.route('GET', '**api/modules/carpetas/carpetasPacientes**').as('carpetasPacientes');
 
         cy.get('plex-button[type="default"]').click();
         cy.get('plex-select[label="Estado"] input').type('pendiente{enter}');
+
+        cy.get('plex-select[label="Prestación destino"] input').type('Consulta clínica médica{enter}');
 
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.get('plex-button[title="Dar Turno"]').click({
             force: true
         });
 
-        cy.wait('@carpetasPacientes').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@carpetasPacientes');
+        cy.wait('@getPrestaciones');
+        cy.wait('@agendas');
+
+        let fechaAgenda48hs = Cypress.moment().add(2, 'days');
+        if (fechaAgenda48hs.month() > Cypress.moment().month()) {
+            cy.get('plex-button[icon="chevron-right"]').click();
+            cy.wait('@agendas');
+        }
+
+        cy.get('div[class="dia"]').contains(Cypress.moment().add(2, 'days').format('D')).click({
+            force: true
         });
 
-        cy.wait('@getPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        });
+        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+        cy.get('plex-button[label="Confirmar"]').click();
 
-        cy.wait('@agendas').then(() => {
-            cy.get('div[class="dia"]').contains(Cypress.moment().add(2, 'days').format('D')).click({
-                force: true
-            });
-
-            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
-            cy.get('plex-button[label="Confirmar"]').click();
-
-            // Confirmo que se le dio el turno
-            cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
-        });
+        // Confirmo que se le dio el turno
+        cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
     });
 
     it.skip('crear solicitud desde rup', () => { // TODO: carga mal la prestacion
@@ -271,7 +264,7 @@ context('Aliasing', () => {
                 cy.get('.introjs-tooltipbuttons').children('.introjs-skipbutton').click({
                     force: true
                 })
-            } else {}
+            } else { }
         })
         // cy.get('.introjs-skipbutton').should('be.visible').click({ force: true })
         cy.get('plex-text[name="searchTerm"] input').first().type('Consulta De Pediatría')
@@ -306,9 +299,4 @@ context('Aliasing', () => {
 
         // cy.get('div.alert.alert-danger').should('exist');
     })
-
-
-
-
-
 })
