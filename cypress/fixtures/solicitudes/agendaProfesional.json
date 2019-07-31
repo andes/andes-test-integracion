@@ -25,13 +25,13 @@
             "cantidadBloque": null,
             "tipoPrestaciones": [
                 {
-                    "_id": "598ca8375adc68e2a0c121bc",
+                    "_id": "59ee2d9bf00c415246fd3d6b",
                     "conceptId": "401000013105",
-                    "term": "consulta de clínica médica",
-                    "fsn": "consulta de clínica médica",
+                    "term": "Consulta de clínica médica",
+                    "fsn": "Consulta de clínica médica",
                     "semanticTag": "procedimiento",
-                    "nombre": "consulta de clínica médica",
-                    "id": "598ca8375adc68e2a0c121bc"
+                    "nombre": "Consulta de clínica médica",
+                    "id": "59ee2d9bf00c415246fd3d6b"
                 }
             ],
             "turnos": [
@@ -52,13 +52,13 @@
     "horaFin": "2019-07-01T19:00:00.000Z",
     "tipoPrestaciones": [
         {
-            "_id": "598ca8375adc68e2a0c121bc",
+            "_id": "59ee2d9bf00c415246fd3d6b",
             "conceptId": "401000013105",
-            "term": "consulta de clínica médica",
-            "fsn": "consulta de clínica médica",
+            "term": "Consulta de clínica médica",
+            "fsn": "Consulta de clínica médica",
             "semanticTag": "procedimiento",
-            "nombre": "consulta de clínica médica",
-            "id": "598ca8375adc68e2a0c121bc"
+            "nombre": "Consulta de clínica médica",
+            "id": "59ee2d9bf00c415246fd3d6b"
         }
     ],
     "profesionales": [
