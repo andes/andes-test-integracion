@@ -474,32 +474,44 @@ describe('CITAS - Gestor Agendas', () => {
     })
 
     it('Dar sobreturno', () => {
+        let horaInicioOffset = 0;
+        let horaFinOffset = 1;
+        cy.createAgenda('apps/citas/agendaDarSobreturno', 0, horaInicioOffset, horaFinOffset, token);
+        let nuevaHoraInicio = Cypress.moment().add(horaInicioOffset, 'hours');
+        let nuevaHoraFin = Cypress.moment().add(horaFinOffset, 'hours');
         cy.server();
+        cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgenda');
+        cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
         cy.route('GET', '**/api/core/mpi/pacientes?type=multimatch&cadenaInput=**').as('getPaciente');
-        cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('guardarSobreturno');
 
-        cy.get('table span').should('have.class', 'badge-success').contains('Publicada').click();
+        cy.get('plex-datetime[name="fechaHasta"] input').type('{selectall}{backspace}' + Cypress.moment().add(1, 'day').format('DD/MM/YYYY'));
+        cy.wait('@getAgenda');
+        cy.get('table tr').contains('darSobreturno, prueba').click();
+        cy.wait('@getAgenda');
+        cy.get('botones-agenda plex-button[title="Publicar"]').click();
+        cy.get('button').contains('CONFIRMAR').click();
+        cy.wait('@patchAgenda');
         cy.get('botones-agenda plex-button[title="Agregar Sobreturno"]').click();
 
         cy.get('sobreturno paciente-buscar plex-text[name="buscador"] input').first().type('38906735');
         cy.wait('@getPaciente');
         cy.get('table td').contains('PRUEBA, PRUEBA').click();
 
-        cy.get('plex-datetime[name="horaTurno"] input').type('05:00');
-        cy.get('div[class="form-control-feedback"]').contains('El valor debe ser mayor a 08:00');
+        cy.get('plex-datetime[name="horaTurno"] input').type(`${Number(nuevaHoraInicio.format('HH')) - 1}:00`);
+        cy.get('div[class="form-control-feedback"]').contains(`El valor debe ser mayor a ${nuevaHoraInicio.format('HH')}:00`);
 
-        cy.get('plex-datetime[name="horaTurno"] input').type('{selectall}{backspace}20:00');
-        cy.get('div[class="form-control-feedback"]').contains('El valor debe ser menor a 19:00');
+        cy.get('plex-datetime[name="horaTurno"] input').type(`{selectall}{backspace}${Number(nuevaHoraFin.format('HH')) + 1}:00`);
+        cy.get('div[class="form-control-feedback"]').contains(`El valor debe ser menor a ${nuevaHoraFin.format('HH')}:00`);
         cy.get('plex-button[label="Guardar"]').click();
         cy.contains('Debe completar los datos requeridos');
         cy.swal('confirm');
 
-        cy.get('plex-datetime[name="horaTurno"] input').type('{selectall}{backspace}08:00', {
+        cy.get('plex-datetime[name="horaTurno"] input').type(`{selectall}{backspace}${nuevaHoraInicio.format('HH')}:00`, {
             force: true
         });
         cy.get('plex-button[label="Guardar"]').click();
 
-        cy.wait('@guardarSobreturno').then(xhr => {
+        cy.wait('@patchAgenda').then(xhr => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.sobreturnos).to.have.length(1);
         });
