@@ -7,6 +7,7 @@ context('Aliasing', () => {
             token = t;
             cy.createPaciente('solicitudes/paciente-solicitud', token);
             cy.createAgenda48hs('solicitudes/agendaProfesional', token);
+            cy.createSolicitud('solicitudes/solicitudAutocitado', token);
         })
     })
 
@@ -175,14 +176,14 @@ context('Aliasing', () => {
         // Tipo de prestación solicitada
         cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
             force: true
-        }).get('.option[data-value="59ee2d9bf00c415246fd3d6b"]').click({
+        }).get('.option[data-value="598ca8375adc68e2a0c121b7"]').click({
             force: true
         })
 
         cy.wait('@getReglasOrganizacionDestino');
 
         // Profesional Solicitante
-        cy.get('plex-select[label="Profesional solicitante"] input').type('PEREZ MARIA', {
+        cy.get('plex-select[label="Profesional solicitante"] input').type('huenchuman natalia', {
             force: true
         });
 
@@ -190,7 +191,7 @@ context('Aliasing', () => {
 
         cy.get('plex-select[label="Profesional solicitante"]').children().children().children('.selectize-input').click({
             force: true
-        }).get('.option[data-value="5c82a5a53c524e4c57f08cf3"]').click({
+        }).get('.option[data-value="5d02602588c4d1772a8a17f8"]').click({
             force: true
         })
 
