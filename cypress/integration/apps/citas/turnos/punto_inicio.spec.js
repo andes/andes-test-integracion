@@ -3,6 +3,7 @@ context('Agenda dinamicas', () => {
     before(() => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
+            cy.createAgenda('apps/citas/turnos/agendaDinamicaDarTurno', 0, 0, 1, token);
         });
     })
 
@@ -31,10 +32,9 @@ context('Agenda dinamicas', () => {
         cy.wait('@prestaciones');
 
         cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click()
-            .find('.option[data-value="5951051aa784f4e1a8e2afe1"]').click();
+            .find('.option[data-value="598ca8375adc68e2a0c121d5"]').click();
         cy.wait('@cargaAgendas');
         cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
-        cy.get('plex-button[title="Agenda siguiente"]').click();
         cy.get('plex-button[label="Dar Turno"]').click();
         cy.get('plex-button[label="Confirmar"]').click();
 
