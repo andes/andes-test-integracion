@@ -105,7 +105,7 @@ Cypress.Commands.add('createAgenda', (name, daysOffset, horaInicioOffset, horaFi
             agenda.bloques[0].horaInicio = newFechaInicio;
             agenda.bloques[0].horaFin = newFechaFin;
             if (!agenda.dinamica) {
-            agenda.bloques[0].turnos[0].horaInicio = newFechaInicio;
+                agenda.bloques[0].turnos[0].horaInicio = newFechaInicio;
             }
             agenda.fecha = newDate;
             agenda.horaInicio = newFechaInicio;
@@ -115,7 +115,7 @@ Cypress.Commands.add('createAgenda', (name, daysOffset, horaInicioOffset, horaFi
             agenda.bloques[0].horaInicio = agenda.bloques[0].horaInicio.replace('2019-07-01', newDate);
             agenda.bloques[0].horaFin = agenda.bloques[0].horaFin.replace('2019-07-01', newDate);
             if (!agenda.dinamica) {
-            agenda.bloques[0].turnos[0].horaInicio = agenda.bloques[0].turnos[0].horaInicio.replace('2019-07-01', newDate);
+                agenda.bloques[0].turnos[0].horaInicio = agenda.bloques[0].turnos[0].horaInicio.replace('2019-07-01', newDate);
             }
             agenda.fecha = agenda.fecha.replace('2019-07-01', newDate);
             agenda.horaInicio = agenda.horaInicio.replace('2019-07-01', newDate);
@@ -146,6 +146,20 @@ Cypress.Commands.add('createAgenda48hs', (name, token) => {
             method: 'POST',
             url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
             body: agenda,
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        });
+    });
+});
+Cypress.Commands.add('createSolicitud', (name, token) => {
+    return cy.fixture(name).then((solicitud) => {
+
+
+        cy.request({
+            method: 'POST',
+            url: Cypress.env('API_SERVER') + '/api/modules/rup/prestaciones',
+            body: solicitud,
             headers: {
                 Authorization: `JWT ${token}`
             }
