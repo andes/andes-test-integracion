@@ -5,18 +5,22 @@ context('Aliasing', () => {
     before(() => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
+            cy.createPaciente('apps/citas/turnos/paciente-turnos', token);
+            cy.createAgenda('apps/citas/turnos/agendaTurnoDia', 0, 0, 1, token);
         })
     })
     beforeEach(() => {
         cy.viewport(1280, 720)
-    })
 
-    it('Registrar bebé desde punto de Inicio de Turnos', () => {
         cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
+    })
+
+    it('Registrar bebé desde punto de Inicio de Turnos', () => {
+
         cy.server();
         // Rutas para control
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
@@ -69,11 +73,6 @@ context('Aliasing', () => {
     });
 
     it('Registrar paciente sin dni argentino desde punto de Inicio de Turnos', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
         cy.server();
         //Rutas para control
         cy.route('POST', '**api/core/mpi/pacientes').as('sinDniGuardar');
@@ -131,11 +130,6 @@ context('Aliasing', () => {
     });
 
     it('Registrar paciente con dni argentino desde punto de Inicio de Turnos', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
         cy.server();
         //Rutas para control
         cy.route('POST', '**api/core/mpi/pacientes').as('conDniGuardar');
@@ -192,36 +186,48 @@ context('Aliasing', () => {
     });
 
     it('dar turno de día', () => { // TODO: no encuentra agenda para los filtros ingresados por mas que se cree en el caso de prueba anterior
-        cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
         cy.server();
-
+        //Rutas de control
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
-        cy.get('paciente-buscar input').first().type('79546213');
-        cy.wait('@consultaPaciente').then(() => {
-            cy.get('table tbody').contains('79546213').click();
-        });
-        cy.get('plex-button[title="Dar Turno"]').click();
-        // cy.get('plex-select[placeholder="Tipos de Prestación"]').children().children('.selectize-control').click()
-        //     .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
+        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('getAgendas');
+        cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');
-        cy.get('plex-select[placeholder="Equipo de Salud"] input').type('huenchuman natalia');
-        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('agendas');
-        cy.wait('@getProfesional').then(() => {
-            cy.get('plex-select[placeholder="Equipo de Salud"] input').type('{enter}');
-        });
-        cy.wait('@agendas').then(() => {
-            cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
-                force: true
-            });
-            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
-            cy.get('plex-button[label="Confirmar"]').click();
+        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
 
-            // Confirmo que se le dio el turno
-            cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
+        cy.get('paciente-buscar input').first().type('36425896');
+
+        cy.wait('@consultaPaciente').then(() => {
+            cy.get('table tbody').contains('36425896').click();
+        });
+
+        cy.get('plex-button[title="Dar Turno"]').click();
+
+        //Carga la prestación de la agenda
+        cy.get('plex-select[placeholder="Tipos de Prestación"] input').type('consulta de cardiología');
+        cy.wait('@getPrestaciones');
+        cy.get('plex-select[placeholder="Tipos de Prestación"] input').type('{enter}');
+
+        cy.wait('@getAgendas');
+
+        //Carga profesional de la agenda
+        cy.get('plex-select[placeholder="Equipo de Salud"] input').type('huenchuman natalia');
+        cy.wait('@getProfesional');
+        cy.get('plex-select[placeholder="Equipo de Salud"] input').type('{enter}');
+
+        cy.wait('@getAgendas');
+
+        cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
+            force: true
+        });
+
+        cy.wait('@agenda');
+
+        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+        cy.get('plex-button[label="Confirmar"]').click();
+
+        cy.wait('@confirmarTurno').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
         });
     });
 
