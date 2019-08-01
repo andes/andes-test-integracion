@@ -222,8 +222,12 @@ describe('CITAS - Gestor Agendas', () => {
         cy.get('plex-dateTime[name="modelo.fecha"] input').type(proximaSemana);
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('10');
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('15');
-        cy.get('plex-select[name="modelo.tipoPrestaciones"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
+        cy.get('plex-select[name="modelo.tipoPrestaciones"]').children().children('.selectize-control').click({
+                force: true
+            })
+            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click({
+                force: true
+            });
         cy.get('plex-select[name="modelo.profesionales"] input').type('perez maria', {
             force: true
         });
