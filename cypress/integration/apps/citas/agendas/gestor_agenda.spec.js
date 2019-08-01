@@ -146,16 +146,14 @@ describe('CITAS - Gestor Agendas', () => {
         cy.get('plex-button[label="Guardar"]').click();
 
         // // publico la agenda
-        cy.wait('@filtroAgendas').then(() => {
+        cy.wait('@filtroAgendas');
             cy.get('table tbody tr').find('td').contains(`${ahora.add(-1, 'hour').format('HH')}:00 a ${ahora.add(1, 'hour').format('HH')}:00 hs`).parent().parent().as('fila');
             cy.get('@fila').find('td').eq(2).should('contain', 'Huenchuman, Natalia').click();
             cy.get('botones-agenda plex-button[title="Publicar"]').click();
             cy.get('button').contains('CONFIRMAR').click();
-        });
     })
 
     it('crea agenda dinámica para la fecha actual', () => {
-
         cy.server();
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
         cy.route('POST', '**/api/modules/turnos/agenda**').as('crear');
