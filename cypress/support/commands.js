@@ -79,9 +79,36 @@ Cypress.Commands.add('goto', (url, token) => {
     });
 });
 
-Cypress.Commands.add('createAgenda', (name, daysOffset, token) => {
+Cypress.Commands.add('createAgenda', (name, daysOffset, horaInicioOffset, horaFinOffset, token) => {
     return cy.fixture(name).then((agenda) => {
-        if (daysOffset) {
+        if (horaInicioOffset !== null) {
+            let newDate = Cypress.moment().add(daysOffset, 'days'); //.format('YYYY-MM-DD');
+            let newFechaInicio = Cypress.moment().set({
+                'year': newDate.year(),
+                'month': newDate.month(),
+                'date': newDate.date(),
+                'hour': Cypress.moment().add(daysOffset, 'hours').format('HH'),
+                'minute': 0,
+                'second': 0,
+                'millisecond': 0
+            });
+
+            let newFechaFin = Cypress.moment().set({
+                'year': newDate.year(),
+                'month': newDate.month(),
+                'date': newDate.date(),
+                'hour': Cypress.moment().add(horaFinOffset, 'hours').format('HH'),
+                'minute': 0,
+                'second': 0,
+                'millisecond': 0
+            });
+            agenda.bloques[0].horaInicio = newFechaInicio;
+            agenda.bloques[0].horaFin = newFechaFin;
+            agenda.bloques[0].turnos[0].horaInicio = newFechaInicio;
+            agenda.fecha = newDate;
+            agenda.horaInicio = newFechaInicio;
+            agenda.horaFin = newFechaFin;
+        } else { // no modifica la hora del json de la agenda, solo las fechas
             let newDate = Cypress.moment().add(daysOffset, 'days').format('YYYY-MM-DD');
             agenda.bloques[0].horaInicio = agenda.bloques[0].horaInicio.replace('2019-07-01', newDate);
             agenda.bloques[0].horaFin = agenda.bloques[0].horaFin.replace('2019-07-01', newDate);

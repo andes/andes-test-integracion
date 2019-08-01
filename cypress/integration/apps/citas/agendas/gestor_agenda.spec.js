@@ -401,11 +401,12 @@ describe('CITAS - Gestor Agendas', () => {
     // })
 
     it('clonación de agendas con y sin conflictos', () => {
-        cy.createAgenda('agendasClonar/agendaClonar1', 16, token);
-        cy.createAgenda('agendasClonar/agendaClonar2', 17, token);
-        cy.createAgenda('agendasClonar/agendaClonar3', 17, token);
-        cy.createAgenda('agendasClonar/agendaClonar4', 17, token);
-        cy.createAgenda('agendasClonar/agendaClonar5', 16, token);
+        cy.createAgenda('agendasClonar/agendaOriginal', 8, null, null, token);
+        cy.createAgenda('agendasClonar/agendaClonar1', 16, null, null, token);
+        cy.createAgenda('agendasClonar/agendaClonar2', 17, null, null, token);
+        cy.createAgenda('agendasClonar/agendaClonar3', 17, null, null, token);
+        cy.createAgenda('agendasClonar/agendaClonar4', 17, null, null, token);
+        cy.createAgenda('agendasClonar/agendaClonar5', 16, null, null, token);
 
         cy.server();
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
@@ -423,9 +424,9 @@ describe('CITAS - Gestor Agendas', () => {
         // cy.wait('@getEspaciosFisicos');
         // cy.get('plex-select[label="Espacio Físico"] input').type('{enter}');
 
-        let proximaSemana = Cypress.moment().add(7, 'days');
-        cy.get('plex-datetime[name="fechaDesde"] input').type('{selectall}{backspace}' + proximaSemana.format('DD/MM/YYYY'));
-        cy.get('plex-datetime[name="fechaHasta"] input').type('{selectall}{backspace}' + proximaSemana.format('DD/MM/YYYY'));
+        let fechaAgendaOriginal = Cypress.moment().add(8, 'days');
+        cy.get('plex-datetime[name="fechaDesde"] input').type('{selectall}{backspace}' + fechaAgendaOriginal.format('DD/MM/YYYY'));
+        cy.get('plex-datetime[name="fechaHasta"] input').type('{selectall}{backspace}' + fechaAgendaOriginal.format('DD/MM/YYYY'));
         cy.wait('@getAgendas');
         cy.get('table tbody div').contains('PEREZ, MARIA').click({
             force: true
@@ -433,7 +434,7 @@ describe('CITAS - Gestor Agendas', () => {
 
         cy.get('botones-agenda plex-button[title="Clonar"]').click();
         let fechaClonadaConflicto = Cypress.moment().add(17, 'days');
-        if (fechaClonadaConflicto.month() > proximaSemana.month()) {
+        if (fechaClonadaConflicto.month() > fechaAgendaOriginal.month()) {
             cy.get('plex-button[icon="chevron-right"]').click();
         }
         cy.wait('@getAgendas');
@@ -456,7 +457,7 @@ describe('CITAS - Gestor Agendas', () => {
         cy.get('button').contains('Aceptar').click();
 
         let fechaClonadaSinConflicto = Cypress.moment().add(16, 'days');
-        if (fechaClonadaSinConflicto.month() === proximaSemana.month() && fechaClonadaConflicto.month() > proximaSemana.month()) {
+        if (fechaClonadaSinConflicto.month() === fechaAgendaOriginal.month() && fechaClonadaConflicto.month() > fechaAgendaOriginal.month()) {
             cy.get('plex-button[icon="chevron-left"]').click();
             cy.wait('@getAgendas');
         }

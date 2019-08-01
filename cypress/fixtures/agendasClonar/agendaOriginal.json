@@ -1,0 +1,113 @@
+{
+    "nominalizada": true,
+    "dinamica": false,
+    "bloques": [{
+        "indice": 0,
+        "cantidadTurnos": 1,
+        "horaInicio": "2019-07-01T13:00:00.000Z",
+        "horaFin": "2019-07-01T18:00:00.000Z",
+        "duracionTurno": 300,
+        "cantidadSimultaneos": null,
+        "cantidadBloque": null,
+        "accesoDirectoDelDia": 0,
+        "accesoDirectoDelDiaPorc": 0,
+        "accesoDirectoProgramado": 1,
+        "accesoDirectoProgramadoPorc": 100,
+        "reservadoGestion": 0,
+        "reservadoGestionPorc": 0,
+        "reservadoProfesional": 0,
+        "reservadoProfesionalPorc": 0,
+        "tipoPrestaciones": [{
+            "_id": "598ca8375adc68e2a0c121b7",
+            "conceptId": "391000013108",
+            "term": "consulta de medicina general (procedimiento)",
+            "fsn": "consulta de medicina general (procedimiento)",
+            "semanticTag": "procedimiento",
+            "nombre": "consulta de medicina general (procedimiento)",
+            "id": "598ca8375adc68e2a0c121b7",
+            "activo": true
+        }],
+        "turnos": [{
+            "estado": "disponible",
+            "horaInicio": "2019-07-01T13:00:00.000Z"
+        }],
+        "restantesDelDia": 0,
+        "restantesProgramados": 1,
+        "restantesGestion": 0,
+        "restantesProfesional": 0
+    }],
+    "fecha": "2019-07-01T03:00:00.000Z",
+    "horaInicio": "2019-07-01T13:00:00.000Z",
+    "horaFin": "2019-07-01T18:00:00.000Z",
+    "tipoPrestaciones": [{
+        "_id": "598ca8375adc68e2a0c121b7",
+        "conceptId": "391000013108",
+        "term": "consulta de medicina general (procedimiento)",
+        "fsn": "consulta de medicina general (procedimiento)",
+        "semanticTag": "procedimiento",
+        "nombre": "consulta de medicina general (procedimiento)",
+        "id": "598ca8375adc68e2a0c121b7"
+    }],
+    "profesionales": [{
+        "_id": "5c82a5a53c524e4c57f08cf3",
+        "nombre": "MARIA",
+        "apellido": "PEREZ",
+        "documento": "4466777",
+        "nombreCompleto": "PEREZ, MARIA",
+        "id": "5c82a5a53c524e4c57f08cf3"
+    }],
+    "espacioFisico": {
+        "estado": "disponible",
+        "_id": "5b843279a4fd1b39d6f4c415",
+        "nombre": "Aula 1 Docencia",
+        "descripcion": "",
+        "activo": true,
+        "edificio": {
+            "_id": "589c578355bf4277035bcf2a",
+            "direccion": {
+                "activo": true,
+                "_id": "589c578355bf4277035bcf2b",
+                "valor": "Buenos Aires 450",
+                "ubicacion": {
+                    "_id": "589c578355bf4277035bcf2c",
+                    "pais": {
+                        "_id": "57f3b5c469fe79a598e6281f",
+                        "nombre": "Argentina",
+                        "id": "57f3b5c469fe79a598e6281f"
+                    },
+                    "provincia": {
+                        "_id": "57f3f3aacebd681cc2014c53",
+                        "nombre": "Neuquén",
+                        "id": "57f3f3aacebd681cc2014c53"
+                    },
+                    "localidad": {
+                        "_id": "57f538a472325875a199a82d",
+                        "nombre": "NEUQUEN",
+                        "id": "57f538a472325875a199a82d"
+                    },
+                    "id": "589c578355bf4277035bcf2c"
+                },
+                "ranking": null,
+                "codigoPostal": "8300",
+                "id": "589c578355bf4277035bcf2b"
+            },
+            "descripcion": "Central",
+            "id": "589c578355bf4277035bcf2a"
+        },
+        "detalle": "Buenos Aires 450",
+        "equipamiento": [
+
+        ],
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id": "57e9670e52df311059bc8964"
+        },
+        "id": "5b843279a4fd1b39d6f4c415"
+    },
+    "organizacion": {
+        "_id": "57e9670e52df311059bc8964",
+        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+        "id": "57e9670e52df311059bc8964"
+    }
+}
