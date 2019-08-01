@@ -213,11 +213,21 @@ context('Aliasing', () => {
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
         cy.route('GET', '**api/modules/carpetas/carpetasPacientes**').as('carpetasPacientes');
+        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
+        cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
+        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
+        cy.route('GET', '/api/modules/obraSocial/os/**', []).as('obraSocial');
+        cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
+
 
         cy.get('plex-button[type="default"]').click();
-        cy.get('plex-select[label="Estado"] input').type('pendiente{enter}');
 
-        cy.get('plex-select[label="Prestación destino"] input').type('Consulta clínica médica{enter}');
+        cy.get('plex-select[label="Estado"] input').type('pendiente');
+        cy.get('plex-select[label="Estado"] input').type('{enter}');
+
+        cy.get('plex-select[label="Prestación destino"] input').type('consulta de clínica médica');
+        cy.wait('@getPrestaciones');
+        cy.get('plex-select[label="Prestación destino"] input').type('{enter}');
 
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.get('plex-button[title="Dar Turno"]').click({
@@ -238,11 +248,16 @@ context('Aliasing', () => {
             force: true
         });
 
-        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+        cy.wait('@agenda');
+
+        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({
+            force: true
+        });
         cy.get('plex-button[label="Confirmar"]').click();
 
-        // Confirmo que se le dio el turno
-        cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
+        cy.wait('@confirmarTurno').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+        });
     });
 
     it.skip('crear solicitud desde rup', () => { // TODO: carga mal la prestacion
