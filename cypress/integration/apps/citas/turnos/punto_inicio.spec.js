@@ -4,6 +4,7 @@ context('Agenda dinamicas', () => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createAgenda('apps/citas/turnos/agendaDinamicaDarTurno', 0, 0, 1, token);
+            cy.createAgenda('apps/citas/turnos/agendaDarTurnoProgramado', 8, null, null, token);
         });
     })
 
@@ -62,16 +63,19 @@ context('Agenda dinamicas', () => {
         cy.get('plex-button[title="Dar Turno"]').click();
         cy.wait('@prestaciones');
 
-        cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
+        cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click({
+                force: true
+            })
+            .find('.option[data-value="598ca8375adc68e2a0c121d5"]').click({
+                force: true
+            });
 
-        // Hay una agenda creada dentro de los 7 dias y puede caer en el proximo mes
-        if (Cypress.moment().add(7, 'days').month() > Cypress.moment().month()) {
+        if (Cypress.moment().add(8, 'days').month() > Cypress.moment().month()) {
             cy.get('plex-button[icon="chevron-right"]').click();
         }
         cy.wait('@cargaAgendas');
-        cy.get('app-calendario .dia').contains(Cypress.moment().add(7, 'days').date()).click();
-        cy.get('div').contains('10:00').first().click()
+        cy.get('app-calendario .dia').contains(Cypress.moment().add(8, 'days').date()).click();
+        cy.get('div').contains('15:00').first().click()
         cy.get('plex-button[label="Confirmar"]').click();
 
         // Confirmo que se dio el turno desde la API
