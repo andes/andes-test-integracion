@@ -122,6 +122,8 @@ context('MPI', () => {
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
         cy.route('PATCH', '**api/core/mpi/pacientes/**').as('relacionProgenitor');
         cy.route('POST', '**api/core/mpi/pacientes').as('bebeAgregado');
+        cy.route('GET', '**api/modules/georeferencia/georeferenciar?**').as('geoReferencia');
+
 
         // Buscador
         cy.get('plex-text input[type="text"]').first().type('123254').should('have.value', '123254');
@@ -153,6 +155,10 @@ context('MPI', () => {
         // Se actualizan los datos del domicilio
         cy.get('plex-button[label="Actualizar"]').click();
 
+        cy.wait('@geoReferencia').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
         cy.get('plex-button[label="Guardar"]').click();
 
         // Se espera la actualización de la relación del progenitor con el bebé
@@ -173,6 +179,7 @@ context('MPI', () => {
     it('should registrar bebé sin completar algún campo requerido, debería fallar', () => {
 
         cy.server();
+        cy.route('GET', '**api/modules/georeferencia/georeferenciar?**').as('geoReferencia');
 
         // Buscador
         cy.get('plex-text input[type="text"]').first().type('123254').should('have.value', '123254');
@@ -194,6 +201,10 @@ context('MPI', () => {
         cy.get('paciente-listado').find('td').contains('12325484').click();
 
         cy.get('plex-button[label="Actualizar"]').click();
+
+        cy.wait('@geoReferencia').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.get('plex-button[label="Guardar"]').click();
 
