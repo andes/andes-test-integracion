@@ -108,6 +108,7 @@ context('TM Profesional', () => {
         cy.get('plex-phone[label="Número"] input').type('29945876as12').should('have.value', '2994587612');
 
         cy.get('plex-button[label="Guardar"]').click();
+        cy.wait(2000);
         cy.wait('@get').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(1);

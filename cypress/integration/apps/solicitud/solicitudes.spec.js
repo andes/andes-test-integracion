@@ -101,57 +101,83 @@ context('Aliasing', () => {
         });
     })
 
-    it.skip('crear solicitud de salida', () => { // TODO: molesta el wizard
+    it('crear solicitud de salida', () => {
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes').as('consulta');
+        //cy.route('GET', '**/api/core/mpi/pacientes').as('consulta');
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
+        cy.route('GET', '**/api/modules/top/reglas?organizacionOrigen=**').as('getReglasOrganizacionOrigen');
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+
+        cy.get('li[class="nav-item nav-item-default"]').click();
 
         cy.get('plex-button[label="Nueva Solicitud"]').click();
 
-        cy.get('plex-text input[type=text]').first().type('38906735').should('have.value', '38906735');
+        cy.get('plex-text input[type=text]').first().type('32589654').should('have.value', '32589654');
 
-        // cy.wait('@consulta').then((xhr) => {
-        //     expect(xhr.status).to.be.eq(200)
-        // })
         cy.get('tr').eq(1).click()
 
-        cy.get('plex-dateTime[name="fechaSolicitud"] input').type('25/10/2018').should('have.value', '25/10/2018');
+        //Fecha solicitud
+        cy.get('plex-dateTime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
 
-        cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children('.selectize-control').click({
+        //Prestación origen
+        cy.get('plex-select[label="Tipos de Prestación Origen"] input').type('consulta de medicina general', {
             force: true
-        })
-            .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click({
-                force: true
-            })
+        });
+        cy.get('plex-select[label="Tipos de Prestación Origen"]').children().children('.selectize-control').click({
+            force: true
+        }).find('.option[data-value="598ca8375adc68e2a0c121b8"]').click({
+            force: true
+        });
 
-        cy.get('plex-select[label="Organización origen"]').children().children().children('.selectize-input').click({
+        cy.wait('@getPrestaciones');
+        cy.wait('@getReglasOrganizacionOrigen');
+
+        //Profesional solicitante
+        cy.get('plex-select[label="Profesional solicitante"] input').type('huenchuman natalia', {
+            force: true
+        });
+        cy.wait('@getProfesional');
+        cy.get('plex-select[label="Profesional solicitante"]').children().children().children('.selectize-input').click({
+            force: true
+        }).get('.option[data-value="5d02602588c4d1772a8a17f8"]').click({
+            force: true
+        });
+
+        //Organización destino
+        cy.get('plex-select[label="Organización destino"] input').type('hospital provincial neuquen - dr eduardo castro rendon', {
+            force: true
+        });
+        cy.get('plex-select[label="Organización destino"]').children().children().children('.selectize-input').click({
             force: true
         }).get('.option[data-value="57e9670e52df311059bc8964"]').click({
             force: true
-        })
-        cy.get('plex-select[label="Tipos de Prestación Origen"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="391000013108"]').click({
-            force: true
-        })
-        cy.get('plex-select[label="Profesional solicitante"] input').type('valverde')
-        cy.get('plex-select[label="Profesional solicitante"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="58f74fd4d03019f919ea243e"]').click({
-            force: true
-        })
-        cy.get('plex-select[label="Profesional destino"] input').type('santarelli')
-        cy.get('plex-select[label="Profesional destino"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="5b4df3aebd7c1f8e59138be6"]').click({
-            force: true
-        })
-        cy.get('textarea').last().type('ni', {
+        });
+
+        cy.wait('@getReglasOrganizacionOrigen');
+
+        //Prestación solicitada
+        cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').type('consulta de neurocirugía{enter}', {
             force: true
         });
-        cy.get('plex-button[label="Guardar"]').click();
-        // cy.get('plex-text input[type=text]').first().type('botta').should('have.value', 'botta');
+        cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
+            force: true
+        }).get('.option[data-value="598ca8375adc68e2a0c121ad"]').click({
+            force: true
+        });
 
-        // cy.get('div.alert.alert-danger').should('exist');
+        // Motivo de la solicitud
+        cy.get('textarea').last().type('Motivo de la solicitud de salida', {
+            force: true
+        });
+
+        cy.get('plex-button[label="Guardar"]').click({
+            force: true
+        });
+
+        cy.wait('@guardarSolicitud').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
     })
 
     it('Crear solicitud autocitado', () => {
@@ -169,9 +195,9 @@ context('Aliasing', () => {
 
         cy.get('table tbody td span').contains('32589654').click();
         cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY')); -
-            cy.get('plex-bool[name="autocitado"] input').check({
-                force: true
-            });
+        cy.get('plex-bool[name="autocitado"] input').check({
+            force: true
+        });
 
         // Tipo de prestación solicitada
         cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
@@ -214,7 +240,7 @@ context('Aliasing', () => {
         cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
-        cy.route('GET', '**api/modules/carpetas/carpetasPacientes**').as('carpetasPacientes');
+        cy.route('GET', '**api/modules/carpetas/carpetasPacientes**', []).as('carpetasPacientes');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
         cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
@@ -236,7 +262,7 @@ context('Aliasing', () => {
             force: true
         });
 
-        cy.wait('@carpetasPacientes');
+        // cy.wait('@carpetasPacientes');
         cy.wait('@getPrestaciones');
         cy.wait('@agendas');
 
@@ -290,7 +316,7 @@ context('Aliasing', () => {
                 cy.get('.introjs-tooltipbuttons').children('.introjs-skipbutton').click({
                     force: true
                 })
-            } else { }
+            } else {}
         })
         // cy.get('.introjs-skipbutton').should('be.visible').click({ force: true })
         cy.get('plex-text[name="searchTerm"] input').first().type('Consulta De Pediatría')

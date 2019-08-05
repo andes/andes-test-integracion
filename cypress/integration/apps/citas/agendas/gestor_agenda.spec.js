@@ -473,7 +473,7 @@ describe('CITAS - Gestor Agendas', () => {
         cy.swal('confirm');
     })
 
-    it.only('dar sobreturno', () => {
+    it('dar sobreturno', () => {
         let horaInicioOffset = 0;
         let horaFinOffset = 1;
         cy.createAgenda('apps/citas/agendaDarSobreturno', 0, horaInicioOffset, horaFinOffset, token);

@@ -122,7 +122,7 @@ context('MPI', () => {
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
         cy.route('PATCH', '**api/core/mpi/pacientes/**').as('relacionProgenitor');
         cy.route('POST', '**api/core/mpi/pacientes').as('bebeAgregado');
-        cy.route('GET', '**api/modules/georeferencia/georeferenciar?**').as('geoReferencia');
+        // cy.route('GET', '**api/modules/georeferencia/georeferenciar?**').as('geoReferencia');
 
 
         // Buscador
@@ -153,11 +153,11 @@ context('MPI', () => {
         cy.get('paciente-listado').find('td').contains('12325484').click();
 
         // Se actualizan los datos del domicilio
-        cy.get('plex-button[label="Actualizar"]').click();
+        // cy.get('plex-button[label="Actualizar"]').click();
 
-        cy.wait('@geoReferencia').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+        // cy.wait('@geoReferencia').then((xhr) => {
+        //     expect(xhr.status).to.be.eq(200);
+        // });
 
         cy.get('plex-button[label="Guardar"]').click();
 
