@@ -154,8 +154,8 @@ Cypress.Commands.add('createAgenda48hs', (name, token) => {
 });
 Cypress.Commands.add('createSolicitud', (name, token) => {
     return cy.fixture(name).then((solicitud) => {
-
-
+        let newDate = Cypress.moment().format('YYYY-MM-DD');
+        solicitud.solicitud.fecha = solicitud.solicitud.fecha.replace('2019-08-01', newDate);
         cy.request({
             method: 'POST',
             url: Cypress.env('API_SERVER') + '/api/modules/rup/prestaciones',
