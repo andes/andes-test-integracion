@@ -33,23 +33,23 @@ context('TM Profesional', () => {
         cy.contains('¡El profesional se creó con éxito!');
     });
 
-    it.skip('crear profesional no matriculado existente en renaper', () => { // TODO: se queda esperando el @create
+    it('crear profesional no matriculado existente en renaper', () => {
         cy.goto('/tm/profesional/create', token);
 
         cy.server();
         cy.route('POST', '**/core/tm/profesionales**').as('create');
         cy.fixture('renaper-1').as('fxRenaper')
-        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=35887998&sexo=M', '@fxRenaper').as('renaper');
+        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=26487951&sexo=M', '@fxRenaper').as('renaper');
 
 
-        cy.get('plex-int[label="Número de Documento"] input').type('3588fs799af8').should('have.value', '35887998'); // verifico que no se pueda ingresar letras
+        cy.get('plex-int[label="Número de Documento"] input').type('264sf8a7951').should('have.value', '26487951'); // verifico que no se pueda ingresar letras
         cy.get('plex-select[label="Sexo"] input').type('masculino{enter}');
 
         cy.get('plex-layout-sidebar plex-button[label="Validar con servicios de Renaper"]').click();
         cy.wait('@renaper');
 
-        cy.get('plex-text[label="Nombre"] input').should('have.value', 'PRUEBA');
-        cy.get('plex-text[label="Apellido"] input').should('have.value', 'PRUEBA');
+        cy.get('plex-text[label="Nombre"] input').should('have.value', 'PROFESIONAL');
+        cy.get('plex-text[label="Apellido"] input').should('have.value', 'TEST');
         cy.get('plex-datetime[label="Fecha de nacimiento"] input').should('have.value', '09/03/1990');
 
         cy.get('plex-phone[label="Número"] input').type('29945576as12').should('have.value', '2994557612');
