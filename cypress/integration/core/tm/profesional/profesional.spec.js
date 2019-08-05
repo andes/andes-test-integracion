@@ -93,11 +93,11 @@ context('TM Profesional', () => {
         cy.contains('¡El profesional se creó con éxito!');
     });
 
-    it.skip('crear profesional duplicado', () => { // TODO: se queda esperando el @get
+    it('crear profesional duplicado', () => {
         cy.goto('/tm/profesional/create', token);
 
         cy.server();
-        cy.route('POST', '**/api/core/tm/profesionales?documento=4163782').as('get');
+        cy.route('GET', '**/api/core/tm/profesionales?documento=4163782').as('get');
 
         cy.get('plex-text[label="Nombre"] input').first().type('ALICIA BEATRIZ');
         cy.get('plex-text[label="Apellido"] input').first().type('ESPOSITO');
@@ -110,7 +110,7 @@ context('TM Profesional', () => {
         cy.get('plex-button[label="Guardar"]').click();
         cy.wait('@get').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.body).to.have.length(1);
+            expect(xhr.response.body).to.have.length(1);
         });
         cy.contains('El profesional que está intentando guardar ya se encuentra cargado');
     });
