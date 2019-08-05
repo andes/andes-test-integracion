@@ -7,6 +7,7 @@ context('Aliasing', () => {
             token = t;
             cy.createPaciente('solicitudes/paciente-solicitud', token);
             cy.createAgenda48hs('solicitudes/agendaProfesional', token);
+            cy.createSolicitud('solicitudes/solicitudAutocitado', token);
         })
     })
 
@@ -116,8 +117,8 @@ context('Aliasing', () => {
         cy.get('plex-dateTime[name="fechaSolicitud"] input').type('25/10/2018').should('have.value', '25/10/2018');
 
         cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children('.selectize-control').click({
-                force: true
-            })
+            force: true
+        })
             .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click({
                 force: true
             })
@@ -168,9 +169,9 @@ context('Aliasing', () => {
 
         cy.get('table tbody td span').contains('32589654').click();
         cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY')); -
-        cy.get('plex-bool[name="autocitado"] input').check({
-            force: true
-        });
+            cy.get('plex-bool[name="autocitado"] input').check({
+                force: true
+            });
 
         // Tipo de prestación solicitada
         cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
@@ -208,8 +209,7 @@ context('Aliasing', () => {
         });
     });
 
-    it.only('dar turno autocitado', () => {
-        cy.createSolicitud('solicitudes/solicitudAutocitado', token);
+    it('dar turno autocitado', () => {
         cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
@@ -288,7 +288,7 @@ context('Aliasing', () => {
                 cy.get('.introjs-tooltipbuttons').children('.introjs-skipbutton').click({
                     force: true
                 })
-            } else {}
+            } else { }
         })
         // cy.get('.introjs-skipbutton').should('be.visible').click({ force: true })
         cy.get('plex-text[name="searchTerm"] input').first().type('Consulta De Pediatría')
