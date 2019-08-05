@@ -13,7 +13,7 @@ context('TM Profesional', () => {
 
     })
 
-    it.skip('crear profesional no matriculado, sin validar', () => { // TODO: se queda esperando el @create
+    it('crear profesional no matriculado, sin validar', () => {
         cy.goto('/tm/profesional/create', token);
 
         cy.server();
@@ -30,7 +30,7 @@ context('TM Profesional', () => {
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
-        // cy.contains('¡El profesional se creó con éxito!');
+        cy.contains('¡El profesional se creó con éxito!');
     });
 
     it.skip('crear profesional no matriculado existente en renaper', () => { // TODO: se queda esperando el @create
@@ -60,7 +60,7 @@ context('TM Profesional', () => {
         cy.contains('¡El profesional se creó con éxito!');
     });
 
-    it.skip('crear profesional no matriculado no existente en renaper', () => { // TODO: se queda esperando el @create
+    it('crear profesional no matriculado no existente en renaper', () => {
         cy.goto('/tm/profesional/create', token);
 
         cy.server();
