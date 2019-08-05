@@ -147,10 +147,10 @@ describe('CITAS - Gestor Agendas', () => {
 
         // // publico la agenda
         cy.wait('@filtroAgendas');
-            cy.get('table tbody tr').find('td').contains(`${ahora.add(-1, 'hour').format('HH')}:00 a ${ahora.add(1, 'hour').format('HH')}:00 hs`).parent().parent().as('fila');
-            cy.get('@fila').find('td').eq(2).should('contain', 'Huenchuman, Natalia').click();
-            cy.get('botones-agenda plex-button[title="Publicar"]').click();
-            cy.get('button').contains('CONFIRMAR').click();
+        cy.get('table tbody tr').find('td').contains(`${ahora.add(-1, 'hour').format('HH')}:00 a ${ahora.add(1, 'hour').format('HH')}:00 hs`).parent().parent().as('fila');
+        cy.get('@fila').find('td').eq(2).should('contain', 'Huenchuman, Natalia').click();
+        cy.get('botones-agenda plex-button[title="Publicar"]').click();
+        cy.get('button').contains('CONFIRMAR').click();
     })
 
     it('crea agenda dinámica para la fecha actual', () => {
@@ -473,10 +473,11 @@ describe('CITAS - Gestor Agendas', () => {
         cy.swal('confirm');
     })
 
-    it('Dar sobreturno', () => {
+    it.only('dar sobreturno', () => {
         let horaInicioOffset = 0;
         let horaFinOffset = 1;
         cy.createAgenda('apps/citas/agendaDarSobreturno', 0, horaInicioOffset, horaFinOffset, token);
+
         let nuevaHoraInicio = Cypress.moment().add(horaInicioOffset, 'hours');
         let nuevaHoraFin = Cypress.moment().add(horaFinOffset, 'hours');
         cy.server();
@@ -487,30 +488,33 @@ describe('CITAS - Gestor Agendas', () => {
         cy.get('plex-datetime[name="fechaHasta"] input').type('{selectall}{backspace}' + Cypress.moment().add(1, 'day').format('DD/MM/YYYY'));
         cy.wait('@getAgenda');
         cy.get('table tr').contains('darSobreturno, prueba').click();
-        cy.wait('@getAgenda');
-        cy.get('botones-agenda plex-button[title="Publicar"]').click();
-        cy.get('button').contains('CONFIRMAR').click();
-        cy.wait('@patchAgenda');
+        // cy.wait('@getAgenda');
+        // cy.get('botones-agenda plex-button[title="Publicar"]').click();
+        // cy.get('button').contains('CONFIRMAR').click();
+        // cy.wait('@patchAgenda');
         cy.get('botones-agenda plex-button[title="Agregar Sobreturno"]').click();
 
         cy.get('sobreturno paciente-buscar plex-text[name="buscador"] input').first().type('38906735');
         cy.wait('@getPaciente');
         cy.get('table td').contains('PRUEBA, PRUEBA').click();
+        cy.log(`${Number(nuevaHoraInicio.format('HH'))}:00`);
+        cy.log(`${Number(nuevaHoraFin.format('HH'))}:00`);
 
-        cy.get('plex-datetime[name="horaTurno"] input').type(`${Number(nuevaHoraInicio.format('HH')) - 1}:00`);
+        cy.get('plex-datetime[name="horaTurno"] input').type(`${Number(nuevaHoraInicio.format('HH')) - 2}:00`);
         cy.get('div[class="form-control-feedback"]').contains(`El valor debe ser mayor a ${nuevaHoraInicio.format('HH')}:00`);
 
-        cy.get('plex-datetime[name="horaTurno"] input').type(`{selectall}{backspace}${Number(nuevaHoraFin.format('HH')) + 1}:00`);
+        cy.get('plex-datetime[name="horaTurno"] input').type(`{selectall}{backspace}${Number(nuevaHoraInicio.format('HH')) + 2}:00`);
         cy.get('div[class="form-control-feedback"]').contains(`El valor debe ser menor a ${nuevaHoraFin.format('HH')}:00`);
         cy.get('plex-button[label="Guardar"]').click();
         cy.contains('Debe completar los datos requeridos');
         cy.swal('confirm');
 
+        cy.wait(4000);
         cy.get('plex-datetime[name="horaTurno"] input').type(`{selectall}{backspace}${nuevaHoraInicio.format('HH')}:00`, {
             force: true
         });
         cy.get('plex-button[label="Guardar"]').click();
-
+        cy.wait(4000);
         cy.wait('@patchAgenda').then(xhr => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.sobreturnos).to.have.length(1);
