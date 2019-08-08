@@ -27,6 +27,7 @@ services:
     ports:
       - "9200:9200"   
   andes_nginx:  
+    ipc: host 
     image: "andesnqn/nginx:${APP}"
     container_name: andes_nginx
     ports:

@@ -110,8 +110,10 @@ context('MPI', () => {
         // Se espera confirmación de que se agrego nuevo paciente SIN DNI correctamente
         cy.wait('@sinDniGuardar').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.apellido).to.be.eq('MANUAL');
+            // expect(xhr.response.body.apellido).to.be.eq('MANUAL');
         });
+        cy.contains('Los datos se actualizaron correctamente');
+        cy.swal('confirm');
 
     });
 
