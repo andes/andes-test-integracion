@@ -109,7 +109,9 @@ context('Aliasing', () => {
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
 
-        cy.get('li[class="nav-item nav-item-default"]').click();
+        cy.get('li[class="nav-item nav-item-default"]').click({
+            force: true
+        });
 
         cy.get('plex-button[label="Nueva Solicitud"]').click();
 

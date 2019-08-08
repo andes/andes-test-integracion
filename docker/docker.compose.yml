@@ -31,7 +31,8 @@ services:
     container_name: andes_nginx
     ports:
       - "80:80"  
-  andes_api:  
+  andes_api:
+    ipc: host  
     image: "andesnqn/api:${API}"
     container_name: andes_api
     environment:
