@@ -101,7 +101,7 @@ context('Aliasing', () => {
         });
     })
 
-    it('crear solicitud de salida', () => {
+    it.skip('crear solicitud de salida', () => {
         cy.server();
         //cy.route('GET', '**/api/core/mpi/pacientes').as('consulta');
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
@@ -180,7 +180,7 @@ context('Aliasing', () => {
         });
     })
 
-    it('Crear solicitud autocitado', () => {
+    it('crear solicitud autocitado', () => {
         cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('prestacion');
         cy.route('GET', '**/api/core/tm/profesionales?**').as('profesional');
@@ -240,6 +240,7 @@ context('Aliasing', () => {
         cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
+        cy.route('GET', '**/api/core/mpi/pacientes/**').as('consultaPaciente');
         cy.route('GET', '**api/modules/carpetas/carpetasPacientes**', []).as('carpetasPacientes');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
@@ -262,7 +263,7 @@ context('Aliasing', () => {
             force: true
         });
 
-        // cy.wait('@carpetasPacientes');
+        cy.wait('@consultaPaciente');
         cy.wait('@getPrestaciones');
         cy.wait('@agendas');
 
@@ -272,12 +273,11 @@ context('Aliasing', () => {
             cy.wait('@agendas');
         }
 
+        cy.wait(2000);
         cy.get('div[class="dia"]').contains(Cypress.moment().add(2, 'days').format('D')).click({
             force: true
         });
-
         cy.wait('@agenda');
-        cy.wait(2000);
 
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({
             force: true

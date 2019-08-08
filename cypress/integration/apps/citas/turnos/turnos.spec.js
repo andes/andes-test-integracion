@@ -72,7 +72,7 @@ context('Aliasing', () => {
         });
     });
 
-    it('Registrar paciente sin dni argentino desde punto de Inicio de Turnos', () => {
+    it.skip('Registrar paciente sin dni argentino desde punto de Inicio de Turnos', () => {
         cy.server();
         //Rutas para control
         cy.route('POST', '**api/core/mpi/pacientes').as('sinDniGuardar');
@@ -129,7 +129,7 @@ context('Aliasing', () => {
         });
     });
 
-    it('Registrar paciente con dni argentino desde punto de Inicio de Turnos', () => {
+    it.skip('Registrar paciente con dni argentino desde punto de Inicio de Turnos', () => {
         cy.server();
         //Rutas para control
         cy.route('POST', '**api/core/mpi/pacientes').as('conDniGuardar');

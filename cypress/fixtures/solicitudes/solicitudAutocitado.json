@@ -43,53 +43,49 @@
         "ambitoOrigen": "ambulatorio",
         "fecha": "2019-08-01T00:00:00.000-03:00",
         "turno": null,
-        "registros": [
-            {
-                "privacy": {
-                    "scope": "public"
-                },
-                "destacado": false,
-                "esSolicitud": false,
-                "esDiagnosticoPrincipal": false,
-                "relacionadoCon": [],
+        "registros": [{
+            "privacy": {
+                "scope": "public"
+            },
+            "destacado": false,
+            "esSolicitud": false,
+            "esDiagnosticoPrincipal": false,
+            "relacionadoCon": [],
+            "nombre": "Consulta de clínica médica",
+            "concepto": {
+                "_id": "59ee2d9bf00c415246fd3d6b",
+                "fsn": "Consulta de clínica médica (procedimiento)",
+                "semanticTag": "procedimiento",
+                "conceptId": "401000013105",
+                "term": "Consulta de clínica médica",
                 "nombre": "Consulta de clínica médica",
-                "concepto": {
-                    "_id": "59ee2d9bf00c415246fd3d6b",
-                    "fsn": "Consulta de clínica médica (procedimiento)",
-                    "semanticTag": "procedimiento",
-                    "conceptId": "401000013105",
-                    "term": "Consulta de clínica médica",
-                    "nombre": "Consulta de clínica médica",
-                    "id": "59ee2d9bf00c415246fd3d6b"
+                "id": "59ee2d9bf00c415246fd3d6b"
+            },
+            "valor": {
+                "solicitudPrestacion": {
+                    "motivo": "Motivo Solcitud",
+                    "autocitado": true
                 },
-                "valor": {
-                    "solicitudPrestacion": {
-                        "motivo": "Motivo Solcitud",
-                        "autocitado": true
-                    },
-                    "documentos": []
-                },
-                "registros": []
-            }
-        ]
+                "documentos": []
+            },
+            "registros": []
+        }]
     },
     "ejecucion": {
         "registros": []
     },
     "noNominalizada": false,
     "paciente": {
-        "id": "5d430e6c9d7a3a1720ff18d3",
+        "id": "5d4a073f73aa36303266d09d",
         "nombre": "TEST",
         "apellido": "SOLICITUD",
         "documento": "32589654",
         "sexo": "femenino",
         "fechaNacimiento": "1987-01-01T00:00:00.000-03:00"
     },
-    "estados": [
-        {
-            "idOrigenModifica": null,
-            "motivoRechazo": null,
-            "tipo": "pendiente"
-        }
-    ]
+    "estados": [{
+        "idOrigenModifica": null,
+        "motivoRechazo": null,
+        "tipo": "pendiente"
+    }]
 }
