@@ -9,7 +9,7 @@ context('Aliasing', () => {
     })
     beforeEach(() => {
         cy.viewport(1280, 720)
-        cy.visit(Cypress.env('BASE_URL') + '/citas/puntoInicio', {
+        cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
@@ -17,11 +17,11 @@ context('Aliasing', () => {
     })
 
     // Necesita tener cargada una agenda para colonoscopia, publicada. Que tenga el horario 15:00 disponible
-    it('iniciar Colonoscopía', () => {
+    it.skip('Registrar Prestación de Colonoscopia', () => {
         cy.server();
         // doy turno
-        cy.get('plex-text input[type=text]').first().type('50002123');
-        cy.get('tr').first().click()
+        cy.get('plex-text input[type=text]').first().type('12325484');
+        cy.get('tr').contains('OROS, CAMILO').first().click()
         cy.get('plex-button').first().click()
         cy.get('plex-select[name="tipoPrestacion"] input').type('colonoscopia{enter}');
         cy.get('.outline-success ').first().click();

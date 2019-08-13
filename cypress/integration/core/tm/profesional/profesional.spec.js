@@ -10,65 +10,12 @@ context('TM Profesional', () => {
     })
 
     beforeEach(() => {
-        
+
     })
-
-    it('búsqueda de profesional matriculado', () => {
-        cy.goto('/tm/profesional', token);
-
-        cy.server();
-        cy.route('GET', '**/api/core/tm/profesionales**').as('get');
-
-        // ingreso los valores en cada uno de los filtros
-        cy.get('plex-int[label="Documento"] input').type('41f6a3asd78f2').should('have.value', '4163782'); // verifico que no se pueda ingresar letras
-        cy.get('plex-text[label="Apellido"] input').first().type('judzik');
-        cy.get('plex-text[label="Nombre"] input').first().type('nilda bet');
-        cy.wait('@get');
-
-        // selecciono a Nilda Bethy Judzik de la tabla de resultados (primer resultado)
-        cy.get('tbody').find('tr').first().click();
-
-        // valido que el sidebar haya traído todos los datos
-        cy.get('plex-layout-sidebar strong').should('contain', 'JUDZIK, NILDA BETHY');
-        cy.get('plex-layout-sidebar').should('contain', '4.163.782');
-        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('span[class="badge badge-info"]').should('contain', 'Matriculado');
-
-        // TEST INVIABLE cambia el valor con el paso del tiempo
-        // cy.get('plex-layout-sidebar').should('contain', '11/01/1941 | ' + Cypress.moment().diff('11/01/1941', 'years') + ' años');
-
-        cy.get('plex-layout-sidebar').should('contain', 'Femenino');
-        cy.get('plex-layout-sidebar').should('contain', '27041637825');
-        // cy.get('plex-layout-sidebar').should('contain', 'FARMACEUTICO - Matrícula: 681');
-    });
-
-    it('búsqueda de profesional no matriculado', () => {
-        cy.goto('/tm/profesional', token);
-
-        cy.server();
-        cy.route('GET', '**/api/core/tm/profesionales**').as('get');
-        cy.get('plex-text[label="Apellido"] input').first().type('ESpoSito');
-        cy.get('plex-text[label="Nombre"] input').first().type('alicia beatriz');
-        cy.wait('@get');
-
-        // selecciono a Alicia Beatriz Esposito de la tabla de resultados (primer resultado)
-        cy.get('tbody').find('tr').first().click();
-
-        // valido que el sidebar haya traído todos los datos
-        cy.get('plex-layout-sidebar strong').should('contain', 'ESPOSITO, ALICIA BEATRIZ');
-        cy.get('plex-layout-sidebar').should('contain', '1.742.939');
-        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('span[class="badge badge-warning"]').should('contain', 'No Matriculado');
-        // cy.get('plex-layout-sidebar').should('contain', '12/12/1995 | ' + Cypress.moment().diff('12/12/1995', 'years') + ' años');
-        cy.get('plex-layout-sidebar').should('contain', 'Femenino');
-        cy.get('plex-layout-sidebar').should('contain', '1217429393');
-        // cy.get('plex-layout-sidebar').should('contain', 'Médico - Matrícula: 2');
-        // cy.get('plex-layout-sidebar').should('contain', 'Citogenética (R) - Matrícula: 412');
-        // cy.get('plex-layout-sidebar').should('contain', 'Bioquímica y Nutrición (R) - Matrícula: 533');
-
-    });
 
     it('crear profesional no matriculado, sin validar', () => {
         cy.goto('/tm/profesional/create', token);
-        
+
         cy.server();
         cy.route('POST', '**/core/tm/profesionales**').as('create');
 
@@ -83,7 +30,7 @@ context('TM Profesional', () => {
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
-        // cy.contains('¡El profesional se creó con éxito!');
+        cy.contains('¡El profesional se creó con éxito!');
     });
 
     it('crear profesional no matriculado existente en renaper', () => {
@@ -92,18 +39,17 @@ context('TM Profesional', () => {
         cy.server();
         cy.route('POST', '**/core/tm/profesionales**').as('create');
         cy.fixture('renaper-1').as('fxRenaper')
-        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=35887998&sexo=M', '@fxRenaper').as('renaper');
+        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=26487951&sexo=M', '@fxRenaper').as('renaper');
 
 
-        cy.get('plex-int[label="Número de Documento"] input').type('3588fs799af8').should('have.value', '35887998'); // verifico que no se pueda ingresar letras
+        cy.get('plex-int[label="Número de Documento"] input').type('264sf8a7951').should('have.value', '26487951'); // verifico que no se pueda ingresar letras
         cy.get('plex-select[label="Sexo"] input').type('masculino{enter}');
 
         cy.get('plex-layout-sidebar plex-button[label="Validar con servicios de Renaper"]').click();
         cy.wait('@renaper');
 
-        // cy.get('plex-text[label="Nombre"] input').should('have.attr', 'readonly', true); // cypress no da soporte todavia a readonly
-        cy.get('plex-text[label="Nombre"] input').should('have.value', 'PRUEBA');
-        cy.get('plex-text[label="Apellido"] input').should('have.value', 'PRUEBA');
+        cy.get('plex-text[label="Nombre"] input').should('have.value', 'PROFESIONAL');
+        cy.get('plex-text[label="Apellido"] input').should('have.value', 'TEST');
         cy.get('plex-datetime[label="Fecha de nacimiento"] input').should('have.value', '09/03/1990');
 
         cy.get('plex-phone[label="Número"] input').type('29945576as12').should('have.value', '2994557612');
@@ -149,10 +95,10 @@ context('TM Profesional', () => {
 
     it('crear profesional duplicado', () => {
         cy.goto('/tm/profesional/create', token);
-        
+
         cy.server();
-        cy.route('POST', '**/api/core/tm/profesionales?documento=4163782').as('get');
-        
+        cy.route('GET', '**/api/core/tm/profesionales?documento=4163782').as('get');
+
         cy.get('plex-text[label="Nombre"] input').first().type('ALICIA BEATRIZ');
         cy.get('plex-text[label="Apellido"] input').first().type('ESPOSITO');
         cy.get('plex-int[label="Número de Documento"] input').type('4163782').should('have.value', '4163782'); // verifico que no se pueda ingresar letras
@@ -162,11 +108,64 @@ context('TM Profesional', () => {
         cy.get('plex-phone[label="Número"] input').type('29945876as12').should('have.value', '2994587612');
 
         cy.get('plex-button[label="Guardar"]').click();
+        cy.wait(2000);
         cy.wait('@get').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.body).to.have.length(1);
+            expect(xhr.response.body).to.have.length(1);
         });
         cy.contains('El profesional que está intentando guardar ya se encuentra cargado');
+    });
+
+    it('búsqueda de profesional matriculado', () => {
+        cy.goto('/tm/profesional', token);
+
+        cy.server();
+        cy.route('GET', '**/api/core/tm/profesionales**').as('get');
+
+        // ingreso los valores en cada uno de los filtros
+        cy.get('plex-int[label="Documento"] input').type('44f6a6asd77f7').should('have.value', '4466777'); // verifico que no se pueda ingresar letras
+        cy.get('plex-text[label="Apellido"] input').first().type('PEREZ');
+        cy.get('plex-text[label="Nombre"] input').first().type('MARIA');
+        cy.wait('@get');
+
+        // selecciono a Nilda Bethy Judzik de la tabla de resultados (primer resultado)
+        cy.get('tbody').find('tr').first().click();
+
+        // valido que el sidebar haya traído todos los datos
+        cy.get('plex-layout-sidebar strong').should('contain', 'PEREZ, MARIA');
+        cy.get('plex-layout-sidebar').should('contain', '4.466.777');
+        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('span[class="badge badge-info"]').should('contain', 'Matriculado');
+
+        // TEST INVIABLE cambia el valor con el paso del tiempo
+        // cy.get('plex-layout-sidebar').should('contain', '11/01/1941 | ' + Cypress.moment().diff('11/01/1941', 'years') + ' años');
+
+        cy.get('plex-layout-sidebar').should('contain', 'Femenino');
+        cy.get('plex-layout-sidebar').should('contain', '27041637825');
+        // cy.get('plex-layout-sidebar').should('contain', 'FARMACEUTICO - Matrícula: 681');
+    });
+
+    it('búsqueda de profesional no matriculado', () => {
+        cy.goto('/tm/profesional', token);
+
+        cy.server();
+        cy.route('GET', '**/api/core/tm/profesionales**').as('get');
+        cy.get('plex-text[label="Apellido"] input').first().type('PRUEBA');
+        cy.get('plex-text[label="Nombre"] input').first().type('ALICIA');
+        cy.wait('@get');
+
+        // seleccionó a Usuario Prueba de la tabla de resultados (primer resultado)
+        cy.get('tbody').find('tr').first().click();
+
+        // valido que el sidebar haya traído todos los datos
+        cy.get('plex-layout-sidebar strong').should('contain', 'PRUEBA, ALICIA');
+        cy.get('plex-layout-sidebar').should('contain', '1.711.999');
+        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('span[class="badge badge-warning"]').should('contain', 'No Matriculado');
+        cy.get('plex-layout-sidebar').should('contain', 'Femenino');
+        cy.get('plex-layout-sidebar').should('contain', '1217429393');
+        // cy.get('plex-layout-sidebar').should('contain', 'Médico - Matrícula: 2');
+        // cy.get('plex-layout-sidebar').should('contain', 'Citogenética (R) - Matrícula: 412');
+        // cy.get('plex-layout-sidebar').should('contain', 'Bioquímica y Nutrición (R) - Matrícula: 533');
+
     });
 
 })

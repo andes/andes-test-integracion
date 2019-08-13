@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx cypress open --env BASE_URL=http://localhost:4200,API_SERVER=http://localhost:3002"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,6 @@
   },
   "homepage": "https://github.com/andes/andes-test-integracion#readme",
   "devDependencies": {
-    "cypress": "^3.1.0"
+    "cypress": "^3.3.1"
   }
 }

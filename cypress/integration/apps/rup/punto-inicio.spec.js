@@ -1,5 +1,3 @@
-
-
 /// <reference types="Cypress" />
 
 context('RUP - Punto de inicio', () => {
@@ -12,31 +10,59 @@ context('RUP - Punto de inicio', () => {
         })
     })
 
-    it('iniciar prestacion - fuera de agenda', () => {
+    it('Iniciar prestación - Fuera de agenda', () => {
         cy.goto('/rup', token);
 
         cy.server();
+        const fixtures = [];
+        cy.fixture('conceptos-snomed.json').then(json => {
+            fixtures.push(json);
+            console.log(fixtures);
+        });
+        // Stub
+        cy.route(/api\/core\/term\/snomed\?/, fixtures).as('search');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
+        cy.route('GET', '/api/modules/obraSocial/os/**', []).as('obraSocial');
+        cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
 
         cy.get('plex-button[label="PACIENTE FUERA DE AGENDA"]').click();
 
         cy.wait('@prestaciones');
         cy.get('plex-select[name="nombrePrestacion"]').children().children('.selectize-control').click()
-            .find('.option[data-value="5951051aa784f4e1a8e2afe1"]').click();
+            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
 
         cy.get('plex-button[label="SELECCIONAR PACIENTE"]').click();
-        cy.get('plex-text input').first().type('38906730');
+        cy.get('plex-text input').first().type('3399661');
         cy.get('table tbody tr').first().click();
 
-        cy.get('plex-button[label="INICIAR PRESTACIÓN"]').click();
-
+        cy.get('plex-button[type="success"]').contains('INICIAR PRESTACIÓN').click();
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.turno).to.be.undefined;
-            expect(xhr.response.body.solicitud.tipoPrestacion.id).to.be.eq('5951051aa784f4e1a8e2afe1');
-            expect(xhr.response.body.paciente.documento).to.be.eq('38906730');
+            expect(xhr.response.body.solicitud.tipoPrestacion.id).to.be.eq('598ca8375adc68e2a0c121b8');
+            expect(xhr.response.body.paciente.documento).to.be.eq('3399661');
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
         });
+
+        cy.get('plex-text[name="searchTerm"] input').first().type('fiebre');
+        cy.wait(3000);
+        cy.wait('@search').then((xhr) => {
+            console.log('Search', xhr);
+        });
+
+        cy.get('.mdi-plus').first().click();
+        cy.get('textarea').first().type('test', {
+            force: true
+        });
+        cy.get('span').contains('Guardar consulta de medicina general').click({
+            force: true
+        });
+        cy.wait(3000)
+        cy.get('span').contains('Validar consulta de medicina general').first().click({
+            force: true
+        });
+        cy.get('button').contains('CONFIRMAR').click()
+
     });
 });
