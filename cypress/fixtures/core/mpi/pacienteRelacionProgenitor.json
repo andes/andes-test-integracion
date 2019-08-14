@@ -1,0 +1,62 @@
+{
+    "id": null,
+    "documento": 8921651,
+    "cuil": null,
+    "activo": true,
+    "estado": "temporal",
+    "nombre": "RELACIONAR",
+    "apellido": "PROGENITOR",
+    "nombreCompleto": "",
+    "alias": "",
+    "contacto": [{
+        "tipo": "celular",
+        "valor": 2999849855,
+        "ranking": 0,
+        "activo": true,
+        "ultimaActualizacion": "2019-03-19T10:54:29.420Z"
+    }],
+    "sexo": "femenino",
+    "genero": "femenino",
+    "fechaNacimiento": "1962-08-01T03:00:00.000Z",
+    "edad": null,
+    "edadReal": null,
+    "fechaFallecimiento": null,
+    "direccion": [{
+        "valor": "",
+        "codigoPostal": "",
+        "ubicacion": {
+            "pais": {
+                "_id": "57f3b5c469fe79a598e6281f",
+                "nombre": "Argentina",
+                "id": "57f3b5c469fe79a598e6281f"
+            },
+            "provincia": {
+                "_id": "57f3f3aacebd681cc2014c53",
+                "nombre": "Neuquén",
+                "id": "57f3f3aacebd681cc2014c53"
+            },
+            "localidad": {
+                "_id": "57f538a472325875a199a82d",
+                "nombre": "NEUQUEN",
+                "id": "57f538a472325875a199a82d"
+            },
+            "barrio": null
+        },
+        "ranking": 0,
+        "geoReferencia": null,
+        "ultimaActualizacion": "2019-03-19T10:54:29.420Z",
+        "activo": true
+    }],
+    "estadoCivil": null,
+    "foto": null,
+    "relaciones": null,
+    "financiador": null,
+    "identificadores": null,
+    "claveBlocking": null,
+    "entidadesValidadoras": [
+        ""
+    ],
+    "scan": null,
+    "reportarError": false,
+    "notaError": ""
+}

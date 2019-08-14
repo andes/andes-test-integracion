@@ -3,8 +3,10 @@
 context('MPI', () => {
     let token
     before(() => {
-        cy.login('38906735', 'asd').then(t => {
+        cy.login('30643636', 'asd').then(t => {
             token = t;
+            cy.createPaciente('core/mpi/pacienteRelacionProgenitor', token);
+            cy.createPaciente('core/mpi/pacienteRelacionHijo', token);
         });
         cy.viewport(1280, 720);
     })
@@ -568,5 +570,46 @@ context('MPI', () => {
     //     cy.swal('confirm');
 
     // });
+
+    it('should relacionar un paciente con otro', () => {
+        cy.server();
+
+        cy.route('GET', '**/api/core/mpi/pacientes?type=multimatch&cadenaInput=**').as('busquedaPaciente');
+        cy.route('PUT', '**/api/core/mpi/pacientes/**').as('guardarProgenitor');
+        cy.route('PATCH', '**/api/core/mpi/pacientes/**').as('relacionHijo');
+
+        cy.get('plex-text[name="buscador"] input').first().type('8921651');
+        cy.wait('@busquedaPaciente');
+
+        cy.get('paciente-listado').contains('8921651').click();
+        cy.get('li[class="nav-item nav-item-default"]').click({
+            multiple: true
+        });
+        cy.get('relaciones-pacientes input').first().type('28981651');
+        cy.wait('@busquedaPaciente');
+        cy.get('paciente-listado').contains('28981651').click();
+        cy.get('plex-select[placeholder="Seleccione..."] input').type('hijo/a{enter}');
+
+        cy.get('plex-button[label="Guardar"]').click({
+            force: true
+        });
+
+        cy.wait('@guardarProgenitor').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.relaciones).to.have.length(1);
+            expect(xhr.response.body.relaciones[0].relacion.nombre).to.be.eq('hijo/a');
+            expect(xhr.response.body.relaciones[0].relacion.opuesto).to.be.eq('progenitor/a');
+            expect(xhr.response.body.relaciones[0].documento).to.be.eq('28981651');
+        });
+
+        cy.wait('@relacionHijo').then((xhr) => { // chequea que el hijo tenga como progenitor al otro paciente
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.relaciones).to.have.length(1)
+            expect(xhr.response.body.relaciones[0].relacion.nombre).to.be.eq('progenitor/a');
+            expect(xhr.response.body.relaciones[0].relacion.opuesto).to.be.eq('hijo/a');
+            expect(xhr.response.body.relaciones[0].documento).to.be.eq('8921651');
+        });
+
+    })
 
 })
