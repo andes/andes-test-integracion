@@ -101,7 +101,7 @@ context('Aliasing', () => {
         });
     })
 
-    it.skip('crear solicitud de salida', () => {
+    it('crear solicitud de salida', () => {
         cy.server();
         //cy.route('GET', '**/api/core/mpi/pacientes').as('consulta');
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
@@ -113,7 +113,9 @@ context('Aliasing', () => {
             force: true
         });
 
-        cy.get('plex-button[label="Nueva Solicitud"]').click();
+        cy.get('plex-button[label="Nueva Solicitud"]').click({
+            force: true
+        });
 
         cy.get('plex-text input[type=text]').first().type('32589654').should('have.value', '32589654');
 
