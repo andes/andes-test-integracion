@@ -7,7 +7,6 @@ context('Aliasing', () => {
             token = t;
             cy.createPaciente('solicitudes/paciente-solicitud', token);
             cy.createAgenda48hs('solicitudes/agendaProfesional', token);
-
         })
     })
 
@@ -28,7 +27,9 @@ context('Aliasing', () => {
         cy.route('GET', '**/api/core/tm/organizaciones').as('getOrganizaciones');
         cy.route('POST', '**/api/modules/top/reglas').as('guardarRegla');
 
-        cy.get('plex-button[label="Reglas"]').click();
+        cy.get('plex-button[label="Reglas"]').click({
+            force: true
+        });
 
         cy.wait('@getPrestaciones');
 
@@ -43,7 +44,9 @@ context('Aliasing', () => {
         cy.wait('@getOrganizaciones');
         cy.get('plex-select[name="organizacion"] input').type('{enter}');
 
-        cy.get('plex-button[title="Agregar Organización"]').click();
+        cy.get('plex-button[title="Agregar Organización"]').click({
+            force: true
+        });
 
         cy.wait('@getPrestaciones');
 
@@ -51,9 +54,13 @@ context('Aliasing', () => {
         cy.wait('@getPrestaciones');
         cy.get('plex-select[name="prestacionOrigen"] input').type('{enter}');
 
-        cy.get('plex-button[title="Agregar Prestación"]').click();
+        cy.get('plex-button[title="Agregar Prestación"]').click({
+            force: true
+        });
 
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.get('plex-button[label="Guardar"]').click({
+            force: true
+        });
 
         cy.wait('@guardarRegla').then(xhr => {
             expect(xhr.status).to.be.eq(200);
@@ -65,9 +72,11 @@ context('Aliasing', () => {
         cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
-        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+        cy.route('POST', '**api/modules/rup/prestaciones').as('guardarSolicitud');
 
-        cy.get('plex-button[label="Nueva Solicitud"]').click();
+        cy.get('plex-button[label="Nueva Solicitud"]').click({
+            force: true
+        });
         cy.get('paciente-buscar plex-text[name="buscador"] input').first().type('32589654');
         cy.wait('@consultaPaciente');
         cy.get('table tbody').contains('32589654').click();
@@ -94,7 +103,9 @@ context('Aliasing', () => {
         cy.get('textarea').last().type('Motivo de la solicitud', {
             force: true
         });
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.get('plex-button[label="Guardar"]').click({
+            force: true
+        });
         cy.wait('@guardarSolicitud').then(xhr => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
@@ -192,7 +203,9 @@ context('Aliasing', () => {
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglasOrganizacionDestino');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
 
-        cy.get('plex-button[label="Nueva Solicitud"]').click();
+        cy.get('plex-button[label="Nueva Solicitud"]').click({
+            force: true
+        });
         cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('32589654');
 
         cy.wait('@busquedaPaciente');
@@ -253,14 +266,16 @@ context('Aliasing', () => {
         cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
 
 
-        cy.get('plex-button[type="default"]').click();
+        cy.get('plex-button[type="default"]').click({
+            force: true
+        });
 
         cy.get('plex-select[label="Estado"] input').type('pendiente');
         cy.get('plex-select[label="Estado"] input').type('{enter}');
 
         cy.get('plex-select[label="Prestación destino"] input').type('consulta de clínica médica');
-        cy.wait('@getPrestaciones');
         cy.get('plex-select[label="Prestación destino"] input').type('{enter}');
+        cy.wait('@getPrestaciones');
 
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.get('plex-button[title="Dar Turno"]').click({
@@ -286,7 +301,9 @@ context('Aliasing', () => {
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({
             force: true
         });
-        cy.get('plex-button[label="Confirmar"]').click();
+        cy.get('plex-button[label="Confirmar"]').click({
+            force: true
+        });
 
         cy.wait('@confirmarTurno').then(xhr => {
             expect(xhr.status).to.be.eq(200);
