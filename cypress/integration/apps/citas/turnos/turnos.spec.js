@@ -93,17 +93,17 @@ context('Aliasing', () => {
         cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
 
         // Se completa datos de contacto
-        cy.get('plex-select[ng-reflect-name="tipo-0"]').children().children('.selectize-control').click().find('div[data-value="fijo"]').click();
+        cy.get('plex-select[label="Tipo"]').children().children('.selectize-control').click().find('div[data-value="fijo"]').click();
 
-        cy.get('plex-phone[ng-reflect-name="valor-0"] input').first().type('02994351614').should('have.value', '02994351614');
+        cy.get('plex-phone[label="Número"] input').first().type('02994351614').should('have.value', '02994351614');
 
         // Se agrega nuevo contacto
         cy.get('plex-button[name="agregarContacto"]').click();
 
-        cy.get('plex-select[ng-reflect-name="tipo-1"]').children().children('.selectize-control').click()
+        cy.get('plex-select[label="Tipo"]').eq(1).children().children('.selectize-control').click()
             .find('div[data-value="email"]').click();
 
-        cy.get('plex-text[ng-reflect-name="valor-1"] input').first().type('mail@ejemplo.com').should('have.value', 'mail@ejemplo.com');
+        cy.get('plex-text[label="Dirección"] input').first().type('mail@ejemplo.com').should('have.value', 'mail@ejemplo.com');
 
         // Se completa los datos de domicilio
         cy.get('plex-bool[name="viveProvActual"]').click();
@@ -156,7 +156,7 @@ context('Aliasing', () => {
         cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
 
         // Se completa datos de contacto
-        cy.get('plex-phone[ng-reflect-name="valor-0"] input').first().type('02991489753').should('have.value', '02991489753');
+        cy.get('plex-phone[label="Número"] input').first().type('02991489753').should('have.value', '02991489753');
 
         // Se completa los datos de domicilio
         cy.get('plex-bool[name="viveProvActual"]').click();
