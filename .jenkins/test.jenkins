@@ -1,24 +1,30 @@
 pipeline {
     agent any
     environment {
+        cypressparams = "${CYPRESS_PARAMS}"
+        build = "${BUILD}"
         app = "${APP_BRANCH}"
+        envmode = "${APP_MODE}"
         api = "${API_BRANCH}"
     }
     stages {
         stage('Build images') {
+            when { expression { env.build == "true" } }
             parallel {
-                stage('Build app') {
+                 stage('Build app') {
                     steps {
-                        build( job: "andes-app", parameters: [string(name: 'GIT_BRANCH', value: app  )]  )
+                        build( job: "andes-app", parameters: [string(name: 'GIT_BRANCH', value: app  ), string(name: 'ENVIRONMENT', value: envmode  )]  )
                     }
                 }
+
                 stage('build api') {
                     steps {
                          build job: "andes-api", parameters: [string(name: 'GIT_BRANCH', value: api )] 
                     }
                 }
             }
-        } 
+        }
+        
         stage('Clone') {
             steps {
                 git (
@@ -31,7 +37,7 @@ pipeline {
         stage('build api') {
             steps {
                 sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} .'
-                sh 'API=$api APP=$app docker-compose -f docker/docker.compose.yml up -d'
+                sh 'API=$api APP=$app docker-compose -f docker/docker.compose.yml up -d '
             }
         }
         
@@ -58,7 +64,7 @@ pipeline {
             }
             steps {
                 sh 'npm ci'
-                sh 'npx cypress run --env BASE_URL="http://172.16.1.116",API_SERVER="http://172.16.1.116" --config video=false'
+                sh 'npx cypress run --env BASE_URL="http://172.16.1.116",API_SERVER="http://172.16.1.116" --config video=false,numTestsKeptInMemory=1 ${cypressparams}' 
             }
         }
     }
