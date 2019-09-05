@@ -7,7 +7,6 @@ context('Aliasing', () => {
             token = t;
             cy.createPaciente('solicitudes/paciente-solicitud', token);
             cy.createAgenda48hs('solicitudes/agendaProfesional', token);
-
         })
     })
 

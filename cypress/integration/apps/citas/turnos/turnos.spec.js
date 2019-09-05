@@ -6,7 +6,6 @@ context('Aliasing', () => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('apps/citas/turnos/paciente-turnos', token);
-            cy.createAgenda('apps/citas/turnos/agendaTurnoDia', 0, 0, 1, token);
         })
     })
     beforeEach(() => {
@@ -186,6 +185,7 @@ context('Aliasing', () => {
     });
 
     it('dar turno de día', () => { // TODO: no encuentra agenda para los filtros ingresados por mas que se cree en el caso de prueba anterior
+        cy.createAgenda('apps/citas/turnos/agendaTurnoDia', 0, 0, 1, token);
         cy.server();
         //Rutas de control
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
@@ -211,7 +211,7 @@ context('Aliasing', () => {
         cy.wait('@getAgendas');
 
         //Carga profesional de la agenda
-        cy.get('plex-select[placeholder="Equipo de Salud"] input').type('huenchuman natalia');
+        cy.get('plex-select[placeholder="Equipo de Salud"] input').type('ESPOSITO ALICIA BEATRIZ');
         cy.wait('@getProfesional');
         cy.get('plex-select[placeholder="Equipo de Salud"] input').type('{enter}');
 

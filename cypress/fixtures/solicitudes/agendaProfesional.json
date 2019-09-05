@@ -54,12 +54,12 @@
         "id": "59ee2d9bf00c415246fd3d6b"
     }],
     "profesionales": [{
-        "_id": "58f74fd3d03019f919e9fff2",
-        "nombre": "JAZMIN",
-        "apellido": "CORTES",
-        "documento": "4402222",
-        "nombreCompleto": "CORTES, JAzMIN",
-        "id": "58f74fd3d03019f919e9fff2"
+        "_id": "5c82a5a53c524e4c57f08cf3",
+        "nombre": "MARIA",
+        "apellido": "PEREZ",
+        "documento": "4466777",
+        "nombreCompleto": "PEREZ, MARIA",
+        "id": "5c82a5a53c524e4c57f08cf3"
     }],
     "organizacion": {
         "_id": "57e9670e52df311059bc8964",

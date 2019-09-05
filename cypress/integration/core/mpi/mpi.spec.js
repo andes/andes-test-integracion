@@ -146,20 +146,14 @@ context('MPI', () => {
         // Se completa datos
         cy.get('paciente-buscar[label="Buscar"] input').first().type('12325484');
 
+        // Se selecciona el progenitor 
+        cy.get('paciente-listado').find('td').contains('12325484').click();
         //Espera confirmación de la búsqueda correcta del progenitor
         cy.wait('@busquedaProgenitor').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        // Se selecciona el progenitor 
-        cy.get('paciente-listado').find('td').contains('12325484').click();
-
-        // Se actualizan los datos del domicilio
-        // cy.get('plex-button[label="Actualizar"]').click();
-
-        // cy.wait('@geoReferencia').then((xhr) => {
-        //     expect(xhr.status).to.be.eq(200);
-        // });
+        cy.wait(2000);
 
         cy.get('plex-button[label="Guardar"]').click();
 

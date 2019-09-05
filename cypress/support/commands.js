@@ -150,7 +150,6 @@ Cypress.Commands.add('createAgenda48hs', (name, token) => {
         // agenda.fecha = agenda.fecha.replace('2019-07-01', newDate);
         agenda.horaInicio = agenda.horaInicio.replace('2019-07-01', newDate);
         agenda.horaFin = agenda.horaFin.replace('2019-07-01', newDate);
-
         cy.request({
             method: 'POST',
             url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
