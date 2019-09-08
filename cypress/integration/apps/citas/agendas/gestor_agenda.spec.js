@@ -487,7 +487,12 @@ describe('CITAS - Gestor Agendas', () => {
         cy.route('GET', '**/api/core/mpi/pacientes?type=multimatch&cadenaInput=**').as('getPaciente');
 
         cy.get('plex-datetime[name="fechaHasta"] input').type('{selectall}{backspace}' + Cypress.moment().add(1, 'day').format('DD/MM/YYYY'));
+        cy.get('plex-select[label="Prestación"]').children().children('.selectize-control').click()
+            .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click({
+                force: true
+            })
         cy.wait('@getAgenda');
+        cy.wait(2000);
         cy.get('table tbody div').contains('darSobreturno, prueba').click({
             force: true
         });

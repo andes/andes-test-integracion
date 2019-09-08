@@ -7,7 +7,6 @@ context('Aliasing', () => {
             token = t;
             cy.createPaciente('solicitudes/paciente-solicitud', token);
             cy.createAgenda48hs('solicitudes/agendaProfesional', token);
-
         })
     })
 
@@ -84,7 +83,7 @@ context('Aliasing', () => {
         cy.wait('@getReglas');
         cy.get('plex-select[name="organizacionOrigen"] input').type('hospital dr. horacio heller{enter}');
         cy.get('plex-select[label="Tipos de Prestación Origen"] input').type('consulta de medicina general{enter}');
-        cy.get('plex-select[name="profesionalOrigen"] input').type('perez maria');
+        cy.get('plex-select[name="profesionalOrigen"] input').type('cortes jazmin');
         cy.wait('@getProfesional');
         cy.get('plex-select[name="profesionalOrigen"] input').type('{enter}');
 
