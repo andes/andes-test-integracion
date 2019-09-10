@@ -33,8 +33,9 @@ describe('CITAS - Gestor Agendas', () => {
 
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('1900').should('have.value', '1900');
 
-        cy.get('plex-select[label="Tipos de prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click()
+        cy.select('label="Tipos de prestación"', '"598ca8375adc68e2a0c121b8"')
+        // cy.get('plex-select[label="Tipos de prestación"]').children().children('.selectize-control').click()
+        //     .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click()
 
         cy.get('plex-int[label="Cantidad de Turnos"] input').type(10)
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type(10);
@@ -46,8 +47,9 @@ describe('CITAS - Gestor Agendas', () => {
         cy.contains('La agenda se guardó');
         cy.swal('confirm');
 
-        cy.get('plex-select[label="Prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click()
+        // cy.get('plex-select[label="Prestación"]').children().children('.selectize-control').click()
+        //     .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click()
+        cy.select('label="Tipos de prestación"', '"598ca8375adc68e2a0c121b8"')
         cy.wait('@get');
         cy.wait(2000);
         cy.get('table tr').contains('En planificación').first().click();
@@ -60,7 +62,6 @@ describe('CITAS - Gestor Agendas', () => {
         });
         cy.contains('La agenda cambió el estado');
         cy.swal('confirm');
-
     });
 
     it('crear agenda con turnos del día y publicarla', () => {
@@ -79,8 +80,9 @@ describe('CITAS - Gestor Agendas', () => {
 
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('1900').should('have.value', '1900');
 
-        cy.get('plex-select[label="Tipos de prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="5951051aa784f4e1a8e2afe1"]').click()
+        // cy.get('plex-select[label="Tipos de prestación"]').children().children('.selectize-control').click()
+        //     .find('.option[data-value="5951051aa784f4e1a8e2afe1"]').click()
+        cy.select('label="Tipos de prestación"', '"5951051aa784f4e1a8e2afe1"')
 
         cy.get('plex-int[label="Cantidad de Turnos"] input').type(10)
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type(10);

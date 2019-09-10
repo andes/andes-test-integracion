@@ -6,7 +6,6 @@ context('Aliasing', () => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('solicitudes/paciente-solicitud', token);
-            cy.createAgenda48hs('solicitudes/agendaProfesional', token);
         })
     })
 
@@ -238,6 +237,7 @@ context('Aliasing', () => {
 
     it('dar turno autocitado', () => {
         cy.createSolicitud('solicitudes/solicitudAutocitado', token);
+        cy.createAgenda48hs('solicitudes/agendaProfesional', token);
         cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
@@ -352,4 +352,4 @@ context('Aliasing', () => {
 
         // cy.get('div.alert.alert-danger').should('exist');
     })
-})
+});

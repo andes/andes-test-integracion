@@ -78,7 +78,9 @@ Cypress.Commands.add('swal', (acction) => {
             })
         }
     });
-})
+});
+
+
 
 Cypress.Commands.add('goto', (url, token) => {
     return cy.visit(Cypress.env('BASE_URL') + url, {
@@ -174,3 +176,10 @@ Cypress.Commands.add('createSolicitud', (name, token) => {
         });
     });
 });
+
+Cypress.Commands.add('select', (label, value) => {
+    return cy.get(`plex-select[${label}]`).children().children('.selectize-control').click()
+        .find(`.option[data-value=${value}]`).click({
+            force: true
+        });
+})
