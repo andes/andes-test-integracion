@@ -63,7 +63,9 @@ context('Agenda dinamicas', () => {
             cy.get('plex-button[icon="chevron-right"]').click();
         }
         cy.wait('@cargaAgendas');
-        cy.get('app-calendario .dia').contains(Cypress.moment().add(8, 'days').date()).click();
+        cy.get('app-calendario .dia').contains(Cypress.moment().add(8, 'days').date()).click({
+            force: true
+        });
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
         // cy.get('div').contains('15:00').first().click()
         cy.get('plex-button[label="Confirmar"]').click();

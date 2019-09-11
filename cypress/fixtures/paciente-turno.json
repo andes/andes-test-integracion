@@ -1,0 +1,96 @@
+{
+    "_id": "5d790c8b59530a13545f8394",
+    "id": "5d790c8b59530a13545f8394",
+    "claveBlocking": [
+        "TRNPZN",
+        "TRN",
+        "PZNT",
+        "3960463",
+        "396"
+    ],
+    "entidadesValidadoras": [
+        ""
+    ],
+    "documento": "31549268",
+    "cuil": null,
+    "activo": true,
+    "estado": "temporal",
+    "nombre": "PACIENTE",
+    "apellido": "TURNO",
+    "alias": "",
+    "contacto": [{
+        "activo": true,
+        "_id": "5d790c8b59530a13545f8395",
+        "tipo": "celular",
+        "valor": "",
+        "ranking": 0,
+        "ultimaActualizacion": "2019-09-11T12:01:35.339-03:00"
+    }],
+    "sexo": "masculino",
+    "genero": "masculino",
+    "fechaNacimiento": "1989-04-24T00:00:00.000-03:00",
+    "numeroIdentificacion": "",
+    "fechaFallecimiento": null,
+    "direccion": [{
+        "activo": true,
+        "_id": "5d790c8b59530a13545f8396",
+        "valor": "",
+        "codigoPostal": "",
+        "ubicacion": {
+            "_id": "5d790c8b59530a13545f8397",
+            "pais": {
+                "_id": "57f3b5c469fe79a598e6281f",
+                "nombre": "Argentina"
+            },
+            "provincia": {
+                "_id": "57f3f3aacebd681cc2014c53",
+                "nombre": "Neuquén"
+            },
+            "localidad": {
+                "_id": "57f538a472325875a199a82d",
+                "nombre": "NEUQUEN"
+            },
+            "barrio": null
+        },
+        "ranking": 0,
+        "geoReferencia": null,
+        "ultimaActualizacion": "2019-09-11T12:01:35.339-03:00"
+    }],
+    "estadoCivil": "soltero",
+    "foto": null,
+    "relaciones": null,
+    "financiador": null,
+    "identificadores": null,
+    "scan": null,
+    "reportarError": false,
+    "notaError": "",
+    "notas": [],
+    "createdAt": "2019-09-11T12:02:35.804-03:00",
+    "createdBy": {
+        "id": "59e76172b7c39e57a13b38c5",
+        "nombreCompleto": "30643636 30643636",
+        "nombre": "30643636",
+        "apellido": "30643636",
+        "username": 30643636,
+        "documento": 30643636,
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id": "57e9670e52df311059bc8964"
+        }
+    },
+    "updatedAt": "2019-09-11T12:05:37.948-03:00",
+    "updatedBy": {
+        "id": "59e76172b7c39e57a13b38c5",
+        "nombreCompleto": "30643636 30643636",
+        "nombre": "30643636",
+        "apellido": "30643636",
+        "username": 30643636,
+        "documento": 30643636,
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id": "57e9670e52df311059bc8964"
+        }
+    }
+}
