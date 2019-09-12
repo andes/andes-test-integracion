@@ -16,15 +16,13 @@ context('CITAS - Espacios físicos', () => {
         //Rutas para control
         cy.route('GET', '**api/modules/turnos/agenda?fechaDesde**').as('buscarEspacios');
 
-        cy.get('plex-select[name="edificio"]').children().children('.selectize-control').click()
-            .find('.option[data-value="589c578355bf4277035bcf30"]').click();
+        cy.selectOption('name="edificio"', '"589c578355bf4277035bcf30"');
         cy.get('plex-button[label="Buscar"]').click();
         cy.wait('@buscarEspacios').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('plex-select[name="edificio"]').children().children('.selectize-control').click()
-            .find('.option[data-value="589c578355bf4277035bcf2a"]').click();
+        cy.selectOption('name="edificio"', '"589c578355bf4277035bcf2a"');
         cy.get('plex-button[label="Buscar"]').click();
         cy.wait('@buscarEspacios').then((xhr) => {
             expect(xhr.status).to.be.eq(200);

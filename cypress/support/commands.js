@@ -177,9 +177,15 @@ Cypress.Commands.add('createSolicitud', (name, token) => {
     });
 });
 
-Cypress.Commands.add('select', (label, value) => {
+Cypress.Commands.add('selectOption', (label, value) => {
     return cy.get(`plex-select[${label}]`).children().children('.selectize-control').click()
         .find(`.option[data-value=${value}]`).click({
             force: true
         });
-})
+});
+
+Cypress.Commands.add('selectWrite', (label, value) => {
+    return cy.get(`plex-select[${label}] input`).first().type(`${value}{enter}`, {
+        force: true
+    });
+});
