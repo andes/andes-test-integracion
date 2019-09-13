@@ -22,7 +22,7 @@ context('TM Profesional', () => {
         cy.get('plex-text[label="Nombre"] input').first().type('Pedro');
         cy.get('plex-text[label="Apellido"] input').first().type('Ramirez');
         cy.get('plex-int[label="Número de Documento"] input').type('11111fd111').should('have.value', '11111111'); // verifico que no se pueda ingresar letras
-        cy.get('plex-select[label="Sexo"] input').type('femenino{enter}');
+        cy.selectWrite('label="Sexo"', 'femenino');
         cy.get('plex-datetime[label="Fecha de nacimiento"] input').type('05/11/1991{enter}');
 
         cy.get('plex-phone[label="Número"] input').type('29945876as12').should('have.value', '2994587612');
@@ -43,7 +43,7 @@ context('TM Profesional', () => {
 
 
         cy.get('plex-int[label="Número de Documento"] input').type('264sf8a7951').should('have.value', '26487951'); // verifico que no se pueda ingresar letras
-        cy.get('plex-select[label="Sexo"] input').type('masculino{enter}');
+        cy.selectWrite('label="Sexo"', 'masculino');
 
         cy.get('plex-layout-sidebar plex-button[label="Validar con servicios de Renaper"]').click();
         cy.wait('@renaper');
@@ -71,7 +71,7 @@ context('TM Profesional', () => {
         cy.get('plex-int[label="Número de Documento"] input').type('15e654f898').should('have.value', '15654898');
         cy.get('plex-layout-sidebar').should('not.contain', 'plex-button[label="Validar con servicios de Renaper"]');
 
-        cy.get('plex-select[label="Sexo"] input').type('femenino{enter}');
+        cy.selectWrite('label="Sexo"', 'femenino');
         cy.get('plex-layout-sidebar').find('plex-button[label="Validar con servicios de Renaper"]');
 
         cy.get('plex-layout-sidebar plex-button[label="Validar con servicios de Renaper"]').click();
@@ -102,7 +102,7 @@ context('TM Profesional', () => {
         cy.get('plex-text[label="Nombre"] input').first().type('ALICIA BEATRIZ');
         cy.get('plex-text[label="Apellido"] input').first().type('ESPOSITO');
         cy.get('plex-int[label="Número de Documento"] input').type('4163782').should('have.value', '4163782'); // verifico que no se pueda ingresar letras
-        cy.get('plex-select[label="Sexo"] input').type('femenino{enter}');
+        cy.selectWrite('label="Sexo"', 'femenino');
         cy.get('plex-datetime[label="Fecha de nacimiento"] input').type('12/12/1995{enter}');
 
         cy.get('plex-phone[label="Número"] input').type('29945876as12').should('have.value', '2994587612');

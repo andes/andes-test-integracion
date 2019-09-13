@@ -35,7 +35,7 @@ context('Aliasing', () => {
 
         cy.get('plex-text[name="nombre"] input').first().type('nombreBebe12').should('have.value', 'nombreBebe12');
 
-        cy.get('plex-select[label="Sexo"] input').type('masculino{enter}');
+        cy.selectWrite('label="Sexo"', 'masculino');
 
         cy.get('plex-datetime[name="fechaNacimiento"] input').type(Cypress.moment().format('DD/MM/YYYY'));
 
@@ -89,10 +89,10 @@ context('Aliasing', () => {
 
         cy.get('plex-datetime[name="fechaNacimiento"] input').first().type('11/06/1992').should('have.value', '11/06/1992');
 
-        cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
+        cy.selectWrite('name="sexo"', 'masculino');
 
         // Se completa datos de contacto
-        cy.get('plex-select[label="Tipo"]').children().children('.selectize-control').click().find('div[data-value="fijo"]').click();
+        cy.selectWrite('label="Tipo"', 'Teléfono fijo');
 
         cy.get('plex-phone[label="Número"] input').first().type('02994351614').should('have.value', '02994351614');
 
@@ -109,7 +109,7 @@ context('Aliasing', () => {
 
         cy.get('plex-bool[name="viveLocActual"]').click();
 
-        cy.get('plex-select[name="barrio"] input[type="text"]').type('alta barda{enter}');
+        cy.selectWrite('name="barrio"', 'alta barda');
 
         cy.get('plex-text[name="direccion"] input[type="text"]').first().type('Avenida las Flores 1200').should('have.value', 'Avenida las Flores 1200');
 
@@ -152,7 +152,7 @@ context('Aliasing', () => {
 
         cy.get('plex-datetime[name="fechaNacimiento"] input').first().type('23/02/1998').should('have.value', '23/02/1998');
 
-        cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
+        cy.selectWrite('name="sexo"', 'masculino');
 
         // Se completa datos de contacto
         cy.get('plex-phone[label="Número"] input').first().type('02991489753').should('have.value', '02991489753');
@@ -184,7 +184,7 @@ context('Aliasing', () => {
         cy.contains('Los datos se actualizaron correctamente');
     });
 
-    it('dar turno de día', () => { // TODO: no encuentra agenda para los filtros ingresados por mas que se cree en el caso de prueba anterior
+    it('dar turno de día', () => {
         cy.createAgenda('apps/citas/turnos/agendaTurnoDia', 0, 0, 1, token);
         cy.server();
         //Rutas de control
@@ -204,25 +204,26 @@ context('Aliasing', () => {
         cy.get('plex-button[title="Dar Turno"]').click();
 
         //Carga la prestación de la agenda
-        cy.get('plex-select[placeholder="Tipos de Prestación"] input').type('consulta de cardiología');
+        cy.get('plex-select[placeholder="Tipos de Prestación"] input').type('Consulta de cardiología');
         cy.wait('@getPrestaciones');
         cy.get('plex-select[placeholder="Tipos de Prestación"] input').type('{enter}');
 
-        cy.wait('@getAgendas');
+        // cy.wait('@getAgendas');
 
         //Carga profesional de la agenda
         cy.get('plex-select[placeholder="Equipo de Salud"] input').type('ESPOSITO ALICIA BEATRIZ');
         cy.wait('@getProfesional');
         cy.get('plex-select[placeholder="Equipo de Salud"] input').type('{enter}');
 
-        cy.wait('@getAgendas');
-
+        cy.wait('@getAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
             force: true
         });
-
-        cy.wait('@agenda');
-
+        cy.wait('@agenda').then((xhr) => {
+            expect(xhr.response.body.estado).to.be.eq('publicada');
+        });
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
         cy.get('plex-button[label="Confirmar"]').click();
 

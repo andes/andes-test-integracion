@@ -21,9 +21,9 @@ context('Aliasing', () => {
         cy.server();
         // doy turno
         cy.get('plex-text input[type=text]').first().type('12325484');
-        cy.get('tr').contains('OROS, CAMILO').first().click()
-        cy.get('plex-button').first().click()
-        cy.get('plex-select[name="tipoPrestacion"] input').type('colonoscopia{enter}');
+        cy.get('tr').contains('OROS, CAMILO').first().click();
+        cy.get('plex-button').first().click();
+        cy.selectOption('name="tipoPrestacion"', 'colonoscopia');
         cy.get('.outline-success ').first().click();
         cy.get('div').contains('15:00').first().click()
         cy.get('plex-button[label="Confirmar"]').click();

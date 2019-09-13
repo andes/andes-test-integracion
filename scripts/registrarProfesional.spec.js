@@ -24,12 +24,12 @@ context('Aliasing', () => {
         cy.get('plex-button[label="Nuevo Profesional"]').click();
         cy.get('plex-text[label="apellido"] input').first().type('Palavecino');
         cy.get('plex-text[label="Nombre"] input').first().type('Mariano');
-        cy.get('plex-select[label="Sexo"] input').first().type('masculino{enter}');
-        cy.get('plex-select[label="Nacionalidad"] input').first().type('argentina{enter}');
+        cy.selectWrite('label="Sexo"', 'masculino');
+        cy.selectWrite('label="Nacionalidad"', 'argentina');
         cy.get('plex-datetime[label="Fecha de Nacimiento"] input').first().type('18/01/1991');
         cy.get('plex-text[label="Lugar de Nacimiento"] input').first().type('San Carlos de Bariloche');
         cy.get('plex-int[label="C.U.I.T. / C.U.I.L."] input').first().type('2a3b3f5d5e9r3y5d4f6w9').should('have.value', '23355935469');
-        cy.get('plex-select[label="Tipo de Documento"] input').first().type('dni{enter}');
+        cy.selectWrite('label="Tipo de Documento"', 'dni');
         cy.get('plex-int[label="Nº de Documento"] input').first().type('3a5c5d9w3r5e4q6').should('have.value', '35593546');
 
         //DATOS CONTACTO
@@ -38,8 +38,8 @@ context('Aliasing', () => {
         //DATOS DOMICILIO
 
         //Domicilio Real
-        cy.get('plex-select[name="provinciaReal"] input').first().type('Neuquen{enter}');
-        cy.get('plex-select[name="localidadReal"] input').first().type('Neuquen{enter}');
+        cy.selectWrite('name="provinciaReal"', 'Neuquen');
+        cy.selectWrite('name="localidadReal"', 'Neuquen');
         cy.get('plex-text[name="direccionReal"] input').first().type('Dewey 521');
         cy.get('plex-int[name="codigoPostalReal"] input').should('have.value', '8300');
 
@@ -49,7 +49,7 @@ context('Aliasing', () => {
 
         //DATOS PROFESION
 
-        cy.get('plex-select[name="formacionPosgrado"] input').first().type('Kinesiólogo{enter}');
+        cy.selectWrite('name="formacionPosgrado"', 'Kinesiólogo');
         cy.get('plex-text[name="titulo"] input').first().type('Licenciatura de Kinesiologia');
         cy.get('plex-datetime[name="fechaEgreso"] input').first().type('05/11/2007');
 
@@ -57,8 +57,7 @@ context('Aliasing', () => {
         cy.get('plex-bool[label="Otra Entidad Formadora"] input[type="checkbox"]').uncheck({
             force: true
         }).should('not.be.checked');
-
-        cy.get('plex-select[name="entidadFormadora"] input').first().type('Escuela superior de salud publica{enter}');
+        cy.selectWrite('name="entidadFormadora"', 'Escuela superior de salud publica');
 
         //ACEPTAR LOS DATOS CARGADOS
 
@@ -98,12 +97,12 @@ context('Aliasing', () => {
         cy.get('plex-button[label="Nuevo Profesional"]').click();
         cy.get('plex-text[label="apellido"] input').first().type('Palavecino');
         cy.get('plex-text[label="Nombre"] input').first().type('Mariano');
-        cy.get('plex-select[label="Sexo"] input').first().type('masculino{enter}');
-        cy.get('plex-select[label="Nacionalidad"] input').first().type('argentina{enter}');
+        cy.selectWrite('label="Sexo"', 'masculino');
+        cy.selectWrite('label="Nacionalidad"', 'argentina');
         cy.get('plex-datetime[label="Fecha de Nacimiento"] input').first().type('18/01/1991');
         cy.get('plex-text[label="Lugar de Nacimiento"] input').first().type('San Carlos de Bariloche');
         cy.get('plex-int[label="C.U.I.T. / C.U.I.L."] input').first().type('2a3b3f5d5e9r3y5d4f6w9').should('have.value', '23355935469');
-        cy.get('plex-select[label="Tipo de Documento"] input').first().type('dni{enter}');
+        cy.selectWrite('label="Tipo de Documento"', 'dni');
         cy.get('plex-int[label="Nº de Documento"] input').first().type('3a5c5d9w3r5e4q6').should('have.value', '35593546');
 
         //DATOS CONTACTO
@@ -112,8 +111,8 @@ context('Aliasing', () => {
         //DATOS DOMICILIO
 
         //Domicilio Real
-        cy.get('plex-select[name="provinciaReal"] input').first().type('Neuquen{enter}');
-        cy.get('plex-select[name="localidadReal"] input').first().type('Neuquen{enter}');
+        cy.selectWrite('name="provinciaReal"', 'Neuquén');
+        cy.selectWrite('name="localidadReal"', 'Neuquen');
         cy.get('plex-text[name="direccionReal"] input').first().type('Dewey 521');
         cy.get('plex-int[name="codigoPostalReal"] input').should('have.value', '8300');
 
@@ -123,7 +122,7 @@ context('Aliasing', () => {
 
         //DATOS PROFESIÓN 
 
-        cy.get('plex-select[name="formacionPosgrado"] input').first().type('Kinesiólogo{enter}');
+        cy.selectWrite('name="formacionPosgrado"', 'Kinesiólogo');
         cy.get('plex-text[name="titulo"] input').first().type('Licenciatura de Kinesiologia');
         cy.get('plex-datetime[name="fechaEgreso"] input').first().type('05/11/2007');
 
@@ -132,7 +131,7 @@ context('Aliasing', () => {
             force: true
         }).should('not.be.checked');
 
-        cy.get('plex-select[name="entidadFormadora"] input').first().type('Escuela superior de salud publica{enter}');
+        cy.selectWrite('name="entidadFormadora"', 'Escuela superior de salud publica');
 
         //ACEPTAR LOS DATOS CARGADOS
 

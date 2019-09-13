@@ -17,7 +17,6 @@ context('RUP - Punto de inicio', () => {
         const fixtures = [];
         cy.fixture('conceptos-snomed.json').then(json => {
             fixtures.push(json);
-            console.log(fixtures);
         });
         // Stub
         cy.route(/api\/core\/term\/snomed\?/, fixtures).as('search');
@@ -29,8 +28,7 @@ context('RUP - Punto de inicio', () => {
         cy.get('plex-button[label="PACIENTE FUERA DE AGENDA"]').click();
 
         cy.wait('@prestaciones');
-        cy.get('plex-select[name="nombrePrestacion"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click();
+        cy.selectOption('name="nombrePrestacion"', '"598ca8375adc68e2a0c121b8"');
 
         cy.get('plex-button[label="SELECCIONAR PACIENTE"]').click();
         cy.get('plex-text input').first().type('3399661');
@@ -48,13 +46,12 @@ context('RUP - Punto de inicio', () => {
         cy.get('plex-text[name="searchTerm"] input').first().type('fiebre');
         cy.wait(3000);
         cy.wait('@search').then((xhr) => {
-            console.log('Search', xhr);
+            cy.get('.mdi-plus').first().click();
+            cy.get('textarea').first().type('test', {
+                force: true
+            });
         });
 
-        cy.get('.mdi-plus').first().click();
-        cy.get('textarea').first().type('test', {
-            force: true
-        });
         cy.get('span').contains('Guardar consulta de medicina general').click({
             force: true
         });

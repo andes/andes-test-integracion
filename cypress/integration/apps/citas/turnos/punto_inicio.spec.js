@@ -6,12 +6,7 @@ context('Agenda dinamicas', () => {
             cy.createAgenda('apps/citas/turnos/agendaDinamicaDarTurno', 0, 0, 1, token);
             cy.createAgenda('apps/citas/turnos/agendaDarTurnoProgramado', 8, null, null, token);
         });
-    })
-
-    beforeEach(() => {
-
-    })
-
+    });
 
 
     it('dar turno agenda dinámica', () => {
@@ -32,8 +27,7 @@ context('Agenda dinamicas', () => {
         cy.get('plex-button[title="Dar Turno"]').click();
         cy.wait('@prestaciones');
 
-        cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121d5"]').click();
+        cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
         cy.wait('@cargaAgendas');
         cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
         cy.get('plex-button[label="Dar Turno"]').click();
@@ -63,12 +57,7 @@ context('Agenda dinamicas', () => {
         cy.get('plex-button[title="Dar Turno"]').click();
         cy.wait('@prestaciones');
 
-        cy.get('plex-select[name="tipoPrestacion"]').children().children('.selectize-control').click({
-                force: true
-            })
-            .find('.option[data-value="598ca8375adc68e2a0c121d5"]').click({
-                force: true
-            });
+        cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
 
         if (Cypress.moment().add(8, 'days').month() > Cypress.moment().month()) {
             cy.get('plex-button[icon="chevron-right"]').click();

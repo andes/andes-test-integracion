@@ -33,9 +33,7 @@ describe('CITAS - Gestor Agendas', () => {
 
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('1900').should('have.value', '1900');
 
-        cy.get('plex-select[label="Tipos de prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click()
-
+        cy.selectOption('label="Tipos de prestación"', '"598ca8375adc68e2a0c121b8"');
         cy.get('plex-int[label="Cantidad de Turnos"] input').type(10)
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type(10);
         cy.get('plex-button[label="Guardar"]').click();
@@ -46,8 +44,7 @@ describe('CITAS - Gestor Agendas', () => {
         cy.contains('La agenda se guardó');
         cy.swal('confirm');
 
-        cy.get('plex-select[label="Prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click()
+        cy.selectOption('label="Prestación"', '"598ca8375adc68e2a0c121b8"')
         cy.wait('@get');
         cy.wait(2000);
         cy.get('table tr').contains('En planificación').first().click();
@@ -60,7 +57,6 @@ describe('CITAS - Gestor Agendas', () => {
         });
         cy.contains('La agenda cambió el estado');
         cy.swal('confirm');
-
     });
 
     it('crear agenda con turnos del día y publicarla', () => {
@@ -79,10 +75,9 @@ describe('CITAS - Gestor Agendas', () => {
 
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('1900').should('have.value', '1900');
 
-        cy.get('plex-select[label="Tipos de prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="5951051aa784f4e1a8e2afe1"]').click()
+        cy.selectOption('label="Tipos de prestación"', '"5951051aa784f4e1a8e2afe1"');
 
-        cy.get('plex-int[label="Cantidad de Turnos"] input').type(10)
+        cy.get('plex-int[label="Cantidad de Turnos"] input').type(10);
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type(10);
 
         cy.get('plex-button[label="Guardar"]').click();
@@ -104,7 +99,7 @@ describe('CITAS - Gestor Agendas', () => {
         cy.swal('confirm');
     });
 
-    it('Crear agenda hoy y publicarla', () => {
+    it('crear agenda hoy y publicarla', () => {
         cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
@@ -129,17 +124,13 @@ describe('CITAS - Gestor Agendas', () => {
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type(ahora.hour());
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type(ahora.add(1, 'hour').hour());
 
-        cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('consulta de medicina general');
+        cy.selectWrite('name="modelo.tipoPrestaciones"', 'consulta de medicina general');
         cy.wait('@prestacion').then(() => {
-            cy.get('plex-select[name="modelo.tipoPrestaciones"] input').type('{enter}');
+            cy.selectWrite('name="modelo.tipoPrestaciones"', '');
         });
-        cy.get('plex-select[name="modelo.profesionales"] input').type('huenchuman natalia', {
-            force: true
-        });
+        cy.selectWrite('name="modelo.profesionales"', 'huenchuman natalia');
         cy.wait('@profesional').then(() => {
-            cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}', {
-                force: true
-            });
+            cy.selectWrite('name="modelo.profesionales"', '');
         });
         cy.get('plex-int[name="cantidadTurnos"] input').type('4');
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type('4');
@@ -170,8 +161,7 @@ describe('CITAS - Gestor Agendas', () => {
 
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('1900').should('have.value', '1900');
 
-        cy.get('plex-select[label="Tipos de prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="5951051aa784f4e1a8e2afe1"]').click();
+        cy.selectOption('label="Tipos de prestación"', '"5951051aa784f4e1a8e2afe1"')
 
         cy.get('plex-bool[name="dinamica"] input[type="checkbox"]').check({
             force: true
@@ -223,21 +213,15 @@ describe('CITAS - Gestor Agendas', () => {
         cy.get('plex-dateTime[name="modelo.fecha"] input').type(proximaSemana);
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('10');
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('15');
-        cy.get('plex-select[name="modelo.tipoPrestaciones"]').children().children('.selectize-control').click({
-                force: true
-            })
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click({
-                force: true
-            });
-        cy.get('plex-select[name="modelo.profesionales"] input').type('perez maria', {
-            force: true
-        });
+
+        cy.selectOption('name="modelo.tipoPrestaciones"', '"598ca8375adc68e2a0c121b8"');
+        cy.selectWrite('name="modelo.profesionales"', 'perez maria');
+
         cy.wait('@getProfesional').then(() => {
-            cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}');
+            cy.selectWrite('name="modelo.profesionales"', '');
         });
-        cy.get('plex-select[name="espacioFisico"] input').type('aula 1 docencia');
+        cy.selectWrite('name="espacioFisico"', 'aula 1 docencia');
         cy.wait('@getEspaciosFisicos');
-        cy.get('plex-select[name="espacioFisico"] input').type('{enter}');
 
         cy.get('plex-int[name="cantidadTurnos"] input').type('10');
         cy.get('plex-int[name="accesoDirectoDelDia"] input').type('2');
@@ -287,18 +271,15 @@ describe('CITAS - Gestor Agendas', () => {
         cy.get('plex-dateTime[name="modelo.fecha"] input').type(hoy);
         cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('15');
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type('17');
-        cy.get('plex-select[name="modelo.tipoPrestaciones"]').children().children('.selectize-control').click()
-            .find('.option[data-value="5b61d59968954f3e6ea84586"]').click();
+        cy.selectOption('name="modelo.tipoPrestaciones"', '"5b61d59968954f3e6ea84586"');
 
         cy.get('legend').contains('Acceso Directo').should('not.be.visible');
         cy.get('legend').contains('Reservado').should('not.be.visible');
         cy.get('legend').contains('Bloque').should('be.visible');
+        cy.selectWrite('name="modelo.profesionales"', 'perez maria');
 
-        cy.get('plex-select[name="modelo.profesionales"] input').type('perez maria', {
-            force: true
-        });
         cy.wait('@getProfesional').then(() => {
-            cy.get('plex-select[name="modelo.profesionales"] input').type('{enter}');
+            cy.selectWrite('name="modelo.profesionales"', '');
         });
 
         cy.get('plex-button[label="Guardar"]').click({
@@ -487,10 +468,9 @@ describe('CITAS - Gestor Agendas', () => {
         cy.route('GET', '**/api/core/mpi/pacientes?type=multimatch&cadenaInput=**').as('getPaciente');
 
         cy.get('plex-datetime[name="fechaHasta"] input').type('{selectall}{backspace}' + Cypress.moment().add(1, 'day').format('DD/MM/YYYY'));
-        cy.get('plex-select[label="Prestación"]').children().children('.selectize-control').click()
-            .find('.option[data-value="59ee2d9bf00c415246fd3d6a"]').click({
-                force: true
-            })
+
+        cy.selectOption('label="Prestación"', '"59ee2d9bf00c415246fd3d6a"');
+
         cy.wait('@getAgenda');
         cy.wait(2000);
         cy.get('table tbody div').contains('darSobreturno, prueba').click({
