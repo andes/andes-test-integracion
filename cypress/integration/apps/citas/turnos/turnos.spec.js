@@ -218,12 +218,11 @@ context('Aliasing', () => {
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
-            force: true
-        });
-        cy.wait('@agenda').then((xhr) => {
-            expect(xhr.response.body.estado).to.be.eq('publicada');
-        });
+        // cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
+        //     force: true
+        // });
+        cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
+        cy.wait(2000);
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
         cy.get('plex-button[label="Confirmar"]').click();
 
