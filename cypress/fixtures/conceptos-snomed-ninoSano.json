@@ -1,0 +1,314 @@
+[{
+        "fsn": "consulta de niño sano, recién nacido (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410621008",
+        "term": "consulta de niño sano, recién nacido"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 3 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [],
+        "conceptId": "2591000013106",
+        "term": "consulta de niño sano, a los 3 meses (procedimiento)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 3 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [],
+        "conceptId": "2591000013106",
+        "term": "consulta de niño sano, a los 3 meses"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 15 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410631001",
+        "term": "consulta de niño sano, a los 15 meses (procedimiento)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 15 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410631001",
+        "term": "consulta de niño sano, a los 15 meses"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 15 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410631001",
+        "term": "Well child visit, 15 month (procedure)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 15 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410631001",
+        "term": "Well child visit, 15 month"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 18 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410632008",
+        "term": "consulta de niño sano, a los 18 meses (procedimiento)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 18 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410632008",
+        "term": "consulta de niño sano, a los 18 meses"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 18 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410632008",
+        "term": "Well child visit, 18 month (procedure)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 18 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410632008",
+        "term": "Well child visit, 18 month"
+    },
+    {
+        "fsn": "consulta de niño sano, a las 2 semanas (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410623006",
+        "term": "consulta de niño sano, a las 2 semanas (procedimiento)"
+    },
+    {
+        "fsn": "consulta de niño sano, a las 2 semanas (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410623006",
+        "term": "consulta de niño sano, a las 2 semanas"
+    },
+    {
+        "fsn": "consulta de niño sano, a las 2 semanas (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410623006",
+        "term": "Well child visit, 2 week (procedure)"
+    },
+    {
+        "fsn": "consulta de niño sano, a las 2 semanas (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410623006",
+        "term": "Well child visit, 2 week"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 2 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410624000",
+        "term": "consulta de niño sano, a los 2 meses (procedimiento)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 2 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410624000",
+        "term": "consulta de niño sano, a los 2 meses"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 2 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410624000",
+        "term": "Well child visit, 2 month (procedure)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 2 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410624000",
+        "term": "Well child visit, 2 month"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 4 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410626003",
+        "term": "consulta de niño sano, a los 4 meses (procedimiento)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 4 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410626003",
+        "term": "consulta de niño sano, a los 4 meses"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 4 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410626003",
+        "term": "Well child visit, 4 month (procedure)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 4 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410626003",
+        "term": "Well child visit, 4 month"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 6 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410627007",
+        "term": "consulta de niño sano, a los 6 meses (procedimiento)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 6 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410627007",
+        "term": "consulta de niño sano, a los 6 meses"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 6 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410627007",
+        "term": "Well child visit, 6 month (procedure)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 6 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410627007",
+        "term": "Well child visit, 6 month"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 21 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [],
+        "conceptId": "2601000013103",
+        "term": "consulta de niño sano, a los 21 meses (procedimiento)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 21 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [],
+        "conceptId": "2601000013103",
+        "term": "consulta de niño sano, a los 21 meses"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 9 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410628002",
+        "term": "consulta de niño sano, a los 9 meses (procedimiento)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 9 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410628002",
+        "term": "consulta de niño sano, a los 9 meses"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 9 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410628002",
+        "term": "Well child visit, 9 month (procedure)"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 9 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "410628002",
+        "term": "Well child visit, 9 month"
+    },
+    {
+        "_id": "5d77db0746332558eca413f6",
+        "id": "5d77db0746332558eca413f6",
+        "fsn": "consulta de niño sano, al mes (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [],
+        "conceptId": "2581000013108",
+        "term": "consulta de niño sano, al mes (procedimiento)"
+    },
+    {
+        "_id": "5d77db0746332558eca413f6",
+        "id": "5d77db0746332558eca413f6",
+        "fsn": "consulta de niño sano, al mes (procedimiento)",
+        "semanticTag": "procedimiento",
+        "refsetIds": [],
+        "conceptId": "2581000013108",
+        "term": "consulta de niño sano, al mes"
+    },
+    {
+        "fsn": "consulta de niño sano, a los 12 meses (procedimiento)",
+        "semanticTag": "procedimiento",
+        "conceptId": "410629005",
+        "term": "consulta de niño sano, a los 12 meses"
+    }
+]

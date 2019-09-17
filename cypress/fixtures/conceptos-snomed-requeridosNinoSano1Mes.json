@@ -1,0 +1,19 @@
+[{
+        "fsn": "alimentado a pecho (hallazgo)",
+        "term": "alimentado a pecho",
+        "conceptId": "169741004",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "fsn": "amamantamiento con suplemento (hallazgo)",
+        "term": "amamantamiento con suplemento",
+        "conceptId": "169743001",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "fsn": "destete del lactante (hallazgo)",
+        "term": "destete del lactante",
+        "conceptId": "169749002",
+        "semanticTag": "hallazgo"
+    }
+]
