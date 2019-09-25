@@ -208,8 +208,6 @@ context('Aliasing', () => {
         cy.wait('@getPrestaciones');
         cy.get('plex-select[placeholder="Tipos de Prestación"] input').type('{enter}');
 
-        // cy.wait('@getAgendas');
-
         //Carga profesional de la agenda
         cy.get('plex-select[placeholder="Equipo de Salud"] input').type('ESPOSITO ALICIA BEATRIZ');
         cy.wait('@getProfesional');
@@ -221,8 +219,8 @@ context('Aliasing', () => {
         // cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click({
         //     force: true
         // });
-        cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
-        cy.wait(2000);
+        cy.wait(1000);
+        cy.get('app-calendario .dia').contains(Cypress.moment().format('D')).click();
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
         cy.get('plex-button[label="Confirmar"]').click();
 
