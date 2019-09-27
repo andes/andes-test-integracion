@@ -106,12 +106,8 @@ context('RUP - Punto de inicio', () => {
             force: true
         });
 
-
-        cy.get('plex-select[name="nombrePrestacion"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click({
-                force: true
-            });
-        cy.wait(3000);
+        cy.selectOption('name="nombrePrestacion"', '"598ca8375adc68e2a0c121b8"');
+        cy.get('table tr').contains('consulta de medicina general').first().click();
         cy.get('div[class="plex-box-content"] table').eq(1).find('tr td plex-button[label="INICIAR PRESTACIÓN"]').click({
             force: true
         });
@@ -181,14 +177,12 @@ context('RUP - Punto de inicio', () => {
             force: true
         });
 
-
-        cy.get('plex-select[name="nombrePrestacion"]').children().children('.selectize-control').click()
-            .find('.option[data-value="598ca8375adc68e2a0c121b8"]').click({
-                force: true
-            });
+        cy.selectOption('name="nombrePrestacion"', '"598ca8375adc68e2a0c121b8"');
+        cy.get('table tr').contains('consulta de medicina general').first().click();
         cy.get('div[class="plex-box-content"] table').eq(2).find('tr td plex-button[label="INICIAR PRESTACIÓN"]').click({
             force: true
         });
+        cy.wait(2000);
         cy.get('button').contains('CONFIRMAR').click();
 
         // cy.get('plex-button[type="success"]').contains('INICIAR PRESTACIÓN').click();
