@@ -5,7 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx cypress open --env BASE_URL=http://localhost:4200,API_SERVER=http://localhost:3002"
+    "start": "npx cypress open --env BASE_URL=http://localhost:4200,API_SERVER=http://localhost:3002",
+    "prod": "npx cypress open --env BASE_URL=http://localhost,API_SERVER=http://localhost",
+    "prod:up": "node scripts/prepare.js production up",
+    "prod:reset": "node scripts/prepare.js production reset",
+    "prod:down": "node scripts/prepare.js production down",
+    "dev:up": "node scripts/prepare.js develop up",
+    "dev:reset": "node scripts/prepare.js develop reset",
+    "dev:down": "node scripts/prepare.js develop down"
   },
   "repository": {
     "type": "git",
