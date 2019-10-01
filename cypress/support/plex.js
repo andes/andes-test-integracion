@@ -43,7 +43,7 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
 Cypress.Commands.add('plexInt', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject).get(`plex-int[${label}] input`);
+        element = cy.wrap(subject).find(`plex-int[${label}] input`);
     } else {
         element = cy.get(`plex-int[${label}] input`);
     }
@@ -56,7 +56,7 @@ Cypress.Commands.add('plexInt', { prevSubject: 'optional' }, (subject, label, te
 Cypress.Commands.add('plexPhone', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject).get(`plex-phone[${label}] input`);
+        element = cy.wrap(subject).find(`plex-phone[${label}] input`);
     } else {
         element = cy.get(`plex-phone[${label}] input`);
     }
@@ -69,7 +69,7 @@ Cypress.Commands.add('plexPhone', { prevSubject: 'optional' }, (subject, label, 
 Cypress.Commands.add('plexText', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject).get(`plex-text[${label}] input`).first();
+        element = cy.wrap(subject).find(`plex-text[${label}] input`).first();
     } else {
         element = cy.get(`plex-text[${label}] input`).first();
     }
@@ -82,7 +82,7 @@ Cypress.Commands.add('plexText', { prevSubject: 'optional' }, (subject, label, t
 Cypress.Commands.add('plexTextArea', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject).get(`plex-text[${label}] textarea`).first();
+        element = cy.wrap(subject).find(`plex-text[${label}] textarea`).first();
     } else {
         element = cy.get(`plex-text[${label}] textarea`).first();
     }
@@ -97,7 +97,7 @@ Cypress.Commands.add('plexButton', { prevSubject: 'optional' }, (subject, label)
     let element;
     if (subject) {
 
-        element = cy.wrap(subject).get('plex-button').contains(label);
+        element = cy.wrap(subject).find('plex-button').contains(label);
     } else {
         element = cy.get('plex-button').contains(label);
     }
@@ -108,7 +108,7 @@ Cypress.Commands.add('plexButtonIcon', { prevSubject: 'optional' }, (subject, ic
     let element;
     if (subject) {
 
-        element = cy.wrap(subject).get(`plex-button[icon="${icon}"]`);
+        element = cy.wrap(subject).find(`plex-button[icon="${icon}"]`);
     } else {
         element = cy.get(`plex-button[icon="${icon}"]`);
     }
@@ -118,11 +118,10 @@ Cypress.Commands.add('plexButtonIcon', { prevSubject: 'optional' }, (subject, ic
 Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject)
+        element = cy.wrap(subject).find(`plex-datetime[${label}] input`)
     } else {
-        element = cy;
+        element = cy.get(`plex-datetime[${label}] input`);
     }
-    element = element.get(`plex-datetime[${label}] input`);
     if (text) {
         element.type(`${text}{enter}`);
     }
@@ -132,11 +131,10 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
 Cypress.Commands.add('plexBool', { prevSubject: 'optional' }, (subject, label, checked = false) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject)
+        element = cy.wrap(subject).find(`plex-bool[${label}] input[type="checkbox"]`)
     } else {
-        element = cy;
+        element = cy.get(`plex-bool[${label}] input[type="checkbox"]`);
     }
-    element = element.get(`plex-bool[${label}] input[type="checkbox"]`);
     if (checked) {
         element = element.check({ force: true });
     }
