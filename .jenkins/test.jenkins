@@ -37,14 +37,14 @@ pipeline {
         stage('build api') {
             steps {
                 sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} .'
-                sh 'API=$api APP=$app docker-compose -f docker/docker.compose.yml up -d '
+                sh 'API=$api APP=$app docker-compose -f docker/docker-compose.yml up -d '
             }
         }
         
         stage('seed dabatase') {
             steps {
                 sh 'sleep 20'
-                sh 'curl -XPUT "http://172.16.1.116:9200/andes/" -d @docker/andes-index.json'
+                sh 'curl -XPUT "http://172.16.1.116:9266/andes/" -d @docker/andes-index.json'
                 sh 'docker exec andes_db mongo --eval "rs.initiate();"'
                 sh 'docker cp docker/andes.gz andes_db:/andes.gz'
                 sh 'docker exec andes_db mongorestore --gzip --archive=/andes.gz --db andes'
@@ -71,7 +71,7 @@ pipeline {
     post { 
         always { 
             sh 'cd docker'
-            sh 'API=$api APP=$app docker-compose -f docker/docker.compose.yml down -v'
+            sh 'API=$api APP=$app docker-compose -f docker/docker-compose.yml down -v'
             junit 'results/cypress-report.xml'
         }
     }
