@@ -70,17 +70,6 @@ Cypress.Commands.add('createPaciente', (name, token) => {
     });
 });
 
-Cypress.Commands.add('swal', (acction) => {
-    return cy.get('div').then(($body) => {
-        if ($body.hasClass('swal2-container')) {
-            cy.get(`.swal2-${acction}`).click({
-                force: true
-            })
-        }
-    });
-});
-
-
 
 Cypress.Commands.add('goto', (url, token) => {
     return cy.visit(Cypress.env('BASE_URL') + url, {
@@ -184,15 +173,3 @@ Cypress.Commands.add('createSolicitud', (name, token) => {
     });
 });
 
-Cypress.Commands.add('selectOption', (label, value) => {
-    return cy.get(`plex-select[${label}]`).children().children('.selectize-control').click()
-        .find(`.option[data-value=${value}]`).click({
-            force: true
-        });
-});
-
-Cypress.Commands.add('selectWrite', (label, value) => {
-    return cy.get(`plex-select[${label}] input`).first().type(`${value}{enter}`, {
-        force: true
-    });
-});
