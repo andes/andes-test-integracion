@@ -19,7 +19,7 @@ context('MPI', () => {
         cy.route('POST', '**api/core/mpi/pacientes').as('conDniGuardar');
 
         // Buscador
-        cy.get('plex-text input[type="text"]').first().type('12325483').should('have.value', '12325483');
+        cy.plexText('name="buscador"', '12325483');
 
         cy.get('div.alert.alert-danger').should('exist');
 
@@ -28,30 +28,30 @@ context('MPI', () => {
         cy.get('div').contains('CON DNI ARGENTINO').click();
 
         // Se completa datos básicos
-        cy.get('plex-int[name="documento"] input').type('12325484');
+        cy.plexInt('name="documento"', '12325484');
 
-        cy.get('plex-text[name="apellido"] input').first().type('Oros');
+        cy.plexText('name="apellido"', 'Oros');
+        cy.plexText('name="nombre"', 'Camilo');
 
-        cy.get('plex-text[name="nombre"] input').first().type('Camilo');
+        cy.plexDatetime('name="fechaNacimiento"', '19/05/1998');
 
-        cy.get('plex-datetime[name="fechaNacimiento"] input').first().type('19/05/1998').should('have.value', '19/05/1998');
-
-        cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
+        cy.plexSelectType('name="sexo"', 'masculino');
 
         // Se completa datos de contacto
-        cy.get('plex-phone[label="Número"] input').first().type('02991489753').should('have.value', '02991489753');
+        cy.plexPhone('label="Número"', '02991489753');
 
         // Se completa los datos de domicilio
-        cy.get('plex-bool[name="viveProvActual"]').click();
+        cy.plexBool('name="viveProvActual"', true);
 
-        cy.get('plex-bool[name="viveLocActual"]').click();
+        cy.plexBool('name="viveLocActual"', true);
 
-        cy.get('plex-select[name="barrio"] input[type="text"]').type('alta barda{enter}');
+        cy.plexSelectType('name="barrio"', 'alta barda');
 
-        cy.get('plex-text[name="direccion"] input[type="text"]').first().type('Avenida las Flores 1200').should('have.value', 'Avenida las Flores 1200');
+        cy.plexText('name="direccion"', 'Avenida las Flores 1200');
 
         // Se guardan cambios
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.plexButton('Guardar').click();
+
         cy.wait('@conDniGuardar').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.documento).to.be.eq("12325484");
@@ -68,45 +68,47 @@ context('MPI', () => {
         //Rutas para control
         cy.route('POST', '**api/core/mpi/pacientes').as('sinDniGuardar');
         // Buscador
-        cy.get('plex-text input[type="text"]').first().type('1232548').should('have.value', '1232548');
+        cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('SIN DNI ARGENTINO').click();
 
         //Se completa datos básicos
-        cy.get('plex-text[name="apellido"] input').first().type('manual').should('have.value', 'manual');
 
-        cy.get('plex-text[name="nombre"] input').first().type('paciente').should('have.value', 'paciente');
 
-        cy.get('plex-datetime[name="fechaNacimiento"] input').first().type('19/05/1993').should('have.value', '19/05/1993');
+        cy.plexText('name="apellido"', 'manual');
+        cy.plexText('name="nombre"', 'paciente');
+        cy.plexDatetime('name="fechaNacimiento"', '19/05/1993');
+        cy.plexSelectType('name="sexo"', 'masculino');
 
-        cy.get('plex-select[name="sexo"] input[type="text"]').type('masculino{enter}');
 
         // Se completa datos de contacto
-        cy.get('plex-select[label="Tipo"]').children().children('.selectize-control').click().find('div[data-value="fijo"]').click();
+        cy.plexSelect('label="Tipo"', 'fijo');
 
-        cy.get('plex-phone[label="Número"] input').first().type('02994331614').should('have.value', '02994331614');
+        cy.plexPhone('label="Número"', '02994331614');
+
+
 
         // Se agrega nuevo contacto
-        cy.get('plex-button[name="agregarContacto"]').click();
+        cy.plexButtonIcon('phone-plus').click();
 
-        cy.get('plex-select[label="Tipo"]').eq(1).children().children('.selectize-control').click()
-            .find('div[data-value="email"]').click();
+        cy.get('fieldset').contains('Datos de contacto').siblings().first().children().eq(2).plexSelect('label="Tipo"', 'email');
 
-        cy.get('plex-text[label="Dirección"] input').first().type('mail@ejemplo.com').should('have.value', 'mail@ejemplo.com');
+        cy.get('fieldset').contains('Datos de contacto').siblings().first().children().eq(2).plexText('label="Dirección"', 'mail@ejemplo.com');
+
+        // cy.plexText('label="Dirección"', 'mail@ejemplo.com');
 
         // Se completa los datos de domicilio
-        cy.get('plex-bool[name="viveProvActual"]').click();
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexSelectType('name="barrio"', 'alta barda');
+        cy.plexText('name="direccion"', 'Avenida las Flores 1200');
 
-        cy.get('plex-bool[name="viveLocActual"]').click();
+        cy.plexButton('Actualizar').click();
 
-        cy.get('plex-select[name="barrio"] input[type="text"]').type('alta barda{enter}');
-
-        cy.get('plex-text[name="direccion"] input[type="text"]').first().type('Avenida las Flores 1200').should('have.value', 'Avenida las Flores 1200');
-
-        cy.get('plex-button[label="Actualizar"]').click();
 
         // Se guardan los cambios
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.plexButton('Guardar').click();
+
         // Se espera confirmación de que se agrego nuevo paciente SIN DNI correctamente
         cy.wait('@sinDniGuardar').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -128,23 +130,22 @@ context('MPI', () => {
 
 
         // Buscador
-        cy.get('plex-text input[type="text"]').first().type('123254').should('have.value', '123254');
+        cy.plexText('name="buscador"', '1232548');
 
         cy.get('div').contains('NUEVO PACIENTE').click();
 
         cy.get('div').contains('BEBÉ').click();
 
         // Se completa datos básicos
-        cy.get('plex-text[name="apellido"] input').first().type('apellidoBebe22').should('have.value', 'apellidoBebe22');
+        cy.plexText('name="apellido"', 'apellidoBebe22');
+        cy.plexText('name="nombre"', 'nombreBebe22');
+        cy.plexDatetime('name="fechaNacimiento"', Cypress.moment().format('DD/MM/YYYY'));
+        cy.plexSelectType('name="sexo"', 'femenino');
 
-        cy.get('plex-text[name="nombre"] input').first().type('nombreBebe22').should('have.value', 'nombreBebe22');
 
-        cy.get('plex-select[label="Sexo"] input').type('femenino{enter}');
-
-        cy.get('plex-datetime[name="fechaNacimiento"] input').type(Cypress.moment().format('DD/MM/YYYY'));
 
         // Se completa datos
-        cy.get('paciente-buscar[label="Buscar"] input').first().type('12325484');
+        cy.get('paciente-buscar').plexText('name="buscador"', '12325484');
 
         // Se selecciona el progenitor 
         cy.get('paciente-listado').find('td').contains('12325484').click();
@@ -155,7 +156,7 @@ context('MPI', () => {
 
         cy.wait(2000);
 
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.plexButton('Guardar').click();
 
         // Se espera la actualización de la relación del progenitor con el bebé
         cy.wait('@relacionProgenitor').then((xhr) => {
@@ -178,25 +179,21 @@ context('MPI', () => {
         cy.route('GET', '**api/modules/georeferencia/georeferenciar?**', []).as('geoReferencia');
 
         // Buscador
-        cy.get('plex-text input[type="text"]').first().type('123254').should('have.value', '123254');
-
+        cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
-
         cy.get('div').contains('BEBÉ').click();
 
         // Se completan datos básicos
-        cy.get('plex-text[name="apellido"] input').first().type('apellidoBebe').should('have.value', 'apellidoBebe');
-
-        cy.get('plex-text[name="nombre"] input').first().type('nombreBebe').should('have.value', 'nombreBebe');
-
-        cy.get('plex-datetime[name="fechaNacimiento"] input').type(Cypress.moment().format('DD/MM/YYYY'));
+        cy.plexText('name="apellido"', 'apellidoBebe22');
+        cy.plexText('name="nombre"', 'nombreBebe22');
+        cy.plexDatetime('name="fechaNacimiento"', Cypress.moment().format('DD/MM/YYYY'));
 
         // Se selecciona el progenitor 
-        cy.get('paciente-buscar[label="Buscar"] input').first().type('12325484');
+        cy.get('paciente-buscar').plexText('name="buscador"', '12325484');
 
         cy.get('paciente-listado').find('td').contains('12325484').click();
 
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.plexButton('Guardar').click();
 
         cy.contains('Debe completar los datos obligatorios');
         cy.swal('confirm');
@@ -358,27 +355,23 @@ context('MPI', () => {
         });
 
         // Buscador
-        cy.get('plex-text input[type="text"]').first().type('12325489').should('have.value', '12325489');
-
+        cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
-
         cy.get('div').contains('CON DNI ARGENTINO').click();
 
         // Se completa datos básicos
-        cy.get('plex-int[name="documento"] input').first().type('12345489').should('have.value', '12345489');
-        cy.get('plex-select[name="sexo"] input[type="text"]').type('Masculino{enter}');
-
-        // Se completa datos de contacto
-        cy.get('plex-select[label="Tipo"]').children().children('.selectize-control').click()
-            .find('div[data-value="fijo"]').click();
+        cy.plexInt('name="documento"', '12345489');
+        cy.plexSelectType('name="sexo"', 'Masculino');
 
         // Se valida con FA RENAPER
-        cy.get('plex-button[label="Validar Paciente"]').click();
+        cy.plexButton('Validar Paciente').click();
 
         // Se verifican que los datos se muestren correctamente
-        cy.get('plex-text[name="apellido"] input').should('have.value', 'TEST');
+        cy.plexText('name="apellido"').should('have.value', 'TEST');
+
         cy.contains('TEST, JOSE');
         cy.contains('Paciente Validado');
+
         cy.swal('confirm');
 
     });
@@ -452,7 +445,8 @@ context('MPI', () => {
         cy.route('GET', '**api/core/mpi/pacientes**').as('busquedaScan');
 
         // Buscador
-        cy.get('plex-text[name="buscador"] input').first().type('00511808749@TEST@ANDES@M@11181222@B@10/01/2012@29/08/2017@208').should('have.value', '00511808749@TEST@ANDES@M@11181222@B@10/01/2012@29/08/2017@208');
+        cy.plexText('name="buscador"', '00511808749@TEST@ANDES@M@11181222@B@10/01/2012@29/08/2017@208');
+
         cy.wait('@busquedaScan').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -460,33 +454,30 @@ context('MPI', () => {
         cy.url().should('include', '/apps/mpi/paciente');
 
         // Se verifica que todos los datos del paciente esten correctos.
-        cy.get('plex-int[name="documento"] input').should('have.value', '11181222');
+        cy.plexInt('name="documento"').should('have.value', '11181222');
 
-        cy.get('plex-text[name="apellido"] input').should('have.value', 'TEST');
+        cy.plexText('name="apellido"').should('have.value', 'TEST');
 
-        cy.get('plex-text[name="nombre"] input').should('have.value', 'ANDES');
+        cy.plexText('name="nombre"').should('have.value', 'ANDES');
 
-        cy.get('plex-datetime[name="fechaNacimiento"] input').should('have.value', '10/01/2012');
+        cy.plexDatetime('name="fechaNacimiento"').should('have.value', '10/01/2012');
 
-        cy.get('plex-select[name="sexo"]').children().children().children().should('have.value', 'masculino');
+        cy.plexSelectType('name="sexo"').contains('Masculino');
 
-        // cy.get('plex-phone[ng-reflect-name="valor-0"] input').first().should('have.value', '2994331614');
-
-        // cy.get('plex-text[ng-reflect-name="valor-1"] input').first().should('have.value', 'mail@ejemplo.com');
-
-        // cy.get('plex-text[name="direccion"] input').first().should('have.value', 'Avenida las Flores 1200');
         // Se completa datos de contacto
-        cy.get('plex-phone[label="Número"] input').first().type('02991489753').should('have.value', '02991489753');
+        cy.plexPhone('label="Número"', '02991489753');
 
         // Se completa los datos de domicilio
-        cy.get('plex-bool[name="viveProvActual"]').click();
-        cy.get('plex-bool[name="viveLocActual"]').click();
-        cy.get('plex-select[name="barrio"] input[type="text"]').type('alta barda{enter}');
-        cy.get('plex-text[name="direccion"] input[type="text"]').first().type('PRUEBA 1200').should('have.value', 'PRUEBA 1200');
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+
+        cy.plexSelectType('name="barrio"', 'alta barda');
+        cy.plexText('name="direccion"', 'Avenida las Flores 1200');
 
 
         // Se guardan cambios
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.plexButton('Guardar').click();
+
         cy.contains('Los datos se actualizaron correctamente');
         cy.swal('confirm');
     });

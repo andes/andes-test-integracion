@@ -9,29 +9,34 @@ Cypress.Commands.add('swal', (acction) => {
 });
 
 Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label, option) => {
+    const selector = `plex-select[${label}]`;
     let element;
     if (subject) {
-        element = cy.wrap(subject)
+        element = cy.wrap(subject).find(selector)
     } else {
-        element = cy;
+        element = cy.get(selector);
     }
-    element = element.get(`plex-select[${label}]`).children().children('.selectize-control').click().find(`.option[data-value=${option}]`).click({
+    element = element.children().children('.selectize-control').click().find(`.option[data-value=${option}]`).click({
         force: true
     });
     return element;
 });
 
-Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, label, text) => {
+Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, label, text = null) => {
+    const selector = `plex-select[${label}] input`;
     let element;
     if (subject) {
-        element = cy.wrap(subject)
+        element = cy.wrap(subject).find(selector);
     } else {
-        element = cy;
+        element = cy.get(selector);
     }
-    element = element.get(`plex-select[${label}] input`).first().type(`${text}{enter}`, {
-        force: true
-    });
-    return element;
+    element = element.first();
+    if (text) {
+        element = element.type(`${text}{enter}`, {
+            force: true
+        });
+    }
+    return element.parent();
 });
 
 
@@ -99,6 +104,16 @@ Cypress.Commands.add('plexButton', { prevSubject: 'optional' }, (subject, label)
     return element;
 });
 
+Cypress.Commands.add('plexButtonIcon', { prevSubject: 'optional' }, (subject, icon) => {
+    let element;
+    if (subject) {
+
+        element = cy.wrap(subject).get(`plex-button[icon="${icon}"]`);
+    } else {
+        element = cy.get(`plex-button[icon="${icon}"]`);
+    }
+    return element;
+});
 
 Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
