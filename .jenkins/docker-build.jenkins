@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+    environment {
+        app = "${APP_BRANCH}"
+        envmode = "prod"
+        api = "${API_BRANCH}"
+        registryAPI = "andesnqn/api"
+        registryAPP = "andesnqn/app"
+        registryCredential = 'dockerhub'
+    }
+    stages {
+        stage('Build images') {
+            parallel {
+                 stage('Build app') {
+                    steps {
+                        build( job: "andes-app", parameters: [string(name: 'GIT_BRANCH', value: app  ), string(name: 'ENVIRONMENT', value: envmode  )]  )
+                    }
+                }
+
+                stage('build api') {
+                    steps {
+                         build job: "andes-api", parameters: [string(name: 'GIT_BRANCH', value: api )] 
+                    }
+                }
+            }
+        }
+        stage('Deploy API') {
+          steps{
+             script {
+                docker.withRegistry( '', registryCredential ) {
+                    dockerAPI = docker.image(registryAPI + ":${API_BRANCH}")
+                    dockerAPI.push()
+              }
+            }
+          }
+        }
+         stage('Deploy APP') {
+          steps{
+             script {
+                docker.withRegistry( '', registryCredential ) {
+                    dockerAPI = docker.image(registryAPP + ":${APP_BRANCH}")
+                    dockerAPI.push()
+              }
+            }
+          }
+        }
+        stage('Deploy VAPP') {
+          steps{
+              sh 'wget https://raw.githubusercontent.com/andes/andes-test-integracion/master/docker/andes.Dockerfile'
+              sh 'wget https://raw.githubusercontent.com/andes/andes-test-integracion/master/docker/nginx.conf'
+              sh 'docker build -t andesnqn/nginx:master --file=andes.Dockerfile    .'
+              script {
+                docker.withRegistry( '', registryCredential ) {
+                    dockerAPI = docker.image("andesnqn/nginx:master")
+                    dockerAPI.push()
+                }
+              }
+          }
+          
+        }
+    }
+}
