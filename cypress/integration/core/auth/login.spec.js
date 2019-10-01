@@ -10,47 +10,34 @@ context('Pagina de login', () => {
     })
 
     it('login complete', () => {
-
         cy.server();
-
         cy.route('POST', '**/api/auth/login').as('login');
         cy.route('GET', '**/api/auth/organizaciones').as('organizaciones');
 
-        
-        cy.get('[name="usuario"] input').type('hola').should('have.value', '');
+        cy.plexInt('name="usuario"').type('hola').should('have.value', '');
+        cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
+        cy.plexText('name="password"', 'anypasswordfornow').should('have.value', 'anypasswordfornow');
 
-        cy.get('[name="usuario"] input').type('38906735').should('have.value', '38906735');
-
-        cy.get('[name="password"] input[type="password"]').type('anypasswordfornow').should('have.value', 'anypasswordfornow');
-
-        cy.get('plex-button').click();
-
+        cy.plexButton('Iniciar sesión').click();
 
         cy.wait('@login').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
         cy.wait('@organizaciones');
-        
+
         cy.get('ul.list-group li').should('have.length', 3);
     })
 
     it('login failed', () => {
-
         cy.server();
-
         cy.route('POST', '**/api/auth/login').as('login');
 
-        cy.get('[name="usuario"] input').type('10000001').should('have.value', '10000001');
-
-        cy.get('[name="password"] input[type="password"]').type('anypasswordfornow').should('have.value', 'anypasswordfornow');
-
-        cy.get('plex-button').click();
+        cy.plexInt('name="usuario"').type('10000001');
+        cy.plexText('name="password"', 'anypasswordfornow');
+        cy.plexButton('Iniciar sesión').click();
 
         cy.wait('@login').then((xhr) => {
             expect(xhr.status).to.be.eq(403)
         });
-
-
-
     });
 })

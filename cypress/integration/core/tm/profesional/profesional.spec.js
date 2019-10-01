@@ -19,14 +19,17 @@ context('TM Profesional', () => {
         cy.server();
         cy.route('POST', '**/core/tm/profesionales**').as('create');
 
-        cy.get('plex-text[label="Nombre"] input').first().type('Pedro');
-        cy.get('plex-text[label="Apellido"] input').first().type('Ramirez');
-        cy.get('plex-int[label="Número de Documento"] input').type('11111fd111').should('have.value', '11111111'); // verifico que no se pueda ingresar letras
-        cy.selectWrite('label="Sexo"', 'femenino');
-        cy.get('plex-datetime[label="Fecha de nacimiento"] input').type('05/11/1991{enter}');
+        cy.plexText('label="Nombre"', 'Pedro');
+        cy.plexText('label="Apellido"', 'Ramirez');
+        cy.plexInt('label="Número de Documento"', '11111111');
 
-        cy.get('plex-phone[label="Número"] input').type('29945876as12').should('have.value', '2994587612');
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.plexSelectType('label="Sexo"', 'femenino');
+
+        cy.plexDatetime('label="Fecha de nacimiento"', '05/11/1991');
+        cy.plexPhone('label="Número"', '29945876as12').should('have.value', '2994587612');
+
+        cy.plexButton("Guardar").click();
+
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
@@ -35,25 +38,24 @@ context('TM Profesional', () => {
 
     it('crear profesional no matriculado existente en renaper', () => {
         cy.goto('/tm/profesional/create', token);
-
         cy.server();
         cy.route('POST', '**/core/tm/profesionales**').as('create');
         cy.fixture('renaper-1').as('fxRenaper')
         cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=26487951&sexo=M', '@fxRenaper').as('renaper');
 
+        cy.plexInt('label="Número de Documento"', '26487951');
+        cy.plexSelectType('label="Sexo"', 'masculino');
 
-        cy.get('plex-int[label="Número de Documento"] input').type('264sf8a7951').should('have.value', '26487951'); // verifico que no se pueda ingresar letras
-        cy.selectWrite('label="Sexo"', 'masculino');
-
-        cy.get('plex-layout-sidebar plex-button[label="Validar con servicios de Renaper"]').click();
+        cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
         cy.wait('@renaper');
 
-        cy.get('plex-text[label="Nombre"] input').should('have.value', 'PROFESIONAL');
-        cy.get('plex-text[label="Apellido"] input').should('have.value', 'TEST');
-        cy.get('plex-datetime[label="Fecha de nacimiento"] input').should('have.value', '09/03/1990');
+        cy.plexText('label="Nombre"').should('have.value', 'PROFESIONAL');
+        cy.plexText('label="Apellido"').should('have.value', 'TEST');
+        cy.plexDatetime('label="Fecha de nacimiento"').should('have.value', '09/03/1990');
+        cy.plexPhone('label="Número"', '2994557612');
 
-        cy.get('plex-phone[label="Número"] input').type('29945576as12').should('have.value', '2994557612');
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.plexButton("Guardar").click();
+
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
@@ -68,25 +70,25 @@ context('TM Profesional', () => {
         cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=15654898&sexo=F', '@fxRenaper').as('renaper');
         cy.route('POST', '**/core/tm/profesionales**').as('create');
 
-        cy.get('plex-int[label="Número de Documento"] input').type('15e654f898').should('have.value', '15654898');
+        cy.plexInt('label="Número de Documento"', '15654898');
         cy.get('plex-layout-sidebar').should('not.contain', 'plex-button[label="Validar con servicios de Renaper"]');
 
-        cy.selectWrite('label="Sexo"', 'femenino');
-        cy.get('plex-layout-sidebar').find('plex-button[label="Validar con servicios de Renaper"]');
+        cy.plexSelectType('label="Sexo"', 'femenino');
 
-        cy.get('plex-layout-sidebar plex-button[label="Validar con servicios de Renaper"]').click();
+        cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
         cy.wait('@renaper');
 
         cy.contains('El profesional no se encontró en RENAPER');
-        cy.swal('confirm')
+        cy.swal('confirm');
 
-        cy.get('plex-text[label="Nombre"] input').first().type('Julieta');
-        cy.get('plex-text[label="Apellido"] input').first().type('Rodriguez');
-        cy.get('plex-datetime[label="Fecha de nacimiento"] input').type('05/12/1987{enter}');
-        cy.get('plex-bool[label="No posee ningún tipo de contacto"] input[type="checkbox"]').check({
-            force: true
-        }).should('be.checked');
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.plexText('label="Nombre"', 'Julieta');
+        cy.plexText('label="Apellido"', 'Rodriguez');
+        cy.plexDatetime('label="Fecha de nacimiento"', '05/12/1987');
+
+        cy.plexBool('label="No posee ningún tipo de contacto"', true).should('be.checked');
+
+        cy.plexButton('Guardar').click();
+
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
@@ -99,15 +101,17 @@ context('TM Profesional', () => {
         cy.server();
         cy.route('GET', '**/api/core/tm/profesionales?documento=4163782').as('get');
 
-        cy.get('plex-text[label="Nombre"] input').first().type('ALICIA BEATRIZ');
-        cy.get('plex-text[label="Apellido"] input').first().type('ESPOSITO');
-        cy.get('plex-int[label="Número de Documento"] input').type('4163782').should('have.value', '4163782'); // verifico que no se pueda ingresar letras
-        cy.selectWrite('label="Sexo"', 'femenino');
-        cy.get('plex-datetime[label="Fecha de nacimiento"] input').type('12/12/1995{enter}');
+        cy.plexText('label="Nombre"', 'ALICIA BEATRIZ');
+        cy.plexText('label="Apellido"', 'ESPOSITO');
+        cy.plexInt('label="Número de Documento"', '4163782');
 
-        cy.get('plex-phone[label="Número"] input').type('29945876as12').should('have.value', '2994587612');
+        cy.plexSelectType('label="Sexo"', 'femenino');
+        cy.plexDatetime('label="Fecha de nacimiento"', '12/12/1995');
 
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.plexPhone('label="Número"', '2994587612');
+
+        cy.plexButton('Guardar').click();
+
         cy.wait(2000);
         cy.wait('@get').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -123,9 +127,9 @@ context('TM Profesional', () => {
         cy.route('GET', '**/api/core/tm/profesionales**').as('get');
 
         // ingreso los valores en cada uno de los filtros
-        cy.get('plex-int[label="Documento"] input').type('44f6a6asd77f7').should('have.value', '4466777'); // verifico que no se pueda ingresar letras
-        cy.get('plex-text[label="Apellido"] input').first().type('PEREZ');
-        cy.get('plex-text[label="Nombre"] input').first().type('MARIA');
+        cy.plexInt('label="Documento"', '4466777');
+        cy.plexText('label="Nombre"', 'MARIA');
+        cy.plexText('label="Apellido"', 'PEREZ');
         cy.wait('@get');
 
         // selecciono a Nilda Bethy Judzik de la tabla de resultados (primer resultado)
@@ -149,8 +153,8 @@ context('TM Profesional', () => {
 
         cy.server();
         cy.route('GET', '**/api/core/tm/profesionales**').as('get');
-        cy.get('plex-text[label="Apellido"] input').first().type('PRUEBA');
-        cy.get('plex-text[label="Nombre"] input').first().type('ALICIA');
+        cy.plexText('label="Nombre"', 'ALICIA');
+        cy.plexText('label="Apellido"', 'PRUEBA');
         cy.wait('@get');
 
         // seleccionó a Usuario Prueba de la tabla de resultados (primer resultado)
