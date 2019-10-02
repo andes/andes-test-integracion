@@ -10,7 +10,7 @@
     "prod:up": "node scripts/prepare.js production up",
     "prod:reset": "node scripts/prepare.js production reset",
     "prod:down": "node scripts/prepare.js production down",
-    "prod:update": "docker-compose -f docker/docker-compose.yml pull",
+    "prod:update": "APP=master API=master docker-compose -f docker/docker-compose.yml pull",
     "dev:up": "node scripts/prepare.js develop up",
     "dev:reset": "node scripts/prepare.js develop reset",
     "dev:down": "node scripts/prepare.js develop down"
