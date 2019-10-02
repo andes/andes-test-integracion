@@ -3,8 +3,8 @@ const type = process.argv[2] || 'develop';
 
 const up = {
     production: [
-        'APP=master API=master docker-compose -f docker/docker-compose.yml up -d',
-        'sleep 10',
+        'npx cross-env APP=master API=master docker-compose -f docker/docker-compose.yml up -d',
+        // 'sleep 10',
         'docker exec andes_db mongo --eval "rs.initiate();"',
         // 'curl -XPUT "http://localhost:9200/andes/" -d @docker/andes-index.json',
         // 'docker cp docker/andes.gz andes_db:/andes.gz',
