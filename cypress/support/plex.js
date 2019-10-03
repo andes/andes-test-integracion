@@ -17,9 +17,7 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
         element = cy.get(selector);
     }
     if (typeof option === 'string') {
-        element = element.children().children('.selectize-control').click().find(`.option[data-value=${option}]`).click({
-            force: true
-        });
+        element = element.children().children('.selectize-control').find(`.option[data-value=${option}]`, { force: true });
     } else {
         element.children().children('.selectize-control').click();
         element.find('.selectize-dropdown-content').children().eq(option);
@@ -28,7 +26,7 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
     return element;
 });
 
-Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, label, text = null) => {
+Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, label, data = null, clicked = true) => {
     const selector = `plex-select[${label}] input`;
     let element;
     if (subject) {
@@ -36,24 +34,35 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
     } else {
         element = cy.get(selector);
     }
-    element = element.first();
-    if (text) {
-        element = element.type(`${text}{enter}`, {
+    // element = element.first();
+    if (data && typeof data === 'string') {
+        const textForType = clicked ? `${data}{enter}` : data;
+        element = element.type(textForType, {
             force: true
         });
+    } else if (data) {
+        if (data.clear) {
+            element.type('{backspace}', { force: true });
+        }
+        if (data.text) {
+            const textForType = clicked ? `${data.text}{enter}` : data.text;
+            element = element.type(textForType, {
+                force: true
+            });
+        }
     }
     return element.parent().parent().parent();
 });
 
 Cypress.Commands.add('plexSelectAsync', { prevSubject: 'optional' }, (subject, label, text, alias, option) => {
     if (subject) {
-        cy.wrap(subject).plexSelectType(label, text);
+        cy.wrap(subject).plexSelectType(label, text, false);
         cy.wait(alias);
-        cy.wrap(subject).plexSelect(label, option);
+        cy.wrap(subject).plexSelect(label, option).click({ force: true });
     } else {
-        cy.plexSelectType(label, text);
+        cy.plexSelectType(label, text, false);
         cy.wait(alias);
-        cy.plexSelect(label, option);
+        cy.plexSelect(label, option).click({ force: true });
     }
 })
 
@@ -133,15 +142,22 @@ Cypress.Commands.add('plexButtonIcon', { prevSubject: 'optional' }, (subject, ic
     return element;
 });
 
-Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, label, text = null) => {
+Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, label, data = null) => {
     let element;
     if (subject) {
         element = cy.wrap(subject).find(`plex-datetime[${label}] input`)
     } else {
         element = cy.get(`plex-datetime[${label}] input`);
     }
-    if (text) {
-        element.type(`${text}{enter}`);
+    if (data && typeof data === 'string') {
+        element.type(`${data}{enter}`);
+    } else if (data) {
+        if (data.clear) {
+            element.clear();
+        }
+        if (data.text) {
+            element.type(`${data.text}{enter}`);
+        }
     }
     element = element.parent().parent().parent();
     return element;
