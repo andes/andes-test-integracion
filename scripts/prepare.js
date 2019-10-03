@@ -47,6 +47,13 @@ const reset = {
     ]
 };
 
+const backup = {
+    production: [
+        'docker exec andes_db mongodump --gzip --archive=/andes.gz --db andes',
+        'docker cp andes_db:/andes.gz docker/andes.gz'
+    ]
+};
+
 function runCommands(cmds) {
     const { execSync } = require('child_process');
     for (let i = 0; i < cmds.length; i++) {
@@ -63,5 +70,8 @@ switch (action) {
         break;
     case 'reset':
         runCommands(reset[type]);
+        break;
+    case 'backup':
+        runCommands(backup[type]);
         break;
 }

@@ -82,8 +82,7 @@ context('MPI', () => {
 
 
         // Se completa datos de contacto
-        cy.plexSelect('label="Tipo"', 'fijo');
-
+        cy.plexSelectType('label="Tipo"', { text: 'telefono fijo', clear: true });
         cy.plexPhone('label="Número"', '02994331614');
 
 
@@ -91,7 +90,7 @@ context('MPI', () => {
         // Se agrega nuevo contacto
         cy.plexButtonIcon('phone-plus').click();
 
-        cy.get('fieldset').contains('Datos de contacto').siblings().first().children().eq(2).plexSelect('label="Tipo"', 'email');
+        cy.get('fieldset').contains('Datos de contacto').siblings().first().children().eq(2).plexSelectType('label="Tipo"', { text: 'Email', clear: true });
 
         cy.get('fieldset').contains('Datos de contacto').siblings().first().children().eq(2).plexText('label="Dirección"', 'mail@ejemplo.com');
 
@@ -460,7 +459,7 @@ context('MPI', () => {
 
         cy.plexText('name="nombre"').should('have.value', 'ANDES');
 
-        cy.plexDatetime('name="fechaNacimiento"').should('have.value', '10/01/2012');
+        cy.plexDatetime('name="fechaNacimiento"').find('input').should('have.value', '10/01/2012');
 
         cy.plexSelectType('name="sexo"').contains('Masculino');
 
