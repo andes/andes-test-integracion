@@ -1,5 +1,49 @@
 /// <reference types="Cypress" />
 
+const complete = (dto) => {
+    if (dto.nombre) {
+        cy.plexText('label="Nombre"', dto.nombre);
+    }
+
+    if (dto.apellido) {
+        cy.plexText('label="Apellido"', dto.apellido);
+    }
+
+    if (dto.sexo) {
+        cy.plexSelectType('label="Sexo"', dto.sexo);
+    }
+
+    if (dto.documento) {
+        cy.plexInt('label="Número de Documento"', dto.documento);
+    }
+
+    if (dto.fechaNacimiento) {
+        cy.plexDatetime('label="Fecha de nacimiento"', dto.fechaNacimiento);
+    }
+}
+
+const check = (dto) => {
+    if (dto.nombre) {
+        cy.plexText('label="Nombre"').should('have.value', dto.nombre);
+    }
+
+    if (dto.apellido) {
+        cy.plexText('label="Apellido"').should('have.value', dto.apellido);
+    }
+
+    if (dto.sexo) {
+        cy.plexSelectType('label="Sexo"').contains(dto.sexo);
+    }
+
+    if (dto.documento) {
+        cy.plexInt('label="Número de Documento"').should('have.value', dto.documento);
+    }
+
+    if (dto.fechaNacimiento) {
+        cy.plexDatetime('label="Fecha de nacimiento"').should('have.value', dto.fechaNacimiento);
+    }
+}
+
 context('TM Profesional', () => {
     let token
     before(() => {
@@ -20,13 +64,14 @@ context('TM Profesional', () => {
         cy.server();
         cy.route('POST', '**/core/tm/profesionales**').as('create');
 
-        cy.plexText('label="Nombre"', 'Pedro');
-        cy.plexText('label="Apellido"', 'Ramirez');
-        cy.plexInt('label="Número de Documento"', '11111111');
+        complete({
+            nombre: 'Pedro',
+            apellido: 'Ramirez',
+            sexo: 'femenino',
+            fechaNacimiento: '05/11/1991',
+            documento: '11111111'
+        });
 
-        cy.plexSelectType('label="Sexo"', 'femenino');
-
-        cy.plexDatetime('label="Fecha de nacimiento"', '05/11/1991');
         cy.plexPhone('label="Número"', '29945876as12').should('have.value', '2994587612');
 
         cy.plexButton("Guardar").click();
@@ -44,15 +89,21 @@ context('TM Profesional', () => {
         cy.fixture('renaper-1').as('fxRenaper')
         cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=26487951&sexo=M', '@fxRenaper').as('renaper');
 
-        cy.plexInt('label="Número de Documento"', '26487951');
-        cy.plexSelectType('label="Sexo"', 'masculino');
+        complete({
+            sexo: 'masculino',
+            documento: '26487951'
+        });
 
         cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
         cy.wait('@renaper');
 
-        cy.plexText('label="Nombre"').should('have.value', 'PROFESIONAL');
-        cy.plexText('label="Apellido"').should('have.value', 'TEST');
-        cy.plexDatetime('label="Fecha de nacimiento"').should('have.value', '09/03/1990');
+        check({
+            nombre: 'PROFESIONAL',
+            apellido: 'TEST',
+            fechaNacimiento: '09/03/1990',
+            sexo: 'Masculino'
+        })
+
         cy.plexPhone('label="Número"', '2994557612');
 
         cy.plexButton("Guardar").click();
