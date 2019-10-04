@@ -1,0 +1,853 @@
+{
+    "createdBy" : {
+        "organizacion" : {
+            "id" : "57fcf037326e73143fb48bd8",
+            "codigo" : {
+                "sisa" : "10580352167035",
+                "cuie" : "Q06436",
+                "remediar" : "0"
+            },
+            "contacto" : [],
+            "edificio" : [],
+            "activo" : true,
+            "nivelComplejidad" : 6,
+            "tipoEstablecimiento" : {
+                "_id" : "5a321e83f0894b0b34625665",
+                "id" : "5a321e83f0894b0b34625665",
+                "nombre" : "Hospital"
+            },
+            "telecom" : [ 
+                {
+                    "_id" : "57fcf037326e73143fb48bde",
+                    "activo" : true,
+                    "ultimaActualizacion" : "2010-09-28T03:00:00.000Z",
+                    "ranking" : 1,
+                    "valor" : "0299-4962662",
+                    "tipo" : "Teléfono Fijo"
+                }
+            ],
+            "direccion" : {
+                "id" : "57fcf037326e73143fb48bd9",
+                "activo" : true,
+                "_id" : "57fcf037326e73143fb48bd9",
+                "valor" : "SCRIBER Y LAS LENGAS S/N",
+                "codigoPostal" : "8318",
+                "ranking" : 1,
+                "ubicacion" : {
+                    "id" : "57fcf037326e73143fb48bda",
+                    "_id" : "57fcf037326e73143fb48bda",
+                    "localidad" : {
+                        "_id" : "57f538a472325875a199a82f",
+                        "id" : "57f538a472325875a199a82f",
+                        "nombre" : "PLAZA HUINCUL"
+                    },
+                    "provincia" : {
+                        "_id" : "57f3f3aacebd681cc2014c53",
+                        "id" : "57f3f3aacebd681cc2014c53",
+                        "nombre" : "Neuquén"
+                    },
+                    "pais" : {
+                        "_id" : "57f3b5c469fe79a598e6281f",
+                        "id" : "57f3b5c469fe79a598e6281f",
+                        "nombre" : "Argentina"
+                    }
+                },
+                "geoReferencia" : [ 
+                    -38.9372973135323, 
+                    -69.2129552364349
+                ],
+                "ultimaActualizacion" : "2010-09-28T03:00:00.000Z"
+            },
+            "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+            "_id" : "57fcf037326e73143fb48bd8"
+        },
+        "documento" : 23534129,
+        "username" : 23534129,
+        "apellido" : "RINAUDO",
+        "nombre" : "PAULO CEFERINO",
+        "nombreCompleto" : "PAULO CEFERINO RINAUDO"
+    },
+    "createdAt" : "2019-09-29T13:44:15.074Z",
+    "estados" : [ 
+        {
+            "createdBy" : {
+                "organizacion" : {
+                    "id" : "57fcf037326e73143fb48bd8",
+                    "codigo" : {
+                        "sisa" : "10580352167035",
+                        "cuie" : "Q06436",
+                        "remediar" : "0"
+                    },
+                    "contacto" : [],
+                    "edificio" : [],
+                    "activo" : true,
+                    "nivelComplejidad" : 6,
+                    "tipoEstablecimiento" : {
+                        "_id" : "5a321e83f0894b0b34625665",
+                        "id" : "5a321e83f0894b0b34625665",
+                        "nombre" : "Hospital"
+                    },
+                    "telecom" : [ 
+                        {
+                            "_id" : "57fcf037326e73143fb48bde",
+                            "activo" : true,
+                            "ultimaActualizacion" : "2010-09-28T03:00:00.000Z",
+                            "ranking" : 1,
+                            "valor" : "0299-4962662",
+                            "tipo" : "Teléfono Fijo"
+                        }
+                    ],
+                    "direccion" : {
+                        "id" : "57fcf037326e73143fb48bd9",
+                        "activo" : true,
+                        "_id" : "57fcf037326e73143fb48bd9",
+                        "valor" : "SCRIBER Y LAS LENGAS S/N",
+                        "codigoPostal" : "8318",
+                        "ranking" : 1,
+                        "ubicacion" : {
+                            "id" : "57fcf037326e73143fb48bda",
+                            "_id" : "57fcf037326e73143fb48bda",
+                            "localidad" : {
+                                "_id" : "57f538a472325875a199a82f",
+                                "id" : "57f538a472325875a199a82f",
+                                "nombre" : "PLAZA HUINCUL"
+                            },
+                            "provincia" : {
+                                "_id" : "57f3f3aacebd681cc2014c53",
+                                "id" : "57f3f3aacebd681cc2014c53",
+                                "nombre" : "Neuquén"
+                            },
+                            "pais" : {
+                                "_id" : "57f3b5c469fe79a598e6281f",
+                                "id" : "57f3b5c469fe79a598e6281f",
+                                "nombre" : "Argentina"
+                            }
+                        },
+                        "geoReferencia" : [ 
+                            -38.9372973135323, 
+                            -69.2129552364349
+                        ],
+                        "ultimaActualizacion" : "2010-09-28T03:00:00.000Z"
+                    },
+                    "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+                    "_id" : "57fcf037326e73143fb48bd8"
+                },
+                "documento" : 23534129,
+                "username" : 23534129,
+                "apellido" : "RINAUDO",
+                "nombre" : "PAULO CEFERINO",
+                "nombreCompleto" : "PAULO CEFERINO RINAUDO"
+            },
+            "createdAt" : "2019-09-29T13:44:15.074Z",
+            "tipo" : "ejecucion",
+            "_id" : "5a32802ff0894b0b34640c1a"
+        }, 
+        {
+            "createdBy" : {
+                "organizacion" : {
+                    "id" : "57fcf037326e73143fb48bd8",
+                    "codigo" : {
+                        "sisa" : "10580352167035",
+                        "cuie" : "Q06436",
+                        "remediar" : "0"
+                    },
+                    "contacto" : [],
+                    "edificio" : [],
+                    "activo" : true,
+                    "nivelComplejidad" : 6,
+                    "tipoEstablecimiento" : {
+                        "_id" : "5a321e83f0894b0b34625665",
+                        "id" : "5a321e83f0894b0b34625665",
+                        "nombre" : "Hospital"
+                    },
+                    "telecom" : [ 
+                        {
+                            "_id" : "57fcf037326e73143fb48bde",
+                            "activo" : true,
+                            "ultimaActualizacion" : "2010-09-28T03:00:00.000Z",
+                            "ranking" : 1,
+                            "valor" : "0299-4962662",
+                            "tipo" : "Teléfono Fijo"
+                        }
+                    ],
+                    "direccion" : {
+                        "id" : "57fcf037326e73143fb48bd9",
+                        "activo" : true,
+                        "_id" : "57fcf037326e73143fb48bd9",
+                        "valor" : "SCRIBER Y LAS LENGAS S/N",
+                        "codigoPostal" : "8318",
+                        "ranking" : 1,
+                        "ubicacion" : {
+                            "id" : "57fcf037326e73143fb48bda",
+                            "_id" : "57fcf037326e73143fb48bda",
+                            "localidad" : {
+                                "_id" : "57f538a472325875a199a82f",
+                                "id" : "57f538a472325875a199a82f",
+                                "nombre" : "PLAZA HUINCUL"
+                            },
+                            "provincia" : {
+                                "_id" : "57f3f3aacebd681cc2014c53",
+                                "id" : "57f3f3aacebd681cc2014c53",
+                                "nombre" : "Neuquén"
+                            },
+                            "pais" : {
+                                "_id" : "57f3b5c469fe79a598e6281f",
+                                "id" : "57f3b5c469fe79a598e6281f",
+                                "nombre" : "Argentina"
+                            }
+                        },
+                        "geoReferencia" : [ 
+                            -38.9372973135323, 
+                            -69.2129552364349
+                        ],
+                        "ultimaActualizacion" : "2010-09-28T03:00:00.000Z"
+                    },
+                    "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+                    "_id" : "57fcf037326e73143fb48bd8"
+                },
+                "documento" : 23534129,
+                "username" : 23534129,
+                "apellido" : "RINAUDO",
+                "nombre" : "PAULO CEFERINO",
+                "nombreCompleto" : "PAULO CEFERINO RINAUDO"
+            },
+            "createdAt" : "2019-09-29T13:54:07.532Z",
+            "tipo" : "validada",
+            "_id" : "5a32827ff0894b0b34641835"
+        }
+    ],
+    "ejecucion" : {
+        "fecha" : "2019-09-29T13:47:31.539Z",
+        "registros" : [ 
+            {
+                "createdBy" : {
+                    "organizacion" : {
+                        "id" : "57fcf037326e73143fb48bd8",
+                        "codigo" : {
+                            "sisa" : "10580352167035",
+                            "cuie" : "Q06436",
+                            "remediar" : "0"
+                        },
+                        "contacto" : [],
+                        "edificio" : [],
+                        "activo" : true,
+                        "nivelComplejidad" : 6,
+                        "tipoEstablecimiento" : {
+                            "_id" : "5a321e83f0894b0b34625665",
+                            "id" : "5a321e83f0894b0b34625665",
+                            "nombre" : "Hospital"
+                        },
+                        "telecom" : [ 
+                            {
+                                "_id" : "57fcf037326e73143fb48bde",
+                                "activo" : true,
+                                "ultimaActualizacion" : "2010-09-28T03:00:00.000Z",
+                                "ranking" : 1,
+                                "valor" : "0299-4962662",
+                                "tipo" : "Teléfono Fijo"
+                            }
+                        ],
+                        "direccion" : {
+                            "id" : "57fcf037326e73143fb48bd9",
+                            "activo" : true,
+                            "_id" : "57fcf037326e73143fb48bd9",
+                            "valor" : "SCRIBER Y LAS LENGAS S/N",
+                            "codigoPostal" : "8318",
+                            "ranking" : 1,
+                            "ubicacion" : {
+                                "id" : "57fcf037326e73143fb48bda",
+                                "_id" : "57fcf037326e73143fb48bda",
+                                "localidad" : {
+                                    "_id" : "57f538a472325875a199a82f",
+                                    "id" : "57f538a472325875a199a82f",
+                                    "nombre" : "PLAZA HUINCUL"
+                                },
+                                "provincia" : {
+                                    "_id" : "57f3f3aacebd681cc2014c53",
+                                    "id" : "57f3f3aacebd681cc2014c53",
+                                    "nombre" : "Neuquén"
+                                },
+                                "pais" : {
+                                    "_id" : "57f3b5c469fe79a598e6281f",
+                                    "id" : "57f3b5c469fe79a598e6281f",
+                                    "nombre" : "Argentina"
+                                }
+                            },
+                            "geoReferencia" : [ 
+                                -38.9372973135323, 
+                                -69.2129552364349
+                            ],
+                            "ultimaActualizacion" : "2010-09-28T03:00:00.000Z"
+                        },
+                        "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+                        "_id" : "57fcf037326e73143fb48bd8"
+                    },
+                    "documento" : 23534129,
+                    "username" : 23534129,
+                    "apellido" : "RINAUDO",
+                    "nombre" : "PAULO CEFERINO",
+                    "nombreCompleto" : "PAULO CEFERINO RINAUDO"
+                },
+                "createdAt" : "2019-09-29T13:53:25.202Z",
+                "nombre" : "informe",
+                "concepto" : {
+                    "refsetIds" : [ 
+                        "900000000000497000"
+                    ],
+                    "term" : "informe",
+                    "conceptId" : "229059009",
+                    "semanticTag" : "elemento de registro",
+                    "fsn" : "informe (elemento de registro)"
+                },
+                "valor" : "Se avanza hasta el ciego, restos de preparacion, se realiza lavado y se constata angiodisplasia pequeña en fondo cecal, colon derecho sin lesiones endoluminales, colon transverso sin lesiones endoluminales, colon izquierdo sin lesiones en mucosa, recto con pequeño polipo hiperplasico, en el tacto rectal esfinter tonico.",
+                "_id" : "5a3280f3748a690000d48f86",
+                "relacionadoCon" : [],
+                "registros" : [],
+                "esPrimeraVez" : false,
+                "esDiagnosticoPrincipal" : false,
+                "esSolicitud" : false,
+                "destacado" : false
+            }, 
+            {
+                "createdBy" : {
+                    "organizacion" : {
+                        "id" : "57fcf037326e73143fb48bd8",
+                        "codigo" : {
+                            "sisa" : "10580352167035",
+                            "cuie" : "Q06436",
+                            "remediar" : "0"
+                        },
+                        "contacto" : [],
+                        "edificio" : [],
+                        "activo" : true,
+                        "nivelComplejidad" : 6,
+                        "tipoEstablecimiento" : {
+                            "_id" : "5a321e83f0894b0b34625665",
+                            "id" : "5a321e83f0894b0b34625665",
+                            "nombre" : "Hospital"
+                        },
+                        "telecom" : [ 
+                            {
+                                "_id" : "57fcf037326e73143fb48bde",
+                                "activo" : true,
+                                "ultimaActualizacion" : "2010-09-28T03:00:00.000Z",
+                                "ranking" : 1,
+                                "valor" : "0299-4962662",
+                                "tipo" : "Teléfono Fijo"
+                            }
+                        ],
+                        "direccion" : {
+                            "id" : "57fcf037326e73143fb48bd9",
+                            "activo" : true,
+                            "_id" : "57fcf037326e73143fb48bd9",
+                            "valor" : "SCRIBER Y LAS LENGAS S/N",
+                            "codigoPostal" : "8318",
+                            "ranking" : 1,
+                            "ubicacion" : {
+                                "id" : "57fcf037326e73143fb48bda",
+                                "_id" : "57fcf037326e73143fb48bda",
+                                "localidad" : {
+                                    "_id" : "57f538a472325875a199a82f",
+                                    "id" : "57f538a472325875a199a82f",
+                                    "nombre" : "PLAZA HUINCUL"
+                                },
+                                "provincia" : {
+                                    "_id" : "57f3f3aacebd681cc2014c53",
+                                    "id" : "57f3f3aacebd681cc2014c53",
+                                    "nombre" : "Neuquén"
+                                },
+                                "pais" : {
+                                    "_id" : "57f3b5c469fe79a598e6281f",
+                                    "id" : "57f3b5c469fe79a598e6281f",
+                                    "nombre" : "Argentina"
+                                }
+                            },
+                            "geoReferencia" : [ 
+                                -38.9372973135323, 
+                                -69.2129552364349
+                            ],
+                            "ultimaActualizacion" : "2010-09-28T03:00:00.000Z"
+                        },
+                        "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+                        "_id" : "57fcf037326e73143fb48bd8"
+                    },
+                    "documento" : 23534129,
+                    "username" : 23534129,
+                    "apellido" : "RINAUDO",
+                    "nombre" : "PAULO CEFERINO",
+                    "nombreCompleto" : "PAULO CEFERINO RINAUDO"
+                },
+                "createdAt" : "2019-09-29T13:53:25.202Z",
+                "nombre" : "Procedimiento completo",
+                "concepto" : {
+                    "sugeridoPor" : "colonoscopia",
+                    "id" : null,
+                    "refsetIds" : [],
+                    "term" : "Procedimiento completo",
+                    "conceptId" : "2011000013105",
+                    "semanticTag" : "situación",
+                    "fsn" : "Procedimiento completo (situación)"
+                },
+                "valor" : "llegada a ciego",
+                "_id" : "5a32810e748a690000d48f87",
+                "relacionadoCon" : [],
+                "registros" : [],
+                "esPrimeraVez" : false,
+                "esDiagnosticoPrincipal" : false,
+                "esSolicitud" : false,
+                "destacado" : false
+            }, 
+            {
+                "createdBy" : {
+                    "organizacion" : {
+                        "id" : "57fcf037326e73143fb48bd8",
+                        "codigo" : {
+                            "sisa" : "10580352167035",
+                            "cuie" : "Q06436",
+                            "remediar" : "0"
+                        },
+                        "contacto" : [],
+                        "edificio" : [],
+                        "activo" : true,
+                        "nivelComplejidad" : 6,
+                        "tipoEstablecimiento" : {
+                            "_id" : "5a321e83f0894b0b34625665",
+                            "id" : "5a321e83f0894b0b34625665",
+                            "nombre" : "Hospital"
+                        },
+                        "telecom" : [ 
+                            {
+                                "_id" : "57fcf037326e73143fb48bde",
+                                "activo" : true,
+                                "ultimaActualizacion" : "2010-09-28T03:00:00.000Z",
+                                "ranking" : 1,
+                                "valor" : "0299-4962662",
+                                "tipo" : "Teléfono Fijo"
+                            }
+                        ],
+                        "direccion" : {
+                            "id" : "57fcf037326e73143fb48bd9",
+                            "activo" : true,
+                            "_id" : "57fcf037326e73143fb48bd9",
+                            "valor" : "SCRIBER Y LAS LENGAS S/N",
+                            "codigoPostal" : "8318",
+                            "ranking" : 1,
+                            "ubicacion" : {
+                                "id" : "57fcf037326e73143fb48bda",
+                                "_id" : "57fcf037326e73143fb48bda",
+                                "localidad" : {
+                                    "_id" : "57f538a472325875a199a82f",
+                                    "id" : "57f538a472325875a199a82f",
+                                    "nombre" : "PLAZA HUINCUL"
+                                },
+                                "provincia" : {
+                                    "_id" : "57f3f3aacebd681cc2014c53",
+                                    "id" : "57f3f3aacebd681cc2014c53",
+                                    "nombre" : "Neuquén"
+                                },
+                                "pais" : {
+                                    "_id" : "57f3b5c469fe79a598e6281f",
+                                    "id" : "57f3b5c469fe79a598e6281f",
+                                    "nombre" : "Argentina"
+                                }
+                            },
+                            "geoReferencia" : [ 
+                                -38.9372973135323, 
+                                -69.2129552364349
+                            ],
+                            "ultimaActualizacion" : "2010-09-28T03:00:00.000Z"
+                        },
+                        "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+                        "_id" : "57fcf037326e73143fb48bd8"
+                    },
+                    "documento" : 23534129,
+                    "username" : 23534129,
+                    "apellido" : "RINAUDO",
+                    "nombre" : "PAULO CEFERINO",
+                    "nombreCompleto" : "PAULO CEFERINO RINAUDO"
+                },
+                "createdAt" : "2019-09-29T13:53:25.202Z",
+                "nombre" : "angiodisplasia del colon",
+                "concepto" : {
+                    "id" : "5a1455eaca02131e67d19af6",
+                    "refsetIds" : [ 
+                        "900000000000497000"
+                    ],
+                    "term" : "angiodisplasia del colon",
+                    "conceptId" : "197244008",
+                    "semanticTag" : "trastorno",
+                    "fsn" : "angiodisplasia del colon (trastorno)",
+                    "_id" : "5a1455eaca02131e67d19af6"
+                },
+                "valor" : {
+                    "evolucion" : "en fondo cecal de 7 mm",
+                    "fechaInicio" : "2017-12-13T13:48:33.756Z",
+                    "estado" : "activo"
+                },
+                "_id" : "5a32812d748a690000d48f88",
+                "relacionadoCon" : [],
+                "registros" : [],
+                "esPrimeraVez" : false,
+                "esDiagnosticoPrincipal" : false,
+                "esSolicitud" : false,
+                "destacado" : false
+            }, 
+            {
+                "createdBy" : {
+                    "organizacion" : {
+                        "id" : "57fcf037326e73143fb48bd8",
+                        "codigo" : {
+                            "sisa" : "10580352167035",
+                            "cuie" : "Q06436",
+                            "remediar" : "0"
+                        },
+                        "contacto" : [],
+                        "edificio" : [],
+                        "activo" : true,
+                        "nivelComplejidad" : 6,
+                        "tipoEstablecimiento" : {
+                            "_id" : "5a321e83f0894b0b34625665",
+                            "id" : "5a321e83f0894b0b34625665",
+                            "nombre" : "Hospital"
+                        },
+                        "telecom" : [ 
+                            {
+                                "_id" : "57fcf037326e73143fb48bde",
+                                "activo" : true,
+                                "ultimaActualizacion" : "2010-09-28T03:00:00.000Z",
+                                "ranking" : 1,
+                                "valor" : "0299-4962662",
+                                "tipo" : "Teléfono Fijo"
+                            }
+                        ],
+                        "direccion" : {
+                            "id" : "57fcf037326e73143fb48bd9",
+                            "activo" : true,
+                            "_id" : "57fcf037326e73143fb48bd9",
+                            "valor" : "SCRIBER Y LAS LENGAS S/N",
+                            "codigoPostal" : "8318",
+                            "ranking" : 1,
+                            "ubicacion" : {
+                                "id" : "57fcf037326e73143fb48bda",
+                                "_id" : "57fcf037326e73143fb48bda",
+                                "localidad" : {
+                                    "_id" : "57f538a472325875a199a82f",
+                                    "id" : "57f538a472325875a199a82f",
+                                    "nombre" : "PLAZA HUINCUL"
+                                },
+                                "provincia" : {
+                                    "_id" : "57f3f3aacebd681cc2014c53",
+                                    "id" : "57f3f3aacebd681cc2014c53",
+                                    "nombre" : "Neuquén"
+                                },
+                                "pais" : {
+                                    "_id" : "57f3b5c469fe79a598e6281f",
+                                    "id" : "57f3b5c469fe79a598e6281f",
+                                    "nombre" : "Argentina"
+                                }
+                            },
+                            "geoReferencia" : [ 
+                                -38.9372973135323, 
+                                -69.2129552364349
+                            ],
+                            "ultimaActualizacion" : "2010-09-28T03:00:00.000Z"
+                        },
+                        "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+                        "_id" : "57fcf037326e73143fb48bd8"
+                    },
+                    "documento" : 23534129,
+                    "username" : 23534129,
+                    "apellido" : "RINAUDO",
+                    "nombre" : "PAULO CEFERINO",
+                    "nombreCompleto" : "PAULO CEFERINO RINAUDO"
+                },
+                "createdAt" : "2019-09-29T13:53:25.203Z",
+                "nombre" : "hemorroides internas, grado II",
+                "concepto" : {
+                    "id" : "5a14559dca02131e67cbf3eb",
+                    "refsetIds" : [ 
+                        "900000000000497000"
+                    ],
+                    "term" : "hemorroides internas, grado II",
+                    "conceptId" : "721704005",
+                    "semanticTag" : "trastorno",
+                    "fsn" : "hemorroides internas, grado II (trastorno)",
+                    "_id" : "5a14559dca02131e67cbf3eb"
+                },
+                "valor" : {
+                    "evolucion" : "tres paquetes con estigmas de sangrado.",
+                    "fechaInicio" : "2017-12-13T13:49:52.981Z",
+                    "estado" : "activo"
+                },
+                "_id" : "5a328178748a690000d48f8a",
+                "relacionadoCon" : [],
+                "registros" : [],
+                "esPrimeraVez" : false,
+                "esDiagnosticoPrincipal" : true,
+                "esSolicitud" : false,
+                "destacado" : false,
+                "updatedAt" : "2019-09-29T13:54:07.532Z",
+                "updatedBy" : {
+                    "organizacion" : {
+                        "id" : "57fcf037326e73143fb48bd8",
+                        "codigo" : {
+                            "sisa" : "10580352167035",
+                            "cuie" : "Q06436",
+                            "remediar" : "0"
+                        },
+                        "contacto" : [],
+                        "edificio" : [],
+                        "activo" : true,
+                        "nivelComplejidad" : 6,
+                        "tipoEstablecimiento" : {
+                            "_id" : "5a321e83f0894b0b34625665",
+                            "id" : "5a321e83f0894b0b34625665",
+                            "nombre" : "Hospital"
+                        },
+                        "telecom" : [ 
+                            {
+                                "_id" : "57fcf037326e73143fb48bde",
+                                "activo" : true,
+                                "ultimaActualizacion" : "2010-09-28T03:00:00.000Z",
+                                "ranking" : 1,
+                                "valor" : "0299-4962662",
+                                "tipo" : "Teléfono Fijo"
+                            }
+                        ],
+                        "direccion" : {
+                            "id" : "57fcf037326e73143fb48bd9",
+                            "activo" : true,
+                            "_id" : "57fcf037326e73143fb48bd9",
+                            "valor" : "SCRIBER Y LAS LENGAS S/N",
+                            "codigoPostal" : "8318",
+                            "ranking" : 1,
+                            "ubicacion" : {
+                                "id" : "57fcf037326e73143fb48bda",
+                                "_id" : "57fcf037326e73143fb48bda",
+                                "localidad" : {
+                                    "_id" : "57f538a472325875a199a82f",
+                                    "id" : "57f538a472325875a199a82f",
+                                    "nombre" : "PLAZA HUINCUL"
+                                },
+                                "provincia" : {
+                                    "_id" : "57f3f3aacebd681cc2014c53",
+                                    "id" : "57f3f3aacebd681cc2014c53",
+                                    "nombre" : "Neuquén"
+                                },
+                                "pais" : {
+                                    "_id" : "57f3b5c469fe79a598e6281f",
+                                    "id" : "57f3b5c469fe79a598e6281f",
+                                    "nombre" : "Argentina"
+                                }
+                            },
+                            "geoReferencia" : [ 
+                                -38.9372973135323, 
+                                -69.2129552364349
+                            ],
+                            "ultimaActualizacion" : "2010-09-28T03:00:00.000Z"
+                        },
+                        "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+                        "_id" : "57fcf037326e73143fb48bd8"
+                    },
+                    "documento" : 23534129,
+                    "username" : 23534129,
+                    "apellido" : "RINAUDO",
+                    "nombre" : "PAULO CEFERINO",
+                    "nombreCompleto" : "PAULO CEFERINO RINAUDO"
+                }
+            }, 
+            {
+                "createdBy" : {
+                    "organizacion" : {
+                        "id" : "57fcf037326e73143fb48bd8",
+                        "codigo" : {
+                            "sisa" : "10580352167035",
+                            "cuie" : "Q06436",
+                            "remediar" : "0"
+                        },
+                        "contacto" : [],
+                        "edificio" : [],
+                        "activo" : true,
+                        "nivelComplejidad" : 6,
+                        "tipoEstablecimiento" : {
+                            "_id" : "5a321e83f0894b0b34625665",
+                            "id" : "5a321e83f0894b0b34625665",
+                            "nombre" : "Hospital"
+                        },
+                        "telecom" : [ 
+                            {
+                                "_id" : "57fcf037326e73143fb48bde",
+                                "activo" : true,
+                                "ultimaActualizacion" : "2010-09-28T03:00:00.000Z",
+                                "ranking" : 1,
+                                "valor" : "0299-4962662",
+                                "tipo" : "Teléfono Fijo"
+                            }
+                        ],
+                        "direccion" : {
+                            "id" : "57fcf037326e73143fb48bd9",
+                            "activo" : true,
+                            "_id" : "57fcf037326e73143fb48bd9",
+                            "valor" : "SCRIBER Y LAS LENGAS S/N",
+                            "codigoPostal" : "8318",
+                            "ranking" : 1,
+                            "ubicacion" : {
+                                "id" : "57fcf037326e73143fb48bda",
+                                "_id" : "57fcf037326e73143fb48bda",
+                                "localidad" : {
+                                    "_id" : "57f538a472325875a199a82f",
+                                    "id" : "57f538a472325875a199a82f",
+                                    "nombre" : "PLAZA HUINCUL"
+                                },
+                                "provincia" : {
+                                    "_id" : "57f3f3aacebd681cc2014c53",
+                                    "id" : "57f3f3aacebd681cc2014c53",
+                                    "nombre" : "Neuquén"
+                                },
+                                "pais" : {
+                                    "_id" : "57f3b5c469fe79a598e6281f",
+                                    "id" : "57f3b5c469fe79a598e6281f",
+                                    "nombre" : "Argentina"
+                                }
+                            },
+                            "geoReferencia" : [ 
+                                -38.9372973135323, 
+                                -69.2129552364349
+                            ],
+                            "ultimaActualizacion" : "2010-09-28T03:00:00.000Z"
+                        },
+                        "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+                        "_id" : "57fcf037326e73143fb48bd8"
+                    },
+                    "documento" : 23534129,
+                    "username" : 23534129,
+                    "apellido" : "RINAUDO",
+                    "nombre" : "PAULO CEFERINO",
+                    "nombreCompleto" : "PAULO CEFERINO RINAUDO"
+                },
+                "createdAt" : "2019-09-29T13:53:25.203Z",
+                "nombre" : "proctorragia",
+                "concepto" : {
+                    "id" : "5a1455e4ca02131e67d124bd",
+                    "refsetIds" : [ 
+                        "900000000000497000"
+                    ],
+                    "term" : "proctorragia",
+                    "conceptId" : "12063002",
+                    "semanticTag" : "trastorno",
+                    "fsn" : "proctorragia (trastorno)",
+                    "_id" : "5a1455e4ca02131e67d124bd"
+                },
+                "valor" : {
+                    "evolucion" : "sangrado anal con la defecacion, sangre roja.",
+                    "fechaInicio" : "2017-11-14T13:56:00.485Z",
+                    "estado" : "activo"
+                },
+                "_id" : "5a3282de748a690000d48f8c",
+                "relacionadoCon" : [],
+                "registros" : [],
+                "esPrimeraVez" : false,
+                "esDiagnosticoPrincipal" : false,
+                "esSolicitud" : false,
+                "destacado" : false
+            }
+        ],
+        "organizacion" : {
+            "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "_id" : "57e9670e52df311059bc8964"
+        }
+    },
+    "solicitud" : {
+        "fecha" : "2019-09-29T13:47:31.539Z",
+        "turno" : null,
+        "registros" : [],
+        "organizacion" : {
+            "id" : "57fcf037326e73143fb48bd8",
+            "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL"
+        },
+        "profesional" : {
+            "id" : "58f74fd4d03019f919ea1416",
+            "nombre" : "PAULO CEFERINO",
+            "apellido" : "RINAUDO",
+            "documento" : "23534129"
+        },
+        "tipoPrestacion" : {
+            "conceptId" : "451000013109",
+            "term" : "consulta de traumatología general",
+            "fsn" : "consulta de traumatología general",
+            "semanticTag" : "procedimiento",
+            "_id" : "598ca8375adc68e2a0c121c5"
+        }
+    },
+    "paciente" : null,
+    "__v" : 2,
+    "updatedAt" : "2019-09-29T13:54:07.532Z",
+    "updatedBy" : {
+        "organizacion" : {
+            "id" : "57fcf037326e73143fb48bd8",
+            "codigo" : {
+                "sisa" : "10580352167035",
+                "cuie" : "Q06436",
+                "remediar" : "0"
+            },
+            "contacto" : [],
+            "edificio" : [],
+            "activo" : true,
+            "nivelComplejidad" : 6,
+            "tipoEstablecimiento" : {
+                "_id" : "5a321e83f0894b0b34625665",
+                "id" : "5a321e83f0894b0b34625665",
+                "nombre" : "Hospital"
+            },
+            "telecom" : [ 
+                {
+                    "_id" : "57fcf037326e73143fb48bde",
+                    "activo" : true,
+                    "ultimaActualizacion" : "2010-09-28T03:00:00.000Z",
+                    "ranking" : 1,
+                    "valor" : "0299-4962662",
+                    "tipo" : "Teléfono Fijo"
+                }
+            ],
+            "direccion" : {
+                "id" : "57fcf037326e73143fb48bd9",
+                "activo" : true,
+                "_id" : "57fcf037326e73143fb48bd9",
+                "valor" : "SCRIBER Y LAS LENGAS S/N",
+                "codigoPostal" : "8318",
+                "ranking" : 1,
+                "ubicacion" : {
+                    "id" : "57fcf037326e73143fb48bda",
+                    "_id" : "57fcf037326e73143fb48bda",
+                    "localidad" : {
+                        "_id" : "57f538a472325875a199a82f",
+                        "id" : "57f538a472325875a199a82f",
+                        "nombre" : "PLAZA HUINCUL"
+                    },
+                    "provincia" : {
+                        "_id" : "57f3f3aacebd681cc2014c53",
+                        "id" : "57f3f3aacebd681cc2014c53",
+                        "nombre" : "Neuquén"
+                    },
+                    "pais" : {
+                        "_id" : "57f3b5c469fe79a598e6281f",
+                        "id" : "57f3b5c469fe79a598e6281f",
+                        "nombre" : "Argentina"
+                    }
+                },
+                "geoReferencia" : [ 
+                    -38.9372973135323, 
+                    -69.2129552364349
+                ],
+                "ultimaActualizacion" : "2010-09-28T03:00:00.000Z"
+            },
+            "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+            "_id" : "57fcf037326e73143fb48bd8"
+        },
+        "documento" : 23534129,
+        "username" : 23534129,
+        "apellido" : "RINAUDO",
+        "nombre" : "PAULO CEFERINO",
+        "nombreCompleto" : "PAULO CEFERINO RINAUDO"
+    }
+}

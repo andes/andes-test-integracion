@@ -1,0 +1,31 @@
+{
+    "horaInicio" : "2017-12-04T09:15:00.000Z",
+    "asistencia" : "asistio",
+    "tipoPrestacion" : {
+        "conceptId" : "451000013109",
+        "term" : "consulta de traumatología general",
+        "fsn" : "consulta de traumatología general",
+        "semanticTag" : "procedimiento",
+        "_id" : "598ca8375adc68e2a0c121c5"
+    },
+    "diagnostico" : {
+        "codificaciones" : [ 
+            {
+                "primeraVez" : false,
+                "codificacionAuditoria" : {
+                    "c2" : false,
+                    "sinonimo" : "Fractura de dedo de la mano",
+                    "nombre" : "Fractura de otro dedo de la mano",
+                    "codigo" : "S62.6",
+                    "subcausa" : "6",
+                    "causa" : "S62",
+                    "_id" : "59bbf1ef53916746547ccd83"
+                },
+                "codificacionProfesional" : null,
+                "_id" : "5a6223ba4693b269c22b5764"
+            }
+        ]
+    },
+    "paciente" : null,
+    "estado" : "asignado"
+}
