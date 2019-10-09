@@ -188,6 +188,17 @@ Cypress.Commands.add('plexDropdown', { prevSubject: 'optional' }, (subject, labe
     return element;
 });
 
+Cypress.Commands.add('plexTab', { prevSubject: 'optional' }, (subject, label) => {
+    let element;
+    if (subject) {
+
+        element = cy.wrap(subject).find(`plex-tabs li`).contains(label);
+    } else {
+        element = cy.get(`plex-tabs li`).contains(label);
+    }
+    return element;
+});
+
 /**
  * @decrecated
  */
@@ -207,3 +218,4 @@ Cypress.Commands.add('selectWrite', (label, value) => {
         force: true
     });
 });
+
