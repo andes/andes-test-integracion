@@ -169,6 +169,25 @@ Cypress.Commands.add('plexTab', { prevSubject: 'optional' }, (subject, label) =>
     return element;
 });
 
+Cypress.Commands.add('plexDropdown', { prevSubject: 'optional' }, (subject, label, option) => {
+    let element;
+    if (subject) {
+        element = cy.wrap(subject).find(`plex-dropdown[${label}] button`);
+    } else {
+        element = cy.get(`plex-dropdown[${label}] button`);
+    }
+    if (option !== undefined && option !== null) {
+        element.click();
+
+        if (typeof option === 'string') {
+            element.parent().find('ul.dropdown-menu').children().contains(option).click();
+        } else {
+            element.parent().find('ul.dropdown-menu').children().eq(option).click();
+        }
+    }
+    return element;
+});
+
 /**
  * @decrecated
  */
