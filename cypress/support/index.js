@@ -17,7 +17,4 @@
 import './commands'
 import './http'
 import './plex'
-import './seed'
-
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+import './seed' 

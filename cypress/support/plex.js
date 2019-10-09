@@ -16,9 +16,14 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
     } else {
         element = cy.get(selector);
     }
-    element = element.children().children('.selectize-control').click().find(`.option[data-value=${option}]`).click({
-        force: true
-    });
+    if (typeof option === 'string') {
+        element = element.children().children('.selectize-control').click().find(`.option[data-value=${option}]`).click({
+            force: true
+        });
+    } else {
+        element.children().children('.selectize-control').click();
+        element.find('.selectize-dropdown-content').children().eq(option).click();
+    }
     return element;
 });
 
@@ -38,6 +43,18 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
     }
     return element.parent();
 });
+
+Cypress.Commands.add('plexSelectAsync', { prevSubject: 'optional' }, (subject, label, text, alias, option) => {
+    if (subject) {
+        cy.wrap(subject).plexSelectType(label, text);
+        cy.wait(alias);
+        cy.wrap(subject).plexSelect(label, option);
+    } else {
+        cy.plexSelectType(label, text);
+        cy.wait(alias);
+        cy.plexSelect(label, option);
+    }
+})
 
 
 Cypress.Commands.add('plexInt', { prevSubject: 'optional' }, (subject, label, text = null) => {
@@ -137,6 +154,17 @@ Cypress.Commands.add('plexBool', { prevSubject: 'optional' }, (subject, label, c
     }
     if (checked) {
         element = element.check({ force: true });
+    }
+    return element;
+});
+
+Cypress.Commands.add('plexTab', { prevSubject: 'optional' }, (subject, label) => {
+    let element;
+    if (subject) {
+
+        element = cy.wrap(subject).find(`plex-tabs li`).contains(label);
+    } else {
+        element = cy.get(`plex-tabs li`).contains(label);
     }
     return element;
 });
