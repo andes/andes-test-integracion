@@ -119,29 +119,6 @@ Cypress.Commands.add('createSolicitud', (name, token) => {
 });
 
 
-Cypress.Commands.add('createPrestacionAgenda', (fixtureName, idTurno = null, paciente = null, token) => {
-    return cy.fixture(fixtureName).then((prestacion) => {
-
-        if (idTurno) {
-            prestacion.solicitud.turno = idTurno;
-        }
-
-        if (paciente) {
-            prestacion.paciente = paciente;
-        }
-
-        cy.request({
-            method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/rup/prestaciones',
-            body: prestacion,
-            headers: {
-                Authorization: `JWT ${token}`
-            }
-        });
-    });
-});
-
-
 Cypress.Commands.add('createTurno', (fixtureName, idTurno, idBloque, idAgenda, paciente, token) => {
     return cy.fixture(fixtureName).then((turno) => {
         if (paciente.id) {
