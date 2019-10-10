@@ -1,8 +1,25 @@
 /// <reference types="Cypress" />
 
-const agenda = require('../../../../fixtures/agenda_auditada');
+export function buscarPaciente(pacienteDoc) {
+    cy.wait(4500);
+    cy.plexButton("Buscar Paciente").click();
+    cy.plexText('name="buscador"', pacienteDoc);
 
-context('TM Profesional', () => {
+    cy.server();
+    cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
+
+    cy.wait('@listaPacientes');
+
+    cy.get('tr td').contains(pacienteDoc).click();
+
+    cy.plexButton("Cambiar Paciente").click();
+    cy.plexText('name="buscador"', pacienteDoc);
+
+    cy.wait('@listaPacientes');
+    cy.get('tr td').contains(pacienteDoc).click();
+};
+
+context('CITAS - Revisión de Agendas', () => {
     let token;
     let idAgenda;
     let idBloque;
@@ -14,85 +31,72 @@ context('TM Profesional', () => {
         cy.viewport(1280, 720);
         cy.login('30643636', 'asd').then(t => {
             token = t;
-            cy.createPaciente('paciente-normal', token).then((xhr) => {
-                paciente = xhr.body;
-                pacienteDoc = xhr.body.documento;
-                cy.createAgenda('agenda_auditada', null, null, null, token).then((xhr) => {
-                    idAgenda = xhr.body.id;
-                    idBloque = xhr.body.bloques[0].id;
-                    idTurno = xhr.body.bloques[0].turnos[1].id;
-                    cy.createTurno('nuevo-turno-asistio', idTurno, idBloque, idAgenda, paciente, token).then(xhr => {
-                        cy.createPrestacionAgenda('prestacion-validada-turno', idTurno, paciente, token).then(xhr => {
-                            cy.log(xhr.body.paciente);
-                        });
-                    });
-                });
-            });
+            return cy.createPaciente('paciente-masculino', token);
+        }).then(xhr => {
+            paciente = xhr.body;
+            pacienteDoc = xhr.body.documento;
+            return cy.createAgenda('agenda-auditada', null, null, null, token);
+        }).then((xhr) => {
+            idAgenda = xhr.body.id;
+            idBloque = xhr.body.bloques[0].id;
+            idTurno = xhr.body.bloques[0].turnos[1].id;
+            return cy.createTurno('nuevo-turno-asistio', idTurno, idBloque, idAgenda, paciente, token);
+            // }).then(xhr => {
+            // return cy.createPrestacionAgenda('prestacion-validada-turno', idTurno, paciente, token);
+        }).then(xhr => {
+            cy.log(xhr.body.paciente);
         });
     })
 
-    beforeEach(() => {
-        // cy.seed();
-        // cy.createAgenda('agenda_auditada', null, null, null, token).then((xhr) => {
-        //     idAgenda = xhr.body.id;
-        //     cy.log(idAgenda);
-        // });
-        // cy.createPaciente('paciente-normal', token).then((xhr) => {
-        //     pacienteDoc = xhr.body.documento;
-        // });
+    it('Asignar paciente con asistencia, sin prestación', () => {
+        cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
+        cy.get('tr:nth-child(1) td:first-child').click();
+        cy.plexButton("Buscar Paciente").click();
+        cy.plexText('name="buscador"', pacienteDoc);
+
+        cy.server();
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
+
+        cy.wait('@listaPacientes');
+        cy.get('tr td').contains(pacienteDoc).click();
+
+        cy.plexSelectType('label="Asistencia"', 'Asistio');
+
     });
 
-    // it('Asignar paciente con asistencia, sin prestación', () => {
-    //     cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
-    //     cy.get('tr:nth-child(1) td:first-child').click();
-    //     cy.plexButton("Buscar Paciente").click();
-    //     cy.plexText('name="buscador"', pacienteDoc);
 
-    //     cy.server();
-    //     cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
-
-    //     cy.wait('@listaPacientes');
-    //     cy.get('tr td').contains(pacienteDoc).click();
-
-    //     cy.plexSelectType('label="Asistencia"', 'Asistio');
-
-
-
-    // });
-
-
-    it('Cambiar paciente', () => {
+    it('Operaciones generales', () => {
 
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
-        // cy.get('tr:nth-child(1) td:first-child').click();
-        // cy.plexButton("Buscar Paciente").click();
-        // cy.plexText('name="buscador"', pacienteDoc);
+        cy.get('tr:nth-child(1) td:first-child').click();
 
-        // cy.server();
-        // cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
+        buscarPaciente(pacienteDoc);
+        cy.plexSelectType('label="Asistencia"', 'Asistio');
 
-        // cy.wait('@listaPacientes');
+        cy.plexText('name="searchTerm"', 'c11');
 
-        // cy.get('tr td').contains(pacienteDoc).click();
+        cy.route('GET', '**/api/core/term/cie10**').as('diagnosticos');
 
-        // cy.plexButton("Cambiar Paciente").click();
-        // cy.plexText('name="buscador"', pacienteDoc);
+        cy.wait('@diagnosticos');
 
-        // cy.wait('@listaPacientes');
-        // cy.get('tr td').contains(pacienteDoc).click();
+        cy.get('tr td').contains('C11.0').click();
 
-        // cy.plexSelectType('label="Asistencia"', 'Asistio');
+        cy.plexButtonIcon('delete').click();
 
-        // cy.plexText('name="searchTerm"', 'c11');
+        let listaTurnos = cy.get('plex-layout-sidebar > .plex-box > .plex-box-content table:first-child tr');
 
-        // cy.route('GET', '**/api/core/term/cie10**').as('diagnosticos');
 
-        // cy.wait('@diagnosticos');
-
-        // cy.get('tr td').contains('C11.0').click();
-
-        // cy.plexButtonIcon('delete').click();
+        listaTurnos.each(($el, index, $list) => {
+            if (index > 0) {
+                cy.get($el).click();
+                buscarPaciente(pacienteDoc);
+                cy.plexSelectType('label="Asistencia"').click().get('.option').contains('No Asistio').click();
+                cy.wait(4500);
+            }
+        });
 
     });
+
+
 
 })
