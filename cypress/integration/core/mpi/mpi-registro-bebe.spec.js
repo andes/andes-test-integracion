@@ -1,0 +1,234 @@
+context('MPI-Registro Paciente Bebé', () => {
+    let token
+    before(() => {
+        cy.login('38906735', 'asd').then(t => {
+            token = t;
+            cy.createPaciente('mpi/progenitor', token);
+        });
+        cy.viewport(1280, 720);
+    })
+
+    beforeEach(() => {
+        cy.goto('/apps/mpi/bebe/mpi', token);
+        cy.server();
+    });
+
+    it('verificar campos obligatorios de datos basicos de paciente', () => {
+        cy.plexButton('Guardar').click();
+        cy.wait(2000);
+        cy.contains('Debe completar los datos obligatorios');
+    });
+
+    it('buscar progenitor por documento y verificar que existe', () => {
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
+        cy.plexText('name="buscador"', '11222333');
+        cy.get('paciente-listado').find('td').contains('11222333');
+        cy.wait('@busquedaProgenitor').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(1);
+            expect(xhr.response.body[0]).to.have.property('documento', '11222333')
+        });
+
+    });
+
+    it('buscar progenitor por documento y verificar que no existe', () => {
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
+        cy.plexText('name="buscador"', '00000000');
+        cy.wait('@busquedaProgenitor').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(0);
+        });
+        cy.contains('¡No se encontró ningún paciente!');
+
+    });
+
+    it('buscar progenitor por nombre y verificar que existe', () => {
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
+        cy.plexText('name="buscador"', 'PROGENITOR');
+        cy.get('paciente-listado').find('td').contains('PROGENITOR');
+        cy.wait('@busquedaProgenitor').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(1);
+            expect(xhr.response.body[0]).to.have.property('nombre', 'PROGENITOR')
+        });
+
+    });
+
+    it('buscar progenitor por nombre/apellido y verificar que no existe', () => {
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
+        cy.plexText('name="buscador"', 'INEXISTENTE');
+        cy.wait('@busquedaProgenitor').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(0);
+        });
+        cy.contains('¡No se encontró ningún paciente!');
+
+    });
+
+    it('buscar progenitor por apellido y verificar que existe', () => {
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
+        cy.plexText('name="buscador"', 'BEBE');
+        cy.get('paciente-listado').find('td').contains('BEBE');
+        cy.wait('@busquedaProgenitor').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(1);
+            expect(xhr.response.body[0]).to.have.property('apellido', 'BEBE')
+        });
+
+    });
+
+
+
+    it('ingresar apellido y nombre y verificar campos obligatorios de datos básicos de paciente', () => {
+        cy.plexText('label="Apellido"', 'Martinez');
+        cy.plexText('label="Nombre"', 'Mario');
+        cy.plexButton('Guardar').click();
+        cy.wait(2000);
+        cy.contains('Debe completar los datos obligatorios');
+    });
+
+    it('verificar la carga de contacto de contacto de paciente', () => {
+        cy.plexText('label="Apellido"', 'Martinez');
+        cy.plexText('label="Nombre"', 'Mario');
+        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
+        cy.plexButton('Guardar').click();
+        cy.wait(2000);
+        cy.contains('Debe completar los datos obligatorios');
+    });
+
+    it('verificar la carga de dirección', () => {
+        cy.plexText('label="Apellido"', 'Martinez');
+        cy.plexText('label="Nombre"', 'Mario');
+        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
+        cy.plexPhone('label="Número"', '2990000000');
+        cy.plexButton('Guardar').click();
+        cy.wait(2000);
+        cy.contains('Debe completar los datos obligatorios');
+    });
+
+    it('verificar la carga de bebé con datos obligatorios requeridos', () => {
+        cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe');
+        cy.plexText('label="Apellido"', 'Martinez');
+        cy.plexText('label="Nombre"', 'Mario');
+        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
+        cy.plexPhone('label="Número"', '2990000000');
+        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexButton('Guardar').click();
+        cy.wait('@registroBebe').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estado).to.be.eq("temporal");
+        });
+        cy.wait(2000);
+        cy.contains('Los datos se actualizaron correctamente');
+    });
+
+    it('verificar la carga de bebé con datos obligatorios requeridos y telefono móvil', () => {
+        cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe');
+        cy.plexText('label="Apellido"', 'Martinez');
+        cy.plexText('label="Nombre"', 'Mario');
+        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
+        cy.plexSelect('label="Tipo"', 'celular');
+        cy.plexPhone('label="Número"', '2990000000');
+        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexButton('Guardar').click();
+        cy.wait('@registroBebe').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estado).to.be.eq("temporal");
+        });
+        cy.wait(2000);
+        cy.contains('Los datos se actualizaron correctamente');
+    });
+
+    it('verificar la carga de bebé con datos obligatorios requeridos y telefono fijo', () => {
+        cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe');
+        cy.plexText('label="Apellido"', 'Martinez');
+        cy.plexText('label="Nombre"', 'Mario');
+        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
+        cy.plexSelect('label="Tipo"', 'fijo');
+        cy.plexPhone('label="Número"', '4752158');
+        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexButton('Guardar').click();
+        cy.wait('@registroBebe').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estado).to.be.eq("temporal");
+        });
+        cy.wait(2000);
+        cy.contains('Los datos se actualizaron correctamente');
+    });
+
+    it('verificar la carga de bebé con datos obligatorios requeridos e email', () => {
+        cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe');
+        cy.plexText('label="Apellido"', 'Martinez');
+        cy.plexText('label="Nombre"', 'Mario');
+        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
+        cy.plexSelect('label="Tipo"', 'email');
+        cy.plexText('label="Dirección"', 'mail@mail.com');
+        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexButton('Guardar').click();
+        cy.wait('@registroBebe').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estado).to.be.eq("temporal");
+        });
+        cy.wait(2000);
+        cy.contains('Los datos se actualizaron correctamente');
+    });
+
+    it('verificar la carga de bebé con datos obligatorios requeridos y una nota', () => {
+        cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe');
+        cy.plexText('label="Apellido"', 'Martinez');
+        cy.plexText('label="Nombre"', 'Mario');
+        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
+        cy.plexSelect('label="Tipo"', 'email');
+        cy.plexText('label="Dirección"', 'mail@mail.com');
+        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexTab('Notas').click();
+        cy.plexText('name="nuevaNota"', 'Test Note');
+        cy.plexButton('Agregar Nota').click();
+        cy.plexButton('Guardar').click();
+        cy.wait('@registroBebe').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estado).to.be.eq("temporal");
+            expect(xhr.response.body.notas).to.have.length(1);
+        });
+        cy.wait(2000);
+        cy.contains('Los datos se actualizaron correctamente');
+    });
+
+
+    it('verificar la carga de una nota y verificar que aparezca en el listado de notas', () => {
+        cy.plexTab('Notas').click();
+        cy.plexText('name="nuevaNota"', 'Test Note');
+        cy.plexButton('Agregar Nota').click();
+        cy.contains('Test Note');
+    });
+
+    it.only('ingresar scan de progenitor existente y verificar datos básicos ingresados', () => {
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
+        cy.plexText('name="buscador"', '00535248130@TUTOR@ANCESTRO@F@66000666@B@09/10/1999@14/02/2018@200').should('have.value', '00535248130@TUTOR@ANCESTRO@F@66000666@B@09/10/1999@14/02/2018@200');
+        cy.wait('@busquedaProgenitor').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            cy.plexText('name="documentoRelacion"').should('have.value', '66000666');
+            cy.plexText('name="nombreRelacion"').should('have.value', 'ANCESTRO');
+            cy.plexText('name="apellidoRelacion"').should('have.value', 'TUTOR');
+            cy.plexDatetime('name="fechaNacimientoRelacion"').should('have.value', '09/10/1999');
+            cy.plexSelectType('name="sexoRelacion"').contains('Femenino');
+        });
+    });
+})
