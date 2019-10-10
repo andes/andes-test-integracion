@@ -1,0 +1,320 @@
+{
+    "_id" : "5d78f9e29b1c83323ab66c70",
+    "intercalar" : false,
+    "estado" : "auditada",
+    "nominalizada" : true,
+    "dinamica" : false,
+    "bloques" : [ 
+        {
+            "accesoDirectoDelDia" : 5,
+            "accesoDirectoProgramado" : 0,
+            "reservadoGestion" : 0,
+            "reservadoProfesional" : 0,
+            "cupoMobile" : 0,
+            "restantesDelDia" : 3,
+            "restantesProgramados" : 0,
+            "restantesGestion" : 0,
+            "restantesProfesional" : 0,
+            "restantesMobile" : 0,
+            "pacienteSimultaneos" : false,
+            "citarPorBloque" : false,
+            "turnosMobile" : false,
+            "_id" : "5d78f9e29b1c83323ab66c71",
+            "cantidadTurnos" : 5,
+            "horaInicio" : "2019-09-11T10:00:00.000-03:00",
+            "horaFin" : "2019-09-11T10:45:00.000-03:00",
+            "duracionTurno" : 9,
+            "cantidadSimultaneos" : null,
+            "cantidadBloque" : null,
+            "tipoPrestaciones" : [ 
+                {
+                    "_id" : "598ca8375adc68e2a0c121b8",
+                    "conceptId" : "391000013108",
+                    "term" : "consulta de medicina general",
+                    "fsn" : "consulta de medicina general",
+                    "semanticTag" : "procedimiento"
+                },
+                {
+                    "_id" : "598ca8375adc68e2a0c121bc",
+                    "conceptId" : "401000013105",
+                    "term" : "consulta de clínica médica",
+                    "fsn" : "consulta de clínica médica",
+                    "semanticTag" : "procedimiento"
+                }
+            ],
+            "turnos" : [ 
+                {
+                    "estadoFacturacion" : {
+                        "estado" : "Sin comprobante",
+                        "tipo" : "",
+                        "numeroComprobante" : ""
+                    },
+                    "estado" : "asignado",
+                    "_id" : "5d78f9e29b1c83323ab66c77",
+                    "diagnostico" : {
+                        "codificaciones" : [ 
+                            {
+                                "codificacionProfesional" : {
+                                    "snomed" : {
+                                        "refsetIds" : [ 
+                                            "900000000000497000"
+                                        ],
+                                        "conceptId" : "386661006",
+                                        "term" : "fiebre",
+                                        "fsn" : "fiebre (hallazgo)",
+                                        "semanticTag" : "hallazgo"
+                                    },
+                                    "cie10" : {
+                                        "_id" : "5d78fab19b1c83323ab66fde",
+                                        "causa" : "R50",
+                                        "subcausa" : "9",
+                                        "codigo" : "R50.9",
+                                        "nombre" : "Fiebre, no especificada",
+                                        "sinonimo" : "Fiebre",
+                                        "c2" : false
+                                    }
+                                },
+                                "_id" : "5d78fab19b1c83323ab66fdd",
+                                "codificacionAuditoria" : {
+                                    "_id" : "5d78fab19b1c83323ab66fde",
+                                    "causa" : "R50",
+                                    "subcausa" : "9",
+                                    "codigo" : "R50.9",
+                                    "nombre" : "Fiebre, no especificada",
+                                    "sinonimo" : "Fiebre",
+                                    "c2" : false
+                                }
+                            }
+                        ],
+                        "ilegible" : false
+                    },
+                    "horaInicio" : "2019-09-11T10:00:00.000-03:00",
+                    "emitidoPor" : "Gestión de pacientes",
+                    "motivoConsulta" : null,
+                    "nota" : null,
+                    "paciente" : {
+                        "_id" : "5d78fa2f9b1c83323ab66e27",
+                        "carpetaEfectores" : [ 
+                            {
+                                "_id" : "5ab1476561007546016253e0",
+                                "organizacion" : {
+                                    "_id" : "57e9670e52df311059bc8964",
+                                    "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+                                },
+                                "nroCarpeta" : "290553"
+                            }, 
+                            {
+                                "_id" : "5b215cb3d7dd497d0d676f8b",
+                                "organizacion" : {
+                                    "_id" : "57fcf037326e73143fb48c09",
+                                    "nombre" : "CENTRO DE SALUD PARQUE INDUSTRIAL"
+                                },
+                                "nroCarpeta" : "120"
+                            }
+                        ],
+                        "id" : "586e6e8627d3107fde116cdb",
+                        "documento" : "12731735",
+                        "apellido" : "FELIPE",
+                        "nombre" : "DOMINGO ALBERTO",
+                        "fechaNacimiento" : "1956-12-26T00:00:00.000-03:00",
+                        "sexo" : "masculino",
+                        "telefono" : "2994545454",
+                        "obraSocial" : {
+                            "codigoPuco" : 115409,
+                            "nombre" : "OBRA SOCIAL DEL PETROLEO Y GAS PRIVADO",
+                            "financiador" : "OBRA SOCIAL DEL PETROLEO Y GAS PRIVADO"
+                        }
+                    },
+                    "tipoPrestacion" : {
+                        "_id" : "598ca8375adc68e2a0c121b8",
+                        "conceptId" : "391000013108",
+                        "term" : "consulta de medicina general",
+                        "fsn" : "consulta de medicina general",
+                        "semanticTag" : "procedimiento"
+                    },
+                    "tipoTurno" : "delDia",
+                    "updatedAt" : "2019-09-11T10:46:22.570-03:00",
+                    "updatedBy" : {
+                        "id" : "5c9247f1116e609e7932d57c",
+                        "nombreCompleto" : "35593546 35593546",
+                        "nombre" : "35593546",
+                        "apellido" : "35593546",
+                        "username" : 35593546,
+                        "documento" : 35593546
+                    },
+                    "asistencia" : "asistio"
+                }, 
+                {
+                    "estadoFacturacion" : {
+                        "estado" : "Sin comprobante",
+                        "tipo" : "",
+                        "numeroComprobante" : ""
+                    },
+                    "estado" : "asignado",
+                    "_id" : "5d78f9e29b1c83323ab66c76",
+                    "diagnostico" : {
+                        "codificaciones" : [ 
+                            {
+                                "codificacionProfesional" : {
+                                    "snomed" : {
+                                        "refsetIds" : []
+                                    }
+                                },
+                                "_id" : "5d78fb199b1c83323ab67161",
+                                "codificacionAuditoria" : {
+                                    "_id" : "59bbf1ed53916746547cbb9e",
+                                    "capitulo" : "07",
+                                    "grupo" : "11",
+                                    "causa" : "H57",
+                                    "subcausa" : "1",
+                                    "codigo" : "H57.1",
+                                    "nombre" : "Dolor ocular",
+                                    "sinonimo" : "Dolor ocular",
+                                    "c2" : false
+                                },
+                                "primeraVez" : false
+                            }
+                        ]
+                    },
+                    "horaInicio" : "2019-09-11T10:09:00.000-03:00",
+                    "emitidoPor" : "Gestión de pacientes",
+                    "motivoConsulta" : null,
+                    "nota" : null,
+                    "paciente" : {
+                        "_id" : "5d78fa3c9b1c83323ab66ed2",
+                        "carpetaEfectores" : [],
+                        "id" : "586e6e8627d3107fde1165b4",
+                        "documento" : "6011973",
+                        "apellido" : "LEO",
+                        "nombre" : "LEONARDO MARTIN",
+                        "fechaNacimiento" : "1935-05-25T00:00:00.000-03:00",
+                        "sexo" : "masculino",
+                        "telefono" : "",
+                        "obraSocial" : {
+                            "codigoPuco" : 500807,
+                            "nombre" : "INSTITUTO NACIONAL DE SERVICIOS SOCIALES PARA JUBILADOS Y PENSIONADOS",
+                            "financiador" : "INSTITUTO NACIONAL DE SERVICIOS SOCIALES PARA JUBILADOS Y PENSIONADOS"
+                        }
+                    },
+                    "tipoPrestacion" : {
+                        "_id" : "598ca8375adc68e2a0c121b8",
+                        "conceptId" : "391000013108",
+                        "term" : "consulta de medicina general",
+                        "fsn" : "consulta de medicina general",
+                        "semanticTag" : "procedimiento"
+                    },
+                    "tipoTurno" : "delDia",
+                    "updatedAt" : "2019-09-11T10:44:28.608-03:00",
+                    "updatedBy" : {
+                        "id" : "5c9247f1116e609e7932d57c",
+                        "nombreCompleto" : "35593546 35593546",
+                        "nombre" : "35593546",
+                        "apellido" : "35593546",
+                        "username" : 35593546,
+                        "documento" : 35593546,
+                        "organizacion" : {
+                            "_id" : "57e9670e52df311059bc8964",
+                            "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+                            "id" : "57e9670e52df311059bc8964"
+                        }
+                    },
+                    "asistencia" : "asistio"
+                }, 
+                {
+                    "diagnostico" : {
+                        "codificaciones" : []
+                    },
+                    "estadoFacturacion" : {
+                        "estado" : "Sin comprobante"
+                    },
+                    "estado" : "disponible",
+                    "_id" : "5d78f9e29b1c83323ab66c75",
+                    "horaInicio" : "2019-09-11T10:18:00.000-03:00"
+                }, 
+                {
+                    "diagnostico" : {
+                        "codificaciones" : []
+                    },
+                    "estadoFacturacion" : {
+                        "estado" : "Sin comprobante"
+                    },
+                    "estado" : "disponible",
+                    "_id" : "5d78f9e29b1c83323ab66c74",
+                    "horaInicio" : "2019-09-11T10:27:00.000-03:00"
+                }, 
+                {
+                    "diagnostico" : {
+                        "codificaciones" : []
+                    },
+                    "estadoFacturacion" : {
+                        "estado" : "Sin comprobante"
+                    },
+                    "estado" : "disponible",
+                    "_id" : "5d78f9e29b1c83323ab66c73",
+                    "horaInicio" : "2019-09-11T10:36:00.000-03:00"
+                }
+            ]
+        }
+    ],
+    "horaInicio" : "2019-09-11T10:00:00.000-03:00",
+    "horaFin" : "2019-09-11T10:45:00.000-03:00",
+    "tipoPrestaciones" : [ 
+        {
+            "_id" : "598ca8375adc68e2a0c121b8",
+            "conceptId" : "391000013108",
+            "term" : "consulta de medicina general",
+            "fsn" : "consulta de medicina general",
+            "semanticTag" : "procedimiento"
+        },
+        {
+            "_id" : "598ca8375adc68e2a0c121bc",
+            "conceptId" : "401000013105",
+            "term" : "consulta de clínica médica",
+            "fsn" : "consulta de clínica médica",
+            "semanticTag" : "procedimiento"
+        }
+    ],
+    "profesionales" : [ 
+        {
+            "_id" : "5d4991772f6e30513e913e3f",
+            "nombre" : "MARIANO ANDRES",
+            "apellido" : "PALAVECINO"
+        }
+    ],
+    "organizacion" : {
+        "_id" : "57e9670e52df311059bc8964",
+        "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+    },
+    "avisos" : [],
+    "sobreturnos" : [ 
+        
+    ],
+    "createdAt" : "2019-09-11T10:42:58.595-03:00",
+    "createdBy" : {
+        "id" : "5c9247f1116e609e7932d57c",
+        "nombreCompleto" : "35593546 35593546",
+        "nombre" : "35593546",
+        "apellido" : "35593546",
+        "username" : 35593546,
+        "documento" : 35593546,
+        "organizacion" : {
+            "_id" : "57e9670e52df311059bc8964",
+            "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id" : "57e9670e52df311059bc8964"
+        }
+    },
+    "updatedAt" : "2019-09-11T11:10:44.736-03:00",
+    "updatedBy" : {
+        "id" : "5c9247f1116e609e7932d57c",
+        "nombreCompleto" : "35593546 35593546",
+        "nombre" : "35593546",
+        "apellido" : "35593546",
+        "username" : 35593546,
+        "documento" : 35593546,
+        "organizacion" : {
+            "_id" : "57e9670e52df311059bc8964",
+            "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id" : "57e9670e52df311059bc8964"
+        }
+    }
+}
