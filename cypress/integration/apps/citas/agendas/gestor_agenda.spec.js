@@ -1,4 +1,4 @@
-describe('CITAS - Gestor Agendas', () => {
+describe('CITAS - Planicar Agendas', () => {
     let token
     before(() => {
         cy.login('30643636', 'asd').then(t => {
