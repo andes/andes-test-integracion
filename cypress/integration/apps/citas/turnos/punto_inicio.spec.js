@@ -22,19 +22,7 @@ context('punto de inicio', () => {
         cy.get('.alert.alert-danger').should('contain', 'No se encontró ningún paciente..');
     });
     it('dar turno', () => {
-        cy.route('GET', '**api/core/mpi/pacientes/**').as('darTurnoPaciente');
-        cy.plexText('name="buscador"', '38906734');
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.get('paciente-listado table').find('td').contains('38906734').click();
-        cy.wait('@seleccionPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.plexButtonIcon('calendar-plus').click({force: true});
-        cy.wait('@darTurnoPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+        cy.darTurno('**api/core/mpi/pacientes/57f3b5d579fe79a598e6281f', token);
     });
     it('generar solicitud', () => {
         cy.route('GET', '**api/modules/rup/prestaciones/solicitudes?idPaciente=**').as('generarSolicitudPaciente');
