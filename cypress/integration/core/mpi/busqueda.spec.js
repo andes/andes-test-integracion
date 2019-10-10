@@ -4,6 +4,7 @@ context('MPI-Busqueda Paciente', () => {
     before(() => {
         cy.login('38906735', 'asd').then(t => {
             token = t;
+            cy.createPaciente('mpi/relacion', token);
         });
         cy.viewport(1280, 720);
     })
