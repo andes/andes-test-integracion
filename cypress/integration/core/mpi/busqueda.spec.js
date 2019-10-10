@@ -10,15 +10,15 @@ context('MPI-Busqueda Paciente', () => {
 
     beforeEach(() => {
         cy.goto('/apps/mpi/busqueda', token);
+        cy.server();
     });
 
 
     it('buscar paciente por documento y verificar que no existe', () => {
-        cy.server();
         cy.route('GET', '**api/core/mpi/pacientes**').as('busquedaConDocumento');
-        cy.get('button[class="btn btn-default dropdown-toggle waves-effect"]').should('have.prop', 'disabled', true);
-        cy.get('plex-text[name="buscador"] input').first().type('52081206').should('have.value', '52081206');
-        cy.get('button[class="dropdown-toggle waves-effect btn btn-primary"]').should('have.prop', 'disabled', false);
+        cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', true);
+        cy.plexText('name="buscador"', '52081206');
+        cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', false);
         cy.wait('@busquedaConDocumento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -26,11 +26,10 @@ context('MPI-Busqueda Paciente', () => {
     });
 
     it('buscar paciente por nombre/apellido y verificar que no existe', () => {
-        cy.server();
         cy.route('GET', '**api/core/mpi/pacientes**').as('busquedaConNombre');
-        cy.get('button[class="btn btn-default dropdown-toggle waves-effect"]').should('have.prop', 'disabled', true);
-        cy.get('plex-text[name="buscador"] input').first().type('nopatient').should('have.value', 'nopatient');
-        cy.get('button[class="dropdown-toggle waves-effect btn btn-primary"]').should('have.prop', 'disabled', false);
+        cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', true);
+        cy.plexText('name="buscador"', 'nopatint');
+        cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', false);
         cy.wait('@busquedaConNombre').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -38,7 +37,6 @@ context('MPI-Busqueda Paciente', () => {
     });
 
     it('buscar paciente con scan y verificar precarga de datos básicos', () => {
-        cy.server();
         cy.route('GET', '**api/core/mpi/pacientes**').as('busquedaConScan');
         cy.get('plex-text[name="buscador"] input').first().type('00535248130@TEST@TEST@M@26108063@B@02/10/1977@14/02/2018@200').should('have.value', '00535248130@TEST@TEST@M@26108063@B@02/10/1977@14/02/2018@200');
         cy.wait('@busquedaConScan').then((xhr) => {
