@@ -69,4 +69,25 @@ Cypress.Commands.add('goto', (url, token) => {
     });
 });
 
+Cypress.Commands.add('buscarPaciente', (pacienteDoc, cambiarPaciente = true) => {
+    cy.plexButton("Buscar Paciente").click();
+    cy.plexText('name="buscador"', pacienteDoc);
+
+    cy.server();
+    cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
+
+    cy.wait('@listaPacientes');
+
+    cy.get('tr td').contains(pacienteDoc).click();
+
+    if (cambiarPaciente) {
+        cy.plexButton("Cambiar Paciente").click();
+        cy.plexText('name="buscador"', pacienteDoc);
+
+        cy.wait('@listaPacientes');
+        cy.get('tr td').contains(pacienteDoc).click();
+    }
+});
+
+
 
