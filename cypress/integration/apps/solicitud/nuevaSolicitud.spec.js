@@ -8,6 +8,7 @@ function secuencia(token) {
 
 function seleccionarPaciente(dni) {
     cy.plexText('name="buscador"', dni);
+    cy.wait('@searchPaciente')
     cy.get('paciente-listado').find('td').contains(dni).click();
 }
 
@@ -26,12 +27,13 @@ context('TOP: Nueva Solicitud de Salida', () => {
         cy.server();
         cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
         cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
         secuencia(token);
     });
 
     it('nueva solicitud exitosa', () => {
         let idPrestacion;
-        seleccionarPaciente('38906734');
+        seleccionarPaciente('NORMAL');
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
         cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
         cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
