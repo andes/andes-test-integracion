@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="14.277000000000001" tests="6" failures="1">
-  <testsuite name="Root Suite" timestamp="2019-10-11T15:33:18" tests="0" failures="0" time="0">
+<testsuites name="Mocha Tests" time="14.87" tests="6" failures="1">
+  <testsuite name="Root Suite" timestamp="2019-10-11T16:38:22" tests="0" failures="0" time="0">
   </testsuite>
-  <testsuite name="TM Profesional" timestamp="2019-10-11T15:33:18" tests="6" failures="1" time="14.277000000000001">
-    <testcase name="TM Profesional crear profesional no matriculado, sin validar" time="3.617" classname="crear profesional no matriculado, sin validar">
+  <testsuite name="TM Profesional" timestamp="2019-10-11T16:38:22" tests="6" failures="1" time="14.87">
+    <testcase name="TM Profesional crear profesional no matriculado, sin validar" time="3.813" classname="crear profesional no matriculado, sin validar">
     </testcase>
     <testcase name="TM Profesional crear profesional no matriculado existente en renaper" time="0" classname="crear profesional no matriculado existente en renaper">
       <failure message="Timed out retrying: expected &apos;&lt;plex-datetime.ng-untouched.ng-pristine.ng-valid&gt;&apos; to have value &apos;09/03/1990&apos;, but the value was &apos;&apos;" type="CypressError"><![CDATA[CypressError: Timed out retrying: expected '<plex-datetime.ng-untouched.ng-pristine.ng-valid>' to have value '09/03/1990', but the value was ''
@@ -22,13 +22,13 @@
     at Async.drainQueues (http://localhost/__cypress/runner/cypress_runner.js:126950:14)
     at <anonymous>]]></failure>
     </testcase>
-    <testcase name="TM Profesional crear profesional no matriculado no existente en renaper" time="2.274" classname="crear profesional no matriculado no existente en renaper">
+    <testcase name="TM Profesional crear profesional no matriculado no existente en renaper" time="2.4" classname="crear profesional no matriculado no existente en renaper">
     </testcase>
-    <testcase name="TM Profesional crear profesional duplicado" time="4.234" classname="crear profesional duplicado">
+    <testcase name="TM Profesional crear profesional duplicado" time="4.307" classname="crear profesional duplicado">
     </testcase>
-    <testcase name="TM Profesional búsqueda de profesional matriculado" time="2.027" classname="búsqueda de profesional matriculado">
+    <testcase name="TM Profesional búsqueda de profesional matriculado" time="2.27" classname="búsqueda de profesional matriculado">
     </testcase>
-    <testcase name="TM Profesional búsqueda de profesional no matriculado" time="2.125" classname="búsqueda de profesional no matriculado">
+    <testcase name="TM Profesional búsqueda de profesional no matriculado" time="2.08" classname="búsqueda de profesional no matriculado">
     </testcase>
   </testsuite>
 </testsuites>

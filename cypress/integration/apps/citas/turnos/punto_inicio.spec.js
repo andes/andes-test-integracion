@@ -1,78 +1,69 @@
-context('Agenda dinamicas', () => {
-    let token
+context('punto de inicio', () => {
+    let token;
+    const DNI = '20000000';
     before(() => {
+        // Borro los datos de la base antes de los test
+        cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
-            cy.createAgenda('apps/citas/turnos/agendaDinamicaDarTurno', 0, 0, 1, token);
-            cy.createAgenda('apps/citas/turnos/agendaDarTurnoProgramado', 8, null, null, token);
+            cy.createPaciente('paciente-normal.json', token);
         });
     });
 
-
-    it('dar turno agenda dinámica', () => {
+    beforeEach(() => {
         cy.server();
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
-        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
-        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
-
         cy.goto('/citas/punto-inicio', token);
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**api/core/log/paciente?idPaciente=**').as('seleccionPaciente');
+    })
 
-        cy.get('plex-text input[type=text]').first().type('38906735').should('have.value', '38906735');
+    it('Buscar paciente inexistente', () => {
+        cy.plexText('name="buscador"', '12362920');
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains('38906735').click();
-
-        cy.get('plex-button[title="Dar Turno"]').click();
-        cy.wait('@prestaciones');
-
-        cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
-        cy.wait('@cargaAgendas');
-        cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
-        cy.get('plex-button[label="Dar Turno"]').click();
-        cy.get('plex-button[label="Confirmar"]').click();
-
-        // Confirmo que se dio el turno desde la API
-        cy.wait('@darTurno').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        });
+        cy.get('.alert.alert-danger').should('contain', 'No se encontró ningún paciente..');
     });
 
-    it('dar turno programado', () => {
-        cy.server();
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
-        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
-        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
+    it('dar turno', () => {
+        cy.darTurno('**api/core/mpi/pacientes/57f3b5d579fe79a598e6281f', token);
+    });
 
-        cy.goto('/citas/punto-inicio', token);
-
-        cy.get('plex-text input[type=text]').first().type('38906735').should('have.value', '38906735');
+    it('generar solicitud', () => {
+        cy.route('GET', '**api/modules/rup/prestaciones/solicitudes?idPaciente=**').as('generarSolicitudPaciente');
+        cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
+        cy.plexText('name=buscador', DNI);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains('38906735').click();
-
-        cy.get('plex-button[title="Dar Turno"]').click();
-        cy.wait('@prestaciones');
-
-        cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
-
-        if (Cypress.moment().add(8, 'days').month() > Cypress.moment().month()) {
-            cy.get('plex-button[icon="chevron-right"]').click();
-        }
-        cy.wait('@cargaAgendas');
-        cy.wait(1000);
-        cy.get('div[class="dia"]').contains(Cypress.moment().add(8, 'days').format('D')).click();
-        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({
-            force: true
+        cy.get('paciente-listado').find('td').contains(DNI).click();
+        cy.wait('@seleccionPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
         });
-        cy.get('plex-button[label="Confirmar"]').click();
-
-        // Confirmo que se dio el turno desde la API
-        cy.wait('@darTurno').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.plexButtonIcon('open-in-app').click();
+        cy.wait('@generarSolicitudPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
         });
+        cy.get('lista-solicitud-turno-ventanilla').plexButton('Cargar Solicitud nueva').click();
     });
-});
+
+    it('activar app mobile', () => {
+        cy.route('GET', '**api/core/mpi/modules/mobileApp/check/**', {
+            "message": "account_doesntExists",
+            "account": null
+        }).as('clickActivarApp');
+
+        cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('puco');
+        cy.route('GET', '/api/modules/obraSocial/prepagas/**', []).as('prepagas');
+        cy.plexText('name=buscador', DNI);
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').find('td').contains(DNI).click();
+        cy.plexButtonIcon('cellphone-android').click();
+        cy.plexText('placeholder="e-mail"', '{selectall}{backspace}prueba@prueba.com');
+        cy.plexText('placeholder="Celular"', '{selectall}{backspace}2995290357');
+        cy.plexButton('Activar App Mobile').click();
+        cy.swal('confirm')
+    })
+})
