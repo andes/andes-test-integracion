@@ -7,7 +7,7 @@ Cypress.Commands.add('seed', () => {
 
 Cypress.Commands.add('createPaciente', (name, token) => {
     return cy.fixture(name).then((paciente) => {
-        cy.request({
+        return cy.request({
             method: 'POST',
             url: Cypress.env('API_SERVER') + '/api/core/mpi/pacientes',
             body: {

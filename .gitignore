@@ -2,3 +2,5 @@
 # Archivos de configuración
 .vscode
 node_modules
+cypress/screenshots
+cypress/videos
