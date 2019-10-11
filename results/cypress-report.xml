@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="26.573999999999998" tests="3" failures="0">
+  <testsuite name="Root Suite" timestamp="2019-10-11T12:44:47" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="TOP: Nueva Solicitud de Salida" timestamp="2019-10-11T12:44:47" tests="3" failures="0" time="26.573999999999998">
+    <testcase name="TOP: Nueva Solicitud de Salida nueva solicitud exitosa" time="8.749" classname="nueva solicitud exitosa">
+    </testcase>
+    <testcase name="TOP: Nueva Solicitud de Salida campos requeridos" time="15.017" classname="campos requeridos">
+    </testcase>
+    <testcase name="TOP: Nueva Solicitud de Salida comprobación de reglas" time="2.808" classname="comprobación de reglas">
+    </testcase>
+  </testsuite>
+</testsuites>

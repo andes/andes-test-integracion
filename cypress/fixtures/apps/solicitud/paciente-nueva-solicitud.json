@@ -1,10 +1,10 @@
 {
-    "documento": "20000000",
+    "documento": "2006890",
     "cuil": null,
     "activo": true,
     "estado": "temporal",
-    "nombre": "AGENDA",
-    "apellido": "NORMAL",
+    "nombre": "SOLICITUD",
+    "apellido": "NUEVA",
     "nombreCompleto": "",
     "alias": "",
     "contacto": [
@@ -18,7 +18,7 @@
     ],
     "sexo": "femenino",
     "genero": "femenino",
-    "fechaNacimiento": "1987-01-01T03:00:00.000Z",
+    "fechaNacimiento": "2000-01-01T03:00:00.000Z",
     "edad": null,
     "edadReal": null,
     "fechaFallecimiento": null,
