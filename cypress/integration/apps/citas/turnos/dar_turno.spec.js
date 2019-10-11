@@ -1,7 +1,6 @@
 context('punto de inicio', () => {
     let token;
     before(() => {
-        // Borro los datos de la base antes de los test
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
@@ -15,15 +14,16 @@ context('punto de inicio', () => {
         cy.goto('/citas/punto-inicio', token);
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('GET', '**api/core/log/paciente?idPaciente=**').as('seleccionPaciente');
+        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
+
         cy.darTurno('**api/core/mpi/pacientes/57f3b5d579fe79a598e6281f', token);
 
     })
     it('dar turno agenda dinámica', () => {
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
-        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('seleccionAgenda');
-        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
 
         cy.wait('@prestaciones');
         cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
@@ -42,8 +42,6 @@ context('punto de inicio', () => {
     });
 
     it('dar turno programado', () => {
-        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
-        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('seleccionAgenda');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
 
