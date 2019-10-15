@@ -1,6 +1,7 @@
 context('MPI-Registro Paciente Sin DNI', () => {
     let token
     before(() => {
+        cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
             cy.createPaciente('mpi/relacion', token);
@@ -31,7 +32,8 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexPhone('label="Número"', '2990000000');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
@@ -50,7 +52,8 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexSelect('label="Tipo"', 'celular');
         cy.plexPhone('label="Número"', '2990000000');
@@ -70,7 +73,8 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexSelect('label="Tipo"', 'fijo');
         cy.plexPhone('label="Número"', '4785215');
@@ -90,7 +94,8 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexSelect('label="Tipo"', 'email');
         cy.plexText('label="Dirección"', 'mail@mail.com');
@@ -135,7 +140,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
         });
     });
 
-    it.only('buscar en la pestaña relaciones un paciente por nombre/apellido que exista y verificar mensaje', () => {
+    it('buscar en la pestaña relaciones un paciente por nombre/apellido que exista y verificar mensaje', () => {
         cy.plexTab('Relaciones').click();
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', 'PACIENTE SIN DNI');
@@ -181,7 +186,8 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);

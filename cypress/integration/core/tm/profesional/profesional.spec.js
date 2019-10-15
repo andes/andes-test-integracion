@@ -40,7 +40,7 @@ const check = (dto) => {
     }
 
     if (dto.fechaNacimiento) {
-        cy.plexDatetime('label="Fecha de nacimiento"').should('have.value', dto.fechaNacimiento);
+        cy.plexDatetime('label="Fecha de nacimiento"').find('input').should('have.value', dto.fechaNacimiento);
     }
 }
 

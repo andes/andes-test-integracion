@@ -2,6 +2,7 @@
 context('MPI-Busqueda Paciente', () => {
     let token
     before(() => {
+        cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
             cy.createPaciente('mpi/relacion', token);
@@ -37,13 +38,13 @@ context('MPI-Busqueda Paciente', () => {
     });
 
     it('buscar paciente con scan y verificar precarga de datos básicos', () => {
-        cy.get('plex-text[name="buscador"] input').first().type('00535248130@TEST@TEST@M@26108063@B@02/10/1977@14/02/2018@200').should('have.value', '00535248130@TEST@TEST@M@26108063@B@02/10/1977@14/02/2018@200');
+        cy.plexText('name="buscador"', '00535248130@TEST@TEST@M@26108063@B@02/10/1977@14/02/2018@200');
         cy.wait('@busqueda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             cy.plexInt('name="documento"').should('have.value', '26108063');
             cy.plexText('label="Nombre"').should('have.value', 'TEST');
             cy.plexText('label="Apellido"').should('have.value', 'TEST');
-            cy.plexDatetime('label="Fecha de Nacimiento"').should('have.value', '02/10/1977');
+            cy.plexDatetime('label="Fecha de Nacimiento"').find('input').should('have.value', '02/10/1977');
             cy.plexSelectType('label="Sexo"').contains('Masculino');
         });
     });

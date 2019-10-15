@@ -1,6 +1,7 @@
 context('MPI-Registro Paciente Bebé', () => {
     let token
     before(() => {
+        cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
             cy.createPaciente('mpi/progenitor', token);
@@ -90,7 +91,8 @@ context('MPI-Registro Paciente Bebé', () => {
     it('verificar la carga de contacto de contacto de paciente', () => {
         cy.plexText('label="Apellido"', 'Martinez');
         cy.plexText('label="Nombre"', 'Mario');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexButton('Guardar').click();
         cy.wait(2000);
@@ -100,7 +102,8 @@ context('MPI-Registro Paciente Bebé', () => {
     it('verificar la carga de dirección', () => {
         cy.plexText('label="Apellido"', 'Martinez');
         cy.plexText('label="Nombre"', 'Mario');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexPhone('label="Número"', '2990000000');
         cy.plexButton('Guardar').click();
@@ -112,7 +115,8 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe');
         cy.plexText('label="Apellido"', 'Martinez');
         cy.plexText('label="Nombre"', 'Mario');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexPhone('label="Número"', '2990000000');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
@@ -131,7 +135,8 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe');
         cy.plexText('label="Apellido"', 'Martinez');
         cy.plexText('label="Nombre"', 'Mario');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexSelect('label="Tipo"', 'celular');
         cy.plexPhone('label="Número"', '2990000000');
@@ -151,7 +156,8 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe');
         cy.plexText('label="Apellido"', 'Martinez');
         cy.plexText('label="Nombre"', 'Mario');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexSelect('label="Tipo"', 'fijo');
         cy.plexPhone('label="Número"', '4752158');
@@ -171,7 +177,8 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe');
         cy.plexText('label="Apellido"', 'Martinez');
         cy.plexText('label="Nombre"', 'Mario');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexSelect('label="Tipo"', 'email');
         cy.plexText('label="Dirección"', 'mail@mail.com');
@@ -191,7 +198,8 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe');
         cy.plexText('label="Apellido"', 'Martinez');
         cy.plexText('label="Nombre"', 'Mario');
-        cy.plexSelect('label="Sexo"', 'masculino');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexSelect('label="Tipo"', 'email');
         cy.plexText('label="Dirección"', 'mail@mail.com');
@@ -219,15 +227,15 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.contains('Test Note');
     });
 
-    it.only('ingresar scan de progenitor existente y verificar datos básicos ingresados', () => {
+    it('ingresar scan de progenitor existente y verificar datos básicos ingresados', () => {
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
-        cy.plexText('name="buscador"', '00535248130@TUTOR@ANCESTRO@F@66000666@B@09/10/1999@14/02/2018@200').should('have.value', '00535248130@TUTOR@ANCESTRO@F@66000666@B@09/10/1999@14/02/2018@200');
+        cy.plexText('name="buscador"', '00535248130@TUTOR@ANCESTRO@F@66000666@B@11/10/2000@14/02/2018@200').should('have.value', '00535248130@TUTOR@ANCESTRO@F@66000666@B@11/10/2000@14/02/2018@200');
         cy.wait('@busquedaProgenitor').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             cy.plexText('name="documentoRelacion"').should('have.value', '66000666');
             cy.plexText('name="nombreRelacion"').should('have.value', 'ANCESTRO');
             cy.plexText('name="apellidoRelacion"').should('have.value', 'TUTOR');
-            cy.plexDatetime('name="fechaNacimientoRelacion"').should('have.value', '09/10/1999');
+            cy.plexDatetime('name="fechaNacimientoRelacion"').find('input').should('have.value', '10/10/2000');
             cy.plexSelectType('name="sexoRelacion"').contains('Femenino');
         });
     });
