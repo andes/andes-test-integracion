@@ -11,7 +11,7 @@ context('Aliasing', () => {
     beforeEach(() => {
         cy.viewport(1280, 720)
 
-        cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
+        cy.visit('/citas/punto-inicio', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
@@ -230,7 +230,7 @@ context('Aliasing', () => {
     });
 
     // it.skip('Crear solicitud diferente profesional y prestación, misma organización', () => { // TODO: Hay que sacar el wizard
-    //     cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
+    //     cy.visit('/solicitudes', {
     //         onBeforeLoad: (win) => {
     //             win.sessionStorage.setItem('jwt', token);
     //         }
@@ -280,7 +280,7 @@ context('Aliasing', () => {
     // });
 
     // it('FUNCIONA MAL : dar turno para profesional', () => { // TODO
-    //     cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
+    //     cy.visit('/solicitudes', {
     //         onBeforeLoad: (win) => {
     //             win.sessionStorage.setItem('jwt', token);
     //         }

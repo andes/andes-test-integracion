@@ -10,7 +10,7 @@ context('Aliasing', () => {
     beforeEach(() => {
         cy.viewport(1280, 720)
 
-        cy.visit(Cypress.env('BASE_URL') + '/apps/mpi/auditoria', {
+        cy.visit('/apps/mpi/auditoria', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }

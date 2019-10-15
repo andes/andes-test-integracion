@@ -2,7 +2,7 @@
 
 context('Pagina de login', () => {
     beforeEach(() => {
-        cy.visit(Cypress.env('BASE_URL'), {
+        cy.visit('/', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear()
             }

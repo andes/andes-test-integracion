@@ -146,9 +146,9 @@ Cypress.Commands.add('plexButtonIcon', { prevSubject: 'optional' }, (subject, ic
     let element;
     if (subject) {
 
-        element = cy.wrap(subject).find(`plex-button[icon="${icon}"]`);
+        element = cy.wrap(subject).find(`plex-button i.mdi.mdi-${icon}`).parent();
     } else {
-        element = cy.get(`plex-button[icon="${icon}"]`);
+        element = cy.get(`plex-button i.mdi.mdi-${icon}`).parent();
     }
     return element;
 });

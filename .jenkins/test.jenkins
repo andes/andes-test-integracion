@@ -64,7 +64,7 @@ pipeline {
             }
             steps {
                 sh 'npm ci'
-                sh 'npx cypress run --env BASE_URL="http://172.16.1.116",API_SERVER="http://172.16.1.116" --config video=false,numTestsKeptInMemory=1 ${cypressparams}' 
+                sh 'npx cypress run -c baseUrl=http://localhost --env API_SERVER="http://172.16.1.116" --config video=false,numTestsKeptInMemory=1 ${cypressparams}' 
             }
         }
     }
