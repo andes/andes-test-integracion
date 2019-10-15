@@ -96,7 +96,10 @@ context('Planificacion Agendas', () => {
 
     });
 
-    it('Guardar agenda del día con un solo bloque', () => {
+    /**
+     * QUEDA PENDIENTE UN TEMA CON EL PLEX-SELECT
+     */
+    it.skip('Guardar agenda del día con un solo bloque', () => {
         complete({
             fecha: cy.today(),
             horaInicio: "10:00",

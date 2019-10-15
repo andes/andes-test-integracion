@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/andes/andes-test-integracion#readme",
   "devDependencies": {
+    "@angular/cli": "^8.3.8",
     "cypress": "^3.3.1"
   },
   "dependencies": {

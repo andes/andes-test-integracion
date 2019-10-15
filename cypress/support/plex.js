@@ -8,6 +8,11 @@ Cypress.Commands.add('swal', (acction) => {
     });
 });
 
+/**
+ * selectize no renderiza las opciones hasta que no interactuas. Por esos en los select que son fijas
+ * hay que hacer un click o escribir antes.
+ */
+
 Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label, option) => {
     const selector = `plex-select[${label}]`;
     let element;
@@ -16,12 +21,18 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
     } else {
         element = cy.get(selector);
     }
-    if (typeof option === 'string') {
-        element = element.children().children('.selectize-control').find(`.option[data-value=${option}]`, { force: true });
+    if (option !== null && option !== undefined) {
+        if (typeof option === 'string') {
+            element = element.children().children('.selectize-control').find(`.option[data-value=${option}]`, { force: true });
+        } else {
+            element.children().children('.selectize-control').click();
+            element.find('.selectize-dropdown-content').children().eq(option);
+        }
     } else {
-        element.children().children('.selectize-control').click();
-        element.find('.selectize-dropdown-content').children().eq(option);
+        return element.children().eq(0);
     }
+
+
 
     return element;
 });
@@ -64,7 +75,7 @@ Cypress.Commands.add('plexSelectAsync', { prevSubject: 'optional' }, (subject, l
         cy.wait(alias);
         cy.plexSelect(label, option).click({ force: true });
     }
-})
+});
 
 
 Cypress.Commands.add('plexInt', { prevSubject: 'optional' }, (subject, label, text = null) => {
