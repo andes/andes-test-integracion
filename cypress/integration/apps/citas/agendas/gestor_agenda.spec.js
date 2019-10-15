@@ -9,7 +9,7 @@ describe('CITAS - Planicar Agendas', () => {
     })
 
     beforeEach(() => {
-        cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
+        cy.visit('/citas/gestor_agendas', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
@@ -100,7 +100,7 @@ describe('CITAS - Planicar Agendas', () => {
     });
 
     it('crear agenda hoy y publicarla', () => {
-        cy.visit(Cypress.env('BASE_URL') + '/citas/gestor_agendas', {
+        cy.visit('/citas/gestor_agendas', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }

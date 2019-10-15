@@ -62,7 +62,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
 
 
 Cypress.Commands.add('goto', (url, token) => {
-    return cy.visit(Cypress.env('BASE_URL') + url, {
+    return cy.visit(url, {
         onBeforeLoad: (win) => {
             win.sessionStorage.setItem('jwt', token);
         }

@@ -9,7 +9,7 @@ context('Aliasing', () => {
     })
     beforeEach(() => {
         cy.viewport(1280, 720)
-        cy.visit(Cypress.env('BASE_URL') + '/citas/punto-inicio', {
+        cy.visit('/citas/punto-inicio', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
@@ -30,7 +30,7 @@ context('Aliasing', () => {
         cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
 
         // comienzo la atención
-        cy.visit(Cypress.env('BASE_URL') + '/rup');
+        cy.visit('/rup');
         cy.get('plex-button[title="Mostrar todas las agendas"]').click();
         cy.get('plex-select[label="Filtrar por prestación"] input').type('colonoscopia{enter}');
         cy.wait(2000);

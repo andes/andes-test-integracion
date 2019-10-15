@@ -12,7 +12,7 @@ context('Aliasing', () => {
     beforeEach(() => {
         cy.viewport(1280, 720)
 
-        cy.visit(Cypress.env('BASE_URL') + '/solicitudes', {
+        cy.visit('/solicitudes', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
@@ -195,9 +195,9 @@ context('Aliasing', () => {
 
         cy.get('table tbody td span').contains('32589654').click();
         cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY')); -
-        cy.get('plex-bool[name="autocitado"] input').check({
-            force: true
-        });
+            cy.get('plex-bool[name="autocitado"] input').check({
+                force: true
+            });
 
         // Tipo de prestación solicitada
         cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
@@ -315,7 +315,7 @@ context('Aliasing', () => {
                 cy.get('.introjs-tooltipbuttons').children('.introjs-skipbutton').click({
                     force: true
                 })
-            } else {}
+            } else { }
         })
         // cy.get('.introjs-skipbutton').should('be.visible').click({ force: true })
         cy.get('plex-text[name="searchTerm"] input').first().type('Consulta De Pediatría')

@@ -73,6 +73,7 @@ Cypress.Commands.add('createAgenda', (name, daysOffset, horaInicioOffset, horaFi
             method: 'POST',
             url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
             body: agenda,
+            failOnStatusCode: false,
             headers: {
                 Authorization: `JWT ${token}`
             }
