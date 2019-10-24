@@ -28,8 +28,16 @@
                     "nombre": "Argentina",
                     "id": "57f3b5c469fe79a598e6281f"
                 },
-                "provincia": null,
-                "localidad": null,
+                "provincia": {
+                    "_id": "57f3f3aacebd681cc2014c53",
+                    "nombre": "Neuquén",
+                    "id": "57f3f3aacebd681cc2014c53"
+                },
+                "localidad": {
+                    "_id": "57f538a472325875a199a86b",
+                    "nombre": "Paso Aguerre",
+                    "id": "57f538a472325875a199a86b"
+                },
                 "barrio": null
             },
             "ranking": 0,
