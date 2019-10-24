@@ -2,7 +2,6 @@
 
 function secuencia(token) {
     cy.goto('/solicitudes', token);
-    cy.plexTab('Solicitudes de Salida').click();
     cy.plexButton("Nueva Solicitud").click();
 }
 
@@ -29,6 +28,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
         cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
         cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
+        cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
         secuencia(token);
     });
 
@@ -37,19 +37,35 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         seleccionarPaciente(dni);
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
         cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
-        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
-        cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
-        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
-        cy.plexSelect('label="Organización destino"', 0).click();
-        cy.plexSelect('label="Tipo de Prestación Solicitada"', 0).then((elemento) => {
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelect('label="Organización origen"', 0).click();
+        cy.plexSelect('label="Tipos de Prestación Origen"', 0).then((elemento) => {
             idPrestacion = elemento.attr('data-value');
         }).click();
+        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'un motivo lalala');
         cy.plexButton('Guardar').click();
         cy.wait('@createSolicitud').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.paciente.documento).to.be.eq(dni);
-            expect(xhr.response.body.solicitud.tipoPrestacion.conceptId).to.be.eq(idPrestacion);
+            expect(xhr.response.body.solicitud.tipoPrestacionOrigen.conceptId).to.be.eq(idPrestacion);
+        });
+    });
+
+    it('nueva solicitud autocitada exitosa', () => {
+        seleccionarPaciente(dni);
+        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
+        cy.plexBool('label="Autocitado"').check({
+            force: true
+        });
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
+        cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'un motivo lalala');
+        cy.plexButton('Guardar').click();
+        cy.wait('@createSolicitud').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.documento).to.be.eq(dni);
         });
     });
 
@@ -65,25 +81,22 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
 
-        cy.plexSelectType('label="Tipos de Prestación Origen"').validationMessage()
+        cy.plexSelectType('label="Tipo de Prestación Solicitada"').validationMessage()
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
-        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
+
+        cy.plexSelectType('label="Organización origen"').validationMessage()
+        cy.plexButton('Guardar').click();
+        cy.swal('confirm');
+        cy.plexSelect('label="Organización origen"', 0).click();
+
+        cy.plexSelect('label="Tipos de Prestación Origen"', 0).click();
 
         cy.plexSelectType('label="Profesional solicitante"').validationMessage()
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
-        cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
-
-        cy.plexSelectType('label="Organización destino"').validationMessage()
-        cy.plexButton('Guardar').click();
-        cy.swal('confirm');
-        cy.plexSelect('label="Organización destino"', 0).click();
-
-        cy.plexSelect('label="Tipo de Prestación Solicitada"', 0).click();
-        cy.plexButton('Guardar').click();
-        cy.swal('confirm');
 
         cy.plexTextArea('label="Notas / Diagnóstico / Motivo"').validationMessage()
         cy.plexButton('Guardar').click();
@@ -99,11 +112,8 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         seleccionarPaciente(dni);
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
         cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
-        cy.plexSelectType('label="Organización destino"').find('.selectize-dropdown-content').children().should('have.length', 0);
-        cy.plexSelectType('label="Tipo de Prestación Solicitada"').find('.selectize-dropdown-content').children().should('have.length', 0);
+        cy.plexSelectType('label="Organización origen"').find('.selectize-dropdown-content').children().should('have.length', 0);
+        cy.plexSelectType('label="Tipos de Prestación Origen"').find('.selectize-dropdown-content').children().should('have.length', 0);
     });
-
-    //caso en que se elimina el elemento seleccionado del select
-
 
 });
