@@ -3,32 +3,46 @@
 context('auditoria', () => {
     let token
     before(() => {
+        cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
+            cy.createPaciente('apps/auditoria/paciente-validado1.json', token);
+            cy.createPaciente('apps/auditoria/paciente-validado2.json', token);
         })
     })
     beforeEach(() => {
         cy.viewport(1280, 720);
-
-        cy.visit('/apps/mpi/auditoria', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
-    })
-    it.skip('vincular dos pacientes validados', () => {
         cy.server();
-        cy.get('paciente-buscar').get('plex-text input').first().type('39130233');
-        cy.wait(2000); // espero 2s para que se carguen los resultados en la tabla
-        cy.get('tbody tr').first().find('span').should('have.class', 'badge badge-success').should('contain', 'Validado').first().click(); // selecciono el primer resultado de la tabla
-        cy.get('plex-layout-footer plex-button[label="Vincular"]').click();
-        cy.wait(4000);
-        cy.get('paciente-buscar').get('plex-text input').first().type('39404080');
-        cy.wait(2000); // espero 2s para que se carguen los resultados en la tabla
-        cy.get('tbody tr').first().find('span').should('have.class', 'badge badge-success').should('contain', 'Validado').first().click(); // valido que la persona buscada esté validada y la selecciono
+        cy.goto('/apps/mpi/auditoria', token);
+        cy.route('GET', '**api/core/mpi/pacientes**').as('busquedaPaciente');
+        cy.route('POST', '**api/core/mpi/pacientes/**').as('vincularPaciente');
+    })
 
-        cy.get('plex-button[label="Vincular"]').click();
+    it('vincular dos pacientes validados', () => {
+        cy.plexText('name="buscador"', '12386056');
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.get('paciente-listado').find('td').contains('VALIDADO1').click();
+        cy.plexButton('Vincular').click();
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexText('name="buscador"', '12386056');
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').find('td').contains('VALIDADO2').click();
+
+        cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
+
+        cy.wait('@vincularPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.vinculos).to.have.length(2);
+        });
+
         cy.get('tbody tr').first().find('span').should('have.class', 'badge badge-success').should('contain', 'Activo'); // valido que la persona buscada esté validada y la selecciono
         cy.get('plex-button[label="Desactivar"]').should('have.attr', 'type', 'warning');
     });
