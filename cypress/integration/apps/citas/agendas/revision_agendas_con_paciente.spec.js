@@ -49,13 +49,11 @@ context('CITAS - Revisión de Agendas', () => {
         cy.wait(500);
 
         // Hay que corregir el plex-button, ya que debería funcionar así:
-        // cy.plexButtonIcon('refresh').click();
         cy.plexButtonIcon('refresh').click();
 
         cy.get('div[class="simple-notification toast success"]').contains('El estado de la agenda fue actualizado');
 
         // Hay que corregir el plex-button, ya que debería funcionar así:
-        // cy.plexButtonIcon('pencil').click();
         cy.plexButtonIcon('pencil').click();
 
         cy.plexText('name="searchTerm"', 'fiebre inducida por drogas');
@@ -68,7 +66,7 @@ context('CITAS - Revisión de Agendas', () => {
 
     });
 
-    it('Se agrega sobreturno', () => {
+    it.only('Se agrega sobreturno', () => {
         cy.server();
         cy.route('GET', '**/api/auth/organizaciones**').as('organizacionesGet');
         cy.route('POST', '**/api/auth/organizaciones**').as('organizacionesPost');
@@ -88,7 +86,7 @@ context('CITAS - Revisión de Agendas', () => {
         cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
         cy.wait('@listaPacientes');
         cy.get('tr td').contains(pacienteDoc).click();
-        cy.plexDatetime('label="Hora Turno"', Cypress.moment(horaInicio).format('DD/MM/YYYY'));
+        cy.plexDatetime('label="Hora Turno"', Cypress.moment(horaInicio).format('HH:mm'));
         cy.plexButton('Guardar').click();
 
     });
