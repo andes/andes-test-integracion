@@ -291,7 +291,7 @@ context('MPI', () => {
     //     cy.swal('confirm');
     // });
 
-    it('should validar paciente con Renaper', () => {
+    it.only('should validar paciente con Renaper', () => {
 
         let paciente_validado = {
             "paciente": {
