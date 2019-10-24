@@ -46,16 +46,17 @@ context('CITAS - Revisión de Agendas', () => {
 
 
         cy.get('plex-layout-main .plex-box-content').scrollTo('bottom');
+        cy.wait(500);
 
         // Hay que corregir el plex-button, ya que debería funcionar así:
         // cy.plexButtonIcon('refresh').click();
-        cy.plexButtonIcon('mdi mdi-refresh').click();
+        cy.plexButtonIcon('refresh').click();
 
         cy.get('div[class="simple-notification toast success"]').contains('El estado de la agenda fue actualizado');
 
         // Hay que corregir el plex-button, ya que debería funcionar así:
         // cy.plexButtonIcon('pencil').click();
-        cy.plexButtonIcon('mdi mdi-pencil').click();
+        cy.plexButtonIcon('pencil').click();
 
         cy.plexText('name="searchTerm"', 'fiebre inducida por drogas');
 
