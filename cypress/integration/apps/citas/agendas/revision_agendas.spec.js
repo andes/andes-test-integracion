@@ -28,6 +28,7 @@ context('CITAS - Revisión de Agendas', () => {
     let pacienteDoc;
     before(() => {
         cy.seed();
+
         cy.viewport(1280, 720);
         cy.login('30643636', 'asd').then(t => {
             token = t;
@@ -48,26 +49,12 @@ context('CITAS - Revisión de Agendas', () => {
         });
     })
 
-    it('Asignar paciente con asistencia, sin prestación', () => {
+    beforeEach(() => {
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
-        cy.get('tr:nth-child(1) td:first-child').click();
-        cy.plexButton("Buscar Paciente").click();
-        cy.plexText('name="buscador"', pacienteDoc);
-
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
-
-        cy.wait('@listaPacientes');
-        cy.get('tr td').contains(pacienteDoc).click();
-
-        cy.plexSelectType('label="Asistencia"', 'Asistio');
-
     });
 
-
-    it('Operaciones generales', () => {
-
-        cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
+    it('Agregar y eliminar un diagnóstico', () => {
         cy.get('tr:nth-child(1) td:first-child').click();
 
         buscarPaciente(pacienteDoc);
@@ -83,8 +70,12 @@ context('CITAS - Revisión de Agendas', () => {
 
         cy.plexButtonIcon('delete').click();
 
-        let listaTurnos = cy.get('plex-layout-sidebar > .plex-box > .plex-box-content table:first-child tr');
+    });
 
+
+    it('Asignar asistencia a todos los turnos, mismo paciente', () => {
+
+        let listaTurnos = cy.get('plex-layout-sidebar > .plex-box > .plex-box-content table:first-child tr');
 
         listaTurnos.each(($el, index, $list) => {
             if (index > 0) {
