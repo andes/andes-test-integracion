@@ -66,7 +66,7 @@ context('CITAS - Revisión de Agendas', () => {
 
     });
 
-    it.only('Se agrega sobreturno', () => {
+    it('Se agrega sobreturno', () => {
         cy.server();
         cy.route('GET', '**/api/auth/organizaciones**').as('organizacionesGet');
         cy.route('POST', '**/api/auth/organizaciones**').as('organizacionesPost');

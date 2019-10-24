@@ -36,7 +36,7 @@ context('CITAS - Revisión de Agendas', () => {
     });
 
 
-    it('Se selecciona la primera de dos prestaciones, luego se cambia por la segunda', () => {
+    it.skip('Se selecciona la primera de dos prestaciones, luego se cambia por la segunda', () => {
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
         cy.get('tbody:nth-child(1) tr:nth-child(3)').click();
 

@@ -85,20 +85,14 @@
             "reservadoGestion" : 0,
             "accesoDirectoProgramado" : 8,
             "accesoDirectoDelDia" : 0,
-            "tipoPrestaciones" : [ 
-                {
-                    "_id" : "5953eadbd03019f919ea31e3",
-                    "key" : "patologiaMamaria",
-                    "nombre" : "Patología Mamaria",
-                    "autonoma" : true,
-                    "activo" : true,
-                    "turneable" : true,
-                    "tipoProblemas" : [],
-                    "ejecucion" : [],
-                    "solicitud" : [],
-                    "codigo" : []
-                }
-            ],
+            "tipoPrestaciones": [{
+                "_id": "598ca8375adc68e2a0c121b8",
+                "conceptId": "391000013108",
+                "term": "consulta de medicina general",
+                "fsn": "consulta de medicina general",
+                "semanticTag": "procedimiento",
+                "id": "598ca8375adc68e2a0c121b8"
+            }],
             "restantesDelDia" : 0,
             "restantesProgramados" : 8.0,
             "restantesGestion" : 0.0,
@@ -114,20 +108,14 @@
             "nombre" : "ELSA SUSANA"
         }
     ],
-    "tipoPrestaciones" : [ 
-        {
-            "_id" : "5953eadbd03019f919ea31e3",
-            "key" : "patologiaMamaria",
-            "nombre" : "Patología Mamaria",
-            "autonoma" : true,
-            "activo" : true,
-            "turneable" : true,
-            "tipoProblemas" : [],
-            "ejecucion" : [],
-            "solicitud" : [],
-            "codigo" : []
-        }
-    ],
+    "tipoPrestaciones": [{
+        "_id": "598ca8375adc68e2a0c121b8",
+        "conceptId": "391000013108",
+        "term": "consulta de medicina general",
+        "fsn": "consulta de medicina general",
+        "semanticTag": "procedimiento",
+        "id": "598ca8375adc68e2a0c121b8"
+    }],
     "__v" : 0,
     "updatedAt" : "2017-11-28T02:00:00.108Z",
     "updatedBy" : {

@@ -54,6 +54,15 @@ context('CITAS - Revisión de Agendas', () => {
         cy.server();
     });
 
+    it('Comprueba datos de la agenda', () => {
+        cy.plexButtonIcon('chevron-down').click();
+        cy.get('plex-layout-sidebar header > fieldset > div > div:nth-child(2) > div').contains(/[A-Z]{3}\. [0-9]{2}\/[0-9]{2}\/[0-9]{4}, [0-9]{2}:[0-9]{2} a [0-9]{2}:[0-9]{2} hs/).should('not.be.empty');
+        cy.get('plex-layout-sidebar header > fieldset > div > div:nth-child(3) > div div').should('not.be.empty');
+        cy.get('plex-layout-sidebar header > fieldset > div > div:nth-child(4) > div div').should('not.be.empty');
+        cy.get('plex-layout-sidebar header > fieldset > div > div:nth-child(5) > div span').should('not.be.empty');
+        cy.plexButtonIcon('chevron-up').click();
+    });
+
     it('Agregar y eliminar un diagnóstico', () => {
         cy.get('tr:nth-child(1) td:first-child').click();
 
