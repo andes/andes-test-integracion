@@ -72,8 +72,24 @@ Cypress.Commands.add('createProfesional', (name, token) => {
     });
 });
 
-Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset, horaFinOffset, token) => {
-    return cy.fixture(fixtureName).then((agenda) => {
+Cypress.Commands.add('createProfesional', (name, token) => {
+    return cy.fixture(name).then((profesional) => {
+        cy.request({
+            method: 'POST',
+            url: Cypress.env('API_SERVER') + '/api/core/tm/profesionales',
+            body: {
+                profesional
+            },
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        });
+    });
+});
+
+
+Cypress.Commands.add('createAgenda', (name, daysOffset, horaInicioOffset, horaFinOffset, token) => {
+    return cy.fixture(name).then((agenda) => {
         if (horaInicioOffset !== null) {
             let newDate = Cypress.moment().add(daysOffset, 'days'); //.format('YYYY-MM-DD');
             let newFechaInicio = Cypress.moment().set({

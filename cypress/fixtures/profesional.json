@@ -1,0 +1,19 @@
+{
+    "_id" : "5da08e2a68231c091df219c0",
+    "habilitado" : true,
+    "incluidoSuperintendencia" : false,
+    "notas" : null,
+    "rematriculado" : 0,
+    "profesionalMatriculado" : true,
+    "nombre" : "Gustavo Manuel",
+    "apellido" : "Riquelme",
+    "tipoDocumento" : "DNI",
+    "documento" : "16235478",
+    "documentoViejo" : null,
+    "fotoArchivo" : null,
+    "firmas" : null,
+    "formacionPosgrado" : null,
+    "agenteMatriculador" : "ANDRES MARIANO PALAVECINO",
+    "OtrosDatos" : null,
+    "idRenovacion" : null
+}
