@@ -1,7 +1,6 @@
 /// <reference types="Cypress" />
 
 export function buscarPaciente(pacienteDoc) {
-    cy.wait(4500);
     cy.plexButton("Buscar Paciente").click();
     cy.plexText('name="buscador"', pacienteDoc);
 
@@ -11,6 +10,7 @@ export function buscarPaciente(pacienteDoc) {
     cy.wait('@listaPacientes');
 
     cy.get('tr td').contains(pacienteDoc).click();
+    cy.wait(100);
 
     cy.plexButton("Cambiar Paciente").click();
     cy.plexText('name="buscador"', pacienteDoc);
@@ -91,7 +91,7 @@ context('CITAS - Revisión de Agendas', () => {
                 cy.get($el).click();
                 buscarPaciente(pacienteDoc);
                 cy.plexSelectType('label="Asistencia"').click().get('.option').contains('No Asistio').click();
-                cy.wait(4500);
+                cy.get('.simple-notification').click();
             }
         });
 
