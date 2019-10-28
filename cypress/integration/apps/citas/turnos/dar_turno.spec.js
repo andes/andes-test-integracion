@@ -6,7 +6,7 @@ context('punto de inicio', () => {
             token = t;
             cy.createAgenda('apps/citas/turnos/agendaDinamicaDarTurno', 0, 0, 1, token);
             cy.createAgenda('apps/citas/turnos/agendaDarTurnoProgramado', 8, null, null, token);
-            cy.createPaciente('paciente-normal.json', token);
+            cy.createPaciente('apps/citas/turnos/paciente-turnos', token);
         });
     });
     beforeEach(() => {

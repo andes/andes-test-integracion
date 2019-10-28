@@ -1,14 +1,14 @@
 context('punto de inicio', () => {
     let token;
-    const DNI = '20000000';
+    const DNI = '36425896';
     before(() => {
         // Borro los datos de la base antes de los test
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
-            cy.createPaciente('paciente-normal.json', token).then(r => {
-                cy.createAgendaPaciente('agenda-turno-paciente.json', 0, 0, 2, r.body._id, token);
-                cy.createAgendaPaciente('agenda-turno-paciente.json', 0, 4, 6, r.body._id, token);
+            cy.createPaciente('apps/citas/turnos/paciente-turnos', token).then(r => {
+                cy.createAgendaPaciente('agenda-turno-paciente', 0, 0, 2, r.body._id, token);
+                cy.createAgendaPaciente('agenda-turno-paciente', 0, 4, 6, r.body._id, token);
             });
         });
     });
@@ -123,7 +123,7 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexPhone('label="Número"', '2990000000');
+        cy.plexPhone('label="Número"', '{selectall}{backspace}2990000000');
         cy.plexText('label="Dirección"', 'Avenida Las Flores 1200');
 
         cy.plexSelectType('label="Provincia"', 'Neuquén');
@@ -287,9 +287,9 @@ context('punto de inicio', () => {
         cy.get('li[class="list-group-item"]').find('div[class=" list-group-item-text"]').find('div[class="row"]')
             .find('div[class="col-md-12"]').eq(1).plexButton("Liberar Turno").click({ force: true });
 
-            cy.wait('@getTurnosAgenda').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-            });
+        cy.wait('@getTurnosAgenda').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.plexButton("Liberar").click();
 
