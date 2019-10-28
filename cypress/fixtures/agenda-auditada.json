@@ -1,0 +1,198 @@
+{
+    "createdBy" : {
+        "organizacion" : {
+            "id" : "57e9670e52df311059bc8964",
+            "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "_id" : "57e9670e52df311059bc8964"
+        },
+        "documento" : 34292120,
+        "username" : 34292120,
+        "apellido" : "BUSTO GARCIA",
+        "nombre" : "SILVINA GABRIELA",
+        "nombreCompleto" : "SILVINA GABRIELA BUSTO GARCIA"
+    },
+    "createdAt" : "2019-09-28T18:22:35.299Z",
+    "horaInicio" : "2019-09-29T12:00:00.000Z",
+    "horaFin" : "2019-09-29T14:00:00.000Z",
+    "organizacion" : {
+        "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+        "_id" : "57e9670e52df311059bc8964"
+    },
+    "sobreturnos" : [],
+    "bloques" : [ 
+        {
+            "cantidadTurnos" : 8,
+            "horaInicio" : "2019-09-29T12:00:00.000Z",
+            "horaFin" : "2019-09-29T14:00:00.000Z",
+            "duracionTurno" : 15,
+            "cantidadSimultaneos" : null,
+            "cantidadBloque" : null,
+            "_id" : "5953f3eb1801a153a2348e0c",
+            "descripcion" : null,
+            "turnos" : [ 
+                {
+                    "horaInicio" : "2019-09-29T12:00:00.000Z",
+                    "_id" : "5955016e81ac784c129a376b",
+                    "diagnosticoSecundario" : [],
+                    "estado" : "disponible"
+                }, 
+                {
+                    "horaInicio" : "2019-09-29T12:15:00.000Z",
+                    "_id" : "5955016e81ac784c129a376a",
+                    "diagnosticoSecundario" : [],
+                    "estado" : "disponible"
+                }, 
+                {
+                    "horaInicio" : "2019-09-29T12:30:00.000Z",
+                    "_id" : "5955016e81ac784c129a3769",
+                    "diagnosticoSecundario" : [],
+                    "estado" : "disponible"
+                }, 
+                {
+                    "horaInicio" : "2019-09-29T12:45:00.000Z",
+                    "_id" : "5955016e81ac784c129a3768",
+                    "diagnosticoSecundario" : [],
+                    "estado" : "disponible"
+                }, 
+                {
+                    "horaInicio" : "2019-09-29T13:00:00.000Z",
+                    "_id" : "5955016e81ac784c129a3767",
+                    "diagnosticoSecundario" : [],
+                    "estado" : "disponible"
+                }, 
+                {
+                    "horaInicio" : "2019-09-29T13:15:00.000Z",
+                    "_id" : "5955016e81ac784c129a3766",
+                    "diagnosticoSecundario" : [],
+                    "estado" : "disponible"
+                }, 
+                {
+                    "horaInicio" : "2019-09-29T13:30:00.000Z",
+                    "_id" : "5955016e81ac784c129a3765",
+                    "diagnosticoSecundario" : [],
+                    "estado" : "disponible"
+                }, 
+                {
+                    "horaInicio" : "2019-09-29T13:45:00.000Z",
+                    "_id" : "5955016e81ac784c129a3764",
+                    "diagnosticoSecundario" : [],
+                    "estado" : "disponible"
+                }
+            ],
+            "citarPorBloque" : false,
+            "pacienteSimultaneos" : false,
+            "reservadoProfesional" : 0,
+            "reservadoGestion" : 0,
+            "accesoDirectoProgramado" : 8,
+            "accesoDirectoDelDia" : 0,
+            "tipoPrestaciones": [{
+                "_id": "598ca8375adc68e2a0c121b8",
+                "conceptId": "391000013108",
+                "term": "consulta de medicina general",
+                "fsn": "consulta de medicina general",
+                "semanticTag": "procedimiento",
+                "id": "598ca8375adc68e2a0c121b8"
+            }],
+            "restantesDelDia" : 0,
+            "restantesProgramados" : 8.0,
+            "restantesGestion" : 0.0,
+            "restantesProfesional" : 0.0
+        }
+    ],
+    "estado" : "pendienteAuditoria",
+    "intercalar" : false,
+    "profesionales" : [ 
+        {
+            "_id" : "58f74fd4d03019f919ea1249",
+            "apellido" : "MORALES",
+            "nombre" : "ELSA SUSANA"
+        }
+    ],
+    "tipoPrestaciones": [{
+        "_id": "598ca8375adc68e2a0c121b8",
+        "conceptId": "391000013108",
+        "term": "consulta de medicina general",
+        "fsn": "consulta de medicina general",
+        "semanticTag": "procedimiento",
+        "id": "598ca8375adc68e2a0c121b8"
+    }],
+    "__v" : 0,
+    "updatedAt" : "2017-11-28T02:00:00.108Z",
+    "updatedBy" : {
+        "organizacion" : {
+            "_id" : "57f67d090166fa6aedb2f9fb",
+            "nombre" : "HOSPITAL DE AREA CENTENARIO - DR. NATALIO BURD",
+            "nivelComplejidad" : 3,
+            "direccion" : {
+                "valor" : "AV. LIBERTADOR 700",
+                "codigoPostal" : "8309",
+                "ubicacion" : {
+                    "pais" : {
+                        "nombre" : "Argentina",
+                        "_id" : "57f3b5c469fe79a598e6281f",
+                        "id" : "57f3b5c469fe79a598e6281f"
+                    },
+                    "provincia" : {
+                        "nombre" : "Neuquén",
+                        "_id" : "57f3f3aacebd681cc2014c53",
+                        "id" : "57f3f3aacebd681cc2014c53"
+                    },
+                    "localidad" : {
+                        "nombre" : "CENTENARIO",
+                        "_id" : "57f538a472325875a199a829",
+                        "id" : "57f538a472325875a199a829"
+                    },
+                    "_id" : "57ffba9696a41114a89d7cae",
+                    "id" : "57ffba9696a41114a89d7cae"
+                },
+                "ranking" : null,
+                "_id" : "57ffba9696a41114a89d7cad",
+                "activo" : true,
+                "id" : "57ffba9696a41114a89d7cad"
+            },
+            "telecom" : [ 
+                {
+                    "activo" : true,
+                    "ranking" : 2,
+                    "valor" : "4891424",
+                    "tipo" : "Teléfono Fijo",
+                    "_id" : "57ffba9696a41114a89d7cac"
+                }, 
+                {
+                    "activo" : true,
+                    "ranking" : 1,
+                    "valor" : "0299-4898862",
+                    "tipo" : "Teléfono Fijo",
+                    "_id" : "57ffba9696a41114a89d7cab"
+                }
+            ],
+            "tipoEstablecimiento" : {
+                "nombre" : "Hospital",
+                "_id" : "5894b7e34633bf3dbc043152",
+                "id" : "5894b7e34633bf3dbc043152"
+            },
+            "fechaBaja" : "2017-03-02T11:26:47.459Z",
+            "activo" : false,
+            "edificio" : [],
+            "contacto" : [ 
+                {
+                    "valor" : "1542811567",
+                    "tipo" : "",
+                    "_id" : "57ffba9696a41114a89d7cb2",
+                    "activo" : true,
+                    "id" : "57ffba9696a41114a89d7cb2"
+                }
+            ],
+            "codigo" : {
+                "sisa" : "10580352167014",
+                "cuie" : "Q06393",
+                "remediar" : "0"
+            },
+            "id" : "57f67d090166fa6aedb2f9fb"
+        },
+        "apellido" : "BRAVO",
+        "nombre" : "IVANA SOLEDAD CAROLA"
+    },
+    "avisos" : [],
+    "nominalizada" : true
+}
