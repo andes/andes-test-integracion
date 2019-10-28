@@ -1,6 +1,7 @@
 describe('CITAS - Planicar Agendas', () => {
     let token
     before(() => {
+        cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('paciente-dinamico', token);
