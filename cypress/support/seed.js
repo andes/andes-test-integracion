@@ -2,6 +2,8 @@ Cypress.Commands.add('seed', () => {
     const develop = Cypress.env('ENVIRONMENT') === 'develop';
     if (develop) {
         cy.exec('npm run prod:reset');
+    } else {
+        // cy.exec('npm run prod:cleanup');
     }
 });
 
@@ -71,7 +73,7 @@ Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset,
                 agenda.horaFin = agenda.horaFin.replace('2019-07-01', newDate);
             }
         }
-        cy.request({
+        return cy.request({
             method: 'POST',
             url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
             body: agenda,

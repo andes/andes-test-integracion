@@ -27,8 +27,6 @@ context('CITAS - Revisión de Agendas', () => {
             idBloque = xhr.body.bloques[0].id;
             idTurno = xhr.body.bloques[0].turnos[1].id;
             horaInicio = xhr.horaInicio;
-        }).then(xhr => {
-            cy.log(xhr.body.paciente);
         });
     });
 
@@ -71,6 +69,7 @@ context('CITAS - Revisión de Agendas', () => {
         cy.route('GET', '**/api/auth/organizaciones**').as('organizacionesGet');
         cy.route('POST', '**/api/auth/organizaciones**').as('organizacionesPost');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('agendas');
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
 
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
 
@@ -83,7 +82,6 @@ context('CITAS - Revisión de Agendas', () => {
 
         cy.plexButton('Agregar Sobreturno').click();
         cy.plexText('name="buscador"', pacienteDoc);
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
         cy.wait('@listaPacientes');
         cy.get('tr td').contains(pacienteDoc).click();
         cy.plexDatetime('label="Hora Turno"', Cypress.moment(horaInicio).format('HH:mm'));

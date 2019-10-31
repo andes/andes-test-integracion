@@ -30,8 +30,6 @@ context('CITAS - Revisión de Agendas', () => {
             horaInicio = xhr.body.horaInicio;
             tipoPrestacion1 = xhr.body.tipoPrestaciones[0];
             tipoPrestacion2 = xhr.body.tipoPrestaciones[1];
-        }).then(xhr => {
-            cy.log(xhr.body.paciente);
         });
     });
 

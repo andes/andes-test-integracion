@@ -54,6 +54,14 @@ const backup = {
     ]
 };
 
+const cleanup = {
+    production: [
+        'docker exec andes_db mongo andes --eval "db.paciente.remove();db.agenda.remove();db.prestaciones.remove();"',
+        'curl -XDELETE "http://localhost:9266/andes"',
+        'curl -XPUT "http://localhost:9266/andes/" -d @docker/andes-index.json'
+    ]
+};
+
 function runCommands(cmds) {
     const { execSync } = require('child_process');
     for (let i = 0; i < cmds.length; i++) {
@@ -73,5 +81,8 @@ switch (action) {
         break;
     case 'backup':
         runCommands(backup[type]);
+        break;
+    case 'cleanup':
+        runCommands(cleanup[type]);
         break;
 }

@@ -1,12 +1,13 @@
 {
-    "env": {
-        "API_SERVER": "http://localhost:3002"
-    },
-    "reporter": "junit",
-    "reporterOptions": {
-        "mochaFile": "results/cypress-report.xml",
-        "toConsole": true
-    },
-    "chromeWebSecurity": false,
-    "modifyObstructiveCode": false
+  "env": {
+    "API_SERVER": "http://localhost:3002"
+  },
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "results/cypress-report.xml",
+    "toConsole": true
+  },
+  "chromeWebSecurity": false,
+  "modifyObstructiveCode": false,
+  "projectId": "xr7gft"
 }

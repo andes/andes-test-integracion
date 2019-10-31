@@ -5,7 +5,6 @@ export function buscarPaciente(pacienteDoc) {
     cy.plexText('name="buscador"', pacienteDoc);
 
     cy.server();
-    cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
 
     cy.wait('@listaPacientes');
 
@@ -28,7 +27,6 @@ context('CITAS - Revisión de Agendas', () => {
     let pacienteDoc;
     before(() => {
         cy.seed();
-
         cy.viewport(1280, 720);
         cy.login('30643636', 'asd').then(t => {
             token = t;
@@ -42,16 +40,13 @@ context('CITAS - Revisión de Agendas', () => {
             idBloque = xhr.body.bloques[0].id;
             idTurno = xhr.body.bloques[0].turnos[1].id;
             return cy.createTurno('nuevo-turno-asistio', idTurno, idBloque, idAgenda, paciente, token);
-            // }).then(xhr => {
-            // return cy.createPrestacionAgenda('prestacion-validada-turno', idTurno, paciente, token);
-        }).then(xhr => {
-            cy.log(xhr.body.paciente);
         });
     })
 
     beforeEach(() => {
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
         cy.server();
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
     });
 
     it('Comprueba datos de la agenda', () => {

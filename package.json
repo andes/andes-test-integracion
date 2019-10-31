@@ -12,6 +12,7 @@
     "prod:reset": "node scripts/prepare.js production reset",
     "prod:down": "node scripts/prepare.js production down",
     "prod:backup": "node scripts/prepare.js production backup",
+    "prod:cleanup": "node scripts/prepare.js production cleanup",
     "prod:update": "cross-env APP=master API=master docker-compose -f docker/docker-compose.yml pull",
     "dev:up": "node scripts/prepare.js develop up",
     "dev:reset": "node scripts/prepare.js develop reset",
