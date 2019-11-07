@@ -7,10 +7,13 @@ context('punto de inicio', () => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('apps/citas/turnos/paciente-turnos', token).then(r => {
-                cy.createAgendaPaciente('agenda-turno-paciente', 0, 0, 2, r.body._id, token);
-                cy.createAgendaPaciente('agenda-turno-paciente', 0, 4, 6, r.body._id, token);
+                cy.createAgendaPaciente('agenda-turno-paciente', 0, 0, 2, r.body, token);
+                cy.createAgendaPaciente('agenda-turno-paciente', 0, 4, 6, r.body, token);
+                cy.createAgendaPaciente('apps/citas/agendas/agenda-historial', null, null, null, r.body, token);
             });
+
         });
+
     });
 
     beforeEach(() => {
@@ -29,7 +32,7 @@ context('punto de inicio', () => {
         cy.get('.alert.alert-danger').should('contain', 'No se encontró ningún paciente..');
     });
 
-    it('generar solicitud', () => {
+    it('Generar solicitud', () => {
         cy.route('GET', '**api/modules/rup/prestaciones/solicitudes?idPaciente=**').as('generarSolicitudPaciente');
         cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
         cy.plexText('name=buscador', DNI);
@@ -300,6 +303,83 @@ context('punto de inicio', () => {
         cy.wait('@getLog').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+
+    });
+
+    it('Historial', () => {
+        cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
+        cy.route('GET', '**/api/modules/turnos/historial?*').as('getTurnos');
+
+        cy.plexText('name="buscador"', '36425896');
+
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.get('paciente-listado').find('td').contains('36425896').click();
+
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.wait('@getTurnos').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.get('plex-tabs').contains('Historial').click({ force: true });
+
+        cy.get('li[class="list-group-item"]').eq(1).find('span[class="badge badge-success"]').contains('ASIGNADO');
+
+        cy.get('li[class="list-group-item"]').eq(1).contains('08/10/2019 11:00');
+
+        cy.get('li[class="list-group-item"]').eq(1).contains('consulta de medicina general');
+
+        cy.get('li[class="list-group-item"]').eq(1).contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+    });
+
+    it('Carpetas', () => {
+        cy.route('GET', '**api/modules/carpetas/carpetasPacientes?*').as('getCarpetas');
+        cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
+        cy.route('GET', '**/api/modules/turnos/historial?*').as('getTurnos');
+        cy.route('PATCH', '**/api/core/mpi/pacientes/*').as('carpetaNueva');
+        cy.route('POST', '**/api/modules/carpetas/incrementarCuenta').as('incrementaCarpeta');
+
+        cy.plexText('name="buscador"', '36425896');
+
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').find('td').contains('36425896').click();
+
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.wait('@getTurnos').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.get('plex-tabs').contains('Carpetas').click({ force: true });
+
+        cy.wait('@getCarpetas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.plexButton("Nueva Carpeta").click();
+
+        cy.plexText('label="Número de Carpeta"', '123');
+
+        cy.plexButton("Guardar").click();
+
+        cy.wait('@carpetaNueva').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.wait('@incrementaCarpeta').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.contains('Nuevo número de carpeta establecido');
 
     });
 })
