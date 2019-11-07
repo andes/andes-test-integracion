@@ -21,6 +21,16 @@
             "cantidadTurnos": 1,
             "horaInicio": "2019-07-01T14:00:00.000Z",
             "horaFin": "2019-07-01T14:00:00.000Z",
+            "profesionales": [
+                {
+                    "_id": "5d4195500ae227149d508506",
+                    "nombre": "prueba",
+                    "apellido": "agendaPlanificada",
+                    "documento": "15789463",
+                    "nombreCompleto": "agendaPlanificada, prueba",
+                    "id": "5d4195500ae227149d508506"
+                }
+            ],
             "duracionTurno": 30,
             "cantidadSimultaneos": null,
             "cantidadBloque": null,

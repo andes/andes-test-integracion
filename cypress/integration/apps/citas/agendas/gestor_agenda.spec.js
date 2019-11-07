@@ -4,11 +4,20 @@ describe('CITAS - Planicar Agendas', () => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
+            cy.createProfesional('apps/citas/agendas/gestor-agendas-listado/profesional', token);
+            cy.createAgenda('apps/citas/agendas/gestor-agendas-listado/agendaMedicinaGeneralPublicada', 0, 0, 1, token);
+            cy.createAgenda('apps/citas/agendas/gestor-agendas-listado/agendaPlanificada', 0, 2, 3, token);
+            cy.createAgenda('apps/citas/agendas/gestor-agendas-listado/agendaMedicinaGeneralAPublicar', 0, 0, 0, token);
+            cy.createAgenda('apps/citas/agendaDarSobreturno', 0, 0, 1, token);
             cy.createPaciente('paciente-dinamico', token);
         });
     })
 
     beforeEach(() => {
+        cy.server();
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getTiposPrestacion');
+        cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgendas');
+        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.visit('/citas/gestor_agendas', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
@@ -18,7 +27,6 @@ describe('CITAS - Planicar Agendas', () => {
     })
 
     it('crea agenda de turnos programados y publicarla', () => {
-        cy.server();
         cy.route('POST', '**/api/modules/turnos/agenda**').as('crear');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('get');
@@ -59,7 +67,6 @@ describe('CITAS - Planicar Agendas', () => {
     });
 
     it('crear agenda con turnos del día y publicarla', () => {
-        cy.server();
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
         cy.route('POST', '**/api/modules/turnos/agenda**').as('crear');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('get');
@@ -120,7 +127,7 @@ describe('CITAS - Planicar Agendas', () => {
 
         cy.get('plex-dateTime[name="modelo.fecha"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         let ahora = Cypress.moment();
-        cy.get('plex-dateTime[name="modelo.horaInicio"] input').type(ahora.hour());
+        cy.get('plex-dateTime[name="modelo.horaInicio"] input').type(ahora.add(-1, 'hour').hour());
         cy.get('plex-dateTime[name="modelo.horaFin"] input').type(ahora.add(1, 'hour').hour());
 
         cy.selectWrite('name="modelo.tipoPrestaciones"', 'consulta de medicina general');
@@ -145,7 +152,6 @@ describe('CITAS - Planicar Agendas', () => {
     })
 
     it('crea agenda dinámica para la fecha actual', () => {
-        cy.server();
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
         cy.route('POST', '**/api/modules/turnos/agenda**').as('crear');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('get');
@@ -194,7 +200,6 @@ describe('CITAS - Planicar Agendas', () => {
     });
 
     it('crea agenda semana próxima y publicarla', () => {
-        cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1**').as('getPrestacion');
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('GET', '**/api/modules/turnos/espacioFisico?activo=**').as('getEspaciosFisicos');
@@ -252,7 +257,6 @@ describe('CITAS - Planicar Agendas', () => {
     })
 
     it('crea agenda no nominalizada', () => {
-        cy.server();
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('publicar');
         cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('getAgendas');
@@ -389,7 +393,6 @@ describe('CITAS - Planicar Agendas', () => {
         cy.createAgenda('agendasClonar/agendaClonar4', 17, null, null, token);
         cy.createAgenda('agendasClonar/agendaClonar5', 16, null, null, token);
 
-        cy.server();
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('GET', '**/api/modules/turnos/espacioFisico?activo=**').as('getEspaciosFisicos');
         cy.route('GET', '**/api/modules/turnos/agenda?fechaDesde=**').as('getAgendas');
@@ -457,7 +460,6 @@ describe('CITAS - Planicar Agendas', () => {
     it('dar sobreturno', () => {
         let horaInicioOffset = 0;
         let horaFinOffset = 1;
-        cy.createAgenda('apps/citas/agendaDarSobreturno', 0, horaInicioOffset, horaFinOffset, token);
 
         let nuevaHoraInicio = Cypress.moment().add(horaInicioOffset, 'hours');
         let nuevaHoraFin = Cypress.moment().add(horaFinOffset, 'hours');
@@ -513,4 +515,66 @@ describe('CITAS - Planicar Agendas', () => {
             expect(xhr.response.body.sobreturnos).to.have.length(1);
         });
     })
+
+    it('editar agenda publicada', () => {
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.wait('@getAgendas');
+        cy.get('table tbody div').contains('agendaPublicada, prueba').click({
+            force: true
+        });
+        cy.get('plex-button[title="Editar"]').click();
+        cy.get('.remove-button').click();
+        cy.get('plex-select[label="Equipo de Salud"]').children().children('.selectize-control').find('input').first().type('Lopex Mario').as('profesional');
+        cy.wait('@getProfesional');
+        cy.get('@profesional').type('{enter}');
+        cy.get('plex-select[label="Espacio Físico"]').children().children('.selectize-control').find('input').first().type('Huemul Consultorio 3 PB').as('espacio');
+        cy.wait(2000);
+        cy.get('@espacio').type('{enter}');
+        cy.get('plex-button[label="Guardar"]').click();
+        cy.get('.nombres-profesionales').contains('Lopex, Mario');
+        cy.get('table tbody tr td').contains('Huemul Consultorio 3 PB (Huemul)');
+    })
+
+    it('editar agenda en planificación', () => {
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.wait('@getAgendas');
+        cy.get('table tbody div').contains('agendaPlanificada, prueba').click({
+            force: true
+        });
+        cy.get('plex-button[title="Editar"]').click();
+        cy.swal('cancel');
+        cy.get('.item[data-value="59ee2d9bf00c415246fd3d6a"] .remove-button').click();
+        const manana = Cypress.moment().add(1, 'days').format('DD/MM/YYYY');
+        cy.get('plex-dateTime[name="modelo.fecha"] input').type('{selectall}{backspace}' + manana);
+        cy.get('plex-dateTime[name="modelo.horaInicio"] input').type('{selectall}{backspace}' + '1400');
+        cy.get('plex-dateTime[name="modelo.horaFin"] input').type('{selectall}{backspace}' + '1900');
+        cy.selectOption('name="modelo.tipoPrestaciones"', '"59ee2d9bf00c415246fd3d85"');
+        cy.get('plex-select[label="Equipo de Salud"] .remove-button').click();
+        cy.get('plex-select[label="Equipo de Salud"]').children().children('.selectize-control').find('input').first().type('Lopex Mario').as('profesional');
+        cy.wait('@getProfesional');
+        cy.get('@profesional').type('{enter}');
+        cy.get('plex-button[label="Guardar"]').click();
+        cy.get('plex-dateTime[label="Desde"] input').type('{selectall}{backspace}' + manana);
+        cy.get('plex-dateTime[label="Hasta"] input').type('{selectall}{backspace}' + manana);
+        cy.get('.nombres-profesionales').contains('Lopex, Mario');
+        cy.get('.tipo-prestacion').contains('Consulta de ortopedia');
+        cy.get('.datos-agenda').contains(' 14:00 a 19:00 hs - ');
+    })
+
+    it('publicar agenda en planificación', () => {
+        cy.wait('@getAgendas');
+        cy.get('table tbody div').contains('agendaAPublicar, prueba').click({
+            force: true
+        });
+        cy.get('plex-button[title="Publicar"]').click();
+        cy.swal('confirm');
+        cy.get('table tbody div').contains('agendaAPublicar, prueba').click({
+            force: true
+        });
+        cy.get('.bloques-y-turnos .badge-success').contains('Publicada');
+        cy.get('table tbody .bg-inverse').contains('Publicada');
+
+    })
+
+
 })
