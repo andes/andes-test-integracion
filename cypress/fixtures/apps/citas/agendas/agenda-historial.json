@@ -1,0 +1,142 @@
+{
+    "intercalar": false,
+    "estado": "publicada",
+    "nominalizada": true,
+    "dinamica": false,
+    "bloques": [
+        {
+            "accesoDirectoDelDia": 2,
+            "accesoDirectoProgramado": 0,
+            "reservadoGestion": 0,
+            "reservadoProfesional": 0,
+            "cupoMobile": 0,
+            "restantesDelDia": 0,
+            "restantesProgramados": 0,
+            "restantesGestion": 0,
+            "restantesProfesional": 0,
+            "restantesMobile": 0,
+            "pacienteSimultaneos": false,
+            "citarPorBloque": false,
+            "turnosMobile": false,
+            "_id": "5dc4268049cb1d043b2fbfe5",
+            "cantidadTurnos": 2,
+            "horaInicio": "2019-10-08T11:00:00.000-03:00",
+            "horaFin": "2019-10-08T13:00:00.000-03:00",
+            "duracionTurno": 60,
+            "cantidadSimultaneos": null,
+            "cantidadBloque": null,
+            "tipoPrestaciones": [
+                {
+                    "auditable": true,
+                    "_id": "598ca8375adc68e2a0c121b8",
+                    "conceptId": "391000013108",
+                    "term": "consulta de medicina general",
+                    "fsn": "consulta de medicina general",
+                    "semanticTag": "procedimiento"
+                }
+            ],
+            "turnos": [
+                {
+                    "estadoFacturacion": {
+                        "estado": "Sin comprobante",
+                        "tipo": "",
+                        "numeroComprobante": ""
+                    },
+                    "estado": "asignado",
+                    "_id": "5d79417a5f6cfc13bb7d7842",
+                    "diagnostico": {
+                        "codificaciones": []
+                    },
+                    "horaInicio": "2019-10-08T11:00:00.000-03:00",
+                    "emitidoPor": "Gestión de pacientes",
+                    "motivoConsulta": null,
+                    "nota": null,
+                    "paciente": {
+                        "_id": "5d790c8b59530a13545f8394",
+                        "id": "5d790c8b59530a13545f8394",
+                        "documento": "31549268",
+                        "apellido": "TURNO",
+                        "nombre": "PACIENTE",
+                        "alias": "",
+                        "fechaNacimiento": "1987-01-01T00:00:00.000-03:00",
+                        "sexo": "femenino",
+                        "telefono": "",
+                        "carpetaEfectores": [],
+                        "obraSocial": null
+                    },
+                    "tipoPrestacion": {
+                        "auditable": true,
+                        "_id": "598ca8375adc68e2a0c121b8",
+                        "conceptId": "391000013108",
+                        "term": "consulta de medicina general",
+                        "fsn": "consulta de medicina general",
+                        "semanticTag": "procedimiento"
+                    },
+                    "tipoTurno": "delDia",
+                    "updatedAt": "2019-09-11T09:05:37.952-03:00",
+                    "updatedBy": {
+                        "id": "59e76172b7c39e57a13b38c5",
+                        "nombreCompleto": "30643636 30643636",
+                        "nombre": "30643636",
+                        "apellido": "30643636",
+                        "username": 30643636,
+                        "documento": 30643636,
+                        "organizacion": {
+                            "_id": "57e9670e52df311059bc8964",
+                            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+                            "id": "57e9670e52df311059bc8964"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "horaInicio": "2019-10-08T11:00:00.000-03:00",
+    "horaFin": "2019-10-08T13:00:00.000-03:00",
+    "tipoPrestaciones": [
+        {
+            "auditable": true,
+            "_id": "598ca8375adc68e2a0c121b8",
+            "conceptId": "391000013108",
+            "term": "consulta de medicina general",
+            "fsn": "consulta de medicina general",
+            "semanticTag": "procedimiento"
+        }
+    ],
+    "organizacion": {
+        "_id": "57e9670e52df311059bc8964",
+        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+    },
+    "profesionales": [],
+    "avisos": [],
+    "sobreturnos": [],
+    "createdAt": "2019-09-11T09:03:35.006-03:00",
+    "createdBy": {
+        "id": "59e76172b7c39e57a13b38c5",
+        "nombreCompleto": "30643636 30643636",
+        "nombre": "30643636",
+        "apellido": "30643636",
+        "username": 30643636,
+        "documento": 30643636,
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id": "57e9670e52df311059bc8964"
+        }
+    },
+    "updatedAt": "2019-11-07T11:13:20.350-03:00",
+    "updatedBy": {
+        "id": "59e76172b7c39e57a13b38c5",
+        "nombreCompleto": "30643636 30643636",
+        "nombre": "30643636",
+        "apellido": "30643636",
+        "username": 30643636,
+        "documento": 30643636,
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id": "57e9670e52df311059bc8964"
+        }
+    },
+    "espacioFisico": null
+}
