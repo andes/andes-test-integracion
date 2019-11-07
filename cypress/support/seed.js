@@ -155,9 +155,9 @@ Cypress.Commands.add('createAgenda48hs', (name, token) => {
     });
 });
 
-Cypress.Commands.add('createAgendaPaciente', (name, daysOffset, horaInicioOffset, horaFinOffset, idPaciente, token) => {
+Cypress.Commands.add('createAgendaPaciente', (name, daysOffset, horaInicioOffset, horaFinOffset, paciente, token) => {
     return cy.fixture(name).then((agenda) => {
-        agenda.bloques[0].turnos[0].paciente.id = idPaciente;
+        agenda.bloques[0].turnos[0].paciente = paciente;
         if (horaInicioOffset !== null) {
             let newDate = Cypress.moment().add(daysOffset, 'days'); //.format('YYYY-MM-DD');
             let newFechaInicio = Cypress.moment().set({
@@ -201,7 +201,6 @@ Cypress.Commands.add('createAgendaPaciente', (name, daysOffset, horaInicioOffset
             if (!agenda.dinamica) {
                 agenda.bloques[0].turnos[0].horaInicio = agenda.bloques[0].turnos[0].horaInicio.replace('2019-07-01', newDate);
             }
-            agenda.fecha = agenda.fecha.replace('2019-07-01', newDate);
             agenda.horaInicio = agenda.horaInicio.replace('2019-07-01', newDate);
             agenda.horaFin = agenda.horaFin.replace('2019-07-01', newDate);
         }
