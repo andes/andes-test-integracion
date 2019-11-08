@@ -54,6 +54,11 @@
         "nombre": "consulta con médico oftalmólogo",
         "id": "598ca8375adc68e2a0c121d5"
     }],
+    "profesionales": [{
+        "_id":"5d49fa8bb6834a1d95e277b8",
+        "apellido":"ESPOSITO",
+        "nombre":"ALICIA BEATRIZ"
+    }],
     "organizacion": {
         "_id": "57e9670e52df311059bc8964",
         "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
