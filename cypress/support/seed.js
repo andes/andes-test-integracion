@@ -35,6 +35,27 @@ Cypress.Commands.add('createPaciente', (name, token) => {
     });
 });
 
+Cypress.Commands.add('createPrestacion', (name, token, options = {}) => {
+    return cy.fixture(name).then((prestacion) => {
+        const { fecha } = options;
+        if (fecha) {
+            prestacion.solicitud.fecha = fecha.format();
+            prestacion.ejecucion.fecha = fecha.format();
+            prestacion.estados.forEach(e => {
+                e.createdAt = fecha.format();
+            })
+        }
+        return cy.request({
+            method: 'POST',
+            url: Cypress.env('API_SERVER') + '/api/modules/rup/prestaciones',
+            body: prestacion,
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        });
+    });
+});
+
 Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset, horaFinOffset, token) => {
     return cy.fixture(fixtureName).then((agenda) => {
         if (horaInicioOffset !== null) {
@@ -43,7 +64,7 @@ Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset,
                 'year': newDate.year(),
                 'month': newDate.month(),
                 'date': newDate.date(),
-                'hour': Cypress.moment().add(daysOffset, 'hours').format('HH'),
+                'hour': Cypress.moment().add(horaInicioOffset, 'hours').format('HH'),
                 'minute': 0,
                 'second': 0,
                 'millisecond': 0
@@ -81,7 +102,7 @@ Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset,
                 if (!agenda.dinamica) {
                     agenda.bloques[0].turnos[0].horaInicio = agenda.bloques[0].turnos[0].horaInicio.replace('2019-07-01', newDate);
                 }
-                agenda.fecha = agenda.fecha.replace('2019-07-01', newDate);
+                // agenda.fecha = agenda.fecha.replace('2019-07-01', newDate);
                 agenda.horaInicio = agenda.horaInicio.replace('2019-07-01', newDate);
                 agenda.horaFin = agenda.horaFin.replace('2019-07-01', newDate);
             }

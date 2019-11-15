@@ -8,7 +8,7 @@ context('auditoria', () => {
         })
     })
     beforeEach(() => {
-        cy.viewport(1280, 720)
+        cy.viewport(1280, 720);
 
         cy.visit('/apps/mpi/auditoria', {
             onBeforeLoad: (win) => {

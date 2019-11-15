@@ -1,11 +1,12 @@
 Cypress.Commands.add('swal', (acction) => {
-    return cy.get('div').then(($body) => {
-        if ($body.hasClass('swal2-container')) {
-            cy.get(`.swal2-${acction}`).click({
-                force: true
-            })
-        }
-    });
+    return cy.get('div.swal2-modal').find(`.swal2-${acction}`).click({ force: true });
+    // return cy.get('div.swal2-modal').then(($body) => {
+    //     if ($body.hasClass('swal2-container')) {
+    //         return cy.get(`.swal2-${acction}`).click({
+    //             force: true
+    //         })
+    //     }
+    // });
 });
 
 /**
@@ -23,7 +24,10 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
     }
     if (option !== null && option !== undefined) {
         if (typeof option === 'string') {
-            element = element.children().children('.selectize-control').find(`.option[data-value=${option}]`, { force: true });
+            element = element.children()
+                .children('.selectize-control')
+                .find('.selectize-dropdown-content')
+                .find(`.option[data-value="${option}"]`, { force: true });
         } else {
             element.children().children('.selectize-control').click();
             element.find('.selectize-dropdown-content').children().eq(option);
