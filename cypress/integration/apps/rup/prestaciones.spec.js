@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-context('Aliasing', () => {
+context('prestaciones', () => {
     let token
     before(() => {
         cy.login('38906735', 'asd').then(t => {

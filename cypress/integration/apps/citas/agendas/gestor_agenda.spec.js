@@ -492,8 +492,14 @@ describe('CITAS - Planicar Agendas', () => {
         cy.get('plex-datetime[name="horaTurno"] input').type(`${Number(nuevaHoraInicio.format('HH')) - 2}:00`);
         cy.get('div[class="form-control-feedback"]').contains(`El valor debe ser mayor a ${nuevaHoraInicio.format('HH')}:00`);
 
-        cy.get('plex-datetime[name="horaTurno"] input').type(`{selectall}{backspace}${Number(nuevaHoraInicio.format('HH')) + 2}:00`);
-        cy.get('div[class="form-control-feedback"]').contains(`El valor debe ser menor a ${nuevaHoraFin.format('HH')}:00`);
+        // let horaMas2 = Number(nuevaHoraInicio.format('HH')) + 2;
+        // if (horaMas2 > 23) {
+        //     horaMas2 = 24 - horaMas2;
+        // }
+
+        // cy.get('plex-datetime[name="horaTurno"] input').type(`{selectall}{backspace}${horaMas2}:00`);
+        // cy.get('div[class="form-control-feedback"]').contains(`El valor debe ser menor a ${nuevaHoraFin.format('HH')}:00`);
+
         cy.get('plex-button[label="Guardar"]').click();
         cy.contains('Debe completar los datos requeridos');
         cy.swal('confirm');

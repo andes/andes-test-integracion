@@ -3,6 +3,7 @@
 context('MPI', () => {
     let token
     before(() => {
+        cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });
@@ -47,7 +48,7 @@ context('MPI', () => {
 
         cy.plexSelectType('name="barrio"', 'alta barda');
 
-        cy.plexText('name="direccion"', 'Avenida las Flores 1200');
+        cy.plexText('name="direccion"', 'BUENOS AIRES 200');
 
         // Se guardan cambios
         cy.plexButton('Guardar').click();
@@ -99,10 +100,13 @@ context('MPI', () => {
         // Se completa los datos de domicilio
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
-        cy.plexSelectType('name="barrio"', 'alta barda');
-        cy.plexText('name="direccion"', 'Avenida las Flores 1200');
 
-        cy.plexButton('Actualizar').click();
+        cy.plexSelect('name="barrio"').click();
+        cy.plexSelectType('name="barrio"', 'alta barda');
+        cy.plexText('name="direccion"', 'buenos aires 200');
+
+        cy.get('fieldset legend').contains('Datos del domicilio').parent()
+            .plexButton('Geolocalizar').click();
 
 
         // Se guardan los cambios
@@ -470,8 +474,9 @@ context('MPI', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
 
+
         cy.plexSelectType('name="barrio"', 'alta barda');
-        cy.plexText('name="direccion"', 'Avenida las Flores 1200');
+        cy.plexText('name="direccion"', 'BUENOS AIRES 200');
 
 
         // Se guardan cambios

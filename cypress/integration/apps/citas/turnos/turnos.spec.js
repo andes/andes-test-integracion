@@ -1,8 +1,9 @@
 /// <reference types="Cypress" />
 // Realiza las pruebas del camino básico: crear paciente, agendas, dar turno del dia, profesional, programado (crea solicitudes)
-context('Aliasing', () => {
+context('turnos', () => {
     let token
     before(() => {
+        cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('apps/citas/turnos/paciente-turnos', token);
@@ -40,14 +41,14 @@ context('Aliasing', () => {
         cy.get('plex-datetime[name="fechaNacimiento"] input').type(Cypress.moment().format('DD/MM/YYYY'));
 
         // Se completa datos
-        cy.get('paciente-buscar[label="Buscar"] input').first().type('38906735');
+        cy.get('paciente-buscar[label="Buscar"] input').first().type('36425896');
 
         //Espera confirmación de la búsqueda correcta del progenitor
         cy.wait('@busquedaProgenitor').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         // Se selecciona el progenitor 
-        cy.get('paciente-listado').find('td').contains('38906735').click();
+        cy.get('paciente-listado').find('td').contains('36425896').click();
 
         cy.get('plex-bool[name="noPoseeContacto"]').click();
 
@@ -113,7 +114,7 @@ context('Aliasing', () => {
 
         cy.get('plex-text[name="direccion"] input[type="text"]').first().type('Avenida las Flores 1200').should('have.value', 'Avenida las Flores 1200');
 
-        cy.get('plex-button[label="Actualizar"]').click();
+        cy.get('plex-button[label="Geolocalizar"]').click();
 
         cy.wait('@geoReferencia').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
@@ -166,7 +167,7 @@ context('Aliasing', () => {
 
         cy.get('plex-text[name="direccion"] input[type="text"]').first().type('Avenida las Flores 1200').should('have.value', 'Avenida las Flores 1200');
 
-        cy.get('plex-button[label="Actualizar"]').click();
+        cy.get('plex-button[label="Geolocalizar"]').click();
 
         cy.wait('@geoReferencia').then((xhr) => {
             expect(xhr.status).to.be.eq(200)

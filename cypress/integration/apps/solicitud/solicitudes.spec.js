@@ -1,8 +1,14 @@
 /// <reference types="Cypress" />
 
-context('Aliasing', () => {
+/**
+ * VER TEMA DE REGLAS COMO RESETEAR
+ * A LA NOCHE DA ERROR POR PROBLEMA DE TIMEZONE
+ */
+
+context('TOP', () => {
     let token
     before(() => {
+        cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('solicitudes/paciente-solicitud', token);
@@ -37,9 +43,11 @@ context('Aliasing', () => {
         })
         cy.wait('@getReglasOrganizacionDestino');
 
-        cy.get('plex-select[name="organizacion"] input').type('hospital dr. horacio heller');
-        cy.wait('@getOrganizaciones');
-        cy.get('plex-select[name="organizacion"] input').type('{enter}');
+        cy.plexSelectAsync('name="organizacion"', 'hospital dr. horacio heller', '@getOrganizaciones', 0);
+
+        // cy.get('plex-select[name="organizacion"] input').type('hospital dr. horacio heller');
+        // cy.wait('@getOrganizaciones');
+        // cy.get('plex-select[name="organizacion"] input').type('{enter}');
 
         cy.get('plex-button[title="Agregar Organización"]').click();
 
@@ -194,10 +202,10 @@ context('Aliasing', () => {
         cy.wait('@busquedaPaciente');
 
         cy.get('table tbody td span').contains('32589654').click();
-        cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY')); -
-            cy.get('plex-bool[name="autocitado"] input').check({
-                force: true
-            });
+        cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
+        cy.get('plex-bool[name="autocitado"] input').check({
+            force: true
+        });
 
         // Tipo de prestación solicitada
         cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
@@ -258,6 +266,7 @@ context('Aliasing', () => {
         cy.get('plex-select[label="Prestación destino"] input').type('Consulta de clínica médica');
         cy.get('plex-select[label="Prestación destino"] input').type('{enter}');
         cy.wait(2000);
+        cy.log('SI SE CORRE DE NOCHE DA ERROR');
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.get('plex-button[title="Dar Turno"]').click({
             force: true
