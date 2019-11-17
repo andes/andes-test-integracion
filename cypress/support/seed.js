@@ -3,15 +3,21 @@ Cypress.Commands.add('seed', () => {
     if (develop) {
         cy.exec('npm run prod:reset');
     } else {
-        cy.clean()
+        cy.cleanDB();
     }
 });
 
-Cypress.Commands.add('clean', () => {
-    cy.task('drop:database', 'paciente');
-    cy.task('drop:database', 'agenda');
-    cy.task('drop:database', 'prestaciones');
-    cy.wait(1000)
+const collectionList = ['paciente', 'agenda', 'prestaciones'];
+Cypress.Commands.add('cleanDB', (collection) => {
+    if (!collection) {
+        collection = collectionList;
+    } else if (!Array.isArray(collection)) {
+        collection = [collection];
+    }
+    collection.forEach((item) => {
+        cy.task('database:drop', item);
+    });
+    cy.wait(1000);
 });
 
 Cypress.Commands.add('createPaciente', (name, token) => {

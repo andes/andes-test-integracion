@@ -1,0 +1,85 @@
+{
+    "_id": "586e6e8627d3107fde116cdb",
+    "claveBlocking": [
+        "FLPDMN",
+        "FLP",
+        "DMNGLV",
+        "25036685193",
+        "250"
+    ],
+    "entidadesValidadoras": [
+        "Sisa"
+    ],
+    "documento": "10000000",
+    "estado": "validado",
+    "nombre": "PACIENTE VALIDADO",
+    "apellido": "ANDES",
+    "sexo": "masculino",
+    "genero": "masculino",
+    "fechaNacimiento": "1956-12-26T00:00:00.000-03:00",
+    "estadoCivil": null,
+    "financiador": [],
+    "relaciones": [],
+    "direccion": [
+        {
+            "activo": true,
+            "_id": "58cf3289d816ea2b7cfdf58c",
+            "valor": "",
+            "codigoPostal": "",
+            "ubicacion": {
+                "_id": "58cf3289d816ea2b7cfdf58d",
+                "localidad": null,
+                "provincia": null,
+                "pais": null
+            },
+            "ranking": 1
+        }
+    ],
+    "contacto": [
+        {
+            "activo": true,
+            "_id": "5b6c4b0454853f061f97d589",
+            "tipo": "celular",
+            "valor": "2994545454",
+            "ranking": 0,
+            "ultimaActualizacion": "2018-08-09T11:09:08.167-03:00"
+        }
+    ],
+    "identificadores": [
+        {
+            "entidad": "SIPS",
+            "valor": "335995"
+        }
+    ],
+    "carpetaEfectores": [],
+    "createdAt": "2018-03-20T14:39:24.141-03:00",
+    "createdBy": {
+        "nombreCompleto": "MILAGROS VICENTELO",
+        "nombre": "MILAGROS",
+        "apellido": "VICENTELO",
+        "username": 93240495,
+        "documento": 93240495,
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id": "57e9670e52df311059bc8964"
+        }
+    },
+    "notas": [],
+    "updatedAt": "2019-10-08T14:15:30.749-03:00",
+    "updatedBy": {
+        "id": "5c9247f1116e609e7932d57c",
+        "nombreCompleto": "35593546 35593546",
+        "nombre": "35593546",
+        "apellido": "35593546",
+        "username": 35593546,
+        "documento": 35593546,
+        "organizacion": {
+            "_id": "57f67d090166fa6aedb2f9fb",
+            "nombre": "HOSPITAL CENTENARIO - DR. NATALIO BURD",
+            "id": "57f67d090166fa6aedb2f9fb"
+        }
+    },
+    "cuil": "20127317357",
+    "activo": true
+}

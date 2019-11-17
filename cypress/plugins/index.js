@@ -14,23 +14,26 @@
 const seed = require('./seedDatabase');
 
 module.exports = (on, config) => {
-  // ref: https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
-  on('before:browser:launch', (browser = {}, args) => {
-    if (browser.name === 'chrome') {
-      args.push('--disable-dev-shm-usage')
-      return args
-    }
+    // ref: https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
+    on('before:browser:launch', (browser = {}, args) => {
+        if (browser.name === 'chrome') {
+            args.push('--disable-dev-shm-usage')
+            return args
+        }
 
-    return args
-  });
+        return args
+    });
 
-  on('task', {
-    'drop:database': (collection) => {
-      const mongoUri = config.env.MONGO_URI || 'mongodb://localhost:27066/andes';
-      const elasticuri = config.env.ELASTIC_URI || 'http://localhost:9266';
+    const mongoUri = config.env.MONGO_URI || 'mongodb://localhost:27066/andes';
+    const elasticuri = config.env.ELASTIC_URI || 'http://localhost:9266';
 
-      return seed.dropCollection(mongoUri, elasticuri, collection);
-    },
-  });
+    on('task', {
+        'database:drop': (collection) => {
+            return seed.dropCollection(mongoUri, elasticuri, collection);
+        },
+        'database:seed:paciente': (...params) => {
+            return seed.seedPaciente(mongoUri, elasticuri, ...params);
+        }
+    });
 
 }

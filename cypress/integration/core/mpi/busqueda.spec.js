@@ -1,11 +1,14 @@
 
 context('MPI-Busqueda Paciente', () => {
-    let token
+    let token;
+    let pacientes;
     before(() => {
         cy.seed();
+        cy.task('database:seed:paciente').then(ps => {
+            pacientes = ps;
+        })
         cy.login('38906735', 'asd').then(t => {
             token = t;
-            cy.createPaciente('mpi/relacion', token);
         });
         cy.viewport(1280, 720);
     })
@@ -16,6 +19,18 @@ context('MPI-Busqueda Paciente', () => {
         cy.route('GET', '**api/core/mpi/pacientes**').as('busqueda');
     });
 
+    ['validado', 'temporal', 'sin-documento'].forEach((type, i) => {
+        it('busca paciente ' + type, () => {
+            cy.plexText('name="buscador"', pacientes[i].nombre);
+            cy.wait('@busqueda').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            cy.get('paciente-listado').find('td').contains(pacientes[i].nombre);
+            if (pacientes[i].documento) {
+                cy.get('paciente-listado').find('td').contains(pacientes[i].documento);
+            }
+        });
+    })
 
     it('buscar paciente por documento y verificar que no existe', () => {
         cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', true);
