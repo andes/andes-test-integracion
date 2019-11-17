@@ -3,8 +3,9 @@ const type = process.argv[2] || 'develop';
 
 const up = {
     production: [
+        'npm run prod:down',
         'npx cross-env APP=master API=master docker-compose -f docker/docker-compose.yml up -d',
-        // 'sleep 10',
+        'node ./scripts/prepare.js production sleep',
         'docker exec andes_db mongo --eval "rs.initiate();"',
         // 'curl -XPUT "http://localhost:9200/andes/" -d @docker/andes-index.json',
         // 'docker cp docker/andes.gz andes_db:/andes.gz',
@@ -12,7 +13,7 @@ const up = {
     ],
     develop: [
         'docker-compose -f docker/docker-local.yml up -d',
-        'sleep 10',
+        'node ./scripts/prepare.js develop sleep',
         'docker exec andes_db mongo --eval "rs.initiate();"',
         // 'mongo andes --eval "db.getCollectionNames().forEach(function(n){db[n].remove()});"',
         // 'curl -XDELETE "http://localhost:9200/andes"',
@@ -65,10 +66,14 @@ const cleanup = {
 function runCommands(cmds) {
     const { execSync } = require('child_process');
     for (let i = 0; i < cmds.length; i++) {
+        console.log('-> ', cmds[i]);
         const result = execSync(cmds[i]);
     }
 }
 
+function sleep() {
+    setTimeout(() => { }, 10000);
+}
 switch (action) {
     case 'up':
         runCommands(up[type]);
@@ -84,5 +89,8 @@ switch (action) {
         break;
     case 'cleanup':
         runCommands(cleanup[type]);
+        break;
+    case 'sleep':
+        sleep();
         break;
 }
