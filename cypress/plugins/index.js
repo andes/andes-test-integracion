@@ -11,6 +11,8 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
+const seed = require('./seedDatabase');
+
 module.exports = (on, config) => {
   // ref: https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
   on('before:browser:launch', (browser = {}, args) => {
@@ -20,5 +22,15 @@ module.exports = (on, config) => {
     }
 
     return args
-  })
+  });
+
+  on('task', {
+    'drop:database': (collection) => {
+      const mongoUri = config.env.MONGO_URI || 'mongodb://localhost:27066/andes';
+      const elasticuri = config.env.ELASTIC_URI || 'http://localhost:9266';
+
+      return seed.dropCollection(mongoUri, elasticuri, collection);
+    },
+  });
+
 }

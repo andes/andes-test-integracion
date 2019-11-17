@@ -3,8 +3,15 @@ Cypress.Commands.add('seed', () => {
     if (develop) {
         cy.exec('npm run prod:reset');
     } else {
-        // cy.exec('npm run prod:cleanup');
+        cy.clean()
     }
+});
+
+Cypress.Commands.add('clean', () => {
+    cy.task('drop:database', 'paciente');
+    cy.task('drop:database', 'agenda');
+    cy.task('drop:database', 'prestaciones');
+    cy.wait(1000)
 });
 
 Cypress.Commands.add('createPaciente', (name, token) => {
