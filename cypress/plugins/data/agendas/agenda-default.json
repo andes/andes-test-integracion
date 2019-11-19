@@ -1,0 +1,67 @@
+{
+    "estado": "publicada",
+    "nominalizada": true,
+    "dinamica": false,
+    "bloques": [
+        {
+            "accesoDirectoDelDia": 4,
+            "accesoDirectoProgramado": 0,
+            "reservadoGestion": 0,
+            "reservadoProfesional": 0,
+            "cupoMobile": 0,
+            "restantesDelDia": 4,
+            "restantesProgramados": 0,
+            "restantesGestion": 0,
+            "restantesProfesional": 0,
+            "restantesMobile": 0,
+            "pacienteSimultaneos": false,
+            "citarPorBloque": false,
+            "turnosMobile": false,
+            "cantidadTurnos": 4,
+            "horaInicio": "2019-08-01T10:00:00.000-03:00",
+            "horaFin": "2019-08-01T11:00:00.000-03:00",
+            "duracionTurno": 30,
+            "cantidadSimultaneos": null,
+            "cantidadBloque": null,
+            "tipoPrestaciones": [
+                {
+                    "_id": "598ca8375adc68e2a0c121b9",
+                    "id": "598ca8375adc68e2a0c121b9",
+                    "conceptId": "391000013108",
+                    "term": "consulta con médico general",
+                    "fsn": "consulta con médico general (procedimiento)",
+                    "semanticTag": "procedimiento",
+                    "nombre": "consulta con médico general"
+                }
+            ],
+            "turnos": []
+        }
+    ],
+    "horaInicio": "2019-08-01T10:00:00.000-03:00",
+    "horaFin": "2019-08-01T11:00:00.000-03:00",
+    "tipoPrestaciones": [
+        {
+            "_id": "598ca8375adc68e2a0c121b9",
+            "id": "598ca8375adc68e2a0c121b9",
+            "conceptId": "391000013108",
+            "term": "consulta con médico general",
+            "fsn": "consulta con médico general (procedimiento)",
+            "semanticTag": "procedimiento",
+            "nombre": "consulta con médico general"
+        }
+    ],
+    "profesionales": [
+        {
+            "_id": "5d02602588c4d1772a8a17f8",
+            "nombre": "NATALIA VANESA",
+            "apellido": "HUENCHUMAN",
+            "documento": "30643636",
+            "nombreCompleto": "ESPOSITO, NATALIA VANESA",
+            "id": "5d02602588c4d1772a8a17f8"
+        }
+    ],
+    "organizacion": {
+        "_id": "57e9670e52df311059bc8964",
+        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+    }
+}

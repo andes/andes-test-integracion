@@ -33,6 +33,9 @@ module.exports = (on, config) => {
         },
         'database:seed:paciente': (...params) => {
             return seed.seedPaciente(mongoUri, elasticuri, ...params);
+        },
+        'database:seed:agenda': (dto) => {
+            return seed.seedAgenda(mongoUri, dto);
         }
     });
 
