@@ -43,7 +43,6 @@ describe('CITAS - Planicar Agendas', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.contains('La agenda se guardó');
-        cy.swal('confirm');
 
         cy.selectOption('label="Prestación"', '"598ca8375adc68e2a0c121b8"')
         cy.wait('@get');
@@ -57,7 +56,7 @@ describe('CITAS - Planicar Agendas', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.contains('La agenda cambió el estado');
-        cy.swal('confirm');
+        // cy.swal('confirm');
     });
 
     it('crear agenda con turnos del día y publicarla', () => {
