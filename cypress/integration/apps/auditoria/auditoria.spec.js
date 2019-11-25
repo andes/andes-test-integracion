@@ -1,19 +1,38 @@
 /// <reference types="Cypress" />
 
 context('auditoria', () => {
-    let token
+    let token;
+    let validado1;
+    let validado2;
+    let validado3;
+    let temporal1;
+    let temporal2;
+    let temporal3;
 
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
-            cy.createPaciente('apps/auditoria/paciente-validado1.json', token);
-            cy.createPaciente('apps/auditoria/paciente-validado2.json', token);
-            cy.createPaciente('apps/auditoria/paciente-validado3.json', token);
-            cy.createPaciente('apps/auditoria/paciente-temporal1.json', token);
-            cy.createPaciente('apps/auditoria/paciente-temporal2.json', token);
-            cy.createPaciente('apps/auditoria/paciente-temporal3.json', token);
-        })
+        });
+        // [TODO] poder crear tres o más paciente de un tiro.
+        cy.task('database:create:paciente', { template: 'validado' }).then(p => {
+            validado1 = p;
+        });
+        cy.task('database:create:paciente', { template: 'validado' }).then(p => {
+            validado2 = p;
+        });
+        cy.task('database:create:paciente', { template: 'validado' }).then(p => {
+            validado3 = p;
+        });
+        cy.task('database:create:paciente', { template: 'temporal' }).then(p => {
+            temporal1 = p;
+        });
+        cy.task('database:create:paciente', { template: 'temporal' }).then(p => {
+            temporal2 = p;
+        });
+        cy.task('database:create:paciente', { template: 'temporal' }).then(p => {
+            temporal3 = p;
+        });
     })
     beforeEach(() => {
         cy.server();
@@ -23,21 +42,21 @@ context('auditoria', () => {
     })
 
     it('vincular dos pacientes validados', () => {
-        cy.plexText('name="buscador"', '12386056');
+        cy.plexText('name="buscador"', validado1.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains('VALIDADO1').click();
+        cy.get('paciente-listado').find('td').contains(validado1.nombre).click();
         cy.plexButton('Vincular').click();
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexText('name="buscador"', '12386056');
+        cy.plexText('name="buscador"', validado2.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains('VALIDADO2').click();
+        cy.get('paciente-listado').find('td').contains(validado2.nombre).click();
 
         cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
@@ -52,21 +71,21 @@ context('auditoria', () => {
     });
 
     it('vincular un paciente temporal con uno temporal', () => {
-        cy.plexText('name="buscador"', '1598607');
+        cy.plexText('name="buscador"', temporal1.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains('TEMPORAL1').click();
+        cy.get('paciente-listado').find('td').contains(temporal1.nombre).click();
         cy.plexButton('Vincular').click();
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexText('name="buscador"', '1598607');
+        cy.plexText('name="buscador"', temporal2.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains('TEMPORAL2').click();
+        cy.get('paciente-listado').find('td').contains(temporal2.nombre).click();
 
         cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
@@ -80,21 +99,21 @@ context('auditoria', () => {
     });
 
     it('vincular un paciente validado con uno temporal', () => {
-        cy.plexText('name="buscador"', '15986897');
+        cy.plexText('name="buscador"', validado3.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains('VALIDADO3').click();
+        cy.get('paciente-listado').find('td').contains(validado3.nombre).click();
         cy.plexButton('Vincular').click();
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexText('name="buscador"', '15986897');
+        cy.plexText('name="buscador"', temporal3.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains('TEMPORAL3').click();
+        cy.get('paciente-listado').find('td').contains(temporal3.nombre).click();
 
         cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
