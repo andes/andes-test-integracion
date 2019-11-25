@@ -26,27 +26,24 @@ context('MPI-Busqueda Paciente', () => {
                 expect(xhr.status).to.be.eq(200);
             });
             cy.get('paciente-listado').find('td').contains(pacientes[i].nombre);
+            cy.get('paciente-listado').find('td').contains(pacientes[i].apellido)
             if (pacientes[i].documento) {
                 cy.get('paciente-listado').find('td').contains(pacientes[i].documento);
-                cy.get('paciente-listado').find('td').contains(pacientes[i].nombre)
-                cy.get('paciente-listado').find('td').contains(pacientes[i].apellido)
                 // cy.get('paciente-listado').find('td').contains('01/01/1987');
                 // cy.get('paciente-listado').find('td').contains('Femenino');        
             }
         });
 
         it('busca paciente ' + type + ' por documento', () => {
-            cy.plexText('name="buscador"', pacientes[i].documento);
-            cy.wait('@busqueda').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-            });
-            cy.get('paciente-listado').find('td').contains(pacientes[i].nombre);
             if (pacientes[i].documento) {
+                cy.plexText('name="buscador"', pacientes[i].documento);
+                cy.wait('@busqueda').then((xhr) => {
+                    expect(xhr.status).to.be.eq(200);
+                });
+                cy.get('paciente-listado').find('td').contains(pacientes[i].nombre);
                 cy.get('paciente-listado').find('td').contains(pacientes[i].documento);
-                cy.get('paciente-listado').find('td').contains(pacientes[i].nombre)
-                cy.get('paciente-listado').find('td').contains(pacientes[i].apellido)
-                // cy.get('paciente-listado').find('td').contains('01/01/1987');
-                // cy.get('paciente-listado').find('td').contains('Femenino');        
+                cy.get('paciente-listado').find('td').contains(pacientes[i].nombre);
+                cy.get('paciente-listado').find('td').contains(pacientes[i].apellido);
             }
         });
     })
@@ -82,36 +79,7 @@ context('MPI-Busqueda Paciente', () => {
             cy.plexSelectType('label="Sexo"').contains('Masculino');
         });
     });
-
-    it('buscar paciente por documento y verificar que aparezca el paciente con documento, nombre y apellido, fecha de nacimiento y sexo', () => {
-        cy.createPaciente('mpi/paciente', token);
-        cy.wait(1000);
-        cy.plexText('name="buscador"', '33665254');
-        cy.wait('@busqueda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.get('paciente-listado').find('td').contains('33665254');
-        cy.get('paciente-listado').find('td').contains('TEST')
-        cy.get('paciente-listado').find('td').contains('MPI')
-        cy.get('paciente-listado').find('td').contains('01/01/1987');
-        cy.get('paciente-listado').find('td').contains('Femenino');
-    });
-
-
-    it('buscar paciente por nombre/apellido y verificar que aparezca el paciente con documento, nombre y apellido, fecha de nacimiento y sexo', () => {
-        cy.createPaciente('mpi/paciente', token);
-        cy.wait(1000);
-        cy.plexText('name="buscador"', 'TEST');
-        //cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', false);
-        cy.wait('@busqueda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.get('paciente-listado').find('td').contains('33665254');
-        cy.get('paciente-listado').find('td').contains('TEST')
-        cy.get('paciente-listado').find('td').contains('MPI')
-        cy.get('paciente-listado').find('td').contains('01/01/1987');
-        cy.get('paciente-listado').find('td').contains('Femenino');
-    });
+ 
 
 
 })

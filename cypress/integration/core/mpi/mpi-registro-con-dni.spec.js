@@ -38,8 +38,6 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.contains('TEST, JOSE');
         cy.contains('Paciente Validado');
 
-        cy.swal('confirm');
-
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos', () => {
@@ -156,17 +154,25 @@ context('MPI-Registro Paciente Con Dni', () => {
     });
 
     it('editar un paciente existente y agregarle una relación', () => {
-        cy.createPaciente('mpi/paciente', token);
+        cy.cleanDB()
+        cy.task('database:seed:paciente');
         cy.wait(1000);
-        cy.createPaciente('mpi/relacion', token);
-        cy.plexText('name="buscador"', '33665254');
+        // cy.createPaciente('mpi/paciente', token);
+        // cy.createPaciente('mpi/relacion', token);
+
+
+        cy.plexText('name="buscador"', '20000000');
         cy.wait(1000);
-        cy.get('paciente-listado').find('td').contains('33665254').click();
+        cy.get('paciente-listado').find('td').contains('20000000').click();
+
         cy.plexTab('Relaciones').click();
-        cy.plexText('name="buscador"', '33222111');
-        cy.get('paciente-listado').find('td').contains('33222111').click();
+
+        cy.plexText('name="buscador"', '10000000');
+        cy.get('paciente-listado').find('td').contains('10000000').click();
+
         cy.plexSelect('placeholder="Seleccione..."').click();
         cy.plexSelect('placeholder="Seleccione..."', 1).click();
+
         cy.plexButton('Guardar').click();
         cy.contains('Los datos se actualizaron correctamente');
     });

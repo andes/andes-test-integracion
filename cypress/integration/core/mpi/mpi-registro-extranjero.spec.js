@@ -5,7 +5,6 @@ context('MPI-Registro Paciente Extranjero', () => {
         cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
-            cy.createPaciente('mpi/relacion', token);
         });
         cy.viewport(1280, 720);
     })
@@ -17,7 +16,6 @@ context('MPI-Registro Paciente Extranjero', () => {
 
     it('verificar campos obligatorios de datos basicos de paciente', () => {
         cy.plexButton('Guardar').click();
-        cy.wait(2000);
         cy.contains('Debe completar los datos obligatorios');
     });
 
@@ -25,7 +23,6 @@ context('MPI-Registro Paciente Extranjero', () => {
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'EXTRANJERO');
         cy.plexButton('Guardar').click();
-        cy.wait(2000);
         cy.contains('Debe completar los datos obligatorios');
     });
 
@@ -45,7 +42,6 @@ context('MPI-Registro Paciente Extranjero', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
         });
-        cy.wait(2000);
         cy.contains('Los datos se actualizaron correctamente');
     });
 
@@ -66,7 +62,6 @@ context('MPI-Registro Paciente Extranjero', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
         });
-        cy.wait(2000);
         cy.contains('Los datos se actualizaron correctamente');
     });
 });

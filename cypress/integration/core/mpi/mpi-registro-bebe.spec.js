@@ -1,10 +1,13 @@
 context('MPI-Registro Paciente Bebé', () => {
-    let token
+    let token;
+    let progenitor;
     before(() => {
         cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
-            cy.createPaciente('mpi/progenitor', token);
+            cy.task('database:create:paciente').then(p => {
+                progenitor = p;
+            })
         });
         cy.viewport(1280, 720);
     })
@@ -22,12 +25,12 @@ context('MPI-Registro Paciente Bebé', () => {
 
     it('buscar progenitor por documento y verificar que existe', () => {
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
-        cy.plexText('name="buscador"', '11222333');
-        cy.get('paciente-listado').find('td').contains('11222333');
+        cy.plexText('name="buscador"', progenitor.documento);
+        cy.get('paciente-listado').find('td').contains(progenitor.documento);
         cy.wait('@busquedaProgenitor').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(1);
-            expect(xhr.response.body[0]).to.have.property('documento', '11222333')
+            expect(xhr.response.body[0]).to.have.property('documento', progenitor.documento)
         });
 
     });
@@ -45,12 +48,12 @@ context('MPI-Registro Paciente Bebé', () => {
 
     it('buscar progenitor por nombre y verificar que existe', () => {
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
-        cy.plexText('name="buscador"', 'PROGENITOR');
-        cy.get('paciente-listado').find('td').contains('PROGENITOR');
+        cy.plexText('name="buscador"', progenitor.nombre);
+        cy.get('paciente-listado').find('td').contains(progenitor.nombre);
         cy.wait('@busquedaProgenitor').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(1);
-            expect(xhr.response.body[0]).to.have.property('nombre', 'PROGENITOR')
+            expect(xhr.response.body[0]).to.have.property('nombre', progenitor.nombre)
         });
 
     });
@@ -68,12 +71,12 @@ context('MPI-Registro Paciente Bebé', () => {
 
     it('buscar progenitor por apellido y verificar que existe', () => {
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
-        cy.plexText('name="buscador"', 'BEBE');
-        cy.get('paciente-listado').find('td').contains('BEBE');
+        cy.plexText('name="buscador"', progenitor.apellido);
+        cy.get('paciente-listado').find('td').contains(progenitor.apellido);
         cy.wait('@busquedaProgenitor').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(1);
-            expect(xhr.response.body[0]).to.have.property('apellido', 'BEBE')
+            expect(xhr.response.body[0]).to.have.property('apellido', progenitor.apellido)
         });
 
     });
@@ -88,7 +91,7 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.contains('Debe completar los datos obligatorios');
     });
 
-    it('verificar la carga de contacto de contacto de paciente', () => {
+    it('verificar la carga de contacto de paciente', () => {
         cy.plexText('label="Apellido"', 'Martinez');
         cy.plexText('label="Nombre"', 'Mario');
         cy.plexSelect('label="Sexo"').click();

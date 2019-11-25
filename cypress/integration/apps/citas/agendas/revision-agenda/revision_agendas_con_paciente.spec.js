@@ -13,7 +13,7 @@ context('CITAS - Revisión de Agendas', () => {
     })
 
     beforeEach(() => {
-        cy.seed();
+        cy.cleanDB();
         cy.viewport(1280, 720);
         cy.login('30643636', 'asd').then(t => {
             token = t;

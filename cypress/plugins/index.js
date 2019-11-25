@@ -11,7 +11,10 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const seed = require('./seedDatabase');
+const { seedAgenda } = require('./seed-agenda');
+const { dropCollection } = require('./seed-drop');
+const { seedPaciente, createPaciente } = require('./seed-paciente');
+
 
 module.exports = (on, config) => {
     // ref: https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
@@ -29,13 +32,16 @@ module.exports = (on, config) => {
 
     on('task', {
         'database:drop': (collection) => {
-            return seed.dropCollection(mongoUri, elasticuri, collection);
+            return dropCollection(mongoUri, elasticuri, collection);
         },
-        'database:seed:paciente': (...params) => {
-            return seed.seedPaciente(mongoUri, elasticuri, ...params);
+        'database:seed:paciente': (params) => {
+            return seedPaciente(mongoUri, elasticuri, params);
+        },
+        'database:create:paciente': (params = {}) => {
+            return createPaciente(mongoUri, elasticuri, params);
         },
         'database:seed:agenda': (dto) => {
-            return seed.seedAgenda(mongoUri, dto);
+            return seedAgenda(mongoUri, dto);
         }
     });
 
