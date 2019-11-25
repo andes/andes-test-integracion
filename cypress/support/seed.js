@@ -8,6 +8,7 @@ Cypress.Commands.add('seed', () => {
 });
 
 const collectionList = ['paciente', 'agenda', 'prestaciones'];
+
 Cypress.Commands.add('cleanDB', (collection) => {
     if (!collection) {
         collection = collectionList;
@@ -17,7 +18,7 @@ Cypress.Commands.add('cleanDB', (collection) => {
     collection.forEach((item) => {
         cy.task('database:drop', item);
     });
-    cy.wait(1000);
+    return cy.wait(1000);
 });
 
 Cypress.Commands.add('createPaciente', (name, token) => {

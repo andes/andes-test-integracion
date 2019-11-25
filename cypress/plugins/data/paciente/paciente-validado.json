@@ -18,21 +18,35 @@
     "genero": "masculino",
     "fechaNacimiento": "1956-12-26T00:00:00.000-03:00",
     "estadoCivil": null,
+    "scan": "00535248130@PACIENTE@ANDES@F@10000000@B@26/12/1956@14/02/2018@200",
     "financiador": [],
     "relaciones": [],
     "direccion": [
         {
-            "activo": true,
-            "_id": "58cf3289d816ea2b7cfdf58c",
             "valor": "",
             "codigoPostal": "",
             "ubicacion": {
-                "_id": "58cf3289d816ea2b7cfdf58d",
-                "localidad": null,
-                "provincia": null,
-                "pais": null
+                "pais": {
+                    "_id": "57f3b5c469fe79a598e6281f",
+                    "nombre": "Argentina",
+                    "id": "57f3b5c469fe79a598e6281f"
+                },
+                "provincia": {
+                    "_id": "57f3f3aacebd681cc2014c53",
+                    "nombre": "Neuquén",
+                    "id": "57f3f3aacebd681cc2014c53"
+                },
+                "localidad": {
+                    "_id": "57f538a472325875a199a86b",
+                    "nombre": "Paso Aguerre",
+                    "id": "57f538a472325875a199a86b"
+                },
+                "barrio": null
             },
-            "ranking": 1
+            "ranking": 0,
+            "geoReferencia": null,
+            "ultimaActualizacion": "2019-03-19T10:54:29.420Z",
+            "activo": true
         }
     ],
     "contacto": [

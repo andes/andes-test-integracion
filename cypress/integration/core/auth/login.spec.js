@@ -2,17 +2,6 @@
 
 context('Pagina de login', () => {
     beforeEach(() => {
-        cy.cleanDB();
-        cy.task('database:seed:paciente').then(pacientes => {
-            cy.task('database:seed:agenda', {
-                estado: 'suspendida',
-                pacientes: pacientes.map(p => p._id.toString()),
-                inicio: -2
-            }).then(agenda => {
-                cy.log(agenda);
-            })
-
-        })
         cy.visit('/', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear()
