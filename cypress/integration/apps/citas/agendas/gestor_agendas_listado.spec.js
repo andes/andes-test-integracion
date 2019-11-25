@@ -3,7 +3,6 @@ context('CITAS - Gestor de Agendass', () => {
     let token
     before(() => {
         cy.seed();
-        cy.viewport(1280, 720);
         cy.login('38906735', 'asd', '57f67a7ad86d9f64130a138d').then(t => {
             cy.log(t);
             token = t;

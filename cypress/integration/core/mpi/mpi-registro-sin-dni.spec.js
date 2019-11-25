@@ -10,7 +10,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
             token = t;
             // cy.createPaciente('mpi/relacion', token);
         });
-        cy.viewport(1280, 720);
+
     })
 
     beforeEach(() => {

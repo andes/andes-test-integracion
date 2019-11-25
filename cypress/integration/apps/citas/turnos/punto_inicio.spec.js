@@ -14,7 +14,7 @@ context('punto de inicio', () => {
     });
 
     beforeEach(() => {
-        cy.viewport(1280, 720);
+
         cy.server();
         cy.goto('/citas/punto-inicio', token);
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');

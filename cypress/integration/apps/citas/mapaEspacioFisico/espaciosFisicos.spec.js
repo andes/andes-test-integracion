@@ -4,7 +4,7 @@ context('CITAS - Espacios físicos', () => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
         });
-        cy.viewport(1280, 720);
+
     });
 
     beforeEach(() => {

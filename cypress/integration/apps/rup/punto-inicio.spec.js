@@ -4,7 +4,7 @@ context('RUP - Punto de inicio', () => {
     let token;
 
     before(() => {
-        cy.viewport(1358, 636);
+        // cy.viewport(1358, 636);
         cy.seed();
         cy.task('database:seed:paciente');
         cy.login('30643636', 'asd').then(t => {

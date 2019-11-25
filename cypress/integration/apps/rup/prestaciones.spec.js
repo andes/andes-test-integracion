@@ -8,7 +8,7 @@ context('prestaciones', () => {
         })
     })
     beforeEach(() => {
-        cy.viewport(1280, 720)
+        // cy.viewport(1280, 720)
         cy.visit('/citas/punto-inicio', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);

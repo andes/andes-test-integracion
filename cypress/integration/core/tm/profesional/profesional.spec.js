@@ -48,7 +48,7 @@ context('TM Profesional', () => {
     let token
     before(() => {
         cy.seed();
-        cy.viewport(1280, 720);
+
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });

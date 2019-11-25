@@ -6,7 +6,6 @@ describe('CITAS - Planicar Agendas', () => {
             token = t;
             cy.createPaciente('paciente-dinamico', token);
         });
-        cy.viewport(1280, 720);
     })
 
     beforeEach(() => {

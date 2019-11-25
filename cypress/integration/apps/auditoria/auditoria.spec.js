@@ -2,20 +2,20 @@
 
 context('auditoria', () => {
     let token
+
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('apps/auditoria/paciente-validado1.json', token);
             cy.createPaciente('apps/auditoria/paciente-validado2.json', token);
+            cy.createPaciente('apps/auditoria/paciente-validado3.json', token);
             cy.createPaciente('apps/auditoria/paciente-temporal1.json', token);
             cy.createPaciente('apps/auditoria/paciente-temporal2.json', token);
-            cy.createPaciente('apps/auditoria/paciente-validado3.json', token);
             cy.createPaciente('apps/auditoria/paciente-temporal3.json', token);
         })
     })
     beforeEach(() => {
-        cy.viewport(1280, 720);
         cy.server();
         cy.goto('/apps/mpi/auditoria', token);
         cy.route('GET', '**api/core/mpi/pacientes**').as('busquedaPaciente');
