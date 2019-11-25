@@ -10,7 +10,7 @@ context('MPI-Busqueda Paciente', () => {
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });
-        cy.viewport(1280, 720);
+
     })
 
     beforeEach(() => {
@@ -79,7 +79,7 @@ context('MPI-Busqueda Paciente', () => {
             cy.plexSelectType('label="Sexo"').contains('Masculino');
         });
     });
- 
+
 
 
 })

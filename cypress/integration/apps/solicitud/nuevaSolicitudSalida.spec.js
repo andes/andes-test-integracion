@@ -16,7 +16,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
     let token, dni;
     before(() => {
         cy.seed();
-        cy.viewport(1280, 720);
+
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('apps/solicitud/paciente-nueva-solicitud', token);

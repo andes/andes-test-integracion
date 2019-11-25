@@ -16,7 +16,7 @@ context('TOP', () => {
     })
 
     beforeEach(() => {
-        cy.viewport(1280, 720)
+        // cy.viewport(1280, 720)
 
         cy.visit('/solicitudes', {
             onBeforeLoad: (win) => {

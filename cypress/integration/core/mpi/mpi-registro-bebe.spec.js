@@ -9,7 +9,7 @@ context('MPI-Registro Paciente Bebé', () => {
                 progenitor = p;
             })
         });
-        cy.viewport(1280, 720);
+
     })
 
     beforeEach(() => {

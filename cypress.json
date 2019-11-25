@@ -9,5 +9,7 @@
   },
   "chromeWebSecurity": false,
   "modifyObstructiveCode": false,
-  "projectId": "xr7gft"
+  "projectId": "xr7gft",
+  "viewportWidth": 1280,
+  "viewportHeight": 720
 }

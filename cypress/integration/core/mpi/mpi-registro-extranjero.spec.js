@@ -6,7 +6,7 @@ context('MPI-Registro Paciente Extranjero', () => {
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });
-        cy.viewport(1280, 720);
+
     })
 
     beforeEach(() => {
