@@ -29,10 +29,6 @@ context('punto de inicio', () => {
         cy.get('.alert.alert-danger').should('contain', 'No se encontró ningún paciente..');
     });
 
-    it('dar turno', () => {
-        cy.darTurno('**api/core/mpi/pacientes/57f3b5d579fe79a598e6281f', token);
-    });
-
     it('generar solicitud', () => {
         cy.route('GET', '**api/modules/rup/prestaciones/solicitudes?idPaciente=**').as('generarSolicitudPaciente');
         cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
