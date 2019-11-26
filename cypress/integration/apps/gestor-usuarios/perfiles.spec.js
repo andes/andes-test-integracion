@@ -2,7 +2,6 @@ context('perfiles-usuario', () => {
     let token
     before(() => {
         cy.seed();
-        cy.viewport(1280, 720);
         cy.login('30643636', 'asd', '57e9670e52df311059bc8964').then(t => {
             token = t;
         });
@@ -21,25 +20,22 @@ context('perfiles-usuario', () => {
         cy.plexText('name="nombre"', 'test perfil');
         cy.get('div[id="accordion"]').eq(0).find('plex-bool').eq(0).click();
         cy.plexButton('Guardar').click();
-        cy.wait(2000);
         cy.contains('El perfil se ha guardado satisfactoriamente!');
 
     });
 
-    it.skip('Agregar permisos de un perfil existente', () => {
+    it('Agregar permisos de un perfil existente', () => {
         cy.get('table tbody tr').first().click();
         cy.get('div[id="accordion"]').eq(1).find('plex-bool').eq(0).click();
         cy.plexButton('Guardar').click();
-        cy.wait(2000);
         cy.contains('El perfil se ha guardado satisfactoriamente!');
-     });
+    });
 
-     it('Inactivar un perfil activo y verificar que se vea desactivado', () => {
+    it('Inactivar un perfil activo y verificar que se vea desactivado', () => {
         cy.get('table tbody tr').find('span').should('have.class', 'badge badge-success badge-md').first().click();
         cy.get('plex-bool[name="activo"]').click();
         cy.plexButton('Guardar').click();
-        cy.wait(2000);
         cy.contains('El perfil se ha guardado satisfactoriamente!');
-     });
+    });
 
 });
