@@ -16,6 +16,11 @@ module.exports.seedAgenda = async (mongoUri, params) => {
         if (params.estado) {
             agenda.estado = params.estado;
         }
+
+        if (params.dinamica) {
+            agenda.dinamica = params.dinamica;
+        }
+
         if (params.organizacion) {
             const OrganizacionDB = await client.db().collection('organizacion');
             const orgData = await OrganizacionDB.findOne({ _id: new ObjectId(params.organizacion) }, { projection: { nombre: 1 } });
@@ -36,6 +41,8 @@ module.exports.seedAgenda = async (mongoUri, params) => {
                     nombreCompleto: `${p.nombre} ${p.nombre}`
                 };
             })
+        } else if (params.profesionales === null) {
+            agenda.profesionales = [];
         } else {
             agenda.profesionales.forEach((prof) => {
                 prof._id = new ObjectId(prof._id);
@@ -54,7 +61,21 @@ module.exports.seedAgenda = async (mongoUri, params) => {
             agenda.tipoPrestaciones[0]._id = new ObjectId(agenda.tipoPrestaciones[0]._id);
             agenda.bloques[0].tipoPrestaciones[0]._id = new ObjectId(agenda.bloques[0].tipoPrestaciones[0]._id);
             agenda.bloques[0].tipoPrestaciones[0].id = new ObjectId(agenda.bloques[0].tipoPrestaciones[0].id);
+        }
 
+        let labelTipoTurno = 'accesoDirectoDelDia';
+        let labelTipoTurnoRestante = 'restantesDelDia';
+        if (params.tipo) {
+            switch (params.tipo) {
+                case 'delDia':
+                    labelTipoTurno = 'accesoDirectoDelDia';
+                    labelTipoTurnoRestante = 'restantesDelDia';
+                    break;
+                case 'programado':
+                    labelTipoTurno = 'accesoDirectoProgramado';
+                    labelTipoTurnoRestante = 'restantesProgramados';
+                    break;
+            }
         }
 
         let horaInicio = moment().startOf('hour');
@@ -74,12 +95,13 @@ module.exports.seedAgenda = async (mongoUri, params) => {
         }
         agenda.horaInicio = horaInicio.toDate();
         agenda.horaFin = horaFin.toDate();
+        agenda.bloques[0]._id = new ObjectId();
         agenda.bloques[0].horaInicio = horaInicio.toDate();
         agenda.bloques[0].horaFin = horaFin.toDate();
 
         const cantTurnos = horaFin.diff(horaInicio, 'hours') * 2;
-        agenda.bloques[0].accesoDirectoDelDia = cantTurnos;
-        agenda.bloques[0].restantesDelDia = cantTurnos;
+        agenda.bloques[0][labelTipoTurno] = cantTurnos;
+        agenda.bloques[0][labelTipoTurnoRestante] = cantTurnos;
         agenda.bloques[0].cantidadTurnos = cantTurnos;
 
         const pacientesIDs = encapsulateArray(params.pacientes);
@@ -114,6 +136,7 @@ module.exports.seedAgenda = async (mongoUri, params) => {
                     "tipoPrestacion": agenda.tipoPrestaciones[0]
                 };
                 agenda.bloques[0].turnos.push(turno);
+                agenda.bloques[0][labelTipoTurnoRestante]--;
             }
         }
 
