@@ -1,5 +1,5 @@
 {
-    "nominalizada": true,
+    "nominalizada": false,
     "dinamica": false,
     "bloques": [
         {
@@ -50,12 +50,12 @@
     "horaFin": "2019-07-01T12:00:00.000Z",
     "profesionales": [
         {
-            "_id": "5d4195500ae227149d508406",
+            "_id": "5d4185500ae227149d508406",
             "nombre": "prueba",
-            "apellido": "darSobreturno",
+            "apellido": "agendaPublicada",
             "documento": "15789463",
-            "nombreCompleto": "darSobreturno, prueba",
-            "id": "5d4195500ae227149d508406"
+            "nombreCompleto": "agendaPublicada, prueba",
+            "id": "5d4185500ae227149d508406"
         }
     ],
     "tipoPrestaciones": [

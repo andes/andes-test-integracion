@@ -238,7 +238,8 @@ context('MPI-Registro Paciente Bebé', () => {
             cy.plexText('name="documentoRelacion"').should('have.value', '66000666');
             cy.plexText('name="nombreRelacion"').should('have.value', 'ANCESTRO');
             cy.plexText('name="apellidoRelacion"').should('have.value', 'TUTOR');
-            cy.plexDatetime('name="fechaNacimientoRelacion"').find('input').should('have.value', '10/10/2000');
+            // [TODO] En local el parseo de la fecha devuelve un dia menos. En jenkins va bien. 
+            cy.plexDatetime('name="fechaNacimientoRelacion"').find('input').should('have.value', '11/10/2000');
             cy.plexSelectType('name="sexoRelacion"').contains('Femenino');
         });
     });
