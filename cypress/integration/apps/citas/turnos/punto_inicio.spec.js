@@ -337,7 +337,7 @@ context('punto de inicio', () => {
         cy.get('li[class="list-group-item"]').eq(1).contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
     });
 
-    it('Carpetas', () => {
+    it.only('Carpetas', () => {
         cy.route('GET', '**api/modules/carpetas/carpetasPacientes?*').as('getCarpetas');
         cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?*').as('getTurnos');
@@ -379,7 +379,14 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Nuevo número de carpeta establecido');
+        cy.toast('success', 'Nuevo número de carpeta establecido').click();
+        cy.plexButtonIcon('pencil').click();
+        cy.plexText('name="nroCarpeta"', 'DDD123');
+        cy.plexButtonIcon('content-save').click();
+        cy.toast('success', 'Nuevo número de carpeta establecido').click();
+        cy.plexButtonIcon('pencil').click();
+        cy.plexText('name="nroCarpeta"', '{selectall}{backspace}DDD123');
+        cy.plexButtonIcon('content-save').click();
 
     });
 })
