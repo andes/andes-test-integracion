@@ -2,8 +2,13 @@ describe('CITAS - Planicar Agendas', () => {
     let token
     before(() => {
         cy.seed();
+        cy.task('database:seed:paciente');
         cy.task('database:seed:agenda', { inicio: 1, fin: 3 });
         cy.task('database:seed:agenda', { estado: 'planificacion', inicio: 1, fin: 3 });
+        cy.task('database:seed:agenda', { tipoPrestaciones: '57f5062f69fe79a598faf261', estado: 'disponible', inicio: 2, fin: 3 });
+        cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '57f5063f69fe79a598fcf99d', estado: 'publicada', inicio: 3, fin: 4 });
+        cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', inicio: 4, fin: 5 });
+        cy.task('database:seed:agenda', { tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', inicio: 5, fin: 6 });
         cy.login('30643636', 'asd').then(t => {
             token = t;
 
@@ -79,5 +84,62 @@ describe('CITAS - Planicar Agendas', () => {
 
         // [TODO] Ver helpers para las fechas de las agendas
         // cy.get('.datos-agenda').contains(' 14:00 a 19:00 hs - ');
+    })
+
+    it('suspender agenda disponible sin turnos', () => {
+
+        cy.wait('@getAgendas');
+        cy.get('table tbody td').contains('oxigenoterapia domiciliaria').click();
+
+        cy.plexButtonIcon('stop').click();
+        cy.plexButton('Confirmar').click();
+
+        cy.get('table tbody td').contains('oxigenoterapia domiciliaria').click();
+        cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
+    })
+
+    it('suspender agenda disponible con turno', () => {
+
+        cy.wait('@getAgendas');
+        cy.get('table tbody td').contains('examen pediátrico').click();
+
+        cy.plexButtonIcon('stop').click();
+        cy.plexButton('Confirmar').click();
+
+        cy.get('table tbody td').contains('examen pediátrico').click();
+        cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
+        cy.plexButtonIcon('sync-alert').click();
+        cy.get('tbody tr').first().click();
+        cy.contains(' No hay agendas que contengan turnos que coincidan');
+    })
+
+    it('suspender agenda disponible con turno y reasignarlo', () => {
+
+        cy.wait('@getAgendas');
+        cy.get('table tbody td').contains('servicio de neumonología').click();
+        cy.plexButtonIcon('stop').click();
+        cy.plexButton('Confirmar').click();
+        cy.get('table tbody td').contains('servicio de neumonología').click();
+        cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
+        cy.plexButtonIcon('sync-alert').click();
+        cy.get('tbody tr').first().click();
+        cy.get('.reasignar').first().click();
+        cy.get('button').contains('CONFIRMAR').click();
+        cy.plexButton('Gestor de Agendas').click();
+        cy.get('table tbody td').contains('servicio de neumonología').click();
+        cy.get('.lista-turnos .badge-info').contains('Reasignado');
+    })
+
+    it('suspender turno de agenda publicada', () => {
+
+        cy.wait('@getAgendas');
+        cy.plexButtonIcon('chevron-down').click();
+        cy.selectOption('label="Estado"', '"publicada"');
+        cy.get('tbody tr').first().click();
+        cy.get('.lista-turnos').first().click();
+        cy.get('plex-button[title="Suspender turno"]').click();
+        cy.plexButton('Confirmar').click();
+        cy.get('.lista-turnos').contains('Turno suspendido (sin paciente)');
+
     })
 })
