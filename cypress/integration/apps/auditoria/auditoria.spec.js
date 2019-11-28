@@ -9,7 +9,9 @@ context('auditoria', () => {
     let temporal1;
     let temporal2;
     let temporal3;
+    let temporal4;
     let sinDocumento1;
+    let sinDocumento2;
 
     before(() => {
         cy.seed();
@@ -53,9 +55,19 @@ context('auditoria', () => {
             temporal3 = p;
         });
         cy.task('database:create:paciente', {
+            template: 'temporal'
+        }).then(p => {
+            temporal4 = p;
+        });
+        cy.task('database:create:paciente', {
             template: 'sin-documento'
         }).then(p => {
             sinDocumento1 = p;
+        });
+        cy.task('database:create:paciente', {
+            template: 'sin-documento'
+        }).then(p => {
+            sinDocumento2 = p;
         });
     })
     beforeEach(() => {
@@ -173,6 +185,34 @@ context('auditoria', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.get('paciente-listado').find('td').contains(sinDocumento1.nombre).click();
+
+        cy.plexButton('Vincular').click();
+        cy.get('button').contains('CONFIRMAR').click();
+
+        cy.wait('@vincularPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.vinculos).to.have.length(2);
+        });
+        cy.get('tbody tr').first().find('span').should('have.class', 'badge badge-success').should('contain', 'Activo'); // valido que la persona buscada esté validada y la selecciono
+        cy.get('plex-button[label="Desactivar"]').should('have.attr', 'type', 'warning');
+    });
+
+    it('vincular un paciente temporal con uno sin documento', () => {
+        cy.plexText('name="buscador"', temporal4.documento);
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.get('paciente-listado').find('td').contains(temporal4.nombre).click();
+        cy.plexButton('Vincular').click();
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexText('name="buscador"', `${sinDocumento2.nombre} ${sinDocumento2.apellido}`);
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').find('td').contains(sinDocumento2.nombre).click();
 
         cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
