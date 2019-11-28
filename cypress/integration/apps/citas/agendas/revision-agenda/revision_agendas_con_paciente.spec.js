@@ -34,7 +34,7 @@ context('CITAS - Revisión de Agendas', () => {
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
         cy.get('tbody:nth-child(1) tr:first-child').click();
         cy.plexSelectType('label="Asistencia"').click().get('.option').contains('No Asistio').click();
-        cy.toast('El estado de la agenda fue actualizado', 'success');
+        cy.toast('success', 'El estado de la agenda fue actualizado');
     });
 
     it('Se reestablece diagnóstico', () => {
@@ -50,7 +50,7 @@ context('CITAS - Revisión de Agendas', () => {
         // Hay que corregir el plex-button, ya que debería funcionar así:
         cy.plexButtonIcon('refresh').click();
 
-        cy.toast('El estado de la agenda fue actualizado', 'success');
+        cy.toast('success', 'El estado de la agenda fue actualizado');
 
         // Hay que corregir el plex-button, ya que debería funcionar así:
         cy.plexButtonIcon('pencil').click();
@@ -63,7 +63,7 @@ context('CITAS - Revisión de Agendas', () => {
 
         cy.get('tr td').contains('Fiebre inducida por drogas').click();
 
-        cy.toast('El estado de la agenda fue actualizado', 'success');
+        cy.toast('success', 'El estado de la agenda fue actualizado');
 
     });
 

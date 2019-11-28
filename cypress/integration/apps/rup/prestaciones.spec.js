@@ -27,7 +27,7 @@ context('prestaciones', () => {
         cy.get('.outline-success ').first().click();
         cy.get('div').contains('15:00').first().click()
         cy.get('plex-button[label="Confirmar"]').click();
-        cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
+        cy.toast('info', 'El turno se asignó correctamente');
 
         // comienzo la atención
         cy.visit('/rup');
@@ -77,6 +77,6 @@ context('prestaciones', () => {
         })
         cy.get('button').contains('CONFIRMAR').click();
 
-        cy.get('div[class="simple-notification toast success"]').contains('La prestación se validó correctamente');
+        cy.toast('success', 'La prestación se validó correctamente');
     })
 })
