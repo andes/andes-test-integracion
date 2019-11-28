@@ -226,6 +226,12 @@ Cypress.Commands.add('validationMessage', { prevSubject: true }, (subject, text)
     return cy.wrap(subject).find('div[class="form-control-feedback"]').should('contain', text);
 })
 
+Cypress.Commands.add('toast', (label, option) => {
+
+    return cy.get(`div[class="simple-notification toast ${option}"]`).contains(label).click();
+
+})
+
 
 /**
  * @decrecated
