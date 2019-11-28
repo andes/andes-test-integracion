@@ -4,12 +4,12 @@
     "dinamica": false,
     "bloques": [
         {
-            "accesoDirectoDelDia": 4,
+            "accesoDirectoDelDia": 0,
             "accesoDirectoProgramado": 0,
             "reservadoGestion": 0,
             "reservadoProfesional": 0,
             "cupoMobile": 0,
-            "restantesDelDia": 4,
+            "restantesDelDia": 0,
             "restantesProgramados": 0,
             "restantesGestion": 0,
             "restantesProfesional": 0,
@@ -17,7 +17,7 @@
             "pacienteSimultaneos": false,
             "citarPorBloque": false,
             "turnosMobile": false,
-            "cantidadTurnos": 4,
+            "cantidadTurnos": 0,
             "horaInicio": "2019-08-01T10:00:00.000-03:00",
             "horaFin": "2019-08-01T11:00:00.000-03:00",
             "duracionTurno": 30,

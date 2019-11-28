@@ -1,0 +1,60 @@
+[{
+	"origen" : {
+		"organizacion" : {
+			"nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+			"id" : "57e9670e52df311059bc8964"
+		},
+		"prestaciones" : [
+			{
+				"prestacion" : {
+					"refsetIds" : [ ],
+					"semanticTag" : "procedimiento",
+					"conceptId" : "1271000013104",
+					"term" : "consulta de gastroenterología infantil ",
+					"fsn" : "consulta de gastroenterología infantil (procedimiento)"
+				},
+				"auditable" : true,
+				"_id" : "5c75630f50822f6427759f66"
+			},
+			{
+				"prestacion" : {
+					"refsetIds" : [ ],
+					"conceptId" : "511000013109",
+					"term" : "consulta de pediatría",
+					"fsn" : "consulta de pediatría",
+					"semanticTag" : "procedimiento"
+				},
+				"auditable" : true,
+				"_id" : "5c75630f50822f6427759f65"
+			}
+		]
+	},
+	"destino" : {
+		"organizacion" : {
+			"nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+			"id" : "57e9670e52df311059bc8964"
+		},
+		"prestacion" : {
+			"refsetIds" : [ ],
+			"semanticTag" : "procedimiento",
+			"conceptId" : "1271000013104",
+			"term" : "consulta de gastroenterología infantil ",
+			"fsn" : "consulta de gastroenterología infantil (procedimiento)",
+			"id" : "5b60aa0fe4d8f5c31ef19d7a"
+		}
+	},
+	"createdAt" : "2019-02-26T13:02:23.252-03:00",
+	"createdBy" : {
+		"id" : "5d49fa8bb6834a1d95e277b8",
+		"nombreCompleto" : "ALICIA BEATRIZ ESPOSITO",
+		"nombre" : "ALICIA BEATRIZ",
+		"apellido" : "ESPOSITO",
+		"username" : 4163782,
+		"documento" : 4163782,
+		"organizacion" : {
+			"_id" : "57e9670e52df311059bc8964",
+			"nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+			"id" : "57e9670e52df311059bc8964"
+		}
+	}
+}]

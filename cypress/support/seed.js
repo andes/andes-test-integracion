@@ -218,8 +218,8 @@ Cypress.Commands.add('createAgendaPaciente', (name, daysOffset, horaInicioOffset
 
 Cypress.Commands.add('createSolicitud', (name, token) => {
     return cy.fixture(name).then((solicitud) => {
-        let newDate = Cypress.moment().format('YYYY-MM-DD');
-        solicitud.solicitud.fecha = solicitud.solicitud.fecha.replace('2019-08-01', newDate);
+        let newDate = Cypress.moment().toDate();
+        solicitud.solicitud.fecha = newDate;
         cy.request({
             method: 'POST',
             url: Cypress.env('API_SERVER') + '/api/modules/rup/prestaciones',
@@ -241,6 +241,19 @@ Cypress.Commands.add('createTurno', (fixtureName, idTurno, idBloque, idAgenda, p
             method: 'PATCH',
             url: Cypress.env('API_SERVER') + `/api/modules/turnos/turno/${idTurno}/${idBloque}/${idAgenda}`,
             body: turno,
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        });
+    });
+});
+
+Cypress.Commands.add('createReglaTOP', (fixtureName, token) => {
+    return cy.fixture(fixtureName).then((reglas) => {
+        cy.request({
+            method: 'POST',
+            url: Cypress.env('API_SERVER') + `/api/modules/top/reglas`,
+            body: { reglas },
             headers: {
                 Authorization: `JWT ${token}`
             }

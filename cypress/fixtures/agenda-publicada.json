@@ -1,0 +1,204 @@
+{
+    "intercalar": false,
+    "estado": "disponible",
+    "nominalizada": true,
+    "dinamica": false,
+    "bloques": [{
+        "accesoDirectoDelDia" : 0,
+        "accesoDirectoProgramado" : 0,
+        "reservadoGestion" : 5,
+        "reservadoProfesional" : 0,
+        "cupoMobile" : 0,
+        "restantesDelDia" : 0,
+        "restantesProgramados" : 0,
+        "restantesGestion" : 5,
+        "restantesProfesional" : 0,
+        "restantesMobile" : 0,
+        "pacienteSimultaneos" : false,
+        "citarPorBloque" : false,
+        "turnosMobile" : false,
+        "_id" : "5dc460bb64bc5214014f9fb1",
+        "cantidadTurnos" : 5,
+        "horaInicio" : "2019-11-10T15:00:00.000-03:00",
+        "horaFin" :"2019-11-10T16:00:00.000-03:00",
+        "duracionTurno" : 12,
+        "cantidadSimultaneos" : null,
+        "cantidadBloque" : null,
+        "tipoPrestaciones": [{
+            "_id": "59ee2d9bf00c415246fd3d6b",
+            "conceptId": "401000013105",
+            "term": "Consulta de clínica médica",
+            "fsn": "Consulta de clínica médica",
+            "semanticTag": "procedimiento",
+            "nombre": "Consulta de clínica médica",
+            "id": "59ee2d9bf00c415246fd3d6b"
+        }],
+        "turnos": [{
+            "estadoFacturacion" : {
+                "estado" : "Sin comprobante"
+            },
+            "estado" : "disponible",
+            "_id" : "5dc44eadfec88713ffefd1fd",
+            "diagnostico" : {
+                "codificaciones" : [ ]
+            },
+            "horaInicio" : "2019-11-15T14:00:00.000-03:00",
+            "auditable" : true,
+            "paciente" : null,
+            "tipoPrestacion" : null,
+            "idPrestacionPaciente" : null,
+            "nota" : null
+        },
+        {
+            "estadoFacturacion" : {
+                "estado" : "Sin comprobante"
+            },
+            "estado" : "disponible",
+            "_id" : "5dc44eadfec88713ffefd1fe",
+            "diagnostico" : {
+                "codificaciones" : [ ]
+            },
+            "horaInicio" : "2019-11-15T14:12:00.000-03:00",
+            "auditable" : true,
+            "paciente" : null,
+            "tipoPrestacion" : null,
+            "idPrestacionPaciente" : null,
+            "nota" : null
+        },
+        {
+            "estadoFacturacion" : {
+                "estado" : "Sin comprobante"
+            },
+            "estado" : "disponible",
+            "_id" : "5dc44eadfec88713ffefd1ff",
+            "diagnostico" : {
+                "codificaciones" : [ ]
+            },
+            "horaInicio" : "2019-11-15T14:24:00.000-03:00",
+            "auditable" : true,
+            "paciente" : null,
+            "tipoPrestacion" : null,
+            "idPrestacionPaciente" : null,
+            "nota" : null
+        },
+        {
+            "estadoFacturacion" : {
+                "estado" : "Sin comprobante"
+            },
+            "estado" : "disponible",
+            "_id" : "5dc44eadfec88713ffefd200",
+            "diagnostico" : {
+                "codificaciones" : [ ]
+            },
+            "horaInicio" : "2019-11-15T14:36:00.000-03:00",
+            "auditable" : true,
+            "paciente" : null,
+            "tipoPrestacion" : null,
+            "idPrestacionPaciente" : null,
+            "nota" : null
+        },
+        {
+            "estadoFacturacion" : {
+                "estado" : "Sin comprobante"
+            },
+            "estado" : "disponible",
+            "_id" : "5dc44eadfec88713ffefd201",
+            "diagnostico" : {
+                "codificaciones" : [ ]
+            },
+            "horaInicio" : "2019-11-15T14:48:00.000-03:00",
+            "auditable" : true,
+            "paciente" : null,
+            "tipoPrestacion" : null,
+            "idPrestacionPaciente" : null,
+            "nota" : null
+        },
+        {
+            "estadoFacturacion" : {
+                "estado" : "Sin comprobante"
+            },
+            "estado" : "disponible",
+            "_id" : "5dc44eadfec88713ffefd202",
+            "diagnostico" : {
+                "codificaciones" : [ ]
+            },
+            "horaInicio" : "2019-11-15T15:00:00.000-03:00",
+            "auditable" : true,
+            "paciente" : null,
+            "tipoPrestacion" : null,
+            "idPrestacionPaciente" : null,
+            "nota" : null
+        },
+        {
+            "estadoFacturacion" : {
+                "estado" : "Sin comprobante"
+            },
+            "estado" : "disponible",
+            "_id" : "5dc44eadfec88713ffefd203",
+            "diagnostico" : {
+                "codificaciones" : [ ]
+            },
+            "horaInicio" : "2019-11-15T15:12:00.000-03:00",
+            "auditable" : true,
+            "paciente" : null,
+            "tipoPrestacion" : null,
+            "idPrestacionPaciente" : null,
+            "nota" : null
+        }]
+    }],
+    "horaInicio": "2019-07-01T13:00:00.000Z",
+    "horaFin": "2019-07-01T14:00:00.000Z",
+    "tipoPrestaciones": [{
+        "_id": "59ee2d9bf00c415246fd3d6b",
+            "conceptId": "401000013105",
+            "term": "Consulta de clínica médica",
+            "fsn": "Consulta de clínica médica",
+            "semanticTag": "procedimiento",
+            "nombre": "Consulta de clínica médica",
+            "id": "59ee2d9bf00c415246fd3d6b"
+    }],
+    "organizacion": {
+        "_id": "57e9670e52df311059bc8964",
+        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+        "id": "57e9670e52df311059bc8964"
+    },
+    "profesionales": [{
+        "_id": "5d49fa8bb6834a1d95e277b8",
+        "nombre": "ALICIA BEATRIZ",
+        "apellido": "ESPOSITO",
+        "documento": "4163782",
+        "nombreCompleto": "ESPOSITO, ALICIA BEATRIZ",
+        "id": "5d49fa8bb6834a1d95e277b8"
+    }],
+    "avisos": [],
+    "sobreturnos": [],
+    "createdAt": "2019-09-11T12:03:35.006Z",
+    "createdBy": {
+        "id": "59e76172b7c39e57a13b38c5",
+        "nombreCompleto": "30643636 30643636",
+        "nombre": "30643636",
+        "apellido": "30643636",
+        "username": 30643636,
+        "documento": 30643636,
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id": "57e9670e52df311059bc8964"
+        }
+    },
+    "updatedAt": "2019-09-11T12:05:56.393Z",
+    "updatedBy": {
+        "id": "59e76172b7c39e57a13b38c5",
+        "nombreCompleto": "30643636 30643636",
+        "nombre": "30643636",
+        "apellido": "30643636",
+        "username": 30643636,
+        "documento": 30643636,
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id": "57e9670e52df311059bc8964"
+        }
+    },
+    "espacioFisico": null
+}

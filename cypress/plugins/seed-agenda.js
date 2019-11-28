@@ -83,6 +83,10 @@ module.exports.seedAgenda = async (mongoUri, params) => {
                     labelTipoTurno = 'accesoDirectoProgramado';
                     labelTipoTurnoRestante = 'restantesProgramados';
                     break;
+                case 'gestion':
+                    labelTipoTurno = 'reservadoGestion';
+                    labelTipoTurnoRestante = 'restantesGestion';
+                    break;
                 case 'profesional':
                     labelTipoTurno = 'reservadoProfesional';
                     labelTipoTurnoRestante = 'restantesProfesional';
@@ -151,7 +155,7 @@ module.exports.seedAgenda = async (mongoUri, params) => {
                     "id": turnoID,
                     "estado": "asignado",
                     "emitidoPor": "Gestión de pacientes",
-                    "tipoTurno": "delDia", // A mejorar
+                    "tipoTurno": labelTipoTurno,
                     "horaInicio": horaInicio.clone().add(i * 30, 'minutes').toDate(),
                     "paciente": {
                         ...paciente,

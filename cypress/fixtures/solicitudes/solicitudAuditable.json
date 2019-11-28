@@ -1,0 +1,141 @@
+{
+	"_id" : "5dc442ac857ade142b555a55",
+	"solicitud" : {
+		"tipoPrestacion" : {
+			"_id": "59ee2d9bf00c415246fd3d6b",
+            "conceptId": "401000013105",
+            "term": "Consulta de clínica médica",
+            "fsn": "Consulta de clínica médica",
+            "semanticTag": "procedimiento",
+            "nombre": "Consulta de clínica médica",
+            "id": "59ee2d9bf00c415246fd3d6b"
+		},
+		"tipoPrestacionOrigen" : {
+			"refsetIds" : [ ],
+			"semanticTag" : "procedimiento",
+			"conceptId" : "721000013105",
+			"term" : "consulta de ginecología",
+			"fsn" : "consulta de ginecología (procedimiento)",
+			"id" : "5b509b552343abc77fa7a469"
+		},
+		"organizacion" : {
+			"id" : "57e9670e52df311059bc8964",
+			"nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		},
+		"organizacionOrigen" : {
+			"nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+			"id" : "57e9670e52df311059bc8964"
+		},
+		"profesional" : {
+			"_id": "5d49fa8bb6834a1d95e277b8",
+            "nombre": "ALICIA BEATRIZ",
+            "apellido": "ESPOSITO",
+            "documento": "4163782",
+            "nombreCompleto": "ESPOSITO, ALICIA BEATRIZ",
+            "id": "5d49fa8bb6834a1d95e277b8"
+		},
+		"profesionalOrigen" : {
+			"_id": "5d49fa8bb6834a1d95e277b8",
+            "nombre": "ALICIA BEATRIZ",
+            "apellido": "ESPOSITO",
+            "documento": "4163782",
+            "nombreCompleto": "ESPOSITO, ALICIA BEATRIZ",
+            "id": "5d49fa8bb6834a1d95e277b8"
+		},
+		"ambitoOrigen" : "ambulatorio",
+		"fecha" : "2019-11-07T13:12:23.905-03:00",
+		"turno" : null,
+		"registros" : [
+			{
+				"privacy" : {
+					"scope" : "public"
+				},
+				"_id" : "5dc442ac857ade142b555a56",
+				"destacado" : false,
+				"esSolicitud" : false,
+				"esDiagnosticoPrincipal" : false,
+				"relacionadoCon" : [ ],
+				"nombre" : "consulta de clínica médica",
+				"concepto" : {
+					"refsetIds" : [ ],
+					"conceptId" : "401000013105",
+					"term" : "consulta de clínica médica",
+					"fsn" : "consulta de clínica médica",
+					"semanticTag" : "procedimiento",
+					"id" : "598ca8375adc68e2a0c121bc"
+				},
+				"valor" : {
+					"solicitudPrestacion" : {
+						"motivo" : "asdasd",
+						"autocitado" : false
+					},
+					"documentos" : [ ]
+				},
+				"registros" : [ ],
+				"createdAt" : "2019-11-07T13:13:32.367-03:00",
+				"createdBy" : {
+					"id" : "5a09e00b339cdd5965d2903e",
+					"nombreCompleto" : "ANDRES FRANCISCO JOSE VELAZQUEZ",
+					"nombre" : "ANDRES FRANCISCO JOSE",
+					"apellido" : "VELAZQUEZ",
+					"username" : 29148200,
+					"documento" : 29148200,
+					"organizacion" : {
+						"_id" : "57e9670e52df311059bc8964",
+						"nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+						"id" : "57e9670e52df311059bc8964"
+					}
+				}
+			}
+		]
+	},
+	"ejecucion" : {
+		"registros" : [ ]
+	},
+	"noNominalizada" : false,
+	"paciente" : {
+		"id" : "586e6e8627d3107fde116cdb",
+		"nombre" : "DOMINGO ALBERTO",
+		"apellido" : "FELIPE",
+		"documento" : "12731735",
+		"sexo" : "masculino",
+		"fechaNacimiento" : "1956-12-26T00:00:00-03:00"
+	},
+	"estados" : [
+		{
+			"idOrigenModifica" : null,
+			"motivoRechazo" : null,
+			"_id" : "5dc442ac857ade142b555a57",
+			"tipo" : "auditoria",
+			"createdAt" : "2019-11-07T13:13:32.367-03:00",
+			"createdBy" : {
+				"id" : "5a09e00b339cdd5965d2903e",
+				"nombreCompleto" : "ANDRES FRANCISCO JOSE VELAZQUEZ",
+				"nombre" : "ANDRES FRANCISCO JOSE",
+				"apellido" : "VELAZQUEZ",
+				"username" : 29148200,
+				"documento" : 29148200,
+				"organizacion" : {
+					"_id" : "57e9670e52df311059bc8964",
+					"nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+					"id" : "57e9670e52df311059bc8964"
+				}
+			}
+		}
+	],
+	"createdAt" : "2019-11-07T13:13:32.367-03:00",
+	"createdBy" : {
+		"id" : "5a09e00b339cdd5965d2903e",
+		"nombreCompleto" : "ANDRES FRANCISCO JOSE VELAZQUEZ",
+		"nombre" : "ANDRES FRANCISCO JOSE",
+		"apellido" : "VELAZQUEZ",
+		"username" : 29148200,
+		"documento" : 29148200,
+		"organizacion" : {
+			"_id" : "57e9670e52df311059bc8964",
+			"nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+			"id" : "57e9670e52df311059bc8964"
+		}
+	},
+	"__v" : 0
+}
