@@ -1,17 +1,22 @@
 context('punto de inicio', () => {
     let token;
-    const DNI = '36425896';
+    // const = '36425896';
+    let paciente;
+    let turno;
     before(() => {
         // Borro los datos de la base antes de los test
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
-            cy.createPaciente('apps/citas/turnos/paciente-turnos', token).then(r => {
-                cy.createAgendaPaciente('agenda-turno-paciente', 0, 0, 2, r.body, token);
-                cy.createAgendaPaciente('agenda-turno-paciente', 0, 4, 6, r.body, token);
-                cy.createAgendaPaciente('apps/citas/agendas/agenda-historial', null, null, null, r.body, token);
+            cy.task('database:create:paciente', { template: 'validado' }).then(p => {
+                paciente = p.documento;
+                // Se crea una agenda del día con el paciente creado
+                cy.task('database:seed:agenda', { pacientes: p._id, profesionales: '5c82a5a53c524e4c57f08cf3' });
+                // Se crea agenda para un día anterior con el paciente creado para verificar el historial
+                cy.task('database:seed:agenda', { pacientes: p._id, profesionales: '5c82a5a53c524e4c57f08cf3', fecha: -1 }).then(agenda => {
+                    turno = agenda.bloques[0].turnos[0].horaInicio; // Se queda con la horaInicio del primer turno para luego verificar historial
+                });
             });
-
         });
 
     });
@@ -35,11 +40,11 @@ context('punto de inicio', () => {
     it('Generar solicitud', () => {
         cy.route('GET', '**api/modules/rup/prestaciones/solicitudes?idPaciente=**').as('generarSolicitudPaciente');
         cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
-        cy.plexText('name=buscador', DNI);
+        cy.plexText('name=buscador', paciente);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(DNI).click();
+        cy.get('paciente-listado').find('td').contains(paciente).click();
         cy.wait('@seleccionPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -58,11 +63,11 @@ context('punto de inicio', () => {
 
         cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('puco');
         cy.route('GET', '/api/modules/obraSocial/prepagas/**', []).as('prepagas');
-        cy.plexText('name=buscador', DNI);
+        cy.plexText('name=buscador', paciente);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(DNI).click();
+        cy.get('paciente-listado').find('td').contains(paciente).click();
         cy.plexButtonIcon('cellphone-android').click();
         cy.plexText('placeholder="e-mail"', '{selectall}{backspace}prueba@prueba.com');
         cy.plexText('placeholder="Celular"', '{selectall}{backspace}2995290357');
@@ -72,29 +77,30 @@ context('punto de inicio', () => {
 
     it('editar datos de contacto', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**/api/modules/turnos/historial?**').as('getTurnos');
+        cy.route('GET', '**/api/modules/turnos/historial?**').as('getHistorial');
         cy.route('GET', '**/api/core/log/paciente?**').as('getLog');
         cy.route('GET', '**/api/modules/obraSocial/puco/**').as('getObraSocial');
-        cy.route('GET', '**/api/core/tm/paises?**').as('getPaises');
         cy.route('GET', '**/api/modules/obraSocial/prepagas**').as('getPrepagas');
-        cy.route('GET', '**/api/core/tm/provincias**').as('getProvincias');
-        cy.route('GET', '**/api/core/tm/provincias?**').as('getNeuquen');
-        cy.route('GET', '**/api/core/tm/localidades**').as('provincia');
-        cy.route('GET', '**/api/core/tm/barrios**').as('localidad');
+        cy.route('GET', '**/api/core/tm/localidades?**').as('getLocalidades');
+        cy.route('GET', '**/api/core/tm/paises?**').as('getPaises');
+        cy.route('GET', '**/api/core/tm/provincias?**').as('getProvincias');
+
+
+        cy.route('GET', '**/api/core/tm/barrios?**').as('getBarrios');
         cy.route('PUT', '**/api/core/mpi/pacientes/**').as('guardar');
 
-        cy.plexText('name="buscador"', DNI);
+        cy.plexText('name="buscador"', paciente);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains(DNI).click();
+        cy.get('paciente-listado').find('td').contains(paciente).click();
 
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@getTurnos').then((xhr) => {
+        cy.wait('@getHistorial').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
@@ -106,11 +112,16 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@getPaises').then((xhr) => {
+        cy.wait('@getPrepagas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@getPrepagas').then((xhr) => {
+        cy.wait('@getLocalidades').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+
+        cy.wait('@getPaises').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
@@ -118,20 +129,15 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@getNeuquen').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
         cy.plexPhone('label="Número"', '{selectall}{backspace}2990000000');
         cy.plexText('label="Dirección"', 'Avenida Las Flores 1200');
 
         cy.plexSelectType('label="Provincia"', 'Neuquén');
-        cy.wait('@provincia').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+
+        cy.plexSelect('label="Localidad"').find('.remove-button').click();
 
         cy.plexSelectType('label="Localidad"', 'Neuquén');
-        cy.wait('@localidad').then((xhr) => {
+        cy.wait('@getBarrios').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
@@ -140,7 +146,7 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Los cambios han sido guardados');
+        cy.toast('success', 'Los cambios han sido guardados');
     });
 
     it('dar asistencia y quitarla', () => {
@@ -154,12 +160,12 @@ context('punto de inicio', () => {
         cy.route('GET', '**/api/core/tm/provincias?**').as('getNeuquen');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
 
-        cy.plexText('name="buscador"', DNI);
+        cy.plexText('name="buscador"', paciente);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains(DNI).click();
+        cy.get('paciente-listado').find('td').contains(paciente).click();
 
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -202,7 +208,7 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Se registro la asistencia del paciente');
+        cy.toast('success', 'Se registro la asistencia del paciente');
 
         cy.wait('@getTurnos').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -219,7 +225,7 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Se registro la inasistencia del paciente');
+        cy.toast('alert', 'Se registro la inasistencia del paciente');
 
         cy.wait('@getTurnos').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -242,12 +248,12 @@ context('punto de inicio', () => {
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('getTurnosAgenda');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
 
-        cy.plexText('name="buscador"', DNI);
+        cy.plexText('name="buscador"', paciente);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains(DNI).click();
+        cy.get('paciente-listado').find('td').contains(paciente).click();
 
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -292,6 +298,8 @@ context('punto de inicio', () => {
 
         cy.plexButton("Liberar").click();
 
+        cy.toast('success', 'El turno seleccionado fue liberado');
+
         cy.wait('@patchAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -310,13 +318,13 @@ context('punto de inicio', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?*').as('getTurnos');
 
-        cy.plexText('name="buscador"', '36425896');
+        cy.plexText('name="buscador"', paciente);
 
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains('36425896').click();
+        cy.get('paciente-listado').find('td').contains(paciente).click();
 
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -328,28 +336,28 @@ context('punto de inicio', () => {
 
         cy.get('plex-tabs').contains('Historial').click({ force: true });
 
-        cy.get('li[class="list-group-item"]').eq(1).find('span[class="badge badge-success"]').contains('ASIGNADO');
+        cy.get('li[class="list-group-item"]').eq(0).find('span[class="badge badge-success"]').contains('ASIGNADO');
 
-        cy.get('li[class="list-group-item"]').eq(1).contains('08/10/2019 11:00');
+        cy.get('li[class="list-group-item"]').eq(0).contains(Cypress.moment(turno).format('DD/MM/YYYY HH:mm'));
 
-        cy.get('li[class="list-group-item"]').eq(1).contains('consulta de medicina general');
+        cy.get('li[class="list-group-item"]').eq(0).contains('consulta con médico general');
 
-        cy.get('li[class="list-group-item"]').eq(1).contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+        cy.get('li[class="list-group-item"]').eq(0).contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
     });
 
-    it.only('Carpetas', () => {
+    it('Carpetas', () => {
         cy.route('GET', '**api/modules/carpetas/carpetasPacientes?*').as('getCarpetas');
         cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?*').as('getTurnos');
         cy.route('PATCH', '**/api/core/mpi/pacientes/*').as('carpetaNueva');
         cy.route('POST', '**/api/modules/carpetas/incrementarCuenta').as('incrementaCarpeta');
 
-        cy.plexText('name="buscador"', '36425896');
+        cy.plexText('name="buscador"', paciente);
 
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains('36425896').click();
+        cy.get('paciente-listado').find('td').contains(paciente).click();
 
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -379,14 +387,7 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.toast('success', 'Nuevo número de carpeta establecido').click();
-        cy.plexButtonIcon('pencil').click();
-        cy.plexText('name="nroCarpeta"', 'DDD123');
-        cy.plexButtonIcon('content-save').click();
-        cy.toast('success', 'Nuevo número de carpeta establecido').click();
-        cy.plexButtonIcon('pencil').click();
-        cy.plexText('name="nroCarpeta"', '{selectall}{backspace}DDD123');
-        cy.plexButtonIcon('content-save').click();
+        cy.toast('success', 'Nuevo número de carpeta establecido');
 
     });
 })
