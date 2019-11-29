@@ -34,7 +34,7 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
     return element;
 });
 
-Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, label, data = null, clicked = true) => {
+Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, label, data = null, clicked = true, first = false) => {
     const selector = `plex-select[${label}] input`;
     let element;
     if (subject) {
@@ -42,7 +42,10 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
     } else {
         element = cy.get(selector);
     }
-    // element = element.first();
+    if (first) {
+        element = element.first();
+
+    }
     if (data && typeof data === 'string') {
         const textForType = clicked ? `${data}{enter}` : data;
         element = element.type(textForType, {
