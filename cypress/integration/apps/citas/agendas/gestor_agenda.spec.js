@@ -19,6 +19,10 @@ describe('CITAS - Planicar Agendas', () => {
         cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getTiposPrestacion');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgendas');
+        cy.route('GET', '**/api/modules/turnos/agenda/**').as('findAgenda');
+        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('patchAgenda');
+        cy.route('PUT', '**/api/modules/turnos/turno/**').as('putAgenda');
+
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.visit('/citas/gestor_agendas', {
             onBeforeLoad: (win) => {
@@ -109,12 +113,12 @@ describe('CITAS - Planicar Agendas', () => {
         cy.get('table tbody td').contains('examen pediátrico').click();
         cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
         cy.plexButtonIcon('sync-alert').click();
+        cy.wait('@findAgenda');
         cy.get('tbody tr').first().click();
         cy.contains(' No hay agendas que contengan turnos que coincidan');
     })
 
-    it('suspender agenda disponible con turno y reasignarlo', () => {
-
+    it.only('suspender agenda disponible con turno y reasignarlo', () => {
         cy.wait('@getAgendas');
         cy.get('table tbody td').contains('servicio de neumonología').click();
         cy.plexButtonIcon('stop').click();
@@ -122,10 +126,22 @@ describe('CITAS - Planicar Agendas', () => {
         cy.get('table tbody td').contains('servicio de neumonología').click();
         cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
         cy.plexButtonIcon('sync-alert').click();
+        cy.wait('@findAgenda');
+
         cy.get('tbody tr').first().click();
+
         cy.get('.reasignar').first().click();
         cy.get('button').contains('CONFIRMAR').click();
+        cy.wait('@patchAgenda');
         cy.plexButton('Gestor de Agendas').click();
+        cy.wait('@putAgenda');
+
+        // [TODO] Investigar este caso.
+        cy.wait('@getAgendas');
+        cy.wait('@getAgendas');
+        cy.wait('@getAgendas');
+        cy.wait('@getTiposPrestacion');
+
         cy.get('table tbody td').contains('servicio de neumonología').click();
         cy.get('.lista-turnos .badge-info').contains('Reasignado');
     })
@@ -137,8 +153,9 @@ describe('CITAS - Planicar Agendas', () => {
         cy.selectOption('label="Estado"', '"publicada"');
         cy.get('tbody tr').first().click();
         cy.get('.lista-turnos').first().click();
-        cy.get('plex-button[title="Suspender turno"]').click();
+        cy.get('plex-box').eq(1).plexButtonIcon('stop').click();
         cy.plexButton('Confirmar').click();
+        cy.wait('@getAgendas');
         cy.get('.lista-turnos').contains('Turno suspendido (sin paciente)');
 
     })
