@@ -1,12 +1,5 @@
 Cypress.Commands.add('swal', (acction) => {
     return cy.get('div.swal2-modal').find(`.swal2-${acction}`).click({ force: true });
-    // return cy.get('div.swal2-modal').then(($body) => {
-    //     if ($body.hasClass('swal2-container')) {
-    //         return cy.get(`.swal2-${acction}`).click({
-    //             force: true
-    //         })
-    //     }
-    // });
 });
 
 /**
@@ -81,6 +74,23 @@ Cypress.Commands.add('plexSelectAsync', { prevSubject: 'optional' }, (subject, l
     }
 });
 
+
+Cypress.Commands.add('isSelectedID', { prevSubject: 'element' }, (subject, value) => {
+    return cy.wrap(subject).find(`.selectize-input .item[data-value="${value}"]`);
+});
+
+Cypress.Commands.add('isSelectedLabel', { prevSubject: 'element' }, (subject, label) => {
+    return cy.wrap(subject).find(`.selectize-input .item`).contains(label);
+});
+
+Cypress.Commands.add('clearSelect', { prevSubject: 'element' }, (subject, id) => {
+    if (!id) {
+        return cy.wrap(subject).find('.mdi-close-circle').click();
+    } else {
+        return cy.wrap(subject).find(`.selectize-input .item[data-value="${id}"]`).find('.mdi-close-circle').click();
+
+    }
+});
 
 Cypress.Commands.add('plexInt', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
@@ -237,6 +247,31 @@ Cypress.Commands.add('toast', (option, label) => {
 
 })
 
+Cypress.Commands.add('plexAccordion', { prevSubject: 'optional' }, (subject, index) => {
+    let element;
+    if (subject) {
+        element = cy.wrap(subject).find(`plex-accordion`);
+    } else {
+        element = cy.get(`plex-accordion`);
+    }
+    if (index !== undefined) {
+        element.find('plex-panel .card .card-header').eq(index).click();
+    }
+    return element;
+});
+
+Cypress.Commands.add('plexPanel', { prevSubject: 'optional' }, (subject, index) => {
+    let element;
+    if (subject) {
+        element = cy.wrap(subject).find(`plex-panel`);
+    } else {
+        element = cy.get(`plex-panel`);
+    }
+    if (index !== undefined) {
+        return element.eq(index);
+    }
+    return element;
+});
 
 /**
  * @decrecated
