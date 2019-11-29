@@ -198,8 +198,12 @@ Cypress.Commands.add('plexBool', { prevSubject: 'optional' }, (subject, label, c
     } else {
         element = cy.get(`plex-bool[${label}] input[type="checkbox"]`);
     }
-    if (checked) {
-        element = element.check({ force: true });
+    if (checked !== undefined) {
+        if (checked) {
+            element = element.check({ force: true });
+        } else {
+            element = element.uncheck({ force: true });
+        }
     }
     return element;
 });
@@ -253,9 +257,9 @@ Cypress.Commands.add('toast', (option, label) => {
 Cypress.Commands.add('plexAccordion', { prevSubject: 'optional' }, (subject, index) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject).find(`plex-accordion`);
+        element = cy.wrap(subject).find(`plex-accordion >div`);
     } else {
-        element = cy.get(`plex-accordion`);
+        element = cy.get(`plex-accordion >div`);
     }
     if (index !== undefined) {
         element.find('plex-panel .card .card-header').eq(index).click();
@@ -271,7 +275,7 @@ Cypress.Commands.add('plexPanel', { prevSubject: 'optional' }, (subject, index) 
         element = cy.get(`plex-panel`);
     }
     if (index !== undefined) {
-        return element.eq(index);
+        return element.eq(index).children().eq(0);
     }
     return element;
 });
