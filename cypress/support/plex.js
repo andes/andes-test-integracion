@@ -34,7 +34,7 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
     return element;
 });
 
-Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, label, data = null, clicked = true) => {
+Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, label, data = null, clicked = true, first = false) => {
     const selector = `plex-select[${label}] input`;
     let element;
     if (subject) {
@@ -42,7 +42,10 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
     } else {
         element = cy.get(selector);
     }
-    // element = element.first();
+    if (first) {
+        element = element.first();
+
+    }
     if (data && typeof data === 'string') {
         const textForType = clicked ? `${data}{enter}` : data;
         element = element.type(textForType, {
@@ -195,8 +198,12 @@ Cypress.Commands.add('plexBool', { prevSubject: 'optional' }, (subject, label, c
     } else {
         element = cy.get(`plex-bool[${label}] input[type="checkbox"]`);
     }
-    if (checked) {
-        element = element.check({ force: true });
+    if (checked !== undefined) {
+        if (checked) {
+            element = element.check({ force: true });
+        } else {
+            element = element.uncheck({ force: true });
+        }
     }
     return element;
 });
@@ -250,9 +257,9 @@ Cypress.Commands.add('toast', (option, label) => {
 Cypress.Commands.add('plexAccordion', { prevSubject: 'optional' }, (subject, index) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject).find(`plex-accordion`);
+        element = cy.wrap(subject).find(`plex-accordion >div`);
     } else {
-        element = cy.get(`plex-accordion`);
+        element = cy.get(`plex-accordion >div`);
     }
     if (index !== undefined) {
         element.find('plex-panel .card .card-header').eq(index).click();
@@ -268,7 +275,7 @@ Cypress.Commands.add('plexPanel', { prevSubject: 'optional' }, (subject, index) 
         element = cy.get(`plex-panel`);
     }
     if (index !== undefined) {
-        return element.eq(index);
+        return element.eq(index).children().eq(0);
     }
     return element;
 });
