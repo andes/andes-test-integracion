@@ -133,6 +133,9 @@ module.exports.seedAgenda = async (mongoUri, params) => {
                         obraSocial: {},
                         carpetaEfectores: []
                     },
+                    "diagnostico": {
+                        codificaciones: []
+                    },
                     "tipoPrestacion": agenda.tipoPrestaciones[0]
                 };
                 agenda.bloques[0].turnos.push(turno);
