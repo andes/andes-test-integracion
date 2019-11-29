@@ -38,7 +38,8 @@ describe('CITAS - Planicar Agendas', () => {
         cy.plexSelectAsync('label="Espacio Físico"', 'Huemul Consultorio 3 PB', '@getEspacioFisico', 0);
 
         cy.plexButton('Guardar').click();
-
+        cy.toast('success');
+        cy.wait('@getAgendas');
         cy.get('.nombres-profesionales').contains('PRUEBA');
         cy.get('table tbody tr td').contains('Huemul Consultorio 3 PB (Huemul)');
     })
