@@ -27,7 +27,33 @@ context('perfiles-usuario', () => {
         cy.wait('@postPerfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+    });
 
+    it('Crear nuevo perfil con permisos de diferentes niveles', () => {
+        cy.plexButton('NUEVO').click();
+        cy.plexText('name="nombre"', 'test perfil');
+        cy.get('plex-layout-sidebar arbol-permisos>div').eq(0).plexAccordion().eq(0).as('citasAccordion');
+        cy.get('@citasAccordion').plexBool('type="slide"', true)
+        cy.get('plex-layout-sidebar arbol-permisos>div').eq(1).plexAccordion().eq(0).as('mpiAccordion');
+        cy.get('@mpiAccordion').plexBool('type="slide"', true)
+        cy.get('plex-layout-sidebar arbol-permisos>div').eq(2).plexAccordion().click().as('rupAccordion');
+        cy.get('@rupAccordion').plexSelectAsync('placeholder="Seleccione los elementos con permisos"', 'Consulta de medicina general', '@prestaciones', 0);
+
+
+
+        cy.get('plex-layout-sidebar arbol-permisos>div').eq(8).plexAccordion().click().as('internacionAccordion');
+        cy.get('@internacionAccordion').within((item) => {
+            cy.get('plex-bool input[type="checkbox"]').eq(1).check({
+                force: true
+            });
+        });
+
+        cy.plexButton('Guardar').click();
+        cy.contains('El perfil se ha guardado satisfactoriamente!');
+        cy.wait('@postPerfil').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.permisos).to.have.length(4);
+        });
     });
 
     it('Agregar permisos de un perfil existente', () => {
