@@ -19,7 +19,7 @@ const { seedPaciente, createPaciente } = require('./seed-paciente');
 const { createUsuario } = require('./seed-usuario');
 const { createElementoRup, deleteElementoRup } = require('./seed-elementos-rup');
 const { createPacienteApp } = require('./seed-paciente-app');
-const { seedPerfil } = require('./seed-gestor-usuarios');
+const { seedPerfil, seedUsuario } = require('./seed-gestor-usuarios');
 
 module.exports = (on, config) => {
     // ref: https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
@@ -65,6 +65,9 @@ module.exports = (on, config) => {
         },
         'database:create:perfil': (dto) => {
             return seedPerfil(mongoUri, dto);
+        },
+        'database:create:usuario': (dto) => {
+            return seedUsuario(mongoUri, dto);
         }
     });
 

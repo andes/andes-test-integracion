@@ -35,3 +35,33 @@ module.exports.seedPerfil = async (mongoUri, params) => {
         return e;
     }
 }
+module.exports.seedUsuario = async (mongoUri, params) => {
+    params = params || {};
+    try {
+        const client = await connectToDB(mongoUri);
+        const UsuarioDB = await client.db().collection('authUsers');
+
+        const templateName = params.template || 'default';
+        const dto = require(`./data/gestor-usuarios/usuario-${templateName}`);
+        let usuario = JSON.parse(JSON.stringify(dto));
+
+        usuario.usuario = params.usuario || faker.random.number({
+            min: 40000000,
+            max: 49999999
+        });
+        usuario.documento = "" + usuario.usuario;
+        usuario.nombre = params.nombre || faker.name.firstName();
+        usuario.apellido = params.apellido || faker.name.lastName();
+
+        usuario.organizaciones.forEach(org => {
+            org._id = new ObjectId(org._id);
+        });
+
+        usuario._id = new ObjectId();
+        await UsuarioDB.insertOne(usuario);
+
+        return usuario;
+    } catch (e) {
+        return e;
+    }
+}
