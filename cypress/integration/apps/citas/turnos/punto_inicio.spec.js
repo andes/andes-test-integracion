@@ -336,13 +336,13 @@ context('punto de inicio', () => {
 
         cy.get('plex-tabs').contains('Historial').click({ force: true });
 
-        cy.get('li[class="list-group-item"]').eq(0).find('span[class="badge badge-success"]').contains('ASIGNADO');
+        cy.get('li[class="list-group-item"]').find('span[class="badge badge-success"]').contains('ASIGNADO');
 
-        cy.get('li[class="list-group-item"]').eq(0).contains(Cypress.moment(turno).format('DD/MM/YYYY HH:mm'));
+        cy.get('li[class="list-group-item"]').contains(Cypress.moment(turno).format('DD/MM/YYYY'));
 
-        cy.get('li[class="list-group-item"]').eq(0).contains('consulta con médico general');
+        cy.get('li[class="list-group-item"]').contains('consulta con médico general');
 
-        cy.get('li[class="list-group-item"]').eq(0).contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+        cy.get('li[class="list-group-item"]').contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
     });
 
     it('Carpetas', () => {

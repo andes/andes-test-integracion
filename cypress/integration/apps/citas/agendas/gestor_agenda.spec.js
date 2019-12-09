@@ -73,7 +73,7 @@ describe('CITAS - Planicar Agendas', () => {
         cy.plexSelect('label="Tipos de prestación"').find('.remove-button').click();
 
 
-        cy.selectOption('label="Tipos de prestación"', '"59ee2d9bf00c415246fd3d85"');
+        cy.plexSelect('label="Tipos de prestación"', '59ee2d9bf00c415246fd3d85').click();
 
 
         cy.plexSelect('label="Equipo de Salud"').find('.remove-button').click();
@@ -118,7 +118,7 @@ describe('CITAS - Planicar Agendas', () => {
         cy.contains(' No hay agendas que contengan turnos que coincidan');
     })
 
-    it.only('suspender agenda disponible con turno y reasignarlo', () => {
+    it('suspender agenda disponible con turno y reasignarlo', () => {
         cy.wait('@getAgendas');
         cy.get('table tbody td').contains('servicio de neumonología').click();
         cy.plexButtonIcon('stop').click();
@@ -150,7 +150,7 @@ describe('CITAS - Planicar Agendas', () => {
 
         cy.wait('@getAgendas');
         cy.plexButtonIcon('chevron-down').click();
-        cy.selectOption('label="Estado"', '"publicada"');
+        cy.plexSelectType('label="Estado"', 'publicada');
         cy.get('tbody tr').first().click();
         cy.get('.lista-turnos').first().click();
         cy.get('plex-box').eq(1).plexButtonIcon('stop').click();

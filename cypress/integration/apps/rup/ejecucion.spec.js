@@ -34,9 +34,8 @@ context('RUP - Punto de inicio', () => {
             force: true
         });
 
-        cy.wait('@prestaciones');
-        cy.selectOption('name="nombrePrestacion"', '"598ca8375adc68e2a0c121b8"');
 
+        cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de medicina general', '@prestaciones', 0);
         cy.get('plex-button[label="SELECCIONAR PACIENTE"]').click({
             force: true
         });
@@ -106,7 +105,7 @@ context('RUP - Punto de inicio', () => {
             force: true
         });
 
-        cy.selectOption('name="nombrePrestacion"', '"598ca8375adc68e2a0c121b8"');
+        cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
         cy.get('table tr').contains('consulta de medicina general').first().click();
         cy.get('div[class="plex-box-content"] table').eq(1).find('tr td plex-button[label="INICIAR PRESTACIÓN"]').click({
             force: true
@@ -177,7 +176,7 @@ context('RUP - Punto de inicio', () => {
             force: true
         });
 
-        cy.selectOption('name="nombrePrestacion"', '"598ca8375adc68e2a0c121b8"');
+        cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
         cy.get('table tr').contains('consulta de medicina general').first().click();
         cy.get('div[class="plex-box-content"] table').eq(2).find('tr td plex-button[label="INICIAR PRESTACIÓN"]').click({
             force: true
