@@ -1,5 +1,6 @@
 context('perfiles-usuario', () => {
-    let token
+    let token;
+    let perfil1;
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd', '57e9670e52df311059bc8964').then(t => {
@@ -19,11 +20,7 @@ context('perfiles-usuario', () => {
     });
 
     it('Crear nuevo perfil', () => {
-        cy.plexButton('NUEVO').click();
-        cy.plexText('name="nombre"', 'test perfil');
-        cy.get('div[id="accordion"]').eq(0).find('plex-bool').eq(0).click();
-        cy.plexButton('Guardar').click();
-        cy.contains('El perfil se ha guardado satisfactoriamente!');
+        crearPerfilBasico();
         cy.wait('@postPerfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -117,4 +114,26 @@ context('perfiles-usuario', () => {
         cy.plexSelect('name="plexSelect"').contains('consulta de nutrición').should('not.exist');
     });
 
+    it('Crear nuevo perfil y verificar que no se modifica uno pre-existente', () => {
+        cy.task('database:create:perfil').then(p => {
+            perfil1 = p;
+        });
+
+        crearPerfilBasico();
+        cy.wait(['@perfil', '@postPerfil']).then((xhr) => {
+            expect(xhr[1].status).to.be.eq(200);
+            cy.wait('@perfil').then((xhr2) => {
+                expect(xhr2.response.body).to.have.length(2);
+                expect(xhr2.response.body[0].permisos).to.have.length(8);
+            });
+        });
+    });
+
+    function crearPerfilBasico() {
+        cy.plexButton('NUEVO').click();
+        cy.plexText('name="nombre"', 'test perfil');
+        cy.get('div[id="accordion"]').eq(0).find('plex-bool').eq(0).click();
+        cy.plexButton('Guardar').click();
+        cy.contains('El perfil se ha guardado satisfactoriamente!');
+    };
 });
