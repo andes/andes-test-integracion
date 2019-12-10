@@ -61,6 +61,11 @@ module.exports.createPaciente = async (mongoUri, elasticUri, params) => {
             dto.documento = params.documento || ('' + faker.random.number({ min: 40000000, max: 49999999 }));
         }
 
+        if (params.sexo) {
+            dto.sexo = params.sexo;
+            dto.genero = params.sexo;
+        }
+
         dto.contacto[0].valor = params.telefono || faker.phone.phoneNumber().replace('-', '').replace('-', '');
 
         dto._id = new ObjectId();
