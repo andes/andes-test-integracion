@@ -3,7 +3,11 @@ Cypress.Commands.add('seed', () => {
     if (develop) {
         cy.exec('npm run prod:reset');
     } else {
-        cy.cleanDB();
+        if (Cypress.env('ENVIRONMENT') === 'develop') {
+            cy.exec('npm run dev:reset');
+        } else {
+            cy.cleanDB();
+        }
     }
 });
 
