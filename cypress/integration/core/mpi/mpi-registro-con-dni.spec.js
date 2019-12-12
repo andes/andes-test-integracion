@@ -2,6 +2,8 @@ context('MPI-Registro Paciente Con Dni', () => {
     let token
     before(() => {
         cy.seed();
+        cy.cleanDB()
+        cy.task('database:seed:paciente');
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });
@@ -9,6 +11,7 @@ context('MPI-Registro Paciente Con Dni', () => {
     })
 
     beforeEach(() => {
+        cy.log(token)
         cy.goto('/apps/mpi/busqueda', token);
         cy.server();
     });
@@ -154,21 +157,20 @@ context('MPI-Registro Paciente Con Dni', () => {
     });
 
     it('editar un paciente existente y agregarle una relación', () => {
-        cy.cleanDB()
-        cy.task('database:seed:paciente');
-        cy.wait(1000);
-        // cy.createPaciente('mpi/paciente', token);
-        // cy.createPaciente('mpi/relacion', token);
-
+        cy.route('GET', '**api/core/mpi/pacientes**').as('getPaciente');
+        cy.route('GET', '**api/core/mpi/pacientes/**').as('findPacienteByID');
 
         cy.plexText('name="buscador"', '20000000');
-        cy.wait(1000);
+        cy.wait('@getPaciente');
         cy.get('paciente-listado').find('td').contains('20000000').click();
+
+        cy.wait('@findPacienteByID');
 
         cy.plexTab('Relaciones').click();
 
         cy.plexText('name="buscador"', '10000000');
-        cy.get('paciente-listado').find('td').contains('10000000').click();
+        cy.wait('@getPaciente');
+        cy.get('paciente-listado').find('td').contains('10000000').parent().parent().click();
 
         cy.plexSelect('placeholder="Seleccione..."').click();
         cy.plexSelect('placeholder="Seleccione..."', 1).click();
