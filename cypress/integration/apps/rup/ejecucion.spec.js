@@ -143,9 +143,7 @@ context('RUP - Punto de inicio', () => {
 
         cy.toast('success');
 
-        cy.plexButton('Validar consulta de medicina general').click({
-            force: true
-        });
+        cy.plexButton('Validar consulta de medicina general').click();
 
         // Popup alert
         cy.get('button').contains('CONFIRMAR').click();
