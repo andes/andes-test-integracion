@@ -15,7 +15,15 @@ context('RUP - Punto de inicio', () => {
     describe('listado de agendas y prestaciones', () => {
         beforeEach(() => {
             cy.server();
-            cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas')
+            cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
+            cy.route('POST', '**/api/modules/rup/prestaciones**').as('crearPrestacion');
+            cy.route('GET', '**/api/modules/rup/prestaciones**').as('prestaciones');
+            cy.route('GET', '**/api/modules/turnero/pantalla**').as('turnero');
+            cy.route('GET', '**/api/modules/rup/elementosRUP**').as('elementosRUP');
+            cy.route('GET', '**/api/auth/organizaciones**').as('organizaciones');
+            cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('tiposPrestaciones');
+            cy.route('GET', '**api/modules/cde/paciente**').as('paciente');
+            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         });
 
         it('no visualiza agendas sin turnos', () => {
@@ -34,7 +42,7 @@ context('RUP - Punto de inicio', () => {
 
         });
 
-        it('vizualizar listados agendas', () => {
+        it('visualizar listados agendas', () => {
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb' });
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', fecha: -1 });
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', fecha: -1, inicio: 2, fin: 4 });
@@ -45,6 +53,11 @@ context('RUP - Punto de inicio', () => {
             cy.get('table').first().as('tablaAgendas');
 
             cy.get('@tablaAgendas').find('tbody tr').should('have.length', 1);
+            cy.wait('@prestaciones');
+            cy.wait('@tiposPrestaciones');
+            cy.wait('@organizaciones');
+            cy.wait('@turnero');
+            cy.wait(1000);
             cy.get('@tablaAgendas').find('tbody tr').find('td div').contains('consulta con médico general');
             cy.get('@tablaAgendas').find('tbody tr').find('td').contains('pacientes 1 / 4');
 
@@ -79,7 +92,7 @@ context('RUP - Punto de inicio', () => {
 
     describe('navegacion', () => {
         beforeEach(() => {
-            cy.goto('/rup', token)
+            cy.goto('/rup', token);
         });
 
         it('iniciar prestacion fuera de agenda', () => {
@@ -102,8 +115,15 @@ context('RUP - Punto de inicio', () => {
         beforeEach(() => {
             cy.seed();
             cy.server();
-            cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
+            cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
             cy.route('POST', '**/api/modules/rup/prestaciones**').as('crearPrestacion');
+            cy.route('GET', '**/api/modules/rup/prestaciones**').as('prestaciones');
+            cy.route('GET', '**/api/modules/turnero/pantalla**').as('turnero');
+            cy.route('GET', '**/api/modules/rup/elementosRUP**').as('elementosRUP');
+            cy.route('GET', '**/api/auth/organizaciones**').as('organizaciones');
+            cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('tiposPrestaciones');
+            cy.route('GET', '**api/modules/cde/paciente**').as('paciente');
+            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         });
 
         it('Visualizar boton "iniciar prestacion"', () => {
@@ -117,6 +137,9 @@ context('RUP - Punto de inicio', () => {
             cy.goto('/rup', token);
 
             cy.wait('@agendas');
+            cy.wait('@prestaciones');
+            cy.wait('@tiposPrestaciones');
+            cy.wait(1000);
             cy.get('table').first().as('tablaAgendas');
             cy.get('@tablaAgendas').find('tbody tr').should('have.length', 1);
             cy.plexButton('INICIAR PRESTACIÓN').click();
@@ -128,6 +151,11 @@ context('RUP - Punto de inicio', () => {
 
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
+                cy.wait('@prestaciones');
+                cy.wait('@tiposPrestaciones');
+                cy.wait('@organizaciones');
+                cy.wait('@turnero');
+                cy.wait(1000);
                 cy.get('table').first().as('tablaAgendas');
                 cy.get('@tablaAgendas').find('tbody tr').should('have.length', 1);
                 cy.plexButton('CONTINUAR REGISTRO').click();
@@ -140,14 +168,22 @@ context('RUP - Punto de inicio', () => {
                 cy.patch('/api/modules/rup/prestaciones/' + idPrestacion, dtoValidacion, token);
 
                 cy.goto('/rup', token);
+                cy.wait('@prestaciones');
+                cy.wait('@tiposPrestaciones');
+                cy.wait('@organizaciones');
                 cy.wait('@agendas');
+                cy.wait(1000);
                 cy.get('table').first().as('tablaAgendas');
                 cy.get('@tablaAgendas').find('tbody tr').should('have.length', 1);
-                cy.plexButton('VER RESÚMEN').click();
+                cy.plexButton('VER RESUMEN').click();
                 cy.url().should('include', '/rup/validacion/' + idPrestacion);
 
                 cy.goto('/rup', token);
+                cy.wait('@prestaciones');
+                cy.wait('@tiposPrestaciones');
+                cy.wait('@organizaciones');
                 cy.wait('@agendas');
+                cy.wait(1000);
                 cy.get('table').first().as('tablaAgendas');
                 cy.get('@tablaAgendas').find('tbody tr').should('have.length', 1);
                 cy.plexButton('VER HUDS').click();
