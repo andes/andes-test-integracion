@@ -36,9 +36,10 @@ context('auditoria', () => {
     })
     beforeEach(() => {
         cy.server();
+        cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('POST', '**/api/core/mpi/pacientes/**').as('vincularPaciente');
+        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.goto('/apps/mpi/auditoria', token);
-        cy.route('GET', '**api/core/mpi/pacientes**').as('busquedaPaciente');
-        cy.route('POST', '**api/core/mpi/pacientes/**').as('vincularPaciente');
     })
 
     it('vincular dos pacientes validados', () => {
@@ -48,8 +49,9 @@ context('auditoria', () => {
         });
 
         cy.get('paciente-listado').find('td').contains(validado1.nombre).click();
+        cy.wait(100);
         cy.plexButton('Vincular').click();
-        cy.wait('@busquedaPaciente').then((xhr) => {
+        cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.plexText('name="buscador"', validado2.documento);
@@ -77,8 +79,11 @@ context('auditoria', () => {
         });
 
         cy.get('paciente-listado').find('td').contains(temporal1.nombre).click();
+        cy.wait(100);
+
         cy.plexButton('Vincular').click();
-        cy.wait('@busquedaPaciente').then((xhr) => {
+        // cy.wait();
+        cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.plexText('name="buscador"', temporal2.documento);
@@ -104,9 +109,11 @@ context('auditoria', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains(validado3.nombre).click();
+        cy.get('paciente-listado').find('td').contains(validado3.documento).click();
+        cy.wait(100);
+
         cy.plexButton('Vincular').click();
-        cy.wait('@busquedaPaciente').then((xhr) => {
+        cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.plexText('name="buscador"', temporal3.documento);
