@@ -3,7 +3,7 @@
 context('RUP - Punto de inicio', () => {
     let token
     before(() => {
-
+        cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
             cy.createPaciente('paciente-rup', token);
@@ -24,6 +24,8 @@ context('RUP - Punto de inicio', () => {
         });
         // Stub
         cy.route(/api\/core\/term\/snomed\?/, fixtures).as('search');
+        // api/modules/rup/prestaciones/huds
+        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('GET', '/api/modules/obraSocial/os/**', []).as('obraSocial');
@@ -50,9 +52,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.paciente.documento).to.be.eq('3399661');
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
         });
-        cy.wait(3000); // le da tiempo para que cargue el sidebar
         cy.get('plex-text[name="searchTerm"] input').first().type('fiebre');
-        cy.wait(3000);
         cy.wait('@search').then((xhr) => {
             cy.get('.mdi-plus').first().click();
             cy.get('textarea').first().type('test', {
@@ -98,6 +98,7 @@ context('RUP - Punto de inicio', () => {
         });
         // Stub
         cy.route(/api\/core\/term\/snomed\?/, fixtures).as('search');
+        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
 
@@ -110,7 +111,6 @@ context('RUP - Punto de inicio', () => {
         cy.get('div[class="plex-box-content"] table').eq(1).find('tr td plex-button[label="INICIAR PRESTACIÓN"]').click({
             force: true
         });
-        cy.wait(2000);
         cy.get('button').contains('CONFIRMAR').click();
 
         cy.wait('@create').then((xhr) => {
@@ -121,9 +121,8 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
-        cy.wait(3000); // le da tiempo para que cargue el sidebar
+
         cy.get('plex-text[name="searchTerm"] input').first().type('fiebre');
-        cy.wait(3000);
         cy.wait('@search').then((xhr) => {
             console.log('Search', xhr);
         });
@@ -169,6 +168,8 @@ context('RUP - Punto de inicio', () => {
         });
         // Stub
         cy.route(/api\/core\/term\/snomed\?/, fixtures).as('search');
+        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+        cy.route('GET', '**/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
 
@@ -181,7 +182,7 @@ context('RUP - Punto de inicio', () => {
         cy.get('div[class="plex-box-content"] table').eq(2).find('tr td plex-button[label="INICIAR PRESTACIÓN"]').click({
             force: true
         });
-        cy.wait(2000);
+
         cy.get('button').contains('CONFIRMAR').click();
 
         // cy.get('plex-button[type="success"]').contains('INICIAR PRESTACIÓN').click();
@@ -193,9 +194,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
-        cy.wait(3000); // le da tiempo para que cargue el sidebar
         cy.get('plex-text[name="searchTerm"] input').first().type('fiebre');
-        cy.wait(3000);
         cy.wait('@search');
 
         cy.get('.mdi-plus').first().click();
