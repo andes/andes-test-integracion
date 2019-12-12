@@ -28,7 +28,7 @@ context('CITAS - punto de inicio', () => {
     it('Buscar agenda por prestación (0 resultados)', () => {
         darTurno(pacientes[0]);
         cy.wait('@prestaciones');
-        cy.selectOption('name="tipoPrestacion"', '"59ee2d9bf00c415246fd3d94"');
+        cy.plexSelectAsync('name="tipoPrestacion"', 'Consulta de adolescencia', '@prestaciones', 0);
         cy.wait('@cargaAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(0);
@@ -39,7 +39,7 @@ context('CITAS - punto de inicio', () => {
     it('Buscar agenda por prestación (2 resultados)', () => {
         darTurno(pacientes[0]);
         cy.wait('@prestaciones');
-        cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
+        cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
         cy.wait('@cargaAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(2);
@@ -51,6 +51,7 @@ context('CITAS - punto de inicio', () => {
         darTurno(pacientes[0]);
         cy.wait('@prestaciones');
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
+
         cy.wait('@cargaAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(0);
@@ -114,7 +115,8 @@ context('CITAS - punto de inicio', () => {
             darTurno(paciente);
 
             cy.wait('@prestaciones');
-            cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
+
+            cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
             cy.wait('@cargaAgendas');
             cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
             cy.wait('@seleccionAgenda').then((xhr) => {

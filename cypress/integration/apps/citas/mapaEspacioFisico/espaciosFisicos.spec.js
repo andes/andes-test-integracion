@@ -15,17 +15,17 @@ context('CITAS - Espacios físicos', () => {
         cy.server()
         //Rutas para control
         cy.route('GET', '**api/modules/turnos/agenda?fechaDesde**').as('buscarEspacios');
+        cy.route('GET', '**api/modules/turnos/espacioFisico?**').as('getEspaciosFisicos');
 
-        cy.selectOption('name="edificio"', '"589c578355bf4277035bcf30"');
+        cy.plexSelectType('name="edificio"', 'Huemul');
+
         cy.get('plex-button[label="Buscar"]').click();
+
         cy.wait('@buscarEspacios').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-
-        cy.selectOption('name="edificio"', '"589c578355bf4277035bcf2a"');
-        cy.get('plex-button[label="Buscar"]').click();
-        cy.wait('@buscarEspacios').then((xhr) => {
+        cy.wait('@getEspaciosFisicos').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-        })
+        });
     })
 })
