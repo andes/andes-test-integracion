@@ -132,7 +132,7 @@ context('CITAS - punto de inicio', () => {
         });
 
         // Test para verificar que al no asignar el turno, guarde la organizacion
-        it.only('rechazar turno', () => {
+        it('rechazar turno', () => {
             cy.route('POST', '**/api/modules/turnos/listaEspera**').as('listaEspera');
             const paciente = pacientes[i];
             darTurno(paciente);
