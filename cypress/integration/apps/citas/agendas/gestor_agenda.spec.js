@@ -121,14 +121,15 @@ describe('CITAS - Planicar Agendas', () => {
     it.only('suspender agenda disponible con turno y reasignarlo', () => {
         cy.wait('@getAgendas');
         cy.get('table tbody td').contains('servicio de neumonología').click();
+        cy.wait('@findAgenda');
         cy.plexButtonIcon('stop').click();
         cy.plexButton('Confirmar').click();
         cy.get('table tbody td').contains('servicio de neumonología').click();
+        cy.wait('@findAgenda');
         cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
         cy.plexButtonIcon('sync-alert').click();
         cy.wait('@findAgenda');
-
-        cy.get('tbody tr').first().click();
+        cy.get('tbody td').first().click({ force: true });
 
         cy.get('.reasignar').first().click();
         cy.get('button').contains('CONFIRMAR').click();
