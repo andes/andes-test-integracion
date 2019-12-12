@@ -32,19 +32,19 @@ context('RUP - Punto de inicio', () => {
         cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
 
-        cy.get('plex-button[label="PACIENTE FUERA DE AGENDA"]').click({
-            force: true
-        });
+        cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
 
         cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de medicina general', '@prestaciones', 0);
-        cy.get('plex-button[label="SELECCIONAR PACIENTE"]').click({
-            force: true
-        });
-        cy.get('plex-text input').first().type('3399661');
+        cy.plexButton('SELECCIONAR PACIENTE').click();
+
+        // cy.get('plex-text input').first().type('3399661');
+        cy.plexText('name="buscador"', '3399661');
+
         cy.get('table tbody tr').first().click();
 
-        cy.get('plex-button[type="success"]').contains('INICIAR PRESTACIÓN').click();
+        cy.plexButton('INICIAR PRESTACIÓN').click();
+
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.turno).to.be.undefined;
@@ -52,17 +52,14 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.paciente.documento).to.be.eq('3399661');
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
         });
-        cy.get('plex-text[name="searchTerm"] input').first().type('fiebre');
+        cy.plexButtonIcon('chevron-up').first().click();
+        cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
             cy.get('.mdi-plus').first().click();
-            cy.get('textarea').first().type('test', {
-                force: true
-            });
         });
 
-        cy.get('span').contains('Guardar consulta de medicina general').click({
-            force: true
-        });
+        cy.plexButton('Guardar consulta de medicina general').click();
+
         cy.wait('@patch').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.turno).to.be.undefined;
@@ -71,10 +68,11 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             expect(xhr.response.body.estados[1]).to.be.eq(undefined);
         });
-        cy.wait(1000); // da tiempo para que el boton cambie de cartel
-        cy.get('span').contains('Validar consulta de medicina general').first().click({
-            force: true
-        });
+
+        cy.toast('success');
+        cy.plexButton('Validar consulta de medicina general').click();
+
+        // Popup alert
         cy.get('button').contains('CONFIRMAR').click();
 
         cy.wait('@patch').then((xhr) => {
@@ -102,9 +100,7 @@ context('RUP - Punto de inicio', () => {
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
 
-        cy.get('plex-button[title="Mostrar todas las agendas"]').click({
-            force: true
-        });
+        cy.plexButtonIcon('asterisk').click();
 
         cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
         cy.get('table tr').contains('consulta de medicina general').first().click();
@@ -122,18 +118,20 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
 
-        cy.get('plex-text[name="searchTerm"] input').first().type('fiebre');
+        cy.plexButtonIcon('chevron-up').first().click();
+
+        cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
-            console.log('Search', xhr);
+
+            // No es plex-button
+            cy.get('.mdi-plus').first().click();
+
+            // Implementar escribir en plex-text con rich text (quill editor)
+            // cy.plexTextArea('name="evolucion"', 'test registro');
         });
 
-        cy.get('.mdi-plus').first().click();
-        cy.get('textarea').first().type('test', {
-            force: true
-        });
-        cy.get('span').contains('Guardar consulta de medicina general').click({
-            force: true
-        });
+        cy.plexButton('Guardar consulta de medicina general').click();
+
         cy.wait('@patch').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.turno).to.be.eq('5d79417a5f6cfc13bb7d7842');
@@ -142,10 +140,14 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
-        cy.wait(1000); // da tiempo para que el boton cambie de cartel
-        cy.get('span').contains('Validar consulta de medicina general').first().click({
+
+        cy.toast('success');
+
+        cy.plexButton('Validar consulta de medicina general').click({
             force: true
         });
+
+        // Popup alert
         cy.get('button').contains('CONFIRMAR').click();
 
         cy.wait('@patch').then((xhr) => {
@@ -173,9 +175,7 @@ context('RUP - Punto de inicio', () => {
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
 
-        cy.get('plex-button[title="Mostrar todas las agendas"]').click({
-            force: true
-        });
+        cy.plexButtonIcon('asterisk').click();
 
         cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
         cy.get('table tr').contains('consulta de medicina general').first().click();
@@ -194,16 +194,14 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
-        cy.get('plex-text[name="searchTerm"] input').first().type('fiebre');
-        cy.wait('@search');
 
-        cy.get('.mdi-plus').first().click();
-        cy.get('textarea').first().type('test', {
-            force: true
+        cy.plexText('name="searchTerm"', 'fiebre');
+        cy.wait('@search').then((xhr) => {
+            cy.get('.mdi-plus').first().click();
         });
-        cy.get('span').contains('Guardar consulta de medicina general').click({
-            force: true
-        });
+
+
+        cy.plexButton('Guardar consulta de medicina general').click();
         cy.wait('@patch').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.turno).to.be.eq('5d790d2659530a13545f85b0');
@@ -213,9 +211,10 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
         cy.wait(1000); // da tiempo para que el boton cambie de cartel
-        cy.get('span').contains('Validar consulta de medicina general').first().click({
-            force: true
-        });
+        cy.plexButton('Validar consulta de medicina general').click();
+        // cy.get('span').contains('Validar consulta de medicina general').first().click({
+        //     force: true
+        // });
         cy.get('button').contains('CONFIRMAR').click();
 
         cy.wait('@patch').then((xhr) => {
