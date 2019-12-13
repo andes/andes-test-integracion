@@ -107,15 +107,18 @@ describe('CITAS - Planicar Agendas', () => {
 
         cy.wait('@getAgendas');
         cy.get('table tbody td').contains('examen pediátrico').click();
-
+        cy.wait('@findAgenda');
         cy.plexButtonIcon('stop').click();
         cy.plexButton('Confirmar').click();
 
         cy.get('table tbody td').contains('examen pediátrico').click();
+        cy.wait('@findAgenda');
         cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
         cy.plexButtonIcon('sync-alert').click();
         cy.wait('@findAgenda');
-        cy.get('tbody tr').first().click();
+        cy.get('tbody').find('td').first().click();
+        cy.wait('@getCandidatas');
+
         cy.contains(' No hay agendas que contengan turnos que coincidan');
     })
 
