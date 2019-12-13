@@ -20,6 +20,7 @@ describe('CITAS - Planicar Agendas', () => {
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getTiposPrestacion');
         cy.route('GET', '**/api/modules/turnos/agenda?**').as('getAgendas');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('findAgenda');
+        cy.route('GET', '**/api/modules/turnos/agenda/candidatas?**').as('getCandidatas');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('patchAgenda');
         cy.route('PUT', '**/api/modules/turnos/turno/**').as('putAgenda');
 
@@ -129,7 +130,8 @@ describe('CITAS - Planicar Agendas', () => {
         cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
         cy.plexButtonIcon('sync-alert').click();
         cy.wait('@findAgenda');
-        cy.get('tbody td').first().click();
+        cy.get('tbody').find('td').first().click();
+        cy.wait('@getCandidatas');
 
         cy.get('.reasignar').first().click();
         cy.get('button').contains('CONFIRMAR').click();
