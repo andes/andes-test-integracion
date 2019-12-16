@@ -99,8 +99,9 @@ context('RUP - Punto de inicio', () => {
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
-
-        cy.plexButtonIcon('asterisk').click();
+        cy.get('plex-radio[name="agendas"] input').eq(1).click({
+            force: true
+        });
 
         cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
         cy.get('table tr').contains('consulta de medicina general').first().click();
@@ -172,9 +173,9 @@ context('RUP - Punto de inicio', () => {
         cy.route('GET', '**/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
-
-        cy.plexButtonIcon('asterisk').click();
-
+        cy.get('plex-radio[name="agendas"] input').eq(1).click({
+            force: true
+        });
         cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
         cy.get('table tr').contains('consulta de medicina general').first().click();
         cy.get('div[class="plex-box-content"] table').eq(2).find('tr td plex-button[label="INICIAR PRESTACIÓN"]').click({
