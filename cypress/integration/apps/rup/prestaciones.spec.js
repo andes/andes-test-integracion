@@ -3,44 +3,43 @@
 context('prestaciones', () => {
     let token
     before(() => {
-        cy.login('38906735', 'asd').then(t => {
+        cy.seed();
+        cy.login('30643636', 'asd', '57fcf038326e73143fb48dac').then(t => {
             token = t;
+            cy.createPaciente('paciente-rup', token);
         })
     })
     beforeEach(() => {
-        // cy.viewport(1280, 720)
-        cy.visit('/citas/punto-inicio', {
+        cy.visit('/rup', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.setItem('jwt', token);
             }
         });
     })
 
-    // Necesita tener cargada una agenda para colonoscopia, publicada. Que tenga el horario 15:00 disponible
-    it.skip('Registrar Prestación de Colonoscopia', () => {
+    it('Registrar Prestación de Colonoscopia, Fuera de Agenda', () => {
         cy.server();
-        // doy turno
-        cy.get('plex-text input[type=text]').first().type('12325484');
-        cy.get('tr').contains('OROS, CAMILO').first().click();
-        cy.get('plex-button').first().click();
-        cy.selectOption('name="tipoPrestacion"', 'colonoscopia');
-        cy.get('.outline-success ').first().click();
-        cy.get('div').contains('15:00').first().click()
-        cy.get('plex-button[label="Confirmar"]').click();
-        cy.toast('info', 'El turno se asignó correctamente');
+        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
+        cy.route('GET', '**/api/modules/rup/prestaciones*').as('guardar');
+        cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+        cy.route('GET', '/api/modules/cda/paciente/**', []).as('cda');
+        cy.route('GET', '/api/core/term/snomed/**',[]).as('search');
+        cy.plexButton('PACIENTE FUERA DE AGENDA').click();
+        cy.plexSelectAsync('name="nombrePrestacion"', 'colonoscopia', '@prestaciones', 0);
 
-        // comienzo la atención
-        cy.visit('/rup');
-        cy.get('plex-button[title="Mostrar todas las agendas"]').click();
-        cy.get('plex-select[label="Filtrar por prestación"] input').type('colonoscopia{enter}');
-        cy.wait(2000);
-        cy.get('tbody td').first().click();
-        cy.get('plex-button[label="INICIAR PRESTACIÓN"]').first().click();
-        cy.get('button[class="swal2-confirm btn btn-success"]').click();
-        // cy.get('plex-button[label="CONTINUAR REGISTRO"]').first().click();
-        cy.wait(2000);
-        cy.get('div[class="introjs-tooltipbuttons"] a[class="introjs-button introjs-skipbutton"]').click();
 
+        cy.plexButton('SELECCIONAR PACIENTE').click();
+        cy.plexText('name="buscador"', '3399661');
+        cy.get('table tbody tr').first().click();
+        cy.plexButton('INICIAR PRESTACIÓN').click();
+
+        cy.wait('@create').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.documento).to.be.eq('3399661');
+            expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
+        });
         // completo el procedimiento
         cy.get('plex-radio[name="binario"] input').first().click({
             force: true
@@ -66,17 +65,30 @@ context('prestaciones', () => {
         cy.get('plex-radio[name="binario"] input').eq(13).click({
             force: true
         });
+        cy.plexInt('name="intValue"').type('100');
         cy.get('plex-radio[name="binario"] input').eq(15).click({
             force: true
         });
 
-        cy.route('GET', '**/api/modules/rup/prestaciones*').as('guardar');
-        cy.get('footer plex-button[type="success"]').click(); // guarda colonoscopia
-        cy.wait('@guardar').then(() => {
-            cy.get('footer plex-button[type="success"]').click(); // valida colonoscopia
-        })
+        cy.plexButton('Guardar colonoscopia').click();
+
+        cy.wait('@patch').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.documento).to.be.eq('3399661');
+            expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
+        });
+
+        cy.toast('success');
+        cy.plexButton('Validar colonoscopia').click();
+
+        // Popup alert
         cy.get('button').contains('CONFIRMAR').click();
 
-        cy.toast('success', 'La prestación se validó correctamente');
+        cy.wait('@patch').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.documento).to.be.eq('3399661');
+            expect(xhr.response.body.estados[1].tipo).to.be.eq('validada');
+        });
+
     })
 })
