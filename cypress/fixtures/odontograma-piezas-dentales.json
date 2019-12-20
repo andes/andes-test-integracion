@@ -1,0 +1,470 @@
+[
+   {
+      "conceptId":"57826002",
+      "fsn":"Structure of maxillary right first premolar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 14",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"80647007",
+      "fsn":"Structure of maxillary right canine tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 13",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"61897005",
+      "fsn":"Structure of maxillary left first premolar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 24",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"47055002",
+      "fsn":"Structure of mandibular right canine tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 43",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"28480000",
+      "fsn":"Structure of mandibular right first molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 46",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"24573005",
+      "fsn":"Structure of mandibular left second premolar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 35",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"7121006",
+      "fsn":"Structure of maxillary right second molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 17",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"22120004",
+      "fsn":"Structure of maxillary right central incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 11",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"87704003",
+      "fsn":"Structure of maxillary left third molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 28",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"45234009",
+      "fsn":"Structure of deciduous maxillary left first molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 64",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"72876007",
+      "fsn":"Structure of maxillary left canine tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 23",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"39844006",
+      "fsn":"Structure of mandibular left canine tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 33",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"67834006",
+      "fsn":"Structure of deciduous mandibular right central incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 81",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"89552004",
+      "fsn":"Structure of deciduous mandibular left central incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 71",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"51678005",
+      "fsn":"Structure of deciduous maxillary left central incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 61",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"40005008",
+      "fsn":"Structure of mandibular right second molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 47",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"43281008",
+      "fsn":"Structure of deciduous mandibular left canine tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 73",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"5140004",
+      "fsn":"Structure of maxillary right first molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 16",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"38896004",
+      "fsn":"Structure of deciduous mandibular left first molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 74",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"6062009",
+      "fsn":"Structure of deciduous mandibular right canine tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 83",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"68085002",
+      "fsn":"Structure of maxillary right third molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 18",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"74344005",
+      "fsn":"Structure of mandibular left third molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 38",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"49330006",
+      "fsn":"Structure of deciduous mandibular left second molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 75",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"65624003",
+      "fsn":"Structure of deciduous maxillary right lateral incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 52",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"8873007",
+      "fsn":"Structure of mandibular right second premolar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 45",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"2400006",
+      "fsn":"Structure of mandibular left first premolar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 34",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"43622005",
+      "fsn":"Structure of deciduous maxillary left lateral incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 62",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"51943008",
+      "fsn":"Structure of deciduous maxillary left second molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 65",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"14770005",
+      "fsn":"Structure of deciduous mandibular left lateral incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 72",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"17505006",
+      "fsn":"Structure of deciduous maxillary right first molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 54",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"11712009",
+      "fsn":"Structure of maxillary right lateral incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 12",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"15422005",
+      "fsn":"Structure of mandibular right central incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 41",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"113278005",
+      "fsn":"Structure of mandibular left central incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 31",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"48402004",
+      "fsn":"Structure of mandibular left second molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 37",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"77130001",
+      "fsn":"Structure of mandibular left lateral incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 32",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"36492000",
+      "fsn":"Structure of maxillary right second premolar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 15",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"23427002",
+      "fsn":"Structure of maxillary left first molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 26",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"89625000",
+      "fsn":"Structure of mandibular left first molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 36",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"23226009",
+      "fsn":"Structure of maxillary left second premolar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 25",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"58646007",
+      "fsn":"Structure of deciduous mandibular right first molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 84",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"80140008",
+      "fsn":"Structure of mandibular right first premolar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 44",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"25748002",
+      "fsn":"Structure of maxillary left lateral incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 22",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"30618001",
+      "fsn":"Structure of deciduous maxillary right canine tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 53",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"73937000",
+      "fsn":"Structure of deciduous maxillary left canine tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 63",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"66303006",
+      "fsn":"Structure of maxillary left second molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 27",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"31982000",
+      "fsn":"Structure of maxillary left central incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 21",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"61868007",
+      "fsn":"Structure of deciduous mandibular right second molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 85",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"22445006",
+      "fsn":"Structure of deciduous mandibular right lateral incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 82",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"82628004",
+      "fsn":"Structure of mandibular right lateral incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 42",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"27855007",
+      "fsn":"Structure of deciduous maxillary right second molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 55",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"88824007",
+      "fsn":"Structure of deciduous maxillary right central incisor tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 51",
+      "refsetIds":[
+
+      ]
+   },
+   {
+      "conceptId":"38994002",
+      "fsn":"Structure of mandibular right third molar tooth (body structure)",
+      "semanticTag":"body structure",
+      "term":"ISO designation 48",
+      "refsetIds":[
+
+      ]
+   }
+]
