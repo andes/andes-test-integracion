@@ -2,13 +2,16 @@ context('perfiles-usuario', () => {
     let token;
     let perfil1;
     before(() => {
-        cy.seed();
         cy.login('30643636', 'asd', '57e9670e52df311059bc8964').then(t => {
             token = t;
         });
     });
 
     beforeEach(() => {
+        cy.seed()
+        cy.task('database:create:perfil', { permisos: ['rup:tipoPrestacion:598ca8375adc68e2a0c121b7'] }).then(p => {
+            perfil1 = p;
+        });
         cy.goto('/gestor-usuarios/usuarios', token);
         cy.server();
         cy.route('GET', '**/api/modules/gestor-usuarios/perfiles').as('perfil');
@@ -69,10 +72,11 @@ context('perfiles-usuario', () => {
         cy.get('table tbody tr').find('span').should('have.class', 'badge badge-success badge-md').first().click();
         cy.get('gestor-usarios-perfiles-detail >div').plexBool('name="activo"', false);
         cy.plexButton('Guardar').click();
-        cy.toast('success', 'El perfil se ha guardado satisfactoriamente!');
         cy.wait('@savePerfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+        cy.toast('success', 'El perfil se ha guardado satisfactoriamente!');
+
         cy.wait('@perfil');
         cy.get('table tbody tr').find('span.badge.badge-success').should('not.exist');
     });
@@ -109,22 +113,18 @@ context('perfiles-usuario', () => {
 
         cy.wait('@perfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].permisos).to.include('rup:tipoPrestacion:5a26e113291f463c1b982d98')
+            expect(xhr.response.body[0].permisos).to.include('rup:tipoPrestacion:598ca8375adc68e2a0c121b7')
         });
         cy.plexSelect('name="plexSelect"').contains('consulta de nutrición').should('not.exist');
     });
 
     it('Crear nuevo perfil y verificar que no se modifica uno pre-existente', () => {
-        cy.task('database:create:perfil').then(p => {
-            perfil1 = p;
-        });
-
         crearPerfilBasico();
         cy.wait(['@perfil', '@postPerfil']).then((xhr) => {
             expect(xhr[1].status).to.be.eq(200);
             cy.wait('@perfil').then((xhr2) => {
                 expect(xhr2.response.body).to.have.length(2);
-                expect(xhr2.response.body[0].permisos).to.have.length(8);
+                expect(xhr2.response.body[0].permisos).to.have.length(1);
             });
         });
     });
