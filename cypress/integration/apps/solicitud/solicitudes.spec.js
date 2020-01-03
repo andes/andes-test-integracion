@@ -243,7 +243,7 @@ context('TOP', () => {
         });
     });
 
-    it('dar turno autocitado', () => {
+    it.only('dar turno autocitado', () => {
         cy.createSolicitud('solicitudes/solicitudAutocitado', token);
         cy.createAgenda48hs('solicitudes/agendaProfesional', token);
         cy.server();
@@ -265,7 +265,7 @@ context('TOP', () => {
 
         cy.get('plex-select[label="Prestación destino"] input').type('Consulta de clínica médica');
         cy.get('plex-select[label="Prestación destino"] input').type('{enter}');
-        cy.wait(2000);
+        cy.wait(3000);
         cy.log('SI SE CORRE DE NOCHE DA ERROR');
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.get('plex-button[title="Dar Turno"]').click({
