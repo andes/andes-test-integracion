@@ -262,10 +262,7 @@ context('TOP', () => {
 
         cy.get('plex-select[label="Estado"] input').type('pendiente');
         cy.get('plex-select[label="Estado"] input').type('{enter}');
-
-        cy.get('plex-select[label="Prestación destino"] input').type('Consulta de clínica médica');
-        cy.get('plex-select[label="Prestación destino"] input').type('{enter}');
-        cy.wait(3000);
+        cy.plexSelectAsync('label="Prestación destino"', 'Consulta de clínica médica', '@getPrestaciones', 0);
         cy.log('SI SE CORRE DE NOCHE DA ERROR');
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.get('plex-button[title="Dar Turno"]').click({

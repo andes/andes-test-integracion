@@ -119,9 +119,8 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
 
-        cy.plexButtonIcon('chevron-up').first().click();
+        cy.wait(3000);
         cy.get('button').contains('BUSCADOR BÁSICO').click();
-
         cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
 
@@ -194,6 +193,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
+        cy.wait(3000);
 
         cy.get('button').contains('BUSCADOR BÁSICO').click();
 
