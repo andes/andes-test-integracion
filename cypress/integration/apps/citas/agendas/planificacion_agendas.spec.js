@@ -311,7 +311,7 @@ context('Planificacion Agendas', () => {
             accesoDirectoProgramado: 7,
         });
 
-        cy.plexBool('label="Cupo para aplicación Mobile"', true);
+        cy.plexBool('label="Ventanilla virtual"', true);
 
         complete({
             cupoMobile: 4,
