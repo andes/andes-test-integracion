@@ -320,4 +320,56 @@ describe('CITAS - Planificar Agendas', () => {
         cy.get('.lista-turnos').contains('Turno suspendido (sin paciente)');
 
     })
+
+    it('editar agenda dinamica con institucion', () => {
+        cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.plexButton("Crear una nueva agenda").click();
+        cy.swal('cancel');
+        cy.plexDatetime('name="modelo.fecha"', cy.today());
+        cy.plexDatetime('name="modelo.horaInicio"', "08:00");
+        cy.plexDatetime('name="modelo.horaFin"', "16:00");
+        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexBool('label="Dinámica"', true);
+        cy.plexBool('name="espacioFisicoPropios"', false);
+        cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
+        cy.plexButton("Guardar").click();
+        cy.contains('La agenda se guardó correctamente');
+        cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click();
+        cy.plexButtonIcon('pencil').click();
+        cy.plexSelect('label="Espacio Físico"').click();
+        cy.plexSelect('label="Espacio Físico"').find('.remove-button').click();
+        cy.plexSelectAsync('label="Espacio Físico"', 'CE.M.O.E. SAN JOSE OBRERO', '@institucion', 0);
+        cy.plexButton("Guardar").click();
+        cy.get('table tbody td').contains('CE.M.O.E. SAN JOSE OBRERO');
+    })
+
+    it('clonar agenda con una institucion asignada', () => {
+        cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.plexButton("Crear una nueva agenda").click();
+        cy.swal('cancel');
+        cy.plexDatetime('name="modelo.fecha"', cy.today());
+        cy.plexDatetime('name="modelo.horaInicio"', "08:00");
+        cy.plexDatetime('name="modelo.horaFin"', "16:00");
+        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexBool('label="Dinámica"', true);
+        cy.plexBool('name="espacioFisicoPropios"', false);
+        cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
+        cy.plexButton("Guardar").click();
+        cy.contains('La agenda se guardó correctamente');
+        cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
+        cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click();
+        cy.plexButtonIcon("content-copy").click();
+        cy.contains(Cypress.moment().add(1, 'days').date()).click()
+        cy.plexButton("Clonar Agenda").click();
+        cy.swal('confirm');
+        cy.wait('@clonar').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+        cy.contains('La Agenda se clonó correctamente');
+        cy.swal('confirm');
+    })
+
+
 })

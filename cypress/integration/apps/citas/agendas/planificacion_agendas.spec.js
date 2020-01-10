@@ -97,6 +97,11 @@ context('Planificacion Agendas', () => {
         cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
     });
 
+
+
+    /**
+     * QUEDA PENDIENTE UN TEMA CON EL PLEX-SELECT
+     */
     it('Guardar agenda del día con un solo bloque', () => {
         complete({
             fecha: cy.today(),
@@ -572,7 +577,7 @@ context('Planificacion Agendas', () => {
         cy.contains('El valor debe ser mayor a 1');
     });
 
-    it.skip('Guardar agenda con bloques vacíos', () => {
+    it('Guardar agenda con bloques vacíos', () => {
         complete({
             fecha: cy.today(),
             horaInicio: "10:00",
@@ -608,6 +613,21 @@ context('Planificacion Agendas', () => {
 
         cy.contains('Existen bloques incompletos');
     });
+
+    it.only('crear agenda dinamica en una institucion', () => {
+        cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
+        cy.swal('cancel');
+        cy.plexDatetime('name="modelo.fecha"', cy.today());
+        cy.plexDatetime('name="modelo.horaInicio"', "08:00");
+        cy.plexDatetime('name="modelo.horaFin"', "16:00");
+        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexBool('label="Dinámica"', true);
+        cy.plexBool('name="espacioFisicoPropios"', false);
+        cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
+        cy.plexButton("Guardar").click();
+        cy.contains('La agenda se guardó correctamente');
+    });
+
 
     it('Guardar, clonar y verificar botón iniciar prestación en agenda no nominalizada', () => {
         let ayer = Cypress.moment().add('days', -1);
