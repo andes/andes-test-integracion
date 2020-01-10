@@ -24,7 +24,6 @@ context('RUP - Punto de inicio', () => {
             cy.route('GET', '**/api/modules/rup/prestaciones**').as('prestaciones');
             cy.route('GET', '**/api/modules/turnero/pantalla**').as('turnero');
             cy.route('GET', '**/api/modules/rup/elementosRUP**').as('elementosRUP');
-            cy.route('GET', '**/api/auth/organizaciones**').as('organizaciones');
             cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('tiposPrestaciones');
             cy.route('GET', '**api/modules/cde/paciente**').as('paciente');
             cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
@@ -60,7 +59,6 @@ context('RUP - Punto de inicio', () => {
             cy.get('@tablaAgendas').find('tbody tr').should('have.length', 1);
             cy.wait('@prestaciones');
             cy.wait('@tiposPrestaciones');
-            cy.wait('@organizaciones');
             cy.wait('@turnero');
             cy.wait(1000);
             cy.get('@tablaAgendas').find('tbody tr').find('td div').contains('consulta con médico general');
