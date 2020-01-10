@@ -85,7 +85,6 @@ context('Planificacion Agendas', () => {
         cy.server();
         cy.goto('/citas/gestor_agendas', token);
         cy.plexButton("Crear una nueva agenda").click();
-        cy.swal('cancel')
         cy.route('POST', '**/api/modules/turnos/agenda**').as('create');
         cy.route('GET', '**/api/modules/turnos/espacioFisico**').as('espacios');
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
@@ -533,7 +532,7 @@ context('Planificacion Agendas', () => {
         cy.contains('La cantidad de turnos asignados es mayor a la cantidad disponible');
     });
 
-    it.skip('Guardar agenda del día citando por segmento un valor negativo de pacientes', () => {
+    it('Guardar agenda del día citando por segmento un valor negativo de pacientes', () => {
         complete({
             fecha: cy.today(),
             horaInicio: "10:00",
@@ -555,7 +554,7 @@ context('Planificacion Agendas', () => {
             cantidadBloque: -9,
         });
 
-        cy.contains('La cantidad de citas por segmento debe ser mayor a 1');
+        cy.contains('El valor debe ser mayor a 1');
     });
 
     it.skip('Guardar agenda con bloques vacíos', () => {
