@@ -61,8 +61,6 @@ describe('CITAS - Planicar Agendas', () => {
 
         cy.plexButtonIcon('pencil').click();
 
-        cy.swal('cancel');
-
         const manana = Cypress.moment().add(1, 'days').format('DD/MM/YYYY');
 
         cy.plexDatetime('label="Fecha"', '{selectall}{backspace}' + manana);
