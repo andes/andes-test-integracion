@@ -43,7 +43,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
                 org.id = id;
             }
             return response = cy.request({
-                url: Cypress.env('API_SERVER') + '/api/auth/organizaciones',
+                url: Cypress.env('API_SERVER') + '/api/auth/v2/organizaciones',
                 method: 'POST',
                 headers: {
                     Authorization: 'JWT ' + token
@@ -62,7 +62,11 @@ Cypress.Commands.add("login", (usuario, password, id) => {
 
 
 Cypress.Commands.add('goto', (url, token) => {
-    return cy.visit(url, {
+    if (token) {
+        cy.server();
+        cy.route('GET', '**/api/auth/sesion**').as('sesion');
+    }
+    cy.visit(url, {
         onBeforeLoad: (win) => {
             if (token) {
                 win.sessionStorage.setItem('jwt', token);
@@ -71,6 +75,9 @@ Cypress.Commands.add('goto', (url, token) => {
             }
         }
     });
+    if (token) {
+        return cy.wait('@sesion');
+    }
 });
 
 Cypress.Commands.add('buscarPaciente', (pacienteDoc, cambiarPaciente = true) => {

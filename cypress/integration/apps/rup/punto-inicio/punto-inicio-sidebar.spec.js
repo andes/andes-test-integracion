@@ -74,7 +74,6 @@ context('RUP - Punto de inicio', () => {
                             cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
                             cy.route('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agregarTurnoDinamico');
                             cy.goto('/rup', token);
-                            cy.wait('@organizaciones');
                             cy.wait('@agendas');
                             cy.wait('@tiposPrestaciones');
                             cy.wait('@turnero');
@@ -160,7 +159,6 @@ context('RUP - Punto de inicio', () => {
                 const paciente = pacientes[pacienteIndex];
 
                 cy.goto('/rup', token);
-                cy.wait('@organizaciones');
                 cy.wait('@agendas');
                 cy.wait('@tiposPrestaciones');
                 cy.wait('@turnero');
@@ -255,7 +253,6 @@ context('RUP - Punto de inicio', () => {
 
                     setRoute();
                     cy.goto('/rup', token);
-                    cy.wait('@organizaciones');
                     cy.wait('@agendas');
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@turnero');
@@ -287,7 +284,6 @@ function setRoute() {
     cy.route({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
     cy.route({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
     cy.route({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' }).as('elementosRUP');
-    cy.route({ method: 'GET', url: '**/api/auth/organizaciones**' }).as('organizaciones');
     cy.route({ method: 'GET', url: '**/api/core/tm/tiposPrestaciones**' }).as('tiposPrestaciones');
     cy.route({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
     cy.route({ method: 'GET', url: '/api/modules/rup/prestaciones/huds/**', response: [] }).as('huds');
