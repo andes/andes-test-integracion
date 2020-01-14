@@ -70,7 +70,78 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.contains('Los datos se actualizaron correctamente');
     });
 
-    it('verificar lista de pacientes similares con porcentaje 81%', () => {
+    it('verificar lista de pacientes validados similares con porcentaje 81%', () => {
+        cy.route('POST', '**api/core/mpi/pacientes**').as('registroConDni');
+        cy.plexText('name="buscador"', '1232548');
+        cy.get('div').contains('NUEVO PACIENTE').click();
+        cy.get('div').contains('CON DNI ARGENTINO').click();
+        cy.plexInt('label="Número de DNI ARGENTINO"', '33650509');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
+        cy.plexButton('Validar Paciente').click();
+        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.wait(6000);
+        cy.plexButton('Guardar').click();
+        cy.wait(2000);
+        cy.contains('Los datos se actualizaron correctamente');
+        cy.get('button').contains('Aceptar').click();
+        cy.plexText('name="buscador"', '1232548');
+        cy.get('div').contains('NUEVO PACIENTE').click();
+        cy.get('div').contains('CON DNI ARGENTINO').click();
+        cy.plexInt('label="Número de DNI ARGENTINO"', '33650590');
+        cy.plexText('label="Apellido"', 'Bucares');
+        cy.plexText('label="Nombre"', 'Matias');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'masculino').click();
+        cy.plexDatetime('label="Fecha de Nacimiento"', '09/04/1989');
+        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexButton('Guardar').click();
+        cy.contains('Existen pacientes similares, verifique las sugerencias')
+        cy.get('button').contains('Aceptar').click();
+        cy.contains('Similitud: 81 % ');
+    });
+
+    it('verificar lista de pacientes validados similares con porcentaje mayor al 96%', () => {
+        cy.route('POST', '**api/core/mpi/pacientes**').as('registroConDni');
+        // Buscador
+        cy.plexText('name="buscador"', '1232548');
+        cy.get('div').contains('NUEVO PACIENTE').click();
+        cy.get('div').contains('CON DNI ARGENTINO').click();
+        cy.plexInt('label="Número de DNI ARGENTINO"', '32247537');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'femenino').click();
+        cy.plexButton('Validar Paciente').click();
+        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.wait(6000);
+        cy.plexButton('Guardar').click();
+        cy.wait(2000);
+        cy.contains('Los datos se actualizaron correctamente');
+        cy.get('button').contains('Aceptar').click();
+        cy.plexText('name="buscador"', '1232548');
+        cy.get('div').contains('NUEVO PACIENTE').click();
+        cy.get('div').contains('CON DNI ARGENTINO').click();
+        cy.plexInt('label="Número de DNI ARGENTINO"', '32247537');
+        cy.plexText('label="Apellido"', 'Ramos');
+        cy.plexText('label="Nombre"', 'María');
+        cy.plexSelect('label="Sexo"').click();
+        cy.plexSelect('label="Sexo"', 'femenino').click();
+        cy.plexDatetime('label="Fecha de Nacimiento"', '28/08/1986');
+        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexButton('Guardar').click();
+        cy.contains('El paciente ya existe, verifique las sugerencias');
+        cy.get('button').contains('Aceptar').click();
+        cy.contains('Similitud: 96 % ');
+    });
+
+    it('crear paciente con similitud del 81% con uno existente temporal', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroConDni');
         // Buscador
         cy.plexText('name="buscador"', '1232548');
@@ -108,12 +179,11 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.contains('Existen pacientes similares, verifique las sugerencias')
+        cy.contains('Los datos se actualizaron correctamente');
         cy.get('button').contains('Aceptar').click();
-        cy.contains('Similitud: 81 % ');
     });
 
-    it('verificar lista de pacientes similares con porcentaje mayor al 98%', () => {
+    it('crear paciente con similitud del 98% con uno existente temporal', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroConDni');
         // Buscador
         cy.plexText('name="buscador"', '1232548');
@@ -151,9 +221,8 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.contains('El paciente ya existe, verifique las sugerencias');
+        cy.contains('Los datos se actualizaron correctamente');
         cy.get('button').contains('Aceptar').click();
-        cy.contains('Similitud: 98 % ');
     });
 
     it('editar un paciente existente y agregarle una relación', () => {
