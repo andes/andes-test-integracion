@@ -16,7 +16,8 @@
     "prod:update": "cross-env APP=master API=master docker-compose -f docker/docker-compose.yml pull",
     "dev:up": "node scripts/prepare.js develop up",
     "dev:reset": "node scripts/prepare.js develop reset",
-    "dev:down": "node scripts/prepare.js develop down"
+    "dev:down": "node scripts/prepare.js develop down",
+    "report": "node scripts/reporter.js"
   },
   "repository": {
     "type": "git",
@@ -30,7 +31,12 @@
   "homepage": "https://github.com/andes/andes-test-integracion#readme",
   "devDependencies": {
     "@angular/cli": "^8.3.8",
-    "cypress": "^3.3.1"
+    "cypress": "^3.3.1",
+    "mocha": "^4.1.0",
+    "mocha-junit-reporter": "^1.23.2",
+    "mocha-multi-reporters": "^1.1.7",
+    "mochawesome": "^4.1.0",
+    "mochawesome-merge": "^4.0.0"
   },
   "dependencies": {
     "cross-env": "^6.0.3",

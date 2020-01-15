@@ -2,10 +2,9 @@
   "env": {
     "API_SERVER": "http://localhost:3002"
   },
-  "reporter": "junit",
+  "reporter": "mocha-multi-reporters",
   "reporterOptions": {
-    "mochaFile": "results/cypress-report-[hash].xml",
-    "toConsole": true
+    "configFile": "config-report.json"
   },
   "chromeWebSecurity": false,
   "modifyObstructiveCode": false,

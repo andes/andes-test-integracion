@@ -19,3 +19,18 @@ import './http'
 import './plex'
 import './seed'
 import './time'
+
+
+const addContext = require('mochawesome/addContext')
+
+Cypress.on('test:after:run', (test, runnable) => {
+    const context = {
+        title: 'Filename',
+        value: Cypress.spec.name
+    };
+    addContext({ test }, context);
+    if (test.state === 'failed') {
+        const screenshotFileName = `${runnable.parent.title} -- ${test.title} (failed).png`
+        addContext({ test }, `assets/${Cypress.spec.name}/${screenshotFileName}`);
+    }
+})
