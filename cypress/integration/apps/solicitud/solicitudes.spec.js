@@ -243,7 +243,7 @@ context('TOP', () => {
         });
     });
 
-    it.only('dar turno autocitado', () => {
+    it('dar turno autocitado', () => {
         cy.createSolicitud('solicitudes/solicitudAutocitado', token);
         cy.createAgenda48hs('solicitudes/agendaProfesional', token);
         cy.server();

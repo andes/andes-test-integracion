@@ -155,7 +155,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
         });
     });
 
-    it.only('buscar en la pestaña relaciones scan de progenitor y verificar datos básicos ingresados', () => {
+    it('buscar en la pestaña relaciones scan de progenitor y verificar datos básicos ingresados', () => {
         cy.plexTab('Relaciones').click();
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', '00535248130@ANDES@PACIENTE VALIDADO@M@10000000@B@26/12/1956@14/02/2018@200');
