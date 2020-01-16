@@ -84,10 +84,6 @@ context('punto de inicio', () => {
 
         cy.get('table > tbody > tr > td').first().click();
 
-        let listaDetalles = cy.get('detalle-solicitud .row .col');
-
-        console.log(listaDetalles.children());
-
         cy.get('detalle-solicitud .row .col span').eq(0).contains(`${auditable.paciente.nombre} ${auditable.paciente.apellido}`);
         cy.get('detalle-solicitud .row .col span').eq(1).contains(`${auditable.solicitud.profesionalOrigen.nombre} ${auditable.solicitud.profesionalOrigen.apellido}`);
         cy.get('detalle-solicitud .row .col span').eq(2).contains(auditable.solicitud.tipoPrestacionOrigen.term);
@@ -95,9 +91,9 @@ context('punto de inicio', () => {
         cy.get('detalle-solicitud .row .col span').eq(4).contains(`${auditable.solicitud.profesional.nombre} ${auditable.solicitud.profesional.apellido}`);
         cy.get('detalle-solicitud .row .col').eq(5).contains(auditable.solicitud.tipoPrestacion.term);
         cy.get('detalle-solicitud .row .col span').eq(5).contains(auditable.solicitud.organizacion.nombre);
-        cy.get('detalle-solicitud .row .col span').eq(6).contains(auditable.solicitud.registros[0].valor.solicitudPrestacion.motivo);
+        //  cy.get('detalle-solicitud .row .col span').eq(6).contains(auditable.solicitud.registros[0].valor.solicitudPrestacion.motivo);
         // Hay un PR que modifica esta parte
-        // cy.get('detalle-solicitud .row .col span').eq(7).contains(auditable.solicitud.registros[0].valor.solicitudPrestacion.motivo);
+        cy.get('detalle-solicitud .row .col span').eq(7).contains(auditable.solicitud.registros[0].valor.solicitudPrestacion.motivo);
 
     });
 
@@ -108,7 +104,7 @@ context('punto de inicio', () => {
         cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('tiposPrestaciones');
 
         cy.get('plex-button[title="Auditar Solicitud"]').click();
-        cy.plexButton('Rechazar').click();
+        cy.plexButton('Responder').click();
 
         var motivo = faker.lorem.sentence();
         cy.plexTextArea('name="motivo"', motivo)
@@ -125,6 +121,7 @@ context('punto de inicio', () => {
         cy.get('plex-button[title="Auditar Solicitud"]').click();
         cy.plexButton('Aceptar').click();
 
+        cy.plexButton('Confirmar').click();
         cy.toast('success', 'Solicitud Aceptada');
 
     });

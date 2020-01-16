@@ -44,7 +44,7 @@ context('TOP', () => {
 
         cy.plexSelectAsync('name="prestacionOrigen"', 'consulta de medicina general', '@getPrestaciones', 0);
 
-        cy.get('div[class="row"]').find('div[class="col-6 h-100"]').eq(1).plexButtonIcon('plus').click();
+        cy.get('plex-button[title="Agregar Prestación"]').click({ force: true });
 
         cy.plexButton('Guardar').click();
 
@@ -67,7 +67,7 @@ context('TOP', () => {
         cy.wait('@consultaPaciente');
         cy.get('table tbody').contains('32589654').click();
 
-        cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
+        cy.contains('Finalizar').click();
 
         cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
@@ -96,7 +96,7 @@ context('TOP', () => {
         });
     })
 
-    it.skip('crear solicitud de salida', () => {
+    it('crear solicitud de salida', () => {
         cy.server();
         //cy.route('GET', '**/api/core/mpi/pacientes').as('consulta');
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
@@ -104,9 +104,7 @@ context('TOP', () => {
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
 
-        cy.get('li[class="nav-item nav-item-default"]').click({
-            force: true
-        });
+        cy.get('li[class="nav-item nav-item-default"]').click();
 
         cy.get('plex-button[label="Nueva Solicitud"]').click();
 
