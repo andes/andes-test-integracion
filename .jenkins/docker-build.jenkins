@@ -4,8 +4,10 @@ pipeline {
         app = "${APP_BRANCH}"
         envmode = "prod"
         api = "${API_BRANCH}"
+        matriculaciones = "${MATRICULACIONES_BRANCH}"
         registryAPI = "andesnqn/api"
         registryAPP = "andesnqn/app"
+        registryMatriculaciones = "andesnqn/matriculaciones"
         registryCredential = 'dockerhub'
     }
     stages {
@@ -20,6 +22,12 @@ pipeline {
                 stage('build api') {
                     steps {
                          build job: "andes-api", parameters: [string(name: 'GIT_BRANCH', value: api )] 
+                    }
+                }
+                
+                stage('build matriculaciones') {
+                    steps {
+                         build job: "andes-matriculaciones", parameters: [string(name: 'GIT_BRANCH', value: matriculaciones )] 
                     }
                 }
             }
@@ -38,7 +46,17 @@ pipeline {
           steps{
              script {
                 docker.withRegistry( '', registryCredential ) {
-                    dockerAPI = docker.image(registryAPP + ":${APP_BRANCH}")
+                    dockerAPI = docker.image(registryMatriculaciones + ":${APP_BRANCH}")
+                    dockerAPI.push()
+              }
+            }
+          }
+        }
+        stage('Deploy MATRICULACIONES') {
+          steps{
+             script {
+                docker.withRegistry( '', registryCredential ) {
+                    dockerAPI = docker.image(registryAPP + ":${MATRICULACIONES_BRANCH}")
                     dockerAPI.push()
               }
             }
@@ -48,10 +66,10 @@ pipeline {
           steps{
               sh 'wget https://raw.githubusercontent.com/andes/andes-test-integracion/master/docker/andes.Dockerfile'
               sh 'wget https://raw.githubusercontent.com/andes/andes-test-integracion/master/docker/nginx.conf'
-              sh 'docker build -t andesnqn/nginx:master --file=andes.Dockerfile    .'
+              sh 'docker build -t andesnqn/nginx:${APP_BRANCH} --build-arg APP=${APP_BRANCH} MATRICULACIONES=${MATRICULACIONES_BRANCH} --file=andes.Dockerfile    .'
               script {
                 docker.withRegistry( '', registryCredential ) {
-                    dockerAPI = docker.image("andesnqn/nginx:master")
+                    dockerAPI = docker.image("andesnqn/nginx:${APP_BRANCH}")
                     dockerAPI.push()
                 }
               }

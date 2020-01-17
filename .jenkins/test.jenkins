@@ -6,6 +6,7 @@ pipeline {
         app = "${APP_BRANCH}"
         envmode = "${APP_MODE}"
         api = "${API_BRANCH}"
+        matriculaciones = "${MATRICULACIONES_BRANCH}"
     }
     stages {
         stage('Build images') {
@@ -22,6 +23,12 @@ pipeline {
                          build job: "andes-api", parameters: [string(name: 'GIT_BRANCH', value: api )] 
                     }
                 }
+                
+                stage('build matriculaciones') {
+                    steps {
+                         build job: "andes-matriculaciones", parameters: [string(name: 'GIT_BRANCH', value: matriculaciones )] 
+                    }
+                }
             }
         }
         
@@ -36,7 +43,8 @@ pipeline {
  
         stage('build api') {
             steps {
-                sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} .'
+                sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} MATRICULACIONES=${matriculaciones} .'
+                sh 'API=$api APP=$app docker-compose -f docker/docker-compose.yml down -v'
                 sh 'API=$api APP=$app docker-compose -f docker/docker-compose.yml up -d '
             }
         }
@@ -64,15 +72,20 @@ pipeline {
             }
             steps {
                 sh 'npm ci'
-                sh 'npx cypress run -c baseUrl=http://localhost --env API_SERVER="http://172.16.1.116" --config video=false,numTestsKeptInMemory=1 ${cypressparams}' 
+                sh 'rm -rf results/* mochawesome-report/* || true'
+                sh 'npx cypress run --env ELASTIC_URI="http://172.16.1.116:9266",MONGO_URI="mongodb://172.16.1.116:27066/andes",API_SERVER="http://172.16.1.116" --config baseUrl=http://172.16.1.116,video=false,numTestsKeptInMemory=1 ${cypressparams} || true' 
+                sh 'npm run report'
             }
         }
     }
     post { 
         always { 
+            sh 'mkdir -p mochawesome-report/web/assets'
+            sh 'mkdir -p cypress/screenshots' 
+            sh 'cp -R cypress/screenshots/* mochawesome-report/web/assets || true'
             sh 'cd docker'
             sh 'API=$api APP=$app docker-compose -f docker/docker-compose.yml down -v'
-            junit 'results/cypress-report.xml'
+            junit 'results/cypress-report-*.xml'
         }
     }
 }
