@@ -76,7 +76,7 @@ context('Planificacion Agendas', () => {
     let token
     before(() => {
         cy.seed();
-        cy.login('38906735', 'asd').then(t => {
+        cy.login('30643636', 'asd').then(t => {
             token = t;
         });
     })
@@ -98,7 +98,7 @@ context('Planificacion Agendas', () => {
     /**
      * QUEDA PENDIENTE UN TEMA CON EL PLEX-SELECT
      */
-    it.skip('Guardar agenda del día con un solo bloque', () => {
+    it('Guardar agenda del día con un solo bloque', () => {
         complete({
             fecha: cy.today(),
             horaInicio: "10:00",
@@ -533,7 +533,7 @@ context('Planificacion Agendas', () => {
         cy.contains('La cantidad de turnos asignados es mayor a la cantidad disponible');
     });
 
-    it.skip('Guardar agenda del día citando por segmento un valor negativo de pacientes', () => {
+    it('Guardar agenda del día citando por segmento un valor negativo de pacientes', () => {
         complete({
             fecha: cy.today(),
             horaInicio: "10:00",
@@ -558,7 +558,7 @@ context('Planificacion Agendas', () => {
         cy.contains('La cantidad de citas por segmento debe ser mayor a 1');
     });
 
-    it.skip('Guardar agenda con bloques vacíos', () => {
+    it('Guardar agenda con bloques vacíos', () => {
         complete({
             fecha: cy.today(),
             horaInicio: "10:00",
@@ -594,5 +594,44 @@ context('Planificacion Agendas', () => {
 
         cy.contains('Existen bloques incompletos');
     });
-});
 
+    it('Guardar,clonar y verificar boton iniciar prestacion en agenda no nominalizada', () => {
+        const ayer = Cypress.moment().add(-1, 'days').format('DD/MM/YYYY');
+        const manana = Cypress.moment().add(1, 'days').format('DD/MM/YYYY');
+        complete({
+            fecha: ayer,
+            horaInicio: "10:00",
+            horaFin: "12:00"
+        });
+        cy.plexSelectAsync('label="Tipos de prestación"', 'actividades con la comunidad', '@prestaciones', 0);
+        cy.plexButton("Guardar").click();
+        cy.contains('La agenda se guardó correctamente').click();
+        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + ayer);
+        cy.get('table tbody td').contains('actividades con la comunidad').click();
+        cy.plexButtonIcon('arrow-up-bold-circle-outline').click();
+        cy.toast('success', 'La agenda cambió el estado a disponible');
+        cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
+        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
+        cy.get('table tbody td').contains('actividades con la comunidad').click();
+        cy.plexButtonIcon('content-copy').click();
+        cy.contains(Cypress.moment().add(0, 'days').date()).click();
+        cy.plexButton("Clonar Agenda").click();
+        cy.swal('confirm');
+        cy.wait('@clonar').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+        cy.contains('La Agenda se clonó correctamente');
+        cy.swal('confirm');
+        cy.get('table tbody td').contains('En planificación').click();
+        cy.plexButtonIcon('arrow-up-bold-circle-outline').click();
+        cy.toast('success', 'La agenda cambió el estado a disponible');
+        cy.goto('/rup', token);
+        cy.get('plex-radio[name="agendas"] input').eq(1).click({
+            force: true
+        });
+        cy.wait(1000);
+        cy.plexButton('INICIAR PRESTACIÓN').click();
+        cy.get('button').contains('CONFIRMAR').click();
+    });
+
+});
