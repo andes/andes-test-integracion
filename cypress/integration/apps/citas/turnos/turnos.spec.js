@@ -218,7 +218,9 @@ context('turnos', () => {
 
         cy.wait('@getAgendas');
 
-        cy.get('app-calendario .dia').contains(Cypress.moment().format('D')).click();
+        cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
+
+        cy.wait('@getAgendas');
 
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
 
