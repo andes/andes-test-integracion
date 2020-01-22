@@ -16,7 +16,6 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.server();
     });
 
-
     it('ingresar documento, sexo del paciente y validar con Renaper', () => {
 
         // Intercepta la llamada a la ruta validar y devuelve paciente_validado
@@ -70,9 +69,11 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.contains('Los datos se actualizaron correctamente');
     });
 
-    it('verificar lista de pacientes validados similares con porcentaje 81%', () => {
+    it('verificar lista de pacientes validados similares con porcentaje 83%', () => {
         cy.route('POST', '**api/core/mpi/pacientes/validar').as('validacion');
         cy.route('POST', '**api/core/mpi/pacientes**').as('guardar');
+        cy.fixture('mpi/paciente-validado2').as('paciente_validado2');
+        cy.route('POST', '**api/core/mpi/pacientes/validar', '@paciente_validado2').as('renaper2');
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
@@ -80,15 +81,11 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexSelect('label="Sexo"').click();
         cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexButton('Validar Paciente').click();
-        cy.wait('@validacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.toast('success', '¡Paciente Validado!').click();
+        cy.contains('Paciente Validado');
+        cy.toast('success').click();
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
-        cy.wait(2000);
         cy.plexButton('Guardar').click();
         cy.wait('@guardar').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -110,13 +107,14 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexButton('Guardar').click();
         cy.contains('Existen pacientes similares, verifique las sugerencias')
         cy.get('button').contains('Aceptar').click();
-        cy.contains('Similitud: 81 % ');
+        cy.contains('Similitud: 83 % ');
     });
 
-    it('verificar lista de pacientes validados similares con porcentaje mayor al 96%', () => {
+    it('verificar lista de pacientes validados similares con porcentaje mayor al 95%', () => {
         cy.route('POST', '**api/core/mpi/pacientes/validar').as('validacion');
         cy.route('POST', '**api/core/mpi/pacientes**').as('guardar');
-        // Buscador
+        cy.fixture('mpi/paciente-validado3').as('paciente_validado3');
+        cy.route('POST', '**api/core/mpi/pacientes/validar', '@paciente_validado3').as('renaper3');
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
@@ -124,14 +122,11 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexSelect('label="Sexo"').click();
         cy.plexSelect('label="Sexo"', 'femenino').click();
         cy.plexButton('Validar Paciente').click();
-        cy.wait('@validacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.toast('success', '¡Paciente Validado!').click();
+        cy.contains('Paciente Validado');
+        cy.toast('success').click();
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
-        cy.wait(2000);
         cy.plexButton('Guardar').click();
         cy.wait('@guardar').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -153,7 +148,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexButton('Guardar').click();
         cy.contains('El paciente ya existe, verifique las sugerencias');
         cy.get('button').contains('Aceptar').click();
-        cy.contains('Similitud: 96 % ');
+        cy.contains('Similitud: 95 % ');
     });
 
     it('crear paciente con similitud del 81% con uno existente temporal', () => {
@@ -177,7 +172,6 @@ context('MPI-Registro Paciente Con Dni', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
         });
-        cy.wait(2000);
         cy.contains('Los datos se actualizaron correctamente');
         cy.get('button').contains('Aceptar').click();
         cy.plexText('name="buscador"', '1232548');
@@ -219,7 +213,6 @@ context('MPI-Registro Paciente Con Dni', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
         });
-        cy.wait(2000);
         cy.contains('Los datos se actualizaron correctamente');
         cy.get('button').contains('Aceptar').click();
         cy.plexText('name="buscador"', '1232548');
