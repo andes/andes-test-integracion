@@ -191,6 +191,7 @@ context('RUP - Punto de inicio', () => {
                 cy.get('table').first().as('tablaAgendas');
                 cy.get('@tablaAgendas').find('tbody tr').should('have.length', 1);
                 cy.plexButton('VER HUDS').click();
+                cy.get('plex-button').contains('ACEPTAR').click({ force: true })
                 cy.url().should('include', '/rup/vista/');
             });
 
