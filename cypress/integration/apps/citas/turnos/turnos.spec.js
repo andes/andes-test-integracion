@@ -218,7 +218,7 @@ context('turnos', () => {
 
         cy.wait('@getAgendas');
 
-        cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
+        cy.get('app-calendario .dia').contains(Cypress.moment().date()).click({ force: true });
 
         cy.wait('@getAgendas');
 
