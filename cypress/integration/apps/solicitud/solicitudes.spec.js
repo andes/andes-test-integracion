@@ -36,34 +36,45 @@ context('TOP', () => {
 
         cy.wait('@getPrestaciones');
 
-        cy.get('plex-select[label="Prestación Destino"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="5a26e113291f463c1b982d98"]').click({
-            force: true
-        })
-        cy.wait('@getReglasOrganizacionDestino');
+        // cy.get('plex-select[label="Prestación Destino"]').children().children().children('.selectize-input').click({
+        //     force: true
+        // }).get('.option[data-value="5a26e113291f463c1b982d98"]').click({
+        //     force: true
+        // })
 
+        cy.plexSelectType('label="Prestación Destino"', 'colonoscopia');
+
+        cy.wait('@getReglasOrganizacionDestino').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        // cy.plexSelectType('name="organizacion"', 'hospital dr. horacio heller');
         cy.plexSelectAsync('name="organizacion"', 'hospital dr. horacio heller', '@getOrganizaciones', 0);
+
+        cy.plexButtonIcon('plus').click();
 
         // cy.get('plex-select[name="organizacion"] input').type('hospital dr. horacio heller');
         // cy.wait('@getOrganizaciones');
         // cy.get('plex-select[name="organizacion"] input').type('{enter}');
 
-        cy.get('plex-button[title="Agregar Organización"]').click();
 
-        cy.wait('@getPrestaciones');
+        // cy.get('plex-button[title="Agregar Organización"]').click();
+        cy.plexSelectAsync('name="prestacionOrigen"', 'consulta de medicina general', '@getPrestaciones', 0);
+        // cy.get('plex-select[name="prestacionOrigen"] input').type('{enter}');
 
-        cy.get('plex-select[name="prestacionOrigen"] input').type('medicina general');
-        cy.wait('@getPrestaciones');
-        cy.get('plex-select[name="prestacionOrigen"] input').type('{enter}');
+        // cy.get('plex-select[name="prestacionOrigen"] input').type('medicina general');
+        // cy.wait('@getPrestaciones');
+        cy.get('div[class="row"]').find('div[class="col-6 h-100"]').eq(1).plexButtonIcon('plus').click();
+        // cy.get('plex-button[title="Agregar Prestación"]').click();
+        cy.plexButton('Guardar').click();
 
-        cy.get('plex-button[title="Agregar Prestación"]').click();
-
-        cy.get('plex-button[label="Guardar"]').click();
+        // cy.get('plex-button[label="Guardar"]').click();
 
         cy.wait('@guardarRegla').then(xhr => {
             expect(xhr.status).to.be.eq(200);
         });
+
+        cy.toast('success', 'Las reglas se guardaron correctamente');
     })
 
     it('crear solicitud de entrada', () => {
@@ -258,15 +269,19 @@ context('TOP', () => {
         cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
 
         cy.plexButtonIcon('chevron-down').click();
-        cy.plexSelect('label="Estado"').click();
         cy.plexSelectType('label="Estado"', 'pendiente');
+        cy.wait('@solicitudes')
         cy.plexSelectAsync('label="Prestación destino"', 'Consulta de clínica médica', '@getPrestaciones', 0);
         cy.log('SI SE CORRE DE NOCHE DA ERROR');
-        cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
+        cy.wait('@getPrestaciones');
 
-        cy.wait('@solicitudes');
+        cy.wait('@solicitudes').then(() => {
+            cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
+        });
 
-        cy.plexButtonIcon('calendar-plus').click();
+        cy.wait('@solicitudes').then(() => {
+            cy.plexButtonIcon('calendar-plus').click();
+        });
 
         cy.wait('@consultaPaciente');
         cy.wait('@agendas');
@@ -282,11 +297,9 @@ context('TOP', () => {
 
         cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
 
-        cy.wait('@agenda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@agenda').then(() => {
+            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
         });
-
-        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
 
         cy.plexButton('Confirmar').click();
 
