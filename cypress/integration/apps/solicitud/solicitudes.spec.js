@@ -257,42 +257,44 @@ context('TOP', () => {
         cy.route('GET', '/api/modules/obraSocial/os/**', []).as('obraSocial');
         cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
 
-
-        cy.get('plex-button[type="default"]').click();
-
-        cy.get('plex-select[label="Estado"] input').type('pendiente');
-        cy.get('plex-select[label="Estado"] input').type('{enter}');
+        cy.plexButtonIcon('chevron-down').click();
+        cy.plexSelect('label="Estado"').click();
+        cy.plexSelectType('label="Estado"', 'pendiente');
         cy.plexSelectAsync('label="Prestación destino"', 'Consulta de clínica médica', '@getPrestaciones', 0);
         cy.log('SI SE CORRE DE NOCHE DA ERROR');
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
-        cy.get('plex-button[title="Dar Turno"]').click({
-            force: true
-        });
 
+        cy.wait('@solicitudes');
+
+        cy.plexButtonIcon('calendar-plus').click();
 
         cy.wait('@consultaPaciente');
         cy.wait('@agendas');
-        cy.wait(2000);
+
         let fechaAgenda48hs = Cypress.moment().add(2, 'days');
         if (fechaAgenda48hs.month() > Cypress.moment().month()) {
-            cy.get('plex-button[icon="chevron-right"]').click();
-            cy.wait('@agendas');
+            cy.plexButtonIcon('chevron-right').click();
         }
 
-        cy.wait(2000);
-        cy.get('div[class="dia"]').contains(Cypress.moment().add(2, 'days').format('D')).click({
-            force: true
+        cy.wait('@agendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
         });
-        cy.wait('@agenda');
 
-        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({
-            force: true
+        cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
+
+        cy.wait('@agenda').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
         });
-        cy.get('plex-button[label="Confirmar"]').click();
+
+        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+
+        cy.plexButton('Confirmar').click();
 
         cy.wait('@confirmarTurno').then(xhr => {
             expect(xhr.status).to.be.eq(200);
         });
+
+        cy.toast('info', 'El turno se asignó correctamente');
     });
 
     it.skip('crear solicitud desde rup', () => { // TODO: carga mal la prestacion
