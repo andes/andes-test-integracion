@@ -36,39 +36,21 @@ context('TOP', () => {
 
         cy.wait('@getPrestaciones');
 
-        // cy.get('plex-select[label="Prestación Destino"]').children().children().children('.selectize-input').click({
-        //     force: true
-        // }).get('.option[data-value="5a26e113291f463c1b982d98"]').click({
-        //     force: true
-        // })
-
         cy.plexSelectType('label="Prestación Destino"', 'colonoscopia');
 
         cy.wait('@getReglasOrganizacionDestino').then(xhr => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        // cy.plexSelectType('name="organizacion"', 'hospital dr. horacio heller');
         cy.plexSelectAsync('name="organizacion"', 'hospital dr. horacio heller', '@getOrganizaciones', 0);
 
         cy.plexButtonIcon('plus').click();
 
-        // cy.get('plex-select[name="organizacion"] input').type('hospital dr. horacio heller');
-        // cy.wait('@getOrganizaciones');
-        // cy.get('plex-select[name="organizacion"] input').type('{enter}');
-
-
-        // cy.get('plex-button[title="Agregar Organización"]').click();
         cy.plexSelectAsync('name="prestacionOrigen"', 'consulta de medicina general', '@getPrestaciones', 0);
-        // cy.get('plex-select[name="prestacionOrigen"] input').type('{enter}');
 
-        // cy.get('plex-select[name="prestacionOrigen"] input').type('medicina general');
-        // cy.wait('@getPrestaciones');
         cy.get('div[class="row"]').find('div[class="col-6 h-100"]').eq(1).plexButtonIcon('plus').click();
-        // cy.get('plex-button[title="Agregar Prestación"]').click();
-        cy.plexButton('Guardar').click();
 
-        // cy.get('plex-button[label="Guardar"]').click();
+        cy.plexButton('Guardar').click();
 
         cy.wait('@guardarRegla').then(xhr => {
             expect(xhr.status).to.be.eq(200);
