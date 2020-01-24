@@ -88,15 +88,10 @@ context('Planificacion Agendas', () => {
         cy.route('POST', '**/api/modules/turnos/agenda**').as('create');
         cy.route('GET', '**/api/modules/turnos/espacioFisico**').as('espacios');
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
-
-
-
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('prestaciones');
+        cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
     });
 
-    /**
-     * QUEDA PENDIENTE UN TEMA CON EL PLEX-SELECT
-     */
     it('Guardar agenda del día con un solo bloque', () => {
         complete({
             fecha: cy.today(),
@@ -104,9 +99,22 @@ context('Planificacion Agendas', () => {
             horaFin: "12:00",
         });
 
+        cy.wait('@prestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+
         cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
         cy.plexSelectAsync('label="Equipo de Salud"', 'CORTES JAZMIN', '@profesionales', 0);
-        cy.plexSelectAsync('label="Seleccione un espacio físico del efector"', 'consultorio 1', '@espacios', 0);
+
+        cy.wait('@agendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+
+        cy.plexSelectAsync('name="espacioFisico"', 'consultorio 1', '@espacios', 0);
+
+        cy.wait('@agendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
 
         complete({
             descripcion: 'Consulta de medicina general',
@@ -115,10 +123,12 @@ context('Planificacion Agendas', () => {
         });
 
         cy.plexButton("Guardar").click();
+
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
-        cy.contains('La agenda se guardó correctamente');
+
+        cy.toast('success', 'La agenda se guardó correctamente');
     });
 
 
@@ -144,7 +154,7 @@ context('Planificacion Agendas', () => {
             expect(xhr.status).to.be.eq(200)
         });
 
-        cy.contains(Cypress.moment().add(1, 'days').date()).click()
+        cy.contains(Cypress.moment().add(1, 'days').date()).click();
 
         cy.contains('La agenda se guardó correctamente').click();
 
