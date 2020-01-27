@@ -88,8 +88,13 @@ context('Planificacion Agendas', () => {
         cy.route('POST', '**/api/modules/turnos/agenda**').as('create');
         cy.route('GET', '**/api/modules/turnos/espacioFisico**').as('espacios');
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('prestaciones');
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.route('GET', '**/api/modules/rup/prestaciones**').as('prestacionesRup');
+        cy.route('GET', '**/api/modules/top/reglas**').as('reglas');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
+        cy.route('GET', '**/api/modules/turnero/pantalla**').as('pantallas');
+        cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('edicionAgenda');
+        cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
     });
 
     it('Guardar agenda del día con un solo bloque', () => {
@@ -614,31 +619,52 @@ context('Planificacion Agendas', () => {
         });
         cy.plexSelectAsync('label="Tipos de prestación"', 'actividades con la comunidad', '@prestaciones', 0);
         cy.plexButton("Guardar").click();
+        cy.wait('@create');
         cy.contains('La agenda se guardó correctamente').click();
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + ayer);
         cy.get('table tbody td').contains('actividades con la comunidad').click();
         cy.plexButtonIcon('arrow-up-bold-circle-outline').click();
+        cy.wait('@edicionAgenda');
         cy.toast('success', 'La agenda cambió el estado a disponible');
-        cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
+        cy.wait('@agendas');
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
         cy.get('table tbody td').contains('actividades con la comunidad').click();
         cy.plexButtonIcon('content-copy').click();
+        cy.wait('@agendas');
         cy.contains(Cypress.moment().add(0, 'days').date()).click();
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
-        cy.wait('@clonar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        });
+        cy.wait('@clonar');
         cy.contains('La Agenda se clonó correctamente');
         cy.swal('confirm');
+        cy.wait('@agendas');
+        cy.wait('@prestaciones');
+        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().date());
+        cy.wait('@agendas');
+        cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().date());
+        cy.wait('@agendas');
+        cy.plexSelectAsync('name="prestaciones"', 'actividades con la comunidad', '@prestaciones', 0);
+        cy.wait('@agendas');
         cy.get('table tbody td').contains('En planificación').click();
+
+        cy.wait('@agendas');
+
         cy.plexButtonIcon('arrow-up-bold-circle-outline').click();
+        cy.wait('@edicionAgenda');
         cy.toast('success', 'La agenda cambió el estado a disponible');
+        cy.wait('@agendas');
         cy.goto('/rup', token);
+        cy.wait('@prestaciones');
+        cy.wait('@pantallas');
+        cy.wait('@prestaciones');
+        cy.wait('@agendas');
+        cy.wait('@prestacionesRup');
+        cy.wait('@reglas');
+
         cy.get('plex-radio[name="agendas"] input').eq(1).click({
             force: true
         });
-        cy.wait(1000);
+        cy.get('table tr').contains('actividades con la comunidad').first().click();
         cy.plexButton('INICIAR PRESTACIÓN').click();
         cy.get('button').contains('CONFIRMAR').click();
     });
