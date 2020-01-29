@@ -137,14 +137,15 @@ context('Planificacion Agendas', () => {
     });
 
 
-    it('Guardar y Clonar agenda del día con un solo bloque', () => {
-        cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
+    it.only('Guardar y Clonar agenda del día con un solo bloque', () => {
 
         complete({
             fecha: cy.today(),
             horaInicio: "10:00",
             horaFin: "12:00"
         });
+
+        cy.wait('@prestaciones');
 
         cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
 
@@ -158,22 +159,15 @@ context('Planificacion Agendas', () => {
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
-
-        cy.contains(Cypress.moment().add(1, 'days').date()).click();
-
-        cy.contains('La agenda se guardó correctamente').click();
-
+        cy.toast('success', 'La agenda se guardó correctamente');
+        cy.wait('@agendas');
+        cy.contains(Cypress.moment().add(2, 'days').format('D')).click();
         cy.plexButton("Clonar Agenda").click();
-
         cy.swal('confirm');
-
-        cy.wait('@clonar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        });
-
+        cy.wait('@clonar');
         cy.contains('La Agenda se clonó correctamente');
-
         cy.swal('confirm');
+        cy.wait('@agendas');
     });
 
 
