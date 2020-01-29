@@ -191,7 +191,8 @@ context('RUP - Punto de inicio', () => {
                 cy.get('table').first().as('tablaAgendas');
                 cy.get('@tablaAgendas').find('tbody tr').should('have.length', 1);
                 cy.plexButton('VER HUDS').click();
-                cy.plexBool('name="checkAccesoAuditoria"', true);
+                cy.contains('Procesos de Auditoría').click({ force: true });
+
                 cy.plexButton('ACEPTAR').click();
                 cy.url().should('include', '/rup/vista/');
             });

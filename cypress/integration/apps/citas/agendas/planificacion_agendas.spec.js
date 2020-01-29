@@ -137,7 +137,7 @@ context('Planificacion Agendas', () => {
     });
 
 
-    it.only('Guardar y Clonar agenda del día con un solo bloque', () => {
+    it('Guardar y Clonar agenda del día con un solo bloque', () => {
 
         complete({
             fecha: cy.today(),
