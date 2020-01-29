@@ -35,7 +35,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
     it('nueva solicitud exitosa', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.get('plex-dateTime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
         cy.plexSelect('label="Organización origen"', 0).click();
@@ -54,7 +54,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
 
     it('nueva solicitud autocitada exitosa', () => {
         seleccionarPaciente(dni);
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.get('plex-dateTime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
         cy.plexBool('label="Autocitado"').check({
             force: true
@@ -77,7 +77,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
 
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"').validationMessage()
         cy.swal('confirm');
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.get('plex-dateTime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
 
@@ -110,7 +110,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
 
     it('comprobación de reglas', () => {
         seleccionarPaciente(dni);
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.get('plex-dateTime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
         cy.plexSelectType('label="Organización origen"').find('.selectize-dropdown-content').children().should('have.length', 0);
         cy.plexSelectType('label="Tipos de Prestación Origen"').find('.selectize-dropdown-content').children().should('have.length', 0);

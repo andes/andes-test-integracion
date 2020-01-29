@@ -36,7 +36,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
     it('nueva solicitud exitosa', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.get('plex-dateTime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
         cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
@@ -61,7 +61,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
 
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"').validationMessage()
         cy.swal('confirm');
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.get('plex-dateTime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
 
@@ -97,7 +97,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
 
     it('comprobación de reglas', () => {
         seleccionarPaciente(dni);
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.get('plex-dateTime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
         cy.plexSelectType('label="Organización destino"').find('.selectize-dropdown-content').children().should('have.length', 0);
         cy.plexSelectType('label="Tipo de Prestación Solicitada"').find('.selectize-dropdown-content').children().should('have.length', 0);
