@@ -196,7 +196,7 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
             element.clear();
         }
         if (data.text) {
-            element.type(`${data.text}{enter}`);
+            element.type(`${data.text}${!data.skipEnter ? '{enter}' : ''}`);
         }
     }
     element = element.parent().parent().parent();
