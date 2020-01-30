@@ -77,7 +77,10 @@ context('TM Profesional', () => {
         cy.plexButton("Guardar").click();
 
         cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.apellido).to.be.eq('Ramirez');
+            expect(xhr.response.body.nombre).to.be.eq('Pedro');
+            expect(xhr.response.body.documento).to.be.eq('11111111');
         });
         cy.contains('¡El profesional se creó con éxito!');
     });
@@ -95,7 +98,11 @@ context('TM Profesional', () => {
         });
 
         cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
-        cy.wait('@renaper');
+        cy.wait('@renaper').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.datos.apellido).to.be.eq('TEST');
+            expect(xhr.response.body.datos.nombres).to.be.eq('PROFESIONAL');
+        });
 
         check({
             nombre: 'PROFESIONAL',
@@ -109,7 +116,11 @@ context('TM Profesional', () => {
         cy.plexButton("Guardar").click();
 
         cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.apellido).to.be.eq('TEST');
+            expect(xhr.response.body.nombre).to.be.eq('PROFESIONAL');
+            expect(xhr.response.body.documento).to.be.eq('26487951');
+
         });
         cy.contains('¡El profesional se creó con éxito!');
     });
@@ -128,7 +139,11 @@ context('TM Profesional', () => {
         cy.plexSelectType('label="Sexo"', 'femenino');
 
         cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
-        cy.wait('@renaper');
+        cy.wait('@renaper').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.datos.apellido).to.be.eq('');
+            expect(xhr.response.body.datos.nombres).to.be.eq('');
+        });
 
         cy.contains('El profesional no se encontró en RENAPER');
         cy.swal('confirm');
@@ -142,7 +157,10 @@ context('TM Profesional', () => {
         cy.plexButton('Guardar').click();
 
         cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.apellido).to.be.eq('Rodriguez');
+            expect(xhr.response.body.nombre).to.be.eq('Julieta');
+            expect(xhr.response.body.documento).to.be.eq('15654898');
         });
         cy.contains('¡El profesional se creó con éxito!');
     });
@@ -164,10 +182,12 @@ context('TM Profesional', () => {
 
         cy.plexButton('Guardar').click();
 
-        cy.wait(2000);
         cy.wait('@get').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(1);
+            expect(xhr.response.body[0].nombre).to.be.eq('ALICIA BEATRIZ');
+            expect(xhr.response.body[0].apellido).to.be.eq('ESPOSITO');
+            expect(xhr.response.body[0].documento).to.be.eq('4163782');
         });
         cy.contains('El profesional que está intentando guardar ya se encuentra cargado');
     });
@@ -182,7 +202,13 @@ context('TM Profesional', () => {
         cy.plexInt('label="Documento"', '4466777');
         cy.plexText('label="Nombre"', 'MARIA');
         cy.plexText('label="Apellido"', 'PEREZ');
-        cy.wait('@get');
+        cy.wait('@get').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(1);
+            expect(xhr.response.body[0].nombre).to.be.eq('MARIA');
+            expect(xhr.response.body[0].apellido).to.be.eq('PEREZ');
+            expect(xhr.response.body[0].documento).to.be.eq('4466777');
+        });
 
         // selecciono a Nilda Bethy Judzik de la tabla de resultados (primer resultado)
         cy.get('tbody').find('tr').first().click();
@@ -207,7 +233,12 @@ context('TM Profesional', () => {
         cy.route('GET', '**/api/core/tm/profesionales**').as('get');
         cy.plexText('label="Nombre"', 'ALICIA');
         cy.plexText('label="Apellido"', 'PRUEBA');
-        cy.wait('@get');
+        cy.wait('@get').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(1);
+            expect(xhr.response.body[0].nombre).to.be.eq('ALICIA');
+            expect(xhr.response.body[0].apellido).to.be.eq('PRUEBA');
+        });
 
         // seleccionó a Usuario Prueba de la tabla de resultados (primer resultado)
         cy.get('tbody').find('tr').first().click();
