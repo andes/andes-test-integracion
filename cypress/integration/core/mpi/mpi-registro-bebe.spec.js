@@ -129,8 +129,9 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.wait('@registroBebe').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
+            expect(xhr.response.body.apellido).to.be.eq("MARTINEZ");
+            expect(xhr.response.body.nombre).to.be.eq("MARIO");
         });
-        cy.wait(2000);
         cy.contains('Los datos se actualizaron correctamente');
     });
 
@@ -150,8 +151,9 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.wait('@registroBebe').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
+            expect(xhr.response.body.apellido).to.be.eq("MARTINEZ");
+            expect(xhr.response.body.nombre).to.be.eq("MARIO");
         });
-        cy.wait(2000);
         cy.contains('Los datos se actualizaron correctamente');
     });
 
@@ -171,8 +173,9 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.wait('@registroBebe').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
+            expect(xhr.response.body.apellido).to.be.eq("MARTINEZ");
+            expect(xhr.response.body.nombre).to.be.eq("MARIO");
         });
-        cy.wait(2000);
         cy.contains('Los datos se actualizaron correctamente');
     });
 
@@ -192,8 +195,9 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.wait('@registroBebe').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
+            expect(xhr.response.body.apellido).to.be.eq("MARTINEZ");
+            expect(xhr.response.body.nombre).to.be.eq("MARIO");
         });
-        cy.wait(2000);
         cy.contains('Los datos se actualizaron correctamente');
     });
 
@@ -217,8 +221,9 @@ context('MPI-Registro Paciente Bebé', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
             expect(xhr.response.body.notas).to.have.length(1);
+            expect(xhr.response.body.apellido).to.be.eq("MARTINEZ");
+            expect(xhr.response.body.nombre).to.be.eq("MARIO");
         });
-        cy.wait(2000);
         cy.contains('Los datos se actualizaron correctamente');
     });
 
