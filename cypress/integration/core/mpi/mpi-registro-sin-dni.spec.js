@@ -45,6 +45,8 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.wait('@registroSinDni').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
+            expect(xhr.response.body.apellido).to.be.eq("TEST");
+            expect(xhr.response.body.nombre).to.be.eq("SIN DNI");
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
@@ -65,6 +67,8 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.wait('@registroSinDni').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
+            expect(xhr.response.body.apellido).to.be.eq("TEST");
+            expect(xhr.response.body.nombre).to.be.eq("SIN DNI");
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
@@ -85,6 +89,8 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.wait('@registroSinDni').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
+            expect(xhr.response.body.apellido).to.be.eq("TEST");
+            expect(xhr.response.body.nombre).to.be.eq("SIN DNI");
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
@@ -105,6 +111,8 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.wait('@registroSinDni').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
+            expect(xhr.response.body.apellido).to.be.eq("TEST");
+            expect(xhr.response.body.nombre).to.be.eq("SIN DNI");
         });
         cy.contains('Los datos se actualizaron correctamente');
     });

@@ -54,6 +54,7 @@ context('MPI-Busqueda Paciente', () => {
         cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', false);
         cy.wait('@busqueda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(0);
         });
         cy.contains(' No se encontró ningún paciente..');
     });
@@ -64,6 +65,7 @@ context('MPI-Busqueda Paciente', () => {
         cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', false);
         cy.wait('@busqueda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(0);
         });
         cy.contains(' No se encontró ningún paciente..');
     });
