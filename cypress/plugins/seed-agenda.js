@@ -19,6 +19,7 @@ module.exports.seedAgenda = async (mongoUri, params) => {
 
         if (params.dinamica) {
             agenda.dinamica = params.dinamica;
+            agenda.cupo = -1;
         }
 
         if (params.organizacion) {
@@ -28,6 +29,9 @@ module.exports.seedAgenda = async (mongoUri, params) => {
         } else {
             agenda.organizacion._id = new ObjectId(agenda.organizacion._id)
         }
+
+
+
 
         if (params.profesionales) {
             const ProfesionalesDB = await client.db().collection('profesional');
@@ -56,11 +60,15 @@ module.exports.seedAgenda = async (mongoUri, params) => {
             const prestaciones = await ConceptosTurneablesDB.find({ _id: { $in: tipoPrestacionesIds } }).toArray();
             agenda.tipoPrestaciones = prestaciones;
             agenda.bloques[0].tipoPrestaciones = prestaciones;
+            if (prestaciones[0].noNominalizada) {
+                agenda.nominalizada = false;
+            }
         } else {
             agenda.tipoPrestaciones[0].id = new ObjectId(agenda.tipoPrestaciones[0].id);
             agenda.tipoPrestaciones[0]._id = new ObjectId(agenda.tipoPrestaciones[0]._id);
             agenda.bloques[0].tipoPrestaciones[0]._id = new ObjectId(agenda.bloques[0].tipoPrestaciones[0]._id);
             agenda.bloques[0].tipoPrestaciones[0].id = new ObjectId(agenda.bloques[0].tipoPrestaciones[0].id);
+            agenda.nominalizada = true;
         }
 
         let labelTipoTurno = 'accesoDirectoDelDia';
@@ -106,17 +114,32 @@ module.exports.seedAgenda = async (mongoUri, params) => {
 
         const pacientesIDs = encapsulateArray(params.pacientes);
 
+        if (!agenda.nominalizada) {
+            const turnoID = new ObjectId();
+            const turno = {
+                "_id": turnoID,
+                "id": turnoID,
+                "estado": "disponible",
+                "horaInicio": horaInicio.clone().toDate(),
+                "tipoPrestacion": agenda.tipoPrestaciones[0]
+            };
+            agenda.bloques[0].turnos.push(turno);
+        }
+
         for (let i = 0; i < cantTurnos; i++) {
             const turnoID = new ObjectId();
             if (!pacientesIDs[i]) {
-                const turno = {
-                    "_id": turnoID,
-                    "id": turnoID,
-                    "estado": "disponible",
-                    "horaInicio": horaInicio.clone().add(i * 30, 'minutes').toDate()
-                };
-                agenda.bloques[0].turnos.push(turno);
+                if (!agenda.dinamica && agenda.nominalizada) {
+                    const turno = {
+                        "_id": turnoID,
+                        "id": turnoID,
+                        "estado": "disponible",
+                        "horaInicio": horaInicio.clone().add(i * 30, 'minutes').toDate()
+                    };
+                    agenda.bloques[0].turnos.push(turno);
+                }
             } else {
+
                 const PacientesDB = await client.db().collection('paciente');
                 const paciente = await PacientesDB.findOne({ _id: new ObjectId(pacientesIDs[i]) }, { projection: { documento: 1, nombre: 1, apellido: 1, sexo: 1, fechaNacimiento: 1 } });
                 const turno = {
@@ -145,6 +168,7 @@ module.exports.seedAgenda = async (mongoUri, params) => {
 
         const data = await AgendaDB.insertOne(agenda);
         agenda._id = data.insertedId;
+
         return agenda;
 
     } catch (e) {
