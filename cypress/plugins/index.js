@@ -14,6 +14,7 @@
 const { seedAgenda } = require('./seed-agenda');
 const { dropCollection } = require('./seed-drop');
 const { seedPaciente, createPaciente } = require('./seed-paciente');
+const { createUsuario } = require('./seed-usuario');
 
 
 module.exports = (on, config) => {
@@ -33,6 +34,9 @@ module.exports = (on, config) => {
     on('task', {
         'database:drop': (collection) => {
             return dropCollection(mongoUri, elasticuri, collection);
+        },
+        'database:create:usuario': (params) => {
+            return createUsuario(mongoUri, params);
         },
         'database:seed:paciente': (params) => {
             return seedPaciente(mongoUri, elasticuri, params);
