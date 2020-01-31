@@ -157,11 +157,18 @@ context('Planificacion Agendas', () => {
         cy.plexButton("Guardar y clonar").click();
 
         cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estado).to.be.eq('planificacion');
+            expect(xhr.response.body.bloques[0].accesoDirectoDelDia).to.be.eq(7);
+            expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(7);
+            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('59ee2d9bf00c415246fd3d6a');
+            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].term).to.be.eq('Consulta de medicina general');
         });
+
         cy.toast('success', 'La agenda se guardó correctamente');
+
         cy.wait('@agendas');
-        cy.contains(Cypress.moment().add(2, 'days').format('D')).click();
+        cy.contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
         cy.wait('@clonar');
@@ -566,7 +573,7 @@ context('Planificacion Agendas', () => {
         cy.contains('El valor debe ser mayor a 1');
     });
 
-    it('Guardar agenda con bloques vacíos', () => {
+    it.skip('Guardar agenda con bloques vacíos', () => {
         complete({
             fecha: cy.today(),
             horaInicio: "10:00",
@@ -625,7 +632,7 @@ context('Planificacion Agendas', () => {
         cy.get('table tbody td').contains('actividades con la comunidad').click();
         cy.plexButtonIcon('content-copy').click();
         cy.wait('@agendas');
-        cy.contains(Cypress.moment().add(0, 'days').date()).click();
+        cy.contains(Cypress.moment().add(0, 'days').format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
         cy.wait('@clonar');
@@ -654,7 +661,7 @@ context('Planificacion Agendas', () => {
         cy.wait('@agendas');
         cy.wait('@prestacionesRup');
         cy.wait('@reglas');
-
+        cy.wait('@agendas');
         cy.get('plex-radio[name="agendas"] input').eq(1).click({
             force: true
         });
