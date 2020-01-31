@@ -20,6 +20,7 @@ import './plex'
 import './seed'
 import './time'
 
+const addContext = require('mochawesome/addContext')
 
 require('cypress-plugin-retries');
 
