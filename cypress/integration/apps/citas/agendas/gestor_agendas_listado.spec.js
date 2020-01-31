@@ -1,5 +1,5 @@
 
-context('CITAS - Gestor de Agendass', () => {
+context('CITAS - Gestor de Agendas', () => {
     let token
     before(() => {
         cy.seed();
@@ -35,21 +35,35 @@ context('CITAS - Gestor de Agendass', () => {
 
 
     it('visualizar agendas de ayer y hoy', () => {
-        cy.wait('@getAgendas');
-        let ayerMoment = Cypress.moment().add(-1, 'days').format('DD/MM/YYYY');
-        cy.plexDatetime('label="Desde"', { text: ayerMoment, clear: true });
         cy.wait('@getAgendas').then((xhr) => {
-            cy.get('table tbody tr').should('length', 3);
-
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.length).to.be.eq(2);
         });
 
+        cy.wait('@getTiposPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        let ayerMoment = Cypress.moment().add(-1, 'days').format('DD/MM/YYYY');
+
+        cy.plexDatetime('label="Desde"', { text: ayerMoment, clear: true });
+
+        cy.wait('@getAgendas').then((xhr) => {
+            cy.get('table tbody tr').should('length', 3);
+        });
     });
 
-
     it('visualizar agendas de hoy y de mañana', () => {
-        cy.wait('@getAgendas');
+        cy.wait('@getAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.length).to.be.eq(2);
+        });
+        cy.wait('@getTiposPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         let ayerMoment = Cypress.moment().add(-1, 'days').format('DD/MM/YYYY');
         cy.plexDatetime('label="Desde"', { text: ayerMoment, clear: true });
+        cy.wait('@getAgendas');
         let manianaMoment = Cypress.moment().add(+1, 'days').format('DD/MM/YYYY');
         cy.plexDatetime('label="Hasta"', { text: manianaMoment, clear: true });
         cy.wait('@getAgendas').then((xhr) => {
@@ -59,9 +73,15 @@ context('CITAS - Gestor de Agendass', () => {
     });
 
     it('visualizar agendas del dia y por tipo de prestacion', () => {
-        cy.wait('@getAgendas');
-        cy.wait('@getTiposPrestacion');
-        cy.plexSelectType('label="Prestación"', 'Consulta de cardiología');
+        cy.wait('@getAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.length).to.be.eq(2);
+        });
+        cy.wait('@getTiposPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexSelectAsync('label="Prestación"', 'Consulta de cardiología', '@getTiposPrestacion', 0);
+
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(1);
@@ -70,9 +90,16 @@ context('CITAS - Gestor de Agendass', () => {
     });
 
     it('visualizar agendas por tipo de prestacion inexistente', () => {
-        cy.wait('@getAgendas');
-        cy.wait('@getTiposPrestacion');
-        cy.plexSelectType('label="Prestación"', 'Consulta de cirugía general');
+        cy.wait('@getAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.length).to.be.eq(2);
+        });
+        cy.wait('@getTiposPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.plexSelectAsync('label="Prestación"', 'Consulta de cirugía general', '@getTiposPrestacion', 0);
+
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(0);
@@ -81,10 +108,17 @@ context('CITAS - Gestor de Agendass', () => {
     });
 
     it('visualizar agendas por profesional', () => {
-        cy.wait('@getAgendas');
+        cy.wait('@getAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.length).to.be.eq(2);
+        });
+        cy.wait('@getTiposPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.plexButtonIcon('chevron-down').click();
+
         cy.plexSelectAsync('label="Equipo de Salud"', 'ESPOSITO ALICIA BEATRIZ', '@getProfesionales', 0);
-        // cy.wait('@getAgendas')
+
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(1);
@@ -93,15 +127,20 @@ context('CITAS - Gestor de Agendass', () => {
     });
 
     it('filtar agendas por profesional sin agendas', () => {
-        cy.wait('@getAgendas');
+        cy.wait('@getAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.length).to.be.eq(2);
+        });
+        cy.wait('@getTiposPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.plexButtonIcon('chevron-down').click();
         cy.plexSelectAsync('label="Equipo de Salud"', 'CORTES JAZMIN', '@getProfesionales', 0);
-        // cy.wait('@getAgendas')
+
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(0);
         });
 
     });
-
 })
