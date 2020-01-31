@@ -21,7 +21,7 @@ import './seed'
 import './time'
 
 
-const addContext = require('mochawesome/addContext')
+require('cypress-plugin-retries');
 
 Cypress.on('test:after:run', (test, runnable) => {
     const context = {
