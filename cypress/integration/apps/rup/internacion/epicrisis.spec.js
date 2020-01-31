@@ -19,9 +19,9 @@ context('RUP - Epicrisis', () => {
         cy.goto('/internacion/inicio', token);
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('GET', '**api/core/log/paciente?idPaciente=**').as('seleccionPaciente');
-        cy.route('POST', '**/api/modules/rup/prestaciones').as('prestaciones');
-        cy.route('GET', '**/api/modules/rup/prestaciones/**').as('prestacionesPaciente');
-        cy.route('GET', '**/api/modules/rup/prestaciones/**').as('prestacionesPaciente');
+        cy.route('POST', '**/api/modules/rup/prestaciones**').as('prestaciones');
+        cy.route('GET', '**/api/modules/rup/prestaciones?idPaciente=**').as('prestacionesPaciente');
+        cy.route('GET', '**/api/modules/rup/prestaciones/**').as('getPrestacion');
         cy.route('GET', '**/api/modules/rup/internaciones/ultima/**').as('ultimaInternacion');
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
     })
@@ -33,9 +33,14 @@ context('RUP - Epicrisis', () => {
         });
         cy.get('.table-striped').find('td').contains(paciente).click();
 
+        cy.wait('@prestacionesPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
         cy.wait('@ultimaInternacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+
 
         cy.plexButton('CREAR EPICRISIS').click();
 
@@ -43,7 +48,7 @@ context('RUP - Epicrisis', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@prestacionesPaciente').then((xhr) => {
+        cy.wait('@getPrestacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
