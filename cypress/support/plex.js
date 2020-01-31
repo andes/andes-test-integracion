@@ -160,7 +160,6 @@ Cypress.Commands.add('plexTextArea', { prevSubject: 'optional' }, (subject, labe
     return element.parent().parent().parent();
 });
 
-
 Cypress.Commands.add('plexButton', { prevSubject: 'optional' }, (subject, label) => {
     let element;
     if (subject) {
@@ -292,6 +291,11 @@ Cypress.Commands.add('plexPanel', { prevSubject: 'optional' }, (subject, index) 
     }
     return element;
 });
+
+Cypress.Commands.add('plexMenu', (icon) => {
+    cy.get('plex-app .navbar-inverse .mdi.mdi-menu').click({ force: true });
+    return cy.get('plex-app .navbar-inverse .dropdown-menu').find(`.mdi.mdi-${icon}`).click({ force: true });
+})
 
 /**
  * @decrecated
