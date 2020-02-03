@@ -5,7 +5,7 @@
  * A LA NOCHE DA ERROR POR PROBLEMA DE TIMEZONE
  */
 
-context('TOP', () => {
+context('SOLICITUDES', () => {
     let token
     before(() => {
         cy.seed();
@@ -17,163 +17,155 @@ context('TOP', () => {
     })
 
     beforeEach(() => {
-        // cy.viewport(1280, 720)
-        cy.goto('/solicitudes', token);
+
+            onBeforeLoad: (win) => {
+                win.sessionStorage.setItem('jwt', token);
+            }
+        });
+        cy.server();
     })
 
     it('crear nueva regla solicitud', () => {
-        cy.server();
+        // routes
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglasOrganizacionDestino');
         cy.route('GET', '**/api/core/tm/organizaciones').as('getOrganizaciones');
         cy.route('POST', '**/api/modules/top/reglas').as('guardarRegla');
+        let prestacionDestino = 'Consulta de cirugía';
+        let orgOrigen = 'HOSPITAL DR. HORACIO HELLER';
+        let prestacionOrigen = 'Consulta de medicina general';
 
-        cy.get('plex-button[label="Reglas"]').click();
+        cy.plexButton('Reglas').click();
 
-        cy.wait('@getPrestaciones');
-
-        cy.plexSelectType('label="Prestación Destino"', 'colonoscopia');
-
-        cy.wait('@getReglasOrganizacionDestino').then(xhr => {
+        cy.wait('@getPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexSelectAsync('name="organizacion"', 'hospital dr. horacio heller', '@getOrganizaciones', 0);
+        cy.plexSelectAsync('label="Prestación Destino"', prestacionDestino, '@getPrestaciones', 0)
+        cy.wait('@getReglasOrganizacionDestino').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.plexSelectAsync('name="organizacion"', orgOrigen, '@getOrganizaciones', 0);
 
         cy.plexButtonIcon('plus').click();
 
-        cy.plexSelectAsync('name="prestacionOrigen"', 'consulta de medicina general', '@getPrestaciones', 0);
+        cy.wait('@getPrestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
-        cy.get('div[class="row"]').find('div[class="col-6 h-100"]').eq(1).plexButtonIcon('plus').click();
+        cy.plexSelectAsync('name="prestacionOrigen"', prestacionOrigen, '@getPrestaciones', 0);
+
+        cy.get('plex-button[title="Agregar Prestación"]').click();
 
         cy.plexButton('Guardar').click();
 
         cy.wait('@guardarRegla').then(xhr => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].destino.organizacion.nombre).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+            expect(xhr.response.body[0].destino.prestacion.nombre).to.be.eq(prestacionDestino);
+            expect(xhr.response.body[0].origen.organizacion.nombre).to.be.eq(orgOrigen);
+            expect(xhr.response.body[0].origen.prestaciones[0].prestacion.nombre).to.be.eq(prestacionOrigen);
         });
-
         cy.toast('success', 'Las reglas se guardaron correctamente');
     })
 
     it('crear solicitud de entrada', () => {
-        cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+        // routes
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('tipoPrestaciones');
+        cy.route('GET', '**/api/core/tm/organizaciones').as('getOrganizaciones');
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
 
-        cy.get('plex-button[label="Nueva Solicitud"]').click();
-        cy.get('paciente-buscar plex-text[name="buscador"] input').first().type('32589654');
-        cy.wait('@consultaPaciente');
+        let prestacionSolicitada = 'Consulta de cirugía';
+        let orgOrigen = 'HOSPITAL DR. HORACIO HELLER';
+        let orgDest = 'HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON';
+        let prestacionOrigen = 'Consulta de medicina general';
+        let motivo = 'bla bla';
+        cy.plexButton('Nueva Solicitud').click();
+
+        cy.plexText('name="buscador"', '32589654');
+        cy.wait('@consultaPaciente').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.get('table tbody').contains('32589654').click();
 
         cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
 
-        cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
-        cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="5a26e113291f463c1b982d98"]').click({
-            force: true
-        });
+        cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', prestacionSolicitada, '@tipoPrestaciones', 0);
 
-        cy.wait('@getReglas');
-        cy.get('plex-select[name="organizacionOrigen"] input').type('hospital dr. horacio heller{enter}');
-        cy.get('plex-select[label="Tipos de Prestación Origen"] input').type('consulta de medicina general{enter}');
-        cy.get('plex-select[name="profesionalOrigen"] input').type('cortes jazmin');
-        cy.wait('@getProfesional');
-        cy.get('plex-select[name="profesionalOrigen"] input').type('{enter}');
+        cy.plexSelectAsync('label="Organización origen"', orgOrigen, '@getReglas', 0);
 
-        cy.get('plex-select[name="profesional"] input').type('natalia huenchuman');
-        cy.wait('@getProfesional');
-        cy.get('plex-select[name="profesional"] input').type('{enter}');
-        cy.get('textarea').last().type('Motivo de la solicitud', {
-            force: true
-        });
-        cy.get('plex-button[label="Guardar"]').click();
+        cy.plexSelectAsync('label="Tipos de Prestación Origen"', prestacionOrigen, '@tipoPrestaciones', 0);
+        cy.plexSelectAsync('name="profesionalOrigen"', 'cortes jazmin', '@getProfesional', 0);
+
+        cy.plexSelectAsync('label="Profesional destino"', 'a', '@getProfesional', 0);
+
+        cy.plexTextArea('name="motivo"', motivo);
+        cy.plexButton('Guardar').click();
         cy.wait('@guardarSolicitud').then(xhr => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
+            expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq(motivo);
+            console.log(xhr)
         });
     })
 
-    it.skip('crear solicitud de salida', () => {
-        cy.server();
-        //cy.route('GET', '**/api/core/mpi/pacientes').as('consulta');
+    it('crear solicitud de salida', () => {
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/modules/top/reglas?organizacionOrigen=**').as('getReglasOrganizacionOrigen');
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('tipoPrestaciones');
 
-        cy.get('li[class="nav-item nav-item-default"]').click({
-            force: true
-        });
 
-        cy.get('plex-button[label="Nueva Solicitud"]').click();
 
-        cy.get('plex-text input[type=text]').first().type('32589654').should('have.value', '32589654');
+        let prestacionSolicitada = 'Consulta de cirugía';
+        let orgOrigen = 'HOSPITAL DR. HORACIO HELLER';
+        let orgDest = 'HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON';
+        let prestacionOrigen = 'Consulta de medicina general';
+        let motivo = 'bla bla';
 
-        cy.get('tr').eq(1).click()
+        cy.get('plex-tabs .nav-item').contains('Solicitudes de Salida').click();
+        cy.plexButton('Nueva Solicitud').click();
+        cy.plexText('name="buscador"', '32589654');
+        cy.wait('@consultaPaciente');
+        cy.get('table tbody').contains('32589654').click();
+
+        cy.contains('Finalizar').click();
 
         //Fecha solicitud
-        cy.get('plex-dateTime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
+        cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
 
         //Prestación origen
-        cy.get('plex-select[label="Tipos de Prestación Origen"] input').type('consulta de medicina general', {
-            force: true
-        });
-        cy.get('plex-select[label="Tipos de Prestación Origen"]').children().children('.selectize-control').click({
-            force: true
-        }).find('.option[data-value="598ca8375adc68e2a0c121b8"]').click({
-            force: true
-        });
-
-        cy.wait('@getPrestaciones');
-        cy.wait('@getReglasOrganizacionOrigen');
+        cy.plexSelectAsync('label="Tipos de Prestación Origen"', prestacionOrigen, '@tipoPrestaciones', 0);
 
         //Profesional solicitante
-        cy.get('plex-select[label="Profesional solicitante"] input').type('huenchuman natalia', {
-            force: true
-        });
-        cy.wait('@getProfesional');
-        cy.get('plex-select[label="Profesional solicitante"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="5d02602588c4d1772a8a17f8"]').click({
-            force: true
-        });
+        cy.plexSelectAsync('label="Profesional solicitante"', 'huenchuman natalia', '@getProfesional', 0);
 
         //Organización destino
-        cy.get('plex-select[label="Organización destino"] input').type('hospital provincial neuquen - dr eduardo castro rendon', {
-            force: true
-        });
-        cy.get('plex-select[label="Organización destino"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="57e9670e52df311059bc8964"]').click({
-            force: true
-        });
 
-        cy.wait('@getReglasOrganizacionOrigen');
+        cy.plexSelectAsync('label="Organización destino"', orgDest, '@getReglasOrganizacionOrigen', 0);
+
+
 
         //Prestación solicitada
-        cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').type('consulta de neurocirugía{enter}', {
-            force: true
-        });
-        cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="598ca8375adc68e2a0c121ad"]').click({
-            force: true
-        });
+
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', prestacionSolicitada, '@getReglasOrganizacionOrigen', 0);
+
 
         // Motivo de la solicitud
-        cy.get('textarea').last().type('Motivo de la solicitud de salida', {
-            force: true
-        });
+        cy.plexTextArea('name="motivo"', motivo);
 
-        cy.get('plex-button[label="Guardar"]').click({
-            force: true
-        });
+        cy.plexButton('Guardar').click();
 
         cy.wait('@guardarSolicitud').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.status).to.be.eq(200);//datos que faltan revisar en api post
+            expect(xhr.response.body.solicitud.organizacionOrigen.nombre).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+            expect(xhr.response.body.solicitud.tipoPrestacionOrigen.term).to.be.eq(prestacionOrigen);
         });
     })
 
@@ -184,52 +176,42 @@ context('TOP', () => {
         cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglasOrganizacionDestino');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+        let prestacionOrigen = 'Consulta de cirugía';
+        cy.plexButton('Nueva Solicitud').click();
+        cy.plexText('name="buscador"', '32589654');
 
-        cy.get('plex-button[label="Nueva Solicitud"]').click();
-        cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('32589654');
-
-        cy.wait('@busquedaPaciente');
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.get('table tbody td span').contains('32589654').click();
-        cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
-        cy.get('plex-bool[name="autocitado"] input').check({
-            force: true
-        });
+        cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
+        cy.contains('Finalizar').click();
+        cy.plexBool('name="autocitado"', true);
 
         // Tipo de prestación solicitada
-        cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="598ca8375adc68e2a0c121b7"]').click({
-            force: true
-        })
+        cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de cirugía');
 
-        cy.wait('@getReglasOrganizacionDestino');
+
+        cy.wait('@getReglasOrganizacionDestino').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         // Profesional Solicitante
-        cy.get('plex-select[label="Profesional solicitante"] input').type('huenchuman natalia', {
-            force: true
-        });
+        cy.plexSelectAsync('label="Profesional solicitante"', 'Huenchuman Natalia', '@profesional', 0);
 
-        cy.wait('@profesional');
-
-        cy.get('plex-select[label="Profesional solicitante"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="5d02602588c4d1772a8a17f8"]').click({
-            force: true
-        })
 
         // Motivo de la solicitud
-        cy.get('textarea').last().type('Motivo Solcitud', {
-            force: true
-        });
+        cy.plexTextArea('name="motivo"', 'Motivo Solicitud');
 
-        cy.get('plex-button[label="Guardar"]').click({
-            force: true
-        });
+        cy.plexButton('Guardar').click();
 
         cy.wait('@guardarSolicitud').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.organizacionOrigen.nombre).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+            expect(xhr.response.body.solicitud.tipoPrestacionOrigen.term).to.be.eq(prestacionOrigen);
         });
+        cy.toast('success', 'Solicitud guardada');
     });
 
     it('dar turno autocitado', () => {
@@ -279,19 +261,14 @@ context('TOP', () => {
             cy.plexButtonIcon('chevron-right').click();
         }
 
-        cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
-
-        cy.wait('@agenda').then(() => {
-            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({
+            force: true
         });
-
-        cy.plexButton('Confirmar').click();
+        cy.get('plex-button[label="Confirmar"]').click();
 
         cy.wait('@confirmarTurno').then(xhr => {
             expect(xhr.status).to.be.eq(200);
         });
-
-        cy.toast('info', 'El turno se asignó correctamente');
     });
 
     it.skip('crear solicitud desde rup', () => { // TODO: carga mal la prestacion
