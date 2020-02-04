@@ -58,6 +58,40 @@ Cypress.Commands.add("login", (usuario, password, id) => {
     });
 });
 
+Cypress.Commands.add("loginMatriculaciones", (usuario, password, id) => {
+    let token;
+    return cy.request('POST', Cypress.env('API_SERVER') + '/api/auth/login', {
+        usuario,
+        password
+    }).then((response) => {
+        token = response.body.token;
+        return response = cy.request({
+            url: Cypress.env('API_SERVER') + '/api/auth/organizaciones',
+            method: 'GET',
+            headers: {
+                Authorization: 'JWT ' + token
+            },
+        }).then((response) => {
+            let org = response.body[0];
+            if (id) {
+                org.id = id;
+            }
+            return response = cy.request({
+                url: Cypress.env('API_SERVER') + '/api/auth/organizaciones',
+                method: 'POST',
+                headers: {
+                    Authorization: 'JWT ' + token
+                },
+                body: {
+                    organizacion: org.id
+                }
+            }).then((response) => {
+                return response.body.token;
+            });
+        });
+    });
+});
+
 
 
 
