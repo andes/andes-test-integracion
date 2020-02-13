@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx cypress open -c baseUrl=http://localhost:4200 --env ENVIRONMENT=develop,API_SERVER=http://localhost:3002,RETRIES=0",
-    "prod": "npx cypress open -c baseUrl=http://localhost --env ENVIRONMENT=develop,API_SERVER=http://localhost",
+    "prod": "npx cypress open -c baseUrl=http://localhost --env ENVIRONMENT=develop,API_SERVER=http://localhost,RETRIES=0",
     "prod:run": "npx cypress run -c numTestsKeptInMemory=1,baseUrl=http://localhost --env API_SERVER=http://localhost",
     "prod:up": "node scripts/prepare.js production up",
     "prod:reset": "node scripts/prepare.js production reset",
