@@ -59,7 +59,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
     it('Listar turnos con filtros de fechas y equipo de salud', () => {
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
         cy.plexButtonIcon('chevron-down').click();
-        cy.plexSelectAsync('label="Equipo de Salud"', 'PEREZ MARIA', '@profesionales', 0);
+        cy.plexSelectAsync('label="Equipo de salud"', 'PEREZ MARIA', '@profesionales', 0);
         cy.plexButton("Buscar").click();
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
