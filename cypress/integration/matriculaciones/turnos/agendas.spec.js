@@ -1,5 +1,5 @@
 
-context('Solicitar turnos matriculaciones', () => {
+context('Crear/editar agendas', () => {
     let token;
 
     before(() => {
