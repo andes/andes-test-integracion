@@ -294,7 +294,7 @@ Cypress.Commands.add('plexPanel', { prevSubject: 'optional' }, (subject, index) 
 
 Cypress.Commands.add('plexMenu', (icon) => {
     cy.get('plex-app .navbar-inverse .mdi.mdi-menu').click({ force: true });
-    return cy.get('plex-app .navbar-inverse .dropdown-menu').find(`.mdi.mdi-${icon}`).click({ force: true });
+    return cy.get('plex-app .navbar-inverse .dropdown-menu').find(`.mdi.mdi-${icon}`).first().click({ force: true });
 })
 
 /**
