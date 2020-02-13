@@ -18,11 +18,7 @@ context('TOP', () => {
     beforeEach(() => {
         // cy.viewport(1280, 720)
 
-        cy.visit('/solicitudes', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
+        cy.goto('/solicitudes', token);
     })
 
     it('crear nueva regla solicitud', () => {

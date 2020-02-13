@@ -2,11 +2,7 @@
 
 context('Pagina de login', () => {
     beforeEach(() => {
-        cy.visit('/', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.clear()
-            }
-        });
+        cy.goto('/');
     })
 
     it('login complete', () => {
