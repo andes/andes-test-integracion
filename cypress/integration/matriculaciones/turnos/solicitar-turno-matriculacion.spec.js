@@ -16,7 +16,7 @@ context('Solicitar turnos matriculaciones', () => {
         cy.server();
     });
 
-    it('Solicitar turno matrícula universitaria', () => {
+    it.skip('Solicitar turno matrícula universitaria', () => {
         cy.plexButton('Requisitos generales').click();
         cy.plexDropdown('label="Matricularme por primera vez"').click();
         cy.get('div').contains(' MATRÍCULA UNIVERSITARIA').click();
@@ -54,7 +54,7 @@ context('Solicitar turnos matriculaciones', () => {
         cy.toast('success', 'Se registro con exito!');
     });
 
-    it('Solicitar turno matrícula universitaria y tratar de sacar otro para el mismo profesional', () => {
+    it.skip('Solicitar turno matrícula universitaria y tratar de sacar otro para el mismo profesional', () => {
         cy.plexButton('Requisitos generales').click();
         cy.plexDropdown('label="Matricularme por primera vez"').click();
         cy.get('div').contains(' MATRÍCULA UNIVERSITARIA').click();
@@ -126,7 +126,7 @@ context('Solicitar turnos matriculaciones', () => {
         cy.contains("usted ya tiene un turno para el dia ");
     });
 
-    it('Solicitar turno matrícula técnica', () => {
+    it.skip('Solicitar turno matrícula técnica', () => {
 
         cy.plexButton('Requisitos generales').click();
         cy.plexDropdown('label="Matricularme por primera vez"').click();
@@ -164,7 +164,7 @@ context('Solicitar turnos matriculaciones', () => {
 
     });
 
-    it('Solicitar turno renovación', () => {
+    it.skip('Solicitar turno renovación', () => {
         cy.route('POST', '**api/modules/matriculaciones/turnos/**').as('nuevoTurno');
         cy.plexButton('Requisitos generales').click();
         cy.plexButton('Solicitar turno para renovación').click();
