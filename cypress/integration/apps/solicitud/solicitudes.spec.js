@@ -350,4 +350,106 @@ context('TOP', () => {
         cy.get('plex-button').contains('Validar Consulta de medicina general').first().click();
         cy.get('button').contains('CONFIRMAR').click();
     })
+
+    it('crear solicitud de entrada y verificar filtros', () => {
+        cy.server();
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+        cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
+
+        cy.plexButton('Nueva Solicitud').click();
+        cy.plexText('name="buscador"', '32589654');
+        cy.wait('@consultaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('table tbody').contains('32589654').click();
+
+        cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
+
+        cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@tipoPrestacion', '59ee2d9bf00c415246fd3d6d');
+
+        cy.wait('@getReglas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER', '@tipoPrestacion', '57fcf038326e73143fb48dac');
+        cy.plexSelectType('label="Tipos de Prestación Origen"', 'Consulta de clínica médica');
+        cy.plexSelectAsync('name="profesionalOrigen"', 'cortes jazmin', '@getProfesional', 0);
+        cy.plexSelectAsync('name="profesional"', 'natalia huenchuman', '@getProfesional', 0);
+        cy.get('textarea').last().type('Motivo de la solicitud', {
+            force: true
+        });
+        cy.plexButton('Guardar').click();
+        cy.wait('@guardarSolicitud').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
+        });
+        cy.plexButtonIcon('chevron-down').click();
+        cy.plexText('name="paciente"', 'SOLICITUD TEST');
+
+        cy.plexSelectAsync('name="organizacion"', 'HOSPITAL DR. HORACIO HELLER', '@tipoPrestacion', '57fcf038326e73143fb48dac');
+        cy.plexSelectAsync('name="prestacionDestino"', 'consulta de neurología', '@tipoPrestacion', '59ee2d9bf00c415246fd3d6d');
+        cy.plexSelectType('name="estado"', 'auditoria');
+        cy.get('table tbody tr td').contains('Consulta de neurología');
+
+    })
+
+    it('crear solicitud de entrada y auditarla', () => {
+        cy.server();
+        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
+        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('auditarSolicitud');
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+        cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
+
+        cy.plexButton('Nueva Solicitud').click();
+        cy.plexText('name="buscador"', '32589654');
+        cy.wait('@consultaPaciente');
+        cy.get('table tbody').contains('32589654').click();
+
+        cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
+        cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@tipoPrestacion', '59ee2d9bf00c415246fd3d6d');
+
+        cy.wait('@getReglas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER', '@tipoPrestacion', '57fcf038326e73143fb48dac');
+
+        cy.plexSelectType('label="Tipos de Prestación Origen"', 'Consulta de clínica médica');
+
+        cy.plexSelectAsync('name="profesionalOrigen"', 'cortes jazmin', '@getProfesional', 0);
+
+
+        cy.get('textarea').last().type('Motivo de la solicitud', {
+            force: true
+        });
+        cy.plexButton('Guardar').click();
+        cy.wait('@guardarSolicitud').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
+        });
+        cy.plexButtonIcon('chevron-down').click();
+        cy.plexSelectAsync('name="prestacionDestino"', 'consulta de neurología', '@tipoPrestacion', '59ee2d9bf00c415246fd3d6d');
+
+        cy.wait('@solicitudes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('table tbody tr td').contains('CORTES, JAZMIN').click();
+        cy.plexButtonIcon('lock-alert').first().click();
+        cy.plexButton('Responder').click();
+        cy.get('textarea').last().type('Una observacion', {
+            force: true
+        });
+        cy.plexButton('Confirmar').click();
+        cy.wait('@auditarSolicitud').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estados[1].observaciones).to.be.eq('Una observacion');
+        });
+    })
 });
