@@ -1,0 +1,46 @@
+{
+    "organizacion": "57e9670e52df311059bc8964",
+    "ambito": "internacion",
+    "capa": "estadistica",
+    "estados": [{
+        "key": "disponible",
+        "label": "Disponible",
+        "color": "success",
+        "icon": "adi adi-cama"
+    },
+    {
+        "key": "ocupada",
+        "label": "Ocupada",
+        "color": "warning",
+        "icon": "adi adi-cama-ocupada"
+    },
+    {
+        "key": "inactiva",
+        "label": "Inactiva",
+        "color": "danger",
+        "icon": "adi adi-cama-configuracion"
+    }
+    ],
+    "relaciones": [{
+        "origen": "disponible",
+        "destino": "ocupada",
+        "color": "success",
+        "icon": "plus",
+        "accion": "internarPaciente"
+    },
+    {
+        "origen": "ocupada",
+        "destino": "disponible",
+        "color": "danger",
+        "icon": "minus",
+        "accion": "desocuparCama"
+    },
+    {
+        "origen": "disponible",
+        "destino": "inactiva",
+        "color": "danger",
+        "icon": "minus",
+        "accion": "desocuparCama"
+    }
+    ]
+}
