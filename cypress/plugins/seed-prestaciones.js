@@ -56,13 +56,13 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
 
         if (params.tipoPrestacion) {
             const ConceptosTurneablesDB = await client.db().collection('conceptoTurneable');
-            const prestacion = await ConceptosTurneablesDB.findOne({ _id: new ObjectId(params.tipoPrestacion) });
-            prestacion.solicitud.tipoPrestacion = prestacion;
+            const tipoPrestacion = await ConceptosTurneablesDB.findOne({ _id: new ObjectId(params.tipoPrestacion) });
+            prestacion.solicitud.tipoPrestacion = tipoPrestacion;
         } else {
             prestacion.solicitud.tipoPrestacion._id = new ObjectId(prestacion.solicitud.tipoPrestacion._id);
         }
 
-        if (params.tipoPrestacion) {
+        if (params.profesional) {
             const ProfesionalDB = await client.db().collection('profesional');
             const profesional = await ProfesionalDB.findOne({ _id: new ObjectId(params.profesional) });
             prestacion.solicitud.profesional = profesional;
@@ -83,6 +83,6 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
         return prestacion;
 
     } catch (e) {
-        return e;
+        throw e;
     }
 }
