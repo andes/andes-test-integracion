@@ -1,0 +1,20 @@
+{
+    "activo": true,
+    "componente": "PesoComponent",
+    "tipo": "atomo",
+    "esSolicitud": false,
+    "style": {
+        "columns": 6.0,
+        "cssClass": null
+    },
+    "conceptos": [
+        {
+            "conceptId": "440377005",
+            "term": "derivación por",
+            "fsn": "derivación por (entidad observable)",
+            "semanticTag": "entidad observable"
+        }
+    ],
+    "requeridos": [],
+    "frecuentes": []
+}
