@@ -233,9 +233,8 @@ context('RUP - Punto de inicio', () => {
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(1).click();
                     cy.plexButton('VER HUDS').click();
-                    cy.contains('Procesos de Auditoría').click({ force: true });
-
-                    cy.plexButton('ACEPTAR').click();
+                    //    cy.contains('Procesos de Auditoría').click({ force: true });
+                    //    cy.plexButton('ACEPTAR').click();
                     cy.url().should('include', '/rup/vista/');
                 });
 
@@ -375,9 +374,8 @@ context('RUP - Punto de inicio', () => {
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
                     cy.plexButton('VER HUDS').click();
-                    cy.contains('Procesos de Auditoría').click({ force: true });
-
-                    cy.plexButton('ACEPTAR').click();
+                    // cy.contains('Procesos de Auditoría').click({ force: true });
+                    // cy.plexButton('ACEPTAR').click();
                     cy.url().should('include', '/rup/vista/');
                 });
             }
