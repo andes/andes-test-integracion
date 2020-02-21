@@ -12,12 +12,12 @@ context('TOP', () => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('solicitudes/paciente-solicitud', token);
+            cy.task('database:seed:agenda', { tipoPrestaciones: '59ee2d9bf00c415246fd3d6b', fecha: 2, profesionales: '5c82a5a53c524e4c57f08cf3', estado: 'disponible', tipo: 'profesional' });
         })
     })
 
     beforeEach(() => {
         // cy.viewport(1280, 720)
-
         cy.goto('/solicitudes', token);
     })
 
@@ -234,7 +234,6 @@ context('TOP', () => {
 
     it('dar turno autocitado', () => {
         cy.createSolicitud('solicitudes/solicitudAutocitado', token);
-        cy.createAgenda48hs('solicitudes/agendaProfesional', token);
         cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
@@ -242,36 +241,47 @@ context('TOP', () => {
         cy.route('GET', '**api/modules/carpetas/carpetasPacientes**', []).as('carpetasPacientes');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
-        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
+        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?**').as('solicitudes');
         cy.route('GET', '/api/modules/obraSocial/os/**', []).as('obraSocial');
         cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
 
         cy.plexButtonIcon('chevron-down').click();
-        cy.plexSelectType('label="Estado"', 'pendiente');
-        cy.wait('@solicitudes')
+        cy.wait('@getPrestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.plexSelectAsync('label="Prestación destino"', 'Consulta de clínica médica', '@getPrestaciones', 0);
-        cy.log('SI SE CORRE DE NOCHE DA ERROR');
-        cy.wait('@getPrestaciones');
 
-        cy.wait('@solicitudes').then(() => {
-            cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
+        cy.wait('@solicitudes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@solicitudes').then(() => {
-            cy.plexButtonIcon('calendar-plus').click();
+        cy.plexSelectType('label="Estado"', 'pendiente');
+
+        cy.wait('@solicitudes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@consultaPaciente');
-        cy.wait('@agendas');
 
-        let fechaAgenda48hs = Cypress.moment().add(2, 'days');
-        if (fechaAgenda48hs.month() > Cypress.moment().month()) {
-            cy.plexButtonIcon('chevron-right').click();
-        }
-
+        cy.plexButtonIcon('calendar-plus').click();
+        cy.wait('@consultaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+        cy.wait('@carpetasPacientes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@getPrestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@agendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        if (Cypress.moment().add(2, 'days').format('M') > Cypress.moment().format('M')) {
+            cy.plexButtonIcon('chevron-right').click();
+        }
 
         cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
 
