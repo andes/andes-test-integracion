@@ -19,11 +19,15 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
 
         if (params.turno) {
             prestacion.solicitud.turno = new ObjectId(params.turno);
+        } else {
+            prestacion.solicitud.turno = null;
         }
 
         if (params.ambito) {
             prestacion.solicitud.ambitoOrigen = params.ambito;
         }
+
+        prestacion.noNominalizada = false;
 
         let fechaPrestacion = moment().startOf('hour');
         if (params.fecha) {
@@ -46,18 +50,19 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             prestacion.ejecucion.organizacion = orgData;
         } else {
             prestacion.solicitud.organizacion._id = new ObjectId(prestacion.solicitud.organizacion._id);
+            prestacion.solicitud.organizacion.id = new ObjectId(prestacion.solicitud.organizacion._id);
             prestacion.ejecucion.organizacion._id = new ObjectId(prestacion.ejecucion.organizacion._id);
         }
 
         if (params.tipoPrestacion) {
             const ConceptosTurneablesDB = await client.db().collection('conceptoTurneable');
-            const prestacion = await ConceptosTurneablesDB.findOne({ _id: new ObjectId(params.tipoPrestacion) });
-            prestacion.solicitud.tipoPrestacion = prestacion;
+            const tipoPrestacion = await ConceptosTurneablesDB.findOne({ _id: new ObjectId(params.tipoPrestacion) });
+            prestacion.solicitud.tipoPrestacion = tipoPrestacion;
         } else {
             prestacion.solicitud.tipoPrestacion._id = new ObjectId(prestacion.solicitud.tipoPrestacion._id);
         }
 
-        if (params.tipoPrestacion) {
+        if (params.profesional) {
             const ProfesionalDB = await client.db().collection('profesional');
             const profesional = await ProfesionalDB.findOne({ _id: new ObjectId(params.profesional) });
             prestacion.solicitud.profesional = profesional;
@@ -69,6 +74,7 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             const PacientesDB = await client.db().collection('paciente');
             const paciente = await PacientesDB.findOne({ _id: new ObjectId(params.paciente) }, { projection: { documento: 1, nombre: 1, apellido: 1, sexo: 1, fechaNacimiento: 1 } });
             prestacion.paciente = paciente;
+            prestacion.paciente.id = prestacion.paciente._id;
         }
 
         const data = await PrestacionDB.insertOne(prestacion);
@@ -77,7 +83,6 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
         return prestacion;
 
     } catch (e) {
-        console.log('ERRROROROR', e)
-        return e;
+        throw e;
     }
 }

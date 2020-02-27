@@ -69,7 +69,6 @@ module.exports.createPaciente = async (mongoUri, elasticUri, params) => {
 
         return dto;
     } catch (e) {
-        console.log(e)
         return e;
     }
 }

@@ -131,6 +131,23 @@ context('CITAS - punto de inicio', () => {
             });
         });
 
+        // Test para verificar que al no asignar el turno, guarde la organizacion
+        it('rechazar turno', () => {
+            cy.route('POST', '**/api/modules/turnos/listaEspera**').as('listaEspera');
+            const paciente = pacientes[i];
+            darTurno(paciente);
+
+            cy.wait('@prestaciones');
+            cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
+            cy.wait('@cargaAgendas');
+            cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
+            cy.wait('@seleccionAgenda')
+            cy.plexButton('No se asigna turno').click();
+            cy.wait('@listaEspera').then((xhr) => {
+                expect(xhr.response.body).to.have.property('organizacion');
+            });
+        });
+
     })
 
 });

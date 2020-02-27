@@ -83,6 +83,10 @@ module.exports.seedAgenda = async (mongoUri, params) => {
                     labelTipoTurno = 'accesoDirectoProgramado';
                     labelTipoTurnoRestante = 'restantesProgramados';
                     break;
+                case 'profesional':
+                    labelTipoTurno = 'reservadoProfesional';
+                    labelTipoTurnoRestante = 'restantesProfesional';
+                    break;
             }
         }
 

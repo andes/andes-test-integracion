@@ -13,15 +13,10 @@ context('turnos', () => {
             cy.task('database:seed:agenda', { profesionales: '58f74fd3d03019f919e9fff2', estado: 'publicada', fecha: 0 });
         })
     })
-    beforeEach(() => {
-        // cy.viewport(1280, 720)
 
-        cy.visit('/citas/punto-inicio', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-        });
-    })
+    beforeEach(() => {
+        cy.goto('/citas/punto-inicio', token);
+    });
 
     it('registrar bebé desde punto de Inicio de Turnos', () => {
 
@@ -232,95 +227,5 @@ context('turnos', () => {
         cy.toast('info', 'El turno se asignó correctamente');
     });
 
-    // it.skip('Crear solicitud diferente profesional y prestación, misma organización', () => { // TODO: Hay que sacar el wizard
-    //     cy.visit('/solicitudes', {
-    //         onBeforeLoad: (win) => {
-    //             win.sessionStorage.setItem('jwt', token);
-    //         }
-    //     });
-    //     cy.server();
 
-    //     cy.get('plex-button[label="Nueva Solicitud"]').click();
-    //     cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('12325484');
-    //     cy.get('table tbody td span').contains('12325484').click();
-    //     cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
-
-    //     // Prestación Destino (solicitada)
-    //     cy.route('GET', '**//api/core/tm/tiposPrestaciones?turneable=1').as('prestacion');
-    //     cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').first().type('consulta de medicina general (procedimiento)', {
-    //         force: true
-    //     });
-    //     cy.wait('@prestacion').then(() => {
-    //         cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').first().type('{enter}');
-    //     });
-    //     // Organización Origen
-    //     cy.get('plex-select[name="organizacionOrigen"] input').type('Castro Rendon');
-    //     cy.get('plex-select[name="organizacionOrigen"] input').type('{enter}');
-
-    //     // Prestación Origen
-    //     cy.get('plex-select[label="Tipos de Prestación Origen"] input').type('consulta de medicina general');
-    //     cy.wait('@prestacion').then(() => {
-    //         cy.get('plex-select[label="Tipos de Prestación Origen"] input').type('{enter}');
-
-    //     });
-    //     // Profesional Origen
-    //     cy.route('GET', '**/api/core/tm/profesionales*').as('profesional')
-    //     cy.get('plex-select[name="profesionalOrigen"] input').first().type('Perez Maria');
-    //     cy.wait('@profesional').then(() => {
-    //         cy.get('plex-select[name="profesionalOrigen"] input').first().type('{enter}');
-    //     });
-    //     // Profesional Destino
-    //     cy.get('plex-select[name="profesional"] input').type('huenchuman natalia');
-    //     cy.wait('@profesional').then(() => {
-    //         cy.get('plex-select[name="profesional"] input').type('{enter}');
-    //     });
-
-    //     cy.get('plex-text[name="motivo"] input').type('Motivo de la solicitud');
-
-    //     cy.get('plex-button[label="Guardar"]').click();
-    //     cy.get('div[class="simple-notification toast success"]').contains('Solicitud guardada');
-
-    // });
-
-    // it('FUNCIONA MAL : dar turno para profesional', () => { // TODO
-    //     cy.visit('/solicitudes', {
-    //         onBeforeLoad: (win) => {
-    //             win.sessionStorage.setItem('jwt', token);
-    //         }
-    //     });
-    //     cy.server();
-    //     // cy.get('plex-button[type="default"]').click();
-    //     // cy.get('plex-select[label="Estado"] input').type('auditoria{enter}');
-
-    //     // cy.get('tbody td').should('contain', 'auditoria').and('contain', 'YANG, SO MIN');
-    //     // cy.get('plex-button[title="Auditar Solicitud"]').click({
-    //     //     force: true
-    //     // });
-    //     // cy.get('auditar-solicitud plex-button[type="success"]').should('have.text', 'Aceptar').click();
-
-    //     // dar turno
-    //     cy.get('tbody td').should('not.contain', 'auditoria').and('contain', 'YANG, SO MIN');
-    //     cy.get('plex-button[title="Dar Turno"]').first().click({
-    //         force: true
-    //     });
-
-    //     cy.route('GET', '**/api/modules/turnos/agenda*').as('agenda');
-    //     cy.get('div[class="dia"]').contains(Cypress.moment().add(7, 'days').format('D')).click({
-    //         force: true
-    //     });
-    //     // cy.wait('@agenda').then(() => {
-    //     //     cy.get('dar-turnos div').contains('13:00').click({
-    //     //         force: true
-    //     //     }); // no carga el sidebar
-    //     // });
-
-    //     cy.wait(15000);
-    //     cy.get('dar-turnos div').contains('13:00').click({
-    //         force: true
-    //     });
-
-
-    //     cy.get('plex-button[label="Confirmar"]').click();
-    //     cy.get('div[class="simple-notification toast info"]').contains('El turno se asignó correctamente');
-    // });
 })

@@ -27,12 +27,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.route('PUT', '**/api/modules/turnos/agenda/**').as('putAgenda2');
 
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
-        cy.visit('/citas/gestor_agendas', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-
-        });
+        cy.goto('/citas/gestor_agendas', token);
     })
 
     it('editar agenda publicada', () => {
