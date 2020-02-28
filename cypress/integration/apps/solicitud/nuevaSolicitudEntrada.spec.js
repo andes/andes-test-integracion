@@ -29,6 +29,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
         cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
         cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
+        cy.route('GET', '**/modules/rup/prestaciones/solicitudes**').as('getSolicitudes');
         secuencia(token);
     });
 
@@ -116,4 +117,50 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.plexSelectType('label="Tipos de Prestación Origen"').find('.selectize-dropdown-content').children().should('have.length', 0);
     });
 
+    it('nueva solicitud, asignación a profesional y control de historial', () => {
+        let idPrestacion;
+        seleccionarPaciente(dni);
+        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
+
+        cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').type('Consulta de clinica médica');
+        cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').type('{enter}');
+        cy.get('plex-select[label="Organización origen"] input').type('CASTRO RENDON');
+        cy.get('plex-select[label="Organización origen"] input').type('{enter}');
+        cy.plexSelect('label="Tipos de Prestación Origen"', 0).then((elemento) => {
+            idPrestacion = elemento.attr('data-value');
+        }).click();
+        cy.get('plex-select[label="Profesional solicitante"] input').type('CORTES');
+        cy.wait('@profesionalSolicitante');
+        cy.get('plex-select[label="Profesional solicitante"] input').type('{enter}');
+        cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'un motivo lalala');
+        cy.plexButton('Guardar').click();
+        cy.wait('@createSolicitud').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.documento).to.be.eq(dni);
+            expect(xhr.response.body.solicitud.tipoPrestacionOrigen.conceptId).to.be.eq(idPrestacion);
+        });
+        cy.toast('success');
+        cy.plexButtonIcon('lock-alert').last().click();
+        cy.plexButton('Asignar').click();
+        cy.plexTextArea('label="Observaciones"', 'un motivo lalala');
+        cy.get('plex-select[label="Profesional"] input').type('natalia huenchuman');
+        cy.wait('@profesionalSolicitante');
+        cy.get('plex-select[label="Profesional"] input').type('{enter}');
+        cy.plexButton('Confirmar').click();
+        cy.wait('@getSolicitudes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            cy.get('.badge').contains('asignada');
+        });
+        cy.goto('/rup', token);
+        cy.plexButton(' Mis solicitudes').click();
+        cy.wait('@getSolicitudes.all').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            cy.get('.badge').contains('asignada');
+        });
+        cy.get("@getSolicitudes.all").then((array) => {
+            expect(array[6].response.body[0].solicitud.historial[0].accion).to.be.eq('asignacionProfesional');
+        });
+        cy.get('tbody tr').should('have.length', 1);
+    });
 });
