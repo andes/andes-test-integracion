@@ -36,18 +36,20 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             token = t;
         });
     });
+
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/api/modules/estadistica/turnos_prestaciones**').as('turnosPrestaciones');
-        cy.goto('/buscador', token);
     });
     it('Listar turnos con filtros de fechas', () => {
+        cy.goto('/buscador', token);
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(3);
         });
     });
     it('Listar turnos con filtros de fechas y tipo de prestacion', () => {
+        cy.goto('/buscador', token);
         cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.plexSelectAsync('label="Prestación"', 'consulta de medicina general', '@prestaciones', 1);
         cy.plexButton("Buscar").click();
@@ -57,6 +59,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         });
     });
     it('Listar turnos con filtros de fechas y equipo de salud', () => {
+        cy.goto('/buscador', token);
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
         cy.plexButtonIcon('chevron-down').click();
         cy.plexSelectAsync('label="Equipo de salud"', 'PEREZ MARIA', '@profesionales', 0);
