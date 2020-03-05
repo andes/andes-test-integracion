@@ -610,11 +610,11 @@ context('Planificacion Agendas', () => {
         cy.contains('Existen bloques incompletos');
     });
 
-    it('Guardar,clonar y verificar boton iniciar prestacion en agenda no nominalizada', () => {
-        const ayer = Cypress.moment().add(-1, 'days').format('DD/MM/YYYY');
-        const manana = Cypress.moment().add(1, 'days').format('DD/MM/YYYY');
+    it('Guardar, clonar y verificar botón iniciar prestación en agenda no nominalizada', () => {
+        let ayer = Cypress.moment().add('days', -1);
+        let hoy = Cypress.moment();
         complete({
-            fecha: ayer,
+            fecha: ayer.format('DD/MM/YYYY'),
             horaInicio: "10:00",
             horaFin: "12:00"
         });
@@ -622,17 +622,17 @@ context('Planificacion Agendas', () => {
         cy.plexButton("Guardar").click();
         cy.wait('@create');
         cy.contains('La agenda se guardó correctamente').click();
-        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + ayer);
+        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + ayer.format('DD/MM/YYYY'));
         cy.get('table tbody td').contains('actividades con la comunidad').click();
         cy.plexButtonIcon('arrow-up-bold-circle-outline').click();
         cy.wait('@edicionAgenda');
         cy.toast('success', 'La agenda cambió el estado a disponible');
         cy.wait('@agendas');
-        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
+        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + ayer.format('DD/MM/YYYY'));
         cy.get('table tbody td').contains('actividades con la comunidad').click();
         cy.plexButtonIcon('content-copy').click();
         cy.wait('@agendas');
-        cy.contains(Cypress.moment().add(0, 'days').format('D')).click({ force: true });
+        cy.contains(hoy.format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
         cy.wait('@clonar');
