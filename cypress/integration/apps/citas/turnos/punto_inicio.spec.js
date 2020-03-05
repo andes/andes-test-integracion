@@ -2,6 +2,7 @@ context('punto de inicio', () => {
     let token;
     // const = '36425896';
     let paciente;
+    let datosPaciente;
     let turno;
     before(() => {
         // Borro los datos de la base antes de los test
@@ -10,6 +11,7 @@ context('punto de inicio', () => {
             token = t;
             cy.task('database:create:paciente', { template: 'validado' }).then(p => {
                 paciente = p.documento;
+                datosPaciente = p;
                 // Se crea una agenda del día con el paciente creado
                 cy.task('database:seed:agenda', { pacientes: p._id, profesionales: '5c82a5a53c524e4c57f08cf3' });
                 // Se crea agenda para un día anterior con el paciente creado para verificar el historial
@@ -389,5 +391,35 @@ context('punto de inicio', () => {
 
         cy.toast('success', 'Nuevo número de carpeta establecido');
 
+    });
+
+    it('Editar direccion del paciente', () => {
+        cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('PUT', '**/api/core/mpi/pacientes/**').as('guardar');
+
+
+        cy.plexText('name="buscador"', paciente);
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].apellido).to.be.eq(datosPaciente.apellido);
+            expect(xhr.response.body[0].nombre).to.be.eq(datosPaciente.nombre);
+        });
+
+        cy.get('paciente-listado').find('td').contains(paciente).click();
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.apellido).to.be.eq(datosPaciente.apellido);
+            expect(xhr.response.body.nombre).to.be.eq(datosPaciente.nombre);
+        });
+
+        //Esta mal el formato que viene por defecto por eso se modifica el numero de telefono
+        cy.plexPhone('label="Número"', '{selectall}{backspace}2222222222');
+        cy.plexText('name="divValor"', '{selectall}{backspace}Avenida Las Flores 1200');
+        cy.plexButton("Guardar").click();
+        cy.wait('@guardar').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.direccion[0].valor).to.be.eq("Avenida Las Flores 1200");
+        });
     });
 })
