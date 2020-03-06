@@ -122,17 +122,15 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         seleccionarPaciente(dni);
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
         cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
-
-        cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').type('Consulta de clinica médica');
-        cy.get('plex-select[label="Tipo de Prestación Solicitada"] input').type('{enter}');
-        cy.get('plex-select[label="Organización origen"] input').type('CASTRO RENDON');
-        cy.get('plex-select[label="Organización origen"] input').type('{enter}');
+        cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de clinica médica');
+        cy.plexSelectType('label="Organización origen"', 'CASTRO RENDON');
+        cy.plexSelectType('label="Organización origen"', '{enter}');
         cy.plexSelect('label="Tipos de Prestación Origen"', 0).then((elemento) => {
             idPrestacion = elemento.attr('data-value');
         }).click();
-        cy.get('plex-select[label="Profesional solicitante"] input').type('CORTES');
+        cy.plexSelectType('label="Profesional solicitante"', 'CORTES');
         cy.wait('@profesionalSolicitante');
-        cy.get('plex-select[label="Profesional solicitante"] input').type('{enter}');
+        cy.plexSelectType('label="Profesional solicitante"', '{enter}');
         cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'un motivo lalala');
         cy.plexButton('Guardar').click();
         cy.wait('@createSolicitud').then((xhr) => {
@@ -144,9 +142,9 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.plexButtonIcon('lock-alert').last().click();
         cy.plexButton('Asignar').click();
         cy.plexTextArea('label="Observaciones"', 'un motivo lalala');
-        cy.get('plex-select[label="Profesional"] input').type('natalia huenchuman');
+        cy.plexSelectType('label="Profesional"', 'natalia huenchuman');
         cy.wait('@profesionalSolicitante');
-        cy.get('plex-select[label="Profesional"] input').type('{enter}');
+        cy.plexSelectType('label="Profesional"', '{enter}');
         cy.plexButton('Confirmar').click();
         cy.wait('@getSolicitudes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -161,6 +159,6 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.get("@getSolicitudes.all").then((array) => {
             expect(array[6].response.body[0].solicitud.historial[0].accion).to.be.eq('asignacionProfesional');
         });
-        cy.get('tbody tr').should('have.length', 1);
+        cy.get('tbody tr').should('have.length.above', 0);
     });
 });
