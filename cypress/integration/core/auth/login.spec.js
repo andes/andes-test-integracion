@@ -13,6 +13,7 @@ context('Pagina de login', () => {
         cy.route('GET', '**/api/auth/organizaciones').as('organizaciones');
         cy.route('POST', '**/api/core/tm/disclaimer').as('disclaimer');
         cy.route('GET', '**/api/core/tm/disclaimer').as('disclaimers');
+        cy.route('POST', '/api/auth/v2/organizaciones').as('selectOrg');
         cy.visit('/', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear();
@@ -38,10 +39,14 @@ context('Pagina de login', () => {
             cy.wait('@login').then((xhr) => {
                 expect(xhr.status).to.be.eq(200)
             });
+            cy.wait('@organizaciones');
+            cy.get('ul.list-group li').eq(1).click();
+            cy.wait('@selectOrg').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
+            });
             cy.contains("Versión: 1.1.0");
             cy.get('plex-button[label="Acepto"]').click();
-            cy.wait('@organizaciones');
-            cy.get('ul.list-group li').should('have.length', 3);
             cy.visit('/auth/login');
             cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
             cy.plexText('name="password"', 'anypasswordfornow').should('have.value', 'anypasswordfornow');
@@ -49,7 +54,6 @@ context('Pagina de login', () => {
             cy.wait('@login').then((xhr) => {
                 expect(xhr.status).to.be.eq(200)
             });
-            cy.wait('@organizaciones');
             cy.request({
                 method: 'PATCH',
                 url: Cypress.env('API_SERVER') + '/api/core/tm/disclaimer/' + disclaimer.id,
@@ -78,6 +82,13 @@ context('Pagina de login', () => {
             cy.plexButton('Iniciar sesión').click();
             cy.wait('@login').then((xhr) => {
                 expect(xhr.status).to.be.eq(200)
+            });
+            cy.wait('@organizaciones');
+            cy.get('ul.list-group li').eq(1).click();
+
+            cy.wait('@selectOrg').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
             });
             cy.contains("Versión: 1.2.0");
             cy.get('plex-button[label="No Acepto"]').click();
@@ -109,10 +120,15 @@ context('Pagina de login', () => {
         cy.wait('@login').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
+        cy.wait('@organizaciones');
+        cy.get('ul.list-group li').eq(1).click();
+
+        cy.wait('@selectOrg').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
+        });
         cy.contains("Versión: 1.3.0");
         cy.get('plex-button[label="Acepto"]').click();
-        cy.wait('@organizaciones');
-        cy.get('ul.list-group li').should('have.length', 3);
         cy.visit('/auth/login');
         cy.wait(1000);
         cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
