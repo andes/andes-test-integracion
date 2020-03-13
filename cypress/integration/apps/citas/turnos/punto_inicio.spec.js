@@ -130,7 +130,7 @@ context('punto de inicio', () => {
         });
 
         cy.plexPhone('label="Número"', '{selectall}{backspace}2990000000');
-        cy.plexText('label="Dirección"', 'Avenida Las Flores 1200');
+        cy.plexText('label="Dirección actual"', 'Avenida Las Flores 1200');
 
         cy.plexSelectType('label="Provincia"', 'Neuquén');
 
