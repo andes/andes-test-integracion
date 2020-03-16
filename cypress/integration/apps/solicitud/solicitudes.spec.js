@@ -251,10 +251,6 @@ context('TOP', () => {
         });
         cy.plexSelectAsync('label="Prestación destino"', 'Consulta de clínica médica', '@getPrestaciones', 0);
 
-        cy.wait('@solicitudes').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
         cy.plexSelectType('label="Estado"', 'pendiente');
 
         cy.wait('@solicitudes').then((xhr) => {
