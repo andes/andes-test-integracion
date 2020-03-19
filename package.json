@@ -31,13 +31,15 @@
   "homepage": "https://github.com/andes/andes-test-integracion#readme",
   "devDependencies": {
     "@angular/cli": "^8.3.8",
+    "@elastic/elasticsearch": "^6.8.6",
     "cypress": "^3.3.1",
     "cypress-plugin-retries": "^1.5.2",
     "mocha": "^4.1.0",
     "mocha-junit-reporter": "^1.23.2",
     "mocha-multi-reporters": "^1.1.7",
     "mochawesome": "^4.1.0",
-    "mochawesome-merge": "^4.0.0"
+    "mochawesome-merge": "^4.0.0",
+    "require-dir": "^1.2.0"
   },
   "dependencies": {
     "cross-env": "^6.0.3",
