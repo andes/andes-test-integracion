@@ -150,6 +150,40 @@ context('CITAS - punto de inicio', () => {
 
     })
 
+    it('Verifica fecha/hora y usuario de dacion de turno', () => {
+        const hoy = Cypress.moment().format('DD/MM/YYYY')
+        darTurno(pacientes[0]);
+        cy.wait('@prestaciones');
+        cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
+        cy.wait('@cargaAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(2);
+        });
+        cy.plexSelectAsync('name="profesional"', 'HUENCHUMAN NATALIA', '@getProfesionales', 0);
+        cy.wait('@cargaAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(1);
+        });
+
+        if (Cypress.moment().add(1, 'days').month() > Cypress.moment().month()) {
+            cy.plexButton('chevron-right').click();
+        }
+
+        cy.get('div[class="dia"]').contains(Cypress.moment().add(1, 'days').format('D')).click();
+
+        cy.wait('@seleccionAgenda').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+        cy.plexButton('Confirmar').click();
+        cy.wait('@cargaAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            const fechaHora = Cypress.moment(xhr.response.body[0].bloques[0].turnos[0].fechaHoraDacion).format('DD/MM/YYYY');
+            expect(fechaHora).to.be.eq(hoy);
+            expect(xhr.response.body[0].bloques[0].turnos[0].usuarioDacion.nombreCompleto).to.be.eq('Natalia Huenchuman');
+        });
+    });
+
 });
 
 function darTurno(paciente) {
