@@ -1,51 +1,45 @@
 /// <reference types="Cypress" />
 
-// import { buscarPaciente } from './revision_agendas.spec';
-
 context('CITAS - Revisión de Agendas', () => {
     let token;
-    let horaInicio;
-    let tipoPrestacion1;
-    let tipoPrestacion2;
-    let idAgenda;
-    let idBloque;
-    let idTurno;
+    let agenda;
     let paciente;
-    let pacienteDoc;
 
-    beforeEach(() => {
+    before(() => {
         cy.seed();
-
+        cy.task('database:create:paciente', {
+            template: 'validado'
+        }).then(p => {
+            paciente = p;
+            cy.task('database:seed:agenda', {
+                pacientes: p._id,
+                tipoPrestaciones: ['598ca8375adc68e2a0c121b8', '598ca8375adc68e2a0c121bc'],
+                estado: 'auditada',
+                organizacion: '57e9670e52df311059bc8964',
+                horaInicio: '2019-09-11T10:00:00.000-03:00'
+            }).then(a => {
+                agenda = a;
+            });
+        });
         cy.login('30643636', 'asd').then(t => {
             token = t;
-            return cy.createPaciente('paciente-masculino', token);
-        }).then(xhr => {
-            paciente = xhr.body;
-            pacienteDoc = xhr.body.documento;
-            return cy.createAgenda('agenda-auditada-con-dos-prestaciones', null, null, null, token);
-        }).then((xhr) => {
-            idAgenda = xhr.body.id;
-            idBloque = xhr.body.bloques[0].id;
-            idTurno = xhr.body.bloques[0].turnos[1].id;
-            horaInicio = xhr.body.horaInicio;
-            tipoPrestacion1 = xhr.body.tipoPrestaciones[0];
-            tipoPrestacion2 = xhr.body.tipoPrestaciones[1];
         });
     });
-
+    beforeEach(() => {
+        cy.server();
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('busquedaPaciente');
+    });
 
     it.skip('Se selecciona la primera de dos prestaciones, luego se cambia por la segunda', () => {
-        cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
+        cy.goto(`/citas/revision_agenda/${agenda._id}`, token);
         cy.get('tbody:nth-child(1) tr:nth-child(3)').click();
 
-        cy.buscarPaciente(pacienteDoc, false);
-
-        // El <plex-select> no está armado con label
-        cy.plexSelectType('name="tipoPrestacionTurno"').click().get('.option').contains(tipoPrestacion1.term).click();
+        cy.buscarPaciente(paciente.documento, false);
+        cy.plexSelectType('name="tipoPrestacionTurno"').click().get('.option').contains(agenda.tipoPrestaciones[0].term).click();
         cy.wait(1000);
-        cy.plexSelectType('name="tipoPrestacionTurno"').click().get('.option').contains(tipoPrestacion2.term).click();
+        cy.plexSelectType('name="tipoPrestacionTurno"').click().get('.option').contains(agenda.tipoPrestaciones[1].term).click();
         cy.plexSelectType('label="Asistencia"', 'Asistio');
 
     });
 
-})
+});
