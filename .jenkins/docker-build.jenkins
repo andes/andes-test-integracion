@@ -19,8 +19,9 @@ pipeline {
     stages {
         stage('Build images') {
             parallel {
-                 when { expression { env.app_build == "true" } }
+                 
                  stage('Build app') {
+                     when { expression { env.app_build == "true" } }
                     steps {
                         build( job: "andes-app", parameters: [string(name: 'GIT_BRANCH', value: app  ), string(name: 'ENVIRONMENT', value: envmode  )]  )
                     }
