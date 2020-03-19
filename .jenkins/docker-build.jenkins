@@ -5,14 +5,21 @@ pipeline {
         envmode = "prod"
         api = "${API_BRANCH}"
         matriculaciones = "${MATRICULACIONES_BRANCH}"
+        monitoreo = "${MONITOREO_BRANCH}"
+        app_build = "${APP_BUILD}" 
+        api_build = "${API_BUILD}"
+        matriculaciones_build = "${MATRICULACIONES_BUILD}"
+        monitoreo_build = "${MONITOREO_BUILD}"
         registryAPI = "andesnqn/api"
         registryAPP = "andesnqn/app"
         registryMatriculaciones = "andesnqn/matriculaciones"
+        registryMonitoreo = "andesnqn/monitoreo"
         registryCredential = 'dockerhub'
     }
     stages {
         stage('Build images') {
             parallel {
+                 when { expression { env.app_build == "true" } }
                  stage('Build app') {
                     steps {
                         build( job: "andes-app", parameters: [string(name: 'GIT_BRANCH', value: app  ), string(name: 'ENVIRONMENT', value: envmode  )]  )
@@ -20,19 +27,29 @@ pipeline {
                 }
 
                 stage('build api') {
+                    when { expression { env.api_build == "true" } }
                     steps {
                          build job: "andes-api", parameters: [string(name: 'GIT_BRANCH', value: api )] 
                     }
                 }
                 
                 stage('build matriculaciones') {
+                    when { expression { env.matriculaciones_build == "true" } }
                     steps {
                          build job: "andes-matriculaciones", parameters: [string(name: 'GIT_BRANCH', value: matriculaciones )] 
+                    }
+                }
+                
+                stage('build monitoreo') {
+                    when { expression { env.monitoreo_build == "true" } } 
+                    steps {
+                         build job: "andes-monitoreo", parameters: [string(name: 'GIT_BRANCH', value: monitoreo )] 
                     }
                 }
             }
         }
         stage('Deploy API') {
+          when { expression { env.api_build == "true" } }     
           steps{
              script {
                 docker.withRegistry( '', registryCredential ) {
@@ -43,30 +60,47 @@ pipeline {
           }
         }
          stage('Deploy APP') {
+          when { expression { env.app_build == "true" } }      
           steps{
              script {
                 docker.withRegistry( '', registryCredential ) {
-                    dockerAPI = docker.image(registryMatriculaciones + ":${APP_BRANCH}")
+                    dockerAPI = docker.image( registryAPP + ":${APP_BRANCH}")
                     dockerAPI.push()
               }
             }
           }
         }
         stage('Deploy MATRICULACIONES') {
+          when { expression { env.matriculaciones_build == "true" } }      
           steps{
              script {
                 docker.withRegistry( '', registryCredential ) {
-                    dockerAPI = docker.image(registryAPP + ":${MATRICULACIONES_BRANCH}")
+                    dockerAPI = docker.image(registryMatriculaciones + ":${MATRICULACIONES_BRANCH}")
                     dockerAPI.push()
               }
             }
           }
         }
+        
+        stage('Deploy MONITOREO') {
+          when { expression { env.monitoreo_build == "true" } }          
+          steps{
+             script {
+                docker.withRegistry( '', registryCredential ) {
+                    dockerAPI = docker.image(registryMonitoreo + ":${MONITOREO_BRANCH}")
+                    dockerAPI.push()
+              }
+            }
+          }
+        }
+        
         stage('Deploy VAPP') {
           steps{
+              sh 'rm andes.Dockerfile*'
+              sh 'rm nginx.conf*'
               sh 'wget https://raw.githubusercontent.com/andes/andes-test-integracion/master/docker/andes.Dockerfile'
               sh 'wget https://raw.githubusercontent.com/andes/andes-test-integracion/master/docker/nginx.conf'
-              sh 'docker build -t andesnqn/nginx:${APP_BRANCH} --build-arg APP=${APP_BRANCH} MATRICULACIONES=${MATRICULACIONES_BRANCH} --file=andes.Dockerfile    .'
+              sh 'docker build -t andesnqn/nginx:${APP_BRANCH} --build-arg APP=${APP_BRANCH} --build-arg MATRICULACIONES=${MATRICULACIONES_BRANCH} --build-arg MONITOREO=${MONITOREO_BRANCH} --file=andes.Dockerfile    .'
               script {
                 docker.withRegistry( '', registryCredential ) {
                     dockerAPI = docker.image("andesnqn/nginx:${APP_BRANCH}")

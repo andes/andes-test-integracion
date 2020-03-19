@@ -7,26 +7,41 @@ pipeline {
         envmode = "${APP_MODE}"
         api = "${API_BRANCH}"
         matriculaciones = "${MATRICULACIONES_BRANCH}"
+        monitoreo = "${MONITOREO_BRANCH}"
+        app_build = "${APP_BUILD}"
+        api_build = "${API_BUILD}"
+        matriculaciones_build = "${MATRICULACIONES_BUILD}"
+        monitoreo_build = "${MONITOREO_BUILD}"
     }
     stages {
         stage('Build images') {
             when { expression { env.build == "true" } }
             parallel {
-                 stage('Build app') {
+                 stage('Build app') { 
+                    when { expression { env.app_build == "true" } } 
                     steps {
                         build( job: "andes-app", parameters: [string(name: 'GIT_BRANCH', value: app  ), string(name: 'ENVIRONMENT', value: envmode  )]  )
                     }
                 }
 
-                stage('build api') {
+                stage('build api') { 
+                    when { expression { env.api_build == "true" } }
                     steps {
                          build job: "andes-api", parameters: [string(name: 'GIT_BRANCH', value: api )] 
                     }
                 }
                 
-                stage('build matriculaciones') {
+                stage('build matriculaciones') { 
+                    when { expression { env.matriculaciones_build == "true" } }
                     steps {
                          build job: "andes-matriculaciones", parameters: [string(name: 'GIT_BRANCH', value: matriculaciones )] 
+                    }
+                }
+                
+                stage('build monitoreo') { 
+                    when { expression { env.monitoreo_build == "true" } }
+                    steps {
+                         build job: "andes-monitoreo", parameters: [string(name: 'GIT_BRANCH', value: monitoreo )] 
                     }
                 }
             }
@@ -43,7 +58,7 @@ pipeline {
  
         stage('build api') {
             steps {
-                sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} MATRICULACIONES=${matriculaciones} .'
+                sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} --build-arg MATRICULACIONES=${matriculaciones} .'
                 sh 'API=$api APP=$app docker-compose -f docker/docker-compose.yml down -v'
                 sh 'API=$api APP=$app docker-compose -f docker/docker-compose.yml up -d '
             }
@@ -75,6 +90,7 @@ pipeline {
                 sh 'rm -rf results/* mochawesome-report/* || true'
                 sh 'npx cypress run --env ELASTIC_URI="http://172.16.1.116:9266",MONGO_URI="mongodb://172.16.1.116:27066/andes",API_SERVER="http://172.16.1.116" --config baseUrl=http://172.16.1.116,video=false,numTestsKeptInMemory=1 ${cypressparams} || true' 
                 sh 'npm run report'
+                sh 'ELASTICSEARCH_HOST=http://elklogger.andes.gob.ar:9201  node scripts/dashboard.js'
             }
         }
     }
