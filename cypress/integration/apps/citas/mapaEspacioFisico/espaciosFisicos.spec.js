@@ -8,18 +8,16 @@ context('CITAS - Espacios físicos', () => {
     });
 
     beforeEach(() => {
+        cy.server()
+        cy.route('GET', '**api/modules/turnos/agenda?fechaDesde**').as('buscarEspacios');
+        cy.route('GET', '**api/modules/turnos/espacioFisico?**').as('getEspaciosFisicos');
         cy.goto('/tm/mapa_espacio_fisico', token);
     });
 
     it('Filtrar espacios físicos', () => {
-        cy.server()
-        //Rutas para control
-        cy.route('GET', '**api/modules/turnos/agenda?fechaDesde**').as('buscarEspacios');
-        cy.route('GET', '**api/modules/turnos/espacioFisico?**').as('getEspaciosFisicos');
 
         cy.plexSelectType('name="edificio"', 'Huemul');
-
-        cy.get('plex-button[label="Buscar"]').click();
+        cy.plexButton('Buscar').click();
 
         cy.wait('@buscarEspacios').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
