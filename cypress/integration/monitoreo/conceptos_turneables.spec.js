@@ -15,18 +15,22 @@ const complete = (dto) => {
 }
 
 context('Conceptos Turneables', () => {
+    let token
     before(() => {
-        cy.login('30643636', 'asd').then(t => {
+        cy.login('34934522', '34934522').then(t => {
             token = t;
-
+            cy.log(t);
+            cy.goto('/monitoreo', token);
         });
     });
 
     beforeEach(() => {
-        cy.visit('/monitoreo');
-        cy.viewport(1280, 720);
         cy.server();
-        cy.get('div[label="Boton Conceptos Turneables"]').click()
+        cy.goto('/monitoreo/conceptos-turneables', token);
+        cy.route('GET', '**api/core/term/snomed?search=**').as('busq');
+        cy.route('GET', '**/core/tm/conceptoTurneable**').as('conceptos');
+        //cy.get('div[label="Boton Conceptos Turneables"]').click();
+
     });
 
     /*  
@@ -36,13 +40,15 @@ context('Conceptos Turneables', () => {
     */
     it('Alta de un concepto turneable', () => {
         cy.plexButton('Nuevo').click();
-        cy.route('POST', '**/core/tm/conceptosTurneables**').as('create');
-
+        cy.route('POST', '**api/core/tm/conceptoTurneable**').as('create');
         complete({
             nombre: 'educacion',
         });
 
-        cy.wait(1000);
+        cy.wait('@busq').then((xhr) => {
+            cy.log('@busq');
+            expect(xhr.status).to.be.eq(200)
+        });
 
         cy.get('tr[label="elemento conceptos snomed"]').eq(0).click();
 
@@ -52,6 +58,7 @@ context('Conceptos Turneables', () => {
         cy.contains('CONFIRMAR').click();
 
         cy.wait('@create').then((xhr) => {
+            cy.log('@create');
             expect(xhr.status).to.be.eq(200)
         });
 
@@ -59,15 +66,17 @@ context('Conceptos Turneables', () => {
     });
 
     it('Editar un concepto turneable', () => {
-        cy.route('GET', '**/core/tm/conceptosTurneables**').as('conceptos');
-        cy.route('PATCH', '**/core/tm/conceptosTurneables/**').as('edit');
+        cy.route('GET', '**/core/tm/conceptoTurneable**').as('conceptos');
+        cy.route('PATCH', '**/core/tm/conceptoTurneable/**').as('edit');
 
         complete({
-            conceptId: '1007',
-            term: 'enseñanza de puericultura',
+            conceptId: '700152009',
+            term: 'cribado para papilomavirus humano (procedimiento)',
         });
 
-        cy.wait(600);
+        cy.wait('@conceptos').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
 
         cy.get('tr[label="elemento conceptos turneables"]').eq(0).click();
 
@@ -89,15 +98,17 @@ context('Conceptos Turneables', () => {
     });
 
     it('Eliminar un concepto turneable', () => {
-        cy.route('GET', '**/core/tm/conceptosTurneables**').as('conceptos');
-        cy.route('DELETE', '**/core/tm/conceptosTurneables/**').as('delete');
+
+        cy.route('DELETE', '**/core/tm/conceptoTurneable/**').as('delete');
 
         complete({
             conceptId: '409073007',
             term: 'educación',
         });
 
-        cy.wait(600);
+        cy.wait('@conceptos').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
 
         cy.get('tr[label="elemento conceptos turneables"]').eq(0).click();
 
