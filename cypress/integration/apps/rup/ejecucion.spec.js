@@ -228,4 +228,88 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[2]).to.be.eq(undefined);
         });
     });
+
+    it('Iniciar prestación fuera de agenda con nota privada', () => {
+        cy.goto('/rup', token);
+
+        cy.server();
+        const fixtures = [];
+        const fixtures2 = [];
+        cy.fixture('nota-privada.json').then(json => {
+            fixtures.push(json);
+        });
+        cy.fixture('conceptos-snomed.json').then(json => {
+            fixtures2.push(json);
+        });
+
+        // Stub
+        cy.route(/api\/core\/term\/snomed\?search=nota/, fixtures).as('search');
+        cy.route(/api\/core\/term\/snomed\?search=fiebre/, fixtures2).as('search2');
+
+        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
+        cy.route('GET', '/api/modules/obraSocial/os/**', []).as('obraSocial');
+        cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
+        cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+
+        cy.plexButton('PACIENTE FUERA DE AGENDA').click();
+
+
+        cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexButton('SELECCIONAR PACIENTE').click();
+
+        cy.plexText('name="buscador"', '31549268');
+
+        cy.get('table tbody tr').first().click();
+
+        cy.plexButton('INICIAR PRESTACIÓN').click();
+
+        cy.wait('@create').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.turno).to.be.undefined;
+            expect(xhr.response.body.solicitud.tipoPrestacion.id).to.be.eq('598ca8375adc68e2a0c121b8');
+            expect(xhr.response.body.paciente.documento).to.be.eq('31549268');
+            expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
+        });
+        cy.plexButtonIcon('chevron-up').first().click();
+        cy.plexText('name="searchTerm"', 'nota');
+        cy.wait('@search').then((xhr) => {
+            cy.get('.mdi-plus').first().click();
+        });
+
+        cy.plexText('name="searchTerm"', '{selectall}{backspace}fiebre');
+        cy.wait('@search2').then((xhr) => {
+            cy.get('.mdi-plus').first().click();
+        });
+
+        cy.plexButton('Guardar consulta de medicina general').click();
+
+        cy.wait('@patch').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.turno).to.be.undefined;
+            expect(xhr.response.body.solicitud.tipoPrestacion.id).to.be.eq('598ca8375adc68e2a0c121b8');
+            expect(xhr.response.body.paciente.documento).to.be.eq('31549268');
+            expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
+            expect(xhr.response.body.estados[1]).to.be.eq(undefined);
+        });
+        cy.toast('success');
+        cy.plexButton('Validar consulta de medicina general').click();
+        cy.get('button').contains('CONFIRMAR').click();
+        cy.wait('@patch').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.turno).to.be.undefined;
+            expect(xhr.response.body.solicitud.tipoPrestacion.id).to.be.eq('598ca8375adc68e2a0c121b8');
+            expect(xhr.response.body.paciente.documento).to.be.eq('31549268');
+            expect(xhr.response.body.estados[1].tipo).to.be.eq('validada');
+            expect(xhr.response.body.estados[2]).to.be.eq(undefined);
+        });
+        cy.plexButton('Punto de Inicio').click();
+        cy.wait(2000);
+        cy.get('table tbody tr td').contains(' Fuera de agenda ').click({ force: true });
+        cy.get('tr td').contains("TURNO, PACIENTE ").parent().parent().plexButton(' VER HUDS ').click();
+        cy.get('plex-radio').contains(' Procesos de Auditoría ').click({ force: true });
+        cy.plexButton('ACEPTAR').click();
+
+    });
 });
