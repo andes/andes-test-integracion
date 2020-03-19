@@ -5,120 +5,335 @@
  * A LA NOCHE DA ERROR POR PROBLEMA DE TIMEZONE
  */
 
-context('SOLICITUDES', () => {
-    let token
+function seleccionarPaciente(dni) {
+    cy.plexText('name="buscador"', dni);
+    cy.wait('@searchPaciente');
+    cy.get('paciente-listado').find('td').contains(dni).click();
+}
+
+const rupBuscador = [
+    {
+        "conceptId": "511000013109",
+        "term": "consulta de pediatría",
+        "fsn": "consulta de pediatría",
+        "semanticTag": "procedimiento"
+    }
+]
+
+context('TOP', () => {
+    let token;
+    let paciente;
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
             cy.createPaciente('solicitudes/paciente-solicitud', token);
             cy.task('database:seed:agenda', { tipoPrestaciones: '59ee2d9bf00c415246fd3d6b', fecha: 2, profesionales: '5c82a5a53c524e4c57f08cf3', estado: 'disponible', tipo: 'profesional' });
+            cy.task('database:create:paciente', {
+                template: 'validado'
+            }).then(p => {
+                paciente = p;
+            });
         })
     })
 
     beforeEach(() => {
         cy.goto('/solicitudes', token);
-        cy.server();
     })
 
     it('crear nueva regla solicitud', () => {
-        // routes
+        cy.server();
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglasOrganizacionDestino');
         cy.route('GET', '**/api/core/tm/organizaciones').as('getOrganizaciones');
         cy.route('POST', '**/api/modules/top/reglas').as('guardarRegla');
-        let prestacionDestino = 'consulta de cirugía';
-        let orgOrigen = 'HOSPITAL DR. HORACIO HELLER';
-        let prestacionOrigen = 'Consulta de medicina general';
 
-        cy.plexButton('Reglas').click();
+        cy.get('plex-button[label="Reglas"]').click();
 
-        cy.wait('@getPrestaciones').then((xhr) => {
+        cy.wait('@getPrestaciones');
+
+        cy.plexSelectType('label="Prestación Destino"', 'colonoscopia');
+
+        cy.wait('@getReglasOrganizacionDestino').then(xhr => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexSelectAsync('name="organizacion"', orgOrigen, '@getOrganizaciones', 0);
-
-
-        cy.plexSelectAsync('label="Prestación Destino"', prestacionDestino, '@getPrestaciones', 0)
-        cy.wait('@getReglasOrganizacionDestino').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
+        cy.plexSelectAsync('name="organizacion"', 'hospital dr. horacio heller', '@getOrganizaciones', 0);
 
         cy.plexButtonIcon('plus').click();
 
-        cy.wait('@getPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+        cy.plexSelectAsync('name="prestacionOrigen"', 'consulta de medicina general', '@getPrestaciones', 0);
 
-        cy.plexSelectAsync('name="prestacionOrigen"', prestacionOrigen, '@getPrestaciones', 0);
-
-        cy.get('plex-button[title="Agregar Prestación"]').click();
+        cy.get('div[class="row"]').find('div[class="col-6 h-100"]').eq(1).plexButtonIcon('plus').click();
 
         cy.plexButton('Guardar').click();
 
         cy.wait('@guardarRegla').then(xhr => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].destino.organizacion.nombre).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-            expect(xhr.response.body[0].destino.prestacion.nombre).to.be.eq(prestacionDestino);
-            expect(xhr.response.body[0].origen.organizacion.nombre).to.be.eq(orgOrigen);
-            expect(xhr.response.body[0].origen.prestaciones[0].prestacion.nombre).to.be.eq(prestacionOrigen);
         });
+
         cy.toast('success', 'Las reglas se guardaron correctamente');
+    })
+
+    it('crear solicitud de entrada', () => {
+        cy.server();
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+
+        cy.get('plex-button[label="Nueva Solicitud"]').click();
+        cy.get('paciente-buscar plex-text[name="buscador"] input').first().type('32589654');
+        cy.wait('@consultaPaciente');
+        cy.get('table tbody').contains('32589654').click();
+
+        cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
+
+        cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
+        cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
+            force: true
+        }).get('.option[data-value="5a26e113291f463c1b982d98"]').click({
+            force: true
+        });
+
+        cy.wait('@getReglas');
+        cy.get('plex-select[name="organizacionOrigen"] input').type('hospital dr. horacio heller{enter}');
+        cy.get('plex-select[label="Tipos de Prestación Origen"] input').type('consulta de medicina general{enter}');
+        cy.get('plex-select[name="profesionalOrigen"] input').type('cortes jazmin');
+        cy.wait('@getProfesional');
+        cy.get('plex-select[name="profesionalOrigen"] input').type('{enter}');
+
+        cy.get('plex-select[name="profesional"] input').type('natalia huenchuman');
+        cy.wait('@getProfesional');
+        cy.get('plex-select[name="profesional"] input').type('{enter}');
+        cy.get('textarea').last().type('Motivo de la solicitud', {
+            force: true
+        });
+        cy.get('plex-button[label="Guardar"]').click();
+        cy.wait('@guardarSolicitud').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
+        });
+    })
+
+    it('crear solicitud de salida', () => {
+        cy.server();
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
+        cy.route('GET', '**/api/modules/top/reglas?organizacionOrigen=**').as('getReglasOrganizacionOrigen');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+        cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
+
+        cy.plexTab('Solicitudes de Salida').click();
+        cy.plexButton('Nueva Solicitud').click();
+
+        seleccionarPaciente(paciente.documento);
+
+        //Fecha solicitud
+        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+
+        //Prestación origen
+        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'consulta de medicina general', '@getPrestaciones', '598ca8375adc68e2a0c121b8');
+
+        cy.wait('@getReglasOrganizacionOrigen');
+
+        //Profesional solicitante
+
+        cy.plexSelectAsync('label="Profesional solicitante"', 'huenchuman natalia', '@profesionalSolicitante', '5d02602588c4d1772a8a17f8');
+
+        //Organización destino
+        cy.plexSelect('label="Organización destino"', 0).click();
+
+        cy.wait('@getReglasOrganizacionOrigen');
+
+        //Prestación solicitada
+        cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'consulta de neurocirugía');
+
+        // Motivo de la solicitud
+        cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'Motivo de la solicitud de salida');
+
+        cy.plexButton('Guardar').click();
+
+        cy.wait('@guardarSolicitud').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+    })
+
+    it('crear solicitud autocitado', () => {
+        cy.server();
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('prestacion');
+        cy.route('GET', '**/api/core/tm/profesionales?**').as('profesional');
+        cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglasOrganizacionDestino');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+
+        cy.get('plex-button[label="Nueva Solicitud"]').click();
+        cy.get('paciente-buscar plex-text[placeholder="Escanee un documento digital, o escriba un documento / apellido / nombre"] input').first().type('32589654');
+
+        cy.wait('@busquedaPaciente');
+
+        cy.get('table tbody td span').contains('32589654').click();
+        cy.get('plex-datetime[name="fechaSolicitud"] input').type(Cypress.moment().format('DD/MM/YYYY'));
+        cy.get('plex-bool[name="autocitado"] input').check({
+            force: true
+        });
+
+        // Tipo de prestación solicitada
+        cy.get('plex-select[label="Tipo de Prestación Solicitada"]').children().children().children('.selectize-input').click({
+            force: true
+        }).get('.option[data-value="598ca8375adc68e2a0c121b7"]').click({
+            force: true
+        })
+
+        cy.wait('@getReglasOrganizacionDestino');
+
+        // Profesional Solicitante
+        cy.get('plex-select[label="Profesional solicitante"] input').type('huenchuman natalia', {
+            force: true
+        });
+
+        cy.wait('@profesional');
+
+        cy.get('plex-select[label="Profesional solicitante"]').children().children().children('.selectize-input').click({
+            force: true
+        }).get('.option[data-value="5d02602588c4d1772a8a17f8"]').click({
+            force: true
+        })
+
+        // Motivo de la solicitud
+        cy.get('textarea').last().type('Motivo Solcitud', {
+            force: true
+        });
+
+        cy.get('plex-button[label="Guardar"]').click({
+            force: true
+        });
+
+        cy.wait('@guardarSolicitud').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
     });
 
-    it.skip('crear solicitud desde rup', () => { // TODO: carga mal la prestacion
+    it('dar turno autocitado', () => {
+        cy.createSolicitud('solicitudes/solicitudAutocitado', token);
+        cy.server();
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
+        cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
+        cy.route('GET', '**/api/core/mpi/pacientes/**').as('consultaPaciente');
+        cy.route('GET', '**api/modules/carpetas/carpetasPacientes**', []).as('carpetasPacientes');
+        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
+        cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
+        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?**').as('solicitudes');
+        cy.route('GET', '/api/modules/obraSocial/os/**', []).as('obraSocial');
+        cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
+
+        cy.plexButtonIcon('chevron-down').click();
+        cy.wait('@getPrestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexSelectAsync('label="Prestación destino"', 'Consulta de clínica médica', '@getPrestaciones', 0);
+
+        cy.plexSelectType('label="Estado"', 'pendiente');
+
+        cy.wait('@solicitudes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+
+        cy.plexButtonIcon('calendar-plus').click();
+        cy.wait('@consultaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@agendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@carpetasPacientes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@getPrestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@agendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        if (Cypress.moment().add(2, 'days').format('M') > Cypress.moment().format('M')) {
+            cy.plexButtonIcon('chevron-right').click();
+        }
+
+        cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
+
+        cy.wait('@agenda').then(() => {
+            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+        });
+
+        cy.plexButton('Confirmar').click();
+
+        cy.wait('@confirmarTurno').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.toast('info', 'El turno se asignó correctamente');
+    });
+
+    it('crear solicitud desde rup', () => {
         cy.server();
 
-        cy.get('plex-button[label="PACIENTE FUERA DE AGENDA"]').click();
-        cy.selectOption('name="nombrePrestacion"', '"59ee2d9bf00c415246fd3d6a"');
+        //Stub
+        cy.route(/api\/core\/term\/snomed\?search=Consulta de pediatría/, rupBuscador).as('search');
+        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+        cy.route('GET', '/api/core/term/snomed/**', []).as('search');
+        cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
+        cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
+        cy.goto('/rup', token);
 
-        cy.get('plex-text input[type=text]').first().type('38906735').should('have.value', '38906735');
-        cy.get('tr').eq(1).click()
-        cy.get('plex-button[label="INICIAR PRESTACIÓN"]').click();
+        cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
-        cy.route('GET', '**/api/modules/rup/elementosRUP').as('elementosRUP');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones').as('tipoPrestaciones');
+        cy.plexSelectType('name="nombrePrestacion"', 'consulta de clínica médica');
+        seleccionarPaciente(paciente.documento);
+        cy.plexButton('INICIAR PRESTACIÓN').click();
 
-
-        cy.wait('@elementosRUP').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        })
-        cy.wait('@tipoPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        })
-        cy.wait(2000)
-        cy.get('div').then(($body) => {
-            if ($body.hasClass('introjs-helperLayer')) {
-                cy.get('.introjs-tooltipbuttons').children('.introjs-skipbutton').click({
-                    force: true
-                })
-            } else { }
-        })
-        // cy.get('.introjs-skipbutton').should('be.visible').click({ force: true })
-        cy.get('plex-text[name="searchTerm"] input').first().type('Consulta De Pediatría')
-
-        // cy.get('.introjs-skipbutton').contains('Cerrar').click({force:true})
-        cy.get('.mdi-plus').first().click();
-        cy.get('textarea').first().type('ni', {
-            force: true
+        cy.wait('@create').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            if (paciente.documento) {
+                expect(xhr.response.body.paciente.documento).to.be.eq(paciente.documento);
+            }
+            expect(xhr.response.body.paciente.nombre).to.be.eq(paciente.nombre);
+            expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
         });
-        cy.get('textarea').eq(1).type('ni', {
-            force: true
+        cy.plexButtonIcon('chevron-up').first().click();
+        cy.get('rup-buscador button').contains('BUSCADOR BÁSICO ').click();
+        cy.plexText('name="searchTerm"', 'Consulta de pediatría');
+        cy.wait('@search').then((xhr) => {
+            cy.get('.mdi-plus').first().click();
         });
-        cy.get('plex-select[label="Organización destino"] input').type('castro');
-        cy.selectOption('label="Organización destino"', '"57e9670e52df311059bc8964"');
-        cy.get('plex-select[label="Profesional(es) destino"] input').type('valverde')
-        cy.get('plex-select[label="Profesional(es) destino"]').children().children().children('.selectize-input').click({
-            force: true
-        }).get('.option[data-value="58f74fd4d03019f919ea243e"]').click({
-            force: true
-        })
-        cy.get('plex-button').contains('Guardar Consulta de medicina general').click();
-        cy.wait(3000)
-        cy.get('plex-button').contains('Validar Consulta de medicina general').first().click();
+
+        cy.plexTextArea('label="Motivo"', 'motivo de la solicitud');
+        cy.plexTextArea('label="Indicaciones"', 'indicaciones de la solicitud');
+        cy.plexSelect('label="Organización destino"', 0).click();
+        cy.plexSelectAsync('label="Profesional(es) destino"', 'huenchuman natalia', '@profesionalSolicitante', '5d02602588c4d1772a8a17f8')
+        cy.plexButton('Guardar Consulta de clínica médica').click();
+        cy.wait('@patch').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            if (paciente.documento) {
+                expect(xhr.response.body.paciente.documento).to.be.eq(paciente.documento);
+            }
+            expect(xhr.response.body.paciente.nombre).to.be.eq(paciente.nombre);
+            expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
+        });
+        cy.toast('success');
+        cy.plexButton('Validar Consulta de clínica médica').click();
         cy.get('button').contains('CONFIRMAR').click();
+        cy.wait('@patch').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            if (paciente.documento) {
+                expect(xhr.response.body.paciente.documento).to.be.eq(paciente.documento);
+            }
+            expect(xhr.response.body.paciente.nombre).to.be.eq(paciente.nombre);
+            expect(xhr.response.body.estados[1].tipo).to.be.eq('validada');
+        });
     })
 
     it('crear solicitud de entrada y verificar filtros', () => {
