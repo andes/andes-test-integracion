@@ -34,7 +34,7 @@ context('RUP - Punto de inicio', () => {
 
 
         cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de niño sano', '@prestaciones', 0);
-        cy.plexButton('SELECCIONAR PACIENTE').click();
+
 
         cy.plexText('name="buscador"', '3399661');
 
@@ -56,18 +56,18 @@ context('RUP - Punto de inicio', () => {
             cy.wait('@search').then((xhr) => {
                 cy.get('.mdi-plus').first().click();
             });
-    
+
             cy.plexFloat('label="Peso"', 63);
             cy.plexFloat('label="Percentilo de Peso"', 70);
             cy.plexFloat('name="talla"', 120);
             cy.plexFloat('label="Percentilo de Talla"', 80);
             cy.plexFloat('label="Perímetro Cefálico"', 55);
             cy.plexFloat('label="Percentilo de Perímetro Cefálico"', 40);
-    
+
             cy.get('plex-bool').first().click();
-    
+
             cy.plexButton('Guardar consulta de niño sano').click();
-    
+
             cy.wait('@patch').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.response.body.solicitud.turno).to.be.undefined;
@@ -76,13 +76,13 @@ context('RUP - Punto de inicio', () => {
                 expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
                 expect(xhr.response.body.estados[1]).to.be.eq(undefined);
             });
-            
+
             cy.toast('success');
             cy.plexButton('Validar consulta de niño sano').click();
-    
+
             // Popup alert
             cy.get('button').contains('CONFIRMAR').click();
-    
+
             cy.wait('@patch').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.response.body.solicitud.turno).to.be.undefined;
@@ -93,7 +93,7 @@ context('RUP - Punto de inicio', () => {
             });
             cy.wait('@codificacion').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-    
+
             });
         });
 

@@ -299,7 +299,7 @@ context('TOP', () => {
 
         cy.get('plex-button[label="PACIENTE FUERA DE AGENDA"]').click();
         cy.selectOption('name="nombrePrestacion"', '"59ee2d9bf00c415246fd3d6a"');
-        cy.get('plex-button[label="SELECCIONAR PACIENTE"]').click();
+
         cy.get('plex-text input[type=text]').first().type('38906735').should('have.value', '38906735');
         cy.get('tr').eq(1).click()
         cy.get('plex-button[label="INICIAR PRESTACIÓN"]').click();

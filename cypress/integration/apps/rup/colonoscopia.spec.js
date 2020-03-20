@@ -31,7 +31,7 @@ context('prestaciones', () => {
             cy.plexSelectAsync('name="nombrePrestacion"', 'colonoscopia', '@prestaciones', 0);
 
 
-            cy.plexButton('SELECCIONAR PACIENTE').click();
+
             cy.plexText('name="buscador"', paciente.nombre);
 
             cy.get('table tbody tr').first().click();

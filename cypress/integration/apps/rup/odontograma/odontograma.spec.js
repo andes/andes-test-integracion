@@ -65,7 +65,7 @@ describe('RUP - Odontograma', () => {
 
 
         cy.plexSelectType('label="Seleccione el tipo de prestación"', 'Consulta de odontología').click({ force: true });
-        cy.plexButton('SELECCIONAR PACIENTE').click();
+
         cy.plexText('name="buscador"', 123456789);
         cy.wait('@searchPaciente');
         cy.get('paciente-listado').find('td').contains('123456789').click();
@@ -87,7 +87,7 @@ describe('RUP - Odontograma', () => {
 
     it('Seleccion multiple de caras de diente', () => {
         cy.plexSelectType('label="Seleccione el tipo de prestación"', 'Consulta de odontología').click({ force: true });
-        cy.plexButton('SELECCIONAR PACIENTE').click();
+
         cy.plexText('name="buscador"', 123456789);
         cy.wait('@searchPaciente');
         cy.get('paciente-listado').find('td').contains('123456789').click();
@@ -115,7 +115,7 @@ describe('RUP - Odontograma', () => {
 
     it('Guardar odontograma', () => {
         cy.plexSelectType('label="Seleccione el tipo de prestación"', 'Consulta de odontología').click({ force: true });
-        cy.plexButton('SELECCIONAR PACIENTE').click();
+
         cy.plexText('name="buscador"', 123456789);
         cy.wait('@searchPaciente');
         cy.get('paciente-listado').find('td').contains('123456789').click();
@@ -143,7 +143,7 @@ describe('RUP - Odontograma', () => {
 
     it('Registrar Tratamiento de conducto', () => {
         cy.plexSelectType('label="Seleccione el tipo de prestación"', 'Consulta de odontología').click({ force: true });
-        cy.plexButton('SELECCIONAR PACIENTE').click();
+
         cy.plexText('name="buscador"', 123456789);
         cy.wait('@searchPaciente');
         cy.get('paciente-listado').find('td').contains('123456789').click();
@@ -186,7 +186,7 @@ describe('RUP - Odontograma', () => {
 
     it('Desvincular Caras', () => {
         cy.plexSelectType('label="Seleccione el tipo de prestación"', 'Consulta de odontología').click({ force: true });
-        cy.plexButton('SELECCIONAR PACIENTE').click();
+
         cy.plexText('name="buscador"', 123456789);
         cy.wait('@searchPaciente');
         cy.get('paciente-listado').find('td').contains('123456789').click();

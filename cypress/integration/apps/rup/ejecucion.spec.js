@@ -36,7 +36,7 @@ context('RUP - Punto de inicio', () => {
 
 
         cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de medicina general', '@prestaciones', 0);
-        cy.plexButton('SELECCIONAR PACIENTE').click();
+
 
         // cy.get('plex-text input').first().type('3399661');
         cy.plexText('name="buscador"', '3399661');
