@@ -3,11 +3,13 @@ const { createAppAuth } = require("@octokit/auth-app");
 const { Octokit } = require("@octokit/rest");
 
 
-const PRIVATE_KEY = fs.readFileSync(process.env.GITHUB_PRIVATE_KEY, 'utf8');
-const CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-const CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
-const APP_ID = process.env.GITHUB_APP_ID;
-const INSTALATION_ID = process.env.GITHUB_INSTALATION_ID;
+// const PRIVATE_KEY = fs.readFileSync(process.env.GITHUB_PRIVATE_KEY, 'utf8');
+// const CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+// const CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+// const APP_ID = process.env.GITHUB_APP_ID;
+// const INSTALATION_ID = process.env.GITHUB_INSTALATION_ID;
+
+const PERSONAL_TOKEN = process.env.GITHUB_PERSONAL_TOKEN;
 
 const APP_BRANCH = process.env.APP_BRANCH || 'master';
 const API_BRANCH = process.env.API_BRANCH || 'master';
@@ -19,26 +21,9 @@ const BUILD_ID = parseInt(process.env.BUILD_NUMBER, 10) || Math.round(Math.rando
 
 async function publishComment(result, repo, branch) {
     if (branch === 'master') return;
-    console.log('POSTING COMNENTS ON', repo, branch)
-    const authData = {
-        id: APP_ID,
-        privateKey: PRIVATE_KEY,
-        clientId: CLIENT_ID,
-        clientSecret: CLIENT_SECRET
-    };
-
-    const appOctokit = new Octokit({
-        authStrategy: createAppAuth,
-        auth: authData
-    });
-
-    const { token } = await appOctokit.auth({
-        type: "installation",
-        installationId: INSTALATION_ID
-    });
-
+    console.log(PERSONAL_TOKEN)
     const octokit = new Octokit({
-        auth: token
+        auth: PERSONAL_TOKEN
     });
 
     const prs = await octokit.pulls.list({
@@ -50,13 +35,11 @@ async function publishComment(result, repo, branch) {
 
     if (prs.data.length > 0) {
         const pr = prs.data[0];
-
-        await octokit.pulls.createReview({
+        await octokit.request('POST /repos/:owner/:repo/issues/:issue_number/comments', {
             owner: 'andes',
-            repo,
-            pull_number: pr.number,
-            body: createStatsText(result),
-            event: 'COMMENT'
+            repo: repo,
+            issue_number: pr.number,
+            body: createStatsText(result)
         })
     }
 
