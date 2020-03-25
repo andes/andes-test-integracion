@@ -13,23 +13,29 @@ const complete = (dto) => {
         cy.plexText('label="Ingrese Term"', dto.term)
     }
 }
+const snomedBuscador = [
+    {
+        "conceptId": "0000000000001",
+        "fsn": "nuevo ct (procedimiento)",
+        "semanticTag": "procedimiento",
+        "term": "nuevo ct",
+        "refsetIds": []
+    }
+]
 
 context('Conceptos Turneables', () => {
     let token
     before(() => {
-        cy.login('34934522', '34934522').then(t => {
+        cy.login('38906735', 'asd').then(t => {
             token = t;
-            cy.log(t);
-            cy.goto('/monitoreo', token);
         });
     });
 
     beforeEach(() => {
         cy.server();
         cy.goto('/monitoreo/conceptos-turneables', token);
-        cy.route('GET', '**api/core/term/snomed?search=**').as('busq');
-        cy.route('GET', '**/core/tm/conceptoTurneable**').as('conceptos');
-        //cy.get('div[label="Boton Conceptos Turneables"]').click();
+        cy.route('GET', '**api/core/term/snomed?search=**', snomedBuscador).as('busq');
+        cy.route('GET', '**api/core/tm/conceptos-turneables**').as('conceptos');
 
     });
 
@@ -40,13 +46,12 @@ context('Conceptos Turneables', () => {
     */
     it('Alta de un concepto turneable', () => {
         cy.plexButton('Nuevo').click();
-        cy.route('POST', '**api/core/tm/conceptoTurneable**').as('create');
+        cy.route('POST', '**api/core/tm/conceptos-turneables**').as('create');
         complete({
             nombre: 'educacion',
         });
 
         cy.wait('@busq').then((xhr) => {
-            cy.log('@busq');
             expect(xhr.status).to.be.eq(200)
         });
 
@@ -59,15 +64,17 @@ context('Conceptos Turneables', () => {
 
         cy.wait('@create').then((xhr) => {
             cy.log('@create');
-            expect(xhr.status).to.be.eq(200)
-        });
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.any.keys('conceptId');
+            expect(xhr.response.body).to.have.any.keys('term');
+            expect(xhr.response.body).to.have.any.keys('semanticTag');
 
+        });
         cy.contains('Aceptar').click();
     });
 
     it('Editar un concepto turneable', () => {
-        cy.route('GET', '**/core/tm/conceptoTurneable**').as('conceptos');
-        cy.route('PATCH', '**/core/tm/conceptoTurneable/**').as('edit');
+        cy.route('PATCH', '**api/core/tm/conceptos-turneables/**').as('edit');
 
         complete({
             conceptId: '700152009',
@@ -79,7 +86,6 @@ context('Conceptos Turneables', () => {
         });
 
         cy.get('tr[label="elemento conceptos turneables"]').eq(0).click();
-
         cy.plexButton('Editar').click();
 
         cy.get('plex-bool[name="nominalizada"]').click();
@@ -98,12 +104,11 @@ context('Conceptos Turneables', () => {
     });
 
     it('Eliminar un concepto turneable', () => {
-
-        cy.route('DELETE', '**/core/tm/conceptoTurneable/**').as('delete');
+        cy.route('DELETE', '**api/core/tm/conceptos-turneables/**').as('delete');
 
         complete({
-            conceptId: '409073007',
-            term: 'educación',
+            conceptId: '385805005',
+            term: 'educacion',
         });
 
         cy.wait('@conceptos').then((xhr) => {
