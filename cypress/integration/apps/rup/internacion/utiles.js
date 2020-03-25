@@ -37,7 +37,8 @@ export function factoryInternacion(params = {}) {
                 sector: elemento.sector,
                 tipoCama: elemento.tipoCama,
                 esCensable: elemento.esCensable,
-                paciente
+                paciente,
+                fechaIngreso: elemento.fechaIngreso
             });
             camas.push(toPromise(camaCreada));
         }

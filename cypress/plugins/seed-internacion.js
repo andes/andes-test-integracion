@@ -90,8 +90,8 @@ module.exports.createCama = async (mongoUri, params) => {
             dtoPrestacion._id = new ObjectId();
             dtoPrestacion.solicitud.organizacion.id = ObjectId(params.organizacion) || ObjectId(dtoPrestacion.solicitud.organizacion.id);
             dtoPrestacion.ejecucion.organizacion.id = ObjectId(params.organizacion) || ObjectId(dtoPrestacion.ejecucion.organizacion.id);
-            dtoPrestacion.ejecucion.fecha = moment().startOf('hour').toDate();
-            dtoPrestacion.ejecucion.registros[0].valor.informeIngreso.fechaIngreso = moment().startOf('hour').toDate();
+            dtoPrestacion.ejecucion.fecha = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
+            dtoPrestacion.ejecucion.registros[0].valor.informeIngreso.fechaIngreso = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
 
             if (params.paciente) {
                 const pacientesDB = await client.db().collection('paciente');
@@ -123,9 +123,9 @@ module.exports.createCama = async (mongoUri, params) => {
         dtoEstadistica.estados[index].especialidades = dtoCama.especialidades || especialidades;
         dtoEstadistica.estados[index].idInternacion = dtoPrestacion._id || null;
         dtoEstadistica.estados[index].esCensable = (params.esCensable !== undefined) ? params.esCensable : true;
-        dtoEstadistica.estados[index].fecha = moment().startOf('hour').toDate();
-        dtoEstadistica.start = moment().startOf('month').toDate();
-        dtoEstadistica.end = moment().endOf('month').toDate();
+        dtoEstadistica.estados[index].fecha = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
+        dtoEstadistica.start = moment(params.fechaIngreso).startOf('month').toDate() || moment().startOf('month').toDate();
+        dtoEstadistica.end = moment(params.fechaIngreso).endOf('month').toDate() || moment().endOf('month').toDate();
 
         let dtoMedica = Object.create(dtoEstadistica);
         dtoMedica.capa = 'medica';
