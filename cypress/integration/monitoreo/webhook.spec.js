@@ -25,29 +25,15 @@ context('Webhook', () => {
     before(() => {
         cy.login('38906735', 'asd').then(t => {
             token = t;
-            cy.goto('/monitoreo', token);
         });
     });
 
     beforeEach(() => {
         cy.server();
-        cy.visit('/home', {
-            onBeforeLoad: (win) => {
-                win.sessionStorage.setItem('jwt', token);
-            }
-
-        });
+        cy.goto('/monitoreo/webhook', token);
         cy.route('GET', '**api/modules/webhook/webhook**').as('busq');
-        cy.get('div[label="Boton WebHook"]').click();
-        cy.visit('/webhook', token);
-
     });
 
-    /*  
-    ///////////////////////
-    /// CASOS DE EXITO
-    ///////////////////////
-    */
     it('Alta de un webhook', () => {
         cy.plexButton('Nuevo').click();
         cy.route('POST', '**api/modules/webhook/webhook**').as('create');
@@ -78,7 +64,7 @@ context('Webhook', () => {
         cy.wait('@busq').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
-        cy.get('table tbody tr').plexButtonIcon('pencil').first().click({ force: true });
+        cy.get('table tbody tr').plexButtonIcon('pencil').first().click();
         cy.plexBool('name="active"', true);
 
         cy.plexButton('Guardar').click();
@@ -100,7 +86,7 @@ context('Webhook', () => {
         cy.wait('@busq').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
-        cy.get('table tbody tr').plexButtonIcon('trash-can').first().click({ force: true });
+        cy.get('table tbody tr').plexButtonIcon('trash-can').first().click();
 
         cy.contains('¿Desea eliminar?');
         cy.contains('CONFIRMAR').click();
