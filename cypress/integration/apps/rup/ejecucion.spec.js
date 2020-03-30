@@ -257,7 +257,6 @@ context('RUP - Punto de inicio', () => {
 
 
         cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de medicina general', '@prestaciones', 0);
-        cy.plexButton('SELECCIONAR PACIENTE').click();
 
         cy.plexText('name="buscador"', '31549268');
 
