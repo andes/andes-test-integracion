@@ -7,7 +7,7 @@ pipeline {
     stage('Cloning Git') {
       steps {
         git (
-            url: 'https://github.com/andes/api.git',
+            url: 'https://github.com/andes/monitoreo-app.git',
             branch: '${GIT_BRANCH}'
         )
       }
@@ -25,6 +25,7 @@ pipeline {
          }
       }
       steps{
+          sh 'rm browserslist && touch browserslist' 
           sh 'docker build  -t ${IMAGE_NAME}:${GIT_BRANCH}-${HASH}  -t ${IMAGE_NAME}:${GIT_BRANCH} .'
       }
     }
