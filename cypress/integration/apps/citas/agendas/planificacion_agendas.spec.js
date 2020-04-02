@@ -170,11 +170,12 @@ context('Planificacion Agendas', () => {
         cy.wait('@agendas');
         cy.contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
-        cy.wait('@clonar');
         cy.swal('confirm');
+        cy.wait('@clonar');
         cy.contains('La Agenda se clonó correctamente');
         cy.swal('confirm');
         cy.wait('@agendas');
+        cy.wait('@prestaciones');
     });
 
 
