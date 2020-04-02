@@ -52,7 +52,7 @@ describe('RUP - Odontograma', () => {
         });
 
         // Stub
-        cy.route('GET', '**/api/core/term/snomed?search=odontograma&semanticTag=hallazgo&semanticTag=trastorno&semanticTag=procedimiento&semanticTag=entidad observable&semanticTag=producto&semanticTag=situación&semanticTag=régimen/tratamiento&semanticTag=elemento de registro&semanticTag=objeto físico&semanticTag=medicamento clínico&semanticTag=evento', rupBuscador).as('rup-buscador');
+        cy.route('GET', '**/api/core/term/snomed?search=odontograma&semanticTag=hallazgo&semanticTag=trastorno&semanticTag=procedimiento&semanticTag=entidad observable&semanticTag=producto&semanticTag=situación&semanticTag=régimen/tratamiento&semanticTag=elemento de registro&semanticTag=objeto físico&semanticTag=medicamento clínico&semanticTag=fármaco de uso clínico&semanticTag=evento', rupBuscador).as('rup-buscador');
         cy.route('GET', '**/api/core/term/snomed/expression?expression=**', fixtures).as('snomedExpression');
         cy.route('GET', '**/api/modules/rup/frecuentesProfesional?tipoPrestacion**', frecuentes).as('frecuentesProfesional');
         cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
