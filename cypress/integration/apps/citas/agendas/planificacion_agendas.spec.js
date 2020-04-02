@@ -170,8 +170,8 @@ context('Planificacion Agendas', () => {
         cy.wait('@agendas');
         cy.contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
-        cy.swal('confirm');
         cy.wait('@clonar');
+        cy.swal('confirm');
         cy.contains('La Agenda se clonó correctamente');
         cy.swal('confirm');
         cy.wait('@agendas');
@@ -610,7 +610,7 @@ context('Planificacion Agendas', () => {
         cy.contains('Existen bloques incompletos');
     });
 
-    it('Guardar, clonar y verificar botón iniciar prestación en agenda no nominalizada', () => {
+    it.only('Guardar, clonar y verificar botón iniciar prestación en agenda no nominalizada', () => {
         let ayer = Cypress.moment().add('days', -1);
         let hoy = Cypress.moment();
         complete({
@@ -632,7 +632,7 @@ context('Planificacion Agendas', () => {
         cy.get('table tbody td').contains('actividades con la comunidad').click();
         cy.plexButtonIcon('content-copy').click();
         cy.wait('@agendas');
-        cy.contains(hoy.format('D')).click({ force: true });
+        cy.get('table').contains(hoy.format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
         cy.wait('@clonar');
