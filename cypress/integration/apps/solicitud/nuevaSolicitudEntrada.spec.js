@@ -11,7 +11,7 @@ function seleccionarPaciente(dni) {
     cy.get('paciente-listado').find('td').contains(dni).click();
 }
 
-describe('TOP: Nueva Solicitud de Salida', () => {
+describe('TOP: Nueva Solicitud de Entrada', () => {
     let token, dni;
     before(() => {
         cy.seed();
@@ -27,6 +27,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.server();
         cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
         cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
+        cy.route('PATCH', '**/modules/rup/prestaciones/**').as('patchSolicitud');
         cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
         cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
         cy.route('GET', '**/modules/rup/prestaciones/solicitudes**').as('getSolicitudes');
@@ -36,8 +37,8 @@ describe('TOP: Nueva Solicitud de Salida', () => {
     it('nueva solicitud exitosa', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
+        cy.introjsTooltip();
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
-        cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
         cy.plexSelect('label="Organización origen"', 0).click();
         cy.plexSelect('label="Tipos de Prestación Origen"', 0).then((elemento) => {
@@ -55,8 +56,8 @@ describe('TOP: Nueva Solicitud de Salida', () => {
 
     it('nueva solicitud autocitada exitosa', () => {
         seleccionarPaciente(dni);
+        cy.introjsTooltip();
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
-        cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
         cy.plexBool('label="Autocitado"').check({
             force: true
         });
@@ -73,7 +74,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
     it('campos requeridos', () => {
         seleccionarPaciente(dni);
 
-        cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
+        cy.introjsTooltip();
         cy.plexButton('Guardar').click();
 
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"').validationMessage()
@@ -111,8 +112,8 @@ describe('TOP: Nueva Solicitud de Salida', () => {
 
     it('comprobación de reglas', () => {
         seleccionarPaciente(dni);
+        cy.introjsTooltip();
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
-        cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
         cy.plexSelectType('label="Organización origen"').find('.selectize-dropdown-content').children().should('have.length', 0);
         cy.plexSelectType('label="Tipos de Prestación Origen"').find('.selectize-dropdown-content').children().should('have.length', 0);
     });
@@ -120,8 +121,8 @@ describe('TOP: Nueva Solicitud de Salida', () => {
     it('nueva solicitud, asignación a profesional y control de historial', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
+        cy.introjsTooltip();
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
-        cy.get('div a.introjs-button.introjs-skipbutton.introjs-donebutton').click();
         cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de clinica médica');
         cy.plexSelectType('label="Organización origen"', 'CASTRO RENDON');
         cy.plexSelectType('label="Organización origen"', '{enter}');
@@ -148,10 +149,13 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.plexButton('Confirmar').click();
         cy.wait('@getSolicitudes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            cy.get('.badge').contains('asignada');
         });
+        cy.wait('@patchSolicitud');
+        cy.wait('@getSolicitudes');
+        cy.get('.badge').contains('asignada');
         cy.goto('/rup', token);
-        cy.plexButton(' Mis solicitudes').click();
+        cy.wait('@tipoPrestacion');
+        cy.plexButton('Mis solicitudes').click();
         cy.wait('@getSolicitudes.all').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             cy.get('.badge').contains('asignada');
