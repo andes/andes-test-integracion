@@ -2,6 +2,10 @@ Cypress.Commands.add('swal', (acction) => {
     return cy.get('div.swal2-modal').find(`.swal2-${acction}`).click({ force: true });
 });
 
+Cypress.Commands.add('introjsTooltip', () => {
+    return cy.get('div.introjs-tooltip').find('.introjs-donebutton').click({ force: true });
+});
+
 /**
  * selectize no renderiza las opciones hasta que no interactuas. Por esos en los select que son fijas
  * hay que hacer un click o escribir antes.
