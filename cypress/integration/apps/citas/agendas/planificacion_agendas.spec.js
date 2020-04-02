@@ -614,9 +614,8 @@ context('Planificacion Agendas', () => {
         cy.contains('Existen bloques incompletos');
     });
 
-    it.only('crear agenda dinamica en una institucion', () => {
+    it('crear agenda dinamica en una institucion', () => {
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
-        cy.swal('cancel');
         cy.plexDatetime('name="modelo.fecha"', cy.today());
         cy.plexDatetime('name="modelo.horaInicio"', "08:00");
         cy.plexDatetime('name="modelo.horaFin"', "16:00");

@@ -325,7 +325,6 @@ describe('CITAS - Planificar Agendas', () => {
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
         cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.plexButton("Crear una nueva agenda").click();
-        cy.swal('cancel');
         cy.plexDatetime('name="modelo.fecha"', cy.today());
         cy.plexDatetime('name="modelo.horaInicio"', "08:00");
         cy.plexDatetime('name="modelo.horaFin"', "16:00");
@@ -348,7 +347,6 @@ describe('CITAS - Planificar Agendas', () => {
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
         cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.plexButton("Crear una nueva agenda").click();
-        cy.swal('cancel');
         cy.plexDatetime('name="modelo.fecha"', cy.today());
         cy.plexDatetime('name="modelo.horaInicio"', "08:00");
         cy.plexDatetime('name="modelo.horaFin"', "16:00");
@@ -370,6 +368,4 @@ describe('CITAS - Planificar Agendas', () => {
         cy.contains('La Agenda se clonó correctamente');
         cy.swal('confirm');
     })
-
-
 })
