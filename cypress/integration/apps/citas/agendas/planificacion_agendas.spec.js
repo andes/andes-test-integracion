@@ -610,7 +610,7 @@ context('Planificacion Agendas', () => {
         cy.contains('Existen bloques incompletos');
     });
 
-    it.only('Guardar, clonar y verificar botón iniciar prestación en agenda no nominalizada', () => {
+    it('Guardar, clonar y verificar botón iniciar prestación en agenda no nominalizada', () => {
         let ayer = Cypress.moment().add('days', -1);
         let hoy = Cypress.moment();
         complete({
