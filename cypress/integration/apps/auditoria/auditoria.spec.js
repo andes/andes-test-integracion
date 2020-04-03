@@ -185,6 +185,8 @@ context('auditoria', () => {
         cy.plexText('name="buscador"', validado4.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].nombre).to.be.eq(validado4.nombre);
+            expect(xhr.response.body[0].apellido).to.be.eq(validado4.apellido);
         });
 
         cy.get('paciente-listado').find('td').contains(validado4.nombre).click();
@@ -192,9 +194,12 @@ context('auditoria', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+
         cy.plexText('name="buscador"', `${sinDocumento1.nombre} ${sinDocumento1.apellido}`);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].nombre).to.be.eq(sinDocumento1.nombre);
+            expect(xhr.response.body[0].apellido).to.be.eq(sinDocumento1.apellido);
         });
         cy.get('paciente-listado').find('td').contains(sinDocumento1.nombre).click();
 
@@ -213,6 +218,8 @@ context('auditoria', () => {
         cy.plexText('name="buscador"', temporal4.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].nombre).to.be.eq(temporal4.nombre);
+            expect(xhr.response.body[0].apellido).to.be.eq(temporal4.apellido);
         });
 
         cy.get('paciente-listado').find('td').contains(temporal4.nombre).click();
@@ -223,6 +230,8 @@ context('auditoria', () => {
         cy.plexText('name="buscador"', `${sinDocumento2.nombre} ${sinDocumento2.apellido}`);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].nombre).to.be.eq(sinDocumento2.nombre);
+            expect(xhr.response.body[0].apellido).to.be.eq(sinDocumento2.apellido);
         });
         cy.get('paciente-listado').find('td').contains(sinDocumento2.nombre).click();
 
@@ -241,16 +250,18 @@ context('auditoria', () => {
         cy.plexText('name="buscador"', `${sinDocumento3.nombre} ${sinDocumento3.apellido}`);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].nombre).to.be.eq(sinDocumento3.nombre);
+            expect(xhr.response.body[0].apellido).to.be.eq(sinDocumento3.apellido);
         });
 
         cy.get('paciente-listado').find('td').contains(sinDocumento3.nombre).click();
         cy.plexButton('Vincular').click();
-        // cy.wait('@busquedaPaciente').then((xhr) => { // TODO: toma como que no llama a busquedaPaciente cuando si lo hace :shrug:
-        //     expect(xhr.status).to.be.eq(200);
-        // });
+
         cy.plexText('name="buscador"', `${sinDocumento4.nombre} ${sinDocumento4.apellido}`);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].nombre).to.be.eq(sinDocumento4.nombre);
+            expect(xhr.response.body[0].apellido).to.be.eq(sinDocumento4.apellido);
         });
         cy.get('paciente-listado').find('td').contains(sinDocumento4.nombre).click();
 
