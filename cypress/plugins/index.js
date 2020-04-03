@@ -18,6 +18,7 @@ const { dropCollection } = require('./seed-drop');
 const { seedPaciente, createPaciente } = require('./seed-paciente');
 const { createUsuario } = require('./seed-usuario');
 const { createElementoRup, deleteElementoRup } = require('./seed-elementos-rup');
+const { createPacienteApp } = require('./seed-paciente-app');
 
 module.exports = (on, config) => {
     // ref: https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
@@ -45,6 +46,9 @@ module.exports = (on, config) => {
         },
         'database:create:paciente': (params = {}) => {
             return createPaciente(mongoUri, elasticuri, params);
+        },
+        'database:create:paciente-app': (params = {}) => {
+            return createPacienteApp(mongoUri, params);
         },
         'database:seed:agenda': (dto) => {
             return seedAgenda(mongoUri, dto);
