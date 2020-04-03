@@ -7,7 +7,6 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });
-
     })
 
     beforeEach(() => {
@@ -21,6 +20,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         // Intercepta la llamada a la ruta validar y devuelve paciente_validado
         cy.fixture('mpi/paciente-validado').as('paciente_validado');
         cy.route('POST', '**api/core/mpi/pacientes/validar', '@paciente_validado').as('renaper');
+        cy.route('POST', '**api/core/mpi/pacientes**').as('guardar');
 
         // Buscador
         cy.plexText('name="buscador"', '1232548');
@@ -40,8 +40,16 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexText('name="apellido"').should('have.value', 'TEST');
 
         cy.contains('TEST, JOSE');
-        cy.contains('Paciente Validado');
-
+        cy.contains('Paciente Validado').click();
+        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexButton('Guardar').click();
+        cy.wait('@guardar').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.direccion.length).eq(2)
+        });
+        cy.contains('Los datos se actualizaron correctamente');
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos', () => {
@@ -244,7 +252,8 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.get('button').contains('Aceptar').click();
     });
 
-    it('editar un paciente existente y agregarle una relación', () => {
+    it('editar direccion de un paciente existente y agregarle una relación', () => {
+        let direccion = 'Avenida las flores 1200'
         cy.route('GET', '**api/core/mpi/pacientes**').as('getPaciente');
         cy.route('GET', '**api/core/mpi/pacientes/**').as('findPacienteByID');
         cy.route('PUT', '**api/core/mpi/pacientes/**').as('putPaciente');
@@ -261,6 +270,8 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.wait('@findPacienteByID').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+
+        cy.plexText('name=direccion', direccion);
 
         cy.plexTab('Relaciones').click();
 
@@ -281,6 +292,7 @@ context('MPI-Registro Paciente Con Dni', () => {
             expect(xhr.response.body.documento).to.be.eq('20000000');
             expect(xhr.response.body.nombre).to.be.eq('PACIENTE TEMPORAL');
             expect(xhr.response.body.apellido).to.be.eq('ANDES');
+            expect(xhr.response.body.direccion[0].valor).to.be.eq(direccion)
         });
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);

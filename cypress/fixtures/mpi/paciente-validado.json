@@ -43,6 +43,20 @@
                 "geoReferencia": null,
                 "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
                 "activo": true
+            },
+            {
+                "valor": "AVENIDA LAS FLORES 1200",
+                "codigoPostal": "",
+                "ubicacion": {
+                    "pais": null,
+                    "provincia": null,
+                    "localidad": null,
+                    "barrio": null
+                },
+                "ranking": 0,
+                "geoReferencia": null,
+                "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
+                "activo": true
             }
         ],
         "foto": "",
