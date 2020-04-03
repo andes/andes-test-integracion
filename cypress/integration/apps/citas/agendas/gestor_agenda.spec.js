@@ -26,6 +26,8 @@ describe('CITAS - Planificar Agendas', () => {
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda2');
         cy.route('PUT', '**/api/modules/turnos/turno/**').as('putAgenda');
         cy.route('PUT', '**/api/modules/turnos/agenda/**').as('putAgenda2');
+        cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
+        cy.route('POST', '**/api/modules/turnos/agenda**').as('postAgenda');
 
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.goto('/citas/gestor_agendas', token);
@@ -355,11 +357,24 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexBool('name="espacioFisicoPropios"', false);
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
         cy.plexButton("Guardar").click();
-        cy.contains('La agenda se guardó correctamente');
-        cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
-        cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click();
+        cy.toast('success').click();
+        cy.wait('@postAgenda').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.otroEspacioFisico.nombre).to.be.eq('ESCUELA PRIMARIA 300');
+            expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
+        });
+        cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click({ force: true });
+        cy.wait('@findAgenda').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.otroEspacioFisico.nombre).to.be.eq('ESCUELA PRIMARIA 300');
+            expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
+        });
         cy.plexButtonIcon("content-copy").click();
-        cy.contains(Cypress.moment().add(1, 'days').date()).click()
+        cy.wait('@getAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait(1000);
+        cy.contains(Cypress.moment().add(1, 'days').date()).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
         cy.wait('@clonar').then((xhr) => {
