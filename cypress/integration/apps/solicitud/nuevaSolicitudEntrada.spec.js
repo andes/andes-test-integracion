@@ -152,14 +152,14 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         });
         cy.wait('@patchSolicitud');
         cy.wait('@getSolicitudes');
-        cy.get('.badge').contains('asignada');
+        cy.get('table tbody tr td').find('.badge-info').contains('asignada');
         cy.goto('/rup', token);
         cy.wait('@tipoPrestacion');
         cy.plexButton('Mis solicitudes').click();
         cy.wait('@getSolicitudes.all').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            cy.get('.badge').contains('asignada');
         });
+        cy.get('table tbody tr td').find('.badge-info').contains('asignada');
         cy.get("@getSolicitudes.all").then((array) => {
             expect(array[6].response.body[0].solicitud.historial[0].accion).to.be.eq('asignacionProfesional');
         });
