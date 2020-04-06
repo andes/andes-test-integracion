@@ -45,7 +45,7 @@ context('Pagina de login', () => {
                 expect(xhr.status).to.be.eq(200);
                 expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
             });
-            cy.contains("Versión: 1.1.0");
+            cy.contains("Versión 1.1.0");
             cy.get('plex-button[label="Acepto"]').click();
             cy.visit('/auth/login');
             cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
@@ -90,7 +90,7 @@ context('Pagina de login', () => {
                 expect(xhr.status).to.be.eq(200);
                 expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
             });
-            cy.contains("Versión: 1.2.0");
+            cy.contains("Versión 1.2.0");
             cy.get('plex-button[label="No Acepto"]').click();
             cy.wait(1000);
             cy.contains("Ingrese su usuario provincial OneLogin");
@@ -127,7 +127,7 @@ context('Pagina de login', () => {
             expect(xhr.status).to.be.eq(200);
             expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
         });
-        cy.contains("Versión: 1.3.0");
+        cy.contains("Versión 1.3.0");
         cy.get('plex-button[label="Acepto"]').click();
         cy.visit('/auth/login');
         cy.wait(1000);
