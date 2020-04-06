@@ -27,7 +27,7 @@ context('SOLICITUDES', () => {
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglasOrganizacionDestino');
         cy.route('GET', '**/api/core/tm/organizaciones').as('getOrganizaciones');
         cy.route('POST', '**/api/modules/top/reglas').as('guardarRegla');
-        let prestacionDestino = 'Consulta de cirugía';
+        let prestacionDestino = 'consulta de cirugía';
         let orgOrigen = 'HOSPITAL DR. HORACIO HELLER';
         let prestacionOrigen = 'Consulta de medicina general';
 
@@ -37,12 +37,14 @@ context('SOLICITUDES', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
+        cy.plexSelectAsync('name="organizacion"', orgOrigen, '@getOrganizaciones', 0);
+
+
         cy.plexSelectAsync('label="Prestación Destino"', prestacionDestino, '@getPrestaciones', 0)
         cy.wait('@getReglasOrganizacionDestino').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexSelectAsync('name="organizacion"', orgOrigen, '@getOrganizaciones', 0);
 
         cy.plexButtonIcon('plus').click();
 

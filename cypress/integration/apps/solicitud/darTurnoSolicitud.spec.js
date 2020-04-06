@@ -20,6 +20,7 @@ context('TOP: nuevo turno', () => {
         cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('getPrestaciones');
         cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('searchPaciente');
+        cy.route('POST', '**/api/modules/turnos/listaEspera**').as('listaEspera');
     });
 
     it('intentar dar turno autocitado y cancelar', () => {
@@ -35,26 +36,23 @@ context('TOP: nuevo turno', () => {
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.plexButtonIcon('calendar-plus').click();
 
-        let fechaAgenda48hs = Cypress.moment().add(2, 'days').month();
-        if (fechaAgenda48hs > Cypress.moment().month()) {
-            cy.plexButtonIcon('chevron-right').click();
-            cy.wait('@agendas').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-            });
-        }
-        cy.wait('@searchPaciente').then((xhr) => {
+        cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.wait('@carpetas');
         cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
 
         cy.wait('@agenda').then((xhr) => {
             cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
         });
         cy.plexButton(' No se asigna turno ').click();
+        cy.wait('@listaEspera').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.profesional.nombre).to.be.eq('MARIA');
+            expect(xhr.response.body.profesional.apellido).to.be.eq('PEREZ');
+        })
         cy.get('tbody td').should('contain', 'pendiente').and('contain', 'PEREZ, MARIA');
     });
 
@@ -72,28 +70,20 @@ context('TOP: nuevo turno', () => {
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.plexButtonIcon('calendar-plus').click();
 
-        let fechaAgenda48hs = Cypress.moment().add(2, 'days').month();
-        if (fechaAgenda48hs > Cypress.moment().month()) {
-            cy.plexButtonIcon('chevron-right').click();
-            cy.wait('@agendas').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-            });
-        }
-        cy.wait('@searchPaciente').then((xhr) => {
+        cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.wait('@carpetas');
         cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
 
-        cy.wait('@agenda').then((xhr) => {
-            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
-        });
+        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
         cy.plexButton('Confirmar').click();
         cy.wait('@confirmarTurno').then(xhr => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.profesionales[0].nombre).to.be.eq('MARIA');
+            expect(xhr.response.body.profesionales[0].apellido).to.be.eq('PEREZ');
         });
     });
 
