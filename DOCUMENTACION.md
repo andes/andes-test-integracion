@@ -70,3 +70,39 @@ cy.task('database:seed:agenda', {
 })
 
 ```
+
+#### [route]
+
+El comando `route` se utiliza  para administrar el comportamiento de las solicitudes a la api.
+
+Parémetros:
+1) __url__: escucha una ruta que haga match con la URL especificada.
+2) __method__: setear con:  GET , POST , PUT , etc.
+3) __response__: se puede realizar un `stub` a la ruta, es decir cuando haga match con `url` devolvera lo seteado en response.
+
+Ejemplos: 
+
+```javascript
+
+cy.route('POST', '**/modules/rup/prestaciones**');
+
+```
+
+Observación: `**` machea con cualquier cosa.
+
+Se le puede agregar un alias para utilizarlo de forma mas ordenada:
+
+Ejemplo:
+
+```javascript
+
+cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
+
+```
+Luego se puede trabajar de la siguiente forma:
+
+```javascript
+
+cy.wait('@createSolicitud').then((xhr) => {}
+
+```     
