@@ -33,4 +33,40 @@ it('limpia la sesion', () => {
 
 
 
-### Task
+### Task [database:seed:agenda] https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-agenda.js#6 
+
+El task [seed:agenda] se utiliza para crear todo tipo de agendas en la base de datos para luego poder utilizar en los test. Éstas se conformarán con los parámetros que le enviemos ya sea pacientes, tipo de prestaciones, estado, organizacion, hora de inicio, hora de fin, etc.
+
+Ejemplos:
+
+```javascript
+cy.task('database:seed:agenda', {
+    pacientes: 'XXXXX',
+    tipoPrestaciones: 'XXXXX',
+    estado: 'XXXXX',
+    organizacion: 'XXXXX',
+    inicio: X,
+    fin: X
+});
+```
+
+También se puede utilizar de esta manera para ir armando un arreglo de agendas y correrle diferentes test a cada una con una sentencia forEach(tipo de agenda, indice de agenda).
+
+```javascript
+cy.task('database:seed:agenda', {
+    inicio: X,
+    fin: X,
+    tipoPrestaciones: 'XXXXX'
+}).then(agenda => agendas['no-nominalizada'] = agenda);
+
+cy.task('database:seed:agenda', {
+    inicio: X,
+    fin: X,
+    pacientes: pacientes:'XXXXX',
+}).then(agenda => agendas['dinamica'] = agenda);
+
+['no-nominalizada', 'dinamica'].forEach((typeAgenda, agendaIndex) => {
+    // Se listan los diferentes test
+})
+
+```
