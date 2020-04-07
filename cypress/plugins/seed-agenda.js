@@ -87,6 +87,10 @@ module.exports.seedAgenda = async (mongoUri, params) => {
                     labelTipoTurno = 'reservadoProfesional';
                     labelTipoTurnoRestante = 'restantesProfesional';
                     break;
+                case 'gestion':
+                    labelTipoTurno = 'reservadoGestion';
+                    labelTipoTurnoRestante = 'restantesGestion';
+                    break;
             }
         }
 
