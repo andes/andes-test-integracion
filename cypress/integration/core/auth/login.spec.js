@@ -47,7 +47,7 @@ context('Pagina de login', () => {
             });
             cy.contains("Versión 1.1.0");
             cy.get('plex-button[label="Acepto"]').click();
-            cy.visit('/auth/login');
+            cy.plexMenu('logout');
             cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
             cy.plexText('name="password"', 'anypasswordfornow').should('have.value', 'anypasswordfornow');
             cy.plexButton('Iniciar sesión').click();
@@ -129,7 +129,7 @@ context('Pagina de login', () => {
         });
         cy.contains("Versión 1.3.0");
         cy.get('plex-button[label="Acepto"]').click();
-        cy.visit('/auth/login');
+        cy.plexMenu('logout');
         cy.wait(1000);
         cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
         cy.plexText('name="password"', 'anypasswordfornow').should('have.value', 'anypasswordfornow');
