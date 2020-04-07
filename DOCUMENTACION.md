@@ -97,6 +97,19 @@ cy.task('database:create:paciente', {
   template: 'paciente-XXXXX'
 });
 ```
+
+El task [create:maquinaEstados] crea una máquina de estados de internacion, que por defecto toma el fixture ubicado en '/data/internacion/maquina-estados-default' y luego, mediante el paso de paramentros se puede modificar particularmente la organizacion, el ámbito, la capa, los estados y las relaciones que puede tener esta máquina de estados. 
+
+Ejemplo: 
+```javascript
+cy.task('database:create:maquinaEstados', { 
+  organizacion: 'IdOrganizacion', 
+  ambito: 'Internacion', 
+  capa: 'Medica', 
+  estados: [ {}, {}, {} ],
+  relaciones: [ {}, {}, {} ]
+});
+```
 #### [route]
 
 El comando `route` se utiliza para administrar el comportamiento de las solicitudes a la api.
