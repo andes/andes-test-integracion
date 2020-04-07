@@ -34,7 +34,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         secuencia(token);
     });
 
-    it.skip('nueva solicitud exitosa', () => {
+    it('nueva solicitud exitosa', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
         cy.introjsTooltip();
