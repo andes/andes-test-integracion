@@ -30,6 +30,69 @@ it("limpia la sesion", () => {
   cy.goto("/auth/login");
 });
 ```
+#### [route]
+
+El comando `route` se utiliza para administrar el comportamiento de las solicitudes a la api.
+
+Parémetros:
+
+1. **url**: escucha una ruta que haga match con la URL especificada.
+2. **method**: setear con: GET , POST , PUT , etc.
+3. **response**: se puede realizar un `stub` a la ruta, es decir cuando haga match con `url` devolvera lo seteado en response.
+
+Ejemplos:
+
+```javascript
+cy.route("POST", "**/modules/rup/prestaciones**");
+```
+
+Observación: `**` machea con cualquier cosa.
+
+Se le puede agregar un alias para utilizarlo de forma mas ordenada:
+
+Ejemplo:
+
+```javascript
+cy.route("POST", "**/modules/rup/prestaciones**").as("createSolicitud");
+```
+
+Luego se puede trabajar de la siguiente forma:
+
+```javascript
+
+cy.wait('@createSolicitud').then((xhr) => {}
+
+```
+
+#### [login](https://github.com/andes/andes-test-integracion/blob/master/cypress/support/commands.js#L27)
+
+El comando `login` se utiliza loguearse a la aplicación y devuelve un token
+
+Parémetros:
+
+1. **usuario**: dni del usuario a loguear
+2. **password**: password del usuario a loguear
+2. **id**: id de la organización a la cual queremos entrar con el usuario
+
+Observación: Hace un GET de las organizaciones. Si no recibe un id, utilizará el del primer resultado.
+
+Ejemplos:
+
+```javascript
+cy.login("38906735", "asd").then(t => {
+      token = t;
+      cy.createPaciente("paciente-rup", token);
+    });
+```
+
+```javascript
+cy.login('30643636', 'asd').then(t => {
+            token = t;
+            cy.createPaciente('apps/solicitud/paciente-nueva-solicitud', token);
+            dni = "2006890";
+        });
+```
+
 
 ### Task [database:seed:agenda] https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-agenda.js#6
 
@@ -109,39 +172,6 @@ cy.task('database:create:maquinaEstados', {
   estados: [ {}, {}, {} ],
   relaciones: [ {}, {}, {} ]
 });
-```
-#### [route]
-
-El comando `route` se utiliza para administrar el comportamiento de las solicitudes a la api.
-
-Parémetros:
-
-1. **url**: escucha una ruta que haga match con la URL especificada.
-2. **method**: setear con: GET , POST , PUT , etc.
-3. **response**: se puede realizar un `stub` a la ruta, es decir cuando haga match con `url` devolvera lo seteado en response.
-
-Ejemplos:
-
-```javascript
-cy.route("POST", "**/modules/rup/prestaciones**");
-```
-
-Observación: `**` machea con cualquier cosa.
-
-Se le puede agregar un alias para utilizarlo de forma mas ordenada:
-
-Ejemplo:
-
-```javascript
-cy.route("POST", "**/modules/rup/prestaciones**").as("createSolicitud");
-```
-
-Luego se puede trabajar de la siguiente forma:
-
-```javascript
-
-cy.wait('@createSolicitud').then((xhr) => {}
-
 ```
 
 #### [plexText]
