@@ -52,6 +52,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
             expect(xhr.response.body.paciente.documento).to.be.eq(dni);
             expect(xhr.response.body.solicitud.tipoPrestacionOrigen.conceptId).to.be.eq(idPrestacion);
         });
+        cy.toast('success', 'Solicitud guardada');
     });
 
     it('nueva solicitud autocitada exitosa', () => {
@@ -69,6 +70,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.paciente.documento).to.be.eq(dni);
         });
+        cy.toast('success', 'Solicitud guardada');
     });
 
     it('campos requeridos', () => {

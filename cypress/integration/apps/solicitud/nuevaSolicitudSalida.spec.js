@@ -51,6 +51,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
             expect(xhr.response.body.paciente.documento).to.be.eq(dni);
             expect(xhr.response.body.solicitud.tipoPrestacion.conceptId).to.be.eq(idPrestacion);
         });
+        cy.toast('success', 'Solicitud guardada');
     });
 
     it('campos requeridos', () => {
