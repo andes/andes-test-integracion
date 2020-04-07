@@ -69,6 +69,34 @@ cy.task('database:seed:agenda', {
 
 ```
 
+
+El task [seed:paciente] se utiliza para crear un paciente temporal, validado o sin-documento, según se indique por parámetro. En el siguiente ejemplo se crea un paciente en estado 'validado' y se lo asigna a una variable previamente declarada.
+
+Ejemplo:
+
+```javascript
+cy.task('database:seed:paciente', 'validado').then(paciente => {
+    pacienteValidado = paciente;
+});
+```
+
+El task [create:paciente] es similar a [seed:paciente] pero permite setear algunos datos. En principio crea un paciente validado con datos por defecto pero mediante el parametro 'template' es posible hacerlo a partir de un fixture determinado.
+Este fixture debe estar ubicado en './data/paciente' y comenzar con el prefijo 'paciente-'. 
+
+Ejemplos: 
+
+```javascript
+cy.task('database:create:paciente', { 
+  documento: 'XXXXX', 
+  nombre: 'XXXXX', 
+  apellido: 'XXXXX', 
+  teléfono: 'XXXXX'
+});
+
+cy.task('database:create:paciente', {
+  template: 'paciente-XXXXX'
+});
+```
 #### [route]
 
 El comando `route` se utiliza para administrar el comportamiento de las solicitudes a la api.
