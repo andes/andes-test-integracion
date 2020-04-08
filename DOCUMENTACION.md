@@ -6,7 +6,7 @@
 
 El comando `goto` se utiliza para navegar por las diferentes url de la aplicación.
 
-Parémetros:
+Parámetros:
 
 1. **url**: url del navegador
 2. **token**: token JWT, setea en la sesión del navegador el token previo a navegar hacía la url. Si es `null` límpia la sesión.
@@ -30,6 +30,34 @@ it("limpia la sesion", () => {
   cy.goto("/auth/login");
 });
 ```
+ 
+#### [plexDatetime](https://github.com/andes/andes-test-integracion/blob/master/cypress/support/plex.js#L189)
+
+El comando `plexDatetime` se utiliza para el ingreso de datos en un `plex-datetime` determinado.
+
+Parámetros:
+
+1. **label**: label correspondiente al `plex-datetime` dentro del HTML.
+2. **text**: texto que se ingresa en el `plex-datetime` o puede ser un objeto con la siguiente forma:
+
+- **text**: texto a ingresar
+- **clear**: borra el contenido del ´plex-datetime´ antes de escribir.
+- **skipEnter**: evitar presionar enter después de escribir
+
+
+Ejemplos:
+
+```javascript
+// Ejemplo 1
+cy.plexDatetime('label="Apellido"', "01/01/2020");
+```
+
+```javascript
+// Ejemplo 2
+cy.plexDatetime('name="fecha-ingreso"', { text: "01/01/2020", clear: true });
+```
+
+
 #### [route]
 
 El comando `route` se utiliza para administrar el comportamiento de las solicitudes a la api.
@@ -68,7 +96,7 @@ cy.wait('@createSolicitud').then((xhr) => {}
 
 El comando `login` se utiliza loguearse a la aplicación y devuelve un token
 
-Parémetros:
+Parámetros:
 
 1. **usuario**: dni del usuario a loguear
 2. **password**: password del usuario a loguear
@@ -249,7 +277,7 @@ cy.task('database:seed:elemento-rup', {
 
 El comando `plexText` se utiliza para el ingreso de datos en un plexText determinado
 
-Parémetros:
+Parámetros:
 
 1. **label**: label correspondiente al plexText dentro del HTML.
 2. **text**: texto que se ingresa en el plexText.
