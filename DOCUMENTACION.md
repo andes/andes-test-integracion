@@ -174,6 +174,27 @@ cy.task('database:create:maquinaEstados', {
 });
 ```
 
+El task [create:paciente-app] se utiliza para crear un paciente para la aplicación mobile con datos básicos, según se indique en sus parámetros (param), puede recibir un paciente-app con sus datos completos o parciales y usar datos propios. En el siguiente ejemplo se crea un paciente-app con algunos datos y se lo asigna a una variable previamente declarada.
+
+Ejemplo:
+
+```javascript
+  pacienteAppAux = {
+        activacionApp: true,
+        nacionalidad: "XXXXXX",
+        devices: [
+            {
+                device_type: "XXXX",
+                app_version: 999,
+            }
+        ],
+        sendMessageCache: []
+    }
+cy.task('database:create:paciente-app',pacienteAppAux).then(pacienteResult => {
+    pacienteApp = pacienteResult;
+});
+```
+
 #### [plexText]
 
 El comando `plexText` se utiliza para el ingreso de datos en un plexText determinado
