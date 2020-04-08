@@ -195,14 +195,14 @@ cy.task('database:create:paciente-app',pacienteAppAux).then(pacienteResult => {
 });
 ```
 
-### Task [database:seed:prestaciones] https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-prestaciones.js#6
+### Task [database:seed:prestacion] https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-prestaciones.js#6
 
-El task [seed:prestaciones] persiste un documento en la colección prestaciones. La prestación es nominalizada y se crea a partir de un template que se puede setear en (https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/data/prestacion/prestacion-default.json)
+El task [seed:prestacion] persiste un documento en la colección prestaciones. La prestación es nominalizada y se crea a partir de un template que se puede setear en (https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/data/prestacion/prestacion-default.json)
 
 Ejemplo:
 
 ```javascript
-cy.task('database:seed:prestaciones', {
+cy.task('database:seed:prestacion', {
   template: "default",
   estado: "XXXXX",
   turno: "XXXXX",
@@ -213,6 +213,35 @@ cy.task('database:seed:prestaciones', {
   tipoPrestacion: 'id',
   profesional: 'id',
   paciente: 'id'
+});
+```
+
+### Task [database:seed:elemento-rup] https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-elementos-rup#6
+
+El task [seed:elemento-rup] persiste un documento en la colección elementos RUP. El elemento RUP se crea a partir de un template que se puede setear en (https://github.com/andes/andes-test-integracion/blob/master/cypress/plugins/data/elemento-rup/elemento-rup-atomo.json)
+
+Ejemplo:
+
+```javascript
+cy.task('database:seed:elemento-rup', {
+    componente: 'SelectPorRefsetComponent',
+    template: "atomo" 
+    params: {
+        titulo : "Seleccione via:",
+        refsetId : ">>7389001",
+        tipoSelect : "select",
+        multiple : false,
+        required : true
+    },
+    conceptos: [ 
+        {
+            fsn : "valor de la vía de administración (calificador)",
+            semanticTag : "calificador",
+            conceptId : "284009009",
+            term : "valor de la vía de administración"
+        }
+    ],
+    esSolicitud: false
 });
 ```
 
