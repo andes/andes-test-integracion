@@ -215,3 +215,33 @@ cy.plexText('label="Apellido"', "Martinez");
 // Ejemplo 2
 cy.get("rup-buscador").plexText('name="search"', "{selectall}{backspace}");
 ```
+
+#### [plexButton]
+
+Nota: los comandos `plexButton` y `plexButtonIcon` se utilizan para acceder en ambos casos a un **plex-button**
+
+
+`plexButton(label)` se utiliza para acceder a `<plex-button label="aceptar"></plex-button>` o `<plex-button>aceptar</plex-button>`
+
+Parámetros:
+
+1. **label**: valor correspondiente al atributo label o el contenido *dentro* del tag `<plex-button>`.
+Ejemplo:
+
+```javascript
+// Ejemplo plexButton ('GUARDAR' es el label o el contenido del plex-button)
+cy.plexButton("GUARDAR").click();
+```
+#### [plexButtonIcon]
+`plexButtonIcon(icon)` para acceder a `<plex-button icon="clock"></plex-button>`
+
+Parámetros:
+
+1. **icon**: valor correspondiente al nombre del icono como atributo de un `<plex-button>`.
+
+Ejemplo:
+
+```javascript
+// Ejemplo plexButtonIcon ('plus' es un icono de símbolo '+')
+cy.plexButtonIcon('plus').click();
+```
