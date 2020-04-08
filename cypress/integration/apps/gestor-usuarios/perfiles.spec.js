@@ -1,4 +1,14 @@
-context('perfiles-usuario', () => {
+/// <reference types="Cypress" />
+
+function crearPerfilBasico() {
+    cy.plexButton('NUEVO').click();
+    cy.plexText('name="nombre"', 'test perfil');
+    cy.get('div[id="accordion"]').eq(0).find('plex-bool').eq(0).click();
+    cy.plexButton('Guardar').click();
+    cy.toast('success', 'El perfil se ha guardado satisfactoriamente!');
+};
+
+context('Perfiles de usuario', () => {
     let token;
     let perfil1;
     before(() => {
@@ -8,7 +18,7 @@ context('perfiles-usuario', () => {
     });
 
     beforeEach(() => {
-        cy.seed()
+        cy.seed();
         cy.task('database:create:perfil', { permisos: ['rup:tipoPrestacion:598ca8375adc68e2a0c121b7'] }).then(p => {
             perfil1 = p;
         });
@@ -32,16 +42,14 @@ context('perfiles-usuario', () => {
     it('Crear nuevo perfil con permisos de diferentes niveles', () => {
         cy.plexButton('NUEVO').click();
         cy.plexText('name="nombre"', 'test perfil');
-        cy.get('plex-layout-sidebar arbol-permisos>div').eq(0).plexAccordion().eq(0).as('citasAccordion');
-        cy.get('@citasAccordion').plexBool('type="slide"', true)
-        cy.get('plex-layout-sidebar arbol-permisos>div').eq(1).plexAccordion().eq(0).as('mpiAccordion');
-        cy.get('@mpiAccordion').plexBool('type="slide"', true)
-        cy.get('plex-layout-sidebar arbol-permisos>div').eq(2).plexAccordion().click().as('rupAccordion');
-        cy.get('@rupAccordion').plexSelectAsync('placeholder="Seleccione los elementos con permisos"', 'Consulta de medicina general', '@prestaciones', 0);
-
-
-
-        cy.get('plex-layout-sidebar arbol-permisos>div').eq(8).plexAccordion().click().as('internacionAccordion');
+        cy.buscarPermisos(0, 0).as('citasAccordion');
+        cy.get('@citasAccordion').plexBool('type="slide"', true);
+        cy.buscarPermisos(1, 0).as('mpiAccordion');
+        cy.get('@mpiAccordion').plexBool('type="slide"', true);
+        cy.buscarPermisos(2, 0).as('rupAccordion');
+        cy.get('@rupAccordion').plexPanel(0).click();
+        cy.get('@rupAccordion').plexSelectAsync('name="plexSelect"', 'Consulta de medicina general', '@prestaciones', 0);
+        cy.buscarPermisos(8, 0).as('internacionAccordion');
         cy.get('@internacionAccordion').within((item) => {
             cy.get('plex-bool input[type="checkbox"]').eq(1).check({
                 force: true
@@ -58,35 +66,36 @@ context('perfiles-usuario', () => {
 
     it('Agregar permisos de un perfil existente', () => {
         cy.get('table tbody tr').first().click();
-        cy.get('plex-layout-sidebar arbol-permisos>div').eq(0).plexAccordion().eq(0).as('rupAccordion');
+        cy.buscarPermisos(0, 0).as('rupAccordion');
 
         cy.get('@rupAccordion').plexBool('type="slide"', true)
         cy.plexButton('Guardar').click();
-        cy.contains('El perfil se ha guardado satisfactoriamente!');
+        cy.toast('success', 'El perfil se ha guardado satisfactoriamente!');
         cy.wait('@savePerfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.permisos).to.include('turnos:*');
         });
     });
 
     it('Inactivar un perfil activo y verificar la modificación', () => {
-        cy.get('table tbody tr').find('span').should('have.class', 'badge badge-success badge-md').first().click();
+        cy.get('table tbody tr').find('.badge-success').first().click();
         cy.get('gestor-usarios-perfiles-detail >div').plexBool('name="activo"', false);
         cy.plexButton('Guardar').click();
         cy.wait('@savePerfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.activo).to.be.eq(false);
         });
         cy.toast('success', 'El perfil se ha guardado satisfactoriamente!');
 
         cy.wait('@perfil');
-        cy.get('table tbody tr').find('span.badge.badge-success').should('not.exist');
+        cy.get('table tbody tr').find('.badge').contains('activo').should('not.exist');
     });
 
     it('Editar prestaciones de RUP en un perfil existente', () => {
         cy.get('table tbody tr').first().click();
 
-        // El gestor de usuario tiene un escrutura media maleta XD
-        // Usa muchos plex-accordion en vez de uno solo.
-        cy.get('plex-layout-sidebar arbol-permisos>div').eq(2).plexAccordion().eq(0).as('rupAccordion');
+        cy.buscarPermisos(2, 0).as('rupAccordion');
+
         cy.get('@rupAccordion').plexPanel(0).click();
 
         cy.get('@rupAccordion').plexSelectAsync('name="plexSelect"', 'colonoscopia', '@prestaciones', 0);
@@ -94,46 +103,23 @@ context('perfiles-usuario', () => {
         cy.plexButton('Guardar').click();
         cy.wait('@savePerfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.permisos).to.include('rup:tipoPrestacion:5a26e113291f463c1b982d98');
         });
-        cy.wait('@perfil');
         cy.toast('success', 'El perfil se ha guardado satisfactoriamente!');
     });
 
     it('Editar prestaciones de RUP en un perfil existente y cancelar, verificar que no se realicen cambios', () => {
         cy.get('table tbody tr').first().click();
 
-        cy.get('plex-layout-sidebar arbol-permisos>div').eq(2).plexAccordion().eq(0).as('rupAccordion');
+        cy.buscarPermisos(2, 0).as('rupAccordion');
         cy.get('@rupAccordion').plexPanel(0).click();
 
-        cy.get('@rupAccordion').plexSelect('name="plexSelect"').clearSelect();
         cy.get('@rupAccordion').plexSelectAsync('name="plexSelect"', 'consulta de nutrición', '@prestaciones', 0);
 
         cy.plexButton('Cancelar').click();
-        cy.get('table tbody tr').first().click();
-
         cy.wait('@perfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].permisos).to.include('rup:tipoPrestacion:598ca8375adc68e2a0c121b7')
-        });
-        cy.plexSelect('name="plexSelect"').contains('consulta de nutrición').should('not.exist');
-    });
-
-    it('Crear nuevo perfil y verificar que no se modifica uno pre-existente', () => {
-        crearPerfilBasico();
-        cy.wait(['@perfil', '@postPerfil']).then((xhr) => {
-            expect(xhr[1].status).to.be.eq(200);
-            cy.wait('@perfil').then((xhr2) => {
-                expect(xhr2.response.body).to.have.length(2);
-                expect(xhr2.response.body[0].permisos).to.have.length(1);
-            });
+            expect(xhr.response.body[0].permisos).not.include('rup:tipoPrestacion:59ee2d9bf00c415246fd3d90');
         });
     });
-
-    function crearPerfilBasico() {
-        cy.plexButton('NUEVO').click();
-        cy.plexText('name="nombre"', 'test perfil');
-        cy.get('div[id="accordion"]').eq(0).find('plex-bool').eq(0).click();
-        cy.plexButton('Guardar').click();
-        cy.contains('El perfil se ha guardado satisfactoriamente!');
-    };
 });
