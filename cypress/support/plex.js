@@ -151,6 +151,31 @@ Cypress.Commands.add('plexText', { prevSubject: 'optional' }, (subject, label, t
     return element;
 });
 
+Cypress.Commands.add('plexLabel', { prevSubject: 'optional' }, (subject, label) => {
+    let element;
+    if (subject) {
+        element = cy.wrap(subject).find('plex-label', { timeout: 30000 }).contains(label);
+    } else {
+        element = cy.get('plex-label', { timeout: 30000 }).contains(label);
+    }
+    return element;
+});
+
+Cypress.Commands.add('plexBadge', { prevSubject: 'optional' }, (subject, label, type = null) => {
+    let element;
+    if (subject) {
+        element = cy.wrap(subject).find('plex-badge', { timeout: 30000 })
+    } else {
+        element = cy.get('plex-badge', { timeout: 30000 });
+    }
+    if (type) {
+        element = element.find(`.badge-${type}`, { timeout: 30000 }).contains(label);
+    } else {
+        element = element.contains(label);
+    }
+    return element;
+});
+
 Cypress.Commands.add('plexTextArea', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
     if (subject) {
