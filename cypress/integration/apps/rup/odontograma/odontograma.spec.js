@@ -79,7 +79,7 @@ describe('RUP - Odontograma', () => {
             cy.wait('@rup-buscador');
         });
 
-        cy.get('rup-buscador .mdi-plus').first().click();
+        cy.get('rup-buscador').plexButtonIcon('plus').click();
 
         cy.get('path[class="diente vestibular diente-null"]').first().click({ force: true });
         cy.plexButton('Limpiar selección').click();
@@ -102,7 +102,7 @@ describe('RUP - Odontograma', () => {
             cy.wait('@rup-buscador');
         });
 
-        cy.get('rup-buscador .mdi-plus').first().click();
+        cy.get('rup-buscador').plexButtonIcon('plus').click();
 
         cy.plexBool('label="Seleccionar piezas/caras múltiples"', true);
 
@@ -130,7 +130,7 @@ describe('RUP - Odontograma', () => {
             cy.wait('@rup-buscador');
         });
 
-        cy.get('rup-buscador .mdi-plus').first().click();
+        cy.get('rup-buscador').plexButtonIcon('plus').click();
 
         cy.plexBool('label="Seleccionar piezas/caras múltiples"', true);
 
@@ -158,7 +158,7 @@ describe('RUP - Odontograma', () => {
             cy.wait('@rup-buscador');
         });
 
-        cy.get('rup-buscador .mdi-plus').first().click();
+        cy.get('rup-buscador').plexButtonIcon('plus').click();
 
         cy.plexBool('label="Seleccionar piezas/caras múltiples"', true);
 
@@ -172,7 +172,7 @@ describe('RUP - Odontograma', () => {
         cy.get('path[class="diente vestibular diente-null"]').eq(10).click({ force: true });
 
 
-        cy.get('.mdi-plus').eq(0).click();
+        cy.plexButtonIcon('plus').click();
 
         cy.get('.badge').contains('diente 18');
         cy.get('.badge').contains('diente 14');
@@ -200,7 +200,7 @@ describe('RUP - Odontograma', () => {
         cy.get('snomed-buscar').plexText('name="searchTerm"', 'odontograma').then(() => {
             cy.wait('@rup-buscador');
         });
-        cy.get('rup-buscador .mdi-plus').first().click();
+        cy.get('rup-buscador').plexButtonIcon('plus').click();
 
         cy.plexBool('label="Seleccionar piezas/caras múltiples"', true);
 
@@ -212,10 +212,11 @@ describe('RUP - Odontograma', () => {
         cy.get('snomed-buscar').plexText('name="searchTerm"', '{selectall}{backspace}');
         cy.get('rup-buscador button').contains('FRECUENTES POR PRESTACION').click();
         cy.get('rup-buscador').plexText('name="search"', '{selectall}{backspace}');
-        cy.get('.mdi-plus').eq(0).click();
+        cy.plexButtonIcon('plus').click();
 
-        cy.get('.badge').contains('diente 14').next().click({ force: true });
+        cy.get('button[title="Desvincular"]').eq(1).click({ force: true });
         cy.plexButton('Quitar relación').click();
         cy.get('.badge').contains('diente 14').should('not.exist');
-    })
-})
+    });
+
+});

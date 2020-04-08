@@ -55,7 +55,7 @@ context('RUP - Punto de inicio', () => {
         cy.plexButtonIcon('chevron-up').first().click();
         cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
-            cy.get('.mdi-plus').first().click();
+            cy.plexButtonIcon('plus').click();
         });
 
         cy.plexButton('Guardar consulta de medicina general').click();
@@ -105,7 +105,9 @@ context('RUP - Punto de inicio', () => {
 
         cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
         cy.get('table tr').contains('consulta de medicina general').first().click();
-        cy.plexButton('INICIAR PRESTACIÓN').click({ force: true });
+        cy.get('div[class="plex-box-content"] table').eq(1).plexButton('INICIAR PRESTACIÓN').click({
+            force: true
+        });
         cy.get('button').contains('CONFIRMAR').click();
 
         cy.wait('@create').then((xhr) => {
@@ -123,7 +125,7 @@ context('RUP - Punto de inicio', () => {
         cy.wait('@search').then((xhr) => {
 
             // No es plex-button
-            cy.get('.mdi-plus').first().click();
+            cy.plexButtonIcon('plus').click();
 
             // Implementar escribir en plex-text con rich text (quill editor)
             // cy.plexTextArea('name="evolucion"', 'test registro');
@@ -176,7 +178,9 @@ context('RUP - Punto de inicio', () => {
         });
         cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
         cy.get('table tr').contains('consulta de medicina general').first().click();
-        cy.plexButton('INICIAR PRESTACIÓN').click({ force: true });
+        cy.get('div[class="plex-box-content"] table').eq(2).plexButton('INICIAR PRESTACIÓN').click({
+            force: true
+        });
 
         cy.get('button').contains('CONFIRMAR').click();
 
@@ -194,7 +198,7 @@ context('RUP - Punto de inicio', () => {
 
         cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
-            cy.get('.mdi-plus').first().click();
+            cy.plexButtonIcon('plus').click();
         });
 
 
@@ -270,12 +274,12 @@ context('RUP - Punto de inicio', () => {
         cy.get('button').contains('BUSCADOR BÁSICO ').click();
         cy.plexText('name="searchTerm"', 'nota');
         cy.wait('@search').then((xhr) => {
-            cy.get('.mdi-plus').first().click();
+            cy.plexButtonIcon('plus').click();
         });
 
         cy.plexText('name="searchTerm"', '{selectall}{backspace}fiebre');
         cy.wait('@search2').then((xhr) => {
-            cy.get('.mdi-plus').first().click();
+            cy.plexButtonIcon('plus').click();
         });
 
         cy.plexButton('Guardar consulta de medicina general').click();

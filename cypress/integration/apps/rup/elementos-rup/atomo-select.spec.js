@@ -57,7 +57,7 @@ context('RUP - Ejecucion', () => {
             cy.get('rup-buscador button').contains('BUSCADOR BÁSICO ').click();
             cy.get('snomed-buscar').plexText('name="searchTerm"', 'derivaci');
             cy.wait('@rup-buscador');
-            cy.get('rup-buscador .mdi-plus').first().click();
+            cy.get('rup-buscador').plexButtonIcon('plus').click();
 
             cy.get('.rup-card').first().as('rupCard');
 
