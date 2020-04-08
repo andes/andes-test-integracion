@@ -18,12 +18,14 @@ context('RUP - Ejecucion', () => {
             cy.server();
             cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
-            cy.route('GET', '/api/core/term/snomed?search=derivaci&semanticTag=hallazgo&semanticTag=trastorno&semanticTag=procedimiento&semanticTag=entidad observable&semanticTag=producto&semanticTag=situación&semanticTag=régimen/tratamiento&semanticTag=elemento de registro&semanticTag=objeto físico&semanticTag=medicamento clínico&semanticTag=fármaco de uso clínico&semanticTag=evento', [{
+
+            const resultadoSnomed = [{
                 "conceptId": "440377005",
                 "term": "derivación por",
                 "fsn": "derivación por (entidad observable)",
                 "semanticTag": "entidad observable"
-            }]).as('rup-buscador');
+            }];
+            cy.snomedSearchStub('derivaci', resultadoSnomed, 'rup-buscador');
 
             cy.cleanDB(['prestaciones']);
 

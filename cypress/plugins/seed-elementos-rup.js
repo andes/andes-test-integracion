@@ -23,6 +23,15 @@ module.exports.createElementoRup = async (mongoUri, params) => {
             dto.conceptos = params.conceptos;
         }
 
+        if (params.requeridos) {
+            dto.requeridos = params.requeridos;
+            dto.requeridos.forEach(req => req.elementoRUP = new ObjectId(req.elementoRUP))
+        }
+
+        if (params.frecuentes) {
+            dto.frecuentes = params.frecuentes;
+        }
+
         if (params.esSolicitud !== undefined && params.esSolicitud !== null) {
             dto.esSolicitud = params.esSolicitud;
         }
@@ -33,6 +42,7 @@ module.exports.createElementoRup = async (mongoUri, params) => {
 
         return dto;
     } catch (e) {
+        console.log(e)
         throw e;
     }
 }
