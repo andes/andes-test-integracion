@@ -216,7 +216,7 @@ context('TM Profesional', () => {
         // valido que el sidebar haya traído todos los datos
         cy.get('plex-layout-sidebar strong').should('contain', 'PEREZ, MARIA');
         cy.get('plex-layout-sidebar').should('contain', '4466777');
-        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('span[class="badge badge-info"]').should('contain', 'Matriculado');
+        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('plex-badge[type="info"]').should('contain', 'Matriculado');
 
         // TEST INVIABLE cambia el valor con el paso del tiempo
         // cy.get('plex-layout-sidebar').should('contain', '11/01/1941 | ' + Cypress.moment().diff('11/01/1941', 'years') + ' años');
@@ -246,7 +246,7 @@ context('TM Profesional', () => {
         // valido que el sidebar haya traído todos los datos
         cy.get('plex-layout-sidebar strong').should('contain', 'PRUEBA, ALICIA');
         cy.get('plex-layout-sidebar').should('contain', '1711999');
-        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('span[class="badge badge-warning"]').should('contain', 'No Matriculado');
+        cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('plex-badge[type="warning"]').should('contain', 'No Matriculado');
         cy.get('plex-layout-sidebar').should('contain', 'Femenino');
         cy.get('plex-layout-sidebar').should('contain', '1217429393');
         // cy.get('plex-layout-sidebar').should('contain', 'Médico - Matrícula: 2');
