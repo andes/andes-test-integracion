@@ -7,7 +7,7 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.seed();
 
         // CREA USUARIO
-        cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:estadistica'] }).then(user => {
+        cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:estadistica', 'internacion:ingreso'] }).then(user => {
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;
 
@@ -32,12 +32,20 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.route('GET', '/api/core/term/snomed/expression?expression=<<394733009&words=**', [{
             "conceptId": "1234",
             "term": "Enfermeria en Rehabilitación",
+        }, {
+            "conceptId": "666",
+            "term": "Dolor",
         }]).as('expEspecialidad');
         cy.route('GET', '**/api/core/tm/ocupacion?nombre=**', [{
             "_id": "5c793679af78f1fa5d0a8e1e",
             "id": "5c793679af78f1fa5d0a8e1e",
             "nombre": "Abogado",
             "codigo": "131"
+        }, {
+            "_id": "5c793679af78f1fa5d0a8e1a",
+            "id": "5c793679af78f1fa5d0a8e1a",
+            "nombre": "Medico",
+            "codigo": "132"
         }]).as('getOcupacion')
         cy.viewport(1920, 1080);
     });
@@ -95,15 +103,16 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.plexSelect('name="profesional"').clearSelect();
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexText('name="motivo"', 'Estornudo');
-        cy.plexSelectAsync('name="especialidad"', 'Enf', '@expEspecialidad', 0);
-        cy.plexSelectType('label="Cobertura"', 'Ninguno');
-        cy.plexSelectType('name="situacionLaboral"', 'No trabaja y no busca trabajo');
-        cy.plexSelectAsync('name="ocupacionHabitual"', 'Abog', '@getOcupacion', 0);
+        cy.plexSelectAsync('name="especialidad"', 'Dol', '@expEspecialidad', 0);
+        cy.plexSelectType('label="Cobertura"', 'Plan o Seguro publico');
+        cy.plexSelectType('name="situacionLaboral"', 'Trabaja o está de licencia');
+        cy.plexSelect('name="ocupacionHabitual"').clearSelect();
+        cy.plexSelectAsync('name="ocupacionHabitual"', 'Med', '@getOcupacion', 0);
         cy.plexSelectType('name="nivelInstruccion"', 'Ninguno');
 
         cy.plexButtonIcon('check').click();
         cy.wait(200);
-        cy.contains('Paciente internado')
+        cy.contains('Los datos se actualizaron correctamente')
         cy.contains('Aceptar').click();
     });
 });

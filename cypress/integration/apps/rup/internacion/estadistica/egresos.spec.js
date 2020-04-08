@@ -8,7 +8,7 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.seed();
 
         // CREA USUARIO
-        cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:estadistica'] }).then(user => {
+        cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:estadistica', 'internacion:egreso'] }).then(user => {
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;
 

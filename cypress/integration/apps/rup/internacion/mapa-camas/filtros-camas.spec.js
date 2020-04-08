@@ -3,14 +3,14 @@ const { permisosUsuario, factoryInternacion } = require('../utiles');
 describe('Filtros de Mapa Camas', () => {
     const filtros = {
         unidadesOrganizativas: [
-            { conceptId: '225747005', nombre: 'departamento de rayos X' },
-            { conceptId: '309915006', nombre: 'servicio de cardiología' }
+            { conceptId: '225747005', term: 'departamento de rayos X' },
+            { conceptId: '309915006', term: 'servicio de cardiología' }
         ],
         sectores: [
-            { id: '5c769884cfefcd5e80f7396e', nombre: 'ala izquierda' },
-            { id: '5c769884cfefcd5e80f7396d', nombre: 'ala derecha' }
+            { id: '5c769884cfefcd5e80f7396e', term: 'ala izquierda' },
+            { id: '5c769884cfefcd5e80f7396d', term: 'ala derecha' }
         ],
-        tipoCama: { conceptId: '463742000', nombre: 'cama bariátrica' },
+        tipoCama: { conceptId: '463742000', term: 'cama bariátrica' },
         esCensable: false
     };
     let token;
@@ -28,6 +28,7 @@ describe('Filtros de Mapa Camas', () => {
                     pacientes = pacientesCreados;
 
                     // CREA UN MUNDO IDEAL DE INTERNACION
+                    console.log(filtros)
                     factoryInternacion({
                         configCamas: [
                             { estado: 'ocupada', pacientes: [pacientes[0]], sector: filtros.sectores[0] },

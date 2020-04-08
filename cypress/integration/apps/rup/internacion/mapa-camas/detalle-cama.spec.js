@@ -15,7 +15,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
 
                 // CREA PACIENTES
                 cy.task('database:seed:paciente').then(pacientesCreados => {
-                    paciente = pacientesCreados[0];
+                    paciente = pacientesCreados[1];
 
                     // CREA UN MUNDO IDEAL DE INTERNACION
                     factoryInternacion({
@@ -36,9 +36,9 @@ describe('Mapa Camas - Detalle de Cama', () => {
     });
 
     it('Verificar datos de cama', () => {
-        cy.wait(500);
+        cy.wait(2000);
 
-        cy.get('table tr').contains(paciente.apellido).first().click();
+        cy.get('table tr').eq(1).find('td').eq(1).contains('ANDES').click();
         cy.wait(500);
 
         // VERIF. NOMBRE
@@ -71,7 +71,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
         // VERIF. ESPECIALIDADES
         let esp = '';
         for (const especialidad of cama.estados[0].especialidades) {
-            esp = especialidad.term + ', ';
+            esp = esp + especialidad.term;
         }
 
         cy.get('plex-detail section div').eq(4).find('small').should(($span) => {
@@ -88,9 +88,19 @@ describe('Mapa Camas - Detalle de Cama', () => {
             expect($span.text()).to.equal(cama.cama.sectores[0].nombre);
         });
 
+        let equipamiento = ''
+        for (const equip of cama.cama.equipamiento) {
+            equipamiento = equipamiento + equip.term;
+        }
+
+        // VERIF. EQUIPAMIENTO
+        cy.get('plex-detail section div').eq(7).find('small').should(($span) => {
+            expect($span.text().split(',').join("")).to.equal(equipamiento.split(',').join(""));
+        });
+
         // VERIF. ESTADO
         cy.get('plex-detail').eq(1).find('section').find('div').find('plex-badge').eq(0).find('span').should(($span) => {
-            expect($span.text().trim()).to.equal(paciente.estado);
+            expect($span.text().trim()).to.equal(paciente.estado.toUpperCase());
         });
 
         // VERIF. NOMBRE - APELLIDO PACIENTE
@@ -100,11 +110,16 @@ describe('Mapa Camas - Detalle de Cama', () => {
 
         // VERIF. DOCUMENTO
         cy.get('plex-detail').eq(1).find('section').find('div').eq(1).find('div').eq(1).should(($div) => {
-            expect($div.get(0).innerText).to.equal(paciente.documento);
+            expect($div.get(0).innerText.split('.').join("")).to.equal(paciente.documento);
+        });
+
+        // VERIF. SEXO
+        cy.get('plex-detail').eq(1).find('section').find('div').eq(4).find('small').should(($span) => {
+            expect($span.text().toLowerCase()).to.equal(paciente.genero);
         });
 
         // VERIF. FECHA NACIMIENTO
-        cy.get('plex-detail').eq(1).find('section').find('div').eq(4).find('small').should(($span) => {
+        cy.get('plex-detail').eq(1).find('section').find('div').eq(5).find('small').should(($span) => {
             expect($span.text()).to.equal(moment(paciente.fechaNacimiento).format('DD/MM/YYYY'));
         });
     });
