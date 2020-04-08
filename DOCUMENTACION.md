@@ -195,6 +195,27 @@ cy.task('database:create:paciente-app',pacienteAppAux).then(pacienteResult => {
 });
 ```
 
+### Task [database:seed:prestaciones] https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-prestaciones.js#6
+
+El task [seed:prestaciones] persiste un documento en la colección prestaciones. La prestación es nominalizada y se crea a partir de un template que se puede setear en (https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/data/prestacion/prestacion-default.json)
+
+Ejemplo:
+
+```javascript
+cy.task('database:seed:prestaciones', {
+  template: "default",
+  estado: "XXXXX",
+  turno: "XXXXX",
+  ambito: "internacion" | "ambulatorio",
+  fecha: "XX-XX-XXXX",
+  hora: "hh:mm:ss",
+  organizacion: 'id',
+  tipoPrestacion: 'id',
+  profesional: 'id',
+  paciente: 'id'
+});
+```
+
 #### [plexText]
 
 El comando `plexText` se utiliza para el ingreso de datos en un plexText determinado
