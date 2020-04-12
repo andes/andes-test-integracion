@@ -14,6 +14,8 @@
     "prod:backup": "node scripts/prepare.js production backup",
     "prod:cleanup": "node scripts/prepare.js production cleanup",
     "prod:update": "cross-env APP=master API=master docker-compose -f docker/docker-compose.yml pull",
+    "dev": "npx cypress open -c baseUrl=http://localhost:4200 --env ENVIRONMENT=develop,API_SERVER=http://localhost:3002,RETRIES=0",
+    "dev:run": "npx cypress run -c baseUrl=http://localhost:4200 --env ENVIRONMENT=develop,API_SERVER=http://localhost:3002,RETRIES=3",
     "dev:up": "node scripts/prepare.js develop up",
     "dev:reset": "node scripts/prepare.js develop reset",
     "dev:down": "node scripts/prepare.js develop down",
