@@ -58,6 +58,59 @@ cy.plexDatetime('name="fecha-ingreso"', { text: "01/01/2020", clear: true });
 ```
 
 
+#### [plexText]()
+
+El comando `plexText` se utiliza para el ingreso de datos en un plexText determinado
+
+Parámetros:
+
+1. **label**: label correspondiente al plexText dentro del HTML.
+2. **text**: texto que se ingresa en el plexText.
+
+Ejemplos:
+
+```javascript
+// Ejemplo 1
+cy.plexText('label="Apellido"', "Martinez");
+```
+
+```javascript
+// Ejemplo 2
+cy.get("rup-buscador").plexText('name="search"', "{selectall}{backspace}");
+```
+
+#### [plexButton]()
+
+Nota: los comandos `plexButton` y `plexButtonIcon` se utilizan para acceder en ambos casos a un **plex-button**
+
+
+`plexButton(label)` se utiliza para acceder a `<plex-button label="aceptar"></plex-button>` o `<plex-button>aceptar</plex-button>`
+
+Parámetros:
+
+1. **label**: valor correspondiente al atributo label o el contenido *dentro* del tag `<plex-button>`.
+Ejemplo:
+
+```javascript
+// Ejemplo plexButton ('GUARDAR' es el label o el contenido del plex-button)
+cy.plexButton("GUARDAR").click();
+```
+#### [plexButtonIcon]()
+
+`plexButtonIcon(icon)` para acceder a `<plex-button icon="clock"></plex-button>`
+
+Parámetros:
+
+1. **icon**: valor correspondiente al nombre del icono como atributo de un `<plex-button>`.
+
+Ejemplo:
+
+```javascript
+// Ejemplo plexButtonIcon ('plus' es un icono de símbolo '+')
+cy.plexButtonIcon('plus').click();
+```
+
+
 #### [route]
 
 El comando `route` se utiliza para administrar el comportamiento de las solicitudes a la api.
@@ -122,7 +175,9 @@ cy.login('30643636', 'asd').then(t => {
 ```
 
 
-### Task [database:seed:agenda] https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-agenda.js#6
+### Task 
+
+#### [database:seed:agenda](https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-agenda.js#6)
 
 El task [seed:agenda] se utiliza para crear todo tipo de agendas en la base de datos para luego poder utilizar en los test. Éstas se conformarán con los parámetros que le enviemos ya sea pacientes, tipo de prestaciones, estado, organizacion, hora de inicio, hora de fin, etc.
 
@@ -160,8 +215,9 @@ cy.task('database:seed:agenda', {
 
 ```
 
+#### [seed:paciente]()
 
-El task [seed:paciente] se utiliza para crear un paciente temporal, validado o sin-documento, según se indique por parámetro. En el siguiente ejemplo se crea un paciente en estado 'validado' y se lo asigna a una variable previamente declarada.
+El task `seed:paciente` se utiliza para crear un paciente temporal, validado o sin-documento, según se indique por parámetro. En el siguiente ejemplo se crea un paciente en estado 'validado' y se lo asigna a una variable previamente declarada.
 
 Ejemplo:
 
@@ -189,7 +245,9 @@ cy.task('database:create:paciente', {
 });
 ```
 
-El task [create:maquinaEstados] crea una máquina de estados de internacion, que por defecto toma el fixture ubicado en '/data/internacion/maquina-estados-default' y luego, mediante el paso de paramentros se puede modificar particularmente la organizacion, el ámbito, la capa, los estados y las relaciones que puede tener esta máquina de estados. 
+#### [database:create:maquinaEstados]()
+
+El task `database:create:maquinaEstados` crea una máquina de estados de internacion, que por defecto toma el fixture ubicado en '/data/internacion/maquina-estados-default' y luego, mediante el paso de paramentros se puede modificar particularmente la organizacion, el ámbito, la capa, los estados y las relaciones que puede tener esta máquina de estados. 
 
 Ejemplo: 
 ```javascript
@@ -202,7 +260,9 @@ cy.task('database:create:maquinaEstados', {
 });
 ```
 
-El task [create:paciente-app] se utiliza para crear un paciente para la aplicación mobile con datos básicos, según se indique en sus parámetros (param), puede recibir un paciente-app con sus datos completos o parciales y usar datos propios. En el siguiente ejemplo se crea un paciente-app con algunos datos y se lo asigna a una variable previamente declarada.
+#### [database:create:paciente-app]()
+
+El task [database:create:paciente-app] se utiliza para crear un paciente para la aplicación mobile con datos básicos, según se indique en sus parámetros (param), puede recibir un paciente-app con sus datos completos o parciales y usar datos propios. En el siguiente ejemplo se crea un paciente-app con algunos datos y se lo asigna a una variable previamente declarada.
 
 Ejemplo:
 
@@ -223,9 +283,9 @@ cy.task('database:create:paciente-app',pacienteAppAux).then(pacienteResult => {
 });
 ```
 
-### Task [database:seed:prestacion] https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-prestaciones.js#6
+#### [database:seed:prestacion](https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-prestaciones.js#6)
 
-El task [seed:prestacion] persiste un documento en la colección prestaciones. La prestación es nominalizada y se crea a partir de un template que se puede setear en (https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/data/prestacion/prestacion-default.json)
+El task `database:seed:prestacion` persiste un documento en la colección prestaciones. La prestación es nominalizada y se crea a partir de un template que se puede setear en (https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/data/prestacion/prestacion-default.json)
 
 Ejemplo:
 
@@ -244,9 +304,11 @@ cy.task('database:seed:prestacion', {
 });
 ```
 
-### Task [database:seed:elemento-rup] https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-elementos-rup#6
+#### [database:seed:elemento-rup](https://github.com/andes/andes-test-integracion/edit/master/cypress/plugins/seed-elementos-rup#6)
 
-El task [seed:elemento-rup] persiste un documento en la colección elementos RUP. El elemento RUP se crea a partir de un template que se puede setear en (https://github.com/andes/andes-test-integracion/blob/master/cypress/plugins/data/elemento-rup/elemento-rup-atomo.json)
+El task `seed:elemento-rup` persiste un documento en la colección elementos RUP. El elemento RUP se crea a partir de un template que se puede setear en (https://github.com/andes/andes-test-integracion/blob/master/cypress/plugins/data/elemento-rup/elemento-rup-atomo.json)
+
+
 
 Ejemplo:
 
@@ -273,53 +335,3 @@ cy.task('database:seed:elemento-rup', {
 });
 ```
 
-#### [plexText]
-
-El comando `plexText` se utiliza para el ingreso de datos en un plexText determinado
-
-Parámetros:
-
-1. **label**: label correspondiente al plexText dentro del HTML.
-2. **text**: texto que se ingresa en el plexText.
-
-Ejemplos:
-
-```javascript
-// Ejemplo 1
-cy.plexText('label="Apellido"', "Martinez");
-```
-
-```javascript
-// Ejemplo 2
-cy.get("rup-buscador").plexText('name="search"', "{selectall}{backspace}");
-```
-
-#### [plexButton]
-
-Nota: los comandos `plexButton` y `plexButtonIcon` se utilizan para acceder en ambos casos a un **plex-button**
-
-
-`plexButton(label)` se utiliza para acceder a `<plex-button label="aceptar"></plex-button>` o `<plex-button>aceptar</plex-button>`
-
-Parámetros:
-
-1. **label**: valor correspondiente al atributo label o el contenido *dentro* del tag `<plex-button>`.
-Ejemplo:
-
-```javascript
-// Ejemplo plexButton ('GUARDAR' es el label o el contenido del plex-button)
-cy.plexButton("GUARDAR").click();
-```
-#### [plexButtonIcon]
-`plexButtonIcon(icon)` para acceder a `<plex-button icon="clock"></plex-button>`
-
-Parámetros:
-
-1. **icon**: valor correspondiente al nombre del icono como atributo de un `<plex-button>`.
-
-Ejemplo:
-
-```javascript
-// Ejemplo plexButtonIcon ('plus' es un icono de símbolo '+')
-cy.plexButtonIcon('plus').click();
-```
