@@ -76,7 +76,7 @@ module.exports.createCama = async (mongoUri, params) => {
             });
         }
 
-        dtoCama.equipamiento = params.equipamiento || dtoCama.equipamiento;
+        // dtoCama.equipamiento = params.equipamiento || dtoCama.equipamiento;
         dtoCama._id = new ObjectId();
         await camaDB.insertOne(dtoCama);
 
@@ -123,7 +123,9 @@ module.exports.createCama = async (mongoUri, params) => {
         dtoEstadistica.estados[index].especialidades = dtoCama.especialidades || especialidades;
         dtoEstadistica.estados[index].idInternacion = dtoPrestacion._id || null;
         dtoEstadistica.estados[index].esCensable = (params.esCensable !== undefined) ? params.esCensable : true;
+        dtoEstadistica.estados[index].esMovimiento = true;
         dtoEstadistica.estados[index].fecha = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
+        dtoEstadistica.estados[index].equipamiento = params.equipamiento || dtoCama.equipamiento;
         dtoEstadistica.start = moment(params.fechaIngreso).startOf('month').toDate() || moment().startOf('month').toDate();
         dtoEstadistica.end = moment(params.fechaIngreso).endOf('month').toDate() || moment().endOf('month').toDate();
 
