@@ -284,7 +284,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.get('paciente-listado').find('td').contains('10000000').parent().parent().click();
 
         cy.plexSelect('placeholder="Seleccione..."').click();
-        cy.plexSelect('placeholder="Seleccione..."', 1).click();
+        cy.plexSelect('placeholder="Seleccione..."', 1).click({ force: true });
 
         cy.plexButton('Guardar').click();
         cy.wait('@putPaciente').then((xhr) => {
