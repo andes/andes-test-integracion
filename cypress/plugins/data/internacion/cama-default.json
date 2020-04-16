@@ -1,5 +1,8 @@
 {
-    "organizacion": "57e9670e52df311059bc8964",
+    "organizacion": {
+        "_id": "57e9670e52df311059bc8964",
+        "nombre": "HOSPITAL PRIVINCIAL NEUQUEN - DR CASTRO RENDON"
+    },
     "ambito": "internacion",
     "unidadOrganizativaOriginal": {
         "id" : "5af19d078db89356597271fd",
@@ -29,14 +32,5 @@
         "fsn" : "cama estándar (objeto físico)",
         "semanticTag" : "objeto físico",
         "refsetIds" : []
-    },
-    "equipamiento" : [ 
-        {
-            "refsetIds" : [],
-            "conceptId" : "470361000",
-            "term" : "sistema de aspiración para uso general, al vacío",
-            "fsn" : "sistema de aspiración para uso general, al vacío (objeto físico)",
-            "semanticTag" : "objeto físico"
-        }
-    ]
+    }
 }

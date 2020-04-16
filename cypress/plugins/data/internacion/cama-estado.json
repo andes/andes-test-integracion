@@ -17,7 +17,7 @@
             "estado" : "disponible",
             "esCensable" : true,
             "idInternacion" : null,
-            "esMovimiento" : false,
+            "esMovimiento" : true,
             "sugierePase" : null,
             "fecha" : "2020-02-04T17:32:57.731Z",
             "unidadOrganizativa" : {
@@ -36,6 +36,15 @@
                     "term" : "medicina nuclear - especialidad",
                     "fsn" : "medicina nuclear - especialidad (calificador)",
                     "semanticTag" : "calificador"
+                }
+            ],
+            "equipamiento" : [ 
+                {
+                    "refsetIds" : [],
+                    "conceptId" : "470361000",
+                    "term" : "sistema de aspiración para uso general, al vacío",
+                    "fsn" : "sistema de aspiración para uso general, al vacío (objeto físico)",
+                    "semanticTag" : "objeto físico"
                 }
             ]
         }

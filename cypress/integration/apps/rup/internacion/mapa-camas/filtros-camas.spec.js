@@ -28,7 +28,6 @@ describe('Filtros de Mapa Camas', () => {
                     pacientes = pacientesCreados;
 
                     // CREA UN MUNDO IDEAL DE INTERNACION
-                    console.log(filtros)
                     factoryInternacion({
                         configCamas: [
                             { estado: 'ocupada', pacientes: [pacientes[0]], sector: filtros.sectores[0] },

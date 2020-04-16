@@ -42,7 +42,8 @@ module.exports.createCama = async (mongoUri, params) => {
         let dtoCama = require('./data/internacion/cama-default');
         dtoCama = JSON.parse(JSON.stringify(dtoCama));
 
-        dtoCama.organizacion = ObjectId(params.organizacion || dtoCama.organizacion);
+        dtoCama.organizacion = params.organizacion || dtoCama.organizacion;
+        dtoCama.organizacion._id = ObjectId(dtoCama.organizacion._id);
         dtoCama.nombre = params.nombre || ('CAMA ' + faker.random.number({ min: 0, max: 9999 }));
 
         if (params.unidadOrganizativa) {
@@ -111,7 +112,7 @@ module.exports.createCama = async (mongoUri, params) => {
 
         dtoEstadistica = JSON.parse(JSON.stringify(dtoEstadistica));
         dtoEstadistica.idCama = ObjectId(dtoCama._id);
-        dtoEstadistica.idOrganizacion = ObjectId(dtoCama.organizacion);
+        dtoEstadistica.idOrganizacion = ObjectId(dtoCama.organizacion._id);
 
         const index = dtoEstadistica.estados.length - 1;
         const unidadOrg = dtoEstadistica.estados[index].unidadOrganizativa;
@@ -124,6 +125,7 @@ module.exports.createCama = async (mongoUri, params) => {
         dtoEstadistica.estados[index].idInternacion = dtoPrestacion._id || null;
         dtoEstadistica.estados[index].esCensable = (params.esCensable !== undefined) ? params.esCensable : true;
         dtoEstadistica.estados[index].esMovimiento = true;
+        dtoEstadistica.estados[index].equipamiento = dtoCama.equipamiento || dtoEstadistica.estados[index].equipamiento;
         dtoEstadistica.estados[index].fecha = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
         dtoEstadistica.estados[index].equipamiento = params.equipamiento || dtoCama.equipamiento;
         dtoEstadistica.start = moment(params.fechaIngreso).startOf('month').toDate() || moment().startOf('month').toDate();

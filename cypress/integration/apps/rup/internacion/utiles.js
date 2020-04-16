@@ -3,6 +3,15 @@
 export const permisosUsuario = [
     'turnos:*',
     'mpi:*',
+    'internacion:cama:create',
+    'internacion:cama:baja',
+    'internacion:mapaDeCamas',
+    'internacion:ingreso',
+    'internacion:egreso',
+    'internacion:movimientos',
+    'internacion:censo',
+    'internacion:inicio',
+    'internacion:descargarListado',
     'rup:tipoPrestacion:5951051aa784f4e1a8e2afe1',
     'rup:tipoPrestacion:5a26e113291f463c1b982d98',
     'rup:tipoPrestacion:598ca8375adc68e2a0c121c3',
@@ -24,9 +33,11 @@ function toPromise(task) {
 }
 
 export function factoryInternacion(params = {}) {
-    const maquinaEstados = { ...params.maquinaEstados } || {};
-    cy.task('database:create:maquinaEstados', maquinaEstados);
     let camas = [];
+    const maquinaEstados = { ...params.maquinaEstados } || {};
+    cy.task('database:create:maquinaEstados', {...maquinaEstados, capa: 'medica' });
+    cy.task('database:create:maquinaEstados', {...maquinaEstados, capa: 'estadistica' });
+    cy.task('database:create:maquinaEstados', {...maquinaEstados, capa: 'enfermeria'  });
     params.configCamas.map(elemento => {
         const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
         for (let i = 0; i < count; i++) {
