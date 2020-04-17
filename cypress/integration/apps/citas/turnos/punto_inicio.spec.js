@@ -336,7 +336,7 @@ context('punto de inicio', () => {
 
         cy.get('plex-tabs').contains('Historial').click({ force: true });
 
-        cy.get('li[class="list-group-item"]').find('span[class="badge badge-success"]').contains('ASIGNADO');
+        cy.get('li[class="list-group-item"]').plexBadge('ASIGNADO');
 
         cy.get('li[class="list-group-item"]').contains(Cypress.moment(turno).format('DD/MM/YYYY'));
 
