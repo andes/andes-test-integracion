@@ -149,9 +149,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.wait('@profesionalSolicitante');
         cy.plexSelectType('label="Profesional"', '{enter}');
         cy.plexButton('Confirmar').click();
-        cy.wait('@getSolicitudes').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+        cy.wait('@getSolicitudes')
         cy.wait('@patchSolicitud');
         cy.wait('@getSolicitudes');
         cy.get('.badge').contains('asignada');
