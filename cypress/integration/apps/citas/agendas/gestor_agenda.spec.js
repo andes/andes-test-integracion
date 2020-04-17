@@ -9,6 +9,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '57f5063f69fe79a598fcf99d', estado: 'publicada', inicio: 3, fin: 4 });
         cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', inicio: 4, fin: 5 });
         cy.task('database:seed:agenda', { tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', inicio: 5, fin: 6 });
+        cy.task('database:seed:agenda', { tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', profesionales: '5d49fa8bb6834a1d95e277b8', inicio: 5, fin: 6 });
         cy.login('30643636', 'asd').then(t => {
             token = t;
 
@@ -274,26 +275,24 @@ describe('CITAS - Planificar Agendas', () => {
 
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.length).to.be.eq(5);
         });
         cy.plexButtonIcon('chevron-down').click();
         cy.plexSelectType('label="Estado"', 'publicada');
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.length).to.be.eq(2);
         });
-        cy.get('tbody tr').first().click();
+        cy.get('tbody tr').contains('ESPOSITO').click();
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('publicada');
             expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
-            expect(xhr.response.body.profesionales[0].id).to.be.eq('5c82a5a53c524e4c57f08cf2');
-            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b9');
+            expect(xhr.response.body.profesionales[0].id).to.be.eq('5d49fa8bb6834a1d95e277b8');
+            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('57f5060669fe79a598f4e841');
             expect(xhr.response.body.bloques[0].accesoDirectoDelDia).to.be.eq(4);
             expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(4);
             expect(xhr.response.body.bloques[0].turnos[0].estado).to.be.eq('disponible');
         });
-        cy.get('.lista-turnos').first().click();
+        cy.get('.lista-turnos').contains('Disponible').click();
         cy.get('plex-box').eq(1).plexButtonIcon('stop').click();
         cy.plexButton('Confirmar').click();
         cy.toast('alert', 'El turno seleccionado fue suspendido');
@@ -301,22 +300,22 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('publicada');
             expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
-            expect(xhr.response.body.profesionales[0].id).to.be.eq('5c82a5a53c524e4c57f08cf2');
-            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b9');
+            expect(xhr.response.body.profesionales[0].id).to.be.eq('5d49fa8bb6834a1d95e277b8');
+            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('57f5060669fe79a598f4e841');
             expect(xhr.response.body.bloques[0].accesoDirectoDelDia).to.be.eq(4);
             expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(3);
-            expect(xhr.response.body.bloques[0].tipoPrestaciones[0]._id).to.be.eq('598ca8375adc68e2a0c121b9');
+            expect(xhr.response.body.bloques[0].tipoPrestaciones[0]._id).to.be.eq('57f5060669fe79a598f4e841');
             expect(xhr.response.body.bloques[0].turnos[1].estado).to.be.eq('disponible');
         });
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('publicada');
             expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
-            expect(xhr.response.body.profesionales[0].id).to.be.eq('5c82a5a53c524e4c57f08cf2');
-            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b9');
+            expect(xhr.response.body.profesionales[0].id).to.be.eq('5d49fa8bb6834a1d95e277b8');
+            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('57f5060669fe79a598f4e841');
             expect(xhr.response.body.bloques[0].accesoDirectoDelDia).to.be.eq(4);
             expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(3);
-            expect(xhr.response.body.bloques[0].tipoPrestaciones[0]._id).to.be.eq('598ca8375adc68e2a0c121b9');
+            expect(xhr.response.body.bloques[0].tipoPrestaciones[0]._id).to.be.eq('57f5060669fe79a598f4e841');
             expect(xhr.response.body.bloques[0].turnos[1].estado).to.be.eq('disponible');
         });
         cy.wait('@getAgendas');
