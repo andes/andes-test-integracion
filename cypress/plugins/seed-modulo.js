@@ -3,25 +3,7 @@ const faker = require('faker');
 const { connectToDB, ObjectId } = require('./database');
 
 
-function postModuloElastic(elasticUri, modulo) {
-    const mod = { ...modulo };
-    mod.id = mod._id;
-    delete mod._id;
-    return new Promise((resolve, reject) => {
-        request({
-            method: 'POST',
-            url: elasticUri + '/andes/modulos/' + mod.id,
-            body: JSON.stringify(mod),
-            headers: {
-                'content-type': 'application/json; charset=UTF-8'
-            }
-        }, () => {
-            return resolve();
-        });
-    })
-}
-
-module.exports.createModulo = async (mongoUri, elasticUri, params) => {
+module.exports.createModulo = async (mongoUri, params) => {
     //recibe un modulo en params o vacio y usa datos propios
     params = params || {};
     try {
@@ -52,8 +34,7 @@ module.exports.createModulo = async (mongoUri, elasticUri, params) => {
         }
 
         modulo._id = new ObjectId();
-        let ins = await ModuloDB.insertOne(modulo);
-        await postModuloElastic(elasticUri, modulo);
+        await ModuloDB.insertOne(modulo);
         return modulo;
     } catch (e) {
         return e;

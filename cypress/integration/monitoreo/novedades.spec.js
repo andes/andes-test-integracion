@@ -19,7 +19,7 @@ context('Registro novedades', () => {
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });
-        // se crea módulo un definido para test
+        // se crea un módulo especifico definido para test
         cy.task('database:create:modulo', modulo).then(m => {
             modulo = m;
             cy.log(modulo);

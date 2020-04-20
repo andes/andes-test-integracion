@@ -83,7 +83,7 @@ module.exports = (on, config) => {
             return seedUsuario(mongoUri, dto);
         },
         'database:create:modulo': (params = {}) => {
-            return createModulo(mongoUri, elasticuri, params);
+            return createModulo(mongoUri, params);
         }
     });
 
