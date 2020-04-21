@@ -4,6 +4,7 @@ const { connectToDB, ObjectId } = require('./database');
 module.exports.createUsuario = async (mongoUri, params) => {
     params = params || {};
     try {
+
         const client = await connectToDB(mongoUri);
         const usuarioDB = await client.db().collection('authUsers');
 
@@ -37,6 +38,9 @@ module.exports.createUsuario = async (mongoUri, params) => {
 
         dto._id = new ObjectId();
         await usuarioDB.insertOne(dto);
+
+        console.log('......................................');
+        console.log(dto);
 
         return dto;
     } catch (e) {

@@ -1,7 +1,7 @@
 const moment = require('moment')
 const { permisosUsuario, factoryInternacion } = require('../utiles');
 
-describe('Capa Estadistica - Ingresos', () => {
+describe('Capa Medica - Egresos', () => {
     let token;
     let pacientes;
     before(() => {
@@ -9,6 +9,7 @@ describe('Capa Estadistica - Ingresos', () => {
 
         // CREA USUARIO
         cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:medica', 'internacion:egreso'] }).then(user => {
+            cy.log(user);
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;
 

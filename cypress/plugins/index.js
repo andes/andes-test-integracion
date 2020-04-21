@@ -79,7 +79,7 @@ module.exports = (on, config) => {
         'database:create:perfil': (dto) => {
             return seedPerfil(mongoUri, dto);
         },
-        'database:create:usuario': (dto) => {
+        'database:create:Gusuario': (dto) => {
             return seedUsuario(mongoUri, dto);
         }
     });

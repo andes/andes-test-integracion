@@ -12,7 +12,7 @@ context('Gestor de Usuarios', () => {
         cy.task('database:create:perfil').then(p => {
             perfil = p;
         });
-        cy.task('database:create:usuario').then(user => {
+        cy.task('database:create:Gusuario').then(user => {
             usuario = user;
         });
     });
