@@ -151,6 +151,19 @@ Cypress.Commands.add('plexText', { prevSubject: 'optional' }, (subject, label, t
     return element;
 });
 
+Cypress.Commands.add('plexHtml', { prevSubject: 'optional' }, (subject, label, text = null) => {
+    let element;
+    if (subject) {
+        element = cy.wrap(subject).find(`plex-text[${label}] quill-editor div[class="ql-container ql-snow"] div p`).first();
+    } else {
+        element = cy.get(`plex-text[${label}] quill-editor div[class="ql-container ql-snow"] div p`).first();
+    }
+    if (text) {
+        element.type(text, { force: true });
+    }
+    return element;
+})
+
 Cypress.Commands.add('plexLabel', { prevSubject: 'optional' }, (subject, label) => {
     let element;
     if (subject) {

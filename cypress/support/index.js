@@ -20,6 +20,7 @@ import './plex'
 import './seed'
 import './time'
 import './gestorUsuario'
+import './rup'
 
 const addContext = require('mochawesome/addContext')
 
