@@ -9,20 +9,18 @@ describe('Mapa Camas - Detalle de Cama', () => {
         cy.seed();
 
         // CREA USUARIO
-        cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:estadistica'] }).then(user => {
+        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica'], organizacion: '57e9670e52df311059bc8964' }).then(user => {
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;
 
                 // CREA PACIENTES
                 cy.task('database:seed:paciente').then(pacientesCreados => {
                     paciente = pacientesCreados[1];
-
                     // CREA UN MUNDO IDEAL DE INTERNACION
                     factoryInternacion({
-                        configCamas: [{ estado: 'ocupada', pacientes: [paciente], sector: '5c769884cfefcd5e80f7396e' }]
+                        configCamas: [{ estado: 'ocupada', pacientes: [paciente], unidadOrganizativa: '309901009', sector: '5b0586800d3951652da7daa1' }]
                     }).then(camasCreadas => {
                         cama = camasCreadas[0];
-                        return cy.goto('/internacion/mapa-camas', token);
                     });
                 });
             });
@@ -33,9 +31,11 @@ describe('Mapa Camas - Detalle de Cama', () => {
         cy.server();
         cy.viewport(1920, 1080);
         cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
+        cy.route('GET', '**/api/core/mpi/pacientes/**', paciente).as('getPaciente');
     });
 
     it('Verificar datos de cama', () => {
+        cy.goto('/internacion/mapa-camas', token);
         cy.wait(2000);
 
         cy.get('table tr').eq(1).find('td').eq(1).contains('ANDES').click();
@@ -89,14 +89,16 @@ describe('Mapa Camas - Detalle de Cama', () => {
         });
 
         let equipamiento = ''
-        for (const equip of cama.cama.equipamiento) {
-            equipamiento = equipamiento + equip.term;
+        if (cama.cama.equipamiento) {
+            for (const equip of cama.cama.equipamiento) {
+                equipamiento = equipamiento + equip.term;
+            }
+    
+            // VERIF. EQUIPAMIENTO
+            cy.get('plex-detail section div').eq(7).find('small').should(($span) => {
+                expect($span.text().split(',').join("")).to.equal(equipamiento.split(',').join(""));
+            });
         }
-
-        // VERIF. EQUIPAMIENTO
-        cy.get('plex-detail section div').eq(7).find('small').should(($span) => {
-            expect($span.text().split(',').join("")).to.equal(equipamiento.split(',').join(""));
-        });
 
         // VERIF. ESTADO
         cy.get('plex-detail').eq(1).find('section').find('div').find('plex-badge').eq(0).find('span').should(($span) => {
@@ -110,7 +112,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
 
         // VERIF. DOCUMENTO
         cy.get('plex-detail').eq(1).find('section').find('div').eq(1).find('div').eq(1).should(($div) => {
-            expect($div.get(0).innerText.split('.').join("")).to.equal(paciente.documento);
+            expect($div.get(0).innerText.split('.').join("").trim()).to.equal(paciente.documento);
         });
 
         // VERIF. SEXO

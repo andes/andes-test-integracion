@@ -48,7 +48,7 @@ module.exports.createCama = async (mongoUri, params) => {
 
         if (params.unidadOrganizativa) {
             const organizacionDB = await client.db().collection('organizacion');
-            const organizacion = await organizacionDB.findOne({ _id: dtoCama.organizacion });
+            const organizacion = await organizacionDB.findOne({ _id: dtoCama.organizacion._id });
             organizacion.unidadesOrganizativas.map(unidadOrg => {
                 if (unidadOrg.conceptId === params.unidadOrganizativa) {
                     dtoCama.unidadOrganizativaOriginal = unidadOrg;
@@ -58,7 +58,7 @@ module.exports.createCama = async (mongoUri, params) => {
 
         if (params.sector) {
             const organizacionDB = await client.db().collection('organizacion');
-            const organizacion = await organizacionDB.findOne({ _id: dtoCama.organizacion });
+            const organizacion = await organizacionDB.findOne({ _id: dtoCama.organizacion._id });
             organizacion.mapaSectores.map(sector => {
                 if (String(sector._id) === String(params.sector)) {
                     dtoCama.sectores[0] = sector;
@@ -69,7 +69,6 @@ module.exports.createCama = async (mongoUri, params) => {
         if (params.tipoCama) {
             let tiposCama = require('./data/internacion/tipos-cama');
             tiposCama = JSON.parse(JSON.stringify(tiposCama));
-
             tiposCama.map(tipoCama => {
                 if (tipoCama.conceptId === params.tipoCama) {
                     dtoCama.tipoCama = tipoCama;

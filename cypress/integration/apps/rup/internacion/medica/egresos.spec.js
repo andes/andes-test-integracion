@@ -8,7 +8,7 @@ describe('Capa Medica - Egresos', () => {
         cy.seed();
 
         // CREA USUARIO
-        cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:medica', 'internacion:egreso'] }).then(user => {
+        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:medica', 'internacion:egreso'] }).then(user => {
             cy.log(user);
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;

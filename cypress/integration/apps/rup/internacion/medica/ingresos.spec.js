@@ -7,7 +7,7 @@ describe('Capa Médica - Ingresos', () => {
         cy.seed();
 
         // CREA USUARIO
-        cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:medica', 'internacion:ingreso'] }).then(user => {
+        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:medica', 'internacion:ingreso'] }).then(user => {
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;
 
@@ -27,6 +27,7 @@ describe('Capa Médica - Ingresos', () => {
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
         cy.viewport(1920, 1080);
     });
@@ -40,6 +41,9 @@ describe('Capa Médica - Ingresos', () => {
         });
 
         cy.get('table tbody tr').first().click();
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.plexButtonIcon('arrow-left').click();
 
@@ -50,6 +54,9 @@ describe('Capa Médica - Ingresos', () => {
         });
 
         cy.get('table tbody tr').first().click();
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.plexButtonIcon('check').click();
         cy.wait(200);

@@ -25,13 +25,18 @@ function getStubs() {
         "term" : "sistema de aspiración para uso general, al vacío",
         "fsn" : "sistema de aspiración para uso general, al vacío (objeto físico)",
         "semanticTag" : "objeto físico"
+    }, {
+        "conceptId" : "470391",
+        "term" : "aporte central de oxigeno",
+        "fsn" : "aporte central de oxigeno",
+        "semanticTag" : "objeto físico"
     }]).as('expEquipamiento');
 
     cy.route('POST', '**/api/modules/rup/internacion/camas**').as('createCama')
     cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('editCama')
 }
 
-describe('Capa Médica - Ingresos', () => {
+describe('ABM Camas', () => {
     let token;
     let pacientes;
     let camas;
@@ -39,7 +44,7 @@ describe('Capa Médica - Ingresos', () => {
         cy.seed();
 
         // CREA USUARIO
-        cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:estadistica'] }).then(user => {
+        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica'] }).then(user => {
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;
                 // CREA PACIENTES
@@ -70,15 +75,15 @@ describe('Capa Médica - Ingresos', () => {
         cy.plexSelectAsync('label="Especialidad/es"', 'Enf', '@expEspecialidad', 0);
         cy.plexSelectAsync('label="Genero"', 'Masc', '@expGenero', 0);
         cy.plexSelectType('label="Unidad organizativa"', 'servicio');
-        cy.plexSelectType('label="Ubicación"', 'serv');
+        cy.plexSelectType('label="Ubicación"', 'habi1');
 
         cy.plexButton('GUARDAR').click();
         cy.wait('@createCama').then((xhr) => {
             const cama = xhr.response.body;
             expect(xhr.status).to.be.eq(200);
             expect(cama.nombre).to.be.eq('Cama 666');
-            expect(cama.unidadOrganizativaOriginal.term).to.be.eq('servicio de accidentología y urgencias');
-            expect(cama.sectores[0].nombre).to.be.eq('servicio de accidentología y urgencias');
+            expect(cama.unidadOrganizativaOriginal.term).to.be.eq('servicio médico');
+            expect(cama.sectores[0].nombre).to.be.eq('habi1');
             expect(cama.tipoCama.term).to.be.eq('Cama');
         });
 
@@ -92,10 +97,10 @@ describe('Capa Médica - Ingresos', () => {
         cy.plexText('label="Nombre"', 'Cama 888');
         cy.plexSelectAsync('label="Tipo de cama"', 'Cam', '@expTipoDeCama', 0);
         cy.plexSelectAsync('label="Especialidad/es"', 'Enf', '@expEspecialidad', 0);
-        cy.plexSelectAsync('label="Equipamiento"', 'sis', '@expEquipamiento', 0);
+        cy.plexSelectAsync('label="Equipamiento"', 'ap', '@expEquipamiento', 0);
         cy.plexSelectType('label="Genero"').clearSelect();
         cy.plexSelectAsync('label="Genero"', 'Fem', '@expGenero', 0);
-        cy.plexSelectType('label="Ubicación"', 'serv');
+        cy.plexSelectType('label="Ubicación"', 'edific');
         cy.plexSelectType('label="Unidad organizativa"').clearSelect();
         cy.plexSelectType('label="Unidad organizativa"', 'servicio');
 
@@ -104,7 +109,7 @@ describe('Capa Médica - Ingresos', () => {
             const cama = xhr.response.body;
             expect(xhr.status).to.be.eq(200);
             expect(cama.nombre).to.be.eq('Cama 888');
-            expect(cama.sectores[0].nombre).to.be.eq('servicio de accidentología y urgencias');
+            expect(cama.sectores[0].nombre).to.be.eq('edificio este');
             expect(cama.tipoCama.term).to.be.eq('Cama');
         });;
 

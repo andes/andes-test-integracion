@@ -24,12 +24,14 @@ module.exports.createUsuario = async (mongoUri, params) => {
         if (params.organizacion) {
             const OrganizacionDB = await client.db().collection('organizacion');
             const orgData = await OrganizacionDB.findOne({ _id: new ObjectId(params.organizacion) }, { projection: { nombre: 1 } });
-            dto.organizaciones[0]._id = orgData._id;
-            dto.organizaciones[0].nombre = orgData.nombre;
+            dto.organizaciones.push({
+                _id: ObjectId(orgData._id),
+                nombre: orgData.nombre
+            })
         }
 
         if (params.permisos) {
-            dto.organizaciones[0].permisos = params.permisos;
+            dto.organizaciones[0]['permisos'] = params.permisos;
         }
 
         for (const organizacion of dto.organizaciones) {
@@ -38,10 +40,6 @@ module.exports.createUsuario = async (mongoUri, params) => {
 
         dto._id = new ObjectId();
         await usuarioDB.insertOne(dto);
-
-        console.log('......................................');
-        console.log(dto);
-
         return dto;
     } catch (e) {
         return e;

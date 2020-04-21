@@ -1,14 +1,14 @@
 const moment = require('moment')
 const { permisosUsuario, factoryInternacion } = require('../utiles');
 
-describe('Capa Estadistica - Ingresos', () => {
+describe('Capa Estadistica - Egresos', () => {
     let token;
     let pacientes;
     before(() => {
         cy.seed();
 
         // CREA USUARIO
-        cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:estadistica', 'internacion:egreso'] }).then(user => {
+        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica', 'internacion:egreso'] }).then(user => {
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;
 
@@ -28,6 +28,8 @@ describe('Capa Estadistica - Ingresos', () => {
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/api/core/term/cie10?**').as('getDiagnostico');
+        cy.route('GET', '**/api/modules/rup/internacion/camas/historial?**', true).as('getHistorial');
+        cy.route('GET', '**/api/core/mpi/pacientes/**', true).as('getPaciente');
         cy.viewport(1920, 1080);
     });
 
@@ -43,6 +45,7 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.plexButtonIcon('check').click();
 
         cy.wait(100)
-        cy.toast('success', 'Prestacion guardada correctamente');
+        cy.contains('Los datos se actualizaron correctamente')
+        cy.contains('Aceptar').click();
     });
 });

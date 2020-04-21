@@ -7,7 +7,7 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.seed();
 
         // CREA USUARIO
-        cy.task('database:create:usuario', { permisos: [...permisosUsuario, 'internacion:rol:estadistica', 'internacion:ingreso'] }).then(user => {
+        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica', 'internacion:ingreso'] }).then(user => {
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;
 
@@ -27,6 +27,7 @@ describe('Capa Estadistica - Ingresos', () => {
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
         cy.route('GET', '/api/core/term/snomed/expression?expression=<<394733009&words=**', [{
@@ -59,6 +60,9 @@ describe('Capa Estadistica - Ingresos', () => {
         });
 
         cy.get('table tbody tr').first().click();
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.plexButtonIcon('arrow-left').click();
 
@@ -69,6 +73,9 @@ describe('Capa Estadistica - Ingresos', () => {
         });
 
         cy.get('table tbody tr').first().click();
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.plexSelectType('name="origen"', 'Emergencia');
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
