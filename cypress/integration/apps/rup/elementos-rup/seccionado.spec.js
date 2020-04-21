@@ -99,13 +99,22 @@ context('RUP - Ejecucion', () => {
 
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).find('.card-header').click();
 
-            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).find('quill-editor input').type('hola', { force: true });
+            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).plexHtml('label="Observaciones"', 'hola');
 
             cy.plexButton('Guardar').click();
             cy.toast('error');
 
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).should('not.have.class', 'alerta-campo');
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(1).should('have.class', 'alerta-campo');
+
+            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(1).find('.card-header').click();
+
+            // No es un elemento plex
+            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(1).find('textarea').type('escribo algo');
+
+            cy.plexButton('Guardar').click();
+
+            cy.url().should('contain', 'validacion');
 
         });
 
