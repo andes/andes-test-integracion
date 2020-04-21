@@ -8,7 +8,7 @@ Test de integración para Andes
 $ npm install
 ```
 
-### Comandos
+### Producción
 
 De la siguiente forma se corren los test apuntando a `master`:
 
@@ -16,20 +16,18 @@ De la siguiente forma se corren los test apuntando a `master`:
 - **npm run prod:up** - inicia los contenedores de docker.
 - **npm run prod** - Ejecuta los tests con cypress .
 
+
+### Develop
+
 Cuando se está desarrollando una nueva funcionalidad o fixeando un bug y se desarrollan casos de test para la misma se debe tener en cuenta las siguientes cosas: 
 
-1. Setear las siguientes variables de entorno o apuntar a la api en desarrollo a los siguientes HOST:
+1. Levantar la api con:
 
 ```
-ELASTIC_HOST=http://localhost:9266
-MONGO_MAIN=mongodb://localhost:27066
-MONGO_MPI=mongodb://localhost:27066
-MONGO_SNOMED=mongodb://localhost:27066
-MONGO_PUCO=mongodb://localhost:27066
-MONGO_LOGS=mongodb://localhost:27066
+npm run testing
 ```
 
-2. Levantar la APP Angular
+2. Levantar la APP Angular normalmente.
 
 3. Correr los siguientes comandos: 
 
