@@ -16,7 +16,6 @@ const { seedAgenda } = require('./seed-agenda');
 const { seedPrestacion } = require('./seed-prestaciones');
 const { dropCollection } = require('./seed-drop');
 const { seedPaciente, createPaciente } = require('./seed-paciente');
-const { createUsuario } = require('./seed-usuario');
 const { createElementoRup, deleteElementoRup } = require('./seed-elementos-rup');
 const { createMaquinaEstados, createCama, createEstadosCama, factoryInternacion } = require('./seed-internacion');
 const { createPacienteApp } = require('./seed-paciente-app');
@@ -41,7 +40,7 @@ module.exports = (on, config) => {
             return dropCollection(mongoUri, elasticuri, collection);
         },
         'database:create:usuario': (params) => {
-            return createUsuario(mongoUri, params);
+            return seedUsuario(mongoUri, params);
         },
         'database:seed:paciente': (params) => {
             return seedPaciente(mongoUri, elasticuri, params);

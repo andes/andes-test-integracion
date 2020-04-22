@@ -35,32 +35,47 @@ module.exports.seedPerfil = async (mongoUri, params) => {
         return e;
     }
 }
+
 module.exports.seedUsuario = async (mongoUri, params) => {
     params = params || {};
     try {
+
         const client = await connectToDB(mongoUri);
-        const UsuarioDB = await client.db().collection('authUsers');
+        const usuarioDB = await client.db().collection('authUsers');
 
         const templateName = params.template || 'default';
-        const dto = require(`./data/gestor-usuarios/usuario-${templateName}`);
-        let usuario = JSON.parse(JSON.stringify(dto));
+        let dto = require('./data/gestor-usuarios/usuario-' + templateName);
+        dto = JSON.parse(JSON.stringify(dto));
 
-        usuario.usuario = params.usuario || faker.random.number({
-            min: 40000000,
-            max: 49999999
-        });
-        usuario.documento = "" + usuario.usuario;
-        usuario.nombre = params.nombre || faker.name.firstName();
-        usuario.apellido = params.apellido || faker.name.lastName();
+        dto.nombre = params.nombre || faker.name.firstName().toLocaleUpperCase();
+        dto.apellido = params.apellido || faker.name.lastName().toLocaleUpperCase();
+        dto.usuario = params.usuario || (faker.random.number({ min: 40000000, max: 49999999 }));
+        dto.documento = '' + dto.usuario
 
-        usuario.organizaciones.forEach(org => {
-            org._id = new ObjectId(org._id);
-        });
+        if (params.organizaciones && params.organizaciones.length > 0) {
+            dto.organizaciones = params.organizaciones;
+        }
 
-        usuario._id = new ObjectId();
-        await UsuarioDB.insertOne(usuario);
+        if (params.organizacion) {
+            const OrganizacionDB = await client.db().collection('organizacion');
+            const orgData = await OrganizacionDB.findOne({ _id: new ObjectId(params.organizacion) }, { projection: { nombre: 1 } });
+            dto.organizaciones.push({
+                _id: ObjectId(orgData._id),
+                nombre: orgData.nombre
+            })
+        }
 
-        return usuario;
+        if (params.permisos) {
+            dto.organizaciones[0]['permisos'] = params.permisos;
+        }
+
+        for (const organizacion of dto.organizaciones) {
+            organizacion._id = new ObjectId(organizacion._id)
+        }
+
+        dto._id = new ObjectId();
+        await usuarioDB.insertOne(dto);
+        return dto;
     } catch (e) {
         return e;
     }
