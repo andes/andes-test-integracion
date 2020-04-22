@@ -23,7 +23,7 @@ context('RUP - Punto de inicio', () => {
             fixtures.push(json);
         });
         // Stub
-        cy.route(/api\/core\/term\/snomed\?/, fixtures).as('search');
+        cy.route('GET', /api\/core\/term\/snomed\?/, fixtures).as('search');
         // api/modules/rup/prestaciones/huds
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
@@ -95,7 +95,7 @@ context('RUP - Punto de inicio', () => {
             fixtures.push(json);
         });
         // Stub
-        cy.route(/api\/core\/term\/snomed\?/, fixtures).as('search');
+        cy.route('GET', /api\/core\/term\/snomed\?/, fixtures).as('search');
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
@@ -105,9 +105,7 @@ context('RUP - Punto de inicio', () => {
 
         cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
         cy.get('table tr').contains('consulta de medicina general').first().click();
-        cy.get('div[class="plex-box-content"] table').eq(1).find('tr td plex-button[label="INICIAR PRESTACIÓN"]').click({
-            force: true
-        });
+        cy.plexButton('INICIAR PRESTACIÓN').click({ force: true });
         cy.get('button').contains('CONFIRMAR').click();
 
         cy.wait('@create').then((xhr) => {
@@ -168,7 +166,7 @@ context('RUP - Punto de inicio', () => {
             fixtures.push(json);
         });
         // Stub
-        cy.route(/api\/core\/term\/snomed\?/, fixtures).as('search');
+        cy.route('GET', /api\/core\/term\/snomed\?/, fixtures).as('search');
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('GET', '**/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
@@ -178,13 +176,10 @@ context('RUP - Punto de inicio', () => {
         });
         cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
         cy.get('table tr').contains('consulta de medicina general').first().click();
-        cy.get('div[class="plex-box-content"] table').eq(2).find('tr td plex-button[label="INICIAR PRESTACIÓN"]').click({
-            force: true
-        });
+        cy.plexButton('INICIAR PRESTACIÓN').click({ force: true });
 
         cy.get('button').contains('CONFIRMAR').click();
 
-        // cy.get('plex-button[type="success"]').contains('INICIAR PRESTACIÓN').click();
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.turno).to.be.eq('5d790d2659530a13545f85b0');
@@ -243,8 +238,8 @@ context('RUP - Punto de inicio', () => {
         });
 
         // Stub
-        cy.route(/api\/core\/term\/snomed\?search=nota/, fixtures).as('search');
-        cy.route(/api\/core\/term\/snomed\?search=fiebre/, fixtures2).as('search2');
+        cy.route('GET', /api\/core\/term\/snomed\?search=nota/, fixtures).as('search');
+        cy.route('GET', /api\/core\/term\/snomed\?search=fiebre/, fixtures2).as('search2');
 
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
