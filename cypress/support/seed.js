@@ -7,7 +7,7 @@ Cypress.Commands.add('seed', () => {
     }
 });
 
-const collectionList = ['paciente', 'agenda', 'prestaciones'];
+const collectionList = ['paciente', 'agenda', 'prestaciones', 'internacionCamas', 'internacionCamaEstados', 'internacionEstados', 'internacionCenso'];
 
 Cypress.Commands.add('cleanDB', (collection) => {
     if (!collection) {
