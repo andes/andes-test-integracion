@@ -266,7 +266,8 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.paciente.documento).to.be.eq('31549268');
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
         });
-        cy.plexButtonIcon('chevron-up').first().click();
+        cy.wait(3000);
+        cy.get('button').contains('BUSCADOR BÁSICO ').click();
         cy.plexText('name="searchTerm"', 'nota');
         cy.wait('@search').then((xhr) => {
             cy.get('.mdi-plus').first().click();
@@ -304,6 +305,8 @@ context('RUP - Punto de inicio', () => {
         cy.get('tr td').contains("TURNO, PACIENTE ").parent().parent().plexButton(' VER HUDS ').click();
         cy.get('plex-radio').contains(' Procesos de Auditoría ').click({ force: true });
         cy.plexButton('ACEPTAR').click();
+        cy.get('.rup-card').first().click();
+        cy.get('.rup-card.elementoderegistro .rup-header .title').contains(' Nota privada (elemento de registro) ');
 
     });
 });
