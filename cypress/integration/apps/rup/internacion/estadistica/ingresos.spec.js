@@ -16,7 +16,7 @@ describe('Capa Estadistica - Ingresos', () => {
                     pacientes = pacientesCreados;
 
                     // CREA UN MUNDO IDEAL DE INTERNACION
-                    factoryInternacion({ configCamas: [{ estado: 'disponible' }, { estado: 'ocupada', pacientes: [pacientes[0]] }] }).then(camasCreadas => {
+                    factoryInternacion({ configCamas: [{ estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() }, { estado: 'ocupada', pacientes: [pacientes[0]] }] }).then(camasCreadas => {
                         return cy.goto('/internacion/mapa-camas', token);
                     });
                 });
@@ -77,6 +77,9 @@ describe('Capa Estadistica - Ingresos', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
+        cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
+        cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true});
+        cy.plexSelectType('label="Cama"', 'CAMA');
         cy.plexSelectType('name="origen"', 'Emergencia');
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexText('name="motivo"', 'Estornudo');

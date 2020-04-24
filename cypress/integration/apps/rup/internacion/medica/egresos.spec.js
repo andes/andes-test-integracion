@@ -28,7 +28,9 @@ describe('Capa Medica - Egresos', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/api/core/term/cie10?**').as('getDiagnostico');
+        cy.route('GET', '**/api/modules/rup/internacion/camas/historial?**', true).as('getHistorial');
+        cy.route('GET', '**/api/modules/rup/internacion/camas?**', true).as('getCamas');
+        cy.route('PATCH', '**/api/modules/rup/internacion/camas/**', true).as('patchCamas');
         cy.viewport(1920, 1080);
     });
 
@@ -37,9 +39,12 @@ describe('Capa Medica - Egresos', () => {
         cy.contains('Egresar paciente').click();
 
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
+        cy.plexDatetime('label="Fecha Egreso"', { clear: true, skipEnter: true });
+        cy.plexDatetime('label="Fecha Egreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true});
+
         cy.plexButtonIcon('check').click();
 
-        cy.wait(100)
+        cy.wait('@patchCamas')
         cy.toast('success', 'Prestacion guardada correctamente');
     });
 });
