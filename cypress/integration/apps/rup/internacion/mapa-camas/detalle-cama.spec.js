@@ -31,15 +31,24 @@ describe('Mapa Camas - Detalle de Cama', () => {
         cy.server();
         cy.viewport(1920, 1080);
         cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
+        cy.route('GET', '**/api/modules/rup/internacion/camas/**', true).as('getCama');
+        cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
         cy.route('GET', '**/api/core/mpi/pacientes/**', paciente).as('getPaciente');
     });
 
     it('Verificar datos de cama', () => {
         cy.goto('/internacion/mapa-camas', token);
-        cy.wait(2000);
+        cy.wait('@getCamas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.get('table tr').eq(1).find('td').eq(1).contains('ANDES').click();
-        cy.wait(500);
+
+        cy.wait('@getCama').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+
 
         // VERIF. NOMBRE
         cy.get('plex-detail section div').eq(1).find('div').should(($div) => {

@@ -71,6 +71,7 @@ describe('Capa Estadistica - Egresos', () => {
         cy.route('GET', '**/api/modules/rup/internacion/camas/historial?**', true).as('getHistorial');
         cy.route('GET', '**/api/core/mpi/pacientes/**', true).as('getPaciente');
         cy.route('GET', '**/api/modules/rup/internacion/camas?**', true).as('getCamas');
+        cy.route('GET', '**/api/modules/rup/internacion/camas/**', false).as('getCamas2');
         cy.route('PATCH', '**/api/modules/rup/prestaciones/**', true).as('patchPrestaciones');
         cy.route('PATCH', '**/api/modules/rup/internacion/camas/**', true).as('patchCamas');
         cy.viewport(1920, 1080);
@@ -89,7 +90,13 @@ describe('Capa Estadistica - Egresos', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait(100)
+        cy.wait('@patchPrestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@patchCamas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
         cy.contains('Los datos se actualizaron correctamente')
         cy.contains('Aceptar').click();
     });

@@ -27,8 +27,10 @@ describe('Capa Médica - Ingresos', () => {
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**/api/core/mpi/pacientes/**', true).as('getPaciente');
         cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
+        cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
+        cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.viewport(1920, 1080);
     });
 
@@ -60,17 +62,16 @@ describe('Capa Médica - Ingresos', () => {
 
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true});
-        cy.plexSelectType('label="Cama"', 'CAMA');
+        cy.plexSelectType('label="Cama"', 'CAMA').click();
         
 
         cy.plexButtonIcon('check').click();
-        cy.wait(200);
+        
+        cy.wait('@patchCamas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.contains('Paciente internado')
         cy.contains('Aceptar').click();
-        cy.wait(200);
-        cy.get('table tr').eq(1).find('td').find('plex-badge').find('span').should(($span) => {
-            expect($span.text().trim()).to.equal('Ocupada');
-        });
     });
 });
