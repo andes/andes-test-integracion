@@ -55,12 +55,9 @@ context('Registro novedades', () => {
         cy.plexText('label="titulo"', titulo);
         cy.plexDatetime('label="fecha"', '07/02/2020');
 
-        let elem = cy.get(`plex-text[label="descripcion"] quill-editor div[class="ql-container ql-snow"] div p`);
-        elem.type(text, {
-            force: true
-        });
+        cy.plexHtml('label="descripcion"', text);
 
-        cy.plexButtonIcon('image-plus');
+        cy.plexButtonIcon('image-plus'); //revisamos que el boton exista
 
         cy.plexButton('Guardar').click();
         cy.wait('@postNovedades').then((xhr) => {
@@ -78,22 +75,23 @@ context('Registro novedades', () => {
 
     it('Se busca la primer novedad cargada como INACTIVA y se activa', () => {
         cy.route('PATCH', '**/api/modules/registro-novedades/novedades/**').as('patchNovedades');
-        cy.get('table tbody td').find('span').should('have.class', 'badge badge-success badge-md').contains('Inactiva').first().click();
+        cy.get('table tbody td').plexBadge('Inactiva').first().click();
         cy.plexBool('label="Activa"', true);
         cy.plexButton('Guardar').click();
 
         cy.wait('@patchNovedades').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('table tbody td').find('span').should('have.class', 'badge badge-success badge-md').first().contains(' Activa ');
+        cy.get('table tbody td').plexBadge(' Activa ').first();
     });
 
-    it('Buscar una novedad por titulo: ', () => {
-        cy.plexSelectType('name="modulo"', nombreModulo);
+    it('Buscar una novedad por modulo ', () => {
+        // buscmos por el módulo creado con task
+        cy.plexSelectType('name="modulo"', modulo.nombre);
         cy.wait('@novedades').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             cy.log(xhr);
-            expect(xhr.response.body[0].modulo.nombre).to.be.eq(nombreModulo);
+            expect(xhr.response.body[0].modulo.nombre).to.be.eq(modulo.nombre);
         });
         //verificamos que la lista contenga el primer elemeto del modulo elegido
         cy.get('table tbody td').contains(nombreModulo);
