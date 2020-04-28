@@ -1,5 +1,6 @@
 const request = require('request');
 const faker = require('faker');
+const moment = require('moment');
 const { connectToDB, ObjectId, encapsulateArray } = require('./database');
 
 
@@ -62,6 +63,11 @@ module.exports.createPaciente = async (mongoUri, elasticUri, params) => {
         }
 
         dto.contacto[0].valor = params.telefono || faker.phone.phoneNumber().replace('-', '').replace('-', '');
+        if (params.fechaNacimiento) {
+            dto.fechaNacimiento = moment(params.fechaNacimiento).toDate();
+        }
+        dto.sexo = params.sexo || 'masculino';
+        dto.genero = params.genero || params.sexo || 'masculino';
 
         dto._id = new ObjectId();
         await PacienteDB.insertOne(dto);

@@ -59,7 +59,9 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             const tipoPrestacion = await ConceptosTurneablesDB.findOne({ _id: new ObjectId(params.tipoPrestacion) });
             prestacion.solicitud.tipoPrestacion = tipoPrestacion;
         } else {
-            prestacion.solicitud.tipoPrestacion._id = new ObjectId(prestacion.solicitud.tipoPrestacion._id);
+            const prestacionId = new ObjectId(prestacion.solicitud.tipoPrestacion._id);
+            prestacion.solicitud.tipoPrestacion._id = prestacionId;
+            prestacion.solicitud.tipoPrestacion.id = prestacionId;
         }
 
         if (params.profesional) {
