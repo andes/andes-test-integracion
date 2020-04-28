@@ -16,8 +16,8 @@ const { seedAgenda } = require('./seed-agenda');
 const { seedPrestacion } = require('./seed-prestaciones');
 const { dropCollection } = require('./seed-drop');
 const { seedPaciente, createPaciente } = require('./seed-paciente');
-const { createUsuario } = require('./seed-usuario');
 const { createElementoRup, deleteElementoRup } = require('./seed-elementos-rup');
+const { createMaquinaEstados, createCama, createEstadosCama, factoryInternacion } = require('./seed-internacion');
 const { createPacienteApp } = require('./seed-paciente-app');
 const { seedPerfil, seedUsuario } = require('./seed-gestor-usuarios');
 
@@ -40,7 +40,7 @@ module.exports = (on, config) => {
             return dropCollection(mongoUri, elasticuri, collection);
         },
         'database:create:usuario': (params) => {
-            return createUsuario(mongoUri, params);
+            return seedUsuario(mongoUri, params);
         },
         'database:seed:paciente': (params) => {
             return seedPaciente(mongoUri, elasticuri, params);
@@ -54,6 +54,9 @@ module.exports = (on, config) => {
         'database:seed:agenda': (dto) => {
             return seedAgenda(mongoUri, dto);
         },
+        'factory:internacion': (params) => {
+            return factoryInternacion(params);
+        },
         'database:seed:prestacion': (dto) => {
             return seedPrestacion(mongoUri, dto);
         },
@@ -63,11 +66,17 @@ module.exports = (on, config) => {
         'database:delete:elemento-rup': (dto) => {
             return deleteElementoRup(mongoUri, dto);
         },
+        'database:create:maquinaEstados': (params) => {
+            return createMaquinaEstados(mongoUri, params);
+        },
+        'database:create:camaEstados': (params) => {
+            return createEstadosCama(mongoUri, params);
+        },
+        'database:create:cama': (params) => {
+            return createCama(mongoUri, params);
+        },
         'database:create:perfil': (dto) => {
             return seedPerfil(mongoUri, dto);
-        },
-        'database:create:usuario': (dto) => {
-            return seedUsuario(mongoUri, dto);
         }
     });
 

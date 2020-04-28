@@ -1,0 +1,139 @@
+{
+    "solicitud": {
+        "tipoPrestacion": {
+            "refsetIds": [],
+            "fsn": "admisión hospitalaria (procedimiento)",
+            "semanticTag": "procedimiento",
+            "conceptId": "32485007",
+            "term": "internación"
+        },
+        "tipoPrestacionOrigen": {
+            "refsetIds": []
+        },
+        "organizacion": {
+            "id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+        },
+        "profesional": {
+            "id": "5d49fa8bb6834a1d95e277b8",
+            "nombre": "ALICIA BEATRIZ",
+            "apellido": "ESPOSITO",
+            "documento": "4163782"
+        },
+        "ambitoOrigen": "internacion",
+        "fecha": "2020-02-07T18:09:00.851Z",
+        "turno": null,
+        "registros": []
+    },
+    "ejecucion": {
+        "organizacion": {
+            "id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+        },
+        "fecha": "2020-02-07T18:09:00.851Z",
+        "registros": [
+            {
+                "privacy": {
+                    "scope": "public"
+                },
+                "_id": "5e3da7d84cc64e5543f0d818",
+                "destacado": false,
+                "esSolicitud": false,
+                "esDiagnosticoPrincipal": false,
+                "relacionadoCon": [],
+                "elementoRUP": null,
+                "nombre": "documento de solicitud de admisión",
+                "concepto": {
+                    "fsn": "documento de solicitud de admisión (elemento de registro)",
+                    "semanticTag": "elemento de registro",
+                    "refsetIds": [
+                        "900000000000497000"
+                    ],
+                    "conceptId": "721915006",
+                    "term": "documento de solicitud de admisión"
+                },
+                "valor": {
+                    "informeIngreso": {
+                        "fechaIngreso": "2020-02-07T18:09:00.851Z",
+                        "horaNacimiento": "2020-02-07T18:09:00.851Z",
+                        "edadAlIngreso": "33 año/s",
+                        "origen": "Emergencia",
+                        "ocupacionHabitual": null,
+                        "situacionLaboral": null,
+                        "especialidades": [
+                            {
+                                "fsn": "audiología (calificador)",
+                                "term": "audiología",
+                                "conceptId": "394578005",
+                                "semanticTag": "calificador"
+                            }
+                        ],
+                        "obraSocial": null,
+                        "nroCarpeta": null,
+                        "motivo": null,
+                        "organizacionOrigen": null,
+                        "profesional": {
+                            "_id": "5d49fa8bb6834a1d95e277b8",
+                            "documento": "4163782",
+                            "apellido": "ESPOSITO",
+                            "nombre": "ALICIA BEATRIZ",
+                            "nombreCompleto": "ESPOSITO, ALICIA BEATRIZ",
+                            "id": "5d49fa8bb6834a1d95e277b8"
+                        },
+                        "PaseAunidadOrganizativa": null
+                    }
+                },
+                "registros": [],
+                "hasSections": false,
+                "isSection": false,
+                "noIndex": false,
+                "createdAt": "2020-02-07T18:09:28.434Z",
+                "createdBy": {
+                    "id": "5e3d9e385d07c3718fb86696",
+                    "nombreCompleto": "BERRY YUNDT",
+                    "nombre": "BERRY",
+                    "apellido": "YUNDT",
+                    "username": 43861802,
+                    "documento": 43861802,
+                    "organizacion": {
+                        "_id": "57e9670e52df311059bc8964",
+                        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+                        "id": "57e9670e52df311059bc8964"
+                    }
+                }
+            }
+        ]
+    },
+    "noNominalizada": false,
+    "paciente": {
+        "_id": "5e3d9e384cc64e5543f0d80f",
+        "nombre": "PACIENTE",
+        "apellido": "RUP",
+        "documento": "3399661",
+        "sexo": "femenino",
+        "fechaNacimiento": "1987-01-01T03:00:00.000Z"
+    },
+    "estados": [
+        {
+            "idOrigenModifica": null,
+            "motivoRechazo": null,
+            "observaciones": null,
+            "_id": "5e3da7d84cc64e5543f0d819",
+            "tipo": "ejecucion",
+            "createdAt": "2020-02-07T18:09:28.434Z",
+            "createdBy": {
+                "id": "5e3d9e385d07c3718fb86696",
+                "nombreCompleto": "BERRY YUNDT",
+                "nombre": "BERRY",
+                "apellido": "YUNDT",
+                "username": 43861802,
+                "documento": 43861802,
+                "organizacion": {
+                    "_id": "57e9670e52df311059bc8964",
+                    "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+                    "id": "57e9670e52df311059bc8964"
+                }
+            }
+        }
+    ]
+}

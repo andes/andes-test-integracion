@@ -1,0 +1,38 @@
+[
+    {
+        "fsn": "cama (objeto físico)",
+        "term": "cama",
+        "conceptId": "229772003",
+        "semanticTag": "objeto físico"
+    },
+    {
+        "fsn": "cama pediátrica (objeto físico)",
+        "term": "cama pediátrica",
+        "conceptId": "80278003",
+        "semanticTag": "objeto físico"
+    },
+    {
+        "fsn": "camilla (objeto físico)",
+        "term": "camilla",
+        "conceptId": "89149003",
+        "semanticTag": "objeto físico"
+    },
+    {
+        "fsn": "cama adaptada para pacientes con discapacidad (objeto físico)",
+        "term": "cama adaptada para pacientes con discapacidad",
+        "conceptId": "705401004",
+        "semanticTag": "objeto físico"
+    },
+    {
+        "fsn": "cama de hospital (objeto físico)",
+        "term": "cama de hospital",
+        "conceptId": "91537007",
+        "semanticTag": "objeto físico"
+    },
+    {
+        "fsn": "cama bariátrica (objeto físico)",
+        "term": "cama bariátrica",
+        "conceptId": "463742000",
+        "semanticTag": "objeto físico"
+    }
+]

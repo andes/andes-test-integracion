@@ -1,0 +1,36 @@
+{
+    "organizacion": {
+        "_id": "57e9670e52df311059bc8964",
+        "nombre": "HOSPITAL PRIVINCIAL NEUQUEN - DR CASTRO RENDON"
+    },
+    "ambito": "internacion",
+    "unidadOrganizativaOriginal": {
+        "id" : "5af19d078db89356597271fd",
+        "fsn" : "departamento de rayos X (medio ambiente)",
+        "term" : "departamento de rayos X",
+        "conceptId" : "225747005",
+        "semanticTag" : "medio ambiente",
+        "refsetIds" : []
+    },
+    "sectores": [ 
+        {
+            "nombre" : "H101",
+            "hijos" : [],
+            "_id" : "5af19d3e8db89356597272f1",
+            "tipoSector" : {
+                "semanticTag" : "medio ambiente",
+                "conceptId" : "2401000013100",
+                "term" : "habitación",
+                "fsn" : "habitación (medio ambiente)",
+                "refsetIds" : []
+            }
+        }],
+    "nombre": "CAMA",
+    "tipoCama": {
+        "conceptId" : "706103004",
+        "term" : "cama estándar",
+        "fsn" : "cama estándar (objeto físico)",
+        "semanticTag" : "objeto físico",
+        "refsetIds" : []
+    }
+}
