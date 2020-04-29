@@ -7,7 +7,7 @@ function getStubs() {
         "term": "Cama",
     }]).as('expTipoDeCama');
 
-    cy.route('GET', '/api/core/term/snomed/expression?expression=<<394733009&words=**', [{
+    cy.route('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
         "conceptId": "1234",
         "term": "Enfermeria en Rehabilitación",
     }]).as('expEspecialidad');
