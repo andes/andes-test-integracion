@@ -69,20 +69,20 @@ context('Registro novedades', () => {
         cy.wait('@novedades').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('table tbody td').contains(titulo);
-        cy.get('table tbody td').contains('Inactiva');
+        cy.get('plex-item').contains(titulo);
+        cy.get('plex-item').contains('Inactiva');
     });
 
     it('Se busca la primer novedad cargada como INACTIVA y se activa', () => {
         cy.route('PATCH', '**/api/modules/registro-novedades/novedades/**').as('patchNovedades');
-        cy.get('table tbody td').plexBadge('Inactiva').first().click();
+        cy.get('plex-item').plexBadge('Inactiva').first().click();
         cy.plexBool('label="Activa"', true);
         cy.plexButton('Guardar').click();
 
         cy.wait('@patchNovedades').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('table tbody td').plexBadge(' Activa ').first();
+        cy.get('plex-item').plexBadge(' Activa ').first();
     });
 
     it('Buscar una novedad por modulo ', () => {
@@ -94,6 +94,6 @@ context('Registro novedades', () => {
             expect(xhr.response.body[0].modulo.nombre).to.be.eq(modulo.nombre);
         });
         //verificamos que la lista contenga el primer elemeto del modulo elegido
-        cy.get('table tbody td').contains(nombreModulo);
+        cy.get('plex-item').contains(modulo.nombre);
     });
 });
