@@ -102,30 +102,30 @@ context('Reportes Diarios', () => {
         for (let i=0; i<params.length; i++) {
             cy.get('table>tbody>tr').eq(params[i].fechaPrestacion.date() - 1).within(() => {
                 // Validacion de rango etario
-                cy.get('td').eq(i * 2 + 1).contains(1);
-                cy.get('td').eq(i * 2 + 2).contains(1);
+                cy.get('td').eq(i * 2 + 1).should('contain', 1);
+                cy.get('td').eq(i * 2 + 2).should('contain', 1);
                 // Validacion de los totales en el dia
-                cy.get('td').eq(params.length * 2 + 1).contains(1);
-                cy.get('td').eq(params.length * 2 + 2).contains(1);
-                cy.get('td').eq(params.length * 2 + 3).contains(2);
+                cy.get('td').eq(params.length * 2 + 1).should('contain', 1);
+                cy.get('td').eq(params.length * 2 + 2).should('contain', 1);
+                cy.get('td').eq(params.length * 2 + 3).should('contain', 2);
             });
 
             cy.get('table>tfoot>tr').eq(0).within(() => {
                 // Validacion de los totales en el mes por rango etario
-                cy.get('td').eq(i * 2 + 1).contains(1);
-                cy.get('td').eq(i * 2 + 2).contains(1);
+                cy.get('td').eq(i * 2 + 1).should('contain', 1);
+                cy.get('td').eq(i * 2 + 2).should('contain', 1);
             });
 
             cy.get('table>tfoot>tr').eq(1).within(() => {
                  // Validacion de los totales en el mes por rango etario
-                cy.get('td').eq(i).contains(2);
+                cy.get('td').eq(i).should('contain', 2);
             });
         }
         // Validamos los totales
         cy.get('table>tfoot>tr').eq(0).within(() => {
-            cy.get('td').eq(params.length * 2 + 1).contains(params.length);
-            cy.get('td').eq(params.length * 2 + 2).contains(params.length);
-            cy.get('td').eq(params.length * 2 + 3).contains(params.length * 2);
+            cy.get('td').eq(params.length * 2 + 1).should('contain', params.length);
+            cy.get('td').eq(params.length * 2 + 2).should('contain', params.length);
+            cy.get('td').eq(params.length * 2 + 3).should('contain', params.length * 2);
         });
     });
 
