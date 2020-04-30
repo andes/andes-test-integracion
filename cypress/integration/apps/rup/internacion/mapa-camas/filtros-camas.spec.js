@@ -16,12 +16,26 @@ describe('Filtros de Mapa Camas', () => {
         ],
         sectores: [
             {
+                "tipoSector" : {
+                    "refsetIds" : [],
+                    "fsn" : "edificio (medio ambiente)",
+                    "term" : "edificio",
+                    "conceptId" : "2421000013105",
+                    "semanticTag" : "medio ambiente"
+                },
                 "_id" : "5b0586800d3951652da7daa1",
                 "nombre" : "edificio este"
-            },
-            { 
-                "_id" : "5b0703952483bc2afa04e73c",
-                "nombre" : "habi1" 
+            }, 
+            {
+                "tipoSector" : {
+                    "refsetIds" : [],
+                    "conceptId" : "2401000013100",
+                    "term" : "habitación",
+                    "fsn" : "habitación (medio ambiente)",
+                    "semanticTag" : "medio ambiente"
+                },
+                "_id" : "5e8b3fde7ea96328716a599a",
+                "nombre" : "Habitación 505"
             }
         ],
         tipoCama: { 
@@ -47,8 +61,8 @@ describe('Filtros de Mapa Camas', () => {
                     factoryInternacion({
                         configCamas: [
                             { estado: 'ocupada', pacientes: [pacientes[0]], sector: filtros.sectores[0] },
-                            { estado: 'disponible', count: 2, unidadOrganizativa: filtros.unidadesOrganizativas[0].conceptId, sector: filtros.sectores[0]._id, esCensable: filtros.esCensable },
-                            { estado: 'disponible', count: 5, unidadOrganizativa: filtros.unidadesOrganizativas[1].conceptId, sector: filtros.sectores[1]._id, tipoCama: filtros.tipoCama.conceptId }
+                            { estado: 'disponible', count: 2, unidadOrganizativa: filtros.unidadesOrganizativas[0].conceptId, sector: filtros.sectores[0], esCensable: filtros.esCensable },
+                            { estado: 'disponible', count: 5, unidadOrganizativa: filtros.unidadesOrganizativas[1].conceptId, sector: filtros.sectores[1], tipoCama: filtros.tipoCama.conceptId }
                         ]
                     }).then(camasCreadas => {
                         return cy.goto('/internacion/mapa-camas', token);
@@ -79,7 +93,14 @@ describe('Filtros de Mapa Camas', () => {
 
     it('Filtrar por Sector', () => {
         // FILTRAR SECTOR.
-        cy.plexSelectType('label="Sector"', filtros.sectores[1].nombre)
+        cy.plexSelectType('label="Sector"', filtros.sectores[0].nombre)
+        cy.get('table tr').should('length', 4);
+        cy.plexSelect('label="Sector"').clearSelect();
+    });
+
+    it('Filtrar por Sector Superior', () => {
+        // FILTRAR SECTOR.
+        cy.plexSelectType('label="Sector"', 'COVID-19')
         cy.get('table tr').should('length', 6);
         cy.plexSelect('label="Sector"').clearSelect();
     });
