@@ -2,6 +2,7 @@
 
 context('Registro novedades', () => {
     let token;
+    const titulo = 'Cambio en camas';
     let nombreModulo = 'CITAS';
     let modulo = {
         nombre: nombreModulo,
@@ -47,7 +48,6 @@ context('Registro novedades', () => {
 
     it('Registrar una Novedad y verificar que este en la lista', () => {
         cy.route('POST', '**/api/modules/registro-novedades/novedades').as('postNovedades');
-        let titulo = 'Cambio en registro de camas';
         let text = 'alguna descripcion';
         cy.plexButton('Registrar Novedad').click();
         cy.plexBool('name="activo"', false); // `Inactiva`
@@ -81,8 +81,9 @@ context('Registro novedades', () => {
 
         cy.wait('@patchNovedades').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.activa).to.be.eq(true);
         });
-        cy.get('plex-item').plexBadge(' Activa ').first();
+
     });
 
     it('Buscar una novedad por modulo ', () => {
@@ -95,5 +96,16 @@ context('Registro novedades', () => {
         });
         //verificamos que la lista contenga el primer elemeto del modulo elegido
         cy.get('plex-item').contains(modulo.nombre);
+    });
+
+    it('Buscar una novedad por título ', () => {
+        // buscamos por el titulo ya definido inicialmente
+        cy.plexText('label="Título"', titulo);
+        cy.wait('@novedades').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length.gt(0);
+        });
+        //verificamos que la lista contenga en el primer elemento el titulo elegido
+        cy.get('plex-item').first().contains(titulo);
     });
 });
