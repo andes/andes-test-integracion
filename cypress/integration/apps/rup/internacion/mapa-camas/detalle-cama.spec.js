@@ -18,7 +18,18 @@ describe('Mapa Camas - Detalle de Cama', () => {
                     paciente = pacientesCreados[1];
                     // CREA UN MUNDO IDEAL DE INTERNACION
                     factoryInternacion({
-                        configCamas: [{ estado: 'ocupada', pacientes: [paciente], unidadOrganizativa: '309901009', sector: '5b0586800d3951652da7daa1' }]
+                        configCamas: [{ estado: 'ocupada', pacientes: [paciente], unidadOrganizativa: '309901009', 
+                        sector: {
+                            "tipoSector" : {
+                                "refsetIds" : [],
+                                "fsn" : "edificio (medio ambiente)",
+                                "term" : "edificio",
+                                "conceptId" : "2421000013105",
+                                "semanticTag" : "medio ambiente"
+                            },
+                            "_id" : "5b0586800d3951652da7daa1",
+                            "nombre" : "edificio este"
+                        }}]
                     }).then(camasCreadas => {
                         cama = camasCreadas[0];
                     });

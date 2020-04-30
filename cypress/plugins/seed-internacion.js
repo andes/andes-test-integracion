@@ -59,11 +59,7 @@ module.exports.createCama = async (mongoUri, params) => {
         if (params.sector) {
             const organizacionDB = await client.db().collection('organizacion');
             const organizacion = await organizacionDB.findOne({ _id: dtoCama.organizacion._id });
-            organizacion.mapaSectores.map(sector => {
-                if (String(sector._id) === String(params.sector)) {
-                    dtoCama.sectores[0] = sector;
-                }
-            });
+            dtoCama.sectores = getRuta(organizacion, params.sector);
         }
 
         if (params.tipoCama) {
@@ -150,4 +146,41 @@ module.exports.createCama = async (mongoUri, params) => {
         console.log('error: ', e)
         return e;
     }
+}
+
+function getRuta(organizacion, item) {
+    for (let sector of organizacion.mapaSectores) {
+        let res = makeTree(sector, item);
+        if (res) {
+            return res;
+        }
+    }
+    return [];
+}
+
+
+function makeTree(sector, item) {
+    if (sector.hijos && sector.hijos.length > 0) {
+        for (let sec of sector.hijos) {
+            let res = makeTree(sec, item);
+            if (res) {
+                let r = clone(sector);
+                return [r, ...res];
+            }
+        }
+        return null;
+    } else {
+        if (item._id === sector._id) {
+            let r = clone(sector);
+            return [r];
+        } else {
+            return null;
+        }
+    }
+}
+
+function clone(item) {
+    let r = Object.assign({}, item);
+    delete r['hijos'];
+    return r;
 }
