@@ -19,7 +19,7 @@ context('MPI-Registro de Pacientes Similares', () => {
         cy.route('PUT', '**api/core/mpi/pacientes/**').as('putPaciente');
         cy.route('GET', '**api/core/mpi/pacientes/**').as('getPaciente');
     })
-    
+
     function irANuevoPaciente() {
         // Buscador
         cy.plexText('name="buscador"', 'xxx');
@@ -41,7 +41,7 @@ context('MPI-Registro de Pacientes Similares', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        
+
         cy.wait('@postPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.resultadoMatching.length).to.be.eq(1);
@@ -51,7 +51,7 @@ context('MPI-Registro de Pacientes Similares', () => {
             expect(xhr.response.body.dniRepetido).to.be.eq(true);
         });
         // Popup alert
-    
+
         cy.swal('confirm');
         cy.plexButton('Guardar').should('have.prop', 'disabled', true);
         cy.plexButton('Seleccionar').click();
@@ -74,17 +74,17 @@ context('MPI-Registro de Pacientes Similares', () => {
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
         cy.plexSelectType('name="provincia"', 'CABA');
         cy.plexButton('Guardar').click();
-        
+
         cy.wait('@postPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.resultadoMatching.length).to.be.eq(1);
-            expect(xhr.response.body.resultadoMatching[0].match).to.be.eq(0.87);
+            expect(xhr.response.body.resultadoMatching[0].match).to.be.lessThan(0.87);
             expect(xhr.response.body.resultadoMatching[0].paciente._id).to.be.eq('586e6e8627d3107fde116cdb');
             expect(xhr.response.body.macheoAlto).to.be.eq(false);
             expect(xhr.response.body.dniRepetido).to.be.eq(true);
         });
         // Popup alert
-    
+
         cy.swal('confirm');
         cy.plexButton('Seleccionar').click();
         cy.plexButton('Guardar').click();
@@ -106,7 +106,7 @@ context('MPI-Registro de Pacientes Similares', () => {
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
         cy.plexSelectType('name="provincia"', 'CABA');
         cy.plexButton('Guardar').click();
-        
+
         cy.wait('@postPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.resultadoMatching.length).to.be.eq(1);
@@ -116,7 +116,7 @@ context('MPI-Registro de Pacientes Similares', () => {
             expect(xhr.response.body.dniRepetido).to.be.eq(false);
         });
         // Popup alert
-    
+
         cy.swal('confirm');
         cy.plexButton('Ignorar y Guardar').click();
         cy.wait('@postPaciente').then((xhr) => {
