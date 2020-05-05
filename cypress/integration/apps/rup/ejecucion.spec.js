@@ -30,12 +30,12 @@ context('RUP - Punto de inicio', () => {
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('GET', '/api/modules/obraSocial/os/**', []).as('obraSocial');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+        cy.route('POST', '**/api/modules/huds/accesos/token**').as('tokenHuds');
 
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
 
         cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de medicina general', '@prestaciones', 0);
-
 
         // cy.get('plex-text input').first().type('3399661');
         cy.plexText('name="buscador"', '3399661');
@@ -43,6 +43,9 @@ context('RUP - Punto de inicio', () => {
         cy.get('table tbody tr').first().click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
+        cy.wait('@tokenHuds').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -51,11 +54,13 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.paciente.documento).to.be.eq('3399661');
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
         });
+
         cy.plexButtonIcon('chevron-up').first().click();
         cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
             cy.plexButtonIcon('plus').click();
         });
+        cy.get('plex-tabs').contains('Historia de Salud').click();
 
         cy.plexButton('Guardar consulta de medicina general').click();
 
