@@ -35,6 +35,6 @@ context('select organizacion', () => {
         cy.wait('@disclaimer').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('.userinfo > div > :nth-child(3)').contains('HOSPITAL DE AREA PLOTTIER');
+        cy.get('.userinfo > div span:nth-child(3)').contains('HOSPITAL DE AREA PLOTTIER');
     })
 })

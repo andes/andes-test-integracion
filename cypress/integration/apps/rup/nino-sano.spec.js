@@ -31,15 +31,9 @@ context('RUP - Punto de inicio', () => {
         cy.route('GET', '/api/modules/cda/paciente/**').as('cdaPaciente');
 
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
-
-
         cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de niño sano', '@prestaciones', 0);
-
-
         cy.plexText('name="buscador"', '3399661');
-
         cy.get('table tbody tr').first().click();
-
         cy.plexButton('INICIAR PRESTACIÓN').click();
 
         cy.wait('@create').then((xhr) => {
@@ -54,7 +48,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
             cy.plexText('name="search"', 'consulta de niño sano, recién nacido');
             cy.wait('@search').then((xhr) => {
-                cy.get('.mdi-plus').first().click();
+                cy.plexButtonIcon('plus').click();
             });
 
             cy.plexFloat('label="Peso"', 63);
