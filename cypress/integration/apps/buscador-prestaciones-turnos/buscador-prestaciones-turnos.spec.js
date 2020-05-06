@@ -40,32 +40,63 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/api/modules/estadistica/turnos_prestaciones**').as('turnosPrestaciones');
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
         cy.goto('/buscador', token);
     });
     it('Listar turnos con filtros de fechas', () => {
-        cy.wait('@turnosPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(2);
-        });
+        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+            cy.wait('@turnosPrestaciones').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(2);
+            });
+
+        } else {
+            cy.wait('@turnosPrestaciones').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(2);
+            });
+        }
     });
     it('Listar turnos con filtros de fechas y tipo de prestacion', () => {
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
-        cy.plexSelectAsync('label="Prestación"', 'consulta de medicina general', '@prestaciones', 1);
-        cy.plexButton("Buscar").click();
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(2);
         });
+        cy.plexSelectAsync('label="Prestación"', 'consulta de medicina general', '@prestaciones', 1);
+        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+            cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().add(1, 'days').format('DD/MM/YYYY'));
+            cy.plexButton("Buscar").click();
+            cy.wait('@turnosPrestaciones').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(1);
+            });
+        } else {
+            cy.plexButton("Buscar").click();
+            cy.wait('@turnosPrestaciones').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(1);
+            });
+        }
     });
     it('Listar turnos con filtros de fechas y equipo de salud logueado', () => {
-        cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
-        cy.plexButtonIcon('chevron-down').click();
         cy.plexButton("Buscar").click();
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(2);
-            expect(xhr.response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
-            expect(xhr.response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
         });
+        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+            cy.wait('@turnosPrestaciones').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(2);
+                expect(xhr.response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
+                expect(xhr.response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
+            });
+        } else {
+            cy.wait('@turnosPrestaciones').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(2);
+                expect(xhr.response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
+                expect(xhr.response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
+            });
+        }
     });
 });

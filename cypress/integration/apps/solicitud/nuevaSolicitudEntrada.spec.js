@@ -120,14 +120,13 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.plexSelectType('label="Tipos de Prestación Origen"').find('.selectize-dropdown-content').children().should('have.length', 0);
     });
 
-    it('nueva solicitud, asignación a profesional y control de historial', () => {
+    it.only('nueva solicitud, asignación a profesional y control de historial', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
         cy.introjsTooltip();
         cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
         cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de clinica médica');
-        cy.plexSelectType('label="Organización origen"', 'CASTRO RENDON');
-        cy.plexSelectType('label="Organización origen"', '{enter}');
+        cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON', '@tipoPrestacion', 0);
         cy.plexSelect('label="Tipos de Prestación Origen"', 0).then((elemento) => {
             idPrestacion = elemento.attr('data-value');
         }).click();
@@ -156,7 +155,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.goto('/rup', token);
         cy.wait('@tipoPrestacion');
         cy.plexButton('Mis solicitudes').click();
-        cy.wait('@getSolicitudes.all').then((xhr) => {
+        cy.wait('@getSolicitudes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             cy.get('.badge').contains('asignada');
         });

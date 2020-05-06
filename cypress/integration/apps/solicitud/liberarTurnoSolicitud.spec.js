@@ -120,9 +120,9 @@ describe('TOP: Liberar turno', () => {
             expect(xhr.response.body[0].profesionales[0].apellido).to.be.eq('Huenchuman');
             expect(xhr.response.body[0].profesionales[0].nombre).to.be.eq('Natalia');
         });
-        cy.get('span').contains('DNI 2006890').click({ force: true });
+        cy.get('table tbody td').contains('DNI 2006890').click({ force: true });
         cy.plexButtonIcon('account-off').click({ force: true });
-        cy.get('span').contains('Liberar').click({ force: true });
+        cy.plexButton('Liberar').click();
         cy.goto('/solicitudes', token);
 
         cy.get('span.badge-info').contains('pendiente');
