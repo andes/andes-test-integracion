@@ -10,16 +10,16 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             tipoPrestaciones: '598ca8375adc68e2a0c121bc',
             estado: 'publicada',
             organizacion: '57f67d090166fa6aedb2f9fb',
-            inicio: 3,
-            fin: 4
+            inicio: '3',
+            fin: '4'
         });
         cy.task('database:seed:agenda', {
             pacientes: '586e6e8627d3107fde116cdb',
             tipoPrestaciones: '598ca8375adc68e2a0c121b8',
             estado: 'publicada',
             organizacion: '57f67d090166fa6aedb2f9fb',
-            inicio: 5,
-            fin: 6
+            inicio: '5',
+            fin: '6'
         });
         cy.task('database:create:paciente', {
             template: 'validado'
@@ -30,8 +30,8 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
                 profesionales: '5c82a5a53c524e4c57f08cf3',
                 estado: 'publicada',
                 organizacion: '57f67d090166fa6aedb2f9fb',
-                inicio: 5,
-                fin: 6
+                inicio: '5',
+                fin: '6'
             });
         });
         cy.login('30643636', 'asd', '57f67d090166fa6aedb2f9fb').then(t => {

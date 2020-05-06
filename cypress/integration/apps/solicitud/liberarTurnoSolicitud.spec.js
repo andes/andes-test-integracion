@@ -13,8 +13,8 @@ describe('TOP: Liberar turno', () => {
     before(() => {
         cy.seed();
         cy.task('database:seed:agenda', {
-            inicio: 1,
-            fin: 3,
+            inicio: '1',
+            fin: '3',
             fecha: 3,
             profesionales: '5d02602588c4d1772a8a17f8',
             tipoPrestaciones: '59ee2d9bf00c415246fd3d6a',

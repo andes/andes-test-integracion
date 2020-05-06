@@ -23,27 +23,27 @@ context('RUP - Punto de inicio', () => {
             cy.cleanDB(['agenda', 'prestaciones']);
 
             cy.task('database:seed:agenda', {
-                inicio: 0,
-                fin: 4,
+                inicio: '0',
+                fin: '4',
                 pacientes: pacientes.map(p => p._id)
             }).then(agenda => agendas['comun'] = agenda);
 
             cy.task('database:seed:agenda', {
-                inicio: 1,
-                fin: 5,
+                inicio: '1',
+                fin: '5',
                 pacientes: pacientes.map(p => p._id),
                 dinamica: true
             }).then((agenda) => agendas['dinamica'] = agenda);
 
             cy.task('database:seed:agenda', {
-                inicio: 2,
-                fin: 5,
+                inicio: '2',
+                fin: '5',
                 tipoPrestaciones: '5b61d59968954f3e6ea84586'
             }).then(agenda => agendas['no-nominalizada'] = agenda);
 
             cy.task('database:seed:agenda', {
-                inicio: 3,
-                fin: 6,
+                inicio: '3',
+                fin: '6',
                 pacientes: pacientes.map(p => p._id),
             }).then(agenda => agendas['con-solicitud'] = agenda);
 

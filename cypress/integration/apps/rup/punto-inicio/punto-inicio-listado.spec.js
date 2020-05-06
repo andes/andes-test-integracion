@@ -49,7 +49,7 @@ context('RUP - Punto de inicio', () => {
         it('visualizar listados agendas', () => {
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb' });
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', fecha: -1 });
-            cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', fecha: -1, inicio: 2, fin: 4 });
+            cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', fecha: -1, inicio: '2', fin: '4' });
 
             cy.goto('/rup', token);
 
