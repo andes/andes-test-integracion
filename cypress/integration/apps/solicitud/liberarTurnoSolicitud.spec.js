@@ -99,7 +99,9 @@ describe('TOP: Liberar turno', () => {
             expect(xhr.status).to.be.eq(200)
         });
 
-
+        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+            cy.plexButtonIcon('chevron-right').click();
+        }
         cy.get('div[class="dia"]').contains(pasadoManiana.format('D')).click({ force: true });
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
         cy.plexButton("Confirmar").click({ force: true });
@@ -120,6 +122,7 @@ describe('TOP: Liberar turno', () => {
             expect(xhr.response.body[0].profesionales[0].apellido).to.be.eq('Huenchuman');
             expect(xhr.response.body[0].profesionales[0].nombre).to.be.eq('Natalia');
         });
+        cy.wait(2000);
         cy.get('table tbody td').contains('DNI 2006890').click({ force: true });
         cy.plexButtonIcon('account-off').click({ force: true });
         cy.plexButton('Liberar').click();
