@@ -70,7 +70,7 @@ context('RUP - Ejecucion', () => {
             cy.get('snomed-buscar').plexText('name="searchTerm"', 'alta');
 
             cy.wait('@rup-buscador');
-            cy.get('rup-buscador .mdi-plus').first().click();
+            cy.plexButtonIcon('plus').click();
 
             cy.get('rup-seccionnado-component plex-accordion plex-panel').should('have.length', 4);
 
