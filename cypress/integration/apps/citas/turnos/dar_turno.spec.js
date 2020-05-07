@@ -40,7 +40,7 @@ context('CITAS - punto de inicio', () => {
         darTurno(pacientes[0]);
         cy.wait('@prestaciones');
         cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
-        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+        if (cy.esFinDeMes()) {
             cy.wait('@cargaAgendas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.response.body).to.have.length(1);
@@ -75,7 +75,7 @@ context('CITAS - punto de inicio', () => {
         cy.wait('@prestaciones');
         cy.plexSelectAsync('name="profesional"', 'HUENCHUMAN NATALIA', '@getProfesionales', 0);
 
-        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+        if (cy.esFinDeMes()) {
             cy.wait('@cargaAgendas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.response.body).to.have.length(0);
@@ -101,7 +101,7 @@ context('CITAS - punto de inicio', () => {
             cy.wait('@prestaciones');
             cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
 
-            if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+            if (cy.esFinDeMes()) {
                 cy.wait('@cargaAgendas').then((xhr) => {
                     expect(xhr.status).to.be.eq(200);
                     expect(xhr.response.body).to.have.length(1);
@@ -188,7 +188,7 @@ context('CITAS - punto de inicio', () => {
         darTurno(pacientes[0]);
         cy.wait('@prestaciones');
         cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
-        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+        if (cy.esFinDeMes()) {
             cy.wait('@cargaAgendas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.response.body).to.have.length(1);

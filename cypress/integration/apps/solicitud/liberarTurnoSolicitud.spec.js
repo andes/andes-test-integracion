@@ -99,8 +99,11 @@ describe('TOP: Liberar turno', () => {
             expect(xhr.status).to.be.eq(200)
         });
 
-        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+        if (cy.esFinDeMes()) {
             cy.plexButtonIcon('chevron-right').click();
+            cy.wait('@getAgenda').then((xhr) => {
+                expect(xhr.status).to.be.eq(200)
+            });
         }
         cy.get('div[class="dia"]').contains(pasadoManiana.format('D')).click({ force: true });
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });

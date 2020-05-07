@@ -39,7 +39,7 @@ context('TOP: nuevo turno', () => {
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+        if (cy.esFinDeMes()) {
             cy.plexButtonIcon('chevron-right').click();
         }
         cy.wait('@agendas').then((xhr) => {
@@ -76,7 +76,7 @@ context('TOP: nuevo turno', () => {
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+        if (cy.esFinDeMes()) {
             cy.plexButtonIcon('chevron-right').click();
         }
         cy.wait('@agendas').then((xhr) => {

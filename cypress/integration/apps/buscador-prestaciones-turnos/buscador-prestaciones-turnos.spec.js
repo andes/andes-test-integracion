@@ -1,3 +1,5 @@
+/// <reference types="Cypress" />
+
 context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
     let token;
     before(() => {
@@ -45,7 +47,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.goto('/buscador', token);
     });
     it('Listar turnos con filtros de fechas', () => {
-        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+        if (cy.esFinDeMes()) {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.response.body).to.have.length(2);
@@ -63,7 +65,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             expect(xhr.status).to.be.eq(200);
         });
         cy.plexSelectAsync('label="Prestación"', 'consulta de medicina general', '@prestaciones', 1);
-        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+        if (cy.esFinDeMes()) {
             cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().add(1, 'days').format('DD/MM/YYYY'));
             cy.plexButton("Buscar").click();
             cy.wait('@turnosPrestaciones').then((xhr) => {
@@ -83,7 +85,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        if (cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+        if (cy.esFinDeMes()) {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.response.body).to.have.length(2);
