@@ -10,7 +10,6 @@ context('MPI-Registro Paciente Con Dni', () => {
     })
 
     beforeEach(() => {
-        cy.log(token)
         cy.goto('/apps/mpi/busqueda', token);
         cy.server();
     });
@@ -92,8 +91,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexSelect('label="Sexo"').click();
         cy.plexSelect('label="Sexo"', 'masculino').click();
         cy.plexButton('Validar Paciente').click();
-        cy.contains('Paciente Validado');
-        cy.toast('success').click();
+        cy.toast('success');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
@@ -135,8 +133,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexSelect('label="Sexo"').click();
         cy.plexSelect('label="Sexo"', 'femenino').click();
         cy.plexButton('Validar Paciente').click();
-        cy.contains('Paciente Validado');
-        cy.toast('success').click();
+        cy.toast('success');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
