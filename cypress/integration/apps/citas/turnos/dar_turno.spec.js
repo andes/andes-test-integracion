@@ -6,7 +6,7 @@ context('CITAS - punto de inicio', () => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
-            cy.task('database:seed:agenda', { tipoPrestaciones: '598ca8375adc68e2a0c121d5', dinamica: true, profesionales: null, inicio: 0, fin: 1 });
+            cy.task('database:seed:agenda', { tipoPrestaciones: '598ca8375adc68e2a0c121d5', dinamica: true, profesionales: null, inicio: '22', fin: '23' });
             cy.task('database:seed:agenda', { tipoPrestaciones: '598ca8375adc68e2a0c121d5', fecha: 1, tipo: 'programado' });
             cy.task('database:seed:paciente').then(p => { pacientes = p; })
         });

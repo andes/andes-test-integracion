@@ -3,13 +3,13 @@ describe('CITAS - Planificar Agendas', () => {
     before(() => {
         cy.seed();
         cy.task('database:seed:paciente');
-        cy.task('database:seed:agenda', { inicio: 1, fin: 3 });
-        cy.task('database:seed:agenda', { estado: 'planificacion', inicio: 1, fin: 3 });
-        cy.task('database:seed:agenda', { tipoPrestaciones: '57f5062f69fe79a598faf261', estado: 'disponible', inicio: 2, fin: 3 });
-        cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '57f5063f69fe79a598fcf99d', estado: 'publicada', inicio: 3, fin: 4 });
-        cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', inicio: 4, fin: 5 });
-        cy.task('database:seed:agenda', { tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', inicio: 5, fin: 6 });
-        cy.task('database:seed:agenda', { tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', profesionales: '5d49fa8bb6834a1d95e277b8', inicio: 5, fin: 6 });
+        cy.task('database:seed:agenda', { inicio: '1', fin: '3' });
+        cy.task('database:seed:agenda', { estado: 'planificacion', inicio: '1', fin: '3' });
+        cy.task('database:seed:agenda', { tipoPrestaciones: '57f5062f69fe79a598faf261', estado: 'disponible', inicio: '2', fin: '4' });
+        cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '57f5063f69fe79a598fcf99d', estado: 'publicada', inicio: '1', fin: '3' });
+        cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', inicio: '3', fin: '5' });
+        cy.task('database:seed:agenda', { tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', profesionales: '58f74fd3d03019f919e9fff2', inicio: '21', fin: '23' });
+        cy.task('database:seed:agenda', { tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', profesionales: '5d49fa8bb6834a1d95e277b8', inicio: '5', fin: '7' });
         cy.login('30643636', 'asd').then(t => {
             token = t;
 
@@ -176,7 +176,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
         cy.plexButtonIcon('sync-alert').click();
         cy.wait('@findAgenda');
-        cy.get('tbody').find('td').first().click();
+        cy.get('tbody').find('td').first().click({ force: true });
         cy.wait('@getCandidatas');
 
         cy.contains(' No hay agendas que contengan turnos que coincidan');
@@ -231,7 +231,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.bloques[0].turnos[0].motivoSuspension).to.be.eq('agendaSuspendida');
             expect(xhr.response.body.bloques[0].turnos[0].paciente.id).to.be.eq('586e6e8627d3107fde116cdb');
         });
-        cy.get('tbody').find('td').first().click();
+        cy.get('tbody').find('td').first().click({ force: true });
         cy.wait('@getCandidatas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -244,7 +244,6 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('publicada');
             expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
-            expect(xhr.response.body.profesionales[0].id).to.be.eq('5d02602588c4d1772a8a17f8');
             expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('57f5060669fe79a598f4e841');
             expect(xhr.response.body.bloques[0].accesoDirectoDelDia).to.be.eq(4);
             expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(4);
@@ -255,7 +254,6 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('suspendida');
             expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
-            expect(xhr.response.body.profesionales[0].id).to.be.eq('5d02602588c4d1772a8a17f8');
             expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('57f5060669fe79a598f4e841');
             expect(xhr.response.body.bloques[0].accesoDirectoDelDia).to.be.eq(4);
             expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(3);
