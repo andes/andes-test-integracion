@@ -26,6 +26,8 @@ describe('CITAS - Planificar Agendas', () => {
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda2');
         cy.route('PUT', '**/api/modules/turnos/turno/**').as('putAgenda');
         cy.route('PUT', '**/api/modules/turnos/agenda/**').as('putAgenda2');
+        cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
+        cy.route('POST', '**/api/modules/turnos/agenda**').as('postAgenda');
 
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.goto('/citas/gestor_agendas', token);
@@ -319,5 +321,66 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@getAgendas');
         cy.get('.lista-turnos').contains('Turno suspendido (sin paciente)');
 
+    })
+
+    it('editar agenda dinamica con institucion', () => {
+        cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.plexButton("Crear una nueva agenda").click();
+        cy.plexDatetime('name="modelo.fecha"', cy.today());
+        cy.plexDatetime('name="modelo.horaInicio"', "08:00");
+        cy.plexDatetime('name="modelo.horaFin"', "16:00");
+        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexBool('label="Dinámica"', true);
+        cy.plexBool('name="espacioFisicoPropios"', false);
+        cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
+        cy.plexButton("Guardar").click();
+        cy.contains('La agenda se guardó correctamente');
+        cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click();
+        cy.plexButtonIcon('pencil').click();
+        cy.plexSelect('label="Espacio Físico"').click();
+        cy.plexSelect('label="Espacio Físico"').find('.remove-button').click();
+        cy.plexSelectAsync('label="Espacio Físico"', 'CE.M.O.E. SAN JOSE OBRERO', '@institucion', 0);
+        cy.plexButton("Guardar").click();
+        cy.get('table tbody td').contains('CE.M.O.E. SAN JOSE OBRERO');
+    })
+
+    it('clonar agenda con una institucion asignada', () => {
+        cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.plexButton("Crear una nueva agenda").click();
+        cy.plexDatetime('name="modelo.fecha"', cy.today());
+        cy.plexDatetime('name="modelo.horaInicio"', "08:00");
+        cy.plexDatetime('name="modelo.horaFin"', "16:00");
+        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexBool('label="Dinámica"', true);
+        cy.plexBool('name="espacioFisicoPropios"', false);
+        cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
+        cy.plexButton("Guardar").click();
+        cy.toast('success').click();
+        cy.wait('@postAgenda').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.otroEspacioFisico.nombre).to.be.eq('ESCUELA PRIMARIA 300');
+            expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
+        });
+        cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click({ force: true });
+        cy.wait('@findAgenda').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.otroEspacioFisico.nombre).to.be.eq('ESCUELA PRIMARIA 300');
+            expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
+        });
+        cy.plexButtonIcon("content-copy").click();
+        cy.wait('@getAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait(1000);
+        cy.contains(Cypress.moment().add(1, 'days').date()).click({ force: true });
+        cy.plexButton("Clonar Agenda").click();
+        cy.swal('confirm');
+        cy.wait('@clonar').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+        cy.contains('La Agenda se clonó correctamente');
+        cy.swal('confirm');
     })
 })
