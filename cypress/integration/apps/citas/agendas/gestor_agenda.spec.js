@@ -292,11 +292,11 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(4);
             expect(xhr.response.body.bloques[0].turnos[0].estado).to.be.eq('disponible');
         });
-        cy.get('.lista-turnos').first().click();
-        cy.plexButtonIcon('stop').click();
+        cy.get('.lista-turnos').contains('Disponible').click();
+        cy.get('plex-box').eq(1).plexButtonIcon('stop').click();
         cy.plexButton('Confirmar').click();
+        cy.toast('alert', 'El turno seleccionado fue suspendido');
         cy.wait('@patchAgenda2').then((xhr) => {
-            cy.toast('alert', 'El turno seleccionado fue suspendido');
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('publicada');
             expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');

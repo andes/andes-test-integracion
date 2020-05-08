@@ -39,10 +39,13 @@ context('TOP: nuevo turno', () => {
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+        if (cy.esFinDeMes()) {
+            cy.plexButtonIcon('chevron-right').click();
+        }
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
         });
-        cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
 
         cy.wait('@agenda').then((xhr) => {
             cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
@@ -73,10 +76,13 @@ context('TOP: nuevo turno', () => {
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+        if (cy.esFinDeMes()) {
+            cy.plexButtonIcon('chevron-right').click();
+        }
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
         });
-        cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
 
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
         cy.plexButton('Confirmar').click();

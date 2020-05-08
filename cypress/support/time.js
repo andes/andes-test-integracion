@@ -5,3 +5,9 @@ export function today(format = null) {
 };
 
 cy.today = today;
+
+export function esFinDeMes() {
+    return cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY');
+}
+
+cy.esFinDeMes = esFinDeMes;

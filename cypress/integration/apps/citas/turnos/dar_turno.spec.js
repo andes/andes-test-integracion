@@ -40,10 +40,22 @@ context('CITAS - punto de inicio', () => {
         darTurno(pacientes[0]);
         cy.wait('@prestaciones');
         cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
-        cy.wait('@cargaAgendas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(2);
-        });
+        if (cy.esFinDeMes()) {
+            cy.wait('@cargaAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(1);
+            });
+            cy.plexButtonIcon('chevron-right').click();
+            cy.wait('@cargaAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(2);
+            });
+        } else {
+            cy.wait('@cargaAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(2);
+            });
+        }
     });
 
 
@@ -62,10 +74,23 @@ context('CITAS - punto de inicio', () => {
         darTurno(pacientes[0]);
         cy.wait('@prestaciones');
         cy.plexSelectAsync('name="profesional"', 'HUENCHUMAN NATALIA', '@getProfesionales', 0);
-        cy.wait('@cargaAgendas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(1);
-        });
+
+        if (cy.esFinDeMes()) {
+            cy.wait('@cargaAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(0);
+            });
+            cy.plexButtonIcon('chevron-right').click();
+            cy.wait('@cargaAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(1);
+            });
+        } else {
+            cy.wait('@cargaAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(1);
+            });
+        }
     });
 
     ['validado', 'temporal', 'sin-documento'].forEach((type, i) => {
@@ -75,20 +100,28 @@ context('CITAS - punto de inicio', () => {
 
             cy.wait('@prestaciones');
             cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
-            cy.wait('@cargaAgendas').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(2);
 
-            });
+            if (cy.esFinDeMes()) {
+                cy.wait('@cargaAgendas').then((xhr) => {
+                    expect(xhr.status).to.be.eq(200);
+                    expect(xhr.response.body).to.have.length(1);
+                });
+                cy.plexButtonIcon('chevron-right').click();
+                cy.wait('@cargaAgendas').then((xhr) => {
+                    expect(xhr.status).to.be.eq(200);
+                    expect(xhr.response.body).to.have.length(2);
+                });
+            } else {
+                cy.wait('@cargaAgendas').then((xhr) => {
+                    expect(xhr.status).to.be.eq(200);
+                    expect(xhr.response.body).to.have.length(2);
+                });
+            }
             cy.plexSelectAsync('name="profesional"', 'HUENCHUMAN NATALIA', '@getProfesionales', 0);
             cy.wait('@cargaAgendas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.response.body).to.have.length(1);
             });
-
-            if (Cypress.moment().add(1, 'days').month() > Cypress.moment().month()) {
-                cy.plexButton('chevron-right').click();
-            }
 
             cy.get('div[class="dia"]').contains(Cypress.moment().add(1, 'days').format('D')).click();
 
@@ -155,20 +188,29 @@ context('CITAS - punto de inicio', () => {
         darTurno(pacientes[0]);
         cy.wait('@prestaciones');
         cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
-        cy.wait('@cargaAgendas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(2);
-        });
+        if (cy.esFinDeMes()) {
+            cy.wait('@cargaAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(1);
+            });
+            cy.plexButtonIcon('chevron-right').click();
+            cy.wait('@cargaAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(2);
+            });
+
+        } else {
+            cy.wait('@cargaAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(2);
+            });
+
+        }
         cy.plexSelectAsync('name="profesional"', 'HUENCHUMAN NATALIA', '@getProfesionales', 0);
         cy.wait('@cargaAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(1);
         });
-
-        if (Cypress.moment().add(1, 'days').month() > Cypress.moment().month()) {
-            cy.plexButton('chevron-right').click();
-        }
-
         cy.get('div[class="dia"]').contains(Cypress.moment().add(1, 'days').format('D')).click();
 
         cy.wait('@seleccionAgenda').then((xhr) => {

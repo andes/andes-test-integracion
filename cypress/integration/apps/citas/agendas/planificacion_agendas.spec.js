@@ -144,18 +144,14 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-
         cy.wait('@prestaciones');
-
         cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
-
         complete({
             cantidadTurnos: 7,
             accesoDirectoDelDia: 7,
         });
-
         cy.plexButton("Guardar y clonar").click();
-
+        let fecha;
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('planificacion');
@@ -163,12 +159,14 @@ context('Planificacion Agendas', () => {
             expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(7);
             expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('59ee2d9bf00c415246fd3d6a');
             expect(xhr.response.body.bloques[0].tipoPrestaciones[0].term).to.be.eq('Consulta de medicina general');
+            fecha = xhr.response.body.horaInicio;
         });
-
         cy.toast('success', 'La agenda se guardó correctamente');
-
         cy.wait('@agendas');
-        cy.contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
+        if (Cypress.moment(fecha).format('DD/MM/YYYY') === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+            cy.plexButtonIcon('chevron-right').click();
+        }
+        cy.contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
         cy.wait('@clonar');
