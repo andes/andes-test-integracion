@@ -77,9 +77,16 @@ describe('Filtros de Mapa Camas', () => {
         cy.viewport(1920, 1080);
     });
 
-    it('Filtrar por paciente', () => {
+    it('Filtrar por nombre de paciente', () => {
         // FILTRAR PACIENTE
         cy.plexText('label="Paciente"', pacientes[0].nombre);
+        cy.get('table tr').should('length', 2);
+        cy.plexText('label="Paciente"').clear();
+    });
+
+    it('Filtrar por documento de paciente', () => {
+        // FILTRAR PACIENTE
+        cy.plexText('label="Paciente"', pacientes[0].documento);
         cy.get('table tr').should('length', 2);
         cy.plexText('label="Paciente"').clear();
     });
