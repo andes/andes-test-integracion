@@ -16,23 +16,28 @@ context('TOP: nuevo turno', () => {
     beforeEach(() => {
         cy.server();
         cy.goto('/solicitudes', token);
-        cy.route('GET', '**/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
-        cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('getPrestaciones');
-        cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('searchPaciente');
+
+        cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
+        cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
+        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
         cy.route('POST', '**/api/modules/turnos/listaEspera**').as('listaEspera');
+        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
     });
 
     it('intentar dar turno autocitado y cancelar', () => {
-        cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
-        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
-        cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
-        cy.route('GET', '/api//modules/carpetas/carpetasPacientes?documento=**').as('carpetas');
 
         cy.plexButtonIcon('chevron-down').click();
         cy.plexSelectType('label="Estado"', 'pendiente');
 
-        cy.plexSelectAsync('label="Prestación destino"', 'Consulta de clínica médica', '@getPrestaciones', 0);
+        cy.wait('@solicitudes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].estados[0].tipo).to.be.eq('pendiente');
+            expect(xhr.response.body[0].paciente.documento).to.be.eq('32589654');
+            expect(xhr.response.body[0].solicitud.profesional.nombre).to.be.eq('MARIA');
+            expect(xhr.response.body[0].solicitud.profesional.apellido).to.be.eq('PEREZ');
+            expect(xhr.response.body[0].solicitud.tipoPrestacion.id).to.be.eq('59ee2d9bf00c415246fd3d6b');
+            expect(xhr.response.body[0].solicitud.tipoPrestacion.term).to.be.eq('Consulta de clínica médica');
+        });
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.plexButtonIcon('calendar-plus').click();
 
@@ -61,15 +66,19 @@ context('TOP: nuevo turno', () => {
 
 
     it('dar turno autocitado exitoso', () => {
-        cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
-        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
-        cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
-        cy.route('GET', '/api//modules/carpetas/carpetasPacientes?documento=**').as('carpetas');
 
         cy.plexButtonIcon('chevron-down').click();
         cy.plexSelectType('label="Estado"', 'pendiente');
 
-        cy.plexSelectAsync('label="Prestación destino"', 'Consulta de clínica médica', '@getPrestaciones', 0);
+        cy.wait('@solicitudes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].estados[0].tipo).to.be.eq('pendiente');
+            expect(xhr.response.body[0].paciente.documento).to.be.eq('32589654');
+            expect(xhr.response.body[0].solicitud.profesional.nombre).to.be.eq('MARIA');
+            expect(xhr.response.body[0].solicitud.profesional.apellido).to.be.eq('PEREZ');
+            expect(xhr.response.body[0].solicitud.tipoPrestacion.id).to.be.eq('59ee2d9bf00c415246fd3d6b');
+            expect(xhr.response.body[0].solicitud.tipoPrestacion.term).to.be.eq('Consulta de clínica médica');
+        });
         cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.plexButtonIcon('calendar-plus').click();
 
