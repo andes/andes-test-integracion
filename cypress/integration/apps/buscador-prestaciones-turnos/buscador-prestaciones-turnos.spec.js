@@ -50,13 +50,13 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         if (cy.esFinDeMes()) {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(2);
+                expect(xhr.response.body).to.have.length(3);
             });
 
         } else {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(2);
+                expect(xhr.response.body).to.have.length(3);
             });
         }
     });
@@ -70,13 +70,13 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             cy.plexButton("Buscar").click();
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(1);
+                expect(xhr.response.body).to.have.length(2);
             });
         } else {
             cy.plexButton("Buscar").click();
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(1);
+                expect(xhr.response.body).to.have.length(2);
             });
         }
     });
@@ -88,14 +88,14 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         if (cy.esFinDeMes()) {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(2);
+                expect(xhr.response.body).to.have.length(3);
                 expect(xhr.response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
                 expect(xhr.response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
             });
         } else {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(2);
+                expect(xhr.response.body).to.have.length(3);
                 expect(xhr.response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
                 expect(xhr.response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
             });
