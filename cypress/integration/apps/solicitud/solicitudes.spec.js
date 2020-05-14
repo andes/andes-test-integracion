@@ -19,15 +19,21 @@ context('SOLICITUDES', () => {
     beforeEach(() => {
         cy.goto('/solicitudes', token);
         cy.server();
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
+        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
+        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
+        cy.route('GET', '**/api/core/tm/organizaciones').as('getOrganizaciones');
+        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
+        cy.route('POST', '**/api/modules/top/reglas').as('guardarRegla');
+        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('auditarSolicitud');
+
     })
 
     it('crear nueva regla solicitud', () => {
-        // routes
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
-        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglasOrganizacionDestino');
-        cy.route('GET', '**/api/core/tm/organizaciones').as('getOrganizaciones');
-        cy.route('POST', '**/api/modules/top/reglas').as('guardarRegla');
-        let prestacionDestino = 'consulta de cirugía';
+
+        let prestacionDestino = 'Consulta de cirugía';
         let orgOrigen = 'HOSPITAL DR. HORACIO HELLER';
         let prestacionOrigen = 'Consulta de medicina general';
 
@@ -37,14 +43,11 @@ context('SOLICITUDES', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexSelectAsync('name="organizacion"', orgOrigen, '@getOrganizaciones', 0);
-
-
-        cy.plexSelectAsync('label="Prestación Destino"', prestacionDestino, '@getPrestaciones', 0)
-        cy.wait('@getReglasOrganizacionDestino').then((xhr) => {
+        cy.plexSelectType('label="Prestación Destino"', prestacionDestino)
+        cy.wait('@getReglas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-
+        cy.plexSelectAsync('name="organizacion"', orgOrigen, '@getOrganizaciones', 0);
 
         cy.plexButtonIcon('plus').click();
 
@@ -69,7 +72,6 @@ context('SOLICITUDES', () => {
     });
 
     it.skip('crear solicitud desde rup', () => { // TODO: carga mal la prestacion
-        cy.server();
 
         cy.get('plex-button[label="PACIENTE FUERA DE AGENDA"]').click();
         cy.selectOption('name="nombrePrestacion"', '"59ee2d9bf00c415246fd3d6a"');
@@ -85,7 +87,7 @@ context('SOLICITUDES', () => {
         cy.wait('@elementosRUP').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         })
-        cy.wait('@tipoPrestaciones').then((xhr) => {
+        cy.wait('@getPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         })
         cy.wait(2000)
@@ -122,12 +124,6 @@ context('SOLICITUDES', () => {
     })
 
     it('crear solicitud de entrada y verificar filtros', () => {
-        cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
-        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
-        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
-        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
-        cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
 
         cy.plexButton('Nueva Solicitud').click();
         cy.plexText('name="buscador"', '32589654');
@@ -139,12 +135,12 @@ context('SOLICITUDES', () => {
         cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
 
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
-        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@tipoPrestacion', '59ee2d9bf00c415246fd3d6d');
+        cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de neurología');
 
         cy.wait('@getReglas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER', '@tipoPrestacion', '57fcf038326e73143fb48dac');
+        cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER', '@getPrestaciones', '57fcf038326e73143fb48dac');
         cy.plexSelectType('label="Tipos de Prestación Origen"', 'Consulta de clínica médica');
         cy.plexSelectAsync('name="profesionalOrigen"', 'cortes jazmin', '@getProfesional', 0);
         cy.plexSelectAsync('name="profesional"', 'natalia huenchuman', '@getProfesional', 0);
@@ -159,8 +155,8 @@ context('SOLICITUDES', () => {
         cy.plexButtonIcon('chevron-down').click();
         cy.plexText('name="paciente"', 'SOLICITUD TEST');
 
-        cy.plexSelectAsync('name="organizacion"', 'HOSPITAL DR. HORACIO HELLER', '@tipoPrestacion', '57fcf038326e73143fb48dac');
-        cy.plexSelectAsync('name="prestacionDestino"', 'consulta de neurología', '@tipoPrestacion', '59ee2d9bf00c415246fd3d6d');
+        cy.plexSelectAsync('name="organizacion"', 'HOSPITAL DR. HORACIO HELLER', '@getPrestaciones', '57fcf038326e73143fb48dac');
+        cy.plexSelectType('name="prestacionDestino"', 'consulta de neurología');
         cy.plexSelectType('name="estado"', 'auditoria');
         cy.get('table tbody tr td').contains('Consulta de neurología');
 
@@ -168,13 +164,7 @@ context('SOLICITUDES', () => {
 
     it('crear solicitud de entrada y auditarla', () => {
         cy.server();
-        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
-        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('auditarSolicitud');
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
-        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
-        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
-        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
-        cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
+
 
         cy.plexButton('Nueva Solicitud').click();
         cy.plexText('name="buscador"', '32589654');
@@ -183,13 +173,13 @@ context('SOLICITUDES', () => {
 
         cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
-        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@tipoPrestacion', '59ee2d9bf00c415246fd3d6d');
+        cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de neurología');
 
         cy.wait('@getReglas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER', '@tipoPrestacion', '57fcf038326e73143fb48dac');
+        cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER', '@getPrestaciones', '57fcf038326e73143fb48dac');
 
         cy.plexSelectType('label="Tipos de Prestación Origen"', 'Consulta de clínica médica');
 
@@ -205,7 +195,7 @@ context('SOLICITUDES', () => {
             expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
         });
         cy.plexButtonIcon('chevron-down').click();
-        cy.plexSelectAsync('name="prestacionDestino"', 'consulta de neurología', '@tipoPrestacion', '59ee2d9bf00c415246fd3d6d');
+        cy.plexSelectAsync('name="prestacionDestino"', 'consulta de neurología', '@getPrestaciones', '59ee2d9bf00c415246fd3d6d');
 
         cy.wait('@solicitudes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
