@@ -25,11 +25,9 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
-
         // Se completa datos básicos
         cy.plexInt('name="documento"', '12345489');
         cy.plexSelectType('name="sexo"', 'Masculino');
-
         // Se valida con FA RENAPER
         cy.plexButton('Validar Paciente').click();
         cy.wait('@renaper').then((xhr) => {
@@ -37,7 +35,6 @@ context('MPI-Registro Paciente Con Dni', () => {
         });
         // Se verifican que los datos se muestren correctamente
         cy.plexText('name="apellido"').should('have.value', 'TEST');
-
         cy.contains('TEST, JOSE');
         cy.contains('Paciente Validado').click();
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
@@ -50,6 +47,87 @@ context('MPI-Registro Paciente Con Dni', () => {
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
+    it('validar con renaper nuevo paciente con ALTO % de matching contra un temporal ya existente', () => {
+        let dtoTemp = {
+            template: 'temporal',
+            documento: '12325489',
+            sexo: 'masculino',
+            apellido: 'TEST',
+            nombre: 'JOSE',
+            fechaNacimiento: '2019-06-26T11:46:48.465Z' // difiere del paciente validado en un dia
+        };
+
+        cy.fixture('mpi/paciente-validado').as('paciente_validado');
+        cy.route('POST', '**api/core/mpi/pacientes/validar', '@paciente_validado').as('renaper');
+        cy.route('POST', '**api/core/mpi/pacientes**').as('guardar');
+
+        cy.task('database:create:paciente', dtoTemp).then(pacienteTemp => {
+            cy.plexText('name="buscador"', 'nuevo');
+            cy.get('div').contains('NUEVO PACIENTE').click();
+            cy.get('div').contains('CON DNI ARGENTINO').click();
+
+            // Se completa datos básicos
+            cy.plexInt('name="documento"', pacienteTemp.documento)
+            cy.plexSelectType('name="sexo"', pacienteTemp.sexo);
+
+            // Se valida con FA RENAPER
+            cy.plexButton('Validar Paciente').click();
+            cy.wait('@renaper').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            // vuelta rta de renaper
+            cy.toast('success')
+            cy.plexBool('label="No posee ningún tipo de contacto"', true);
+            cy.plexBool('name="viveProvActual"', true);
+            cy.plexBool('name="viveLocActual"', true);
+            cy.plexButton('Guardar').click();
+            cy.wait('@guardar')
+            cy.swal('confirm');
+            // buscador mpi
+            cy.plexText('name="buscador"', pacienteTemp.documento);
+            cy.get('paciente-listado').should('length', 1); // un solo paciente, ya que el temporal se vinculó al nuevo validado
+        });
+    });
+
+    it('validar con renaper nuevo paciente con BAJO % de matching contra un temporal ya existente', () => {
+        // Varía el documento en un dígito, la fecha de nacimiento y también el nombre de manera que el matching sea bajo
+        let dtoTemp = {
+            template: 'temporal',
+            documento: '99325488',
+            sexo: 'masculino',
+            apellido: 'TESTEO',
+            nombre: 'JOSETEMP',
+            fechaNacimiento: '2019-06-26T11:46:48.465Z'
+        }
+        cy.fixture('mpi/paciente-validado').as('paciente_validado');
+        cy.route('POST', '**api/core/mpi/pacientes/validar', '@paciente_validado').as('renaper');
+        cy.route('POST', '**api/core/mpi/pacientes**').as('guardar');
+
+        cy.task('database:create:paciente', dtoTemp).then(pacienteTemp => {
+            cy.plexText('name="buscador"', 'nuevo');
+            cy.get('div').contains('NUEVO PACIENTE').click();
+            cy.get('div').contains('CON DNI ARGENTINO').click();
+            // Se completa datos básicos
+            cy.plexInt('name="documento"', pacienteTemp.documento)
+            cy.plexSelectType('name="sexo"', pacienteTemp.sexo);
+            // Se valida con FA RENAPER
+            cy.plexButton('Validar Paciente').click();
+            cy.wait('@renaper').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            // vuelta rta de renaper
+            cy.toast('success')
+            cy.plexBool('label="No posee ningún tipo de contacto"', true);
+            cy.plexBool('name="viveProvActual"', true);
+            cy.plexBool('name="viveLocActual"', true);
+            cy.plexButton('Guardar').click();
+            cy.wait('@guardar')
+            cy.swal('confirm');
+            // buscador mpi
+            cy.plexText('name="buscador"', pacienteTemp.documento);
+            cy.get('paciente-listado').should('length', 2); // dos pacientes ya que no hubo vinculacion
+        });
+    });
 
     it('verificar la carga de paciente con datos obligatorios requeridos', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroConDni');
@@ -58,12 +136,10 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
-
         cy.plexInt('label="Número de DNI ARGENTINO"', '11222333');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'CON DNI');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'masculino').click();
+        cy.plexSelectType('label="Sexo"', 'masculino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.plexPhone('label="Número"', '2990000000');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
@@ -88,8 +164,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
         cy.plexInt('label="Número de DNI ARGENTINO"', '33650509');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'masculino').click();
+        cy.plexSelectType('label="Sexo"', 'masculino');
         cy.plexButton('Validar Paciente').click();
         cy.toast('success');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
@@ -109,8 +184,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexInt('label="Número de DNI ARGENTINO"', '33650590');
         cy.plexText('label="Apellido"', 'Bucares');
         cy.plexText('label="Nombre"', 'Matias');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'masculino').click();
+        cy.plexSelectType('label="Sexo"', 'masculino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '09/04/1989');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);
@@ -129,9 +203,8 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
-        cy.plexInt('label="Número de DNI ARGENTINO"', '32247537');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'femenino').click();
+        cy.plexInt('label="Número de DNI ARGENTINO"', '10101010');
+        cy.plexSelectType('label="Sexo"', 'femenino');
         cy.plexButton('Validar Paciente').click();
         cy.toast('success');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
@@ -148,11 +221,10 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
-        cy.plexInt('label="Número de DNI ARGENTINO"', '32247537');
+        cy.plexInt('label="Número de DNI ARGENTINO"', '10101010');
         cy.plexText('label="Apellido"', 'Ramos');
         cy.plexText('label="Nombre"', 'María');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'femenino').click();
+        cy.plexSelectType('label="Sexo"', 'femenino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '28/08/1986');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);
@@ -172,8 +244,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexInt('label="Número de DNI ARGENTINO"', '27799117');
         cy.plexText('label="Apellido"', 'Nuez');
         cy.plexText('label="Nombre"', 'Maria Julieta');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'femenino').click();
+        cy.plexSelectType('label="Sexo"', 'femenino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '03/10/2000');
         cy.plexPhone('label="Número"', '2990000000');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
@@ -194,8 +265,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexInt('label="Número de DNI ARGENTINO"', '27799171');
         cy.plexText('label="Apellido"', 'Nuñez');
         cy.plexText('label="Nombre"', 'Maria');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'femenino').click();
+        cy.plexSelectType('label="Sexo"', 'femenino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '03/10/2000');
         cy.plexPhone('label="Número"', '2990000000');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
@@ -215,8 +285,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexInt('label="Número de DNI ARGENTINO"', '27700887');
         cy.plexText('label="Apellido"', 'Almendra');
         cy.plexText('label="Nombre"', 'Marta Luz');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'femenino').click();
+        cy.plexSelectType('label="Sexo"', 'femenino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '03/09/2000');
         cy.plexPhone('label="Número"', '2990000000');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
@@ -237,8 +306,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexInt('label="Número de DNI ARGENTINO"', '27700887');
         cy.plexText('label="Apellido"', 'Almendra');
         cy.plexText('label="Nombre"', 'Marta');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'femenino').click();
+        cy.plexSelectType('label="Sexo"', 'femenino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '03/09/2000');
         cy.plexPhone('label="Número"', '2990000000');
         cy.plexBool('label="No posee ningún tipo de contacto"', true);
