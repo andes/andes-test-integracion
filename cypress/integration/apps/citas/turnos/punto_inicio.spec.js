@@ -17,6 +17,8 @@ context('punto de inicio', () => {
                     turno = agenda.bloques[0].turnos[0].horaInicio; // Se queda con la horaInicio del primer turno para luego verificar historial
                 });
             });
+            cy.task('database:create:paciente', { template: 'validado', nombre: 'paciente', apellido: 'andes', documento: 123456789 });
+            cy.task('database:seed:agenda', { tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', profesionales: '5d49fa8bb6834a1d95e277b8', inicio: '20', fin: '22' });
         });
 
     });
@@ -27,6 +29,8 @@ context('punto de inicio', () => {
         cy.goto('/citas/punto-inicio', token);
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('GET', '**api/core/log/paciente?idPaciente=**').as('seleccionPaciente');
+        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
     })
 
     it('Buscar paciente inexistente', () => {
@@ -39,7 +43,7 @@ context('punto de inicio', () => {
 
     it('Generar solicitud', () => {
         cy.route('GET', '**api/modules/rup/prestaciones/solicitudes?idPaciente=**').as('generarSolicitudPaciente');
-        cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('version');
+        cy.route('GET', '/api/modules/obraSocial/obraSocial/**', []).as('version');
         cy.plexText('name=buscador', paciente.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -61,7 +65,7 @@ context('punto de inicio', () => {
             "account": null
         }).as('clickActivarApp');
 
-        cy.route('GET', '/api/modules/obraSocial/puco/**', []).as('puco');
+        cy.route('GET', '/api/modules/obraSocial/obraSocial/**', []).as('puco');
         cy.route('GET', '/api/modules/obraSocial/prepagas/**', []).as('prepagas');
         cy.plexText('name=buscador', paciente.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
@@ -79,7 +83,7 @@ context('punto de inicio', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?**').as('getHistorial');
         cy.route('GET', '**/api/core/log/paciente?**').as('getLog');
-        cy.route('GET', '**/api/modules/obraSocial/puco/**').as('getObraSocial');
+        cy.route('GET', '**/api/modules/obraSocial/obraSocial/**').as('getObraSocial');
         cy.route('GET', '**/api/modules/obraSocial/prepagas**').as('getPrepagas');
         cy.route('GET', '**/api/core/tm/localidades?**').as('getLocalidades');
         cy.route('GET', '**/api/core/tm/paises?**').as('getPaises');
@@ -153,7 +157,7 @@ context('punto de inicio', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?**').as('getTurnos');
         cy.route('GET', '**/api/core/log/paciente?**').as('getLog');
-        cy.route('GET', '**/api/modules/obraSocial/puco/**').as('getObraSocial');
+        cy.route('GET', '**/api/modules/obraSocial/obraSocial/**').as('getObraSocial');
         cy.route('GET', '**/api/core/tm/paises?**').as('getPaises');
         cy.route('GET', '**/api/modules/obraSocial/prepagas**').as('getPrepagas');
         cy.route('GET', '**/api/core/tm/provincias**').as('getProvincias');
@@ -240,7 +244,7 @@ context('punto de inicio', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?**').as('getTurnos');
         cy.route('GET', '**/api/core/log/paciente?**').as('getLog');
-        cy.route('GET', '**/api/modules/obraSocial/puco/**').as('getObraSocial');
+        cy.route('GET', '**/api/modules/obraSocial/obraSocial/**').as('getObraSocial');
         cy.route('GET', '**/api/core/tm/paises?**').as('getPaises');
         cy.route('GET', '**/api/modules/obraSocial/prepagas**').as('getPrepagas');
         cy.route('GET', '**/api/core/tm/provincias**').as('getProvincias');
@@ -420,4 +424,59 @@ context('punto de inicio', () => {
             expect(xhr.response.body.direccion[0].valor).to.be.eq("Avenida Las Flores 1200");
         });
     });
+
+
+    it('Verificar obra social de un paciente', () => {
+        cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
+
+        cy.plexText('name="buscador"', 123456789);
+
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').find('td').contains(123456789).click();
+
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.get('plex-label').contains('MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES');
+
+    });
+
+    it('Sacar turno y seleccionar prepaga', () => {
+        cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
+        cy.route('GET', '**/api/modules/turnos/historial?*').as('getTurnos');
+
+        cy.plexText('name="buscador"', 123456789);
+
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').find('td').contains(123456789).click();
+
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.get('plex-label').contains('MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES');
+
+        cy.plexButtonIcon('calendar-plus').click();
+
+        cy.plexSelectAsync('name="tipoPrestacion"', 'servicio de neumonología', '@prestaciones', 0);
+
+        cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click();
+        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+        cy.plexButton('Confirmar').click();
+        cy.wait('@confirmarTurno').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.profesionales[0].nombre).to.be.eq('ALICIA BEATRIZ');
+            expect(xhr.response.body.profesionales[0].apellido).to.be.eq('ESPOSITO');
+        });
+        cy.wait(1000);
+        cy.get('mat-radio-button').contains('Prepaga').click({ force: true });
+        cy.plexSelectType('label="Seleccione una Prepaga"', 'swiss medical').click({ force: true });
+
+    });
+
 })
