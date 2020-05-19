@@ -16,7 +16,6 @@ context('CITAS - punto de inicio', () => {
         cy.server();
         cy.goto('/citas/punto-inicio', token);
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**api/core/log/paciente?idPaciente=**').as('seleccionPaciente');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
@@ -240,9 +239,6 @@ function darTurno(paciente) {
         expect(xhr.status).to.be.eq(200);
     });
     cy.get('paciente-listado plex-item').contains(searchList).click();
-    cy.wait('@seleccionPaciente').then((xhr) => {
-        expect(xhr.status).to.be.eq(200);
-    });
     cy.plexButtonIcon('calendar-plus').click({ force: true });
     return cy.wait('@darTurnoPaciente').then((xhr) => {
         expect(xhr.status).to.be.eq(200);
