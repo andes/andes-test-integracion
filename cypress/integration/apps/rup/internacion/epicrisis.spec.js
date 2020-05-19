@@ -46,10 +46,6 @@ context("RUP - Epicrisis", () => {
       expect(xhr.status).to.be.eq(200);
     });
 
-    cy.wait("@ultimaInternacion").then(xhr => {
-      expect(xhr.status).to.be.eq(200);
-    });
-
     cy.plexDropdown('label="NUEVO REGISTRO"', "EPICRISIS");
 
     cy.wait("@prestaciones").then(xhr => {
