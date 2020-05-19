@@ -171,7 +171,7 @@ context('Planificacion Agendas', () => {
         if (Cypress.moment(fecha).format('DD/MM/YYYY') === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
             cy.plexButtonIcon('chevron-right').click();
         }
-        cy.contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
+        cy.get('table tr td').contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
         cy.wait('@clonar');

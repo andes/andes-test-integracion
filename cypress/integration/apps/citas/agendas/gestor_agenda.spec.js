@@ -372,9 +372,8 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexButtonIcon("content-copy").click();
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            cy.get('table tr td').contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
         });
-        cy.wait(1000);
-        cy.contains(Cypress.moment().add(1, 'days').date()).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
         cy.wait('@clonar').then((xhr) => {
