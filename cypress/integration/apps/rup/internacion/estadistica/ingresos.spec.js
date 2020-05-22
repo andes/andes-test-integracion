@@ -58,7 +58,7 @@ describe('Capa Estadistica - Ingresos', () => {
     });
 
     it('Ingreso completo cambiando paciente', () => {
-        cy.plexButtonIcon('plus').click();
+        cy.get('table tr').plexButtonIcon('plus').click();
 
         cy.plexText('name="buscador"', pacientes[0].nombre);
         cy.wait('@busquedaPaciente').then((xhr) => {
