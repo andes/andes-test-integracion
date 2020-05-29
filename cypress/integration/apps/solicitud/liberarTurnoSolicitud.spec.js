@@ -99,7 +99,7 @@ describe('TOP: Liberar turno', () => {
             expect(xhr.status).to.be.eq(200)
         });
 
-        if (cy.esFinDeMes()) {
+        if (pasadoManiana > Cypress.moment().endOf('month') || cy.esFinDeMes()) {
             cy.plexButtonIcon('chevron-right').click();
             cy.wait('@getAgenda').then((xhr) => {
                 expect(xhr.status).to.be.eq(200)
