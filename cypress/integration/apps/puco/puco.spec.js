@@ -30,7 +30,11 @@ context('PUCO', () => {
     });
 
     it('verificar datos de un paciente', () => {
+        cy.route('GET', '**/api/modules/obraSocial/puco/**').as('buscadorPuco');
         cy.plexText('placeholder="Ingrese DNI"', 123456789);
+        cy.wait('@buscadorPuco').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.get('table tbody tr td').contains(' MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES ');
         cy.get('table tbody tr td').contains('ANDES PACIENTE');
 
