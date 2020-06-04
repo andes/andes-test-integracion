@@ -40,7 +40,7 @@ services:
       APP_KEY: "5gCYFZPp3dfA2m5UNElVkgRLFcFnlele"
       MONGO_MAIN: "mongodb://andes_db:27017/andes"
       MONGO_SNOMED: "mongodb://andes_db:27017/es-edition"
-      MONGO_PUCO: "mongodb://andes_db:27017/padrones"
+      MONGO_PUCO: "mongodb://andes_db:27017/andes"
       MONGO_LOGS: "mongodb://andes_db:27017/logs"
       ELASTIC_HOST: "andes_elastic:9200"
     ports:
