@@ -166,7 +166,6 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
-                    cy.wait('@prestaciones');
 
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(1).click();
@@ -207,7 +206,6 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
-                    cy.wait('@prestaciones');
 
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(1).click();
@@ -228,7 +226,6 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
-                    cy.wait('@prestaciones');
 
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(1).click();
@@ -238,10 +235,7 @@ context('RUP - Punto de inicio', () => {
                     cy.plexButton('ACEPTAR').click();
                     cy.url().should('include', '/rup/vista/');
                 });
-
             })
-
-
         });
 
     })
@@ -271,11 +265,9 @@ context('RUP - Punto de inicio', () => {
                 cy.wait('@tiposPrestaciones');
                 cy.wait('@tiposPrestaciones');
                 cy.wait('@prestaciones');
-                cy.wait('@prestaciones');
-
+                cy.wait(1000);
                 cy.get('table').first().as('tablaAgendas');
                 // cy.get('@tablaAgendas').find('tbody tr').should('have.length', 3);
-
                 cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
 
                 cy.plexButton('INICIAR PRESTACIÓN').click();
@@ -314,7 +306,6 @@ context('RUP - Punto de inicio', () => {
                 cy.wait('@tiposPrestaciones');
                 cy.wait('@tiposPrestaciones');
                 cy.wait('@prestaciones');
-                cy.wait('@prestaciones');
 
                 cy.get('table').first().as('tablaAgendas');
                 cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
@@ -348,7 +339,6 @@ context('RUP - Punto de inicio', () => {
                 cy.wait('@tiposPrestaciones');
                 cy.wait('@tiposPrestaciones');
                 cy.wait('@prestaciones');
-                cy.wait('@prestaciones');
 
                 cy.get('table').first().as('tablaAgendas');
                 cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
@@ -369,7 +359,6 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@turnero');
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@tiposPrestaciones');
-                    cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
                     cy.get('table').first().as('tablaAgendas');
