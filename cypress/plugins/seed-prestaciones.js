@@ -67,7 +67,7 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             const profesional = await ProfesionalDB.findOne({ _id: new ObjectId(params.profesional) });
             prestacion.solicitud.profesional = profesional;
         } else {
-            prestacion.solicitud.profesional._id = new ObjectId(prestacion.solicitud.profesional._id);
+            prestacion.solicitud.profesional.id = new ObjectId(prestacion.solicitud.profesional._id);
         }
 
         if (params.paciente) {
