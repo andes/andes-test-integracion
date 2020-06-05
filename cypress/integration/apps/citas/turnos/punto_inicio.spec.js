@@ -1,6 +1,7 @@
 context('punto de inicio', () => {
     let token;
     // const = '36425896';
+    let pacientes = [];
     let paciente;
     let turno;
     before(() => {
@@ -17,7 +18,8 @@ context('punto de inicio', () => {
                     turno = agenda.bloques[0].turnos[0].horaInicio; // Se queda con la horaInicio del primer turno para luego verificar historial
                 });
             });
-            cy.task('database:create:paciente', { template: 'validado', nombre: 'paciente', apellido: 'andes', documento: 123456789 });
+            cy.task('database:create:paciente', { template: 'validado', nombre: 'andes', apellido: 'paciente', documento: 123456789 }).then(p => { pacientes.push(p) });
+            cy.task('database:create:paciente', { template: 'temporal', nombre: 'andes', apellido: 'temporal', documento: 987654321 }).then(p => { pacientes.push(p) });
             cy.task('database:seed:agenda', { tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', profesionales: '5d49fa8bb6834a1d95e277b8', inicio: '20', fin: '22' });
         });
 
@@ -425,58 +427,84 @@ context('punto de inicio', () => {
         });
     });
 
+    ['validado', 'temporal'].forEach((type, i) => {
 
-    it('Verificar obra social de un paciente', () => {
-        cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
+        it('Verificar obra social de un paciente ' + type, () => {
 
-        cy.plexText('name="buscador"', 123456789);
+            cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
 
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            cy.plexText('name="buscador"', pacientes[i].documento);
+
+            cy.wait('@busquedaPaciente').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            cy.get('paciente-listado').find('td').contains(pacientes[i].documento).click();
+
+            cy.wait('@getPaciente').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+
+            cy.get('plex-label').contains('MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES');
+
         });
-        cy.get('paciente-listado').find('td').contains(123456789).click();
 
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        it('Sacar turno y seleccionar prepaga ' + type, () => {
+            cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
+            cy.route('GET', '**/api/modules/turnos/historial?*').as('getHistorial');
+            cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
+            cy.route('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
+            cy.route('GET', '**/api/modules/turnos/agenda?**').as('getAgendas');
+            cy.route('GET', '**/api/modules/turnos/agenda/**').as('getAgenda');
+
+            cy.plexText('name="buscador"', pacientes[i].documento);
+
+            cy.wait('@busquedaPaciente').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            cy.get('paciente-listado').find('td').contains(pacientes[i].documento).click();
+
+            cy.wait('@getPaciente').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+
+            cy.get('plex-label').contains('MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES');
+
+            cy.plexButtonIcon('calendar-plus').click();
+            cy.wait('@getPaciente').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            cy.wait('@getPrestaciones').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            cy.wait('@getCarpetas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+
+            cy.plexSelectAsync('name="tipoPrestacion"', 'servicio de neumonología', '@prestaciones', 0);
+
+            cy.wait('@getAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+
+            cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click();
+            cy.wait('@getAgenda').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+
+            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+            cy.plexButton('Confirmar').click();
+            cy.wait('@getAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            cy.wait('@confirmarTurno').then(xhr => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body.profesionales[0].nombre).to.be.eq('ALICIA BEATRIZ');
+                expect(xhr.response.body.profesionales[0].apellido).to.be.eq('ESPOSITO');
+            });
+            cy.wait(1000);
+            cy.get('mat-radio-button').contains('Prepaga').click({ force: true });
+            cy.plexSelectType('label="Seleccione una Prepaga"', 'swiss medical').click({ force: true });
+
         });
-
-        cy.get('plex-label').contains('MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES');
-
     });
-
-    it('Sacar turno y seleccionar prepaga', () => {
-        cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
-        cy.route('GET', '**/api/modules/turnos/historial?*').as('getTurnos');
-
-        cy.plexText('name="buscador"', 123456789);
-
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.get('paciente-listado').find('td').contains(123456789).click();
-
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.get('plex-label').contains('MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES');
-
-        cy.plexButtonIcon('calendar-plus').click();
-
-        cy.plexSelectAsync('name="tipoPrestacion"', 'servicio de neumonología', '@prestaciones', 0);
-
-        cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click();
-        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
-        cy.plexButton('Confirmar').click();
-        cy.wait('@confirmarTurno').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.profesionales[0].nombre).to.be.eq('ALICIA BEATRIZ');
-            expect(xhr.response.body.profesionales[0].apellido).to.be.eq('ESPOSITO');
-        });
-        cy.wait(1000);
-        cy.get('mat-radio-button').contains('Prepaga').click({ force: true });
-        cy.plexSelectType('label="Seleccione una Prepaga"', 'swiss medical').click({ force: true });
-
-    });
-
 })
