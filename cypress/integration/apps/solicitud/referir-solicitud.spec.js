@@ -5,7 +5,7 @@
  * A LA NOCHE DA ERROR POR PROBLEMA DE TIMEZONE
  */
 
-context('SOLICITUDES - REEMITIR', () => {
+context('SOLICITUDES - REFERIR', () => {
     let token
     before(() => {
         cy.seed();
@@ -28,11 +28,11 @@ context('SOLICITUDES - REEMITIR', () => {
         cy.route('GET', '**/api/core/tm/tiposPrestaciones').as('tipoPrestaciones');
     })
 
-    it('crear solicitud de entrada y remitirla', () => {
+    it('crear solicitud de entrada y referirla', () => {
         cy.get('table tbody tr td').contains('CORTES, JAZMIN').click();
         cy.plexButtonIcon('lock-alert').first().click();
 
-        cy.plexButton('Remitir').click();
+        cy.plexButton('Referir').click();
 
         cy.plexSelectAsync('label="Organización destino"', 'HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON', '@getReglas', 0);
         cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'consulta de cardiología');
@@ -48,7 +48,7 @@ context('SOLICITUDES - REEMITIR', () => {
             expect(xhr.response.body[0].solicitud.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
             expect(xhr.response.body[0].solicitud.profesional.id).to.be.eq('5c82a5a53c524e4c57f08cf2');
             expect(xhr.response.body[0].solicitud.tipoPrestacion.conceptId).to.be.eq('291000013102');
-            expect(xhr.response.body[0].solicitud.historial[0].accion).to.be.eq('remisionSolicitud');
+            expect(xhr.response.body[0].solicitud.historial[0].accion).to.be.eq('referencia');
         });
     });
 })
