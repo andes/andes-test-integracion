@@ -1,7 +1,9 @@
 context('PUCO', () => {
+    let pacientes = [];
     before(() => {
         cy.seed();
-        cy.task('database:create:paciente', { template: 'validado', nombre: 'paciente', apellido: 'andes', documento: 123456789 });
+        cy.task('database:create:paciente', { template: 'validado', nombre: 'andes', apellido: 'paciente', documento: 123456789 }).then(p => { pacientes.push(p) });
+        cy.task('database:create:paciente', { template: 'temporal', nombre: 'andes', apellido: 'temporal', documento: 987654321 }).then(p => { pacientes.push(p) });
     });
 
     beforeEach(() => {
@@ -29,14 +31,15 @@ context('PUCO', () => {
         });
     });
 
-    it('verificar datos de un paciente', () => {
-        cy.route('GET', '**/api/modules/obraSocial/puco/**').as('buscadorPuco');
-        cy.plexText('placeholder="Ingrese DNI"', 123456789);
-        cy.wait('@buscadorPuco').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
+    ['validado', 'temporal'].forEach((type, i) => {
+        it('verificar datos de un paciente ' + type, () => {
+            cy.route('GET', '**/api/modules/obraSocial/puco/**').as('buscadorPuco');
+            cy.plexText('placeholder="Ingrese DNI"', pacientes[i].documento);
+            cy.wait('@buscadorPuco').then(xhr => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            cy.get('table tbody tr td').contains('MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES');
         });
-        cy.get('table tbody tr td').contains(' MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES ');
-        cy.get('table tbody tr td').contains('ANDES PACIENTE');
-
     });
+
 })
