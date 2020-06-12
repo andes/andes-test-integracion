@@ -99,7 +99,7 @@ context('RUP - Ejecucion', () => {
 
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).find('.card-header').click();
 
-            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).plexHtml('label="Observaciones"', 'hola');
+            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).plexHtml('name="observaciones"', 'hola');
 
             cy.plexButton('Guardar').click();
             cy.toast('error');

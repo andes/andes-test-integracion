@@ -72,7 +72,7 @@ context("RUP - Epicrisis", () => {
     });
 
     cy.get(
-      `plex-text[label="Observaciones"] quill-editor div[class="ql-container ql-snow"] div p`
+      `plex-text[name="observaciones"] quill-editor div[class="ql-container ql-snow"] div p`
     ).type(
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       { force: true }
