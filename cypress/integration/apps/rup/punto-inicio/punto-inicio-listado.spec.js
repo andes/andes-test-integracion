@@ -28,13 +28,14 @@ context('RUP - Punto de inicio', () => {
             cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         });
 
-        it('no visualiza agendas sin turnos', () => {
-            cy.task('database:seed:agenda');
+        it('visualiza agendas sin turnos', () => {
+            cy.task('database:seed:agenda', {});
             cy.goto('/rup', token);
-            cy.get('table').contains('No hay agendas programadas para este día');
+            cy.get('table tbody tr td div').contains('consulta con médico general');
         });
 
         it('no visualiza agendas de otros profesionales', () => {
+            cy.cleanDB(['prestaciones']);
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', profesionales: '5c82a5a53c524e4c57f08cf3' });
             cy.goto('/rup', token);
             cy.get('table').contains('No hay agendas programadas para este día');

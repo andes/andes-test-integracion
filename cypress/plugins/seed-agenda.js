@@ -183,6 +183,7 @@ module.exports.seedAgenda = async (mongoUri, params) => {
         return agenda;
 
     } catch (e) {
+        console.log(e)
         return e;
     }
 }
