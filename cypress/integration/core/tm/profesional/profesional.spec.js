@@ -90,7 +90,7 @@ context('TM Profesional', () => {
         cy.server();
         cy.route('POST', '**/core/tm/profesionales**').as('create');
         cy.fixture('renaper-1').as('fxRenaper')
-        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=26487951&sexo=M', '@fxRenaper').as('renaper');
+        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=26487951&sexo=masculino', '@fxRenaper').as('renaper');
 
         complete({
             sexo: 'masculino',
@@ -100,8 +100,8 @@ context('TM Profesional', () => {
         cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
         cy.wait('@renaper').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.datos.apellido).to.be.eq('TEST');
-            expect(xhr.response.body.datos.nombres).to.be.eq('PROFESIONAL');
+            expect(xhr.response.body.apellido).to.be.eq('TEST');
+            expect(xhr.response.body.nombre).to.be.eq('PROFESIONAL');
         });
 
         check({
@@ -129,8 +129,8 @@ context('TM Profesional', () => {
         cy.goto('/tm/profesional/create', token);
 
         cy.server();
-        cy.fixture('renaper-error').as('fxRenaper')
-        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=15654898&sexo=F', '@fxRenaper').as('renaper');
+        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=15654898&sexo=femenino').as('renaper');
+
         cy.route('POST', '**/core/tm/profesionales**').as('create');
 
         cy.plexInt('label="Número de Documento"', '15654898');
@@ -140,9 +140,7 @@ context('TM Profesional', () => {
 
         cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
         cy.wait('@renaper').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.datos.apellido).to.be.eq('');
-            expect(xhr.response.body.datos.nombres).to.be.eq('');
+            expect(xhr.response.body).to.be.eq(null);
         });
 
         cy.contains('El profesional no se encontró en RENAPER');
