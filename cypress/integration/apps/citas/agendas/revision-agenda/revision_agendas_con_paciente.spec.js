@@ -77,9 +77,6 @@ context('CITAS - Revisión de Agendas', () => {
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
         cy.get('tbody:nth-child(1) tr:first-child').click();
 
-        cy.get('plex-layout-main .plex-box-content').scrollTo('bottom');
-        cy.wait(500);
-
         // Hay que corregir el plex-button, ya que debería funcionar así:
         cy.plexButtonIcon('refresh').click();
 
@@ -132,9 +129,6 @@ context('CITAS - Revisión de Agendas', () => {
         cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
 
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
-
-        // Ver cómo detectar si hay scroll
-        // cy.get('plex-layout-sidebar .plex-box-content').scrollTo('bottom');
 
         cy.wait('@agenda').then(xhrAgenda => {
             cy.expect(xhrAgenda.status).to.be.eq(200);
