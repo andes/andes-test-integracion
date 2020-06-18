@@ -76,7 +76,7 @@ context('punto de inicio', () => {
         cy.get('paciente-listado').find('td').contains(paciente.documento).click();
         cy.plexButtonIcon('cellphone-android').click();
         cy.plexText('placeholder="e-mail"', '{selectall}{backspace}prueba@prueba.com');
-        cy.plexText('placeholder="Celular"', '{selectall}{backspace}2995290357');
+        cy.plexPhone('name="celular"', '{selectall}{backspace}2995290357');
         cy.plexButton('Activar App Mobile').click();
         cy.swal('confirm')
     })
