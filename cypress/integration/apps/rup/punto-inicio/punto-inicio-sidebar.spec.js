@@ -83,7 +83,6 @@ context('RUP - Punto de inicio', () => {
                             cy.wait('@tiposPrestaciones');
                             cy.wait('@turnero');
                             cy.wait('@tiposPrestaciones');
-                            cy.wait('@tiposPrestaciones');
                             cy.wait('@prestaciones');
                             cy.wait(1000);
 
@@ -164,7 +163,6 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@turnero');
                     cy.wait('@tiposPrestaciones');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
@@ -205,7 +203,6 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@turnero');
                     cy.wait('@tiposPrestaciones');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
@@ -225,7 +222,6 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@agendas');
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@turnero');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
@@ -269,7 +265,6 @@ context('RUP - Punto de inicio', () => {
                 cy.wait('@tiposPrestaciones');
                 cy.wait('@turnero');
                 cy.wait('@tiposPrestaciones');
-                cy.wait('@tiposPrestaciones');
                 cy.wait('@prestaciones');
                 cy.wait('@prestaciones');
 
@@ -312,7 +307,6 @@ context('RUP - Punto de inicio', () => {
                 cy.wait('@tiposPrestaciones');
                 cy.wait('@turnero');
                 cy.wait('@tiposPrestaciones');
-                cy.wait('@tiposPrestaciones');
                 cy.wait('@prestaciones');
                 cy.wait('@prestaciones');
 
@@ -346,7 +340,6 @@ context('RUP - Punto de inicio', () => {
                 cy.wait('@tiposPrestaciones');
                 cy.wait('@turnero');
                 cy.wait('@tiposPrestaciones');
-                cy.wait('@tiposPrestaciones');
                 cy.wait('@prestaciones');
                 cy.wait('@prestaciones');
 
@@ -367,7 +360,6 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@agendas');
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@turnero');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
