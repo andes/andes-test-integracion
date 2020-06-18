@@ -47,6 +47,7 @@ context('RUP - Punto de inicio', () => {
         });
 
         it('visualizar listados agendas', () => {
+            const msgSinResultados = 'No hay agendas programadas para este día';
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb' });
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', fecha: -1 });
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', fecha: -1, inicio: '2', fin: '4' });
@@ -74,7 +75,7 @@ context('RUP - Punto de inicio', () => {
             cy.log('Filtro por prestación');
             cy.plexSelect('name="nombrePrestacion"').click();
             cy.plexSelect('name="nombrePrestacion"', '598ca8375adc68e2a0c121bc').click();
-            cy.get('@tablaAgendas').find('tbody tr').should('have.length', 0);
+            cy.get('@tablaAgendas').find('tbody tr').contains(msgSinResultados);
 
             cy.plexSelect('name="nombrePrestacion"').click();
             cy.plexSelect('name="nombrePrestacion"', '598ca8375adc68e2a0c121b9').click();
@@ -85,10 +86,9 @@ context('RUP - Punto de inicio', () => {
             cy.get('@tablaAgendas').find('tbody tr').should('have.length', 2);
 
             cy.plexText('label="Paciente"', '{selectall}{backspace}31549269');
-            cy.get('@tablaAgendas').find('tbody tr').should('have.length', 0);
-
+            cy.get('@tablaAgendas').find('tbody tr').contains(msgSinResultados);
             cy.plexSelect('name="nombrePrestacion"').find('.mdi-close-circle').click();
-            cy.get('@tablaAgendas').find('tbody tr').should('have.length', 0);
+            cy.get('@tablaAgendas').find('tbody tr').contains(msgSinResultados);
 
             cy.plexText('label="Paciente"', '{selectall}{backspace}10000000');
             cy.get('@tablaAgendas').find('tbody tr').should('have.length', 2);
