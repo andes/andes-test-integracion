@@ -21,6 +21,77 @@ function postPacienteElastic(elasticUri, paciente) {
     })
 }
 
+const addWholePhrase = (arr, text) => {
+    if (text.split(' ').length > 1) {
+        return [...arr, text.toLowerCase()];
+    }
+    return arr;
+};
+
+const nGrams = (constants) => (text, minSize, prefixOnly) => {
+    if (minSize == null) {
+        minSize = 2;
+    }
+
+    const set = new Set();
+    let index;
+
+    if (minSize <= 0) {
+        throw new Error('minSize must be greater than 0.');
+    }
+
+    if (!text) {
+        return [];
+    }
+
+    text = text.slice ? text.toLowerCase() : String(text);
+    index = prefixOnly ? 0 : text.length - minSize + 1;
+
+    if (text.length <= minSize) {
+        return [text];
+    }
+
+    if (prefixOnly) {
+        while (minSize < text.length + 1) {
+            set.add(text.slice(index, index + minSize));
+            minSize++;
+        }
+
+        return Array.from(set);
+    }
+
+    while (minSize <= text.length + 1) {
+        if (index !== 0) {
+            set.add(text.slice(--index, index + minSize));
+        } else {
+            minSize++;
+            index = text.length - minSize + 1;
+        }
+    }
+
+    return Array.from(set);
+};
+
+const makeNGrams = (constants) => (
+    text,
+    minSize,
+    prefixOnly,
+) => {
+    if (!text) {
+        return [];
+    }
+    const result = text
+        .split(' ')
+        .map((q) =>
+            nGrams(constants)(
+                minSize || 2,
+                prefixOnly || false,
+            ),
+        )
+        .reduce((acc, arr) => acc.concat(arr), []);
+    return addWholePhrase(Array.from(new Set(result)), text);
+};
+
 module.exports.seedPaciente = async (mongoUri, elasticUri, types) => {
     try {
         const client = await connectToDB(mongoUri);
@@ -46,6 +117,18 @@ module.exports.seedPaciente = async (mongoUri, elasticUri, types) => {
 
 module.exports.createPaciente = async (mongoUri, elasticUri, params) => {
     params = params || {};
+    const config = {
+        DEFAULT_MIN_SIZE: 3,
+        DEFAULT_PREFIX_ONLY: false,
+        validMiddlewares: [
+            'preSave',
+            'preUpdate',
+            'preFindOneAndUpdate',
+            'preInsertMany',
+            'preUpdateMany',
+            'preUpdateOne',
+        ]
+    };
     try {
         const client = await connectToDB(mongoUri);
         const PacienteDB = await client.db().collection('paciente');
@@ -59,6 +142,7 @@ module.exports.createPaciente = async (mongoUri, elasticUri, params) => {
 
         if (dto.documento) {
             dto.documento = params.documento || ('' + faker.random.number({ min: 40000000, max: 49999999 }));
+            dto.documento_fuzzy = makeNGrams(config, dto.documento);
         }
 
         dto.contacto[0].valor = params.telefono || faker.phone.phoneNumber().replace('-', '').replace('-', '');
