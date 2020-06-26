@@ -80,9 +80,7 @@ context('RUP - Punto de inicio', () => {
                             cy.route('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agregarTurnoDinamico');
                             cy.goto('/rup', token);
                             cy.wait('@agendas');
-                            cy.wait('@tiposPrestaciones');
                             cy.wait('@turnero');
-                            cy.wait('@tiposPrestaciones');
                             cy.wait('@prestaciones');
                             cy.wait(1000);
 
@@ -160,9 +158,7 @@ context('RUP - Punto de inicio', () => {
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@turnero');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
@@ -200,9 +196,7 @@ context('RUP - Punto de inicio', () => {
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@turnero');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
@@ -220,9 +214,7 @@ context('RUP - Punto de inicio', () => {
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@turnero');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
@@ -262,9 +254,7 @@ context('RUP - Punto de inicio', () => {
 
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
-                cy.wait('@tiposPrestaciones');
                 cy.wait('@turnero');
-                cy.wait('@tiposPrestaciones');
                 cy.wait('@prestaciones');
                 cy.wait('@prestaciones');
 
@@ -304,9 +294,7 @@ context('RUP - Punto de inicio', () => {
                 setRoute();
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
-                cy.wait('@tiposPrestaciones');
                 cy.wait('@turnero');
-                cy.wait('@tiposPrestaciones');
                 cy.wait('@prestaciones');
                 cy.wait('@prestaciones');
 
@@ -337,9 +325,7 @@ context('RUP - Punto de inicio', () => {
                 setRoute();
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
-                cy.wait('@tiposPrestaciones');
                 cy.wait('@turnero');
-                cy.wait('@tiposPrestaciones');
                 cy.wait('@prestaciones');
                 cy.wait('@prestaciones');
 
@@ -358,9 +344,7 @@ context('RUP - Punto de inicio', () => {
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@turnero');
-                    cy.wait('@tiposPrestaciones');
                     cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
