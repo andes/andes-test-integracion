@@ -2,10 +2,8 @@
 
 context('Registro novedades', () => {
     let token;
-    const titulo = 'Cambio en camas';
-    let nombreModulo = 'CITAS';
     let modulo = {
-        nombre: nombreModulo,
+        nombre: 'CITAS',
         descripcion: 'mejora la accesibilidad de pacientes a las prestaciones',
         subtitulo: 'centro inteligente de agendas & turnos',
         linkAcceso: '/citas/gestor_agendas',
@@ -17,6 +15,7 @@ context('Registro novedades', () => {
     }
 
     before(() => {
+        cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });
@@ -50,9 +49,9 @@ context('Registro novedades', () => {
         cy.route('POST', '**/api/modules/registro-novedades/novedades').as('postNovedades');
         let text = 'alguna descripcion';
         cy.plexButton('Registrar Novedad').click();
-        cy.plexBool('name="activo"', false); // `Inactiva`
+        cy.plexBool('name="activo"', true); // `Activa`
         cy.plexSelectType('name="select"', modulo.nombre);
-        cy.plexText('label="titulo"', titulo);
+        cy.plexText('label="titulo"', 'Novedad activa');
         cy.plexDatetime('label="fecha"', '07/02/2020');
 
         cy.plexHtml('label="descripcion"', text);
@@ -69,11 +68,28 @@ context('Registro novedades', () => {
         cy.wait('@novedades').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('plex-item').contains(titulo);
-        cy.get('plex-item').contains('Inactiva');
+        cy.get('plex-item').contains('Novedad activa');
+        cy.get('plex-item').contains('Activa');
     });
 
-    it('Se busca la primer novedad cargada como INACTIVA y se activa', () => {
+    it('Se carga una novedad como inactiva y luego se activa', () => {
+        cy.route('POST', '**/api/modules/registro-novedades/novedades').as('postNovedades');
+        let text = 'Descripción novedad inactiva';
+        cy.plexButton('Registrar Novedad').click();
+        cy.plexBool('name="activo"', false); // `Inactiva`
+        cy.plexSelectType('name="select"', modulo.nombre);
+        cy.plexText('label="titulo"', "Novedad inactiva");
+        cy.plexDatetime('label="fecha"', '08/02/2020');
+
+        cy.plexHtml('label="descripcion"', text);
+
+        cy.plexButtonIcon('image-plus'); //revisamos que el boton exista
+
+        cy.plexButton('Guardar').click();
+        cy.wait('@postNovedades').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.toast('success', 'Los datos se guardaron correctamente');
         cy.route('PATCH', '**/api/modules/registro-novedades/novedades/**').as('patchNovedades');
         cy.get('plex-item').plexBadge('Inactiva').first().click();
         cy.plexBool('label="Activa"', true);
@@ -87,6 +103,23 @@ context('Registro novedades', () => {
     });
 
     it('Buscar una novedad por modulo ', () => {
+        cy.route('POST', '**/api/modules/registro-novedades/novedades').as('postNovedades');
+        let text = 'Descripción novedad';
+        cy.plexButton('Registrar Novedad').click();
+        cy.plexBool('name="activo"', true); // `Inactiva`
+        cy.plexSelectType('name="select"', modulo.nombre);
+        cy.plexText('label="titulo"', "Novedad búsqueda por módulo");
+        cy.plexDatetime('label="fecha"', '10/02/2020');
+
+        cy.plexHtml('label="descripcion"', text);
+
+        cy.plexButtonIcon('image-plus'); //revisamos que el boton exista
+
+        cy.plexButton('Guardar').click();
+        cy.wait('@postNovedades').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.toast('success', 'Los datos se guardaron correctamente');
         // buscmos por el módulo creado con task
         cy.plexSelectType('name="modulo"', modulo.nombre);
         cy.wait('@novedades').then((xhr) => {
@@ -99,13 +132,30 @@ context('Registro novedades', () => {
     });
 
     it('Buscar una novedad por título ', () => {
+        cy.route('POST', '**/api/modules/registro-novedades/novedades').as('postNovedades');
+        let text = 'Novedad para búsqueda por título';
+        cy.plexButton('Registrar Novedad').click();
+        cy.plexBool('name="activo"', true); // `Inactiva`
+        cy.plexSelectType('name="select"', modulo.nombre);
+        cy.plexText('label="titulo"', 'Novedad búsqueda por título');
+        cy.plexDatetime('label="fecha"', '10/02/2020');
+
+        cy.plexHtml('label="descripcion"', text);
+
+        cy.plexButtonIcon('image-plus'); //revisamos que el boton exista
+
+        cy.plexButton('Guardar').click();
+        cy.wait('@postNovedades').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.toast('success', 'Los datos se guardaron correctamente');
         // buscamos por el titulo ya definido inicialmente
-        cy.plexText('label="Título"', titulo);
+        cy.plexText('label="Título"', 'Novedad búsqueda por título');
         cy.wait('@novedades').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length.gt(0);
         });
         //verificamos que la lista contenga en el primer elemento el titulo elegido
-        cy.get('plex-item').first().contains(titulo);
+        cy.get('plex-item').last().contains('Novedad búsqueda por título');
     });
 });
