@@ -120,7 +120,7 @@ module.exports.seedPaciente = async (mongoUri, elasticUri, types) => {
     try {
         const client = await connectToDB(mongoUri);
         const PacienteDB = await client.db().collection('paciente');
-        types = types || ['validado', 'temporal', 'sin-documento'];
+        types = types || ['validado', 'temporal', 'sin-documento', 'extranjero'];
         const pacientes = encapsulateArray(types).map(async (type) => {
             let dto = require('./data/paciente/paciente-' + type);
             dto = JSON.parse(JSON.stringify(dto));
