@@ -149,4 +149,16 @@ context('Pagina de login', () => {
             expect(xhr.status).to.be.eq(403)
         });
     });
+
+    it('Login usuario sin permisos para ninguna organizacion', () => {
+        cy.plexInt('name="usuario"').type('33650509');
+        cy.plexText('name="password"', 'asd');
+        cy.plexButton('Iniciar sesión').click();
+        cy.wait('@organizaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(0);
+        });
+        cy.get('plex-label').contains('Usted no tiene permisos para acceder a ninguna organización.');
+
+    })
 });
