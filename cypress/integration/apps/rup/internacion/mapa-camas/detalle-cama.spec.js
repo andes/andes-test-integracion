@@ -84,7 +84,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
         });
 
         // VERIF. UNIDAD ORGANIZATIVA
-        cy.get('plex-detail section div').eq(3).find('small').should(($span) => {
+        cy.get('plex-detail section plex-label').eq(0).find('small').should(($span) => {
             expect($span.text()).to.equal(cama.estados[0].unidadOrganizativa.term);
         });
 
@@ -94,17 +94,17 @@ describe('Mapa Camas - Detalle de Cama', () => {
             esp = esp + especialidad.term;
         }
 
-        cy.get('plex-detail section div').eq(4).find('small').should(($span) => {
+        cy.get('plex-detail section plex-label').eq(1).find('small').should(($span) => {
             expect($span.text()).to.equal(esp);
         });
 
         // VERIF. TIPO CAMA
-        cy.get('plex-detail section div').eq(5).find('small').should(($span) => {
+        cy.get('plex-detail section plex-label').eq(2).find('small').should(($span) => {
             expect($span.text()).to.equal(cama.cama.tipoCama.term);
         });
 
         // VERIF. SECTOR
-        cy.get('plex-detail section div').eq(6).find('small').should(($span) => {
+        cy.get('plex-detail section plex-label').eq(3).find('small').should(($span) => {
             expect($span.text()).to.equal(cama.cama.sectores[0].nombre);
         });
 
@@ -141,7 +141,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
         });
 
         // VERIF. FECHA NACIMIENTO
-        cy.get('plex-detail').eq(1).find('section').find('div').eq(5).find('small').should(($span) => {
+        cy.get('plex-detail').eq(1).find('section').find('plex-label').eq(1).find('small').should(($span) => {
             expect($span.text()).to.equal(moment(paciente.fechaNacimiento).format('DD/MM/YYYY'));
         });
     });
