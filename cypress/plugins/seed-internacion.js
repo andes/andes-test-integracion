@@ -85,8 +85,8 @@ module.exports.createCama = async (mongoUri, params) => {
             dtoPrestacion = require('./data/prestacion/prestacion-internacion');
             dtoPrestacion = JSON.parse(JSON.stringify(dtoPrestacion));
             dtoPrestacion._id = new ObjectId();
-            dtoPrestacion.solicitud.organizacion.id = ObjectId(params.organizacion) || ObjectId(dtoPrestacion.solicitud.organizacion.id);
-            dtoPrestacion.ejecucion.organizacion.id = ObjectId(params.organizacion) || ObjectId(dtoPrestacion.ejecucion.organizacion.id);
+            dtoPrestacion.solicitud.organizacion.id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoPrestacion.solicitud.organizacion.id);
+            dtoPrestacion.ejecucion.organizacion.id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoPrestacion.ejecucion.organizacion.id);
             dtoPrestacion.ejecucion.fecha = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
             dtoPrestacion.ejecucion.registros[0].valor.informeIngreso.fechaIngreso = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
 
@@ -97,10 +97,19 @@ module.exports.createCama = async (mongoUri, params) => {
                 paciente = dtoPrestacion.paciente;
             }
 
-            if(fechaEgreso && moment(fechaEgreso).isAfter(params.fechaIngreso)) {
+            if (fechaEgreso && moment(fechaEgreso).isAfter(params.fechaIngreso)) {
                 dtoPrestacion.ejecucion.registros.push(prestacionEgreso);
                 dtoPrestacion.ejecucion.registros[1].valor.InformeEgreso.fechaEgreso = fechaEgreso;
                 dtoPrestacion.ejecucion.registros[1].valor.InformeEgreso.diasDeEstada = moment(fechaEgreso).diff(moment(params.fechaIngreso), 'days');
+            }
+
+            if (params.validada) {
+                dtoPrestacion.estados.push({
+                    "idOrigenModifica": null,
+                    "motivoRechazo": null,
+                    "observaciones": null,
+                    "tipo": "validada",
+                });
             }
 
             paciente._id = ObjectId(paciente._id);
@@ -132,10 +141,10 @@ module.exports.createCama = async (mongoUri, params) => {
         dtoEstadistica.start = moment(params.fechaIngreso).startOf('month').toDate() || moment().startOf('month').toDate();
         dtoEstadistica.end = moment(params.fechaIngreso).endOf('month').toDate() || moment().endOf('month').toDate();
 
-        if(fechaEgreso && moment(fechaEgreso).isAfter(params.fechaIngreso)) {
+        if (fechaEgreso && moment(fechaEgreso).isAfter(params.fechaIngreso)) {
             dtoEstadistica.estados.push({
                 estado: 'disponible',
-                fecha: moment(fechaEgreso).toDate(), 
+                fecha: moment(fechaEgreso).toDate(),
                 esMovimiento: true,
                 paciente: null,
                 unidadOrganizativa: dtoCama.unidadOrganizativaOriginal || unidadOrg,

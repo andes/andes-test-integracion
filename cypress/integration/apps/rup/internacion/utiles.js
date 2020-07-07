@@ -51,6 +51,7 @@ export function factoryInternacion(params = {}) {
                 paciente,
                 fechaIngreso: elemento.fechaIngreso,
                 fechaEgreso: elemento.fechaEgreso,
+                validada: elemento.validada
             });
             camas.push(toPromise(camaCreada));
         }
