@@ -167,9 +167,14 @@ context('Planificacion Agendas', () => {
             fecha = xhr.response.body.horaInicio;
         });
         cy.toast('success', 'La agenda se guardó correctamente');
-        cy.wait('@agendas');
-        if (Cypress.moment(fecha).format('DD/MM/YYYY') === Cypress.moment().endOf('month').format('DD/MM/YYYY')) {
+        cy.wait('@agendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200)
+        });
+        if (cy.esFinDeMes()) {
             cy.plexButtonIcon('chevron-right').click();
+            cy.wait('@agendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200)
+            });
         }
         cy.get('table tr td').contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();

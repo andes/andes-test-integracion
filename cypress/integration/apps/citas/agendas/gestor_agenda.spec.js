@@ -335,13 +335,14 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexBool('name="espacioFisicoPropios"', false);
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
         cy.plexButton("Guardar").click();
-        cy.contains('La agenda se guardó correctamente');
+        cy.toast('success');
         cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click();
         cy.plexButtonIcon('pencil').click();
         cy.plexSelect('label="Espacio Físico"').click();
         cy.plexSelect('label="Espacio Físico"').find('.remove-button').click();
         cy.plexSelectAsync('label="Espacio Físico"', 'CE.M.O.E. SAN JOSE OBRERO', '@institucion', 0);
         cy.plexButton("Guardar").click();
+        cy.toast('success');
         cy.get('table tbody td').contains('CE.M.O.E. SAN JOSE OBRERO');
     })
 
@@ -357,12 +358,12 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexBool('name="espacioFisicoPropios"', false);
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
         cy.plexButton("Guardar").click();
-        cy.toast('success').click();
         cy.wait('@postAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.otroEspacioFisico.nombre).to.be.eq('ESCUELA PRIMARIA 300');
             expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
         });
+        cy.toast('success', 'La agenda se guardó correctamente');
         cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click({ force: true });
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -372,8 +373,14 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexButtonIcon("content-copy").click();
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            cy.get('table tr td').contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
         });
+        if (cy.esFinDeMes()) {
+            cy.plexButtonIcon('chevron-right').click();
+            cy.wait('@getAgendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+        }
+        cy.get('table tr td').contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
         cy.wait('@clonar').then((xhr) => {
