@@ -91,5 +91,11 @@
         }
     },
     "cuil": "20127317357",
-    "activo": true
+    "activo": true,
+    "tokens": [
+        "andes",
+        "paciente",
+        "sin",
+        "documento"
+    ]
 }

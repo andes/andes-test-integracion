@@ -230,7 +230,7 @@ context('CITAS - punto de inicio', () => {
 
 function darTurno(paciente) {
     cy.route('GET', '**api/core/mpi/pacientes/**').as('darTurnoPaciente');
-    let searchField = paciente.documento || paciente.apellido;
+    let searchField = paciente.documento || paciente.nombre;
 
     cy.plexText('name="buscador"', searchField);
 
