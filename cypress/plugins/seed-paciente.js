@@ -21,6 +21,30 @@ function postPacienteElastic(elasticUri, paciente) {
     })
 }
 
+function generarTokens(dto) {
+    let words = [];
+    if (dto.documento) {
+        words.push(dto.documento.toLowerCase());
+    }
+    if (dto.apellido) {
+        dto.apellido.trim().toLowerCase().split(' ').forEach(doc => {
+            words.push(doc.toLowerCase());
+        });
+    }
+    if (dto.nombre) {
+        dto.nombre.trim().toLowerCase().split(' ').forEach(doc => {
+            words.push(doc.toLowerCase());
+        });
+    }
+    if (dto.alias) {
+        words.push(dto.alias.trim().toLowerCase());
+    }
+    if (dto.numeroIdentificacion) {
+        words.push(dto.numeroIdentificacion.trim().toLowerCase());
+    }
+    return words;
+}
+
 const addWholePhrase = (arr, text) => {
     if (text.split(' ').length > 1) {
         return [...arr, text.toLowerCase()];
@@ -141,9 +165,10 @@ module.exports.createPaciente = async (mongoUri, elasticUri, params) => {
         dto.apellido = params.apellido || faker.name.lastName().toLocaleUpperCase();
 
         if (dto.documento) {
-            dto.documento = params.documento || ('' + faker.random.number({ min: 40000000, max: 49999999 }));
+            dto.documento = (params.documento) ? params.documento + '' : ('' + faker.random.number({ min: 40000000, max: 49999999 }));
             dto.documento_fuzzy = makeNGrams(config, dto.documento);
         }
+        dto.tokens = generarTokens(dto);
 
         dto.contacto[0].valor = params.telefono || faker.phone.phoneNumber().replace('-', '').replace('-', '');
 

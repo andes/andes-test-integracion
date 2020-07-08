@@ -108,5 +108,11 @@
         }
     },
     "cuil": "20127317357",
-    "activo": true
+    "activo": true,
+    "tokens": [
+        "10000000",
+        "andes",
+        "paciente",
+        "validado"
+    ]
 }
