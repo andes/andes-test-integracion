@@ -90,7 +90,6 @@ context('Planificacion Agendas', () => {
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
         cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('GET', '**/api/modules/rup/prestaciones**').as('prestacionesRup');
-        cy.route('GET', '**/api/modules/top/reglas**').as('reglas');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
         cy.route('GET', '**/api/modules/turnero/pantalla**').as('pantallas');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('edicionAgenda');
@@ -680,10 +679,8 @@ context('Planificacion Agendas', () => {
         cy.goto('/rup', token);
         cy.wait('@prestaciones');
         cy.wait('@pantallas');
-        cy.wait('@prestaciones');
         cy.wait('@agendas');
         cy.wait('@prestacionesRup');
-        cy.wait('@reglas');
         cy.wait('@agendas');
         cy.get('plex-radio[name="agendas"] input').eq(1).click({
             force: true

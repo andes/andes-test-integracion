@@ -31,7 +31,6 @@ context('punto de inicio', () => {
         cy.goto('/citas/punto-inicio', token);
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('GET', '**api/core/log/paciente?idPaciente=**').as('seleccionPaciente');
-        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
     })
 
@@ -480,7 +479,7 @@ context('punto de inicio', () => {
                 expect(xhr.status).to.be.eq(200);
             });
 
-            cy.plexSelectAsync('name="tipoPrestacion"', 'servicio de neumonología', '@prestaciones', 0);
+            cy.plexSelectAsync('name="tipoPrestacion"', 'servicio de neumonología', '@getPrestaciones', 0);
 
             cy.wait('@getAgendas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
