@@ -49,7 +49,9 @@ export function factoryInternacion(params = {}) {
                 tipoCama: elemento.tipoCama,
                 esCensable: elemento.esCensable,
                 paciente,
-                fechaIngreso: elemento.fechaIngreso
+                fechaIngreso: elemento.fechaIngreso,
+                fechaEgreso: elemento.fechaEgreso,
+                validada: elemento.validada
             });
             camas.push(toPromise(camaCreada));
         }

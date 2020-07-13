@@ -78,14 +78,15 @@ module.exports.createCama = async (mongoUri, params) => {
 
         let paciente = null;
         let dtoPrestacion = {};
+        const fechaEgreso = params.fechaEgreso || null;
         // PRESTACION
         if (params.estado === 'ocupada') {
             const prestacionesDB = await client.db().collection('prestaciones');
             dtoPrestacion = require('./data/prestacion/prestacion-internacion');
             dtoPrestacion = JSON.parse(JSON.stringify(dtoPrestacion));
             dtoPrestacion._id = new ObjectId();
-            dtoPrestacion.solicitud.organizacion.id = ObjectId(params.organizacion) || ObjectId(dtoPrestacion.solicitud.organizacion.id);
-            dtoPrestacion.ejecucion.organizacion.id = ObjectId(params.organizacion) || ObjectId(dtoPrestacion.ejecucion.organizacion.id);
+            dtoPrestacion.solicitud.organizacion.id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoPrestacion.solicitud.organizacion.id);
+            dtoPrestacion.ejecucion.organizacion.id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoPrestacion.ejecucion.organizacion.id);
             dtoPrestacion.ejecucion.fecha = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
             dtoPrestacion.ejecucion.registros[0].valor.informeIngreso.fechaIngreso = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
 
@@ -94,6 +95,21 @@ module.exports.createCama = async (mongoUri, params) => {
                 paciente = await pacientesDB.findOne({ documento: params.paciente.documento });
             } else {
                 paciente = dtoPrestacion.paciente;
+            }
+
+            if (fechaEgreso && moment(fechaEgreso).isAfter(params.fechaIngreso)) {
+                dtoPrestacion.ejecucion.registros.push(prestacionEgreso);
+                dtoPrestacion.ejecucion.registros[1].valor.InformeEgreso.fechaEgreso = fechaEgreso;
+                dtoPrestacion.ejecucion.registros[1].valor.InformeEgreso.diasDeEstada = moment(fechaEgreso).diff(moment(params.fechaIngreso), 'days');
+            }
+
+            if (params.validada) {
+                dtoPrestacion.estados.push({
+                    "idOrigenModifica": null,
+                    "motivoRechazo": null,
+                    "observaciones": null,
+                    "tipo": "validada",
+                });
             }
 
             paciente._id = ObjectId(paciente._id);
@@ -112,7 +128,6 @@ module.exports.createCama = async (mongoUri, params) => {
         const index = dtoEstadistica.estados.length - 1;
         const unidadOrg = dtoEstadistica.estados[index].unidadOrganizativa;
         const especialidades = dtoEstadistica.estados[index].especialidades;
-        dtoEstadistica.estados[index].paciente = params.paciente;
         dtoEstadistica.estados[index].estado = params.estado;
         dtoEstadistica.estados[index].paciente = paciente;
         dtoEstadistica.estados[index].unidadOrganizativa = dtoCama.unidadOrganizativaOriginal || unidadOrg;
@@ -125,6 +140,20 @@ module.exports.createCama = async (mongoUri, params) => {
         dtoEstadistica.estados[index].equipamiento = params.equipamiento || dtoCama.equipamiento;
         dtoEstadistica.start = moment(params.fechaIngreso).startOf('month').toDate() || moment().startOf('month').toDate();
         dtoEstadistica.end = moment(params.fechaIngreso).endOf('month').toDate() || moment().endOf('month').toDate();
+
+        if (fechaEgreso && moment(fechaEgreso).isAfter(params.fechaIngreso)) {
+            dtoEstadistica.estados.push({
+                estado: 'disponible',
+                fecha: moment(fechaEgreso).toDate(),
+                esMovimiento: true,
+                paciente: null,
+                unidadOrganizativa: dtoCama.unidadOrganizativaOriginal || unidadOrg,
+                especialidades: especialidades,
+                idInternacion: null,
+                esCensable: (params.esCensable !== undefined) ? params.esCensable : true,
+                equipamiento: dtoCama.equipamiento || dtoEstadistica.estados[index].equipamiento
+            });
+        }
 
         let dtoMedica = Object.create(dtoEstadistica);
         dtoMedica.capa = 'medica';
@@ -183,4 +212,64 @@ function clone(item) {
     let r = Object.assign({}, item);
     delete r['hijos'];
     return r;
+}
+
+var prestacionEgreso = {
+    privacy: {
+        scope: 'public'
+    },
+    destacado: false,
+    esSolicitud: false,
+    esDiagnosticoPrincipal: true,
+    relacionadoCon: [],
+    registros: [],
+    esPrimeraVez: true,
+    nombre: 'alta del paciente',
+    concepto: {
+        fsn: 'alta del paciente (procedimiento)',
+        semanticTag: 'procedimiento',
+        refsetIds: [
+            '900000000000497000'
+        ],
+        conceptId: '58000006',
+        term: 'alta del paciente'
+    },
+    valor: {
+        InformeEgreso: {
+            fechaEgreso: moment(new Date()).add(1, 'days'),
+            nacimientos: [
+                {
+                    pesoAlNacer: null,
+                    condicionAlNacer: null,
+                    terminacion: null,
+                    sexo: null
+                }
+            ],
+            procedimientosQuirurgicos: [],
+            causaExterna: {
+                producidaPor: null,
+                lugar: null,
+                comoSeProdujo: null
+            },
+            diasDeEstada: 1.0,
+            tipoEgreso: {
+                id: 'Alta médica',
+                nombre: 'Alta médica'
+            },
+            diagnosticoPrincipal: {
+                idCie10: 1187.0,
+                idNew: 3568.0,
+                capitulo: '10',
+                grupo: '02',
+                causa: 'J12',
+                subcausa: '9',
+                codigo: 'J12.9',
+                nombre: '(J12.9) Neumonía viral, no especificada',
+                sinonimo: 'Neumonia viral, no especificada',
+                descripcion: '10.Enfermedades del sistema respiratorio (J00-J99)',
+                c2: true,
+                reporteC2: 'Neumonia',
+            }
+        }
+    }
 }

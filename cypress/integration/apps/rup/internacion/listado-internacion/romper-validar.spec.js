@@ -1,14 +1,14 @@
 const moment = require('moment')
 const { permisosUsuario, factoryInternacion } = require('../utiles');
 
-describe('Capa Estadistica - Egresos', () => {
+describe('Capa Estadistica - Ingresos', () => {
     let token;
     let pacientes;
     before(() => {
         cy.seed();
 
         // CREA USUARIO
-        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica', 'internacion:egreso'] }).then(user => {
+        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica', 'internacion:ingreso'] }).then(user => {
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;
 
@@ -18,15 +18,15 @@ describe('Capa Estadistica - Egresos', () => {
 
                     // CREA UN MUNDO IDEAL DE INTERNACION
                     factoryInternacion({ configCamas: [
-                        { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: moment('2020-01-10').toDate() }, 
-                        { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso:  moment().toDate()}] }).then(camasCreadas => {
-                        return cy.goto('/internacion/mapa-camas', token);
+                        { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate(), fechaEgreso:  moment().toDate() },
+                        { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso:  moment().toDate(), validada: true}
+                    ] }).then(camasCreadas => {
+                        return cy.goto('/internacion/listado-internacion', token);
                     });
                 });
             });
         });
     });
-
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/api/core/term/cie10?**', [{
@@ -72,59 +72,29 @@ describe('Capa Estadistica - Egresos', () => {
         }]).as('getDiagnostico');
         cy.route('GET', '**/api/core/mpi/pacientes/**', true).as('getPaciente');
         cy.route('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
-        cy.route('PATCH', '**/api/modules/rup/prestaciones/**', true).as('patchPrestaciones');
-        cy.route('PATCH', '**/api/modules/rup/internacion/camas/**', true).as('patchCamas');
+        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
         cy.viewport(1920, 1080);
     });
 
-    it('Egreso completo', () => {
-        cy.wait(400)
-        cy.plexButtonIcon('minus').click()
-        cy.contains('Egresar paciente').click();
-
-        cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
-        cy.plexSelectAsync('label="Diagnostico Principal al egreso"', 'Neumo', '@getDiagnostico', 0);
-        cy.plexSelectAsync('label="Otro Diagnóstico"', 'Otros trastornos', '@getDiagnostico', 0);
-        cy.plexSelectAsync('label="Otras circunstancias"', 'Mutismo', '@getDiagnostico', 0);
-        cy.plexDatetime('label="Fecha Egreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha Egreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true});
-
-        cy.plexButtonIcon('check').click();
-
+    it('Validar internacion', () => {
+        cy.get('table tbody tr').eq(0).click({force: true});
+        cy.plexButton("VALIDAR").click();
+        cy.contains("Confirmar validación");
+        cy.get('button').contains('CONFIRMAR').click();
         cy.wait('@patchPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estados[xhr.response.body.estados.length - 1].tipo).to.be.eq('validada');
         });
-        cy.wait('@patchCamas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.contains('Los datos se actualizaron correctamente')
-        cy.contains('Aceptar').click();
     });
 
-    it('Editar egreso', () => {
-        cy.get('plex-badge span plex-datetime div div span button').click()
-        const day = (moment().date() < 10) ? '0' + moment().date() : '' + moment().date();
-        const hour = (moment().hour() - 1);
-        const minute = '' + moment().minute() - 1;
-        cy.get('a').contains(day).click();
-        cy.get('text').contains(hour).click();
-        cy.get(`circle[id='m-${minute}']`).click({force: true});
-        cy.contains(pacientes[1].nombre).click();
-
-        cy.get('plex-tabs ul li').eq(1).click();
-        cy.get('plex-options div div button').contains('EGRESO').click({force: true});
-
-        cy.plexSelect('label="Tipo de egreso"').find('.remove-button').click();
-        cy.plexSelectType('label="Tipo de egreso"', 'Defuncion').click();
-     
-        cy.plexButtonIcon('check').click();
-
+    it('Romper internacion', () => {
+        cy.get('table tbody tr').eq(1).click({force: true});
+        cy.plexButton("ROMPER VALIDACION").click();
+        cy.contains("Romper validación");
+        cy.get('button').contains('CONFIRMAR').click();
         cy.wait('@patchPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estados[xhr.response.body.estados.length - 1].tipo).to.be.eq('ejecucion');
         });
-
-        cy.contains('Los datos se actualizaron correctamente')
-        cy.contains('Aceptar').click();
     });
 });
