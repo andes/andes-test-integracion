@@ -116,7 +116,7 @@ context('MPI-Registro App Mobile', () => {
     });
 
     it('activar app mobile en un paciente validado', () => {
-        let correo = 'prueba@prueba.com';
+        let correo = 'activandoAppMobile@mail.com';
         let celular = '2995290357';
         cy.plexText('name="buscador"', pacValidado2.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
@@ -138,11 +138,12 @@ context('MPI-Registro App Mobile', () => {
         // se envía código de activación al paciente y se lo actualliza en la BD
         cy.wait('@clickActivarApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.message).to.be.eq("OK");
         });
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.contains('Se ha enviado el código de activación al paciente')
+        cy.contains('Se ha enviado el código de activación al paciente');
         cy.get('button').contains('Aceptar').click();
         cy.contains('Cuenta pendiente de activación por el usuario');
         cy.toast('info', 'Datos del paciente actualizados');
