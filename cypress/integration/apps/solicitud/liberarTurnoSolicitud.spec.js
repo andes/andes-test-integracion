@@ -31,7 +31,6 @@ describe('TOP: Liberar turno', () => {
         cy.server();
         cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
         cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
         cy.route('GET', '**/api/modules/top/reglas?**').as('reglas');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgenda');
@@ -90,9 +89,6 @@ describe('TOP: Liberar turno', () => {
         cy.get('i.mdi-calendar-plus').click({ force: true });
 
         cy.wait('@getAgenda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        });
-        cy.wait('@prestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
         cy.wait('@getAgenda').then((xhr) => {
