@@ -28,7 +28,7 @@ context('Perfiles de usuario', () => {
         cy.route('PATCH', '**/api/modules/gestor-usuarios/perfiles/**').as('savePerfil');
         cy.route('POST', '**/api/modules/gestor-usuarios/perfiles').as('postPerfil');
         cy.route('**api/core/tm/tiposPrestaciones?term=**').as('prestaciones');
-        cy.plexButton("VER PERFILES").click();
+        cy.plexButton("PERFILES").click();
         cy.wait('@perfil');
     });
 
