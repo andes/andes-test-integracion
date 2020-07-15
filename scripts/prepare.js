@@ -33,15 +33,11 @@ const down = {
 
 const reset = {
     production: [
-        'curl -XDELETE "http://localhost:9266/andes"',
-        'curl -XPUT "http://localhost:9266/andes/" -d @docker/andes-index.json',
         'docker exec andes_db mongo andes --eval "db.getCollectionNames().forEach(function(n){db[n].remove({})});"',
         'docker cp docker/andes.gz andes_db:/andes.gz',
         'docker exec andes_db mongorestore --gzip --archive=/andes.gz --db andes',
     ],
     develop: [
-        'curl -XDELETE "http://localhost:9266/andes"',
-        'curl -XPUT "http://localhost:9266/andes/" -d @docker/andes-index.json',
         'docker exec andes_db mongo andes --eval "db.getCollectionNames().forEach(function(n){db[n].remove({})});"',
         'docker cp docker/andes.gz andes_db:/andes.gz',
         'docker exec andes_db mongorestore --gzip --archive=/andes.gz --db andes',
