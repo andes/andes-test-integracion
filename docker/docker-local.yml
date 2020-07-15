@@ -7,26 +7,7 @@ services:
       - vandes:/data/db
     ports:
       - "27066:27017"    
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
-  andes_elasticsearch:
-    image: blacktop/elasticsearch:5.5 
-    container_name: andes_elastic
-    environment:
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - transport.host=127.0.0.1
-      - http.host=0.0.0.0
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    mem_limit: 1g
-    volumes:
-      - velastic:/usr/share/elasticsearch/data
-    ports:
-      - "9266:9200"   
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]   
 volumes:
   vandes:
-  velastic:
     driver: local

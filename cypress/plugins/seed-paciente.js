@@ -1,25 +1,6 @@
-const request = require('request');
 const faker = require('faker');
 const { connectToDB, ObjectId, encapsulateArray } = require('./database');
 
-
-function postPacienteElastic(elasticUri, paciente) {
-    const dto = { ...paciente };
-    dto.id = dto._id;
-    delete dto._id;
-    return new Promise((resolve, reject) => {
-        request({
-            method: 'POST',
-            url: elasticUri + '/andes/paciente/' + dto.id,
-            body: JSON.stringify(dto),
-            headers: {
-                'content-type': 'application/json; charset=UTF-8'
-            }
-        }, () => {
-            return resolve();
-        });
-    })
-}
 
 function generarTokens(dto) {
     let words = [];
@@ -116,7 +97,7 @@ const makeNGrams = (constants) => (
     return addWholePhrase(Array.from(new Set(result)), text);
 };
 
-module.exports.seedPaciente = async (mongoUri, elasticUri, types) => {
+module.exports.seedPaciente = async (mongoUri, types) => {
     try {
         const client = await connectToDB(mongoUri);
         const PacienteDB = await client.db().collection('paciente');
@@ -127,7 +108,6 @@ module.exports.seedPaciente = async (mongoUri, elasticUri, types) => {
             if (dto) {
                 dto._id = new ObjectId(dto._id);
                 await PacienteDB.insertOne(dto);
-                await postPacienteElastic(elasticUri, dto);
             }
             return dto;
         });
@@ -139,7 +119,7 @@ module.exports.seedPaciente = async (mongoUri, elasticUri, types) => {
     }
 }
 
-module.exports.createPaciente = async (mongoUri, elasticUri, params) => {
+module.exports.createPaciente = async (mongoUri, params) => {
     params = params || {};
     const config = {
         DEFAULT_MIN_SIZE: 3,
@@ -174,7 +154,6 @@ module.exports.createPaciente = async (mongoUri, elasticUri, params) => {
 
         dto._id = new ObjectId();
         await PacienteDB.insertOne(dto);
-        await postPacienteElastic(elasticUri, dto);
 
         return dto;
     } catch (e) {

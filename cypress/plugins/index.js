@@ -34,20 +34,19 @@ module.exports = (on, config) => {
     });
 
     const mongoUri = config.env.MONGO_URI || 'mongodb://localhost:27066/andes';
-    const elasticuri = config.env.ELASTIC_URI || 'http://localhost:9266';
 
     on('task', {
         'database:drop': (collection) => {
-            return dropCollection(mongoUri, elasticuri, collection);
+            return dropCollection(mongoUri, collection);
         },
         'database:create:usuario': (params) => {
             return seedUsuario(mongoUri, params);
         },
         'database:seed:paciente': (params) => {
-            return seedPaciente(mongoUri, elasticuri, params);
+            return seedPaciente(mongoUri, params);
         },
         'database:create:paciente': (params = {}) => {
-            return createPaciente(mongoUri, elasticuri, params);
+            return createPaciente(mongoUri, params);
         },
         'database:create:paciente-app': (params = {}) => {
             return createPacienteApp(mongoUri, params);
