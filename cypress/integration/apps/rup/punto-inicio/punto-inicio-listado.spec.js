@@ -48,6 +48,7 @@ context('RUP - Punto de inicio', () => {
 
         it('visualizar listados agendas', () => {
             const msgSinResultados = 'No hay agendas programadas para este día';
+            cy.cleanDB(['prestaciones', 'agenda']);
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb' });
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', fecha: -1 });
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', fecha: -1, inicio: '2', fin: '4' });
