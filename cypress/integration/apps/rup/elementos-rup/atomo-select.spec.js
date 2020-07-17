@@ -80,7 +80,7 @@ context('RUP - Ejecucion', () => {
             cy.plexButton('Continuar').click();
 
             cy.wait('@paciente');
-            cy.plexButtonIcon('chevron-down').click();
+            cy.plexButtonIcon('chevron-down').eq(1).click();
 
 
             cy.get('.rup-card').first().as('rupCard');
@@ -164,7 +164,7 @@ context('RUP - Ejecucion', () => {
             cy.plexButton('Continuar').click();
 
             cy.wait('@paciente');
-            cy.plexButtonIcon('chevron-down').click();
+            cy.plexButtonIcon('chevron-down').eq(1).click();
 
 
             cy.get('.rup-card').first().as('rupCard');
