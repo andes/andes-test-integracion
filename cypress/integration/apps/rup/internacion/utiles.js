@@ -4,6 +4,7 @@ export const permisosUsuario = [
     'turnos:*',
     'mpi:*',
     'internacion:cama:create',
+    'internacion:cama:edit',
     'internacion:cama:baja',
     'internacion:mapaDeCamas',
     'internacion:ingreso',
