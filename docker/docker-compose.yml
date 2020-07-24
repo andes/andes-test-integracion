@@ -8,6 +8,7 @@ services:
   api:
     ipc: host  
     image: "andesnqn/api:${API}"
+    entrypoint: ["node", "index.js"]
     environment:
       APP_KEY: "5gCYFZPp3dfA2m5UNElVkgRLFcFnlele"
       MONGO_MAIN: "mongodb://db:27017/andes"
