@@ -12,5 +12,5 @@ services:
     environment:
       APP_KEY: "5gCYFZPp3dfA2m5UNElVkgRLFcFnlele"
       MONGO_MAIN: "mongodb://db:27017/andes"
-      MONGO_PUCO: "mongodb://db:27017/andes"
       MONGO_LOGS: "mongodb://db:27017/logs"
+      MONGO_PUCO: "mongodb://db:27017/andes"
