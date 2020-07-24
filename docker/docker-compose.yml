@@ -1,30 +1,16 @@
 version: '2'
 services:
-  andes_db:  
+  db:  
     image: mongo:4.0
-    container_name: andes_db
-    volumes:
-      - vandes:/data/db
-    ports:
-      - "27066:27017"  
-  andes_nginx:  
+  nginx:  
     ipc: host 
     image: "andesnqn/nginx:${APP}"
-    container_name: andes_nginx
-    ports:
-      - "80:80"  
-  andes_api:
+  api:
     ipc: host  
     image: "andesnqn/api:${API}"
-    container_name: andes_api
+    entrypoint: ["node", "index.js"]
     environment:
       APP_KEY: "5gCYFZPp3dfA2m5UNElVkgRLFcFnlele"
-      MONGO_MAIN: "mongodb://andes_db:27017/andes"
-      MONGO_SNOMED: "mongodb://andes_db:27017/es-edition"
-      MONGO_PUCO: "mongodb://andes_db:27017/andes"
-      MONGO_LOGS: "mongodb://andes_db:27017/logs"
-    ports:
-      - "3002:3002"
-volumes:
-  vandes:
-    driver: local
+      MONGO_MAIN: "mongodb://db:27017/andes"
+      MONGO_LOGS: "mongodb://db:27017/logs"
+      MONGO_PUCO: "mongodb://db:27017/andes"
