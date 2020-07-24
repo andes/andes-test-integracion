@@ -6,9 +6,7 @@ services:
     volumes:
       - vandes:/data/db
     ports:
-      - "27066:27017"    
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
-  
+      - "27066:27017"  
   andes_nginx:  
     ipc: host 
     image: "andesnqn/nginx:${APP}"
