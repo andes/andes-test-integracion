@@ -1,21 +1,17 @@
 /// <reference types="Cypress" />
 
-export function buscarPaciente(pacienteDoc) {
+export function buscarPaciente(dni) {
     cy.plexButton("Buscar Paciente").click();
-    cy.plexText('name="buscador"', pacienteDoc);
-
-    cy.server();
-
+    cy.plexText('name="buscador"', dni);
     cy.wait('@listaPacientes');
 
-    cy.get('tr td').contains(pacienteDoc).click();
-    cy.wait(100);
+    const documento = dni.substr(0, dni.length - 6) + '.' + dni.substr(-6, 3) + '.' + dni.substr(-3);
+    cy.get('plex-item').contains(documento).click();
 
     cy.plexButton("Cambiar Paciente").click();
-    cy.plexText('name="buscador"', pacienteDoc);
-
+    cy.plexText('name="buscador"', dni);
     cy.wait('@listaPacientes');
-    cy.get('tr td').contains(pacienteDoc).click();
+    cy.get('plex-item').contains(documento).click();
 };
 
 context('CITAS - Revisión de Agendas', () => {
@@ -77,8 +73,8 @@ context('CITAS - Revisión de Agendas', () => {
     });
 
 
-    it('Asignar asistencia a todos los turnos, mismo paciente', () => {
-
+    it('Asignar asistencia a todos los turnos, mismo paciente', () => { 
+        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         let listaTurnos = cy.get('plex-layout-sidebar > .plex-box > .plex-box-content table:first-child tr');
 
         listaTurnos.each(($el, index, $list) => {

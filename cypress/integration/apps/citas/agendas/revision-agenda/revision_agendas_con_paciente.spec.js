@@ -20,10 +20,9 @@ context('CITAS - Revisión de Agendas', () => {
             return cy.createPaciente('paciente-masculino', token);
         }).then(xhrPac => {
             paciente = xhrPac.body;
-            pacienteDoc = xhrPac.body.documento;
+            pacienteDoc = xhrPac.body;
             return cy.createAgenda('agenda-auditada-con-paciente', null, null, null, token);
         }).then((xhrAgenda) => {
-            // cy.log(xhrAgenda);
             idAgenda = xhrAgenda.body.id;
             idBloque = xhrAgenda.body.bloques[0].id;
             idTurno = xhrAgenda.body.bloques[0].turnos[0].id;
@@ -134,9 +133,12 @@ context('CITAS - Revisión de Agendas', () => {
             cy.expect(xhrAgenda.status).to.be.eq(200);
             cy.expect(xhrAgenda.response.body.id).to.be.eq(idAgenda);
             cy.plexButton('Agregar Sobreturno').click();
-            cy.plexText('name="buscador"', pacienteDoc);
-            cy.wait('@listaPacientes');
-            cy.get('tr td').contains(pacienteDoc).click();
+            cy.plexText('name="buscador"', pacienteDoc.documento);
+            cy.wait('@listaPacientes').then(xhrPacientes => {
+                cy.log(xhrPacientes);
+                cy.expect(xhrPacientes.responseBody[0].documento).to.be.eq(pacienteDoc.documento)
+            })
+            cy.get('plex-item').contains(pacienteDoc.nombre).contains(pacienteDoc.apellido).click();
             cy.plexDatetime('label="Hora Turno"', Cypress.moment(xhrAgenda.response.body.horaInicio).add(10, 'minutes').format('HH:mm'));
             cy.plexButton('Guardar').click();
             cy.wait('@agendaPatch').then(xhrAgendaPatch => {
