@@ -95,9 +95,8 @@ context('auditoria', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+        cy.get('plex-item').contains(validado1.nombre).click();
 
-        cy.get('paciente-listado').find('td').contains(validado1.nombre).click();
-        cy.wait(100);
         cy.plexButton('Vincular').click();
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -106,16 +105,14 @@ context('auditoria', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(validado2.nombre).click();
+        cy.get('plex-item').contains(validado2.nombre).click();
 
         cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
-
         cy.wait('@vincularPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.vinculos).to.have.length(2);
         });
-
         cy.get('tbody tr').first().find('span').should('have.class', 'badge badge-success').should('contain', 'Activo'); // valido que la persona buscada esté validada y la selecciono
         cy.get('plex-button[label="Desactivar"]').should('have.attr', 'type', 'warning');
     });
@@ -125,12 +122,8 @@ context('auditoria', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-
-        cy.get('paciente-listado').find('td').contains(temporal1.nombre).click();
-        cy.wait(100);
-
+        cy.get('plex-item').contains(temporal1.nombre).click();
         cy.plexButton('Vincular').click();
-        // cy.wait();
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -138,8 +131,7 @@ context('auditoria', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(temporal2.nombre).click();
-
+        cy.get('plex-item').contains(temporal2.nombre).click();
         cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
 
@@ -155,11 +147,10 @@ context('auditoria', () => {
         cy.plexText('name="buscador"', validado3.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].nombre).to.be.eq(validado3.nombre);
+            expect(xhr.response.body[0].apellido).to.be.eq(validado3.apellido);
         });
-
-        cy.get('paciente-listado').find('td').contains(validado3.documento).click();
-        cy.wait(100);
-
+        cy.get('plex-item').contains(validado3.nombre).click();
         cy.plexButton('Vincular').click();
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -168,11 +159,9 @@ context('auditoria', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(temporal3.nombre).click();
-
+        cy.get('plex-item').contains(temporal3.nombre).click();
         cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
-
         cy.wait('@vincularPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.vinculos).to.have.length(2);
@@ -188,21 +177,18 @@ context('auditoria', () => {
             expect(xhr.response.body[0].nombre).to.be.eq(validado4.nombre);
             expect(xhr.response.body[0].apellido).to.be.eq(validado4.apellido);
         });
-
-        cy.get('paciente-listado').find('td').contains(validado4.nombre).click();
+        cy.get('plex-item').contains(validado4.nombre).click();
         cy.plexButton('Vincular').click();
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-
         cy.plexText('name="buscador"', `${sinDocumento1.nombre} ${sinDocumento1.apellido}`);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body[0].nombre).to.be.eq(sinDocumento1.nombre);
             expect(xhr.response.body[0].apellido).to.be.eq(sinDocumento1.apellido);
         });
-        cy.get('paciente-listado').find('td').contains(sinDocumento1.nombre).click();
-
+        cy.get('plex-item').contains(sinDocumento1.nombre).click();
         cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
 
@@ -221,8 +207,7 @@ context('auditoria', () => {
             expect(xhr.response.body[0].nombre).to.be.eq(temporal4.nombre);
             expect(xhr.response.body[0].apellido).to.be.eq(temporal4.apellido);
         });
-
-        cy.get('paciente-listado').find('td').contains(temporal4.nombre).click();
+        cy.get('plex-item').contains(temporal4.nombre).click();
         cy.plexButton('Vincular').click();
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -233,8 +218,7 @@ context('auditoria', () => {
             expect(xhr.response.body[0].nombre).to.be.eq(sinDocumento2.nombre);
             expect(xhr.response.body[0].apellido).to.be.eq(sinDocumento2.apellido);
         });
-        cy.get('paciente-listado').find('td').contains(sinDocumento2.nombre).click();
-
+        cy.get('plex-item').contains(sinDocumento2.nombre).click();
         cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
 
@@ -253,21 +237,17 @@ context('auditoria', () => {
             expect(xhr.response.body[0].nombre).to.be.eq(sinDocumento3.nombre);
             expect(xhr.response.body[0].apellido).to.be.eq(sinDocumento3.apellido);
         });
-
-        cy.get('paciente-listado').find('td').contains(sinDocumento3.nombre).click();
+        cy.get('plex-item').contains(sinDocumento3.nombre).click();
         cy.plexButton('Vincular').click();
-
         cy.plexText('name="buscador"', `${sinDocumento4.nombre} ${sinDocumento4.apellido}`);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body[0].nombre).to.be.eq(sinDocumento4.nombre);
             expect(xhr.response.body[0].apellido).to.be.eq(sinDocumento4.apellido);
         });
-        cy.get('paciente-listado').find('td').contains(sinDocumento4.nombre).click();
-
+        cy.get('plex-item').contains(sinDocumento4.nombre).click();
         cy.plexButton('Vincular').click();
         cy.get('button').contains('CONFIRMAR').click();
-
         cy.wait('@vincularPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.vinculos).to.have.length(2);
