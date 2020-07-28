@@ -33,10 +33,9 @@ context('CITAS - Revisión de Agendas', () => {
     it('Se selecciona la primera de dos prestaciones, luego se cambia por la segunda', () => {
         cy.goto(`/citas/revision_agenda/${agenda._id}`, token);
         cy.get('tbody:nth-child(1) tr:nth-child(3)').click();
-
+        
         cy.buscarPaciente(paciente.documento, false);
         cy.plexSelectType('name="tipoPrestacionTurno"').click().get('.option').contains(agenda.tipoPrestaciones[0].term).click();
-        cy.wait(1000);
         cy.plexSelectType('name="tipoPrestacionTurno"').click().get('.option').contains(agenda.tipoPrestaciones[1].term).click();
         cy.plexSelectType('label="Asistencia"', 'Asistio');
 
