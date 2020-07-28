@@ -110,7 +110,7 @@ context('TM Profesional', () => {
             fechaNacimiento: '09/03/1990',
             sexo: 'Masculino'
         })
-
+        cy.toast('success');
         cy.plexPhone('label="Número"', '2994557612');
 
         cy.plexButton("Guardar").click();
