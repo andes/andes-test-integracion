@@ -16,7 +16,7 @@ describe('Capa Médica - Ingresos', () => {
                     pacientes = pacientesCreados;
 
                     // CREA UN MUNDO IDEAL DE INTERNACION
-                    factoryInternacion({ configCamas: [{ estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate()}] }).then(camasCreadas => {
+                    factoryInternacion({ configCamas: [{ estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() }] }).then(camasCreadas => {
                         return cy.goto('/internacion/mapa-camas', token);
                     });
                 });
@@ -40,9 +40,10 @@ describe('Capa Médica - Ingresos', () => {
         cy.plexText('name="buscador"', pacientes[0].nombre);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.length).to.be.gte(1);
         });
 
-        cy.get('table tbody tr').first().click();
+        cy.get('paciente-listado plex-item').contains(pacientes[0].nombre).click();
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -53,20 +54,21 @@ describe('Capa Médica - Ingresos', () => {
         cy.plexText('name="buscador"', pacientes[1].nombre);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.length).to.be.gte(1);
         });
 
-        cy.get('table tbody tr').first().click();
+        cy.get('paciente-listado plex-item').contains(pacientes[1].nombre).click();
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true});
+        cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('label="Cama"', 'CAMA').click();
-        
+
 
         cy.plexButtonIcon('check').click();
-        
+
         cy.wait('@patchCamas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
