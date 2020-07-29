@@ -92,7 +92,7 @@ context('RUP - Punto de inicio', () => {
                             cy.get('paciente-buscar input').first().type(pacientes[i].nombre);
                             cy.wait('@consultaPaciente');
 
-                            cy.get('paciente-listado').find('table tbody').contains(pacientes[i].nombre).click();
+                            cy.get('paciente-listado plex-item').contains(pacientes[i].nombre).click();
 
                             cy.get('plex-layout-sidebar').plexButton('Guardar').click();
 

@@ -30,6 +30,7 @@ context('RUP - Punto de inicio', () => {
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('GET', '/api/modules/obraSocial/os/**', []).as('obraSocial');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('pacientes');
 
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
@@ -39,8 +40,8 @@ context('RUP - Punto de inicio', () => {
 
         // cy.get('plex-text input').first().type('3399661');
         cy.plexText('name="buscador"', '3399661');
-
-        cy.get('table tbody tr').first().click();
+        cy.wait('@pacientes');
+        cy.get('paciente-listado plex-item').contains(formatDocumento('3399661')).click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
 
@@ -256,8 +257,7 @@ context('RUP - Punto de inicio', () => {
         cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de medicina general', '@prestaciones', 0);
 
         cy.plexText('name="buscador"', '31549268');
-
-        cy.get('table tbody tr').first().click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento('31549268')).click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
 
@@ -312,3 +312,10 @@ context('RUP - Punto de inicio', () => {
 
     });
 });
+function formatDocumento(documentoPac) {
+    // armamos un documento con puntos como se muestra en la lista de pacientes
+    if (documentoPac) {
+        return documentoPac.substr(0, documentoPac.length - 6) + '.' + documentoPac.substr(-6, 3) + '.' + documentoPac.substr(-3);
+    }
+    return documentoPac;
+}

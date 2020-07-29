@@ -33,8 +33,8 @@ context('prestaciones', () => {
 
 
             cy.plexText('name="buscador"', paciente.nombre);
+            cy.get('paciente-listado plex-item').contains(paciente.nombre).click();
 
-            cy.get('table tbody tr').first().click();
             cy.plexButton('INICIAR PRESTACIÓN').click();
 
             cy.wait('@create').then((xhr) => {
