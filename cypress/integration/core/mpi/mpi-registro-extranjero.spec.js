@@ -10,31 +10,28 @@ context('MPI-Registro Paciente Extranjero', () => {
     })
 
     beforeEach(() => {
-        cy.goto('/apps/mpi/extranjero/mpi', token);
+        cy.goto('/apps/mpi/paciente/extranjero/mpi', token);
         cy.server();
     });
 
     it('verificar campos obligatorios de datos basicos de paciente', () => {
-        cy.plexButton('Guardar').click();
-        cy.contains('Debe completar los datos obligatorios');
+        cy.plexButton('Guardar').should('be.disabled');
     });
 
     it('ingresar apellido y nombre y verificar campos obligatorios de datos básicos de paciente', () => {
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'EXTRANJERO');
-        cy.plexButton('Guardar').click();
-        cy.contains('Debe completar los datos obligatorios');
+        cy.plexButton('Guardar').should('be.disabled');
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y sin contacto', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroExtranjero');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'EXTRANJERO');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'masculino').click();
+        cy.plexSelectType('label="Seleccione sexo"', 'masculino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
-        cy.plexPhone('label="Número"', '2990000000');
-        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.contains('datos de contacto').click()
+        cy.plexBool('label="Sin datos de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
@@ -44,19 +41,17 @@ context('MPI-Registro Paciente Extranjero', () => {
             expect(xhr.response.body.apellido).to.be.eq("TEST");
             expect(xhr.response.body.nombre).to.be.eq("EXTRANJERO");
         });
-        cy.contains('Los datos se actualizaron correctamente');
+        cy.toast('succes');
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y telefono móvil', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('registroExtranjero');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'EXTRANJERO');
-        cy.plexSelect('label="Sexo"').click();
-        cy.plexSelect('label="Sexo"', 'masculino').click();
+        cy.plexSelectType('label="Seleccione sexo"', 'masculino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
-        cy.plexSelect('label="Tipo"', 'celular');
-        cy.plexPhone('label="Número"', '2990000000');
-        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.contains('datos de contacto').click()
+        cy.plexBool('label="Sin datos de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
@@ -66,6 +61,6 @@ context('MPI-Registro Paciente Extranjero', () => {
             expect(xhr.response.body.apellido).to.be.eq("TEST");
             expect(xhr.response.body.nombre).to.be.eq("EXTRANJERO");
         });
-        cy.contains('Los datos se actualizaron correctamente');
+        cy.toast('succes');
     });
 });
