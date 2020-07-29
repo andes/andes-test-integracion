@@ -32,7 +32,8 @@ context('RUP - Punto de inicio', () => {
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
         cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de niño sano', '@prestaciones', 0);
         cy.plexText('name="buscador"', '3399661');
-        cy.get('table tbody tr').first().click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento('3399661')).click();
+        //cy.get('table tbody tr').first().click();
         cy.plexButton('INICIAR PRESTACIÓN').click();
 
         cy.wait('@create').then((xhr) => {
@@ -93,3 +94,10 @@ context('RUP - Punto de inicio', () => {
     });
 
 });
+function formatDocumento(documentoPac) {
+    // armamos un documento con puntos como se muestra en la lista de pacientes
+    if (documentoPac) {
+        return documentoPac.substr(0, documentoPac.length - 6) + '.' + documentoPac.substr(-6, 3) + '.' + documentoPac.substr(-3);
+    }
+    return documentoPac;
+}
