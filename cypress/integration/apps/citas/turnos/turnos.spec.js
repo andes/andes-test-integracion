@@ -197,10 +197,11 @@ context('turnos', () => {
         // cy.get('paciente-buscar input').first().type('36425896');
         cy.plexText('name="buscador"', validado1.documento);
 
-        cy.wait('@consultaPaciente').then(() => {
-            cy.get('table tbody').contains(validado1.documento).click();
+        cy.wait('@consultaPaciente').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.length).to.be.gte(1);
         });
-
+        cy.get('paciente-listado plex-item').contains(formatDocumento(validado1.documento)).click();
         cy.plexButtonIcon('calendar-plus').click();
 
         cy.wait('@getCarpetas');
@@ -227,5 +228,12 @@ context('turnos', () => {
         cy.toast('info', 'El turno se asignó correctamente');
     });
 
+    function formatDocumento(documentoPac) {
+        // armamos un documento con puntos como se muestra en la lista de pacientes
+        if (documentoPac) {
+            return documentoPac.substr(0, documentoPac.length - 6) + '.' + documentoPac.substr(-6, 3) + '.' + documentoPac.substr(-3);
+        }
+        return documentoPac;
+    }
 
 })

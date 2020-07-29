@@ -45,11 +45,13 @@ context('punto de inicio', () => {
     it('Generar solicitud', () => {
         cy.route('GET', '**api/modules/rup/prestaciones/solicitudes?idPaciente=**').as('generarSolicitudPaciente');
         cy.route('GET', '/api/modules/obraSocial/obraSocial/**', []).as('version');
+        // const search = paciente.documento;
         cy.plexText('name=buscador', paciente.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(paciente.documento).click();
+
+        cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
         cy.wait('@seleccionPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -61,10 +63,14 @@ context('punto de inicio', () => {
     });
 
     it('activar app mobile', () => {
-        cy.route('GET', '**api/core/mpi/modules/mobileApp/check/**', {
+        cy.route('PATCH', '**api/core/mpi/pacientes/**').as('patchPaciente');
+        cy.route('POST', '**api/modules/mobileApp/create/**').as('clickActivarApp');
+        cy.route('GET', '**api/modules/mobileApp/email/**').as('verificarEmail');
+
+        cy.route('GET', '**api/modules/mobileApp/check/**', {
             "message": "account_doesntExists",
             "account": null
-        }).as('clickActivarApp');
+        }).as('activarApp');
 
         cy.route('GET', '/api/modules/obraSocial/obraSocial/**', []).as('puco');
         cy.route('GET', '/api/modules/obraSocial/prepagas/**', []).as('prepagas');
@@ -72,12 +78,24 @@ context('punto de inicio', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(paciente.documento).click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
         cy.plexButtonIcon('cellphone-android').click();
-        cy.plexText('placeholder="e-mail"', '{selectall}{backspace}prueba@prueba.com');
+        cy.wait('@activarApp');
         cy.plexPhone('name="celular"', '{selectall}{backspace}2995290357');
-        cy.plexButton('Activar App Mobile').click();
-        cy.swal('confirm')
+        cy.plexText('name="email"', '{selectall}{backspace}prueba@prueba.com');
+        cy.wait('@verificarEmail').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+        })
+        cy.plexBadge('Su dirección ha sido validada, puede iniciar el proceso de activación');
+        cy.plexButton('Activar app').click();
+        cy.wait('@clickActivarApp').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.message).to.be.eq("OK");
+        });
+        cy.wait('@patchPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexBadge('Cuenta pendiente de activación por el usuario');
     })
 
     it('editar datos de contacto', () => {
@@ -99,8 +117,7 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains(paciente.documento).click();
-
+        cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -124,7 +141,6 @@ context('punto de inicio', () => {
         cy.wait('@getLocalidades').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-
 
         cy.wait('@getPaises').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -170,8 +186,7 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains(paciente.documento).click();
-
+        cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -257,8 +272,7 @@ context('punto de inicio', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-
-        cy.get('paciente-listado').find('td').contains(paciente.documento).click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
 
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -329,7 +343,7 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('paciente-listado').find('td').contains(paciente.documento).click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
 
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -362,7 +376,7 @@ context('punto de inicio', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(paciente.documento).click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
 
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -409,7 +423,7 @@ context('punto de inicio', () => {
             expect(xhr.response.body[0].nombre).to.be.eq(paciente.nombre);
         });
 
-        cy.get('paciente-listado').find('td').contains(paciente.documento).click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.apellido).to.be.eq(paciente.apellido);
@@ -428,8 +442,8 @@ context('punto de inicio', () => {
 
     ['validado', 'temporal'].forEach((type, i) => {
 
-        it('Verificar obra social de un paciente ' + type, () => {
 
+        it('Verificar obra social de un paciente ' + type, () => {
             cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
 
             cy.plexText('name="buscador"', pacientes[i].documento);
@@ -437,8 +451,7 @@ context('punto de inicio', () => {
             cy.wait('@busquedaPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
             });
-            cy.get('paciente-listado').find('td').contains(pacientes[i].documento).click();
-
+            cy.get('paciente-listado plex-item').contains(formatDocumento(pacientes[i].documento)).click();
             cy.wait('@getPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
             });
@@ -454,13 +467,13 @@ context('punto de inicio', () => {
             cy.route('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
             cy.route('GET', '**/api/modules/turnos/agenda?**').as('getAgendas');
             cy.route('GET', '**/api/modules/turnos/agenda/**').as('getAgenda');
-
+            cy.route('GET', '**/api/modules/obraSocial/prepagas/**').as('prepagas');
             cy.plexText('name="buscador"', pacientes[i].documento);
 
             cy.wait('@busquedaPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
             });
-            cy.get('paciente-listado').find('td').contains(pacientes[i].documento).click();
+            cy.get('paciente-listado plex-item').contains(formatDocumento(pacientes[i].documento)).click();
 
             cy.wait('@getPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
@@ -501,9 +514,17 @@ context('punto de inicio', () => {
                 expect(xhr.response.body.profesionales[0].apellido).to.be.eq('ESPOSITO');
             });
             cy.wait(1000);
-            cy.get('mat-radio-button').contains('Prepaga').click({ force: true });
+            cy.get('plex-radio').contains('Prepaga').click({ force: true });
             cy.plexSelectType('label="Seleccione una Prepaga"', 'swiss medical').click({ force: true });
 
         });
     });
-})
+
+    function formatDocumento(documentoPac) {
+        // armamos un documento con puntos como se muestra en la lista de pacientes
+        if (documentoPac) {
+            return documentoPac.substr(0, documentoPac.length - 6) + '.' + documentoPac.substr(-6, 3) + '.' + documentoPac.substr(-3);
+        }
+        return documentoPac;
+    }
+});
