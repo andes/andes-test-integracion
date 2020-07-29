@@ -34,7 +34,8 @@ context('MPI-Registro de Pacientes Similares', () => {
         cy.plexSelectType('name="sexo"', 'Masculino');
         cy.plexText('name="apellido"', 'ANDES');
         cy.plexText('name="nombre"', 'VALIDADO');
-        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.contains('datos de contacto').click()
+        cy.plexBool('label="Sin datos de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
@@ -67,7 +68,8 @@ context('MPI-Registro de Pacientes Similares', () => {
         cy.plexSelectType('name="sexo"', 'Masculino');
         cy.plexText('name="apellido"', 'X');
         cy.plexText('name="nombre"', 'X');
-        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.contains('datos de contacto').click()
+        cy.plexBool('label="Sin datos de contacto"', true);
         cy.plexSelectType('name="provincia"', 'CABA');
         cy.plexButton('Guardar').click();
 
@@ -98,7 +100,8 @@ context('MPI-Registro de Pacientes Similares', () => {
         cy.plexSelectType('name="sexo"', 'Masculino');
         cy.plexText('name="apellido"', 'ANDES');
         cy.plexText('name="nombre"', 'PACIENTE VALIDADO');
-        cy.plexBool('label="No posee ningún tipo de contacto"', true);
+        cy.contains('datos de contacto').click()
+        cy.plexBool('label="Sin datos de contacto"', true);
         cy.plexSelectType('name="provincia"', 'CABA');
         cy.plexButton('Guardar').click();
 
@@ -117,28 +120,6 @@ context('MPI-Registro de Pacientes Similares', () => {
         cy.wait('@postPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-    });
-
-    it('Paciente similar temporal: no arroja matches', () => {
-
-        // Buscador
-        irANuevoPaciente();
-        // Se completa datos básicos
-        cy.plexInt('name="documento"', '20000000');
-        cy.plexDatetime('name="fechaNacimiento"', '26/12/1990');
-        cy.plexSelectType('name="sexo"', 'Femenino');
-        cy.plexText('name="apellido"', 'ANDES');
-        cy.plexText('name="nombre"', 'PACIENTE TEMPORAL');
-        cy.plexBool('label="No posee ningún tipo de contacto"', true);
-        cy.plexBool('name="viveProvActual"', true);
-        cy.plexBool('name="viveLocActual"', true);
-        cy.plexButton('Guardar').click();
-        cy.wait('@postPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.resultadoMatching).to.be.eq(undefined);
-        });
-        // Popup alert
-        cy.swal('confirm');
     });
 
 });

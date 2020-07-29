@@ -83,22 +83,15 @@ Cypress.Commands.add('goto', (url, token) => {
 Cypress.Commands.add('buscarPaciente', (pacienteDoc, cambiarPaciente = true) => {
     cy.plexButton("Buscar Paciente").click();
     cy.plexText('name="buscador"', pacienteDoc);
-
     cy.server();
     cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
-
     cy.wait('@listaPacientes');
     const documento = pacienteDoc.substr(0, pacienteDoc.length - 6) + '.' + pacienteDoc.substr(-6, 3) + '.' + pacienteDoc.substr(-3);
     cy.get('plex-item').contains(documento).click();
-
     if (cambiarPaciente) {
         cy.plexButton("Cambiar Paciente").click();
         cy.plexText('name="buscador"', pacienteDoc);
-
         cy.wait('@listaPacientes');
         cy.get('plex-item').contains(documento).click();
     }
 });
-
-
-
