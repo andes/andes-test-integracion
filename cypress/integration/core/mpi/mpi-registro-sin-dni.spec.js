@@ -35,7 +35,6 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.contains('datos de contacto').click()
-        cy.plexPhone('label="Número"', '2990000000');
         cy.plexBool('label="Sin datos de contacto"', true);
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
