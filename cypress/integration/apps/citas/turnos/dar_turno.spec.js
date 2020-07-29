@@ -230,14 +230,16 @@ context('CITAS - punto de inicio', () => {
 
 function darTurno(paciente) {
     cy.route('GET', '**api/core/mpi/pacientes/**').as('darTurnoPaciente');
-    let searchField = paciente.documento || paciente.nombre;
-
+    // definimos el campo a buscar en el listado puede contener un documento con puntos o el nombre de paciente
+    const searchList = (paciente.documento) ? paciente.documento.substr(0, paciente.documento.length - 6) + '.' +
+        paciente.documento.substr(-6, 3) + '.' + paciente.documento.substr(-3) : paciente.nombre
+    const searchField = paciente.documento || paciente.nombre;
     cy.plexText('name="buscador"', searchField);
 
     cy.wait('@busquedaPaciente').then((xhr) => {
         expect(xhr.status).to.be.eq(200);
     });
-    cy.get('paciente-listado table').find('td').contains(searchField).click();
+    cy.get('paciente-listado plex-item').contains(searchList).click();
     cy.wait('@seleccionPaciente').then((xhr) => {
         expect(xhr.status).to.be.eq(200);
     });
