@@ -63,9 +63,10 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.plexText('name="buscador"', pacientes[0].nombre);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.length).to.be.gte(1);
         });
 
-        cy.get('table tbody tr').first().click();
+        cy.get('paciente-listado plex-item').contains(pacientes[0].nombre).click();
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -76,15 +77,16 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.plexText('name="buscador"', pacientes[1].nombre);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.length).to.be.gte(1);
         });
 
-        cy.get('table tbody tr').first().click();
+        cy.get('paciente-listado plex-item').contains(pacientes[1].nombre).click();
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true});
+        cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexText('name="motivo"', 'Estornudo');
@@ -96,7 +98,7 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.plexSelectType('label="Cama"').click().get('.option').contains('CAMA').click()
 
         cy.plexButtonIcon('check').click();
-        
+
         cy.wait('@patchCamas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
