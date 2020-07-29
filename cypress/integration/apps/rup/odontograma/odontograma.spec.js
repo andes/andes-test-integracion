@@ -68,7 +68,8 @@ describe('RUP - Odontograma', () => {
 
         cy.plexText('name="buscador"', 123456789);
         cy.wait('@searchPaciente');
-        cy.get('paciente-listado').find('td').contains('123456789').click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento('123456789')).click();
+
         cy.plexButton('INICIAR PRESTACIÓN').click();
 
         cy.wait('@frecuentesProfesional').then((xhr) => {
@@ -90,7 +91,7 @@ describe('RUP - Odontograma', () => {
 
         cy.plexText('name="buscador"', 123456789);
         cy.wait('@searchPaciente');
-        cy.get('paciente-listado').find('td').contains('123456789').click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento('123456789')).click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
 
@@ -118,7 +119,7 @@ describe('RUP - Odontograma', () => {
 
         cy.plexText('name="buscador"', 123456789);
         cy.wait('@searchPaciente');
-        cy.get('paciente-listado').find('td').contains('123456789').click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento('123456789')).click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
 
@@ -146,7 +147,7 @@ describe('RUP - Odontograma', () => {
 
         cy.plexText('name="buscador"', 123456789);
         cy.wait('@searchPaciente');
-        cy.get('paciente-listado').find('td').contains('123456789').click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento('123456789')).click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
 
@@ -189,7 +190,7 @@ describe('RUP - Odontograma', () => {
 
         cy.plexText('name="buscador"', 123456789);
         cy.wait('@searchPaciente');
-        cy.get('paciente-listado').find('td').contains('123456789').click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento('123456789')).click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
 
@@ -218,5 +219,11 @@ describe('RUP - Odontograma', () => {
         cy.plexButton('Quitar relación').click();
         cy.get('.badge').contains('diente 14').should('not.exist');
     });
-
+    function formatDocumento(documentoPac) {
+        // armamos un documento con puntos como se muestra en la lista de pacientes
+        if (documentoPac) {
+            return documentoPac.substr(0, documentoPac.length - 6) + '.' + documentoPac.substr(-6, 3) + '.' + documentoPac.substr(-3);
+        }
+        return documentoPac;
+    }
 });
