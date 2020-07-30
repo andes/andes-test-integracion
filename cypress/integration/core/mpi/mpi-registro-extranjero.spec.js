@@ -15,13 +15,15 @@ context('MPI-Registro Paciente Extranjero', () => {
     });
 
     it('verificar campos obligatorios de datos basicos de paciente', () => {
-        cy.plexButton('Guardar').should('be.disabled');
+        cy.plexButton('Guardar').click();
+        cy.contains('Debe completar los datos obligatorios');
     });
 
     it('ingresar apellido y nombre y verificar campos obligatorios de datos básicos de paciente', () => {
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'EXTRANJERO');
-        cy.plexButton('Guardar').should('be.disabled');
+        cy.plexButton('Guardar').click();
+        cy.contains('Debe completar los datos obligatorios');
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y sin contacto', () => {
