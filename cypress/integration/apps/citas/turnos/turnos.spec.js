@@ -32,13 +32,13 @@ context('turnos', () => {
 
         // Se completa datos básicos
 
-        cy.plexText('name="apellido"', 'apellidoBebe12');
+        cy.plexText('label="Apellido"', 'apellidoBebe12');
 
-        cy.plexText('name="nombre"', 'nombreBebe12');
+        cy.plexText('label="Nombre"', 'nombreBebe12');
 
-        cy.plexSelectType('label="Sexo"', 'masculino');
+        cy.plexSelectType('label="Seleccione sexo"', 'masculino');
 
-        cy.plexDatetime('name="fechaNacimiento"', cy.today());
+        cy.plexDatetime('label="Fecha de Nacimiento"', cy.today());
 
         // Se completa datos
         cy.plexText('name="buscador"', validado1.documento);
@@ -48,14 +48,15 @@ context('turnos', () => {
             expect(xhr.status).to.be.eq(200);
         });
         // Se selecciona el progenitor 
-        cy.get('paciente-listado').find('td').contains(validado1.nombre).click();
+        cy.get('paciente-listado').contains(validado1.nombre).click();
 
-        // cy.get('plex-bool[name="noPoseeContacto"]').click();
-        cy.plexBool('name="noPoseeContacto"', true);
+        cy.contains('datos de contacto').click()
+        cy.plexBool('label="Sin datos de contacto"', true);
         // Se actualizan los datos del domicilio
-        cy.plexBool('name = "viveProvActual"', true);
+        cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
+        cy.swal('confirm');
 
         // Se espera la actualización de la relación del progenitor con el bebé
         cy.wait('@relacionProgenitor').then((xhr) => {
@@ -89,16 +90,15 @@ context('turnos', () => {
 
         cy.plexDatetime('name="fechaNacimiento"', '11/06/1992');
 
-        cy.plexSelectType('name="sexo"', 'masculino');
+        cy.plexSelectType('label="Seleccione sexo"', 'masculino');
 
         // Se completa datos de contacto
-        cy.plexSelect('label="Tipo"').find('.remove-button').click();
-        cy.plexSelectType('label="Tipo"', 'Teléfono fijo');
-
-        cy.plexPhone('label="Número"', '02994351614');
+        cy.contains('datos de contacto').click()
+        cy.plexSelect('label="Tipo"', 'fijo');
+        cy.plexPhone('label="Número"', '2994351614');
 
         // Se agrega nuevo contacto
-        cy.plexButtonIcon('phone-plus').click();
+        cy.plexButtonIcon('plus').click();
 
         cy.get('plex-select[label="Tipo"]').eq(1).children().children('.selectize-control').click()
             .find('div[data-value="email"]').click();
@@ -115,7 +115,7 @@ context('turnos', () => {
 
         cy.plexText('name="direccion"', 'Avenida las Flores 1200');
 
-        cy.plexButton('Geolocalizar').click();
+        cy.get('plex-button[icon="map-marker"]').click();
 
         cy.wait('@geoReferencia').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
@@ -123,11 +123,12 @@ context('turnos', () => {
 
         // Se guardan los cambios
         cy.plexButton('Guardar').click();
+        cy.swal('confirm');
 
         // Se espera confirmación de que se agrego nuevo paciente SIN DNI correctamente
         cy.wait('@sinDniGuardar').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            // expect(xhr.response.body.apellido).to.be.eq('SINDNI');
+            expect(xhr.response.body.documento).to.have.length(0);
         });
     });
 
@@ -155,10 +156,11 @@ context('turnos', () => {
 
         cy.plexDatetime('name="fechaNacimiento"', '23/02/1998');
 
-        cy.plexSelectType('name="sexo"', 'masculino');
+        cy.plexSelectType('label="Seleccione sexo"', 'masculino');
 
         // Se completa datos de contacto
-        cy.plexPhone('label="Número"', '02991489753');
+        cy.contains('datos de contacto').click()
+        cy.plexPhone('label="Número"', '2991489753');
 
         // Se completa los datos de domicilio
         cy.plexBool('name="viveProvActual"', true);
@@ -169,7 +171,7 @@ context('turnos', () => {
 
         cy.plexText('name="direccion"', 'Avenida las Flores 1200');
 
-        cy.plexButton('Geolocalizar').click();
+        cy.get('plex-button[icon="map-marker"]').click();
 
         cy.wait('@geoReferencia').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
@@ -177,9 +179,11 @@ context('turnos', () => {
 
         // Se guardan cambios
         cy.plexButton('Guardar').click();
+        cy.swal('confirm');
 
         cy.wait('@conDniGuardar').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.documento).to.be.eq('79546213');
         });
     });
 
@@ -197,9 +201,12 @@ context('turnos', () => {
         // cy.get('paciente-buscar input').first().type('36425896');
         cy.plexText('name="buscador"', validado1.documento);
 
-        cy.wait('@consultaPaciente').then(() => {
-            cy.get('table tbody').contains(validado1.documento).click();
+        cy.wait('@consultaPaciente').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.length).to.be.gte(1);
         });
+
+        cy.get('paciente-listado plex-item').contains(format(validado1.documento)).click();
 
         cy.plexButtonIcon('calendar-plus').click();
 
@@ -226,6 +233,8 @@ context('turnos', () => {
 
         cy.toast('info', 'El turno se asignó correctamente');
     });
-
-
 })
+
+function format(s) {
+    return s.substr(0, s.length - 6) + '.' + s.substr(-6, 3) + '.' + s.substr(-3);
+}

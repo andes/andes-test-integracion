@@ -38,25 +38,25 @@ context('MPI-Registro App Mobile', () => {
     }
     before(() => {
         cy.seed();
-        cy.task('database:create:paciente', { template: 'validado' }).then(p => {
-            pacValidado = p;
-        });
-        cy.task('database:create:paciente', { template: 'validado' }).then(p => {
-            pacValidado2 = p;
-        });
-        cy.task('database:create:paciente', { template: 'validado' }).then(p => {
-            pacValidado3 = p;
-        });
-        cy.task('database:create:paciente-app', pacienteAppAux).then(pacienteapp => {
-            pacienteApp = pacienteapp;
-        });
         cy.login('38906735', 'asd').then(t => {
             token = t;
+            cy.task('database:create:paciente', { template: 'validado' }).then(p => {
+                pacValidado = p;
+            });
+            cy.task('database:create:paciente', { template: 'validado' }).then(p => {
+                pacValidado2 = p;
+            });
+            cy.task('database:create:paciente', { template: 'validado' }).then(p => {
+                pacValidado3 = p;
+            });
+            cy.task('database:create:paciente-app', pacienteAppAux).then(pacienteapp => {
+                pacienteApp = pacienteapp;
+            });
         });
     });
 
     beforeEach(() => {
-        cy.goto('/apps/mpi/busqueda', token);
+        cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('POST', '**api/modules/mobileApp/create/**').as('clickActivarApp');
         cy.route('GET', '**api/core/mpi/pacientes/**').as('findPacienteByID');
@@ -64,7 +64,7 @@ context('MPI-Registro App Mobile', () => {
         cy.route('PATCH', '**api/core/mpi/pacientes/**').as('patchPaciente');
         cy.route('GET', '**api/modules/mobileApp/check/**').as('clickGestionApp');
         cy.route('GET', '**api/modules/mobileApp/email/**').as('verificarEmail');
-        cy.server();
+        cy.goto('/apps/mpi/busqueda', token);
     });
 
     it('activar app mobile en un paciente, sin guardar el paciente(click en cancelar) y verificar que los datos persistan', () => {
@@ -80,7 +80,7 @@ context('MPI-Registro App Mobile', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexTab(' datos de contacto ').click();
+        cy.plexTab('datos de contacto').click();
         cy.wait('@clickGestionApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -93,11 +93,9 @@ context('MPI-Registro App Mobile', () => {
             expect(xhr.responseBody.length).to.be.eq(0);
         });
 
-        //cy.wait(40000);
-
         cy.plexBadge('Su dirección ha sido validada, puede iniciar el proceso de activación');
 
-        cy.plexButton(' Activar app ').click();
+        cy.plexButton('Activar app').click();
         cy.wait('@clickActivarApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -107,10 +105,9 @@ context('MPI-Registro App Mobile', () => {
 
         cy.toast('success', 'Se ha enviado el código de activación al paciente');
         cy.toast('info', 'Datos del paciente actualizados');
-        cy.plexButton(' Reenviar Código ');
-        // cy.wait(5000);
-        // cy.plexBadge('Cuenta pendiente de activación por el usuario');
-        cy.plexButton(' Volver ').click();
+        cy.plexButton('Reenviar Código');
+        cy.plexBadge('Cuenta pendiente de activación por el usuario');
+        cy.plexButton('Volver').click();
 
         // verificamos datos
         cy.plexText('name="buscador"', pacValidado.documento);
@@ -128,12 +125,11 @@ context('MPI-Registro App Mobile', () => {
         cy.plexTab(' datos de contacto ').click();
         cy.wait('@clickGestionApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            cy.log(xhr);
+            expect(xhr.response.body.account.email).to.be.eq(correo);
+            expect(xhr.response.body.account.telefono).to.be.eq(celular);
         });
-        // cy.get('plex-text[name="email"]').click();
-        //cy.plexButton('Reenviar Código');
-        //cy.wait(20000);
-        //  cy.plexBadge('Cuenta pendiente de activación por el usuario');
+        cy.plexText('name="email"').should('have.value', correo);
+        cy.plexBadge('Cuenta pendiente de activación por el usuario');
     });
 
     it('activar app mobile en un paciente validado', () => {
@@ -161,10 +157,9 @@ context('MPI-Registro App Mobile', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.responseBody.length).to.be.eq(0);
         });
-        // cy.wait(40000);
         cy.plexBadge('Su dirección ha sido validada, puede iniciar el proceso de activación');
 
-        cy.plexButton(' Activar app ').click();
+        cy.plexButton('Activar app').click();
         // se envía código de activación al paciente y se lo actualiza en la BD
         cy.wait('@clickActivarApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -178,8 +173,7 @@ context('MPI-Registro App Mobile', () => {
 
         cy.toast('info', 'Datos del paciente actualizados');
         cy.plexButton('Reenviar Código');
-        //   cy.wait(5000);
-        //   cy.plexBadge('Cuenta pendiente de activación por el usuario');
+        cy.plexBadge('Cuenta pendiente de activación por el usuario');
         cy.plexButton('Guardar').click();
 
         cy.wait('@putPaciente').then((xhr) => {
@@ -204,7 +198,7 @@ context('MPI-Registro App Mobile', () => {
         cy.wait('@findPacienteByID').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexTab(' datos de contacto ').click();
+        cy.plexTab('datos de contacto').click();
         cy.wait('@clickGestionApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -218,11 +212,7 @@ context('MPI-Registro App Mobile', () => {
             //al menos un pacienteApp con ese mail debe traer
             expect(xhr.responseBody.length).to.be.gt(0);
         });
-        // cy.wait(90000);
 
-        cy.plexButton(' Activar app ');
-        // cy.plexBadge('Su dirección no ha podido ser validada, dirección ya utilizada');
-
-
+        cy.plexBadge('Su dirección no ha podido ser validada, dirección ya utilizada');
     });
 });
