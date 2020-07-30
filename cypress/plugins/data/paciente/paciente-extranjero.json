@@ -1,0 +1,78 @@
+{
+    "_id": "5ca74e884090da6c97946782",
+    "claveBlocking": [
+        "APYDNMV",
+        "APYDXT",
+        "NMVRXT",
+        "0534396896619439689",
+        "053439689"
+    ],
+    "entidadesValidadoras": [],
+    "documento": "",
+    "cuil": null,
+    "activo": true,
+    "estado": "temporal",
+    "nombre": "PACIENTE EXTRANJERO",
+    "apellido": "ANDES",
+    "alias": "",
+    "contacto": [
+        {
+            "activo": true,
+            "_id": "5ca74e884090da6c97946783",
+            "tipo": "celular",
+            "valor": "",
+            "ranking": 0,
+            "ultimaActualizacion": "2019-04-05T09:47:03.719-03:00"
+        }
+    ],
+    "sexo": "masculino",
+    "genero": "masculino",
+    "fechaNacimiento": "1998-04-01T00:00:00.000-03:00",
+    "numeroIdentificacion": "123456892",
+    "fechaFallecimiento": null,
+    "direccion": [
+        {
+            "activo": true,
+            "_id": "5ca74e884090da6c97946784",
+            "valor": "",
+            "codigoPostal": "",
+            "ubicacion": {
+                "_id": "5ca74e884090da6c97946785",
+                "pais": {
+                    "_id": "57f3b5c469fe79a598e6281f",
+                    "nombre": "Argentina"
+                },
+                "provincia": null,
+                "localidad": null,
+                "barrio": null
+            },
+            "ranking": 0,
+            "geoReferencia": null,
+            "ultimaActualizacion": "2019-04-05T09:47:03.719-03:00"
+        }
+    ],
+    "estadoCivil": null,
+    "foto": null,
+    "relaciones": null,
+    "financiador": null,
+    "identificadores": null,
+    "scan": null,
+    "reportarError": false,
+    "notaError": "",
+    "carpetaEfectores": [],
+    "notas": [],
+    "createdAt": "2019-04-05T09:48:08.514-03:00",
+    "createdBy": {
+        "id": "5bcf0e35402a3578f3f2d098",
+        "nombreCompleto": "ANDRES MARIANO PALAVECINO",
+        "nombre": "ANDRES MARIANO",
+        "apellido": "PALAVECINO",
+        "username": 35593546,
+        "documento": 35593546,
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id": "57e9670e52df311059bc8964"
+        }
+    }
+}
