@@ -2,25 +2,23 @@ context('MPI-Registro App Mobile', () => {
     let token;
     let pacValidado, pacValidado2, pacValidado3;
     let pacienteApp;
-    let sendMessage = [
-        {
-            status: "success",
-            _id: "5e564977fc9e408a8954ae5b",
-            message: "Estimado FLORES, MARA AZUL, Su código de activación para ANDES Mobile es: 041643",
-            phone: null,
-            email: "probando_mail@mail.com",
-            template: "emails/active-app-code.html",
-            extras: {
-                username: "FLORES, MARA AZUL",
-                codigo: "041643"
-            },
-            subject: "ANDES :: Código de activación",
-            from: "undefined",
-            createdAt: "2020-02-26T10:33:27.503Z",
-            updatedAt: "2020-02-26T10:33:33.580Z",
-            scheduledAt: "2020-02-26T10:33:27.503Z"
-        }
-    ];
+    let sendMessage = [{
+        status: "success",
+        _id: "5e564977fc9e408a8954ae5b",
+        message: "Estimado FLORES, MARA AZUL, Su código de activación para ANDES Mobile es: 041643",
+        phone: null,
+        email: "probando_mail@mail.com",
+        template: "emails/active-app-code.html",
+        extras: {
+            username: "FLORES, MARA AZUL",
+            codigo: "041643"
+        },
+        subject: "ANDES :: Código de activación",
+        from: "undefined",
+        createdAt: "2020-02-26T10:33:27.503Z",
+        updatedAt: "2020-02-26T10:33:33.580Z",
+        scheduledAt: "2020-02-26T10:33:27.503Z"
+    }];
     let pacienteAppAux = {
         activacionApp: true,
         nombre: "MARA AZUL",
@@ -32,19 +30,24 @@ context('MPI-Registro App Mobile', () => {
         fechaNacimiento: "1976-08-28T04:00:00.000Z",
         sexo: "femenino",
         genero: "femenino",
-        devices: [
-        ],
+        devices: [],
         sendMessageCache: sendMessage
     }
     before(() => {
         cy.seed();
-        cy.task('database:create:paciente', { template: 'validado' }).then(p => {
+        cy.task('database:create:paciente', {
+            template: 'validado'
+        }).then(p => {
             pacValidado = p;
         });
-        cy.task('database:create:paciente', { template: 'validado' }).then(p => {
+        cy.task('database:create:paciente', {
+            template: 'validado'
+        }).then(p => {
             pacValidado2 = p;
         });
-        cy.task('database:create:paciente', { template: 'validado' }).then(p => {
+        cy.task('database:create:paciente', {
+            template: 'validado'
+        }).then(p => {
             pacValidado3 = p;
         });
         cy.task('database:create:paciente-app', pacienteAppAux).then(pacienteapp => {
@@ -159,7 +162,6 @@ context('MPI-Registro App Mobile', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.responseBody.length).to.be.eq(0);
         });
-
         cy.plexBadge('Su dirección ha sido validada, puede iniciar el proceso de activación');
 
         cy.plexButton(' Activar app ').click();
