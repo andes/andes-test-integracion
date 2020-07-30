@@ -130,7 +130,8 @@ context('SOLICITUDES', () => {
         cy.wait('@consultaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('table tbody').contains('32589654').click();
+
+        cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
 
         cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
 
@@ -165,11 +166,10 @@ context('SOLICITUDES', () => {
     it('crear solicitud de entrada y auditarla', () => {
         cy.server();
 
-
         cy.plexButton('Nueva Solicitud').click();
         cy.plexText('name="buscador"', '32589654');
         cy.wait('@consultaPaciente');
-        cy.get('table tbody').contains('32589654').click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
 
         cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
@@ -213,3 +213,10 @@ context('SOLICITUDES', () => {
         });
     })
 });
+function formatDocumento(documentoPac) {
+    // armamos un documento con puntos como se muestra en la lista de pacientes
+    if (documentoPac) {
+        return documentoPac.substr(0, documentoPac.length - 6) + '.' + documentoPac.substr(-6, 3) + '.' + documentoPac.substr(-3);
+    }
+    return documentoPac;
+}
