@@ -18,7 +18,8 @@ context('MPI-Registro Paciente Bebé', () => {
     });
 
     it('verificar campos obligatorios de datos basicos de paciente', () => {
-        cy.plexButton('Guardar').should('be.disabled');
+        cy.plexButton('Guardar').click();
+        cy.contains('Debe completar los datos obligatorios');
     });
 
     it('buscar progenitor por documento y verificar que existe', () => {
@@ -80,7 +81,8 @@ context('MPI-Registro Paciente Bebé', () => {
     it('ingresar apellido y nombre y verificar campos obligatorios de datos básicos de paciente', () => {
         cy.plexText('label="Apellido"', 'Martinez');
         cy.plexText('label="Nombre"', 'Mario');
-        cy.plexButton('Guardar').should('be.disabled');
+        cy.plexButton('Guardar').click();
+        cy.contains('Debe completar los datos obligatorios');
     });
 
     it('verificar la carga de contacto de paciente', () => {
@@ -88,7 +90,8 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexText('label="Nombre"', 'Mario');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
-        cy.plexButton('Guardar').should('be.disabled');
+        cy.plexButton('Guardar').click();
+        cy.contains('Debe completar los datos obligatorios');
     });
 
     it('verificar la carga de dirección', () => {
@@ -98,7 +101,8 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.contains('datos de contacto').click()
         cy.plexPhone('label="Número"', '2990000000');
-        cy.plexButton('Guardar').should('be.disabled');
+        cy.plexButton('Guardar').click();
+        cy.contains('Debe completar los datos obligatorios');
     });
 
     it('verificar la carga de bebé con datos obligatorios requeridos', () => {
