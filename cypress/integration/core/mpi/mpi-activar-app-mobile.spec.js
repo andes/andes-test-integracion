@@ -63,39 +63,59 @@ context('MPI-Registro App Mobile', () => {
         cy.route('PUT', '**api/core/mpi/pacientes/**').as('putPaciente');
         cy.route('PATCH', '**api/core/mpi/pacientes/**').as('patchPaciente');
         cy.route('GET', '**api/modules/mobileApp/check/**').as('clickGestionApp');
+        cy.route('GET', '**api/modules/mobileApp/email/**').as('verificarEmail');
         cy.server();
     });
 
-    it('activar app mobile en un paciente, sin guardar el paciente(click en cancelar) y verificar que los datos persistan', () => {
+    it('activar app mobile en un paciente, sin guardar el paciente(click en volver) y verificar que los datos persistan', () => {
         let correo = 'prueba1@prueba.com';
         let celular = '2995290357';
         cy.plexText('name="buscador"', pacValidado.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(pacValidado.documento).click();
+        cy.get('paciente-listado plex-item').plexButtonIcon('pencil').click();
 
         cy.wait('@findPacienteByID').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexButton('Gestión de App Mobile').click();
-        cy.plexText('placeholder="e-mail"', '{selectall}{backspace}' + correo);
-        cy.plexPhone('placeholder="Celular"', '{selectall}{backspace}' + celular);
-        cy.plexButton('Activar App Mobile').click();
+
+        cy.plexTab(' datos de contacto ').click();
+        cy.wait('@clickGestionApp').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexPhone('label="Número"', '{selectall}{backspace}' + celular);
+        cy.plexText('name="email"', '{selectall}{backspace}' + correo);
+
+        // esperamos repuesta de verificación de mail válido (no repetido)
+        cy.wait('@verificarEmail').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.length).to.be.eq(0);
+        });
+
+        cy.plexBadge('Su dirección ha sido validada, puede iniciar el proceso de activación');
+
+        cy.plexButton(' Activar app ').click();
         cy.wait('@clickActivarApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.contains('Se ha enviado el código de activación al paciente');
-        cy.get('button').contains('Aceptar').click();
-        cy.contains('Cuenta pendiente de activación por el usuario');
+        cy.wait('@patchPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.toast('success', 'Se ha enviado el código de activación al paciente');
         cy.toast('info', 'Datos del paciente actualizados');
-        cy.plexButton('Cancelar').click();
+        cy.plexButton(' Reenviar Código ');
+
+        cy.plexBadge('Cuenta pendiente de activación por el usuario');
+        cy.plexButton(' Volver ').click();
+
         // verificamos datos
         cy.plexText('name="buscador"', pacValidado.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(pacValidado.documento).click();
+        cy.get('paciente-listado plex-item').plexButtonIcon('pencil').click();
 
         cy.wait('@findPacienteByID').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -103,16 +123,15 @@ context('MPI-Registro App Mobile', () => {
             expect(xhr.response.body.apellido).to.be.eq(pacValidado.apellido);
             expect(xhr.response.body.documento).to.be.eq(pacValidado.documento);
         });
-        cy.wait('@findPacienteByID').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.wait('@findPacienteByID');
-        cy.wait('@findPacienteByID');
-        cy.plexButton('Gestión de App Mobile').click();
+        cy.plexTab(' datos de contacto ').click();
         cy.wait('@clickGestionApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            cy.log(xhr);
         });
-        cy.contains('Cuenta pendiente de activación por el usuario');
+
+        cy.plexButton('Reenviar Código');
+
+        // cy.plexBadge('Cuenta pendiente de activación por el usuario');
     });
 
     it('activar app mobile en un paciente validado', () => {
@@ -122,20 +141,29 @@ context('MPI-Registro App Mobile', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(pacValidado2.documento).click();
+        cy.get('paciente-listado plex-item').plexButtonIcon('pencil').click();
 
         cy.wait('@findPacienteByID').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexPhone('label="Número"', '{selectall}{backspace}2990000000');
-        cy.plexButton('Gestión de App Mobile').click();
+        cy.plexTab(' datos de contacto ').click();
         cy.wait('@clickGestionApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexText('placeholder="e-mail"', '{selectall}{backspace}' + correo);
-        cy.plexPhone('placeholder="Celular"', '{selectall}{backspace}' + celular);
-        cy.plexButton('Activar App Mobile').click();
-        // se envía código de activación al paciente y se lo actualliza en la BD
+
+        cy.plexPhone('label="Número"', '{selectall}{backspace}' + celular);
+        cy.plexText('name="email"', '{selectall}{backspace}' + correo);
+
+        // esperamos repuesta de verificación de mail válido (no repetido)
+        cy.wait('@verificarEmail').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.length).to.be.eq(0);
+        });
+
+        cy.plexBadge('Su dirección ha sido validada, puede iniciar el proceso de activación');
+
+        cy.plexButton(' Activar app ').click();
+        // se envía código de activación al paciente y se lo actualiza en la BD
         cy.wait('@clickActivarApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.responseBody.message).to.be.eq("OK");
@@ -143,10 +171,13 @@ context('MPI-Registro App Mobile', () => {
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.contains('Se ha enviado el código de activación al paciente');
-        cy.get('button').contains('Aceptar').click();
-        cy.contains('Cuenta pendiente de activación por el usuario');
+
+        cy.toast('success', 'Se ha enviado el código de activación al paciente');
+
         cy.toast('info', 'Datos del paciente actualizados');
+        cy.plexButton('Reenviar Código');
+
+        cy.plexBadge('Cuenta pendiente de activación por el usuario');
         cy.plexButton('Guardar').click();
 
         cy.wait('@putPaciente').then((xhr) => {
@@ -166,20 +197,28 @@ context('MPI-Registro App Mobile', () => {
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('paciente-listado').find('td').contains(pacValidado3.documento).click();
+        cy.get('paciente-listado plex-item').plexButtonIcon('pencil').click();
 
         cy.wait('@findPacienteByID').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexButton('Gestión de App Mobile').click();
-        cy.plexText('placeholder="e-mail"', '{selectall}{backspace}' + correo);
-        cy.plexPhone('placeholder="Celular"', '{selectall}{backspace}' + celular);
-        cy.plexButton('Activar App Mobile').click();
-        cy.wait('@clickActivarApp').then((xhr) => {
+        cy.plexTab(' datos de contacto ').click();
+        cy.wait('@clickGestionApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.contains('El mail ingresado ya existe, ingrese otro email');
-        cy.get('button').contains('Aceptar').click();
+
+        cy.plexPhone('label="Número"', '{selectall}{backspace}' + celular);
+        cy.plexText('name="email"', '{selectall}{backspace}' + correo);
+
+        // esperamos repuesta de verificación de mail válido (no repetido)
+        cy.wait('@verificarEmail').then(xhr => {
+            expect(xhr.status).to.be.eq(200);
+            //al menos un pacienteApp con ese mail debe traer
+            expect(xhr.responseBody.length).to.be.gt(0);
+        });
+        cy.plexButton(' Activar app ');
+        //  cy.plexBadge('Su dirección no ha podido ser validada, dirección ya utilizada');
+
 
     });
 });
