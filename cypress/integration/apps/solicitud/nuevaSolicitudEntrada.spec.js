@@ -8,7 +8,8 @@ function secuencia(token) {
 function seleccionarPaciente(dni) {
     cy.plexText('name="buscador"', dni);
     cy.wait('@searchPaciente')
-    cy.get('paciente-listado').find('td').contains(dni).click();
+    const documento = dni.substr(0, dni.length - 6) + '.' + dni.substr(-6, 3) + '.' + dni.substr(-3);
+    cy.get('paciente-listado plex-item').contains(documento).click();
 }
 
 describe('TOP: Nueva Solicitud de Entrada', () => {
