@@ -1,0 +1,694 @@
+[{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973867"
+	},
+	"conceptId": "128041000119107",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		{
+			"concept": "721617001",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF PRIMARY ADENOCARCINOMA OF LOWER THIRD OF ESOPHAGUS DUE TO BARRETT ESOPHAGUS CHOOSE K22.70 | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT",
+	"mapTarget": "K22.70"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973868"
+	},
+	"conceptId": "254153009",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS Q79.8",
+	"mapTarget": "Q79.8"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973869"
+	},
+	"conceptId": "281801000009108",
+	"mapGroup": 2.0,
+	"mapPriority": 2.0,
+	"mapRule": [
+		false
+	],
+	"mapAdvice": "ALWAYS B96.89",
+	"mapTarget": "B96.89"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897386a"
+	},
+	"conceptId": "301327002",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "MAP SOURCE CONCEPT CANNOT BE CLASSIFIED WITH AVAILABLE DATA",
+	"mapTarget": ""
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897386b"
+	},
+	"conceptId": "246951001",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS H10.8",
+	"mapTarget": "H10.8"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897386c"
+	},
+	"conceptId": "292278006",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS T43.595? | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE | EPISODE OF CARE INFORMATION NEEDED | POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE",
+	"mapTarget": "T43.595?"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897386d"
+	},
+	"conceptId": "291710005",
+	"mapGroup": 2.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS X44 | POSSIBLE REQUIREMENT FOR PLACE OF OCCURRENCE",
+	"mapTarget": "X44"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897386e"
+	},
+	"conceptId": "293072005",
+	"mapGroup": 1.0,
+	"mapPriority": 2.0,
+	"mapRule": [
+		{
+			"concept": "293074006",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF CYCLOSERINE ADVERSE REACTION CHOOSE T37.1X5? | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE | EPISODE OF CARE INFORMATION NEEDED | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT",
+	"mapTarget": "T37.1X5?"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897386f"
+	},
+	"conceptId": "472759003",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS I27.2",
+	"mapTarget": "I27.2"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973870"
+	},
+	"conceptId": "53597009",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS L56.2",
+	"mapTarget": "L56.2"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973871"
+	},
+	"conceptId": "269720009",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS T54.3X1? | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE | EPISODE OF CARE INFORMATION NEEDED | POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE",
+	"mapTarget": "T54.3X1?"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973872"
+	},
+	"conceptId": "1086851000119100",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS K06.8",
+	"mapTarget": "K06.8"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973873"
+	},
+	"conceptId": "473380002",
+	"mapGroup": 2.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS Q23.8",
+	"mapTarget": "Q23.8"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973874"
+	},
+	"conceptId": "164304001",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS R50.9",
+	"mapTarget": "R50.9"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973875"
+	},
+	"conceptId": "284961000119106",
+	"mapGroup": 2.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		{
+			"concept": "284971000119100",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF CHRONIC KIDNEY DISEASE STAGE 1 DUE TO BENIGN HYPERTENSION CHOOSE N18.1 | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT",
+	"mapTarget": "N18.1"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973876"
+	},
+	"conceptId": "365404006",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "MAP SOURCE CONCEPT CANNOT BE CLASSIFIED WITH AVAILABLE DATA",
+	"mapTarget": ""
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973877"
+	},
+	"conceptId": "276542009",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS P24.3",
+	"mapTarget": "P24.3"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973878"
+	},
+	"conceptId": "262616003",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS T19.8 | POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE",
+	"mapTarget": "T19.8"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973879"
+	},
+	"conceptId": "110082000",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS S02.61 | MAPPED FOLLOWING WHO GUIDANCE | POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE",
+	"mapTarget": "S02.61"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897387a"
+	},
+	"conceptId": "446156008",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS A49.8",
+	"mapTarget": "A49.8"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897387b"
+	},
+	"conceptId": "50581000",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS M31.0",
+	"mapTarget": "M31.0"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897387c"
+	},
+	"conceptId": "37776001",
+	"mapGroup": 3.0,
+	"mapPriority": 3.0,
+	"mapRule": [
+		{
+			"concept": "445518008",
+			"value": {
+				"op": "\u003c",
+				"number": "29.0",
+				"unit": "days"
+			}
+		}
+	],
+	"mapAdvice": "IF AGE AT ONSET OF CLINICAL FINDING BEFORE 29.0 DAYS CHOOSE P39.4 | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT",
+	"mapTarget": "P39.4"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897387d"
+	},
+	"conceptId": "262696004",
+	"mapGroup": 1.0,
+	"mapPriority": 5.0,
+	"mapRule": [
+		false
+	],
+	"mapAdvice": "ALWAYS T14.8XX? | EPISODE OF CARE INFORMATION NEEDED | POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE",
+	"mapTarget": "T14.8XX?"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897387e"
+	},
+	"conceptId": "762315004",
+	"mapGroup": 2.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS T45.1X5? | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE | EPISODE OF CARE INFORMATION NEEDED | POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE",
+	"mapTarget": "T45.1X5?"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897387f"
+	},
+	"conceptId": "408340004",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "MAP SOURCE CONCEPT CANNOT BE CLASSIFIED WITH AVAILABLE DATA",
+	"mapTarget": ""
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973880"
+	},
+	"conceptId": "24414006",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS N64.9",
+	"mapTarget": "N64.9"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973881"
+	},
+	"conceptId": "23957004",
+	"mapGroup": 1.0,
+	"mapPriority": 3.0,
+	"mapRule": [
+		{
+			"concept": "283131008",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF SUPERFICIAL TRAUMATIC BLISTER OF LOWER LIMB CHOOSE S80.829? | CONSIDER LATERALITY SPECIFICATION | EPISODE OF CARE INFORMATION NEEDED | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT | POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE",
+	"mapTarget": "S80.829?"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973882"
+	},
+	"conceptId": "32121007",
+	"mapGroup": 1.0,
+	"mapPriority": 2.0,
+	"mapRule": [
+		{
+			"concept": "93077001",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF CONGENITAL HYPERTROPHY OF TESTIS CHOOSE Q55.29 | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT",
+	"mapTarget": "Q55.29"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973883"
+	},
+	"conceptId": "36114005",
+	"mapGroup": 1.0,
+	"mapPriority": 5.0,
+	"mapRule": [
+		{
+			"concept": "248153007",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF MALE CHOOSE Q98.8 | MAP IS CONTEXT DEPENDENT FOR GENDER",
+	"mapTarget": "Q98.8"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973884"
+	},
+	"conceptId": "389089009",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS G93.1",
+	"mapTarget": "G93.1"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973885"
+	},
+	"conceptId": "126850006",
+	"mapGroup": 1.0,
+	"mapPriority": 5.0,
+	"mapRule": [
+		{
+			"concept": "109839004",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF OVERLAPPING MALIGNANT NEOPLASM OF RECTUM, ANUS AND ANAL CANAL CHOOSE C21.8 | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT",
+	"mapTarget": "C21.8"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973886"
+	},
+	"conceptId": "313000007",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS H35.0",
+	"mapTarget": "H35.0"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973887"
+	},
+	"conceptId": "248443002",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS K81.9",
+	"mapTarget": "K81.9"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973888"
+	},
+	"conceptId": "289747009",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "MAP SOURCE CONCEPT CANNOT BE CLASSIFIED WITH AVAILABLE DATA",
+	"mapTarget": ""
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973889"
+	},
+	"conceptId": "389271000",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS Q78.4",
+	"mapTarget": "Q78.4"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897388a"
+	},
+	"conceptId": "365300003",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "MAP SOURCE CONCEPT CANNOT BE CLASSIFIED WITH AVAILABLE DATA",
+	"mapTarget": ""
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897388b"
+	},
+	"conceptId": "440925005",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS B34.8",
+	"mapTarget": "B34.8"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897388c"
+	},
+	"conceptId": "283109000",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS S90.819? | CONSIDER LATERALITY SPECIFICATION | EPISODE OF CARE INFORMATION NEEDED | POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE",
+	"mapTarget": "S90.819?"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897388d"
+	},
+	"conceptId": "240216005",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		{
+			"concept": "202730006",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF THORACIC DISC PROLAPSE WITH MYELOPATHY CHOOSE M51.04 | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT",
+	"mapTarget": "M51.04"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897388e"
+	},
+	"conceptId": "294647003",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS Z88.7 | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE",
+	"mapTarget": "Z88.7"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f897388f"
+	},
+	"conceptId": "293971000119103",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		{
+			"concept": "293921000119104",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF COMPLEX REGIONAL PAIN SYNDROME TYPE I OF BILATERAL UPPER LIMBS CHOOSE G90.513 | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT",
+	"mapTarget": "G90.513"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973890"
+	},
+	"conceptId": "422126006",
+	"mapGroup": 1.0,
+	"mapPriority": 2.0,
+	"mapRule": [
+		{
+			"concept": "190331003",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF TYPE 2 DIABETES MELLITUS WITH HYPEROSMOLAR COMA CHOOSE E11.01 | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT | MAPPED WITH NCHS GUIDANCE",
+	"mapTarget": "E11.01"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973891"
+	},
+	"conceptId": "233933006",
+	"mapGroup": 2.0,
+	"mapPriority": 2.0,
+	"mapRule": [
+		{
+			"concept": "213152006",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF HEART-LUNG TRANSPLANT FAILURE AND REJECTION CHOOSE T86.31 | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT",
+	"mapTarget": "T86.31"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973892"
+	},
+	"conceptId": "249809005",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS M21.6X9 | CONSIDER LATERALITY SPECIFICATION",
+	"mapTarget": "M21.6X9"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973893"
+	},
+	"conceptId": "163532003",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS O80 | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE",
+	"mapTarget": "O80"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973894"
+	},
+	"conceptId": "262762001",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		{
+			"concept": "12279008",
+			"value": null
+		}
+	],
+	"mapAdvice": "IF OPEN WOUND OF COCHLEA WITHOUT COMPLICATION CHOOSE S01.309? | CONSIDER ADDITIONAL CODE TO IDENTIFY SPECIFIC CONDITION OR DISEASE | CONSIDER LATERALITY SPECIFICATION | EPISODE OF CARE INFORMATION NEEDED | MAP OF SOURCE CONCEPT IS CONTEXT DEPENDENT | POSSIBLE REQUIREMENT FOR AN EXTERNAL CAUSE CODE",
+	"mapTarget": "S01.309?"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973895"
+	},
+	"conceptId": "609470005",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS O06.8",
+	"mapTarget": "O06.8"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973896"
+	},
+	"conceptId": "289330005",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS P02.6 | POSSIBLE REQUIREMENT FOR ADDITIONAL CODE TO FULLY DESCRIBE DISEASE OR CONDITION",
+	"mapTarget": "P02.6"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973897"
+	},
+	"conceptId": "92258000",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS D31.6 | POSSIBLE REQUIREMENT FOR MORPHOLOGY CODE",
+	"mapTarget": "D31.6"
+},
+{
+	"_id": {
+		"$oid": "5c35d5f00cf4c715f8973898"
+	},
+	"conceptId": "217595004",
+	"mapGroup": 1.0,
+	"mapPriority": 1.0,
+	"mapRule": [
+		true
+	],
+	"mapAdvice": "ALWAYS W92.XXX? | EPISODE OF CARE INFORMATION NEEDED | THIS IS AN EXTERNAL CAUSE CODE FOR USE IN A SECONDARY POSITION",
+	"mapTarget": "W92.XXX?"
+}]
+

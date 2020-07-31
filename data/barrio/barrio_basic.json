@@ -1,0 +1,613 @@
+[{
+	"_id": {
+		"$oid": "57f3bb9169fe79a598e62821"
+	},
+	"nombre": "Centro",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546732"
+	},
+	"nombre": "14 De Octubre Y Copol",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546733"
+	},
+	"nombre": "Área Centro Este",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546734"
+	},
+	"nombre": "Alta Barda",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546735"
+	},
+	"nombre": "Bardas Soleadas",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546736"
+	},
+	"nombre": "Área Centro Sur",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546737"
+	},
+	"nombre": "Altos Del Limay",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546738"
+	},
+	"nombre": "Área Centro Oeste",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546739"
+	},
+	"nombre": "Belgrano",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554673a"
+	},
+	"nombre": "Bouquet Roldán",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554673b"
+	},
+	"nombre": "Confluencia Rural",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554673c"
+	},
+	"nombre": "Confluencia Urbano",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554673d"
+	},
+	"nombre": "Cuenca Xv",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554673e"
+	},
+	"nombre": "Cumelén",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554673f"
+	},
+	"nombre": "Ciudad Industrial Obispo Don Jaime De Nevares",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546740"
+	},
+	"nombre": "Don Bosco II",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546741"
+	},
+	"nombre": "Don Bosco III",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546742"
+	},
+	"nombre": "Esfuerzo",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546743"
+	},
+	"nombre": "Canal V",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546744"
+	},
+	"nombre": "Gran Neuquén Sur",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546745"
+	},
+	"nombre": "Gran Neuquén Norte",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546746"
+	},
+	"nombre": "Gregorio Álvarez",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546747"
+	},
+	"nombre": "Hibepa",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546748"
+	},
+	"nombre": "Huiliches",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546749"
+	},
+	"nombre": "Islas Malvinas",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554674a"
+	},
+	"nombre": "La Sirena",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554674b"
+	},
+	"nombre": "Colonia Nueva Esperanza",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554674c"
+	},
+	"nombre": "El Progreso",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554674d"
+	},
+	"nombre": "Militar",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554674e"
+	},
+	"nombre": "Nuevo",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554674f"
+	},
+	"nombre": "Provincias Unidas",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546750"
+	},
+	"nombre": "Melipal",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546751"
+	},
+	"nombre": "Limay",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546752"
+	},
+	"nombre": "Resto Ejido Municipal",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546753"
+	},
+	"nombre": "Río Grande",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546754"
+	},
+	"nombre": "San Lorenzo Norte",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546755"
+	},
+	"nombre": "Rincón De Emilio",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546756"
+	},
+	"nombre": "Mariano Moreno",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546757"
+	},
+	"nombre": "San Lorenzo Sur",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546758"
+	},
+	"nombre": "Unión De Mayo",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546759"
+	},
+	"nombre": "Valentina Norte Rural",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554675a"
+	},
+	"nombre": "Terrazas Del Neuquén",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554675b"
+	},
+	"nombre": "Santa Genoveva",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554675c"
+	},
+	"nombre": "Valentina Norte Urbano",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554675d"
+	},
+	"nombre": "Valentina Sur Rural",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554675e"
+	},
+	"nombre": "Valentina Sur Urbano",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae554675f"
+	},
+	"nombre": "Villa Ceferino",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546760"
+	},
+	"nombre": "Villa Farrell",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546761"
+	},
+	"nombre": "Sapere",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546762"
+	},
+	"nombre": "Villa Florencia",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+},
+{
+	"_id": {
+		"$oid": "58e7be5f51b1a72ae5546763"
+	},
+	"nombre": "Villa María",
+	"localidad": {
+		"_id": {
+			"$oid": "57f538a472325875a199a82d"
+		},
+		"nombre": "Neuquén"
+	}
+}]
+

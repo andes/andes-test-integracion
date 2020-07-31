@@ -1,0 +1,1049 @@
+[{
+	"_id": {
+		"$oid": "59e76172b7c39e57a13b38c5"
+	},
+	"nombre": "30643636",
+	"usuario": 30643636,
+	"apellido": "30643636",
+	"password": "f10e2821bbbea527ea02200352313bc059445190",
+	"organizaciones": [
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"auditoriaPacientes:*",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121b9",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"rup:tipoPrestacion:5b61d59968954f3e6ea84586",
+				"rup:tipoPrestacion:5a310d88764a0b2a04d6df83",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121cc",
+				"internacion:*",
+				"huds:visualizacionHuds",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"matriculaciones:*",
+				"tm:*",
+				"cda:*",
+				"reportes:*",
+				"descargas:*",
+				"solicitudes:*",
+				"espaciosFisicos:*"
+			],
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:editarEspacio",
+				"turnos:crearAgendas",
+				"turnos:clonarAgenda",
+				"turnos:reasignarTurnos",
+				"turnos:planificarAgenda:*",
+				"turnos:agenda:puedeEditarCarpeta",
+				"turnos:turnos:*",
+				"turnos:darTurnos:*",
+				"turnos:puntoInicio:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:5a26e113291f463c1b982d98",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"cda:get",
+				"cda:list",
+				"solicitudes:*",
+				"prestamos:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48dac"
+			},
+			"nombre": "HOSPITAL DR. HORACIO HELLER",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:puntoInicio:*",
+				"mpi:*",
+				"fa:*",
+				"log:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48bd8"
+			},
+			"nombre": "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5cac988bea327ba0f2da83e0",
+				"internacion:*",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"tm:*",
+				"cda:*",
+				"reportes:*",
+				"prestamos:*",
+				"turnosPrestaciones:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57f67d090166fa6aedb2f9fb"
+			},
+			"nombre": "HOSPITAL DE AREA CENTENARIO - DR. NATALIO BURD",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"cda:get",
+				"cda:list",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "5a5e3f7e0bd5677324737244"
+			},
+			"nombre": "CENTRO MÉDICO INTEGRAL",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"reportes:*",
+				"cda:get",
+				"cda:list",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48b62"
+			},
+			"nombre": "HOSPITAL ZONAL CHOS MALAL - DR GREGORIO ALVAREZ",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"reportes:*",
+				"solicitudes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48b77"
+			},
+			"nombre": "HOSPITAL ZONAL SAN MARTIN DE LOS ANDES - DR. RAMON CARRILLO",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"reportes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48db3"
+			},
+			"nombre": "CENTRO DE SALUD CHACRA 30",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5ad63b359fd75bb58ddafbad",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:5c5db4f404d803e6dbf11ef7",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121b8",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121cc",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121db",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"rup:tipoPrestacion:5ad63b359fd75bb58ddafbad",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121b8",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121cc",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121db",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"cda:get",
+				"cda:list",
+				"reportes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48b8b"
+			},
+			"nombre": "HOSPITAL DE AREA VILLA LA ANGOSTURA DR. OSCAR ARRAIZ",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121b9",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"log:*",
+				"usuarios:*",
+				"reportes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf039326e73143fb48f47"
+			},
+			"nombre": "PUESTO SANITARIO LOS HORNOS",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"log:*",
+				"usuarios:*",
+				"reportes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48af5"
+			},
+			"nombre": "CENTRO DE SALUD VALENTINA SUR",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"log:*",
+				"usuarios:*",
+				"reportes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c25"
+			},
+			"nombre": "CENTRO DE SALUD CONFLUENCIA",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"log:*",
+				"usuarios:*",
+				"reportes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c1e"
+			},
+			"nombre": "CENTRO DE SALUD MARIANO MORENO",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5ad63b359fd75bb58ddafbad",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"log:*",
+				"usuarios:*",
+				"cda:get",
+				"cda:list",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c09"
+			},
+			"nombre": "CENTRO DE SALUD PARQUE INDUSTRIAL",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"cda:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48f0b"
+			},
+			"nombre": "CENTRO DE SALUD LA COLONIA RURAL NUEVA ESPERANZA",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"log:*",
+				"usuarios:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c02"
+			},
+			"nombre": "CENTRO DE SALUD SAN LORENZO SUR",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"log:*",
+				"usuarios:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57f67a7ad86d9f64130a138d"
+			},
+			"nombre": "HOSPITAL DE AREA PLOTTIER",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"log:*",
+				"usuarios:*",
+				"cda:get",
+				"cda:list",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c33"
+			},
+			"nombre": "CENTRO DE SALUD SAN LORENZO NORTE",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"matriculaciones:*",
+				"tm:*",
+				"cda:*",
+				"reportes:*",
+				"solicitudes:*",
+				"cda:get",
+				"cda:list",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48df2"
+			},
+			"nombre": "CENTRO DE SALUD SAPERE",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"log:*",
+				"usuarios:*",
+				"cda:get",
+				"cda:list",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf12e326e73143fb4927d"
+			},
+			"nombre": "CASA DE SALUD DE LUNCEC",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5ad63b359fd75bb58ddafbad",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"log:*",
+				"usuarios:*",
+				"cda:get",
+				"cda:list",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48be6"
+			},
+			"nombre": "CENTRO DE SALUD VILLA FARREL",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"log:*",
+				"usuarios:*",
+				"cda:get",
+				"cda:list",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c17"
+			},
+			"nombre": "CENTRO DE SALUD VILLA MARIA",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"log:*",
+				"usuarios:*",
+				"cda:get",
+				"cda:list",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48b54"
+			},
+			"nombre": "HOSPITAL DE AREA BAJADA DEL AGRIO",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:5afd5de302d9285ac0c11fef",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"rup:tipoPrestacion:57f5069f69fe79a5980b5427",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c3",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121ea",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121c5",
+				"fa:*",
+				"log:*",
+				"cda:get",
+				"cda:list",
+				"reportes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c3a"
+			},
+			"nombre": "CENTRO DE SALUD PROGRESO",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"log:*",
+				"usuarios:*",
+				"matriculaciones:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48b24"
+			},
+			"nombre": "CENTRO DE SALUD VALENTINA NORTE",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"usuarios:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48b46"
+			},
+			"nombre": "CENTRO DE SALUD VILLA FLORENCIA",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c10"
+			},
+			"nombre": "CENTRO DE SALUD BOUQUET ROLDAN",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48b3f"
+			},
+			"nombre": "CENTRO DE SALUD DON BOSCO",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c6f"
+			},
+			"nombre": "CENTRO DE SALUD ALMAFUERTE",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"tm:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c4e"
+			},
+			"nombre": "CENTRO DE SALUD NUEVA ESPERANZA",
+			"perfiles": []
+		},
+		{
+			"permisos": [],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48bd8"
+			},
+			"nombre": "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"tm:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48d16"
+			},
+			"nombre": "CENTRO DE SALUD EL CHACAY",
+			"perfiles": []
+		},
+		{
+			"permisos": [],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48c4e"
+			},
+			"nombre": "CENTRO DE SALUD NUEVA ESPERANZA",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5ad63b359fd75bb58ddafbad",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"fa:*",
+				"log:*",
+				"tm:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48d85"
+			},
+			"nombre": "CENTRO DE SALUD BARRIO LA ESPERANZA",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"fa:*",
+				"log:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48e1b"
+			},
+			"nombre": "CENTRO DE SALUD LOS HORNOS",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"fa:*",
+				"log:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf039326e73143fb48f41"
+			},
+			"nombre": "CENTRO DE SALUD NUEVA ESPAÑA",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"mpi:*",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"matriculaciones:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "59380153db8e90fe4602ec02"
+			},
+			"nombre": "SUBSECRETARIA DE SALUD",
+			"perfiles": []
+		},
+		{
+			"permisos": [],
+			"_id": {
+				"$oid": "59380153db8e90fe4602ec02"
+			},
+			"nombre": "SUBSECRETARIA DE SALUD",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121b9",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"rup:tipoPrestacion:5ae1b4339fd75bb58df152b0",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121b9",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"fa:*",
+				"log:*",
+				"tm:*",
+				"reportes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48d1d"
+			},
+			"nombre": "CENTRO DE SALUD UNION",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"fa:*",
+				"log:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48e14"
+			},
+			"nombre": "CENTRO DE SALUD SOLDADO AGUILA",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5ad63b359fd75bb58ddafbad",
+				"rup:tipoPrestacion:5b06f2b7746b16c52af75eb2",
+				"fa:*",
+				"log:*",
+				"cda:*",
+				"reportes:*",
+				"solicitudes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "5bae6b7b9677f95a425d9ee8"
+			},
+			"nombre": "HOSPITAL AÑELO",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121b8",
+				"fa:*",
+				"log:*",
+				"cda:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48ca3"
+			},
+			"nombre": "CENTRO DE SALUD LOS AROMOS",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:planificarAgenda:prestacion:*",
+				"turnos:turnos:*",
+				"turnos:darTurnos:*",
+				"turnos:puntoInicio:*",
+				"fa:*",
+				"log:*",
+				"solicitudes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf037326e73143fb48ba7"
+			},
+			"nombre": "HOSPITAL DE AREA LAS OVEJAS",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5b60aa0fe4d8f5c31ef19d74",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48e22"
+			},
+			"nombre": "CENTRO DE SALUD LOS ALAMOS",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"fa:*",
+				"usuarios:*",
+				"tm:*",
+				"cda:*",
+				"reportes:*",
+				"huds:visualizacionHuds"
+			],
+			"_id": {
+				"$oid": "57fcf038326e73143fb48cd7"
+			},
+			"nombre": "HOSPITAL DE AREA LAS COLORADAS",
+			"perfiles": []
+		}
+	],
+	"__v": 91,
+	"lastLogin": {
+		"$date": "2020-01-17T11:43:14.927Z"
+	},
+	"documento": "30643636"
+},
+{
+	"_id": {
+		"$oid": "5bc0a1d17a2da57a9f6795ea"
+	},
+	"nombre": "38906735",
+	"usuario": 38906735,
+	"apellido": "38906735",
+	"password": "f10e2821bbbea527ea02200352313bc059445190",
+	"organizaciones": [
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121b8",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"rup:tipoPrestacion:5951071fa784f4e1a8e2afe2",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"rup:tipoPrestacion:5951071fa784f4e1a8e2afe2",
+				"fa:*",
+				"log:*",
+				"usuarios:set",
+				"usuarios:get",
+				"usuarios:ldap",
+				"usuarios:post",
+				"usuarios:put",
+				"matriculaciones:profesionales:getProfesional",
+				"matriculaciones:profesionales:getProfesionalFoto",
+				"matriculaciones:profesionales:postProfesional",
+				"matriculaciones:profesionales:putProfesional",
+				"matriculaciones:turnos:*",
+				"matriculaciones:agenda:postAgenda",
+				"matriculaciones:agenda:putAgenda",
+				"matriculaciones:supervisor:aprobar",
+				"tm:especialidad:postEspecialidad",
+				"tm:especialidad:putEspecialidad",
+				"tm:especialidad:deleteEspecialidad",
+				"cda:*",
+				"huds:visualizacionHuds",
+				"monitoreo:*"
+			],
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"usuarios:set",
+				"usuarios:get",
+				"usuarios:ldap",
+				"usuarios:post",
+				"usuarios:put",
+				"turnos:*",
+				"mpi:paciente:elasticSearch",
+				"mpi:get:simplequery,multimatch,suggest",
+				"mpi:parentesco:get",
+				"mpi:paciente:getbyId",
+				"mpi:get:byId",
+				"mpi:post:mpi",
+				"mpi:post:andes",
+				"mpi:put:mpi:byId",
+				"mpi:put:andes:byId",
+				"mpi:patch:andes:byId",
+				"mpi:delete:andes:byId",
+				"mpi:delete:mpi:byId",
+				"mpi:paciente:dashboard",
+				"mpi:paciente:patchAndes",
+				"mpi:editarPaciente",
+				"mpi:nuevoPaciente",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:5951071fa784f4e1a8e2afe2",
+				"log:post",
+				"log:get",
+				"matriculaciones:profesionales:getProfesional",
+				"matriculaciones:profesionales:getProfesionalFirma",
+				"matriculaciones:profesionales:getProfesionalFoto",
+				"matriculaciones:supervisor:aprobar",
+				"huds:visualizacionHuds",
+				"monitoreo:*"
+			],
+			"_id": {
+				"$oid": "57f67a7ad86d9f64130a138d"
+			},
+			"nombre": "HOSPITAL DE AREA PLOTTIER",
+			"perfiles": []
+		},
+		{
+			"permisos": [
+				"turnos:editarEspacio",
+				"turnos:crearAgendas",
+				"turnos:clonarAgenda",
+				"turnos:reasignarTurnos",
+				"turnos:planificarAgenda:prestacion:5951051aa784f4e1a8e2afe1",
+				"turnos:planificarAgenda:prestacion:598ca8375adc68e2a0c121bc",
+				"turnos:planificarAgenda:prestacion:5951071fa784f4e1a8e2afe2",
+				"turnos:planificarAgenda:prestacion:57f5060269fe79a598f41225",
+				"turnos:agenda:puedeEditar",
+				"turnos:agenda:puedeSuspender",
+				"turnos:agenda:puedeHabilitar",
+				"turnos:agenda:puedePublicar",
+				"turnos:agenda:puedePausar",
+				"turnos:agenda:puedeReanudar",
+				"turnos:agenda:puedeClonar",
+				"turnos:agenda:puedeDarSobreturno",
+				"turnos:agenda:puedeImprimir",
+				"turnos:agenda:puedeReasignar",
+				"turnos:agenda:puedeEditarCarpeta",
+				"turnos:darTurnos:prestacion:5951051aa784f4e1a8e2afe1",
+				"turnos:darTurnos:prestacion:598ca8375adc68e2a0c121bc",
+				"turnos:darTurnos:prestacion:5951071fa784f4e1a8e2afe2",
+				"turnos:darTurnos:prestacion:57f5060269fe79a598f41225",
+				"turnos:darTurnos:prestacion:57f5069d69fe79a5980b072f",
+				"turnos:darTurnos:prestacion:598ca8375adc68e2a0c121bc",
+				"turnos:darTurnos:delDia",
+				"turnos:darTurnos:paraProfesional",
+				"turnos:darTurnos:programados",
+				"mpi:nuevoPaciente",
+				"mpi:editarPaciente",
+				"mpi:bloque:get",
+				"mpi:matching:get",
+				"mpi:matching:patch",
+				"mpi:matching:put",
+				"mpi:paciente:dashboard",
+				"mpi:paciente:getbyId",
+				"mpi:paciente:elasticSearch",
+				"mpi:paciente:putMpi",
+				"mpi:paciente:deleteMpi",
+				"mpi:paciente:postAndes",
+				"mpi:paciente:putAndes",
+				"mpi:paciente:deleteAndes",
+				"mpi:paciente:patchAndes",
+				"mpi:paciente:parentesco",
+				"rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
+				"rup:tipoPrestacion:5951071fa784f4e1a8e2afe2",
+				"rup:tipoPrestacion:57f5069d69fe79a5980b072f",
+				"rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
+				"log:post",
+				"log:get",
+				"usuarios:set",
+				"usuarios:get",
+				"usuarios:ldap",
+				"usuarios:post",
+				"usuarios:put",
+				"matriculaciones:profesionales:getProfesional",
+				"matriculaciones:profesionales:getProfesionalFirma",
+				"matriculaciones:profesionales:getProfesionalFoto",
+				"matriculaciones:profesionales:postProfesional",
+				"matriculaciones:profesionales:putProfesional",
+				"matriculaciones:turnos:*",
+				"matriculaciones:turnos:getTurno",
+				"tm:especialidad:postEspecialidad",
+				"tm:especialidad:putEspecialidad",
+				"tm:especialidad:deleteEspecialidad",
+				"tm:organizacion:postOrganizacion",
+				"tm:organizacion:putOrganizacion",
+				"tm:organizacion:deleteOrganizacion",
+				"matriculaciones:agenda:putAgenda",
+				"matriculaciones:agenda:postAgenda",
+				"matriculaciones:supervisor:aprobar",
+				"huds:visualizacionHuds",
+				"monitoreo:*"
+			],
+			"_id": {
+				"$oid": "5a5e3f7e0bd5677324737244"
+			},
+			"nombre": "CENTRO MÉDICO INTEGRAL",
+			"perfiles": []
+		}
+	],
+	"__v": 16,
+	"documento": "38906735",
+	"lastLogin": {
+		"$date": "2020-07-29T14:25:11.858Z"
+	}
+},
+{
+	"_id": {
+		"$oid": "5bc721a6c2d8a64ab4c60ad5"
+	},
+	"usuario": 34934522,
+	"nombre": "MARIANO ANDRES",
+	"apellido": "BOTTA",
+	"password": "b3430a15f76504e6ddd305f848fe5b3e1a1843ef",
+	"organizaciones": [
+		{
+			"permisos": [
+				"turnos:*",
+				"mpi:*",
+				"rup:tipoPrestacion:5a26e113291f463c1b982d98",
+				"huds:visualizacionHuds",
+				"fa:*",
+				"log:*",
+				"usuarios:*",
+				"matriculaciones:*",
+				"tm:*",
+				"cda:*",
+				"reportes:*",
+				"descargas:*",
+				"solicitudes:*",
+				"prestamos:*"
+			],
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+			"perfiles": []
+		}
+	],
+	"__v": 1,
+	"documento": "34934522",
+	"lastLogin": {
+		"$date": "2020-07-29T14:24:31.721Z"
+	}
+},
+{
+	"_id": {
+		"$oid": "5ef208980d47ea5398480bf6"
+	},
+	"usuario": 33650509,
+	"nombre": "USUARIO SIN",
+	"apellido": "ORGANIZACIONES",
+	"password": "b3430a15f76504e6ddd305f848fe5b3e1a1843ef",
+	"organizaciones": [],
+	"__v": 1,
+	"documento": "33650509"
+}]
+

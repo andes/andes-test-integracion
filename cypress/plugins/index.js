@@ -83,6 +83,19 @@ module.exports = (on, config) => {
         },
         'database:create:modulo': (params = {}) => {
             return createModulo(mongoUri, params);
+        },
+        'database:initial': () => {
+            const { Seeder } = require('mongo-seeding');
+            const config = {
+                database: mongoUri,
+                dropDatabase: true,
+            };
+            const seeder = new Seeder(config);
+            const path = require('path');
+            const collections = seeder.readCollectionsFromPath(path.resolve("./data"));
+
+            return seeder.import(collections).then(() => true);
+
         }
     });
 

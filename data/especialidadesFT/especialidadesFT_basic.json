@@ -1,0 +1,91 @@
+[{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3ac"
+	},
+	"descripcion": "ANESTESIA"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3ad"
+	},
+	"descripcion": "Adicciones"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3ae"
+	},
+	"descripcion": "CARDIO"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3af"
+	},
+	"descripcion": "CARDIO CLINICO"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3b0"
+	},
+	"descripcion": "CIRUGIA"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3b1"
+	},
+	"descripcion": "CLINICA"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3b2"
+	},
+	"descripcion": "CM"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3b3"
+	},
+	"descripcion": "CX"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3b4"
+	},
+	"descripcion": "CX PLASTICA"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3b5"
+	},
+	"descripcion": "Cardio HPN"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3b6"
+	},
+	"descripcion": "Cardio Pediatrica"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3df"
+	},
+	"descripcion": "UTI"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3e0"
+	},
+	"descripcion": "UTIP"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3e1"
+	},
+	"descripcion": "UTIP pediatrica"
+},
+{
+	"_id": {
+		"$oid": "5ab10ffe5823e4cc712df3e2"
+	},
+	"descripcion": "equipo de quemados"
+}]
+

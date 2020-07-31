@@ -1,0 +1,1486 @@
+[{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f59c"
+	},
+	"nombre": "Seguridad y Eficacia de Medicamentos (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 158
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f59d"
+	},
+	"nombre": "Radiología (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 157
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f59e"
+	},
+	"nombre": "Enfermería Pediátrica (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 156
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f59f"
+	},
+	"nombre": "Citogenética (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 155
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5a0"
+	},
+	"nombre": "Bioquímica y Nutrición (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 154
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5a1"
+	},
+	"nombre": "Bioquímica Toxicológica (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 153
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5a2"
+	},
+	"nombre": "Cirugía Oncológica (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 152
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5a3"
+	},
+	"nombre": "Ingeniería Clinica (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 151
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5a4"
+	},
+	"nombre": "Trabajo Social en Salud (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 150
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5a5"
+	},
+	"nombre": "Neurocirugía Pediátrica (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 149
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5a6"
+	},
+	"nombre": "Psicología Clínica y comunitaria (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": "148"
+	},
+	"activo": true
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5a7"
+	},
+	"nombre": "Salud Pública Veterinaria (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 147
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5a8"
+	},
+	"nombre": "Kinesiologia en Respiratorio de Adultos (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 146
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5a9"
+	},
+	"nombre": "Psicología comunitaria (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 145
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5aa"
+	},
+	"nombre": "Quemados pediátrico (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 159
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ab"
+	},
+	"nombre": "Enfermería Oncologica (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 144
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ac"
+	},
+	"nombre": "Enfermería en control de Infecciones (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 143
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ad"
+	},
+	"nombre": "Medicina Paliativa",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 162
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ae"
+	},
+	"nombre": "Nutrición y Alimentación Clinica del Adulto (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 142
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5af"
+	},
+	"nombre": "Nutrición y Alimentación Clinica Infanto juven (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 141
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5b0"
+	},
+	"nombre": "Hemato-oncología Pediátrica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 161
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5b1"
+	},
+	"nombre": "Enfermería Comunitaria (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 140
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5b2"
+	},
+	"nombre": "Emergentología Pediátrica (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 139
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5b3"
+	},
+	"nombre": "Enfermería en salud familiar y comunitaria (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 138
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5b4"
+	},
+	"nombre": "Enfermería en Neonatología (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 137
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5b5"
+	},
+	"nombre": "Enfermería UTI Adultos (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 136
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5b6"
+	},
+	"nombre": "Enfermeria general y familiar (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 132
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5b7"
+	},
+	"nombre": "Control de Calidad de Medicamentos (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 131
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5b8"
+	},
+	"nombre": "Inocuidad y seguridad de Alimentos (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 130
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5b9"
+	},
+	"nombre": "Microbiología (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 129
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ba"
+	},
+	"nombre": "Salud Mental (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 128
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5bb"
+	},
+	"nombre": "Enfermería UTI Neonatal (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 134
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5bc"
+	},
+	"nombre": "Enfermería en cuidados críticos (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 127
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5bd"
+	},
+	"nombre": "Enfermería Clinico Quirúrgico (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 135
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5be"
+	},
+	"nombre": "Enfermeria UTI Pediatrica (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 133
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5bf"
+	},
+	"nombre": "Terapia ocupacional (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 126
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5c0"
+	},
+	"nombre": "Psicología (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 122
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5c1"
+	},
+	"nombre": "Odontología (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 121
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5c2"
+	},
+	"nombre": "Enfermería (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 123
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5c3"
+	},
+	"nombre": "Enfermeria en Rehabilitación",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 106
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5c4"
+	},
+	"nombre": "Bioquímica industrial",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 104
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5c5"
+	},
+	"nombre": "Gestión de calidad en el laboratorio",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 105
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5c6"
+	},
+	"nombre": "Nutrición en bioquímica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 103
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5c7"
+	},
+	"nombre": "Bioquímica del medio ambiente",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 102
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5c8"
+	},
+	"nombre": "Biotecnología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 101
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5c9"
+	},
+	"nombre": "Bromatología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 100
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ca"
+	},
+	"nombre": "Toxicología legal y forense",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 99
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5cb"
+	},
+	"nombre": "Biofarmacia",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 97
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5cc"
+	},
+	"nombre": "Bioquímica clínica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 98
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5cd"
+	},
+	"nombre": "Nutrición y análisis de los alimentos",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 96
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ce"
+	},
+	"nombre": "Farmacia sanitaria y legal",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 95
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5cf"
+	},
+	"nombre": "Farmacia industrial",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 94
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5d0"
+	},
+	"nombre": "Esterilización",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 93
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5d1"
+	},
+	"nombre": "Farmacia comunitaria",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 92
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5d2"
+	},
+	"nombre": "Farmacia hospitalaria",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 91
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5d3"
+	},
+	"nombre": "Gestión de Servicios de Salud",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 90
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5d4"
+	},
+	"nombre": "Kinesiología (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 125
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5d5"
+	},
+	"nombre": "Epidemiología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 88
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5d6"
+	},
+	"nombre": "Auditoría de Servicios de Salud",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 89
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5d7"
+	},
+	"nombre": "Fonoaudiología (R)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 124
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5d8"
+	},
+	"nombre": "Alergia e inmunología Pediátrica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 85
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5d9"
+	},
+	"nombre": "Cirugía Cardiovascular Pediátrica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 86
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5da"
+	},
+	"nombre": "Hepatología Pediátrica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 84
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5db"
+	},
+	"nombre": "Ortopedia y Traumatología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 82
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5dc"
+	},
+	"nombre": "Hepatología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 83
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5dd"
+	},
+	"nombre": "Electrofisiología cardíaca",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 81
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5de"
+	},
+	"nombre": "Enfermería en Cuidados Paliativos",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 80
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5df"
+	},
+	"nombre": "Enfermería en la Atención del Paciente Crítico: Neonatal, Pediátrico y Adulto",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 79
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5e0"
+	},
+	"nombre": "Salud Pública",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 87
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5e1"
+	},
+	"nombre": "Enfermería en Salud Mental y Psiquiatría",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 78
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5e2"
+	},
+	"nombre": "Enfermería en Salud Materno Infantil y del Adolescente",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 77
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5e3"
+	},
+	"nombre": "Especialidad en Clínica Estomatológica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 73
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5e4"
+	},
+	"nombre": "Especialidad en Odontología Legal",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 72
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5e5"
+	},
+	"nombre": "Especialidad en Prótesis Dentobucomaxilar",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 74
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5e6"
+	},
+	"nombre": "Especialización en Diagnóstico por Imágenes Bucomaxilofacial",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 71
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5e7"
+	},
+	"nombre": "Especialidad de Odontopediatría",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 69
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5e8"
+	},
+	"nombre": "Especialidad de Ortodoncia y Ortopedia Maxilar",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 70
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5e9"
+	},
+	"nombre": "Especialidad de Periodoncia",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 68
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ea"
+	},
+	"nombre": "Especialidad de Endodoncia",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 67
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5eb"
+	},
+	"nombre": "Especialidad en Cirugía y Traumatología Bucomaxilofacial",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 66
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ec"
+	},
+	"nombre": "Especialidad en Anatomía Patológica Bucalmaxilofacial",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 65
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ed"
+	},
+	"nombre": "Emergentología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 64
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ee"
+	},
+	"nombre": "Toxicología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 62
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ef"
+	},
+	"nombre": "Radioterapia o Terapia Radiante",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 61
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5f0"
+	},
+	"nombre": "Dermatología Pediátrica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 63
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5f1"
+	},
+	"nombre": "Medicina Nuclear",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 60
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5f2"
+	},
+	"nombre": "Enfermería en Salud del Anciano",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 76
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5f3"
+	},
+	"nombre": "Enfermería en Salud del Adulto",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 75
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5f4"
+	},
+	"nombre": "Medicina del Deporte",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 57
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5f5"
+	},
+	"nombre": "Diagnóstico por Imágenes",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 55
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5f6"
+	},
+	"nombre": "Hemoterapia e Inmunohematología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 56
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5f7"
+	},
+	"nombre": "Anestesiología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 54
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5f8"
+	},
+	"nombre": "Psiquiatría Infanto Juvenil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 52
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5f9"
+	},
+	"nombre": "Anatomía Patológica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 53
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5fa"
+	},
+	"nombre": "Medicina Legal",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 59
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5fb"
+	},
+	"nombre": "Medicina del Trabajo",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 58
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5fc"
+	},
+	"nombre": "Reumatología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 49
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5fd"
+	},
+	"nombre": "Psiquiatría",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 51
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5fe"
+	},
+	"nombre": "Terapia Intensiva Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 50
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f5ff"
+	},
+	"nombre": "Neurología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 47
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f600"
+	},
+	"nombre": "Oncología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 48
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f601"
+	},
+	"nombre": "Neumonología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 46
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f602"
+	},
+	"nombre": "Neonatología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 45
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f603"
+	},
+	"nombre": "Nefrología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 44
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f604"
+	},
+	"nombre": "Infectología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 43
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f605"
+	},
+	"nombre": "Cardiología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 39
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f606"
+	},
+	"nombre": "Pediatría",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 38
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f607"
+	},
+	"nombre": "Gastroenterología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 41
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f608"
+	},
+	"nombre": "Urología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 37
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f609"
+	},
+	"nombre": "Tocoginecología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 36
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f60a"
+	},
+	"nombre": "Otorrinolaringología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 35
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f60b"
+	},
+	"nombre": "Ortopedia y Traumatología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 34
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f60c"
+	},
+	"nombre": "Hematología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 42
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f60d"
+	},
+	"nombre": "Endocrinología Infantil",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 40
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f60e"
+	},
+	"nombre": "Ginecología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 30
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f60f"
+	},
+	"nombre": "Obstetricia",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 32
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f610"
+	},
+	"nombre": "Coloproctología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 29
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f611"
+	},
+	"nombre": "Cirugía Vascular Periférica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 28
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f612"
+	},
+	"nombre": "Cirugía Plástica y Reparadora",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 27
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f613"
+	},
+	"nombre": "Cirugía infantil (Cirugía Pediátrica)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 26
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f614"
+	},
+	"nombre": "Cirugía de Tórax (Cirugía Torácica)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 25
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f615"
+	},
+	"nombre": "Oftalmología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 33
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f616"
+	},
+	"nombre": "Cirugía General",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 22
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f617"
+	},
+	"nombre": "Cirugía Cardiovascular",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 23
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f618"
+	},
+	"nombre": "Terapia Intensiva",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 21
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f619"
+	},
+	"nombre": "Reumatología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 20
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f61a"
+	},
+	"nombre": "Oncología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 19
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f61b"
+	},
+	"nombre": "Nutrición",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 18
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f61c"
+	},
+	"nombre": "Neurología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 17
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f61d"
+	},
+	"nombre": "Neurocirugía",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 31
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f61e"
+	},
+	"nombre": "Infectología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 14
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f61f"
+	},
+	"nombre": "Hematología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 13
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f620"
+	},
+	"nombre": "Geriatría",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 12
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f621"
+	},
+	"nombre": "Genética Médica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 11
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f622"
+	},
+	"nombre": "Gastroenterología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 10
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f623"
+	},
+	"nombre": "Fisiatría (Medicina Física y Rehabilitación)",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 9
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f624"
+	},
+	"nombre": "Cirugía de Cabeza y Cuello",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 24
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f625"
+	},
+	"nombre": "Farmacología Clínica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 8
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f626"
+	},
+	"nombre": "Neumonología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 16
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f627"
+	},
+	"nombre": "Dermatología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 6
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f628"
+	},
+	"nombre": "Endocrinología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 7
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f629"
+	},
+	"nombre": "Angiología General y Hemodinamia",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 5
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f62a"
+	},
+	"nombre": "Cardiología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 4
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f62b"
+	},
+	"nombre": "Nefrología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 15
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f62c"
+	},
+	"nombre": "Alergia e Inmunología",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 3
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f62d"
+	},
+	"nombre": "Clínica Médica",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 1
+	}
+},
+{
+	"_id": {
+		"$oid": "5887705e69408d715ae4f62e"
+	},
+	"nombre": "Medicina General y/o Medicina de Familia",
+	"habilitado": true,
+	"codigo": {
+		"sisa": 2
+	}
+},
+{
+	"_id": {
+		"$oid": "5899c2e04490d828d842c20d"
+	},
+	"nombre": "MEDICINA GENERAL",
+	"descripcion": "MEDICINA GENERAL",
+	"disciplina": "Medicina General",
+	"complejidad": 2,
+	"activo": true,
+	"codigo": {
+		"sisa": "1234"
+	},
+	"__v": 0
+}]
+

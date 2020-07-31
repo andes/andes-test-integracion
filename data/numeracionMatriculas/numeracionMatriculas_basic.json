@@ -1,0 +1,342 @@
+[{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0920"
+	},
+	"profesion": {
+		"codigo": 196,
+		"nombre": "AUX. DE ANESTESIA"
+	},
+	"proximoNumero": 6,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0921"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb4affab9d8da77fd538900"
+		},
+		"codigo": 183,
+		"nombre": "AUX. DE ENFERMERIA"
+	},
+	"proximoNumero": 3544,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0922"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bc9cadae62d5b17c71291ab"
+		},
+		"codigo": 85,
+		"nombre": "TEC. EN LABORATORIO"
+	},
+	"proximoNumero": 436,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0923"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb4baa92bb2237640c3ba58"
+		},
+		"codigo": 27,
+		"nombre": "BIOQUIMICO"
+	},
+	"proximoNumero": 820,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0924"
+	},
+	"profesion": {
+		"codigo": 110,
+		"nombre": "TEC. EN CITOLOGIA"
+	},
+	"proximoNumero": 4,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0925"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb378b1b9d8da77fd3fe98e"
+		},
+		"codigo": 62,
+		"nombre": "ENFERMERIA PROF."
+	},
+	"proximoNumero": 4768,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0926"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb36525dbeaa659fead5498"
+		},
+		"codigo": 4,
+		"nombre": "FARMACEUTICO"
+	},
+	"proximoNumero": 867,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0927"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bbdfa0bf3b21d0c48e2f5b8"
+		},
+		"codigo": 74,
+		"nombre": "TEC. EN HEMOTERAPIA"
+	},
+	"proximoNumero": 163,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0928"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb4d2f5ae3dd93dc266d507"
+		},
+		"codigo": 68,
+		"nombre": "INSTRUM. QUIRÚRGICO"
+	},
+	"proximoNumero": 614,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0929"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb35524a2522f49d57f924a"
+		},
+		"codigo": 3,
+		"nombre": "LIC. EN ENFERMERIA"
+	},
+	"proximoNumero": 1680,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b092a"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb4ec52f754a763a23293ad"
+		},
+		"codigo": 18,
+		"nombre": "FONOAUDIOLOGO"
+	},
+	"proximoNumero": 372,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b092b"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb36265b1f2865bc6c8417c"
+		},
+		"codigo": 9,
+		"nombre": "KINESIOLOGO"
+	},
+	"proximoNumero": 952,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b092c"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb4cf2945a341772c7c58c2"
+		},
+		"codigo": 20,
+		"nombre": "NUTRICIONISTA"
+	},
+	"proximoNumero": 401,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b092d"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb369d3ff329f6cff646939"
+		},
+		"codigo": 1,
+		"nombre": "MEDICO"
+	},
+	"proximoNumero": 7352,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b092e"
+	},
+	"profesion": {
+		"codigo": 16,
+		"nombre": "MUSICOTERAPEUTA"
+	},
+	"proximoNumero": 54,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b092f"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5be586416a222926531f42f3"
+		},
+		"codigo": 23,
+		"nombre": "OBSTETRICO"
+	},
+	"proximoNumero": 251,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0930"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb3609f861ec867409098ad"
+		},
+		"codigo": 2,
+		"nombre": "ODONTOLOGO"
+	},
+	"proximoNumero": 1784,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0931"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5c48601ad609810d1969a69c"
+		},
+		"codigo": 119,
+		"nombre": "TEC. PROT. Y ORTESIS"
+	},
+	"proximoNumero": 28,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0932"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb795dc02f5473b2921a099"
+		},
+		"codigo": 122,
+		"nombre": "TEC. OPTICO"
+	},
+	"proximoNumero": 208,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0933"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5be9723610e98e53d9c0dfdb"
+		},
+		"codigo": 116,
+		"nombre": "MECANICO DENTAL"
+	},
+	"proximoNumero": 140,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0934"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb6119ba748d2795e6161c9"
+		},
+		"codigo": 7,
+		"nombre": "PSICOPEDAGOGO"
+	},
+	"proximoNumero": 338,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0935"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5c0146bee009da7a45fb6103"
+		},
+		"codigo": 128,
+		"nombre": "PODOLOGO"
+	},
+	"proximoNumero": 136,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0936"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bb4e2214127ff18075fa03c"
+		},
+		"codigo": 95,
+		"nombre": "TEC. EN RADIOLOGIA"
+	},
+	"proximoNumero": 930,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0937"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5bd081110bb42c2e5ba3b16d"
+		},
+		"codigo": 13,
+		"nombre": "TERAP. OCUPACIONAL"
+	},
+	"proximoNumero": 124,
+	"especialidad": null
+},
+{
+	"_id": {
+		"$oid": "5bae687a3748f13cb03b0938"
+	},
+	"profesion": {
+		"_id": {
+			"$oid": "5be042fc8215197a00f3b88f"
+		},
+		"codigo": 220,
+		"nombre": "AG. DE PROP. MEDICA"
+	},
+	"proximoNumero": 468,
+	"especialidad": null
+}]
+

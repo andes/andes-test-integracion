@@ -1,0 +1,364 @@
+[{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de33"
+	},
+	"codigo": 220,
+	"tipoDeFormacion": "Auxiliarato",
+	"nombre": "Ag. de prop. médica",
+	"profesionRef": "Agente de propaganda médica",
+	"habilitado": 1,
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 131,
+	"nomenclador": "VM"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de34"
+	},
+	"codigo": 196,
+	"tipoDeFormacion": "Auxiliarato",
+	"nombre": "Aux. de anestesia",
+	"profesionRef": "Auxiliar de Anestesia",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 139,
+	"nomenclador": "AA"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de35"
+	},
+	"codigo": 183,
+	"tipoDeFormacion": "Auxiliarato",
+	"nombre": "Aux. de enfermería",
+	"profesionRef": "Auxiliar en enfermería",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 32,
+	"nomenclador": "AE"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de36"
+	},
+	"codigo": 27,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Bioquímico",
+	"profesionRef": "Bioquímico",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 8,
+	"nomenclador": "BQ"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de37"
+	},
+	"codigo": 4,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Farmacéutico",
+	"profesionRef": "Farmacéutico",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 38,
+	"nomenclador": "FM"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de38"
+	},
+	"codigo": 62,
+	"tipoDeFormacion": "Tecnicatura",
+	"nombre": "Enfermero",
+	"profesionRef": "Enfermero",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 15,
+	"nomenclador": "EF"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de39"
+	},
+	"codigo": 18,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Fonoaudiólogo",
+	"profesionRef": "Fonoaudiólogo",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 5,
+	"nomenclador": "LF"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de3a"
+	},
+	"codigo": 68,
+	"tipoDeFormacion": "Tecnicatura",
+	"nombre": "Instrum. quirúrgico",
+	"profesionRef": "Instrumentador quirúrgico",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 17,
+	"nomenclador": "IQ"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de3b"
+	},
+	"codigo": 9,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Kinesiólogo",
+	"profesionRef": "Kinesiólogo",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 3,
+	"nomenclador": "LK"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de3c"
+	},
+	"codigo": 3,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Lic. en enfermería",
+	"profesionRef": "Licenciado en enfermería",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 37,
+	"nomenclador": "LE"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de3d"
+	},
+	"codigo": 1,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Médico",
+	"profesionRef": "Médico",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 35,
+	"nomenclador": "MD"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de3e"
+	},
+	"codigo": 20,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Nutricionista",
+	"profesionRef": "Nutricionista",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 6,
+	"nomenclador": "LN"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de3f"
+	},
+	"codigo": 23,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Obstétrico",
+	"profesionRef": "Lic. Obstetricia",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 7,
+	"nomenclador": "OA"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de40"
+	},
+	"codigo": 2,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Odontólogo",
+	"profesionRef": "Odontólogo",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 36,
+	"nomenclador": "OD"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de41"
+	},
+	"codigo": 128,
+	"tipoDeFormacion": "Tecnicatura",
+	"nombre": "Podólogo",
+	"profesionRef": "Podólogo",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 28,
+	"nomenclador": "PO"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de42"
+	},
+	"codigo": 7,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Psicopedagogo",
+	"profesionRef": "Psicopedagogo",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 2,
+	"nomenclador": "PG"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de43"
+	},
+	"codigo": 116,
+	"tipoDeFormacion": "Tecnicatura",
+	"nombre": "Mecánico dental",
+	"profesionRef": "Técnico en prótesis dental",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 25,
+	"nomenclador": "PD"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de44"
+	},
+	"codigo": 16,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Lic. en musicoterápia",
+	"profesionRef": "Musicoterapeuta",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 40,
+	"nomenclador": "MT"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de45"
+	},
+	"codigo": 5,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Psicólogo",
+	"profesionRef": "Psicólogo",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"nomenclador": ""
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de46"
+	},
+	"codigo": 13,
+	"tipoDeFormacion": "Grado Universitario",
+	"nombre": "Terap. ocupacional",
+	"profesionRef": "Terapista ocupacional",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 4,
+	"nomenclador": "TO"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de47"
+	},
+	"codigo": 85,
+	"tipoDeFormacion": "Tecnicatura",
+	"nombre": "Téc. en laboratorio",
+	"profesionRef": "Técnico de laboratorio",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 21,
+	"nomenclador": "BO"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de48"
+	},
+	"codigo": 119,
+	"tipoDeFormacion": "Tecnicatura",
+	"nombre": "Téc. en prótesis y órtesis",
+	"profesionRef": "Técnico en prótesis y órtesis",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 26,
+	"nomenclador": "OP"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de49"
+	},
+	"codigo": 95,
+	"tipoDeFormacion": "Tecnicatura",
+	"nombre": "Téc. radiólogo",
+	"profesionRef": "Técnico radiólogo",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 22,
+	"nomenclador": "RX"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de4a"
+	},
+	"codigo": 110,
+	"tipoDeFormacion": "Tecnicatura",
+	"nombre": "Téc. en citología",
+	"profesionRef": "Técnico en citología",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 24,
+	"nomenclador": "CT"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de4b"
+	},
+	"codigo": 74,
+	"tipoDeFormacion": "Tecnicatura",
+	"nombre": "Téc. en hemoterapia",
+	"profesionRef": "Técnico en hemoterapia",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 18,
+	"nomenclador": "HP"
+},
+{
+	"_id": {
+		"$oid": "5b97b8c27669f0926701de4c"
+	},
+	"codigo": 122,
+	"tipoDeFormacion": "Tecnicatura",
+	"nombre": "Téc. óptico",
+	"profesionRef": "Técnico óptico",
+	"habilitado": "true",
+	"profesionColegiada": "false",
+	"gestionaColegio": "false",
+	"profesionCodigoRef": 27,
+	"nomenclador": "OT"
+}]
+

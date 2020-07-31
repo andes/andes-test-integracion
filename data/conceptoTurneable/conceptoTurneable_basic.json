@@ -1,0 +1,3715 @@
+[{
+	"_id": {
+		"$oid": "57f505d669fe79a598ee5427"
+	},
+	"fsn": "cribado para papilomavirus humano (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "700152009",
+	"term": "pesquisa para papilomavirus humano"
+},
+{
+	"_id": {
+		"$oid": "57f505d669fe79a598ee5428"
+	},
+	"fsn": "cribado para papilomavirus humano (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "700152009",
+	"term": "cribado para papilomavirus humano (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f505d669fe79a598ee5429"
+	},
+	"fsn": "cribado para papilomavirus humano (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "700152009",
+	"term": "screening para papilomavirus humano"
+},
+{
+	"_id": {
+		"$oid": "57f505d669fe79a598ee542a"
+	},
+	"fsn": "cribado para papilomavirus humano (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "700152009",
+	"term": "detección selectiva para papilomavirus humano"
+},
+{
+	"_id": {
+		"$oid": "57f505d669fe79a598ee542b"
+	},
+	"fsn": "cribado para papilomavirus humano (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "700152009",
+	"term": "cribado para papilomavirus humano"
+},
+{
+	"_id": {
+		"$oid": "57f505d669fe79a598ee542c"
+	},
+	"fsn": "cribado para papilomavirus humano (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "700152009",
+	"term": "tamizado para papilomavirus humano"
+},
+{
+	"_id": {
+		"$oid": "57f505dc69fe79a598eee463"
+	},
+	"fsn": "educación en el cuidado de la diabetes (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "385805005",
+	"term": "educación en el cuidado de la diabetes"
+},
+{
+	"_id": {
+		"$oid": "57f505dc69fe79a598eee464"
+	},
+	"fsn": "educación en el cuidado de la diabetes (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "385805005",
+	"term": "educación en el cuidado de la diabetes (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f505e669fe79a598efbbfc"
+	},
+	"fsn": "consulta para cuidados paliativos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "713281006",
+	"term": "consulta para cuidados paliativos"
+},
+{
+	"_id": {
+		"$oid": "57f505e669fe79a598efbbfd"
+	},
+	"fsn": "consulta para cuidados paliativos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "713281006",
+	"term": "consulta para cuidados paliativos (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f505f569fe79a598f1dcc3"
+	},
+	"fsn": "educación en cuidados del niño (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "408991007",
+	"term": "educación en cuidados del niño"
+},
+{
+	"_id": {
+		"$oid": "57f505f569fe79a598f1dcc4"
+	},
+	"fsn": "educación en cuidados del niño (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "408991007",
+	"term": "educación en cuidados del niño (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f505f569fe79a598f1dcc5"
+	},
+	"fsn": "educación en cuidados del niño (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "408991007",
+	"term": "enseñanza de puericultura"
+},
+{
+	"_id": {
+		"$oid": "57f505f869fe79a598f268a9"
+	},
+	"fsn": "manejo de la atención de accidente cerebrovascular (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "80051000119107",
+	"term": "manejo de la atención de accidente cerebrovascular"
+},
+{
+	"_id": {
+		"$oid": "57f505f869fe79a598f268aa"
+	},
+	"fsn": "manejo de la atención de accidente cerebrovascular (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "80051000119107",
+	"term": "manejo de la atención de accidente cerebrovascular (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f505fb69fe79a598f2d2d7"
+	},
+	"fsn": "manejo de los cuidados del adolescente (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "409000006",
+	"term": "manejo de los cuidados del adolescente (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f505fb69fe79a598f2d2d8"
+	},
+	"fsn": "manejo de los cuidados del adolescente (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "409000006",
+	"term": "manejo de los cuidados del adolescente"
+},
+{
+	"_id": {
+		"$oid": "57f5060269fe79a598f41224"
+	},
+	"fsn": "examen ginecológico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "83607001",
+	"term": "examen ginecológico"
+},
+{
+	"_id": {
+		"$oid": "57f5060269fe79a598f41225"
+	},
+	"fsn": "examen ginecológico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "83607001",
+	"term": "examen ginecológico (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4c22e"
+	},
+	"fsn": "evaluación prequirúrgica de riesgo anestésico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "83874006",
+	"term": "evaluación prequirúrgica, anestesia"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4c230"
+	},
+	"fsn": "evaluación prequirúrgica de riesgo anestésico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "83874006",
+	"term": "evaluación prequirúrgica del riesgo anestésico"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4c231"
+	},
+	"fsn": "evaluación prequirúrgica de riesgo anestésico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "83874006",
+	"term": "evaluación prequirúrgica de riesgo anestésico (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4c232"
+	},
+	"fsn": "evaluación prequirúrgica de riesgo anestésico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "83874006",
+	"term": "evaluación prequirúrgica de riesgo anestésico"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e528"
+	},
+	"fsn": "servicio de genética (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310048009",
+	"term": "servicio de genética"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e529"
+	},
+	"fsn": "servicio de genética (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310048009",
+	"term": "servicio de genética (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e5d5"
+	},
+	"fsn": "servicio de nefrología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310056007",
+	"term": "servicio de nefrología (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e5d6"
+	},
+	"fsn": "servicio de nefrología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310056007",
+	"term": "servicio de nefrología"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e5f2"
+	},
+	"fsn": "servicio de infectología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310054005",
+	"term": "servicio de infectología"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e5f3"
+	},
+	"fsn": "servicio de infectología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310054005",
+	"term": "servicio de infectología (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e656"
+	},
+	"fsn": "servicio de reumatología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310059000",
+	"term": "servicio de reumatología"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e657"
+	},
+	"fsn": "servicio de reumatología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310059000",
+	"term": "servicio de reumatología (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e65a"
+	},
+	"fsn": "servicio de neurología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310057003",
+	"term": "servicio de neurología"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e65b"
+	},
+	"fsn": "servicio de neurología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310057003",
+	"term": "servicio de neurología (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e840"
+	},
+	"fsn": "servicio de neumonología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310037002",
+	"term": "servicio de neumonología (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e841"
+	},
+	"fsn": "servicio de neumonología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310037002",
+	"term": "servicio de neumonología"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e862"
+	},
+	"fsn": "servicio de alergia clínica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310035005",
+	"term": "servicio de alergia clínica (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5060669fe79a598f4e863"
+	},
+	"fsn": "servicio de alergia clínica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "310035005",
+	"term": "servicio de alergia clínica"
+},
+{
+	"_id": {
+		"$oid": "57f5060769fe79a598f51205"
+	},
+	"fsn": "consulta por dolor crónico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "420454001",
+	"term": "consulta por dolor crónico (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5060769fe79a598f51206"
+	},
+	"fsn": "consulta por dolor crónico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "420454001",
+	"term": "consulta por dolor crónico"
+},
+{
+	"_id": {
+		"$oid": "57f5061569fe79a598f779c1"
+	},
+	"fsn": "procedimiento Y/O servicio odontológico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "108306002",
+	"term": "procedimiento Y/O servicio odontológico"
+},
+{
+	"_id": {
+		"$oid": "57f5061569fe79a598f779c2"
+	},
+	"fsn": "procedimiento Y/O servicio odontológico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "108306002",
+	"term": "procedimiento Y/O servicio dental"
+},
+{
+	"_id": {
+		"$oid": "57f5061569fe79a598f779c3"
+	},
+	"fsn": "procedimiento Y/O servicio odontológico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "108306002",
+	"term": "procedimiento Y/O servicio odontológico (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5062369fe79a598f90ea6"
+	},
+	"fsn": "obtención de historia clínica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "84100007",
+	"term": "anamnesis"
+},
+{
+	"_id": {
+		"$oid": "57f5062369fe79a598f90ea7"
+	},
+	"fsn": "obtención de historia clínica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "84100007",
+	"term": "entrevista clínica"
+},
+{
+	"_id": {
+		"$oid": "57f5062369fe79a598f90eaa"
+	},
+	"fsn": "obtención de historia clínica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "84100007",
+	"term": "obtención de historia clínica"
+},
+{
+	"_id": {
+		"$oid": "57f5062369fe79a598f90eab"
+	},
+	"fsn": "obtención de historia clínica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "84100007",
+	"term": "obtención de historia clínica (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5062f69fe79a598faf261"
+	},
+	"fsn": "oxigenoterapia domiciliaria (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "426990007",
+	"term": "oxigenoterapia domiciliaria"
+},
+{
+	"_id": {
+		"$oid": "57f5062f69fe79a598faf262"
+	},
+	"fsn": "oxigenoterapia domiciliaria (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "426990007",
+	"term": "oxigenoterapia domiciliaria (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5063f69fe79a598fcf99c"
+	},
+	"fsn": "examen pediátrico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "243788004",
+	"term": "examen pediátrico (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5063f69fe79a598fcf99d"
+	},
+	"fsn": "examen pediátrico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "243788004",
+	"term": "examen pediátrico"
+},
+{
+	"_id": {
+		"$oid": "57f5064269fe79a598fd5c38"
+	},
+	"fsn": "examen y evaluación cardiovascular (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "43038000",
+	"term": "examen y evaluación cardiovascular"
+},
+{
+	"_id": {
+		"$oid": "57f5064269fe79a598fd5c39"
+	},
+	"fsn": "examen y evaluación cardiovascular (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "43038000",
+	"term": "examen y evaluación cardiovascular (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5065369fe79a598006823"
+	},
+	"fsn": "revisión de medicación para epilepsia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "401062003",
+	"term": "revisión de medicación para epilepsia"
+},
+{
+	"_id": {
+		"$oid": "57f5065369fe79a598006824"
+	},
+	"fsn": "revisión de medicación para epilepsia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "401062003",
+	"term": "revisión de medicación para epilepsia (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5066369fe79a5980348da"
+	},
+	"fsn": "exploración y evaluación oftálmica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "36228007",
+	"term": "exploración y evaluación oftálmica"
+},
+{
+	"_id": {
+		"$oid": "57f5066369fe79a5980348db"
+	},
+	"fsn": "exploración y evaluación oftálmica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "36228007",
+	"term": "examen del ojo"
+},
+{
+	"_id": {
+		"$oid": "57f5066369fe79a5980348dc"
+	},
+	"fsn": "exploración y evaluación oftálmica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "36228007",
+	"term": "examen oftalmológico"
+},
+{
+	"_id": {
+		"$oid": "57f5066369fe79a5980348dd"
+	},
+	"fsn": "exploración y evaluación oftálmica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "36228007",
+	"term": "examen ocular"
+},
+{
+	"_id": {
+		"$oid": "57f5066369fe79a5980348de"
+	},
+	"fsn": "exploración y evaluación oftálmica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "36228007",
+	"term": "exploración y evaluación oftálmica (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5066b69fe79a59804af2f"
+	},
+	"fsn": "consulta general e informe de radioterapia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "65263004",
+	"term": "consulta general e informe de radioterapia"
+},
+{
+	"_id": {
+		"$oid": "57f5066b69fe79a59804af30"
+	},
+	"fsn": "consulta general e informe de radioterapia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "65263004",
+	"term": "consulta general e informe de terapia radiante"
+},
+{
+	"_id": {
+		"$oid": "57f5066b69fe79a59804af31"
+	},
+	"fsn": "consulta general e informe de radioterapia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "65263004",
+	"term": "terapia radiante, consulta e informe"
+},
+{
+	"_id": {
+		"$oid": "57f5066b69fe79a59804af32"
+	},
+	"fsn": "consulta general e informe de radioterapia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "65263004",
+	"term": "consulta general e informe de radioterapia (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5066e69fe79a598054363"
+	},
+	"fsn": "cribado para la detección de glaucoma (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "171215009",
+	"term": "detección selectiva de glaucoma"
+},
+{
+	"_id": {
+		"$oid": "57f5066e69fe79a598054368"
+	},
+	"fsn": "cribado para la detección de glaucoma (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "171215009",
+	"term": "cribado para la detección de glaucoma"
+},
+{
+	"_id": {
+		"$oid": "57f5066e69fe79a598054369"
+	},
+	"fsn": "cribado para la detección de glaucoma (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "171215009",
+	"term": "cribado para glaucoma"
+},
+{
+	"_id": {
+		"$oid": "57f5066e69fe79a59805436a"
+	},
+	"fsn": "cribado para la detección de glaucoma (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "171215009",
+	"term": "rastreo para glaucoma"
+},
+{
+	"_id": {
+		"$oid": "57f5066e69fe79a59805436b"
+	},
+	"fsn": "cribado para la detección de glaucoma (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "171215009",
+	"term": "screening para glaucoma"
+},
+{
+	"_id": {
+		"$oid": "57f5066e69fe79a59805436c"
+	},
+	"fsn": "cribado para la detección de glaucoma (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "171215009",
+	"term": "tamizaje para glaucoma"
+},
+{
+	"_id": {
+		"$oid": "57f5066e69fe79a59805436d"
+	},
+	"fsn": "cribado para la detección de glaucoma (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "171215009",
+	"term": "pesquisa para glaucoma"
+},
+{
+	"_id": {
+		"$oid": "57f5066e69fe79a59805436e"
+	},
+	"fsn": "cribado para la detección de glaucoma (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "171215009",
+	"term": "cribado para la detección de glaucoma (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5066e69fe79a59805436f"
+	},
+	"fsn": "cribado para la detección de glaucoma (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "171215009",
+	"term": "cribaje para glaucoma"
+},
+{
+	"_id": {
+		"$oid": "57f5067369fe79a59805eda1"
+	},
+	"fsn": "consulta e informe dermatológicos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "73007006",
+	"term": "consulta e informe dermatológicos"
+},
+{
+	"_id": {
+		"$oid": "57f5067369fe79a59805eda2"
+	},
+	"fsn": "consulta e informe dermatológicos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "73007006",
+	"term": "consulta e informe dermatológicos (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5067869fe79a59806b74c"
+	},
+	"fsn": "examen relacionado con el embarazo (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "312891008",
+	"term": "examen relacionado con el embarazo"
+},
+{
+	"_id": {
+		"$oid": "57f5067869fe79a59806b74d"
+	},
+	"fsn": "examen relacionado con el embarazo (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "312891008",
+	"term": "examen relacionado con el embarazo (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5067869fe79a59806b902"
+	},
+	"fsn": "controles del desarrollo infantil (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "281010000",
+	"term": "controles del desarrollo infantil (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5067869fe79a59806b903"
+	},
+	"fsn": "controles del desarrollo infantil (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "281010000",
+	"term": "controles del desarrollo infantil"
+},
+{
+	"_id": {
+		"$oid": "57f5067869fe79a59806bd2a"
+	},
+	"fsn": "evaluación de salud mental (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "391281002",
+	"term": "evaluación de salud mental"
+},
+{
+	"_id": {
+		"$oid": "57f5067869fe79a59806bd2b"
+	},
+	"fsn": "evaluación de salud mental (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "391281002",
+	"term": "evaluación de salud mental (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5067969fe79a59806f2c9"
+	},
+	"fsn": "examen de garganta, nariz y oído (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "113028003",
+	"term": "examen de garganta, nariz y oído"
+},
+{
+	"_id": {
+		"$oid": "57f5067969fe79a59806f2ca"
+	},
+	"fsn": "examen de garganta, nariz y oído (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "113028003",
+	"term": "examen ORL"
+},
+{
+	"_id": {
+		"$oid": "57f5067969fe79a59806f2cb"
+	},
+	"fsn": "examen de garganta, nariz y oído (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "113028003",
+	"term": "examen otorrinolaringológico"
+},
+{
+	"_id": {
+		"$oid": "57f5067969fe79a59806f2cc"
+	},
+	"fsn": "examen de garganta, nariz y oído (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "113028003",
+	"term": "examen de garganta, nariz y oído (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5069069fe79a5980918d2"
+	},
+	"fsn": "evaluación del receptor después del trasplante renal (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "428645009",
+	"term": "evaluación del receptor luego de trasplante renal"
+},
+{
+	"_id": {
+		"$oid": "57f5069069fe79a5980918d3"
+	},
+	"fsn": "evaluación del receptor después del trasplante renal (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "428645009",
+	"term": "evaluación del receptor después del trasplante renal"
+},
+{
+	"_id": {
+		"$oid": "57f5069069fe79a5980918d4"
+	},
+	"fsn": "evaluación del receptor después del trasplante renal (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "428645009",
+	"term": "evaluación del receptor después del trasplante renal (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5069d69fe79a5980b072e"
+	},
+	"fsn": "consulta de niño sano (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "410620009",
+	"term": "consulta de niño sano (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5069d69fe79a5980b072f"
+	},
+	"fsn": "consulta de niño sano (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "410620009",
+	"term": "consulta de niño sano",
+	"refsetIds": [
+		"900000000000497000"
+	]
+},
+{
+	"_id": {
+		"$oid": "57f5069f69fe79a5980b4f2b"
+	},
+	"fsn": "manejo de tratamiento fonoaudiológico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "410163008",
+	"term": "manejo de tratamiento fonoaudiológico (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5069f69fe79a5980b4f2c"
+	},
+	"fsn": "manejo de tratamiento fonoaudiológico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "410163008",
+	"term": "manejo de tratamiento fonoaudiológico"
+},
+{
+	"_id": {
+		"$oid": "57f5069f69fe79a5980b4f2d"
+	},
+	"fsn": "manejo de tratamiento fonoaudiológico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "410163008",
+	"term": "manejo de tratamiento logopédico"
+},
+{
+	"_id": {
+		"$oid": "57f5069f69fe79a5980b5427"
+	},
+	"fsn": "evaluación de régimen nutricional (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "410173005",
+	"term": "evaluación de régimen nutricional"
+},
+{
+	"_id": {
+		"$oid": "57f5069f69fe79a5980b5429"
+	},
+	"fsn": "evaluación de régimen nutricional (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "410173005",
+	"term": "evaluación de régimen nutricional (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "57f5069f69fe79a5980b58f3"
+	},
+	"fsn": "educación sobre cuidado de ostomía (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "410091003",
+	"term": "educación sobre cuidado de ostomía"
+},
+{
+	"_id": {
+		"$oid": "57f5069f69fe79a5980b58f4"
+	},
+	"fsn": "educación sobre cuidado de ostomía (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "410091003",
+	"term": "educación sobre cuidado de ostomía (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "5951051aa784f4e1a8e2afe1"
+	},
+	"conceptId": "268565007",
+	"term": "Exámen médico del adulto",
+	"fsn": "examen médico del adulto (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "5951071fa784f4e1a8e2afe2"
+	},
+	"conceptId": "410620009",
+	"term": "consulta de niño sano (procedimiento)",
+	"fsn": "consulta de niño sano (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "59510776a784f4e1a8e2afe3"
+	},
+	"conceptId": "243788004",
+	"term": "examen pediátrico (procedimiento)",
+	"fsn": "examen pediátrico (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "595107fba784f4e1a8e2afe4"
+	},
+	"conceptId": "168537006",
+	"term": "radiografía simple (procedimiento)",
+	"fsn": "radiografía simple (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "5951089fa784f4e1a8e2afe5"
+	},
+	"conceptId": "310036006",
+	"term": "servicio de cardiología (procedimiento)",
+	"fsn": "servicio de cardiología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "5951092ea784f4e1a8e2afe6"
+	},
+	"conceptId": "310057003",
+	"term": "servicio de neurología (procedimiento)",
+	"fsn": "servicio de neurología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "595109aca784f4e1a8e2afe7"
+	},
+	"conceptId": "185349003",
+	"term": "consulta por control de salud (procedimiento)",
+	"fsn": "consulta por control de salud (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12188"
+	},
+	"conceptId": "251000013108",
+	"term": "consulta de endocrinología (procedimiento)",
+	"fsn": "consulta de endocrinología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12189"
+	},
+	"conceptId": "251000013108",
+	"term": "consulta de endocrinología",
+	"fsn": "consulta de endocrinología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1218a"
+	},
+	"conceptId": "251000013108",
+	"term": "consulta con especialista en glándulas endócrinas",
+	"fsn": "consulta con especialista en glándulas endócrinas",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1218b"
+	},
+	"conceptId": "251000013108",
+	"term": "consulta con especialista en sistema endócrino",
+	"fsn": "consulta con especialista en sistema endócrino",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1218c"
+	},
+	"conceptId": "261000013105",
+	"term": "consulta con especialista en aparato digestivo",
+	"fsn": "consulta con especialista en aparato digestivo",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1218d"
+	},
+	"conceptId": "261000013105",
+	"term": "consulta de gastroenterología (procedimiento)",
+	"fsn": "consulta de gastroenterología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1218e"
+	},
+	"conceptId": "261000013105",
+	"term": "consulta de gastroenterología",
+	"fsn": "consulta de gastroenterología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1218f"
+	},
+	"conceptId": "271000013103",
+	"term": "consulta de neumonología (procedimiento)",
+	"fsn": "consulta de neumonología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12190"
+	},
+	"conceptId": "271000013103",
+	"term": "consulta de neumonología",
+	"fsn": "consulta de neumonología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12191"
+	},
+	"conceptId": "271000013103",
+	"term": "consulta con especialista del aparato respiratorio",
+	"fsn": "consulta con especialista del aparato respiratorio",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12192"
+	},
+	"conceptId": "281000013100",
+	"term": "consulta de endocrinología para pacientes transgénero (procedimiento)",
+	"fsn": "consulta de endocrinología para pacientes transgénero (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12193"
+	},
+	"conceptId": "281000013100",
+	"term": "consulta de endocrinología para pacientes transgénero",
+	"fsn": "consulta de endocrinología para pacientes transgénero",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12194"
+	},
+	"conceptId": "401062003",
+	"term": "consulta de recetas de antiepilépticos",
+	"fsn": "consulta de recetas de antiepilépticos",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12195"
+	},
+	"conceptId": "401062003",
+	"term": "consulta de recetas de antiepilépticos (procedimiento)",
+	"fsn": "consulta de recetas de antiepilépticos (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12196"
+	},
+	"conceptId": "291000013102",
+	"term": "consulta de cardiología (procedimiento)",
+	"fsn": "consulta de cardiología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12197"
+	},
+	"conceptId": "291000013102",
+	"term": "consulta de cardiología",
+	"fsn": "consulta de cardiología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12198"
+	},
+	"conceptId": "291000013102",
+	"term": "consulta con cardiólogo",
+	"fsn": "consulta con cardiólogo",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12199"
+	},
+	"conceptId": "291000013102",
+	"term": "consultorio de cardiología",
+	"fsn": "consultorio de cardiología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1219a"
+	},
+	"conceptId": "83874006",
+	"term": "consulta prequirúrgica de anestesiología",
+	"fsn": "consulta prequirúrgica de anestesiología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1219b"
+	},
+	"conceptId": "83874006",
+	"term": "consulta prequirúrgica de anestesiología (procedimiento)",
+	"fsn": "consulta prequirúrgica de anestesiología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1219c"
+	},
+	"conceptId": "301000013101",
+	"term": "consulta de tabaquismo (procedimiento)",
+	"fsn": "consulta de tabaquismo (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1219d"
+	},
+	"conceptId": "301000013101",
+	"term": "consulta de tabaquismo",
+	"fsn": "consulta de tabaquismo",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1219e"
+	},
+	"conceptId": "301000013101",
+	"term": "consulta para dejar de fumar",
+	"fsn": "consulta para dejar de fumar",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c1219f"
+	},
+	"conceptId": "311000013103",
+	"term": "consulta de cirugía (procedimiento)",
+	"fsn": "consulta de cirugía (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121a0"
+	},
+	"conceptId": "311000013103",
+	"term": "consulta de cirugía",
+	"fsn": "consulta de cirugía",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121a1"
+	},
+	"conceptId": "311000013103",
+	"term": "consultorio de cirugía",
+	"fsn": "consultorio de cirugía",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121a2"
+	},
+	"conceptId": "311000013103",
+	"term": "consulta quirúrgica",
+	"fsn": "consulta quirúrgica",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121a3"
+	},
+	"conceptId": "311000013103",
+	"term": "consulta con cirujano",
+	"fsn": "consulta con cirujano",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121a4"
+	},
+	"conceptId": "321000013106",
+	"term": "consulta de cirugía general (procedimiento)",
+	"fsn": "consulta de cirugía general (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121a5"
+	},
+	"conceptId": "321000013106",
+	"term": "consulta de cirugía general",
+	"fsn": "consulta de cirugía general",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121a6"
+	},
+	"conceptId": "331000013109",
+	"term": "consulta de cirugía de aparato digstivo superior",
+	"fsn": "consulta de cirugía de aparato digstivo superior",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121a7"
+	},
+	"conceptId": "341000013104",
+	"term": "consulta de coloproctología (procedimiento)",
+	"fsn": "consulta de coloproctología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121a8"
+	},
+	"conceptId": "341000013104",
+	"term": "consulta de coloproctología",
+	"fsn": "consulta de coloproctología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121a9"
+	},
+	"conceptId": "341000013104",
+	"term": "consulta de cirugía de aparato digestivo inferior",
+	"fsn": "consulta de cirugía de aparato digestivo inferior",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121aa"
+	},
+	"conceptId": "351000013102",
+	"term": "consulta de cirugía de cabeza y cuello (procedimiento)",
+	"fsn": "consulta de cirugía de cabeza y cuello (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ab"
+	},
+	"conceptId": "351000013102",
+	"term": "consulta de cirugía de cabeza y cuello",
+	"fsn": "consulta de cirugía de cabeza y cuello",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ac"
+	},
+	"conceptId": "361000013100",
+	"term": "consulta de neurocirugía (procedimiento)",
+	"fsn": "consulta de neurocirugía (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ad"
+	},
+	"conceptId": "361000013100",
+	"term": "consulta de neurocirugía",
+	"fsn": "consulta de neurocirugía",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ae"
+	},
+	"conceptId": "361000013100",
+	"term": "consulta con neurocirujano",
+	"fsn": "consulta con neurocirujano",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121af"
+	},
+	"conceptId": "361000013100",
+	"term": "consulta neuroquirúrgica",
+	"fsn": "consulta neuroquirúrgica",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121b0"
+	},
+	"conceptId": "371000013107",
+	"term": "consulta de hematología (procedimiento)",
+	"fsn": "consulta de hematología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121b1"
+	},
+	"conceptId": "371000013107",
+	"term": "consulta de hematología",
+	"fsn": "consulta de hematología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121b2"
+	},
+	"conceptId": "371000013107",
+	"term": "consulta al médico hematólogo",
+	"fsn": "consulta al médico hematólogo",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121b3"
+	},
+	"conceptId": "381000013105",
+	"term": "consulta sobre alergias (procedimiento)",
+	"fsn": "consulta sobre alergias (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121b4"
+	},
+	"conceptId": "381000013105",
+	"term": "consulta sobre alergias",
+	"fsn": "consulta sobre alergias",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121b5"
+	},
+	"conceptId": "381000013105",
+	"term": "consulta con alergista",
+	"fsn": "consulta con alergista",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121b6"
+	},
+	"conceptId": "381000013105",
+	"term": "consulta de alergología",
+	"fsn": "consulta de alergología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121b7"
+	},
+	"conceptId": "391000013108",
+	"term": "consulta de medicina general (procedimiento)",
+	"fsn": "consulta de medicina general (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121b8"
+	},
+	"conceptId": "391000013108",
+	"term": "consulta de medicina general",
+	"fsn": "consulta de medicina general",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121b9"
+	},
+	"conceptId": "391000013108",
+	"term": "consulta con médico general",
+	"fsn": "consulta con médico general",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ba"
+	},
+	"conceptId": "391000013108",
+	"term": "consulta con médico generalista",
+	"fsn": "consulta con médico generalista",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121bb"
+	},
+	"conceptId": "401000013105",
+	"term": "consulta de clínica médica (procedimiento)",
+	"fsn": "consulta de clínica médica (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121bc"
+	},
+	"conceptId": "401000013105",
+	"term": "consulta de clínica médica",
+	"fsn": "consulta de clínica médica",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121bd"
+	},
+	"conceptId": "421000013100",
+	"term": "consulta de neurología (procedimiento)",
+	"fsn": "consulta de neurología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121be"
+	},
+	"conceptId": "421000013100",
+	"term": "consulta de neurología",
+	"fsn": "consulta de neurología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121bf"
+	},
+	"conceptId": "431000013102",
+	"term": "consulta de reumatología (procedimiento)",
+	"fsn": "consulta de reumatología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121c0"
+	},
+	"conceptId": "431000013102",
+	"term": "consulta de reumatología",
+	"fsn": "consulta de reumatología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121c1"
+	},
+	"conceptId": "431000013102",
+	"term": "consulta con médico reumatólogo",
+	"fsn": "consulta con médico reumatólogo",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121c2"
+	},
+	"conceptId": "441000013107",
+	"term": "consulta de traumatología (procedimiento)",
+	"fsn": "consulta de traumatología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121c3"
+	},
+	"conceptId": "441000013107",
+	"term": "consulta de traumatología",
+	"fsn": "consulta de traumatología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121c4"
+	},
+	"conceptId": "451000013109",
+	"term": "consulta de traumatología general (procedimiento)",
+	"fsn": "consulta de traumatología general (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121c5"
+	},
+	"conceptId": "451000013109",
+	"term": "consulta de traumatología general",
+	"fsn": "consulta de traumatología general",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121c6"
+	},
+	"conceptId": "461000013106",
+	"term": "consulta de infectología (procedimiento)",
+	"fsn": "consulta de infectología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121c7"
+	},
+	"conceptId": "461000013106",
+	"term": "consulta de infectología",
+	"fsn": "consulta de infectología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121c8"
+	},
+	"conceptId": "461000013106",
+	"term": "consulta con médico infectólogo",
+	"fsn": "consulta con médico infectólogo",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121c9"
+	},
+	"conceptId": "471000013104",
+	"term": "consulta de infectología pediátrica (procedimiento)",
+	"fsn": "consulta de infectología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ca"
+	},
+	"conceptId": "471000013104",
+	"term": "consulta de infectología pediátrica",
+	"fsn": "consulta de infectología pediátrica",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121cb"
+	},
+	"conceptId": "471000013104",
+	"term": "consulta de infectología infantil",
+	"fsn": "consulta de infectología infantil",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121cc"
+	},
+	"conceptId": "34043003",
+	"term": "consulta de odontología",
+	"fsn": "consulta de odontología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121cd"
+	},
+	"conceptId": "34043003",
+	"term": "consulta de odontología (procedimiento)",
+	"fsn": "consulta de odontología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ce"
+	},
+	"conceptId": "481000013101",
+	"term": "consulta de odontología pediátrica (procedimiento)",
+	"fsn": "consulta de odontología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121cf"
+	},
+	"conceptId": "481000013101",
+	"term": "consulta de odontología infantil",
+	"fsn": "consulta de odontología infantil",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121d0"
+	},
+	"conceptId": "481000013101",
+	"term": "consulta de odontología pediátrica",
+	"fsn": "consulta de odontología pediátrica",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121d1"
+	},
+	"conceptId": "481000013101",
+	"term": "consulta de odontopediatría",
+	"fsn": "consulta de odontopediatría",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121d2"
+	},
+	"conceptId": "491000013103",
+	"term": "consulta de oftalmología (procedimiento)",
+	"fsn": "consulta de oftalmología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121d3"
+	},
+	"conceptId": "491000013103",
+	"term": "consulta de oftalmología",
+	"fsn": "consulta de oftalmología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121d4"
+	},
+	"conceptId": "491000013103",
+	"term": "consulta con médico oculista",
+	"fsn": "consulta con médico oculista",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121d5"
+	},
+	"conceptId": "491000013103",
+	"term": "consulta con médico oftalmólogo",
+	"fsn": "consulta con médico oftalmólogo",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121d6"
+	},
+	"conceptId": "501000013106",
+	"term": "consulta de otorrinolaringología (procedimiento)",
+	"fsn": "consulta de otorrinolaringología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121d7"
+	},
+	"conceptId": "501000013106",
+	"term": "consulta de otorrinolaringología",
+	"fsn": "consulta de otorrinolaringología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121d8"
+	},
+	"conceptId": "501000013106",
+	"term": "consulta de ORL",
+	"fsn": "consulta de ORL",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121d9"
+	},
+	"conceptId": "501000013106",
+	"term": "consulta con médico otorrinolaringólogo",
+	"fsn": "consulta con médico otorrinolaringólogo",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121da"
+	},
+	"conceptId": "511000013109",
+	"term": "consulta de pediatría (procedimiento)",
+	"fsn": "consulta de pediatría (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121db"
+	},
+	"conceptId": "511000013109",
+	"term": "consulta de pediatría",
+	"fsn": "consulta de pediatría",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121dc"
+	},
+	"conceptId": "511000013109",
+	"term": "consulta con médico pediatra",
+	"fsn": "consulta con médico pediatra",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121dd"
+	},
+	"conceptId": "331000013109",
+	"term": "consulta de cirugía de aparato digestivo superior (procedimiento)",
+	"fsn": "consulta de cirugía de aparato digestivo superior (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121de"
+	},
+	"conceptId": "331000013109",
+	"term": "consulta de cirugía de aparato digestivo superior",
+	"fsn": "consulta de cirugía de aparato digestivo superior",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121df"
+	},
+	"conceptId": "531000013103",
+	"term": "consulta de traumatología de miembro inferior (procedimiento)",
+	"fsn": "consulta de traumatología de miembro inferior (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121e0"
+	},
+	"conceptId": "531000013103",
+	"term": "consulta de traumatología de miembro inferior",
+	"fsn": "consulta de traumatología de miembro inferior",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121e1"
+	},
+	"conceptId": "541000013108",
+	"term": "consulta de reumatología infantil (procedimiento)",
+	"fsn": "consulta de reumatología infantil (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121e2"
+	},
+	"conceptId": "541000013108",
+	"term": "consulta de reumatología infantil",
+	"fsn": "consulta de reumatología infantil",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121e3"
+	},
+	"conceptId": "541000013108",
+	"term": "consulta de reumatología pediátrica",
+	"fsn": "consulta de reumatología pediátrica",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121e4"
+	},
+	"conceptId": "551000013105",
+	"term": "consulta de salud mental (procedimiento)",
+	"fsn": "consulta de salud mental (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121e5"
+	},
+	"conceptId": "551000013105",
+	"term": "consulta de salud mental",
+	"fsn": "consulta de salud mental",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121e6"
+	},
+	"conceptId": "561000013107",
+	"term": "consulta de traumatologia de pie (procedimiento)",
+	"fsn": "consulta de traumatologia de pie (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121e7"
+	},
+	"conceptId": "561000013107",
+	"term": "consulta de traumatologia de pie",
+	"fsn": "consulta de traumatologia de pie",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121e8"
+	},
+	"conceptId": "561000013107",
+	"term": "consulta a médico traumatolólogo de pie",
+	"fsn": "consulta a médico traumatolólogo de pie",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121e9"
+	},
+	"conceptId": "581000013102",
+	"term": "consulta de traumatología de cadera (procedimiento)",
+	"fsn": "consulta de traumatología de cadera (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ea"
+	},
+	"conceptId": "581000013102",
+	"term": "consulta de traumatología de cadera",
+	"fsn": "consulta de traumatología de cadera",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121eb"
+	},
+	"conceptId": "591000013104",
+	"term": "consulta de traumatología de hombro (procedimiento)",
+	"fsn": "consulta de traumatología de hombro (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ec"
+	},
+	"conceptId": "591000013104",
+	"term": "consulta de traumatología de hombro",
+	"fsn": "consulta de traumatología de hombro",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ed"
+	},
+	"conceptId": "601000013107",
+	"term": "consulta de traumatología de codo (procedimiento)",
+	"fsn": "consulta de traumatología de codo (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ee"
+	},
+	"conceptId": "601000013107",
+	"term": "consulta de traumatología de codo",
+	"fsn": "consulta de traumatología de codo",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ef"
+	},
+	"conceptId": "521000013101",
+	"term": "consulta de traumatología de miembro superior (procedimiento)",
+	"fsn": "consulta de traumatología de miembro superior (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121f0"
+	},
+	"conceptId": "521000013101",
+	"term": "consulta de traumatología de miembro superior",
+	"fsn": "consulta de traumatología de miembro superior",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121f1"
+	},
+	"conceptId": "611000013105",
+	"term": "consulta de traumatología de muñeca (procedimiento)",
+	"fsn": "consulta de traumatología de muñeca (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121f2"
+	},
+	"conceptId": "611000013105",
+	"term": "consulta de traumatología de muñeca",
+	"fsn": "consulta de traumatología de muñeca",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121f3"
+	},
+	"conceptId": "621000013102",
+	"term": "consulta de traumatologia de columna (procedimiento)",
+	"fsn": "consulta de traumatologia de columna (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121f4"
+	},
+	"conceptId": "621000013102",
+	"term": "consulta de traumatologia de columna",
+	"fsn": "consulta de traumatologia de columna",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121f5"
+	},
+	"conceptId": "631000013104",
+	"term": "consulta prequirúrgica de traumatología (procedimiento)",
+	"fsn": "consulta prequirúrgica de traumatología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121f6"
+	},
+	"conceptId": "631000013104",
+	"term": "consulta prequirúrgica de traumatología",
+	"fsn": "consulta prequirúrgica de traumatología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121f7"
+	},
+	"conceptId": "641000013109",
+	"term": "consulta postquirúrgica de traumatología (procedimiento)",
+	"fsn": "consulta postquirúrgica de traumatología (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121f8"
+	},
+	"conceptId": "641000013109",
+	"term": "consulta postquirúrgica de traumatología",
+	"fsn": "consulta postquirúrgica de traumatología",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121f9"
+	},
+	"conceptId": "651000013106",
+	"term": "consulta de ortopedia (procedimiento)",
+	"fsn": "consulta de ortopedia (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121fa"
+	},
+	"conceptId": "651000013106",
+	"term": "consulta de ortopedia",
+	"fsn": "consulta de ortopedia",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121fb"
+	},
+	"conceptId": "661000013108",
+	"term": "evaluación mental previa a cirugía bariátrica (procedimiento)",
+	"fsn": "evaluación mental previa a cirugía bariátrica (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121fc"
+	},
+	"conceptId": "661000013108",
+	"term": "evaluación mental previa a cirugía bariátrica",
+	"fsn": "evaluación mental previa a cirugía bariátrica",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121fd"
+	},
+	"conceptId": "661000013108",
+	"term": "evaluación psicológica para pacientes candidatos a cirugía bariátrica",
+	"fsn": "evaluación psicológica para pacientes candidatos a cirugía bariátrica",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121fe"
+	},
+	"conceptId": "671000013101",
+	"term": "consulta de cirugía de tórax (procedimiento)",
+	"fsn": "consulta de cirugía de tórax (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c121ff"
+	},
+	"conceptId": "671000013101",
+	"term": "consulta de cirugía de tórax",
+	"fsn": "consulta de cirugía de tórax",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12200"
+	},
+	"conceptId": "671000013101",
+	"term": "consulta de cirugía torácica",
+	"fsn": "consulta de cirugía torácica",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12201"
+	},
+	"conceptId": "681000013103",
+	"term": "consulta de cirugía vascular (procedimiento)",
+	"fsn": "consulta de cirugía vascular (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12202"
+	},
+	"conceptId": "681000013103",
+	"term": "consulta de cirugía vascular",
+	"fsn": "consulta de cirugía vascular",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12203"
+	},
+	"conceptId": "571000013100",
+	"term": "consulta de traumatología de rodilla (procedimiento)",
+	"fsn": "consulta de traumatología de rodilla (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12204"
+	},
+	"conceptId": "571000013100",
+	"term": "consulta de traumatología de rodilla",
+	"fsn": "consulta de traumatología de rodilla",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "598ca8375adc68e2a0c12205"
+	},
+	"conceptId": "421000013100",
+	"term": "consulta con médico neurólogo",
+	"fsn": "consulta con médico neurólogo",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d13"
+	},
+	"fsn": "Consulta de embarazo y HIV (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1001000013104",
+	"term": "Consulta de embarazo y HIV"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d14"
+	},
+	"fsn": "Consulta de oxigenoterapia domiciliaria (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1011000013101",
+	"term": "Consulta de oxigenoterapia domiciliaria"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d15"
+	},
+	"fsn": "Consulta de ventilación no invasiva (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1021000013109",
+	"term": "Consulta de ventilación no invasiva"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d16"
+	},
+	"fsn": "Consulta de titulación de ventilación no invasiva (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1031000013107",
+	"term": "Consulta de titulación de ventilación no invasiva''"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d17"
+	},
+	"fsn": "Consulta prequirúrgica de neumonología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1041000013102",
+	"term": "Consulta prequirúrgica de neumonología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d18"
+	},
+	"fsn": "Consulta de cirugía infantil (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1051000013100",
+	"term": "Consulta de cirugía infantil "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d19"
+	},
+	"fsn": "Consulta de cirugía urológica infantil (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1061000013103",
+	"term": "Consulta de cirugía urológica infantil "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d1a"
+	},
+	"fsn": "Consulta de dermatología infantil (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1071000013105",
+	"term": "Consulta de dermatología infantil "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d1b"
+	},
+	"fsn": "Consulta de endocrinología ginecológica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1091000013106",
+	"term": "Consulta de endocrinología ginecológica "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d1c"
+	},
+	"fsn": "Consulta de esterilidad (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1101000013100",
+	"term": "Consulta de esterilidad "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d1d"
+	},
+	"fsn": "Consulta de ginecología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1111000013102",
+	"term": "Consulta de ginecología pediátrica "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d1e"
+	},
+	"fsn": "Consulta de ginecología para adolescentes (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1121000013105",
+	"term": "Consulta de ginecología para adolescentes "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d1f"
+	},
+	"fsn": "Consulta de ginecología oncológica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1131000013108",
+	"term": "Consulta de ginecología oncológica "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d20"
+	},
+	"fsn": "Consulta de tocoginecología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1141000013103",
+	"term": "Consulta de tocoginecología "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d21"
+	},
+	"fsn": "Consulta de neonatología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1151000013101",
+	"term": "Consulta de neonatología "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d22"
+	},
+	"fsn": "Consulta de seguimiento de neonatos prematuros (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1161000013104",
+	"term": "Consulta de seguimiento de neonatos prematuros "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d23"
+	},
+	"fsn": "Consulta de control oftalmológico postquirúrgico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1171000013106",
+	"term": "Consulta de control oftalmológico postquirúrgico "
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d24"
+	},
+	"fsn": "Consulta de obstetricia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1181000013109",
+	"term": "Consulta de obstetricia"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d25"
+	},
+	"fsn": "Consulta de control de embarazo (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1191000013107",
+	"term": "Consulta de control de embarazo"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d26"
+	},
+	"fsn": "Consulta de control de embarazo de pacientes adolescentes (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1201000013105",
+	"term": "Consulta de control de embarazo de pacientes adolescentes"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d27"
+	},
+	"fsn": "Consulta de mielomeningocele (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1211000013108",
+	"term": "Consulta de mielomeningocele"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d28"
+	},
+	"fsn": "Consulta de nefrología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1221000013100",
+	"term": "Consulta de nefrología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d29"
+	},
+	"fsn": "Consulta de neumonología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1231000013102",
+	"term": "Consulta de neumonología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d2a"
+	},
+	"fsn": "Consulta de neurología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1241000013107",
+	"term": "Consulta de neurología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d2b"
+	},
+	"fsn": "Consulta de diabetes para pacientes pediátricos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1251000013109",
+	"term": "Consulta de diabetes para pacientes pediátricos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d2c"
+	},
+	"fsn": "Consulta de endocrinología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1261000013106",
+	"term": "Consulta de endocrinología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d2d"
+	},
+	"fsn": "Consulta de gastroenterología infantil (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1271000013104",
+	"term": "Consulta de gastroenterología infantil"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d2e"
+	},
+	"fsn": "Consulta de hematología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1281000013101",
+	"term": "Consulta de hematología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d2f"
+	},
+	"fsn": "Consulta de obesidad pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1291000013103",
+	"term": "Consulta de obesidad pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d30"
+	},
+	"fsn": "Consulta de fisura labioalveolarpalatina - FLAP (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1301000013102",
+	"term": "Consulta de fisura labioalveolarpalatina - FLAP"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d31"
+	},
+	"fsn": "Consulta de cirugía de tórax pediátrida (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1311000013104",
+	"term": "Consulta de cirugía de tórax pediátrida"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d32"
+	},
+	"fsn": "Consulta de nutrición infantil (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1321000013107",
+	"term": "Consulta de nutrición infantil"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d33"
+	},
+	"fsn": "Consulta de oncología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1331000013105",
+	"term": "Consulta de oncología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d34"
+	},
+	"fsn": "Consulta de control de embarazo de alto riesgo (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1341000013100",
+	"term": "Consulta de control de embarazo de alto riesgo"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d35"
+	},
+	"fsn": "Consulta de planificación familiar (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1351000013103",
+	"term": "Consulta de planificación familiar"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d36"
+	},
+	"fsn": "Consulta de nutrición para pacientes embarazadas (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1361000013101",
+	"term": "Consulta de nutrición para pacientes embarazadas"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d37"
+	},
+	"fsn": "Consulta para cuiados paliativos pediátricos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1371000013108",
+	"term": "Consulta para cuiados paliativos pediátricos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d38"
+	},
+	"fsn": "Consulta de hepatología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1381000013106",
+	"term": "Consulta de hepatología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d39"
+	},
+	"fsn": "Consulta de hepatología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1391000013109",
+	"term": "Consulta de hepatología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d3a"
+	},
+	"fsn": "Consulta prequirúrgica pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1411000013109",
+	"term": "Consulta prequirúrgica pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d3b"
+	},
+	"fsn": "Consulta de crecimiento y desarrollo (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1421000013101",
+	"term": "Consulta de crecimiento y desarrollo"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d3c"
+	},
+	"fsn": "Consulta de ortopedia infantil (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1431000013103",
+	"term": "Consulta de ortopedia infantil"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d3d"
+	},
+	"fsn": "Consulta de terapia ocupacional (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1441000013108",
+	"term": "Consulta de terapia ocupacional"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d3e"
+	},
+	"fsn": "Consulta de terapia ocupacional pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1451000013105",
+	"term": "Consulta de terapia ocupacional pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d3f"
+	},
+	"fsn": "Consulta de cardiología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1461000013107",
+	"term": "Consulta de cardiología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d40"
+	},
+	"fsn": "Consulta de cirugía plástica pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1471000013100",
+	"term": "Consulta de cirugía plástica pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d41"
+	},
+	"fsn": "Consulta de cirugía de pacientes pediátricos quemados (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1481000013102",
+	"term": "Consulta de cirugía de pacientes pediátricos quemados"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d42"
+	},
+	"fsn": "Consulta de nutrición para pacientes nefrológicos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1491000013104",
+	"term": "Consulta de nutrición para pacientes nefrológicos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d43"
+	},
+	"fsn": "Consulta de nutrición para pacientes oncológicos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1501000013107",
+	"term": "Consulta de nutrición para pacientes oncológicos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d44"
+	},
+	"fsn": "Consulta prequirúrgica de nutrición (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1511000013105",
+	"term": "Consulta prequirúrgica de nutrición"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d45"
+	},
+	"fsn": "Consulta de nutrición para pacientes postquirúrgicos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1521000013102",
+	"term": "Consulta de nutrición para pacientes postquirúrgicos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d46"
+	},
+	"fsn": "Consulta de nutrición para pacientes diabéticos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1531000013104",
+	"term": "Consulta de nutrición para pacientes diabéticos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d47"
+	},
+	"fsn": "Consulta de nutrición para pacientes diabéticos pediátricos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1541000013109",
+	"term": "Consulta de nutrición para pacientes diabéticos pediátricos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d48"
+	},
+	"fsn": "Consulta programada (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1651000013107",
+	"term": "Consulta programada"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d49"
+	},
+	"fsn": "Consulta de curaciones ginecológicas (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1671000013102",
+	"term": "Consulta de curaciones ginecológicas"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d4a"
+	},
+	"fsn": "Consulta de interrupción legal del embarazo (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1681000013104",
+	"term": "Consulta de interrupción legal del embarazo"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d4b"
+	},
+	"fsn": "Consulta de anticoncepción (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1691000013101",
+	"term": "Consulta de anticoncepción"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d4c"
+	},
+	"fsn": "Consulta de toma de muestra de HPV (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1701000013101",
+	"term": "Consulta de toma de muestra de HPV"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d4d"
+	},
+	"fsn": "Consulta de control de embarazo de bajo riesgo (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1711000013103",
+	"term": "Consulta de control de embarazo de bajo riesgo"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d4e"
+	},
+	"fsn": "Consulta de monitoreo fetal (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1721000013106",
+	"term": "Consulta de monitoreo fetal"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d4f"
+	},
+	"fsn": "Taller de educación preparto (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1731000013109",
+	"term": "Taller de educación preparto"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d50"
+	},
+	"fsn": "Consulta de embarazo para pacientes diabéticas (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1741000013104",
+	"term": "Consulta de embarazo para pacientes diabéticas"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d51"
+	},
+	"fsn": "Consulta de diagnóstico y seguimiento de anomalías genéticas prenatales (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1751000013102",
+	"term": "Consulta de diagnóstico y seguimiento de anomalías genéticas prenatales"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d52"
+	},
+	"fsn": "Consulta sobre pie diabético (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1791000013108",
+	"term": "Consulta sobre pie diabético"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d53"
+	},
+	"fsn": "Consulta de psicología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1801000013109",
+	"term": "Consulta de psicología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d54"
+	},
+	"fsn": "Consulta de admisión al servicio de salud mental para sujeto adulto (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1811000013107",
+	"term": "Consulta de admisión al servicio de salud mental para sujeto adulto"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d55"
+	},
+	"fsn": "Consulta de admisión al servicio de salud mental para sujeto menor (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1821000013104",
+	"term": "Consulta de admisión al servicio de salud mental para sujeto menor"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d56"
+	},
+	"fsn": "Consulta de psicoprofilaxis quirúrgica para pacientes pediátricos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1831000013101",
+	"term": "Consulta de psicoprofilaxis quirúrgica para pacientes pediátricos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d57"
+	},
+	"fsn": "Consulta de aprestamiento prequirurgico para sujetos candidatos a cirugía bariátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1841000013106",
+	"term": "Consulta de aprestamiento prequirurgico para sujetos candidatos a cirugía bariátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d58"
+	},
+	"fsn": "Consulta de asesoramiento social (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1851000013108",
+	"term": "Consulta de asesoramiento social"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d59"
+	},
+	"fsn": "Consulta de asesoramiento sobre abuso y maltrato de sujeto menor (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1861000013105",
+	"term": "Consulta de asesoramiento sobre abuso y maltrato de sujeto menor"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d5a"
+	},
+	"fsn": "Consulta de apoyo psicológico para pacientes oncológicos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1871000013103",
+	"term": "Consulta de apoyo psicológico para pacientes oncológicos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d5b"
+	},
+	"fsn": "Consulta de control de salud mental para sujetos adultos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1881000013100",
+	"term": "Consulta de control de salud mental para sujetos adultos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d5c"
+	},
+	"fsn": "Consulta de control de salud mental para sujetos menores (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1891000013102",
+	"term": "Consulta de control de salud mental para sujetos menores"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d5d"
+	},
+	"fsn": "Consulta de endocrinología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "251000013108",
+	"term": "Consulta de endocrinología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d5e"
+	},
+	"fsn": "Consulta de neumonología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "271000013103",
+	"term": "Consulta de neumonología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d5f"
+	},
+	"fsn": "Consulta de endocrinología para pacientes transgénero (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "281000013100",
+	"term": "Consulta de endocrinología para pacientes transgénero"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d60"
+	},
+	"fsn": "Consulta de cardiología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "291000013102",
+	"term": "Consulta de cardiología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d61"
+	},
+	"fsn": "Consulta de tabaquismo (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "301000013101",
+	"term": "Consulta de tabaquismo"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d62"
+	},
+	"fsn": "Consulta de cirugía (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "311000013103",
+	"term": "Consulta de cirugía"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d63"
+	},
+	"fsn": "Consulta de cirugía general (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "321000013106",
+	"term": "Consulta de cirugía general"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d64"
+	},
+	"fsn": "Consulta de cirugía de aparato digestivo superior (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "331000013109",
+	"term": "Consulta de cirugía de aparato digestivo superior"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d65"
+	},
+	"fsn": "Consulta de odontología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "34043003",
+	"term": "Consulta de odontología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d66"
+	},
+	"fsn": "Consulta de coloproctología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "341000013104",
+	"term": "Consulta de coloproctología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d67"
+	},
+	"fsn": "Consulta de cirugía de cabeza y cuello (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "351000013102",
+	"term": "Consulta de cirugía de cabeza y cuello"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d68"
+	},
+	"fsn": "Consulta de neurocirugía (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "361000013100",
+	"term": "Consulta de neurocirugía"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d69"
+	},
+	"fsn": "Consulta de hematología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "371000013107",
+	"term": "Consulta de hematología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d6a"
+	},
+	"fsn": "Consulta de medicina general (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "391000013108",
+	"term": "Consulta de medicina general"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d6b"
+	},
+	"fsn": "Consulta de clínica médica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "401000013105",
+	"term": "Consulta de clínica médica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d6c"
+	},
+	"fsn": "Consulta de recetas de antiepilépticos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "401062003",
+	"term": "Consulta de recetas de antiepilépticos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d6d"
+	},
+	"fsn": "Consulta de neurología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "421000013100",
+	"term": "Consulta de neurología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d6e"
+	},
+	"fsn": "Consulta de reumatología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "431000013102",
+	"term": "Consulta de reumatología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d6f"
+	},
+	"fsn": "Consulta de traumatología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "441000013107",
+	"term": "Consulta de traumatología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d70"
+	},
+	"fsn": "Consulta e informe prostodóncicos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "44340006",
+	"term": "Consulta e informe prostodóncicos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d71"
+	},
+	"fsn": "Consulta de traumatología general (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "451000013109",
+	"term": "Consulta de traumatología general"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d72"
+	},
+	"fsn": "Consulta de infectología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "461000013106",
+	"term": "Consulta de infectología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d73"
+	},
+	"fsn": "Consulta de infectología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "471000013104",
+	"term": "Consulta de infectología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d74"
+	},
+	"fsn": "Consulta de odontología pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "481000013101",
+	"term": "Consulta de odontología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d75"
+	},
+	"fsn": "Consulta de oftalmología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "491000013103",
+	"term": "Consulta de oftalmología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d76"
+	},
+	"fsn": "Consulta de otorrinolaringología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "501000013106",
+	"term": "Consulta de otorrinolaringología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d77"
+	},
+	"fsn": "Consulta de pediatría (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "511000013109",
+	"term": "Consulta de pediatría"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d78"
+	},
+	"fsn": "Consulta de traumatología de miembro superior (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "521000013101",
+	"term": "Consulta de traumatología de miembro superior"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d79"
+	},
+	"fsn": "Consulta de traumatología de miembro inferior (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "531000013103",
+	"term": "Consulta de traumatología de miembro inferior"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d7a"
+	},
+	"fsn": "Consulta de reumatología infantil (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "541000013108",
+	"term": "Consulta de reumatología infantil"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d7b"
+	},
+	"fsn": "Consulta de salud mental (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "551000013105",
+	"term": "Consulta de salud mental"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d7c"
+	},
+	"fsn": "Consulta de traumatologia de pie (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "561000013107",
+	"term": "Consulta de traumatologia de pie"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d7d"
+	},
+	"fsn": "Consulta de traumatología de rodilla (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "571000013100",
+	"term": "Consulta de traumatología de rodilla"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d7e"
+	},
+	"fsn": "Consulta de traumatología de cadera (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "581000013102",
+	"term": "Consulta de traumatología de cadera"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d7f"
+	},
+	"fsn": "Consulta de traumatología de hombro (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "591000013104",
+	"term": "Consulta de traumatología de hombro"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d80"
+	},
+	"fsn": "Consulta de traumatología de codo (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "601000013107",
+	"term": "Consulta de traumatología de codo"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d81"
+	},
+	"fsn": "Consulta de traumatología de muñeca (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "611000013105",
+	"term": "Consulta de traumatología de muñeca"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d82"
+	},
+	"fsn": "Consulta de traumatologia de columna (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "621000013102",
+	"term": "Consulta de traumatologia de columna"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d83"
+	},
+	"fsn": "Consulta prequirúrgica de traumatología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "631000013104",
+	"term": "Consulta prequirúrgica de traumatología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d84"
+	},
+	"fsn": "Consulta postquirúrgica de traumatología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "641000013109",
+	"term": "Consulta postquirúrgica de traumatología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d85"
+	},
+	"fsn": "Consulta de ortopedia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "651000013106",
+	"term": "Consulta de ortopedia"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d86"
+	},
+	"fsn": "evaluación mental previa a cirugía bariátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "661000013108",
+	"term": "evaluación mental previa a cirugía bariátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d87"
+	},
+	"fsn": "Consulta de cirugía de tórax (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "671000013101",
+	"term": "Consulta de cirugía de tórax"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d88"
+	},
+	"fsn": "Consulta de cirugía vascular (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "681000013103",
+	"term": "Consulta de cirugía vascular"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d89"
+	},
+	"fsn": "Consulta de toxicología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "691000013100",
+	"term": "Consulta de toxicología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d8a"
+	},
+	"fsn": "Consulta de fonoaudiología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "701000013100",
+	"term": "Consulta de fonoaudiología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d8b"
+	},
+	"fsn": "Consulta de genética (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "711000013102",
+	"term": "Consulta de genética"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d8c"
+	},
+	"fsn": "Consulta e informe endodóncicos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "71387007",
+	"term": "Consulta e informe endodóncicos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d8d"
+	},
+	"fsn": "Consulta de ginecología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "721000013105",
+	"term": "Consulta de ginecología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d8e"
+	},
+	"fsn": "Consulta de nefrología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "731000013108",
+	"term": "Consulta de nefrología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d8f"
+	},
+	"fsn": "Consulta post trasplante renal (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "741000013103",
+	"term": "Consulta post trasplante renal"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d90"
+	},
+	"fsn": "Consulta de nutrición (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "751000013101",
+	"term": "Consulta de nutrición"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d91"
+	},
+	"fsn": "Consulta de oncología clínica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "761000013104",
+	"term": "Consulta de oncología clínica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d92"
+	},
+	"fsn": "Consulta de oncología radiante (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "771000013106",
+	"term": "Consulta de oncología radiante"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d93"
+	},
+	"fsn": "Consulta de oncología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "781000013109",
+	"term": "Consulta de oncología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d94"
+	},
+	"fsn": "Consulta de adolescencia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "791000013107",
+	"term": "Consulta de adolescencia"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d95"
+	},
+	"fsn": "Autocitación (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "811000013106",
+	"term": "Autocitación"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d96"
+	},
+	"fsn": "Consulta de cirugía plástica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "831000013100",
+	"term": "Consulta de cirugía plástica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d97"
+	},
+	"fsn": "Consulta prequirúrgica de anestesiología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "83874006",
+	"term": "Consulta prequirúrgica de anestesiología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d98"
+	},
+	"fsn": "Consulta de cirugía por quemaduras (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "841000013105",
+	"term": "Consulta de cirugía por quemaduras"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d99"
+	},
+	"fsn": "Consulta de cirugía urológica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "851000013107",
+	"term": "Consulta de cirugía urológica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d9a"
+	},
+	"fsn": "Consulta de enfermería (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "861000013109",
+	"term": "Consulta de enfermería"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d9b"
+	},
+	"fsn": "Consulta de enfermería de educación sobre diabetes (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "871000013102",
+	"term": "Consulta de enfermería de educación sobre diabetes"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d9c"
+	},
+	"fsn": "Consulta de enfermería de educación sobre ostomías (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "881000013104",
+	"term": "Consulta de enfermería de educación sobre ostomías"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d9d"
+	},
+	"fsn": "Consulta dental e informe ortodóncicos (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "89291005",
+	"term": "Consulta dental e informe ortodóncicos"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d9e"
+	},
+	"fsn": "Consulta de control de evolución de accidente cerebrovascular (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "901000013102",
+	"term": "Consulta de control de evolución de accidente cerebrovascular"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3d9f"
+	},
+	"fsn": "Consulta de genética pediátrica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "911000013104",
+	"term": "Consulta de genética pediátrica"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3da0"
+	},
+	"fsn": "Consulta de toma de papanicolau - PAP (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "921000013107",
+	"term": "Consulta de toma de papanicolau - PAP"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3da1"
+	},
+	"fsn": "Consulta de diabetes (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "931000013105",
+	"term": "Consulta de diabetes"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3da2"
+	},
+	"fsn": "Consulta de obesidad (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "941000013100",
+	"term": "Consulta de obesidad"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3da3"
+	},
+	"fsn": "Consulta de dermatología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "951000013103",
+	"term": "Consulta de dermatología"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3da4"
+	},
+	"fsn": "Consulta de fibrosis quística (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "961000013101",
+	"term": "Consulta de fibrosis quística"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3da5"
+	},
+	"fsn": "Consulta de hipertensión pulmonar (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "971000013108",
+	"term": "Consulta de hipertensión pulmonar"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3da6"
+	},
+	"fsn": "Consulta de patología mamaria (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "981000013106",
+	"term": "Consulta de patología mamaria"
+},
+{
+	"_id": {
+		"$oid": "59ee2d9bf00c415246fd3da7"
+	},
+	"fsn": "Consulta de uroginecología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "991000013109",
+	"term": "Consulta de uroginecología"
+},
+{
+	"_id": {
+		"$oid": "59f9c26497e679cb088c872b"
+	},
+	"fsn": "atención en hospital de día para menores (régimen/tratamiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "1971000013109",
+	"term": "atención en hospital de día pediátrico"
+},
+{
+	"_id": {
+		"$oid": "5a182930764a0b2a04d6df7b"
+	},
+	"conceptId": "1931000013106",
+	"term": "consulta de evaluación de discapacidad",
+	"fsn": "consulta de evaluación de discapacidad (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "5a26e113291f463c1b982d98"
+	},
+	"fsn": "colonoscopia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "73761001",
+	"term": "colonoscopia",
+	"informe": {
+		"fechaEjecucionOverride": "Fecha Realización",
+		"tipoPrestacionTituloOverride": true,
+		"registroTituloOverride": "Colonoscopia",
+		"motivoPrincipalDeConsultaOverride": true
+	}
+},
+{
+	"_id": {
+		"$oid": "5a310d88764a0b2a04d6df83"
+	},
+	"fsn": "preparación de la epicrisis (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "427228005",
+	"term": "preparación de la epicrisis",
+	"informe": {
+		"fechaEjecucionOverride": "Fecha Realización",
+		"tipoPrestacionTituloOverride": true,
+		"registroTituloOverride": "Informe de Epicrisis",
+		"motivoPrincipalDeConsultaOverride": true
+	}
+},
+{
+	"_id": {
+		"$oid": "5a326b45764a0b2a04d6df84"
+	},
+	"fsn": "esofagogastroduodenoscopia (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "76009000",
+	"term": "esofagogastroduodenoscopia (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "5a71a9b39fd75bb58d65a83c"
+	},
+	"fsn": "ecografía diagnóstica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "16310003",
+	"term": "ecografía",
+	"informe": {
+		"fechaEjecucionOverride": "Fecha Realización",
+		"tipoPrestacionTituloOverride": true,
+		"registroTituloOverride": "Informe",
+		"motivoPrincipalDeConsultaOverride": true
+	}
+},
+{
+	"_id": {
+		"$oid": "5a8b176b764a0b2a042e6b8d"
+	},
+	"fsn": "procedimiento de fisioterapia (régimen/tratamiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "91251008",
+	"term": "fisioterapia"
+},
+{
+	"_id": {
+		"$oid": "5a96e87213c28d501292a9eb"
+	},
+	"conceptId": "2091000013100",
+	"term": "screening de otoemisión acústica neonatal",
+	"fsn": "screening de otoemisión acústica neonatal (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "5a96e87213c28d501292a9ec"
+	},
+	"fsn": "examen de garganta, nariz y oído",
+	"semanticTag": "procedimiento",
+	"conceptId": "113028003",
+	"term": "examen de garganta, nariz y oído"
+},
+{
+	"_id": {
+		"$oid": "5acfa786e4fda05a708eabc5"
+	},
+	"fsn": "consulta de urología (procedimiento)",
+	"semanticTag": "procedimiento",
+	"refsetIds": [],
+	"conceptId": "2301000013109",
+	"term": "consulta de urología"
+},
+{
+	"_id": {
+		"$oid": "5acfa7fee4fda05a708eabc6"
+	},
+	"fsn": "consulta de oftalmología infantil (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptActive": true,
+	"refsetIds": [],
+	"conceptId": "2311000013107",
+	"term": "consulta de oftalmología pediátrica"
+},
+{
+	"_id": {
+		"$oid": "5ae1b401623c22d1ac1eee07"
+	},
+	"fsn": "procedimiento de servicios sociales (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "410606002",
+	"term": "procedimiento de servicios sociales"
+},
+{
+	"_id": {
+		"$oid": "5b574e50bd7c1f8e59407f5a"
+	},
+	"fsn": "procedimiento de salud comunitaria (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "389067005",
+	"term": "procedimiento de salud comunitaria",
+	"noNominalizada": true
+},
+{
+	"_id": {
+		"$oid": "5b61d59968954f3e6ea84586"
+	},
+	"fsn": "procedimiento de salud comunitaria (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "389067005",
+	"term": "actividades con la comunidad",
+	"noNominalizada": true
+},
+{
+	"_id": {
+		"$oid": "5b631adfdf417b57102517d4"
+	},
+	"fsn": "procedimiento administrativo (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "14734007",
+	"term": "actividades de planificación, gestión y capacitación de la organización",
+	"noNominalizada": true
+},
+{
+	"_id": {
+		"$oid": "5b76c3cabd7c1f8e598d7392"
+	},
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"conceptId": "15220000",
+	"term": "prueba de laboratorio",
+	"fsn": "prueba de laboratorio (procedimiento)",
+	"semanticTag": "procedimiento"
+},
+{
+	"_id": {
+		"$oid": "5bf833f013e0cba8b56fa63f"
+	},
+	"fsn": "procedimiento radiográfico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "363680008",
+	"term": "procedimiento radiográfico"
+},
+{
+	"_id": {
+		"$oid": "5c8904185cd661b503c48036"
+	},
+	"fsn": "indicación para procedimiento (entidad observable)",
+	"semanticTag": "entidad observable",
+	"conceptId": "432678004",
+	"term": "indicación para procedimiento"
+},
+{
+	"_id": {
+		"$oid": "5cb736b64633250d5db0e59f"
+	},
+	"fsn": "ecografía Doppler diagnóstica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"conceptId": "8306009",
+	"term": "ecografía Doppler diagnóstica"
+},
+{
+	"_id": {
+		"$oid": "5cb737364633250d5db5ce65"
+	},
+	"fsn": "ecocardiografía transesofágica (procedimiento)",
+	"semanticTag": "procedimiento",
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"conceptId": "105376000",
+	"term": "ecocardiografía transesofágica"
+},
+{
+	"_id": {
+		"$oid": "5cb738aa4633250d5dc44412"
+	},
+	"fsn": "ecocardiograma de estrés durante el ejercicio (procedimiento)",
+	"semanticTag": "procedimiento",
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"conceptId": "433233004",
+	"term": "ecocardiograma de estrés durante el ejercicio"
+},
+{
+	"_id": {
+		"$oid": "5cb738cf4633250d5dc5ac33"
+	},
+	"fsn": "ergometría con cinta sin fin (procedimiento)",
+	"semanticTag": "procedimiento",
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"conceptId": "80635001",
+	"term": "ergometría con cinta sin fin"
+},
+{
+	"_id": {
+		"$oid": "5cb738fd4633250d5dc77817"
+	},
+	"fsn": "ecografía Doppler de tejido cardíaco (procedimiento)",
+	"semanticTag": "procedimiento",
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"conceptId": "439858009",
+	"term": "ecografía Doppler de tejido cardíaco"
+},
+{
+	"_id": {
+		"$oid": "5cb739374633250d5dc9aeae"
+	},
+	"fsn": "verificación del marcapasos artificial (procedimiento)",
+	"semanticTag": "procedimiento",
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"conceptId": "9061001",
+	"term": "control del marcapasos"
+},
+{
+	"_id": {
+		"$oid": "5cb7393a4633250d5dc9c661"
+	},
+	"fsn": "electrocardiograma de 24 horas (procedimiento)",
+	"semanticTag": "procedimiento",
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"conceptId": "252417001",
+	"term": "registro de 24 horas de Holter"
+},
+{
+	"_id": {
+		"$oid": "5cb739ca4633250d5dcf536b"
+	},
+	"fsn": "ecocardiografía (procedimiento)",
+	"semanticTag": "procedimiento",
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"conceptId": "40701008",
+	"term": "ecocardiografía"
+},
+{
+	"_id": {
+		"$oid": "5cb73a004633250d5dd16cf6"
+	},
+	"fsn": "prueba de estrés cardiovascular con utilización de agente farmacológico (procedimiento)",
+	"semanticTag": "procedimiento",
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"conceptId": "424064009",
+	"term": "prueba de estrés cardiovascular con utilización de agente farmacológico (procedimiento)"
+},
+{
+	"_id": {
+		"$oid": "5cdc4c865cd661b503d727a6"
+	},
+	"fsn": "sesión de informes de enfermería (procedimiento)",
+	"semanticTag": "procedimiento",
+	"conceptId": "11553003",
+	"refsetIds": [
+		"900000000000497000"
+	],
+	"term": "sesión de informes de enfermería"
+}]
+

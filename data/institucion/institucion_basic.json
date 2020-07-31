@@ -1,0 +1,181 @@
+[{
+	"_id": {
+		"$oid": "5eb2f47f6d43f595b7d54602"
+	},
+	"nombre": "CE.M.O.E. SAN JOSE OBRERO",
+	"tipo": "Establecimiento educativo",
+	"contacto": {
+		"valor": 2.994423957e+09
+	},
+	"direccion": {
+		"valor": "PRIMEROS POBLADORES 1123",
+		"codigoPostal": 8300.0,
+		"ubicacion": {
+			"barrio": "MARIANO MORENO",
+			"localidad": "NEUQUEN"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eb2f47f6d43f595b7d54603"
+	},
+	"nombre": "ESCUELA PRIMARIA 300",
+	"tipo": "Establecimiento educativo",
+	"contacto": {
+		"valor": 2.994886044e+09
+	},
+	"direccion": {
+		"valor": "PERON JUAN D PTE 587",
+		"codigoPostal": 8319.0,
+		"ubicacion": {
+			"barrio": "48 VIVIENDAS",
+			"localidad": "RINCON DE LOS SAUCES"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eb2f47f6d43f595b7d54604"
+	},
+	"nombre": "CENTRO PROVINCIAL DE ENSEÑANZA MEDIA 43",
+	"tipo": "Establecimiento educativo",
+	"contacto": {
+		"valor": 2.994963352e+09
+	},
+	"direccion": {
+		"valor": "OLASCOAGA MANUEL JOSE AV 501",
+		"codigoPostal": 8322.0,
+		"ubicacion": {
+			"barrio": "COOPERATIVA",
+			"localidad": "CUTRAL CO"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eb2f47f6d43f595b7d54605"
+	},
+	"nombre": "ESCUELA PRIMARIA 272 ELOÍSA C.DE CANTONI",
+	"tipo": "Establecimiento educativo",
+	"contacto": {
+		"valor": 2.994961502e+09
+	},
+	"direccion": {
+		"valor": "DI PAOLO 539",
+		"codigoPostal": 8322.0,
+		"ubicacion": {
+			"barrio": "RUCA QUIMEY",
+			"localidad": "CUTRAL CO"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eb2f47f6d43f595b7d54606"
+	},
+	"nombre": "CENTRO PROVINCIAL DE ENSEÑANZA MEDIA 6",
+	"tipo": "Establecimiento educativo",
+	"contacto": {
+		"valor": 2.994963352e+09
+	},
+	"direccion": {
+		"valor": "OLASCOAGA MANUEL JOSE AV 501",
+		"codigoPostal": 8322.0,
+		"ubicacion": {
+			"barrio": "COOPERATIVA",
+			"localidad": "CUTRAL CO"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eb2f47f6d43f595b7d54607"
+	},
+	"nombre": "ESCUELA PRIMARIA 132 CEFERINO NAMUNCURA",
+	"tipo": "Establecimiento educativo",
+	"contacto": {
+		"valor": 2.994487652e+09
+	},
+	"direccion": {
+		"valor": "PURRAN CACIQUE 499",
+		"codigoPostal": 8300.0,
+		"ubicacion": {
+			"barrio": "LA SIRENA",
+			"localidad": "NEUQUEN"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eb2f47f6d43f595b7d54608"
+	},
+	"nombre": "CENTRO PROVINCIAL DE ENSEÑANZA MEDIA 29",
+	"tipo": "Establecimiento educativo",
+	"contacto": {
+		"valor": 2.994440631e+09
+	},
+	"direccion": {
+		"valor": "DE SAN MARTIN JOSE GRL 5202",
+		"codigoPostal": 8300.0,
+		"ubicacion": {
+			"barrio": "VALENTINA NORTE URBANO",
+			"localidad": "NEUQUEN"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eb2f47f6d43f595b7d54609"
+	},
+	"nombre": "CENTRO PROVINCIAL DE ENSEÑANZA MEDIA 26",
+	"tipo": "Establecimiento educativo",
+	"contacto": {
+		"valor": 2.994461549e+09
+	},
+	"direccion": {
+		"valor": "CALLE 5",
+		"codigoPostal": 8300.0,
+		"ubicacion": {
+			"barrio": "GREGORIO ALVAREZ",
+			"localidad": "NEUQUEN"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eb2f47f6d43f595b7d5460a"
+	},
+	"nombre": "ESCUELA PROVINCIAL DE ENSEÑANZA TÉCNICA 3",
+	"tipo": "Establecimiento educativo",
+	"contacto": {
+		"valor": 2.994460722e+09
+	},
+	"direccion": {
+		"valor": "LAGO NONTHUE 2999",
+		"codigoPostal": 8300.0,
+		"ubicacion": {
+			"barrio": "GREGORIO ALVAREZ",
+			"localidad": "NEUQUEN"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eb2f47f6d43f595b7d5460b"
+	},
+	"nombre": "ESCUELA PRIMARIA 115",
+	"tipo": "Establecimiento educativo",
+	"contacto": {
+		"valor": 2.994460222e+09
+	},
+	"direccion": {
+		"valor": "CASTELLI JUAN JOSE 4851",
+		"codigoPostal": 8300.0,
+		"ubicacion": {
+			"barrio": "SAN LORENZO NORTE",
+			"localidad": "NEUQUEN"
+		}
+	}
+}]
+

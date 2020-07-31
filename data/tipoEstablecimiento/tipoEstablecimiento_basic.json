@@ -1,0 +1,52 @@
+[{
+	"_id": {
+		"$oid": "57d19efc69fe79a598e62801"
+	},
+	"nombre": "Hospital",
+	"descripcion": "Hospital",
+	"clasificacion": "HP",
+	"idTipoEfector": 2
+},
+{
+	"_id": {
+		"$oid": "57d19f1a69fe79a598e62802"
+	},
+	"nombre": "Centro de Salud",
+	"descripcion": "Centro de Salud",
+	"clasificacion": "C2",
+	"idTipoEfector": 1
+},
+{
+	"_id": {
+		"$oid": "57d19f3469fe79a598e62803"
+	},
+	"nombre": "Puesto Sanitario",
+	"descripcion": "Puesto Sanitario",
+	"clasificacion": "C3",
+	"idTipoEfector": 3
+},
+{
+	"_id": {
+		"$oid": "57fd037186254722dd3a0199"
+	},
+	"nombre": "Zona Sanitaria",
+	"descripcion": "Zona Sanitaria",
+	"idTipoEfector": 4.0
+},
+{
+	"_id": {
+		"$oid": "57fd037186254722dd3a019a"
+	},
+	"nombre": "SubSecretaria de Salud",
+	"descripcion": "SubSecretaria de Salud",
+	"idTipoEfector": 5.0
+},
+{
+	"_id": {
+		"$oid": "57fd037186254722dd3a019b"
+	},
+	"nombre": "ONG",
+	"descripcion": "ONG",
+	"idTipoEfector": 6.0
+}]
+

@@ -22,14 +22,10 @@ const down = {
 
 const reset = {
     production: [
-        'docker exec andes_test_db mongo andes --eval "db.getCollectionNames().forEach(function(n){db[n].remove({})});"',
-        'docker cp docker/andes.gz andes_test_db:/andes.gz',
-        'docker exec andes_test_db mongorestore --gzip --archive=/andes.gz --db andes',
+        'node scripts/seeder.js'
     ],
     develop: [
-        'docker exec andes_db mongo andes --eval "db.getCollectionNames().forEach(function(n){db[n].remove({})});"',
-        'docker cp docker/andes.gz andes_db:/andes.gz',
-        'docker exec andes_db mongorestore --gzip --archive=/andes.gz --db andes',
+        'node scripts/seeder.js'
     ]
 };
 

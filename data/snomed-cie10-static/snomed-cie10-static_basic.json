@@ -1,0 +1,36 @@
+[{
+	"_id": {
+		"$oid": "5b8ad3877343a046486ea2b8"
+	},
+	"conceptId": "410623006",
+	"mapTarget": "Z00.1"
+},
+{
+	"_id": {
+		"$oid": "5b8ad3877343a046486ea2b9"
+	},
+	"conceptId": "410621008",
+	"mapTarget": "Z00.1"
+},
+{
+	"_id": {
+		"$oid": "5b8ad3877343a046486ea2ba"
+	},
+	"conceptId": " 410624000",
+	"mapTarget": "Z00.1"
+},
+{
+	"_id": {
+		"$oid": "5b8ad3877343a046486ea2bb"
+	},
+	"conceptId": "410626003",
+	"mapTarget": "Z00.1"
+},
+{
+	"_id": {
+		"$oid": "5b8ad3877343a046486ea2bc"
+	},
+	"conceptId": "410627007",
+	"mapTarget": "Z00.1"
+}]
+

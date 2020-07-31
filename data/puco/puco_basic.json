@@ -1,0 +1,27 @@
+[{
+	"_id": {
+		"$oid": "5ed7d80b0dbcf5d3db413f64"
+	},
+	"tipoDoc": "DNI",
+	"dni": 123456789,
+	"codigoOS": 1,
+	"transmite": "N",
+	"nombre": "ANDES PACIENTE",
+	"version": {
+		"$date": "2019-07-01T00:00:00.000Z"
+	}
+},
+{
+	"_id": {
+		"$oid": "5ee23ef04504ce5bd181d1b1"
+	},
+	"tipoDoc": "DNI",
+	"dni": 987654321,
+	"codigoOS": 1,
+	"transmite": "N",
+	"nombre": "ANDES TEMPORAL",
+	"version": {
+		"$date": "2019-07-01T00:00:00.000Z"
+	}
+}]
+

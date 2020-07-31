@@ -1,0 +1,337 @@
+[{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c45"
+	},
+	"codigo": 1,
+	"nombre": "CABA",
+	"codINDEC": 2,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c46"
+	},
+	"codigo": 2,
+	"nombre": "Buenos Aires",
+	"codINDEC": 6,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c47"
+	},
+	"codigo": 3,
+	"nombre": "Catamarca",
+	"codINDEC": 10,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c48"
+	},
+	"codigo": 4,
+	"nombre": "Chaco",
+	"codINDEC": 22,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c49"
+	},
+	"codigo": 5,
+	"nombre": "Chubut",
+	"codINDEC": 26,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c4a"
+	},
+	"codigo": 6,
+	"nombre": "Córdoba",
+	"codINDEC": 14,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c4b"
+	},
+	"codigo": 7,
+	"nombre": "Corrientes",
+	"codINDEC": 18,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c4c"
+	},
+	"codigo": 8,
+	"nombre": "Entre Ríos",
+	"codINDEC": 30,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c4d"
+	},
+	"codigo": 9,
+	"nombre": "Formosa",
+	"codINDEC": 34,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c4e"
+	},
+	"codigo": 10,
+	"nombre": "Jujuy",
+	"codINDEC": 38,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c4f"
+	},
+	"codigo": 11,
+	"nombre": "La Pampa",
+	"codINDEC": 42,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c50"
+	},
+	"codigo": 12,
+	"nombre": "La Rioja",
+	"codINDEC": 46,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c51"
+	},
+	"codigo": 13,
+	"nombre": "Mendoza",
+	"codINDEC": 50,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c52"
+	},
+	"codigo": 14,
+	"nombre": "Misiones",
+	"codINDEC": 54,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c53"
+	},
+	"codigo": 15,
+	"nombre": "Neuquén",
+	"codINDEC": 58,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c54"
+	},
+	"codigo": 16,
+	"nombre": "Río Negro",
+	"codINDEC": 62,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c55"
+	},
+	"codigo": 17,
+	"nombre": "Salta",
+	"codINDEC": 66,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c56"
+	},
+	"codigo": 18,
+	"nombre": "San Juan",
+	"codINDEC": 70,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c57"
+	},
+	"codigo": 19,
+	"nombre": "San Luis",
+	"codINDEC": 74,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c58"
+	},
+	"codigo": 20,
+	"nombre": "Santa Cruz",
+	"codINDEC": 78,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c59"
+	},
+	"codigo": 21,
+	"nombre": "Santa Fe",
+	"codINDEC": 82,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c5a"
+	},
+	"codigo": 22,
+	"nombre": "Santiago del Estero",
+	"codINDEC": 86,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c5b"
+	},
+	"codigo": 23,
+	"nombre": "Tierra del Fuego",
+	"codINDEC": 94,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "57f3f3aacebd681cc2014c5c"
+	},
+	"codigo": 24,
+	"nombre": "Tucumán",
+	"codINDEC": 90,
+	"pais": {
+		"nombre": "Argentina",
+		"_id": {
+			"$oid": "57f3b5c469fe79a598e6281f"
+		}
+	}
+}]
+

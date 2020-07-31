@@ -1,0 +1,65 @@
+[{
+	"_id": {
+		"$oid": "5aaa7796096bb7b214086efc"
+	},
+	"codigo": 1,
+	"nombre": "Residencia acreditada",
+	"descripcion": "Residencia acreditada"
+},
+{
+	"_id": {
+		"$oid": "5aaa7796096bb7b214086efd"
+	},
+	"codigo": 5,
+	"nombre": "Certificación por exámen ante autoridad competente",
+	"descripcion": "Certificación por exámen ante autoridad competente"
+},
+{
+	"_id": {
+		"$oid": "5aaa7796096bb7b214086efe"
+	},
+	"codigo": 2,
+	"nombre": "Carrera de especialista universitario",
+	"descripcion": "Carrera de especialista universitario"
+},
+{
+	"_id": {
+		"$oid": "5aaa7796096bb7b214086eff"
+	},
+	"codigo": 6,
+	"nombre": "Certifica otra jurisdicción",
+	"descripcion": "Certifica otra jurisdicción"
+},
+{
+	"_id": {
+		"$oid": "5aaa7796096bb7b214086f00"
+	},
+	"codigo": 7,
+	"nombre": "Otros",
+	"descripcion": "Otros"
+},
+{
+	"_id": {
+		"$oid": "5aaa7796096bb7b214086f01"
+	},
+	"codigo": 3,
+	"nombre": "Profesor titular o adjunto por concurso",
+	"descripcion": "Profesor titular o adjunto por concurso"
+},
+{
+	"_id": {
+		"$oid": "5ab10aa794ecce092548ea93"
+	},
+	"codigo": 4,
+	"nombre": "Certificación por Sociedad Científica",
+	"descripcion": "Certificación por Sociedad Científica"
+},
+{
+	"_id": {
+		"$oid": "5ab10aa794ecce092548ea97"
+	},
+	"codigo": 8,
+	"nombre": "Sin Especificar",
+	"descripcion": "Sin Especificar"
+}]
+

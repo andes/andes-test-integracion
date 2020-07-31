@@ -1,0 +1,3948 @@
+[{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbdb"
+	},
+	"codigoPuco": 1,
+	"nombre": "MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbdc"
+	},
+	"codigoPuco": 109,
+	"nombre": "OBRA SOCIAL DEL PERS. JERARQUICO DE LA INDUSTRIA GRAFICA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbdd"
+	},
+	"codigoPuco": 208,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA GRAFICA DE LA PROVINCIA DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbde"
+	},
+	"codigoPuco": 307,
+	"nombre": "OBRA SOCIAL PORTUARIOS ARGENTINOS DE MAR DEL PLATA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbdf"
+	},
+	"codigoPuco": 406,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL ORGANISMO DE CONTROL EXTERNO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbe0"
+	},
+	"codigoPuco": 505,
+	"nombre": "OBRA SOCIAL DE CAPITANES, PILOTOS Y PATRONES DE PESCA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbe1"
+	},
+	"codigoPuco": 604,
+	"nombre": "OBRA SOCIAL DE AGENTES DE LOTERIAS Y AFINES DE LA REPUBLICA  ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbe2"
+	},
+	"codigoPuco": 703,
+	"nombre": "MUTUAL DEL PERSONAL DEL AGUA Y LA ENERGIA DE MENDOZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbe3"
+	},
+	"codigoPuco": 802,
+	"nombre": "OBRA SOCIAL DE YPF"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbe4"
+	},
+	"codigoPuco": 901,
+	"nombre": "OBRA SOCIAL DE LA ACTIVIDAD DE SEGUROS, REASEGUROS, CAPITALIZACION Y AHORRO Y PRESTAMO PARA LA VIVIENDA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbe5"
+	},
+	"codigoPuco": 1003,
+	"nombre": "OBRA SOCIAL PARA EL PERS. DE OBRAS Y SERVICIOS SANITARIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbe6"
+	},
+	"codigoPuco": 1102,
+	"nombre": "OBRA SOCIAL PARA LA ACTIVIDAD DOCENTE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbe7"
+	},
+	"codigoPuco": 1201,
+	"nombre": "OBRA SOCIAL PARA EL PERSONAL DEL MINISTERIO DE ECONOMIA Y DE OBRAS Y SERVICIOS PUBLICOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbe8"
+	},
+	"codigoPuco": 1300,
+	"nombre": "OBRA SOCIAL FERROVIARIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbe9"
+	},
+	"codigoPuco": 1409,
+	"nombre": "MUTUAL DEL PERSONAL DE AGUA Y ENERGIA ELECTRICA DE CAPITAL FEDERAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbea"
+	},
+	"codigoPuco": 1508,
+	"nombre": "OBRA SOCIAL DE LA ASOCIACION CIVIL PROSINDICATO DE AMAS DE CASA DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbeb"
+	},
+	"codigoPuco": 1607,
+	"nombre": "OBRA SOCIAL DEL SINDICATO UNIDO DE TRABAJADORES DE LA INDUSTRIA DE AGUAS GASEOSAS DE LA PROVINCIA DE SANTA FE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbec"
+	},
+	"codigoPuco": 1706,
+	"nombre": "OBRA SOCIAL DEL PERSONAL JERARQUICO DE LA REPUBLICA ARGENTINA PARA EL PERSONAL JERARQUICO DE LA INDUSTRIA GRAFICA Y EL PERSONAL JERARQUICO DEL AGUA Y LA ENERGIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbed"
+	},
+	"codigoPuco": 1805,
+	"nombre": "OBRA SOCIAL DE LOS  LEGISLADORES DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbee"
+	},
+	"codigoPuco": 1904,
+	"nombre": "OBRA SOCIAL DE LA FEDERACION DE CAMARAS Y CENTROS COMERCIALES ZONALES DE LA REPUBLICA ARGENTINA (FEDECAMARAS)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbef"
+	},
+	"codigoPuco": 2006,
+	"nombre": "OBRA SOCIAL DE VIALIDAD NACIONAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbf0"
+	},
+	"codigoPuco": 2105,
+	"nombre": "OBRA SOCIAL PROFESIONALES DEL TURF DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbf1"
+	},
+	"codigoPuco": 2204,
+	"nombre": "OBRA SOCIAL DE EMPLEADOS Y PERSONAL JERARQUICO  DE LA ACTIVIDAD DEL  NEUMATICO ARGENTINO DE NEUMATICOS GOOD YEAR SRL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbf2"
+	},
+	"codigoPuco": 2303,
+	"nombre": "OBRA SOCIAL PARA EL  PERSONAL DE EMPRESAS DE  LIMPIEZA, SERVICIOS Y MAESTRANZA DE MENDOZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbf3"
+	},
+	"codigoPuco": 2402,
+	"nombre": "OBRA SOCIAL DEL PERSONAL JERARQUICO DEL TRANSPORTE AUTOMOTOR DE PASAJEROS DE CORDOBA Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbf4"
+	},
+	"codigoPuco": 2501,
+	"nombre": "OBRA SOCIAL DE MINISTROS, SECRETARIOS Y SUBSECRETARIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbf5"
+	},
+	"codigoPuco": 2600,
+	"nombre": "OBRA SOCIAL DE LOS TRABAJADORES DE LA CARNE Y AFINES DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbf6"
+	},
+	"codigoPuco": 2709,
+	"nombre": "OBRA SOCIAL DE LOS TRABAJADORES ASOCIADOS A LA ASOCIACION MUTUAL MERCANTIL ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbf7"
+	},
+	"codigoPuco": 2808,
+	"nombre": "OBRA SOCIAL DE LA CAMARA DE EMPRESARIOS DE AGENCIAS DE REMISES DE LA PROVINCIA DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbf8"
+	},
+	"codigoPuco": 2907,
+	"nombre": "OBRA SOCIAL ASOCIACION MUTUAL METALURGICA VILLA CONSTITUCION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbf9"
+	},
+	"codigoPuco": 3009,
+	"nombre": "OBRA SOCIAL DEL PERSONAL ASOCIADO A ASOCIACION MUTUAL SANCOR"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbfa"
+	},
+	"codigoPuco": 3108,
+	"nombre": "OBRA SOCIAL DE LOS INMIGRANTES ESPAÑOLES Y SUS DESCENDIENTES RESIDENTES EN LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbfb"
+	},
+	"codigoPuco": 3207,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES SOCIOS DE LA ASOCIACION MUTUAL DEL PERSONAL JERARQUICO DE BANCOS OFICIALES NACIONALES-JERARQUICOS SALUD-"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbfc"
+	},
+	"codigoPuco": 3306,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES VENDEDORES DE DIARIOS REVISTAS Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbfd"
+	},
+	"codigoPuco": 3405,
+	"nombre": "OBRA SOCIAL ASOCIACION  MUTUAL DE LOS OBREROS CATOLICOS \"\"PADRE FEDERICO GROTE\"\""
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbfe"
+	},
+	"codigoPuco": 3504,
+	"nombre": "OBRA SOCIAL DE CONDUCTORES TITULARES DE TAXIS DE LA CIUDAD AUTONOMA DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dbff"
+	},
+	"codigoPuco": 3603,
+	"nombre": "OBRA SOCIAL PROGRAMAS MEDICOS SOCIEDAD ARGENTINA DE CONSULTORIA MUTUAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc00"
+	},
+	"codigoPuco": 3702,
+	"nombre": "OBRA SOCIAL  YACIMIENTOS CARBONIFEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc01"
+	},
+	"codigoPuco": 12440,
+	"nombre": "OBRA SOCIAL PARA EL PERS. DE EMPRESAS DE LIMPIEZA Y SERV."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc02"
+	},
+	"codigoPuco": 100106,
+	"nombre": "OBRA SOCIAL PARA EL PERSONAL DE LA INDUSTRIA ACEITERA, DESMOTADORA Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc03"
+	},
+	"codigoPuco": 100205,
+	"nombre": "OBRA SOCIAL DE ACTORES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc04"
+	},
+	"codigoPuco": 100304,
+	"nombre": "OBRA SOCIAL DE TECNICOS DE VUELO DE LINEAS AEREAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc05"
+	},
+	"codigoPuco": 100403,
+	"nombre": "OBRA SOCIAL DEL PERSONAL SUPERIOR Y PROFESIONAL DE EMPRESAS AEROCOMERCIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc06"
+	},
+	"codigoPuco": 100502,
+	"nombre": "OBRA SOCIAL DEL PERSONAL AERONAUTICO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc07"
+	},
+	"codigoPuco": 100601,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE AERONAVEGACION DE ENTES PRIVADOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc08"
+	},
+	"codigoPuco": 100700,
+	"nombre": "OBRA SOCIAL DEL PERSONAL TECNICO AERONAUTICO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc09"
+	},
+	"codigoPuco": 100762,
+	"nombre": "OBRA SOCIAL PARA EL PERS. DE ESCRIBANIAS DE LA PROVINCIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc0a"
+	},
+	"codigoPuco": 100809,
+	"nombre": "OBRA SOCIAL DE AERONAVEGANTES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc0b"
+	},
+	"codigoPuco": 100908,
+	"nombre": "OBRA SOCIAL  EMPLEADOS DE AGENCIAS DE INFORMES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc0c"
+	},
+	"codigoPuco": 101000,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE AGUAS GASEOSAS Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc0d"
+	},
+	"codigoPuco": 101109,
+	"nombre": "OBRA SOCIAL DE ALFAJOREROS, REPOSTEROS, PIZZEROS Y HELADEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc0e"
+	},
+	"codigoPuco": 101208,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DE LA ALIMENTACION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc0f"
+	},
+	"codigoPuco": 101307,
+	"nombre": "OBRA SOCIAL DEL PERS. DE ARTES GRAFICAS DEL CHACO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc10"
+	},
+	"codigoPuco": 101406,
+	"nombre": "OBRA SOCIAL ARTES GRAFICAS DE SANTA FE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc11"
+	},
+	"codigoPuco": 101505,
+	"nombre": "OBRA SOCIAL DE ARTISTAS DE VARIEDADES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc12"
+	},
+	"codigoPuco": 101604,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL AUTOMOVIL  CLUB ARGENTINO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc13"
+	},
+	"codigoPuco": 101703,
+	"nombre": "OBRA SOCIAL DEL PERS. DEL AZUCAR DE CALILEGUA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc14"
+	},
+	"codigoPuco": 101802,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL AZUCAR DEL INGENIO LA ESPERANZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc15"
+	},
+	"codigoPuco": 101901,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL AZUCAR DEL INGENIO LEDESMA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc16"
+	},
+	"codigoPuco": 102003,
+	"nombre": "OBRA SOCIAL DEL PERS. DEL AZUCAR DEL INGENIO LAS TOSCAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc17"
+	},
+	"codigoPuco": 102102,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL AZUCAR DEL INGENIO RIO GRANDE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc18"
+	},
+	"codigoPuco": 102201,
+	"nombre": "OBRA SOCIAL DEL PERS. DEL AZUCAR DEL INGENIO SAN ISIDRO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc19"
+	},
+	"codigoPuco": 102300,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL AZUCAR DEL INGENIO SAN MARTIN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc1a"
+	},
+	"codigoPuco": 102409,
+	"nombre": "OBRA SOCIAL AZUCAR VILLA OCAMPO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc1b"
+	},
+	"codigoPuco": 102607,
+	"nombre": "OBRA SOCIAL DEL PERS. DE LA ACT. AZUCARERA TUCUMANA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc1c"
+	},
+	"codigoPuco": 102706,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA AZUCARERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc1d"
+	},
+	"codigoPuco": 102805,
+	"nombre": "0BRA SOCIAL DE BANCARIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc1e"
+	},
+	"codigoPuco": 102904,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE BARRACAS DE LANAS, CUEROS Y ANEXOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc1f"
+	},
+	"codigoPuco": 103006,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA BOTONERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc20"
+	},
+	"codigoPuco": 103105,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL CALZADO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc21"
+	},
+	"codigoPuco": 103204,
+	"nombre": "OBRA SOCIAL DE CONDUCTORES CAMIONEROS Y PERSONAL DEL TRANSPORTE AUTOMOTOR DE CARGAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc22"
+	},
+	"codigoPuco": 103303,
+	"nombre": "0BRA SOCIAL DEL PERS. DE LA JUNTA NACIONAL DE CARNE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc23"
+	},
+	"codigoPuco": 103402,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE CARGA Y DESCARGA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc24"
+	},
+	"codigoPuco": 103501,
+	"nombre": "OBRA SOCIAL DEL PERS. DE SUPERVISION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc25"
+	},
+	"codigoPuco": 103600,
+	"nombre": "OBRA SOCIAL DEL PERSONAL AUXILIAR DE CASAS PARTICULARES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc26"
+	},
+	"codigoPuco": 103709,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL CAUCHO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc27"
+	},
+	"codigoPuco": 103808,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL CAUCHO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc28"
+	},
+	"codigoPuco": 103907,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL CAUCHO DE SANTA FE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc29"
+	},
+	"codigoPuco": 104009,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE CEMENTERIOS DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc2a"
+	},
+	"codigoPuco": 104108,
+	"nombre": "OBRA SOCIAL DE CERAMISTAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc2b"
+	},
+	"codigoPuco": 104207,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA CERAMICA, SANITARIOS, PORCELANA DE MESA Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc2c"
+	},
+	"codigoPuco": 104306,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA ACTIVIDAD CERVECERA Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc2d"
+	},
+	"codigoPuco": 104405,
+	"nombre": "OBRA SOCIAL DEL PERSONAL CINEMATOGRAFICO DE MAR DEL PLATA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc2e"
+	},
+	"codigoPuco": 104504,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA CINEMATOGRAFICA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc2f"
+	},
+	"codigoPuco": 104603,
+	"nombre": "OBRA SOCIAL DE OPERADORES CINEMATOGRAFICOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc30"
+	},
+	"codigoPuco": 104702,
+	"nombre": "OBRA SOCIAL DE COLCHONEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc31"
+	},
+	"codigoPuco": 104801,
+	"nombre": "OBRA SOCIAL DE COLOCADORES DE AZULEJOS, MOSAICOS, GRANITEROS, LUSTRADORES Y PORCELANEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc32"
+	},
+	"codigoPuco": 104900,
+	"nombre": "OBRA SOCIAL DE LOS EMPLEADOS DE COMERCIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc33"
+	},
+	"codigoPuco": 105002,
+	"nombre": "OBRA SOCIAL DE CONDUCTORES NAVALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc34"
+	},
+	"codigoPuco": 105101,
+	"nombre": "OBRA SOCIAL DE CONSIGNATARIOS DEL MERCADO GENERAL DE HACI"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc35"
+	},
+	"codigoPuco": 105200,
+	"nombre": "INST. DE SERV. SOC. PARA EL PERS. DE LA IND. DE LA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc36"
+	},
+	"codigoPuco": 105309,
+	"nombre": "OBRA SOCIAL DEL PERSONAL ADMINISTRATIVO Y TECNICO DE LA CONSTRUCCION Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc37"
+	},
+	"codigoPuco": 105408,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA CONSTRUCCION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc38"
+	},
+	"codigoPuco": 105507,
+	"nombre": "OBRA SOCIAL DE LOS CORTADORES DE LA INDUMENTARIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc39"
+	},
+	"codigoPuco": 105606,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL CUERO Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc3a"
+	},
+	"codigoPuco": 105705,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL CHACINADO Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc3b"
+	},
+	"codigoPuco": 105804,
+	"nombre": "OBRA SOCIAL DE CHOFERES DE CAMIONES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc3c"
+	},
+	"codigoPuco": 105903,
+	"nombre": "OBRA SOCIAL CHOFERES PARTICULARES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc3d"
+	},
+	"codigoPuco": 106005,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE ENTIDADES DEPORTIVAS Y CIVILES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc3e"
+	},
+	"codigoPuco": 106104,
+	"nombre": "OBRA SOCIAL DE EMPLEADOS DE DESPACHANTES DE ADUANA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc3f"
+	},
+	"codigoPuco": 106203,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DISTRIBUIDORAS CINEMATOGRAFICAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc40"
+	},
+	"codigoPuco": 106302,
+	"nombre": "OBRA SOCIAL DE DOCENTES PARTICULARES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc41"
+	},
+	"codigoPuco": 106401,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE EDIFICIOS DE RENTA Y HORIZONTAL DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc42"
+	},
+	"codigoPuco": 106500,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE EDIFICIOS DE RENTA Y HORIZONTAL DE LA CIUDAD AUTONOMA DE BUENOS AIRES  Y GRAN BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc43"
+	},
+	"codigoPuco": 106609,
+	"nombre": "OBRA SOCIAL ELECTRICISTAS NAVALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc44"
+	},
+	"codigoPuco": 106708,
+	"nombre": "OBRA SOCIAL DE OBREROS EMPACADORES DE FRUTA  DE RIO NEGRO Y NEUQUEN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc45"
+	},
+	"codigoPuco": 106807,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA ENSE¥ANZA PRIVADA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc46"
+	},
+	"codigoPuco": 106906,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE ESCRIBANIAS DE LA PROVINCIA DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc47"
+	},
+	"codigoPuco": 107008,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE ESCRIBANOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc48"
+	},
+	"codigoPuco": 107107,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL ESPECTACULO PUBLICO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc49"
+	},
+	"codigoPuco": 107206,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE ESTACIONES DE SERVICIO, GARAGES, PLAYAS DE ESTACIONAMIENTO Y LAVADEROS AUTOMATICOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc4a"
+	},
+	"codigoPuco": 107305,
+	"nombre": "OBRA SOCIAL DEL PERS. DEL ESTADO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc4b"
+	},
+	"codigoPuco": 107404,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE FARMACIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc4c"
+	},
+	"codigoPuco": 107503,
+	"nombre": "OBRA SOCIAL DE LA FERIA INFANTIL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc4d"
+	},
+	"codigoPuco": 107602,
+	"nombre": "OBRA SOCIAL DEL PERS. DE FERMOLAC"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc4e"
+	},
+	"codigoPuco": 107701,
+	"nombre": "OBRA SOCIAL DE FERROVIARIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc4f"
+	},
+	"codigoPuco": 107800,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL FIBROCEMENTO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc50"
+	},
+	"codigoPuco": 107909,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA FIDEERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc51"
+	},
+	"codigoPuco": 108001,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA FORESTAL DE SANTIAGO DEL ESTERO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc52"
+	},
+	"codigoPuco": 108100,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL FOSFORO, ENCENDIDO Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc53"
+	},
+	"codigoPuco": 108209,
+	"nombre": "OBRA SOCIAL DE FOTOGRAFOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc54"
+	},
+	"codigoPuco": 108308,
+	"nombre": "OBRA SOCIAL DEL PERS. DEL FRIGORIFICO MERCADO NAC. DE HAC"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc55"
+	},
+	"codigoPuco": 108407,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA ACTIVIDAD FRUTICOLA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc56"
+	},
+	"codigoPuco": 108506,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE MANIPULEO, EMPAQUE Y EXPEDICION DE FRUTA FRESCA Y HORTALIZAS DE CUYO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc57"
+	},
+	"codigoPuco": 108605,
+	"nombre": "OBRA SOCIAL DE FUTBOLISTAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc58"
+	},
+	"codigoPuco": 108704,
+	"nombre": "OBRA SOCIAL DE TECNICOS DE FUTBOL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc59"
+	},
+	"codigoPuco": 108803,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL TURISMO, HOTELERO Y GASTRONOMICO DE LA UNION DE TRABAJADORES DEL TURISMO HOTELEROS Y GASTRONOMICOS DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc5a"
+	},
+	"codigoPuco": 108902,
+	"nombre": "OBRA SOCIAL DEL PERS. SUPERIOR DE GOOD-YEAR ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc5b"
+	},
+	"codigoPuco": 109004,
+	"nombre": "OBRA SOCIAL DEL PERSONAL GRAFICO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc5c"
+	},
+	"codigoPuco": 109103,
+	"nombre": "OBRA SOCIAL DEL PERS. GRAFICO DE CORRIENTES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc5d"
+	},
+	"codigoPuco": 109202,
+	"nombre": "OBRA SOCIAL DE GUINCHEROS Y MAQUINISTAS DE GRUAS MOVILES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc5e"
+	},
+	"codigoPuco": 109301,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE CONSIGNATARIOS DEL MERCADO NACIONAL DE HACIENDA DE LINIERS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc5f"
+	},
+	"codigoPuco": 109400,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL HIELO Y MERCADOS PARTICULARES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc60"
+	},
+	"codigoPuco": 109509,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LOS HIPODROMOS DE BUENOS AIRES Y SAN ISIDRO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc61"
+	},
+	"codigoPuco": 109608,
+	"nombre": "OBRA SOCIAL DEL PERSONAL MENSUALIZADO DEL JOCKEY CLUB DE BUENOS AIRES Y LOS HIPODROMOS DE PALERMO Y SAN ISIDRO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc62"
+	},
+	"codigoPuco": 109707,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE IMPRENTA, DIARIOS Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc63"
+	},
+	"codigoPuco": 109806,
+	"nombre": "OBRA SOCIAL DEL PERS. DEL INGENIO MUÑORCO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc64"
+	},
+	"codigoPuco": 109905,
+	"nombre": "OBRA SOCIAL DEL PERS. DEL INGENIO SAN PABLO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc65"
+	},
+	"codigoPuco": 110008,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE JABONEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc66"
+	},
+	"codigoPuco": 110107,
+	"nombre": "OBRA SOCIAL DE JARDINEROS, PARQUISTAS, VIVERISTAS Y FLORICULTORES DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc67"
+	},
+	"codigoPuco": 110206,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL JOCKEY CLUB DE ROSARIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc68"
+	},
+	"codigoPuco": 110305,
+	"nombre": "OBRA SOCIAL DEL PERSONAL LADRILLERO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc69"
+	},
+	"codigoPuco": 110404,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA LADRILLERA A MAQUINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc6a"
+	},
+	"codigoPuco": 110503,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA LECHERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc6b"
+	},
+	"codigoPuco": 110602,
+	"nombre": "OBRA SOCIAL DE LOCUTORES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc6c"
+	},
+	"codigoPuco": 110701,
+	"nombre": "OBRA SOCIAL DE LA FEDERACION ARGENTINA DE TRABAJADORES DE LUZ Y FUERZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc6d"
+	},
+	"codigoPuco": 110800,
+	"nombre": "OBRA SOCIAL DE LOS TRABAJADORES DE LAS EMPRESAS DE ELECTRICIDAD"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc6e"
+	},
+	"codigoPuco": 110909,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LUZ Y FUERZA DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc6f"
+	},
+	"codigoPuco": 111001,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA MADERERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc70"
+	},
+	"codigoPuco": 111100,
+	"nombre": "OBRA SOCIAL DEL PERS. DE LA ACT. MADERERA DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc71"
+	},
+	"codigoPuco": 111209,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE MAESTRANZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc72"
+	},
+	"codigoPuco": 111308,
+	"nombre": "OBRA SOCIAL DE MAQUINISTAS DE TEATRO Y TELEVISION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc73"
+	},
+	"codigoPuco": 111407,
+	"nombre": "OBRA SOCIAL DE CAPITANES DE ULTRAMAR Y OFICIALES DE LA MARINA MERCANTE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc74"
+	},
+	"codigoPuco": 111506,
+	"nombre": "OBRA SOCIAL DE CAPITANES BAQUEANOS FLUVIALES DE LA MARINA MERCANTE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc75"
+	},
+	"codigoPuco": 111605,
+	"nombre": "OBRA SOCIAL DE EMPLEADOS DE LA MARINA MERCANTE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc76"
+	},
+	"codigoPuco": 111704,
+	"nombre": "OBRA SOCIAL DE ENCARGADOS APUNTADORES MARITIMOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc77"
+	},
+	"codigoPuco": 111803,
+	"nombre": "OBRA SOCIAL DEL PERSONAL MARITIMO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc78"
+	},
+	"codigoPuco": 111902,
+	"nombre": "OBRA SOCIAL DEL SINDICATO DE MECANICOS Y AFINES DEL TRANSPORTE AUTOMOTOR"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc79"
+	},
+	"codigoPuco": 112004,
+	"nombre": "OBRA SOCIAL DEL PERSONAL SUPERIOR MERCEDES BENZ ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc7a"
+	},
+	"codigoPuco": 112103,
+	"nombre": "OBRA SOCIAL DE LA UNION OBRERA METALURGICA DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc7b"
+	},
+	"codigoPuco": 112202,
+	"nombre": "OBRA SOCIAL DE LOS  SUPERVISORES DE LA INDUSTRIA METALMECANICA DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc7c"
+	},
+	"codigoPuco": 112301,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE  MICROS Y OMNIBUS DE MENDOZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc7d"
+	},
+	"codigoPuco": 112400,
+	"nombre": "OBRA SOCIAL DE LA ACTIVIDAD MINERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc7e"
+	},
+	"codigoPuco": 112509,
+	"nombre": "OBRA SOCIAL MODELOS ARGENTINOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc7f"
+	},
+	"codigoPuco": 112608,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA MOLINERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc80"
+	},
+	"codigoPuco": 112707,
+	"nombre": "OBRA SOCIAL DEL PERSONAL MOSAISTA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc81"
+	},
+	"codigoPuco": 112806,
+	"nombre": "OBRA SOCIAL DE MUSICOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc82"
+	},
+	"codigoPuco": 112905,
+	"nombre": "OBRA SOCIAL MUSICOS DE CUYO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc83"
+	},
+	"codigoPuco": 113007,
+	"nombre": "OBRA SOCIAL DE MUSICOS DE MAR DEL PLATA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc84"
+	},
+	"codigoPuco": 113106,
+	"nombre": "OBRA SOCIAL ESTATAL NAVAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc85"
+	},
+	"codigoPuco": 113205,
+	"nombre": "OBRA SOCIAL DE JEFES Y OFICIALES NAVALES DE RADIOCOMUNICACIONES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc86"
+	},
+	"codigoPuco": 113304,
+	"nombre": "OBRA SOCIAL DE JEFES Y OFICIALES MAQUINISTAS NAVALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc87"
+	},
+	"codigoPuco": 113403,
+	"nombre": "OBRA SOCIAL DEL PERSONAL NAVAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc88"
+	},
+	"codigoPuco": 113502,
+	"nombre": "OBRA SOCIAL DEL PERS. DEL NEGRO DE HUMO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc89"
+	},
+	"codigoPuco": 113601,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL NEUMATICO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc8a"
+	},
+	"codigoPuco": 113700,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA NAVAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc8b"
+	},
+	"codigoPuco": 113809,
+	"nombre": "OBRA SOCIAL DE COMISARIOS NAVALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc8c"
+	},
+	"codigoPuco": 113908,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE PANADERIAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc8d"
+	},
+	"codigoPuco": 114000,
+	"nombre": "OBRA SOCIAL DE PANADEROS, PASTELEROS Y FACTUREROS DE ENTRE RIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc8e"
+	},
+	"codigoPuco": 114109,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DEL PAPEL, CARTON Y QUIMICOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc8f"
+	},
+	"codigoPuco": 114208,
+	"nombre": "OBRA SOCIAL DE LA INDUSTRIA DE PASTAS ALIMENTICIAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc90"
+	},
+	"codigoPuco": 114307,
+	"nombre": "OBRA SOCIAL TRABAJADORES  PASTELEROS, CONFITEROS, PIZZEROS , HELADEROS Y ALFAJOREROS DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc91"
+	},
+	"codigoPuco": 114406,
+	"nombre": "OBRA SOCIAL DE PASTELEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc92"
+	},
+	"codigoPuco": 114505,
+	"nombre": "OBRA SOCIAL DE PATRONES DE CABOTAJE DE RIOS Y PUERTOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc93"
+	},
+	"codigoPuco": 114604,
+	"nombre": "OBRA SOCIAL DE PELETEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc94"
+	},
+	"codigoPuco": 114703,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE PELUQUERIAS, ESTETICAS Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc95"
+	},
+	"codigoPuco": 114802,
+	"nombre": "OBRA SOCIAL DE OFICIALES PELUQUEROS Y PEINADORES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc96"
+	},
+	"codigoPuco": 114901,
+	"nombre": "OBRA SOCIAL DE OFICIALES PELUQUEROS Y PEINADORES DE ROSARIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc97"
+	},
+	"codigoPuco": 115003,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA ACTIVIDAD PERFUMISTA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc98"
+	},
+	"codigoPuco": 115102,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES DE PRENSA DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc99"
+	},
+	"codigoPuco": 115201,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL PESCADO DE MAR DEL PLATA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc9a"
+	},
+	"codigoPuco": 115300,
+	"nombre": "OBRA SOCIAL DE PETROLEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc9b"
+	},
+	"codigoPuco": 115409,
+	"nombre": "OBRA SOCIAL DEL PETROLEO Y GAS PRIVADO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc9c"
+	},
+	"codigoPuco": 115508,
+	"nombre": "OBRA SOCIAL DE PETROLEROS DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc9d"
+	},
+	"codigoPuco": 115607,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA PETROQUIMICA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc9e"
+	},
+	"codigoPuco": 115706,
+	"nombre": "OBRA SOCIAL PARA PILOTOS DE LINEAS AEREAS COMERCIALES Y REGULARES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dc9f"
+	},
+	"codigoPuco": 115805,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE FABRICAS DE PINTURA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dca0"
+	},
+	"codigoPuco": 115904,
+	"nombre": "OBRA SOCIAL DEL PERS. DE ACADEMIA PITMAN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dca1"
+	},
+	"codigoPuco": 116006,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL PLASTICO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dca2"
+	},
+	"codigoPuco": 116105,
+	"nombre": "OBRA SOCIAL DE CAPATACES  ESTIBADORES PORTUARIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dca3"
+	},
+	"codigoPuco": 116204,
+	"nombre": "OBRA SOCIAL DE PORTUARIOS ARGENTINOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dca4"
+	},
+	"codigoPuco": 116303,
+	"nombre": "OBRA SOCIAL PORTUARIOS DE BAHIA BLANCA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dca5"
+	},
+	"codigoPuco": 116402,
+	"nombre": "OBRA SOCIAL PORTUARIOS DE NECOCHEA Y QUEQUEN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dca6"
+	},
+	"codigoPuco": 116501,
+	"nombre": "OBRA SOCIAL PORTUARIOS DE ROSARIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dca7"
+	},
+	"codigoPuco": 116600,
+	"nombre": "OBRA SOCIAL PORTUARIOS DE SAN LORENZO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dca8"
+	},
+	"codigoPuco": 116709,
+	"nombre": "OBRA SOCIAL PORTUARIOS DE PUERTO SAN MARTIN Y BELLA VISTA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dca9"
+	},
+	"codigoPuco": 116808,
+	"nombre": "OBRA SOCIAL PORTUARIOS DE SAN NICOLAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcaa"
+	},
+	"codigoPuco": 116907,
+	"nombre": "OBRA SOCIAL PORTUARIOS DE SAN PEDRO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcab"
+	},
+	"codigoPuco": 117009,
+	"nombre": "OBRA SOCIAL PORTUARIOS DE SANTA FE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcac"
+	},
+	"codigoPuco": 117108,
+	"nombre": "OBRA SOCIAL PORTUARIOS DE VILLA CONSTITUCION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcad"
+	},
+	"codigoPuco": 117207,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE PRENSA DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcae"
+	},
+	"codigoPuco": 117306,
+	"nombre": "OBRA SOCIAL DEL PERS. DE PRENSA DE CAPITAL FEDERAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcaf"
+	},
+	"codigoPuco": 117405,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE PRENSA DE BAHIA BLANCA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcb0"
+	},
+	"codigoPuco": 117504,
+	"nombre": "OBRA SOCIAL DEL PERS. DE PRENSA DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcb1"
+	},
+	"codigoPuco": 117603,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE PRENSA DE LA PROVINCIA DE CHACO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcb2"
+	},
+	"codigoPuco": 117702,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE PRENSA DE MAR DEL PLATA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcb3"
+	},
+	"codigoPuco": 117801,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE PRENSA DE MENDOZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcb4"
+	},
+	"codigoPuco": 117900,
+	"nombre": "OBRA SOCIAL DEL PERS. DE PRENSA DE SANTIAGO DEL ESTERO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcb5"
+	},
+	"codigoPuco": 118002,
+	"nombre": "OBRA SOCIAL DE EMPLEADOS DE PRENSA DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcb6"
+	},
+	"codigoPuco": 118101,
+	"nombre": "OBRA SOCIAL DE PROFESIONALES DE LA O.S. DEL PERS. DEL PAP"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcb7"
+	},
+	"codigoPuco": 118200,
+	"nombre": "OBRA SOCIAL DE AGENTES DE PROPAGANDA MEDICA DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcb8"
+	},
+	"codigoPuco": 118309,
+	"nombre": "OBRA SOCIAL DE AGENTES DE PROPAGANDA MEDICA DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcb9"
+	},
+	"codigoPuco": 118408,
+	"nombre": "OBRA SOCIAL DE AGENTES DE PROPAGANDA MEDICA DE ENTRE RIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcba"
+	},
+	"codigoPuco": 118507,
+	"nombre": "OBRA SOCIAL DE AGENTES DE PROPAGANDA MEDICA DE ROSARIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcbb"
+	},
+	"codigoPuco": 118606,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA PUBLICIDAD"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcbc"
+	},
+	"codigoPuco": 118705,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE INDUSTRIAS QUIMICAS Y PETROQUIMICAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcbd"
+	},
+	"codigoPuco": 118804,
+	"nombre": "OBRA SOCIAL DE RECIBIDORES DE GRANOS Y ANEXOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcbe"
+	},
+	"codigoPuco": 118903,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE RECOLECCION Y BARRIDO DE ROSARIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcbf"
+	},
+	"codigoPuco": 119005,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE REFINERIAS DE MAIZ"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcc0"
+	},
+	"codigoPuco": 119104,
+	"nombre": "OBRA SOCIAL DE LA INDUSTRIA DE MATERIALES REFRACTARIOS Y"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcc1"
+	},
+	"codigoPuco": 119203,
+	"nombre": "OBRA SOCIAL DE RELOJEROS Y JOYEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcc2"
+	},
+	"codigoPuco": 119302,
+	"nombre": "OBRA SOCIAL DEL PERSONAL RURAL Y ESTIBADORES DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcc3"
+	},
+	"codigoPuco": 119401,
+	"nombre": "OBRA SOCIAL DEL PERS. DE LA INDUSTRIA SALINERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcc4"
+	},
+	"codigoPuco": 119500,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA SANIDAD ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcc5"
+	},
+	"codigoPuco": 119609,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE INSTALACIONES SANITARIAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcc6"
+	},
+	"codigoPuco": 119708,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE SEGURIDAD COMERCIAL, INDUSTRIAL E INVESTIGACIONES PRIVADAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcc7"
+	},
+	"codigoPuco": 119807,
+	"nombre": "OBRA SOCIAL DEL PERS. DEL SEGURO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcc8"
+	},
+	"codigoPuco": 119906,
+	"nombre": "OBRA SOCIAL DE SERENOS DE BUQUES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcc9"
+	},
+	"codigoPuco": 120009,
+	"nombre": "OBRA SOCIAL DEL PERS. DEL SURCO DE VILLA QUINTEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcca"
+	},
+	"codigoPuco": 120108,
+	"nombre": "OBRA SOCIAL DE TECNICOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dccb"
+	},
+	"codigoPuco": 120207,
+	"nombre": "OBRA SOCIAL DEL PERS. DE STANDARD ELECTRIC"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dccc"
+	},
+	"codigoPuco": 120306,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE SUPERVISION DE LA EMPRESA SUBTERRANEOS DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dccd"
+	},
+	"codigoPuco": 120405,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LA EMPRESA SUBTERRANEOS DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcce"
+	},
+	"codigoPuco": 120504,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA  DEL TABACO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dccf"
+	},
+	"codigoPuco": 120603,
+	"nombre": "OBRA SOCIAL DE EMPLEADOS DEL TABACO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcd0"
+	},
+	"codigoPuco": 120702,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LAS TELECOMUNICACIONES DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcd1"
+	},
+	"codigoPuco": 120801,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES DE LAS COMUNICACIONES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcd2"
+	},
+	"codigoPuco": 120900,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE TELEVISION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcd3"
+	},
+	"codigoPuco": 121002,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA TEXTIL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcd4"
+	},
+	"codigoPuco": 121101,
+	"nombre": "OBRA SOCIAL DE EMPLEADOS TEXTILES Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcd5"
+	},
+	"codigoPuco": 121200,
+	"nombre": "OBRA SOCIAL DE TINTOREROS SOMBREREROS Y LA VADEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcd6"
+	},
+	"codigoPuco": 121309,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL TRACTOR"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcd7"
+	},
+	"codigoPuco": 121408,
+	"nombre": "OBRA SOCIAL DEL TRANSPORTE AUTOMOTOR DE ROSARIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcd8"
+	},
+	"codigoPuco": 121507,
+	"nombre": "OBRA SOCIAL DE LA INDUSTRIA DEL TRANSPORTE  AUTOMOTOR DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcd9"
+	},
+	"codigoPuco": 121606,
+	"nombre": "OBRA SOCIAL DE CONDUCTORES DE TRANSPORTE COLECTIVO DE PASAJEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcda"
+	},
+	"codigoPuco": 121705,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA ACTIVIDAD DEL TURF"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcdb"
+	},
+	"codigoPuco": 121804,
+	"nombre": "OBRA SOCIAL CONDUCTORES DE TAXIS DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcdc"
+	},
+	"codigoPuco": 121903,
+	"nombre": "OBRA SOCIAL DE VAREADORES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcdd"
+	},
+	"codigoPuco": 122005,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL VESTIDO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcde"
+	},
+	"codigoPuco": 122104,
+	"nombre": "OBRA SOCIAL DE VIAJANTES VENDEDORES DE LA REPUBLICA ARGENTINA. (ANDAR)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcdf"
+	},
+	"codigoPuco": 122203,
+	"nombre": "OBRA SOCIAL DE VIAJANTES DE COMERCIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dce0"
+	},
+	"codigoPuco": 122302,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA ACTIVIDAD VIAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dce1"
+	},
+	"codigoPuco": 122401,
+	"nombre": "OBRA SOCIAL DE  EMPLEADOS DE LA INDUSTRIA DEL VIDRIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dce2"
+	},
+	"codigoPuco": 122500,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA INDUSTRIA DEL VIDRIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dce3"
+	},
+	"codigoPuco": 122609,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA ACTIVIDAD VITIVINICOLA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dce4"
+	},
+	"codigoPuco": 122708,
+	"nombre": "OBRA SOCIAL DEL PERS. DE VIALIDAD NACIONAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dce5"
+	},
+	"codigoPuco": 122807,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE VIGILANCIA Y SEGURIDAD COMERCIAL, INDUSTRIAL E INVESTIGACIONES PRIVADAS DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dce6"
+	},
+	"codigoPuco": 122906,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE ESTACIONES DE SERVICIO, GARAJES, PLAYAS Y LAVADEROS AUTOMATICOS DE LA PROVINCIA DE SANTA FE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dce7"
+	},
+	"codigoPuco": 123008,
+	"nombre": "OBRA SOCIAL PARA EL PERSONAL DE ESTACIONES DE SERVICIO, GARAGES, PLAYAS DE ESTACIONAMIENTO, LAVADEROS AUTOMATICOS Y GOMERIAS DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dce8"
+	},
+	"codigoPuco": 123107,
+	"nombre": "OBRA SOCIAL DE TALLERISTAS A DOMICILIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dce9"
+	},
+	"codigoPuco": 123206,
+	"nombre": "OBRA SOCIAL DE BAÑEROS Y AFINES DEL PARTIDO GENERAL PUEYRREDON"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcea"
+	},
+	"codigoPuco": 123305,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE SOCIEDADES DE AUTORES Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dceb"
+	},
+	"codigoPuco": 123404,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE PRENSA DE ROSARIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcec"
+	},
+	"codigoPuco": 123503,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE PRENSA DE TUCUMAN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dced"
+	},
+	"codigoPuco": 123602,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES DE PERKINS ARGENTINA S.A.I.C."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcee"
+	},
+	"codigoPuco": 123701,
+	"nombre": "OBRA SOCIAL DE PEONES DE TAXIS DE LA CAPITAL FEDERAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcef"
+	},
+	"codigoPuco": 123800,
+	"nombre": "OBRA SOCIAL DEL PERS. DE GUARDAVIDAS Y AFINES DE LA REP.ARG."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcf0"
+	},
+	"codigoPuco": 123909,
+	"nombre": "OBRA SOCIAL DE VENDEDORES AMBULANTES DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcf1"
+	},
+	"codigoPuco": 124001,
+	"nombre": "OBRA SOCIAL DE BOXEADORES AGREMIADOS DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcf2"
+	},
+	"codigoPuco": 124209,
+	"nombre": "OBRA SOCIAL DE EMBALADORES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcf3"
+	},
+	"codigoPuco": 124308,
+	"nombre": "OBRA SOCIAL DE EMPLEADOS Y OBREROS GASTRONOMICOS DE TUCUMAN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcf4"
+	},
+	"codigoPuco": 124407,
+	"nombre": "OBRA SOCIAL PARA EL  PERS. DE EMPRESAS DE  LIMPIEZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcf5"
+	},
+	"codigoPuco": 124506,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES DE LA INDUSTRIA DEL GAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcf6"
+	},
+	"codigoPuco": 124605,
+	"nombre": "OBRA SOCIAL PARA LOS AGENTES DE PREVISION Y SEGURIDAD SOCIAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcf7"
+	},
+	"codigoPuco": 124704,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES DE LA INDUSTRIA AVICOLA Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcf8"
+	},
+	"codigoPuco": 124803,
+	"nombre": "OBRA SOCIAL DE ARBITROS DE LA ASOC. DEL FUTBOL ARGENTINO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcf9"
+	},
+	"codigoPuco": 124902,
+	"nombre": "OBRA SOCIAL DE LA FEDERACION NACIONAL DE SINDICATOS DE CO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcfa"
+	},
+	"codigoPuco": 125004,
+	"nombre": "OBRA SOCIAL DE YACIMIENTOS CARBONIFEROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcfb"
+	},
+	"codigoPuco": 125103,
+	"nombre": "OBRA SOCIAL DE LOS PROFESIONALES UNIVERSITARIOS DEL AGUA Y LA ENERGIA ELECTRICA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcfc"
+	},
+	"codigoPuco": 125202,
+	"nombre": "OBRA SOCIAL CAPITANES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcfd"
+	},
+	"codigoPuco": 125301,
+	"nombre": "OBRA SOCIAL FEDERAL DE LA FEDERACION NACIONAL DE TRABAJADORES DE OBRAS SANITARIAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcfe"
+	},
+	"codigoPuco": 125400,
+	"nombre": "OBRA SOCIAL PARA EL PERS. DE OBRAS Y SERVICIOS SANITARIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dcff"
+	},
+	"codigoPuco": 125509,
+	"nombre": "OBRA SOCIAL DE LA FEDERACION ARGENTINA DEL TRABAJADOR  DE LAS UNIVERSIDADES NACIONALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd00"
+	},
+	"codigoPuco": 125608,
+	"nombre": "OBRA SOCIAL PERS. SUPERIOR DE LA INDUSTRIA DEL GAS Y AFIN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd01"
+	},
+	"codigoPuco": 125707,
+	"nombre": "OBRA SOCIAL UNION PERSONAL DE LA UNION DEL  PERSONAL CIVIL DE LA NACION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd02"
+	},
+	"codigoPuco": 125806,
+	"nombre": "OBRA SOCIAL DEL PERS. JERARQUICO DEL AGUA Y LA ENERGIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd03"
+	},
+	"codigoPuco": 125905,
+	"nombre": "OBRA SOCIAL DE ARBITROS DEPORTIVOS DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd04"
+	},
+	"codigoPuco": 126007,
+	"nombre": "OBRA SOCIAL DE LA FEDERACION GREMIAL DE LA INDUSTRIA DE LA CARNE Y SUS DERIVADOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd05"
+	},
+	"codigoPuco": 126106,
+	"nombre": "OBRA SOCIAL PARA LOS TRABAJADORES DE LA EDUCACION PRIVADA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd06"
+	},
+	"codigoPuco": 126205,
+	"nombre": "OBRA SOCIAL DE LOS EMPLEADOS DE COMERCIO Y ACTIVIDADES CIVILES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd07"
+	},
+	"codigoPuco": 126304,
+	"nombre": "OBRA SOCIAL BANCARIA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd08"
+	},
+	"codigoPuco": 126403,
+	"nombre": "OBRA SOCIAL MEDICA AVELLANEDA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd09"
+	},
+	"codigoPuco": 126502,
+	"nombre": "OBRA SOCIAL DE LA CONFEDERACION DE OBREROS Y EMPLEADOS MUNICIPALES ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd0a"
+	},
+	"codigoPuco": 126601,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE INDUSTRIAS  QUIMICAS Y PETROQUIMICAS DE ZARATE CAMPANA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd0b"
+	},
+	"codigoPuco": 126700,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA ACTIVIDAD AZUCARERA TUCUMANA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd0c"
+	},
+	"codigoPuco": 126809,
+	"nombre": "OBRA SOCIAL DE CONDUCTORES DE REMISES Y AUTOS AL INSTANTE Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd0d"
+	},
+	"codigoPuco": 126908,
+	"nombre": "OBRA SOCIAL DE LOS MEDICOS DE LA CIUDAD DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd0e"
+	},
+	"codigoPuco": 127000,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES DE ESTACIONES DE SERVICIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd0f"
+	},
+	"codigoPuco": 127109,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE TELECOMUNICACIONES SINDICATO BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd10"
+	},
+	"codigoPuco": 127208,
+	"nombre": "OBRA SOCIAL DE MANDOS MEDIOS DE TELECOMUNICACIONES EN LA REPUBLICA ARGENTINA Y MERCOSUR"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd11"
+	},
+	"codigoPuco": 127307,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES VIALES Y AFINES DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd12"
+	},
+	"codigoPuco": 127406,
+	"nombre": "OBRA SOCIAL DE OBREROS Y EMPLEADOS TINTOREROS SOMBREREROS Y LAVADEROS DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd13"
+	},
+	"codigoPuco": 127505,
+	"nombre": "OBRA SOCIAL DE  LAS ASOCIACIONES DE EMPLEADOS DE FARMACIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd14"
+	},
+	"codigoPuco": 127604,
+	"nombre": "OBRA SOCIAL PARA EL PERSONAL DE OBRAS Y SERVICIOS SANITARIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd15"
+	},
+	"codigoPuco": 127703,
+	"nombre": "OBRA SOCIAL PERSONAL ESTACIONES DE SERVICIO,GARAGES,PLAYAS Y LAVADEROS DE LA PROVINCIA DEL CHACO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd16"
+	},
+	"codigoPuco": 127802,
+	"nombre": "OBRA SOCIAL DE LUZ Y FUERZA DE LA PATAGONIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd17"
+	},
+	"codigoPuco": 127901,
+	"nombre": "OBRA SOCIAL DE PETROLEROS PRIVADOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd18"
+	},
+	"codigoPuco": 128003,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA FEDERACION DE SINDICATOS DE LA INDUSTRIA QUIMICAS Y PETROQUIMICAS DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd19"
+	},
+	"codigoPuco": 128102,
+	"nombre": "OBRA SOCIAL DE LA UNION DE TRABAJADORES DEL INSTITUTO NACIONAL DE SERVICIOS SOCIALES PARA JUBILADOS Y PENSIONADOS DE LA REPUBLICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd1a"
+	},
+	"codigoPuco": 128201,
+	"nombre": "OBRA SOCIAL DEL SINDICATO UNICO DE RECOLECTORES DE RESIDUOS Y BARRIDO DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd1b"
+	},
+	"codigoPuco": 128409,
+	"nombre": "OBRA SOCIAL DEL SINDICATO OBREROS Y EMPLEADOS DE EMPRESAS DE LIMPIEZA,SERVICIOS Y AFINES DE CORDOBA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd1c"
+	},
+	"codigoPuco": 128607,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES DEL PETROLEO Y GAS PRIVADO DEL CHUBUT"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd1d"
+	},
+	"codigoPuco": 200103,
+	"nombre": "OBRA SOCIAL DE LA SECRETARIA DE AGRICULTURA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd1e"
+	},
+	"codigoPuco": 200202,
+	"nombre": "OBRA SOCIAL CENTRO REGIONAL DE AGUAS SUBTERRANEAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd1f"
+	},
+	"codigoPuco": 200301,
+	"nombre": "OBRA SOCIAL DE LAS SECRETARIAS DE INDUSTRIA Y COMERCIO EX"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd20"
+	},
+	"codigoPuco": 200400,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA EMPRESA NACIONAL DE CORREOS Y TELEGRAFOS S.A. Y DE LAS  COMUNICACIONES DE LA REPULICA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd21"
+	},
+	"codigoPuco": 200509,
+	"nombre": "OBRA SOCIAL DEL MINISTERIO DE DEFENSA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd22"
+	},
+	"codigoPuco": 200608,
+	"nombre": "OBRA SOCIAL FLOTA FLUVIAL DEL ESTADO ARGENTINO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd23"
+	},
+	"codigoPuco": 200707,
+	"nombre": "OBRA SOCIAL GAS DEL ESTADO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd24"
+	},
+	"codigoPuco": 200806,
+	"nombre": "DIR. GENERAL DE OBRAS COCIALES DEL MINISTERIO DEL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd25"
+	},
+	"codigoPuco": 200905,
+	"nombre": "OBRA SOCIAL DEL MINISTERIO DE JUSTICIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd26"
+	},
+	"codigoPuco": 201007,
+	"nombre": "OBRA SOCIAL EMPRESAS LINEAS MARITIMAS ARGENTINAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd27"
+	},
+	"codigoPuco": 201106,
+	"nombre": "DIR. GENERAL DE O.S. DEL MINIST. DE RELACIONES EXT"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd28"
+	},
+	"codigoPuco": 201205,
+	"nombre": "OBRA SOCIAL DEL MINISTERIO DE OBRAS Y SERVICIOS PUBLICOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd29"
+	},
+	"codigoPuco": 201304,
+	"nombre": "DIR. DE O.S. DE LA EMPRESA NACIONAL DE TELECOMUNIC"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd2a"
+	},
+	"codigoPuco": 201403,
+	"nombre": "OBRA SOCIAL DE LA UNIVERSIDAD DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd2b"
+	},
+	"codigoPuco": 201502,
+	"nombre": "OBRA SOCIAL DIRECCION NACIONAL DE VIALIDAD"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd2c"
+	},
+	"codigoPuco": 201601,
+	"nombre": "OBRA SOCIAL INST. NACIONAL DE VITIVINICULTURA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd2d"
+	},
+	"codigoPuco": 201700,
+	"nombre": "OBRA SOCIAL YACIMIENTOS CARBONIFEROS FISCALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd2e"
+	},
+	"codigoPuco": 201809,
+	"nombre": "OBRA SOCIAL YACIMIENTOS PETROLEROS FISCALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd2f"
+	},
+	"codigoPuco": 201908,
+	"nombre": "INST. NAC. DE O.S. PARA EL PERS. DE LA ADMINIST. P"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd30"
+	},
+	"codigoPuco": 300100,
+	"nombre": "OBRA SOCIAL ANILSUD"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd31"
+	},
+	"codigoPuco": 300209,
+	"nombre": "OBRA SOCIAL AZULEJOS DECORADOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd32"
+	},
+	"codigoPuco": 300308,
+	"nombre": "OBRA SOCIAL BOROQUIMICA S.A.M.I.C.A.F."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd33"
+	},
+	"codigoPuco": 300407,
+	"nombre": "OBRA SOCIAL DE LA EMPRESA PRIVADA CELULOSA ARGENTINA S.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd34"
+	},
+	"codigoPuco": 300506,
+	"nombre": "OBRA SOCIAL CORPORACION CEMENTERA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd35"
+	},
+	"codigoPuco": 300605,
+	"nombre": "OBRA SOCIAL DEL PERS. DE CERAMICA SAN LORENZO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd36"
+	},
+	"codigoPuco": 300704,
+	"nombre": "OBRA SOCIAL CERAS JOHNSON"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd37"
+	},
+	"codigoPuco": 300803,
+	"nombre": "OBRA SOCIAL CALILEGUA S.A.A.I.C."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd38"
+	},
+	"codigoPuco": 301004,
+	"nombre": "OBRA SOCIAL DESTILERIAS SAN IGNACIO S.A.I.C."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd39"
+	},
+	"codigoPuco": 301103,
+	"nombre": "OBRA SOCIAL DUNLOP ARGENTINA LIMITADA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd3a"
+	},
+	"codigoPuco": 301202,
+	"nombre": "OBRA SOCIAL DUPERIAL ORBEA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd3b"
+	},
+	"codigoPuco": 301301,
+	"nombre": "OBRA SOCIAL DEL PERS. DE LA COMPAÑIA EMBOTELLADORA ARGENT"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd3c"
+	},
+	"codigoPuco": 301400,
+	"nombre": "OBRA SOCIAL ELECTROCLOR S.C.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd3d"
+	},
+	"codigoPuco": 301509,
+	"nombre": "OBRA SOCIAL MUTUALIDAD EMPLEADOS FIRESTONE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd3e"
+	},
+	"codigoPuco": 301608,
+	"nombre": "OBRA SOCIAL AUTOLATINA ARGENTINA S.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd3f"
+	},
+	"codigoPuco": 301707,
+	"nombre": "OBRA SOCIAL DE  ALLIED DOMECQ ARGENTINA S.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd40"
+	},
+	"codigoPuco": 301806,
+	"nombre": "OBRA SOCIAL SOCIEDAD MINERA HIERROS PATAGONICOS DE SIERRA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd41"
+	},
+	"codigoPuco": 301905,
+	"nombre": "OBRA SOCIAL DE SERVICIOS ASISTENCIALES COMPAÑIA ITALO ARG"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd42"
+	},
+	"codigoPuco": 302007,
+	"nombre": "OBRA SOCIAL INGENIO RIO GRANDE S.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd43"
+	},
+	"codigoPuco": 302106,
+	"nombre": "OBRA SOCIAL PARA DIRECTIVOS, TECNICOS Y EMPLEADOS DE JOHN DEERE ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd44"
+	},
+	"codigoPuco": 302205,
+	"nombre": "OBRA SOCIAL LEDESMA S.A.A.I."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd45"
+	},
+	"codigoPuco": 302304,
+	"nombre": "OBRA SOCIAL COMPANIA MINERA AGUILAR S.A"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd46"
+	},
+	"codigoPuco": 302403,
+	"nombre": "OBRA SOCIAL MOLINOS RIO DE LA PLATA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd47"
+	},
+	"codigoPuco": 302502,
+	"nombre": "OBRA SOCIAL PASA PETROQUIMICA ARGENTINA S.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd48"
+	},
+	"codigoPuco": 302601,
+	"nombre": "OBRA SOCIAL COOPERATIVA DE ASISTENCIA MUTUA Y TURISMO DEL PERSONAL DE LAS SOCIEDADES PIRELLI LTDA."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd49"
+	},
+	"codigoPuco": 302700,
+	"nombre": "OBRA SOCIAL COMPAÑIA QUIMICA S.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd4a"
+	},
+	"codigoPuco": 302809,
+	"nombre": "OBRA SOCIAL REFINERIAS DE MAIZ S.A.I.C.F."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd4b"
+	},
+	"codigoPuco": 302908,
+	"nombre": "DIR. GENERAL DE SERV. ASIST. DE SERV. ELECTRICOS D"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd4c"
+	},
+	"codigoPuco": 303000,
+	"nombre": "OBRA SOCIAL SULFACID S.A.I.F. Y C."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd4d"
+	},
+	"codigoPuco": 303109,
+	"nombre": "OBRA SOCIAL SUPERCO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd4e"
+	},
+	"codigoPuco": 303208,
+	"nombre": "OBRA SOCIAL DE EMPRESA PRIVADA WITCEL S.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd4f"
+	},
+	"codigoPuco": 303307,
+	"nombre": "OBRA SOCIAL CABOT ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd50"
+	},
+	"codigoPuco": 303406,
+	"nombre": "OBRA SOCIAL DEL PERSONAL SHELL-CAPSA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd51"
+	},
+	"codigoPuco": 303604,
+	"nombre": "OBRA SOCIAL DE IPAKO S.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd52"
+	},
+	"codigoPuco": 303703,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE PBBPOLISUR SA DE BAHIA BLANCA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd53"
+	},
+	"codigoPuco": 303802,
+	"nombre": "OBRA SOCIAL ARBITROS DE FUTBOL ARG."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd54"
+	},
+	"codigoPuco": 303901,
+	"nombre": "OBRA SOCIAL DE FORD AGENTINA S.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd55"
+	},
+	"codigoPuco": 304003,
+	"nombre": "OBRA SOCIAL DE VOLKSWAGEN ARGENTINA S.A."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd56"
+	},
+	"codigoPuco": 400107,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LAS EMPRESAS DE LA ALIMENTACION Y DEMAS ACTIVIDADES EMPRESARIAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd57"
+	},
+	"codigoPuco": 400206,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LA INDUSTRIA AUTOMOTRIZ ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd58"
+	},
+	"codigoPuco": 400305,
+	"nombre": "OBRA SOCIAL COOPERATIVA LTDA.  DE ASISTENCIA MEDICA ,FARMACEUTICA,CREDITO, Y CONSUMO DEL PERSONAL SUPERIOR DE LA INDUSTRIA DEL CAUCHO Y OTRAS ACTIVIDADES INDUSTRIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd59"
+	},
+	"codigoPuco": 400404,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LA INDUSTRIA CERVECERA Y MALTERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd5a"
+	},
+	"codigoPuco": 400503,
+	"nombre": "OBRA SOCIAL ASOCIACION DEL PERSONAL DE DIRECCION Y JERARQUICO DE LA INDUSTRIA DEL CIGARRILLO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd5b"
+	},
+	"codigoPuco": 400602,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DIRECTIVO DE LA INDUSTRIA DE LA CONSTRUCCION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd5c"
+	},
+	"codigoPuco": 400701,
+	"nombre": "OBRA SOCIAL CAMARA DE LA INDUSTRIA CURTIDORA ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd5d"
+	},
+	"codigoPuco": 400800,
+	"nombre": "OBRA SOCIAL DE EJECUTIVOS Y DEL PERSONAL DE DIRECCION DE EMPRESAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd5e"
+	},
+	"codigoPuco": 400909,
+	"nombre": "OBRA SOCIAL ACCION SOCIAL DE EMPRESARIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd5f"
+	},
+	"codigoPuco": 401001,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LAS EMPRESAS QUE ACTUAN EN FRUTOS DEL PAIS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd60"
+	},
+	"codigoPuco": 401100,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DIRECCION ALFREDO FORTABAT"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd61"
+	},
+	"codigoPuco": 401209,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LA INDUSTRIA METALURGICA  Y DEMAS ACTIVIDADES EMPRESARIAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd62"
+	},
+	"codigoPuco": 401308,
+	"nombre": "OBRA SOCIAL PARA EL PERSONAL DE DIRECCION DE LA INDUSTRIA MADERERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd63"
+	},
+	"codigoPuco": 401407,
+	"nombre": "OBRA SOCIAL DEL PERS. DE DIR. DE LA ACT. MINERA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd64"
+	},
+	"codigoPuco": 401506,
+	"nombre": "ASOC. DE PREST. SOCIALES PARA EMPRESARIOS Y PERS."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd65"
+	},
+	"codigoPuco": 401605,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LA INDUSTRIA PRIVADA DEL PETROLEO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd66"
+	},
+	"codigoPuco": 401704,
+	"nombre": "OBRA SOCIAL  DE EMPRESARIOS, PROFESIONALES Y MONOTRIBUTISTAS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd67"
+	},
+	"codigoPuco": 401803,
+	"nombre": "OBRA SOCIAL ASOCIACION MUTUAL DEL PERSONAL DE PHILIPS ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd68"
+	},
+	"codigoPuco": 401902,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DIRECCION DE PERFUMERIA E.W. HOPE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd69"
+	},
+	"codigoPuco": 402004,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE DIRECCION DE LA SANIDAD LUIS PASTEUR"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd6a"
+	},
+	"codigoPuco": 402103,
+	"nombre": "OBRA SOCIAL ASOCIACION DEL PERSONAL DE DIRECCION DE LA INDUSTRIA SIDERURGICA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd6b"
+	},
+	"codigoPuco": 402202,
+	"nombre": "OBRA SOCIAL MUTUALIDAD INDUSTRIAL TEXTIL ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd6c"
+	},
+	"codigoPuco": 402301,
+	"nombre": "OBRA SOCIAL ASOCIACION DEL PERSONAL SUPERIOR DE LA ORGANIZACION TECHINT"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd6d"
+	},
+	"codigoPuco": 402400,
+	"nombre": "OBRA SOCIAL PARA EL PERSONAL DE DIRECCION DE LA INDUSTRIA VITIVINICOLA Y AFINES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd6e"
+	},
+	"codigoPuco": 402509,
+	"nombre": "OBRA SOCIAL YPF"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd6f"
+	},
+	"codigoPuco": 402608,
+	"nombre": "OBRA SOCIAL ASOCIACION DE SERVICIOS SOCIALES PARA EMPRESARIOS Y PERSONAL DE DIRECCION DE EMPRESAS DEL COMERCIO, SERVICIOS, PRODUCCION, INDUSTRIA Y CIVIL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd70"
+	},
+	"codigoPuco": 402707,
+	"nombre": "OBRA SOCIAL DE DIRECCION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd71"
+	},
+	"codigoPuco": 402806,
+	"nombre": "OBRA SOCIAL DE DIRECCION DE LA ACTIVIDAD AEROCOMERCIAL PRIVADA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd72"
+	},
+	"codigoPuco": 402905,
+	"nombre": "OBRA SOCIAL DE DIRECCIÓN WITCEL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd73"
+	},
+	"codigoPuco": 500104,
+	"nombre": "INST. DE SERVICIOS SOCIALES BANCARIOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd74"
+	},
+	"codigoPuco": 500203,
+	"nombre": "INST. DE O.S."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd75"
+	},
+	"codigoPuco": 500302,
+	"nombre": "INST. DE SERV. SOC. PARA EL PERS.DE LA IND.DE CARN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd76"
+	},
+	"codigoPuco": 500401,
+	"nombre": "OBRA SOCIAL PARA EMPLEADOS DE COMERCIO Y ACT.ES CIVILES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd77"
+	},
+	"codigoPuco": 500500,
+	"nombre": "OBRA SOCIAL PARA LA ACT. DOCENTE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd78"
+	},
+	"codigoPuco": 500609,
+	"nombre": "INST. DE SERVICIOS PARA EL PERS. FERROVIARIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd79"
+	},
+	"codigoPuco": 500708,
+	"nombre": "INST. DE O.S. PARA EL PERS. DEL MINIST.DE ECONOMIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd7a"
+	},
+	"codigoPuco": 500807,
+	"nombre": "INSTITUTO NACIONAL DE SERVICIOS SOCIALES PARA JUBILADOS Y PENSIONADOS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd7b"
+	},
+	"codigoPuco": 500906,
+	"nombre": "OBRA SOCIAL PARA EL PERS. DE OBRAS SANITARIAS DE LA NACION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd7c"
+	},
+	"codigoPuco": 501008,
+	"nombre": "INST. MUNICIPAL DE O.S."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd7d"
+	},
+	"codigoPuco": 501107,
+	"nombre": "INST. DE SERVICIOS SOCIALES PARA LAS ACT.ES RURAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd7e"
+	},
+	"codigoPuco": 501206,
+	"nombre": "INST. DE SERVICIOS PARA EL PERS. DE SEGUROS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd7f"
+	},
+	"codigoPuco": 501404,
+	"nombre": "INST. DE SERV. SOC.PARA EL TERRITORIO NACIONAL DE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd80"
+	},
+	"codigoPuco": 501503,
+	"nombre": "INST. DE SERV. SOC. PARA EL PERS. DE LA IND. DEL V"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd81"
+	},
+	"codigoPuco": 510006,
+	"nombre": "DIRECCION GENERAL DE ASISTENCIA M#DICA SOCIAL UNIVERSITARIA - SAN JUAN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd82"
+	},
+	"codigoPuco": 510105,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA UNIVERSIDAD NACIONAL DE LA PATAGONIA SAN JUAN BOSCO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd83"
+	},
+	"codigoPuco": 510204,
+	"nombre": "OBRA SOCIAL DE LA UNIVERSIDAD NACIONAL DEL LITORAL"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd84"
+	},
+	"codigoPuco": 510303,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE LA UNIVERSIDAD NACIONAL DEL CENTRO DE DE LA PROVINCIA DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd85"
+	},
+	"codigoPuco": 600101,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE BAHIA BLANCA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd86"
+	},
+	"codigoPuco": 600200,
+	"nombre": "ASOC. REGIONAL BARILOCHE DE OBRAS SOCIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd87"
+	},
+	"codigoPuco": 600309,
+	"nombre": "ASOCIACION DE OBRAS SOCIALES DE BELLA VISTA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd88"
+	},
+	"codigoPuco": 600408,
+	"nombre": "ASOCIACION DE OBRAS SOCIALES DE COMODORO RIVADAVIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd89"
+	},
+	"codigoPuco": 600507,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE CONCORDIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd8a"
+	},
+	"codigoPuco": 600606,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE CORONEL SUAREZ"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd8b"
+	},
+	"codigoPuco": 600705,
+	"nombre": "ASOC. CORRENTINA DE OBRAS SOCIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd8c"
+	},
+	"codigoPuco": 600804,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE CORONEL DORREGO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd8d"
+	},
+	"codigoPuco": 600903,
+	"nombre": "ASOCIACION DE OBRAS SOCIALES DE ESPERANZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd8e"
+	},
+	"codigoPuco": 601005,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE FIRMAT"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd8f"
+	},
+	"codigoPuco": 601104,
+	"nombre": "ASOCIACION GUALEGUAYCHU DE OBRAS SOCIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd90"
+	},
+	"codigoPuco": 601203,
+	"nombre": "ASOCIACION DE OBRAS SOCIALES DE GUALEGUAY"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd91"
+	},
+	"codigoPuco": 601302,
+	"nombre": "ASOCIACION DE OBRAS SOCIALES DE MAR DEL PLATA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd92"
+	},
+	"codigoPuco": 601401,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE MENDOZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd93"
+	},
+	"codigoPuco": 601500,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE MISIONES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd94"
+	},
+	"codigoPuco": 601609,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE NEUQUEN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd95"
+	},
+	"codigoPuco": 601708,
+	"nombre": "ASOC. DE OBRAS SOCIALES DEL NORTE DE SANTA FE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd96"
+	},
+	"codigoPuco": 601807,
+	"nombre": "ASOC. NUEVEJULIENSE DE OBRAS SOCIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd97"
+	},
+	"codigoPuco": 601906,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE PERGAMINO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd98"
+	},
+	"codigoPuco": 602107,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE LA RIOJA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd99"
+	},
+	"codigoPuco": 602206,
+	"nombre": "ASOC. RIONEGRINA DE OBRAS SOCIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd9a"
+	},
+	"codigoPuco": 602305,
+	"nombre": "ASOCIACION DE OBRAS SOCIALES DE ROSARIO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd9b"
+	},
+	"codigoPuco": 602404,
+	"nombre": "ASOCIACION DE OBRAS SOCIALES DE RUFINO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd9c"
+	},
+	"codigoPuco": 602503,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE SALTO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd9d"
+	},
+	"codigoPuco": 602602,
+	"nombre": "ASOCIACION DE OBRAS SOCIALES DE SAN JORGE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd9e"
+	},
+	"codigoPuco": 602701,
+	"nombre": "ASOCIACION DE OBRAS SOCIALES DE SAN JUAN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dd9f"
+	},
+	"codigoPuco": 602800,
+	"nombre": "INST. SANRAFAELINO DE OBRAS SOCIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dda0"
+	},
+	"codigoPuco": 602909,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE SANTA FE"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dda1"
+	},
+	"codigoPuco": 603001,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE TUCUMAN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dda2"
+	},
+	"codigoPuco": 603100,
+	"nombre": "ASOCIACION DE OBRAS SOCIALES DE TRELEW"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dda3"
+	},
+	"codigoPuco": 603308,
+	"nombre": "ASOC. MENDOCINA DE OBRAS SOCIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dda4"
+	},
+	"codigoPuco": 603407,
+	"nombre": "FED. DE O.S. DE TRABAJ. DE LOS MEDIOS DE COMUNICACION"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dda5"
+	},
+	"codigoPuco": 603506,
+	"nombre": "ASOC. FEDERATIVA DE OBRAS SOCIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dda6"
+	},
+	"codigoPuco": 603605,
+	"nombre": "FEDERACION ARGENTINA DE OBRAS SOCIALES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dda7"
+	},
+	"codigoPuco": 603704,
+	"nombre": "ASOC. DE OBRAS SOCIALES DE PERS. DE DIR."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dda8"
+	},
+	"codigoPuco": 700108,
+	"nombre": "OBRA SOCIAL DEL PERSONAL MUNICIPAL DE AVELLANEDA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221dda9"
+	},
+	"codigoPuco": 700207,
+	"nombre": "OBRA SOCIAL DEL PERS. MUNICIPAL DE COMODORO RIVADAVIA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddaa"
+	},
+	"codigoPuco": 700306,
+	"nombre": "OBRA SOCIAL DEL PERS. MUNICIPAL DE LANUS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddab"
+	},
+	"codigoPuco": 700405,
+	"nombre": "OBRA SOCIAL DEL PERS. MUNICIPAL DE MERLO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddac"
+	},
+	"codigoPuco": 700504,
+	"nombre": "OBRA SOCIAL DEL PERS. MUNICIPAL DE SAN ISIDRO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddad"
+	},
+	"codigoPuco": 700603,
+	"nombre": "OBRA SOCIAL DEL PERS. MUNICIPAL DE QUILMES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddae"
+	},
+	"codigoPuco": 700702,
+	"nombre": "OBRA SOCIAL DEL PERS. MUNICIPAL DE PUERTO MADRYN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddaf"
+	},
+	"codigoPuco": 700801,
+	"nombre": "OBRA SOCIAL DEL PERSONAL MUNICIPAL DE LA MATANZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddb0"
+	},
+	"codigoPuco": 700900,
+	"nombre": "OBRA SOCIAL DEL PERS. MUNICIPAL DE GENERAL SARMIENTO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddb1"
+	},
+	"codigoPuco": 701002,
+	"nombre": "OBRA SOCIAL PARA EL  PERSONAL MUNICIPAL DE TRES DE FEBRERO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddb2"
+	},
+	"codigoPuco": 701101,
+	"nombre": "OBRA SOCIAL DEL PERS. MUNICIPAL DE SANTIAGO DEL ESTERO"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddb3"
+	},
+	"codigoPuco": 701200,
+	"nombre": "OBRA SOCIAL DE TRABAJADORES MUNICIPALES DE GENERAL PUEYRREDON"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddb4"
+	},
+	"codigoPuco": 800105,
+	"nombre": "OBRA SOCIAL ATANOR S.A"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddb5"
+	},
+	"codigoPuco": 800204,
+	"nombre": "OBRA SOCIAL FORJA ARGENTINA S.A.I.C."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddb6"
+	},
+	"codigoPuco": 800303,
+	"nombre": "OBRA SOCIAL PAPEL MISIONERO S.A.I.F. Y C."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddb7"
+	},
+	"codigoPuco": 800402,
+	"nombre": "OBRA SOCIAL PETROQUIMICA GENERAL MOSCONI"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddb8"
+	},
+	"codigoPuco": 800501,
+	"nombre": "OBRA SOCIAL ACEROS PARANA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddb9"
+	},
+	"codigoPuco": 900102,
+	"nombre": "OBRA SOCIAL DEL PERSONAL DE EMPRESAS FIAT Y EMPRESAS PEUGEOT CITROEN ARGENTINA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddba"
+	},
+	"codigoPuco": 900201,
+	"nombre": "OBRA SOCIAL OLIVETTI S.A.C."
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddbb"
+	},
+	"codigoPuco": 901001,
+	"nombre": "O.S.P. CIUDAD AUT. DE BUENOS AIRES"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddbc"
+	},
+	"codigoPuco": 902001,
+	"nombre": "O.S.P. BUENOS AIRES (IOMA)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddbd"
+	},
+	"codigoPuco": 903001,
+	"nombre": "O.S.P. CATAMARCA (OSEP)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddbe"
+	},
+	"codigoPuco": 904001,
+	"nombre": "O.S.P. CORDOBA (APOSS)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddbf"
+	},
+	"codigoPuco": 905001,
+	"nombre": "O.S.P. CORRIENTES (IOSCOR)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddc0"
+	},
+	"codigoPuco": 906001,
+	"nombre": "O.S.P. ENTRE RIOS (IOSPER)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddc1"
+	},
+	"codigoPuco": 907001,
+	"nombre": "O.S.P. JUJUY (ISJ)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddc2"
+	},
+	"codigoPuco": 908001,
+	"nombre": "O.S.P. LA RIOJA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddc3"
+	},
+	"codigoPuco": 909001,
+	"nombre": "O.S.P. MENDOZA"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddc4"
+	},
+	"codigoPuco": 910001,
+	"nombre": "O.S.P. SALTA (IPS)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddc5"
+	},
+	"codigoPuco": 911001,
+	"nombre": "O.S.P. SAN JUAN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddc6"
+	},
+	"codigoPuco": 912001,
+	"nombre": "O.S.P. SAN LUIS"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddc7"
+	},
+	"codigoPuco": 913001,
+	"nombre": "O.S.P. SANTA FE (IAPOSS)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddc8"
+	},
+	"codigoPuco": 914001,
+	"nombre": "O.S.P. SANTIAGO DEL ESTERO (IOSEP)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddc9"
+	},
+	"codigoPuco": 915001,
+	"nombre": "O.S.P. TUCUMAN (IPSST)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddca"
+	},
+	"codigoPuco": 916001,
+	"nombre": "O.S.P. CHACO (INSSSEP)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddcb"
+	},
+	"codigoPuco": 917001,
+	"nombre": "O.S.P. CHUBUT (SEROS)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddcc"
+	},
+	"codigoPuco": 918001,
+	"nombre": "O.S.P. FORMOSA (IMPF)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddcd"
+	},
+	"codigoPuco": 918002,
+	"nombre": "O.S.P. FORMOSA (AMP)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddce"
+	},
+	"codigoPuco": 919001,
+	"nombre": "O.S.P. LA PAMPA (SEMPRE)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddcf"
+	},
+	"codigoPuco": 920001,
+	"nombre": "O.S.P. MISIONES (IPS)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddd0"
+	},
+	"codigoPuco": 921001,
+	"nombre": "O.S.P. NEUQUEN"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddd1"
+	},
+	"codigoPuco": 922001,
+	"nombre": "O.S.P. RIO NEGRO (IPROSS)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddd2"
+	},
+	"codigoPuco": 923001,
+	"nombre": "O.S.P. SANTA CRUZ"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddd3"
+	},
+	"codigoPuco": 924001,
+	"nombre": "O.S.P. TIERRA DEL FUEGO(IPAUSS)"
+},
+{
+	"_id": {
+		"$oid": "5a7c837274342a1a5221ddd4"
+	},
+	"codigoPuco": 997001,
+	"nombre": "PROGRAMA FEDERAL DE SALUD (PROFE)"
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4a0"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "OBRA SOCIAL DE LOS  LEGISLADORES DE LA REPUBLICA ARGENTINA",
+	"idObraSocial": 22.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4a1"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "FEDERACION MEDICA DE LA PROVINCIA DE BUENOS AIRES",
+	"idObraSocial": 500.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4a2"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "ASISTIR S.A.",
+	"idObraSocial": 529.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4a3"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "FUNSAL S.A.",
+	"idObraSocial": 532.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4a4"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PPG- ACA SALUD (COPERATIVA DE PRESTACION DE SERVICIOS MEDICO ASISTENCIALES LIMITADA)",
+	"idObraSocial": 538.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4a5"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "ASSIST CARD ARGENTINA SOCIEDAD ANONIMA DE SERVICIOS",
+	"idObraSocial": 539.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4a6"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "ASSURANCE MEDICAL",
+	"idObraSocial": 540.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4a7"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "NO USAR - PPG- AUSTRAL OMI (UNION PERSONAL)",
+	"idObraSocial": 541.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4a8"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PPG- CLINICA DEL VALLE S.R.L.",
+	"idObraSocial": 542.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4a9"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PPG- C.S. SALUD",
+	"idObraSocial": 544.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4aa"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PPG- DOCTHOS S.A.",
+	"idObraSocial": 545.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4ab"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "MUTUAL FEDERADA 25 DE JUNIO SOCIEDAD DE PROTECCION RECIPROCA",
+	"idObraSocial": 546.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4ac"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "GALENO ARGENTINA S.A.",
+	"idObraSocial": 547.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4ad"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "MEDICUS SOCIEDAD ANONIMA DE ASISTENCIA MEDICA Y CIENTIFICA",
+	"idObraSocial": 549.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4ae"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "MEDIFE A.C.",
+	"idObraSocial": 550.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4af"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PPG- NEUQUEN SALUD",
+	"idObraSocial": 551.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4b0"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "OMINT S.A.",
+	"idObraSocial": 552.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4b1"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PLAN MEDICO PRIVADO",
+	"idObraSocial": 553.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4b2"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PPG- RED PRESTACIONAL DEL COMAHUE",
+	"idObraSocial": 554.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4b3"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PPG- SALUD PATAGONICA S.A.",
+	"idObraSocial": 555.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4b4"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "SWISS MEDICAL GROUP S.A.",
+	"idObraSocial": 558.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4b5"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PPG- VIDA S.A.",
+	"idObraSocial": 559.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4b6"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PPG- VISITAR S.R.L.",
+	"idObraSocial": 560.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4b7"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PPG- SER SALUD S.A.",
+	"idObraSocial": 561.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4b8"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "CENTRO DE EDUCACION MEDICA E INVESTIGACIONES CLINICAS \"NORBERTO QUIRNO",
+	"idObraSocial": 567.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4b9"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "COVER SALUD S.A.",
+	"idObraSocial": 568.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4ba"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "COBERTURA MEDICO PERSONAL Y DEPORTIVA - AGRUPACION",
+	"idObraSocial": 584.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4bb"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "HOSPITAL ALEMAN ASOCIACION CIVIL",
+	"idObraSocial": 626.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4bc"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "HOSPITAL BRITANICO DE BUENOS AIRES",
+	"idObraSocial": 627.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4bd"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "INTEGRIDAD SALUD S.A.",
+	"idObraSocial": 630.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4be"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "SANATORIO DEL SOL",
+	"idObraSocial": 652.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4bf"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "MEDICINA ESENCIAL S A",
+	"idObraSocial": 653.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4c0"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "BRISTOL MEDICINE SRL.",
+	"idObraSocial": 654.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4c1"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "SIMEPA",
+	"idObraSocial": 657.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4c2"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "SCIS - MEDICINA PRIVADA",
+	"idObraSocial": 660.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4c3"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "INTEGRAL SALUD S.R.L.",
+	"idObraSocial": 662.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4c4"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "PREVENCION SALUD",
+	"idObraSocial": 668.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4c5"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "AGRUPACIÓN DE COLABORACIÓN GRUPO PARAMEDIC",
+	"idObraSocial": 671.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4c6"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "COMPAÑIA MEDITERRÁNEA DE SALUD S.A.",
+	"idObraSocial": 672.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4c7"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "CENTRO MEDICO DE MAR DEL PLATA",
+	"idObraSocial": 684.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4c8"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "CIRCULO MEDICO DE VICENTE LOPEZ",
+	"idObraSocial": 685.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4c9"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "SISTEMA MEDICO CONSEJO",
+	"idObraSocial": 690.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4ca"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "CORPORACIÓN ASISTENCIAL S.A.",
+	"idObraSocial": 695.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4cb"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "ASOCIACION DE CLINICAS Y SANATORIOS PRIVADOS DE FORMOSA",
+	"idObraSocial": 696.0,
+	"prepaga": true
+},
+{
+	"_id": {
+		"$oid": "5c0fec220d08645b3374c4cc"
+	},
+	"codigoPuco": 0.0,
+	"nombre": "FAMYL S.A. SALUD PARA LA FAMILIA",
+	"idObraSocial": 698.0,
+	"prepaga": true
+}]
+

@@ -5,6 +5,8 @@ services:
     image: mongo:4.0
     ports:
         - "27066:27017"    
+    volumes:
+      - ../data:/collection
   nginx:  
     ipc: host 
     image: "andesnqn/nginx:${APP}"

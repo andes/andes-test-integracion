@@ -1,7 +1,7 @@
 Cypress.Commands.add('seed', () => {
     const develop = Cypress.env('ENVIRONMENT') === 'develop';
     if (develop) {
-        cy.exec('npm run prod:reset');
+        cy.task('database:initial');
     } else {
         cy.cleanDB();
     }

@@ -1,0 +1,50 @@
+[{
+	"_id": {
+		"$oid": "59247be21ebf0273353b23bf"
+	},
+	"nombre": "progenitor/a",
+	"opuesto": "hijo/a"
+},
+{
+	"_id": {
+		"$oid": "59247c391ebf0273353b23c0"
+	},
+	"nombre": "hijo/a",
+	"opuesto": "progenitor/a"
+},
+{
+	"_id": {
+		"$oid": "59247c571ebf0273353b23c1"
+	},
+	"nombre": "hermano/a",
+	"opuesto": "hermano/a"
+},
+{
+	"_id": {
+		"$oid": "59247c9b1ebf0273353b23c2"
+	},
+	"nombre": "abuelo/a",
+	"opuesto": "nieto/a"
+},
+{
+	"_id": {
+		"$oid": "59247cb81ebf0273353b23c3"
+	},
+	"nombre": "nieto/a",
+	"opuesto": "abuelo/a"
+},
+{
+	"_id": {
+		"$oid": "59247e021ebf0273353b23c4"
+	},
+	"nombre": "tutor",
+	"opuesto": "tutelado"
+},
+{
+	"_id": {
+		"$oid": "59247e1c1ebf0273353b23c5"
+	},
+	"nombre": "otro",
+	"opuesto": "otro"
+}]
+
