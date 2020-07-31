@@ -33,3 +33,10 @@ module.exports.connectToDB = async (uri) => {
         return false;
     }
 };
+
+module.exports.cleanDB = async (db) => {
+    const colections = await db.collections();
+    for (const colection of colections) {
+        await colection.deleteMany({});
+    }
+}

@@ -22,6 +22,8 @@ const { createPacienteApp } = require('./seed-paciente-app');
 const { seedPerfil, seedUsuario } = require('./seed-gestor-usuarios');
 const { createModulo } = require('./seed-modulo');
 
+const { cleanDB, connectToDB } = require('./database');
+
 module.exports = (on, config) => {
     // ref: https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
     on('before:browser:launch', (browser = {}, args) => {
@@ -84,18 +86,24 @@ module.exports = (on, config) => {
         'database:create:modulo': (params = {}) => {
             return createModulo(mongoUri, params);
         },
-        'database:initial': () => {
+        'database:initial': async () => {
+            // Borra todas las collecciones y carga el dataset inicial en la carpeta ./data
+            // [NEXT] Poder elegir la carpeta y las colleccionara borrar. Podría ayudar a preparar ciertos scenarios. 
+            // [NEXT] También es util para test unitarios en la APi. Debería estar todo en un monorepo. 
+
+            const client = await connectToDB(mongoUri);
+            await cleanDB(client.db());
+
             const { Seeder } = require('mongo-seeding');
             const config = {
                 database: mongoUri,
-                dropDatabase: true,
+                dropDatabase: false,
             };
             const seeder = new Seeder(config);
             const path = require('path');
             const collections = seeder.readCollectionsFromPath(path.resolve("./data"));
-
-            return seeder.import(collections).then(() => true);
-
+            await seeder.import(collections);
+            return true;
         }
     });
 

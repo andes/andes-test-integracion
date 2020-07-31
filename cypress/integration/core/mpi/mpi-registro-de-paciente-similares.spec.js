@@ -2,7 +2,6 @@ context('MPI-Registro de Pacientes Similares', () => {
     let token
     before(() => {
         cy.seed();
-        cy.cleanDB()
         cy.task('database:seed:paciente');
         cy.login('38906735', 'asd').then(t => {
             token = t;
