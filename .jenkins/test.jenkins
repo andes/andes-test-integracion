@@ -88,10 +88,7 @@ pipeline {
                         stage('container up') {
                             steps {
                                 sh 'API=$api APP=$app docker-compose -p andesa$BUILD_NUMBER -f docker/docker-compose.yml up -d'
-                                sh 'sleep 10'
-                                sh 'docker exec andesa${BUILD_NUMBER}_db_1 mongo andes --eval  "db.dropDatabase();"'
-                                sh 'docker cp docker/andes.gz andesa${BUILD_NUMBER}_db_1:/andes.gz'
-                                sh 'docker exec andesa${BUILD_NUMBER}_db_1 mongorestore --gzip --archive=/andes.gz'
+                                sh 'sleep 1'
                             }
                         }
                         stage('run test') {
@@ -106,7 +103,8 @@ pipeline {
                                 HOME="${env.WORKSPACE}"
                             }
                             steps { 
-                                sh 'npx cypress run --env MONGO_URI="mongodb://andesa${BUILD_NUMBER}_db_1:27017/andes",API_SERVER="http://andesa${BUILD_NUMBER}_nginx_1" --config baseUrl=http://andesa${BUILD_NUMBER}_nginx_1,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 --parallel ${cypressparams} || true' 
+                                sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
+                                sh 'npx cypress run --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx" --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 --parallel ${cypressparams} || true' 
                             }
                         } 
                     }
@@ -118,9 +116,6 @@ pipeline {
                             steps {
                                 sh 'API=$api APP=$app docker-compose -p andesb$BUILD_NUMBER -f docker/docker-compose.yml up -d'
                                 sh 'sleep 1'
-                                sh 'docker exec andesb${BUILD_NUMBER}_db_1 mongo andes --eval  "db.dropDatabase();"'
-                                sh 'docker cp docker/andes.gz andesb${BUILD_NUMBER}_db_1:/andes.gz'
-                                sh 'docker exec andesb${BUILD_NUMBER}_db_1 mongorestore --drop --gzip --archive=/andes.gz'
                             }
                         }
                         stage('run test') {
@@ -135,7 +130,8 @@ pipeline {
                                 HOME="${env.WORKSPACE}"
                             }
                             steps { 
-                                sh 'npx cypress run --env MONGO_URI="mongodb://andesb${BUILD_NUMBER}_db_1:27017/andes",API_SERVER="http://andesb${BUILD_NUMBER}_nginx_1" --config baseUrl=http://andesb${BUILD_NUMBER}_nginx_1,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
+                                sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
+                                sh 'npx cypress run --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx" --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
                             }
                         } 
                     }
@@ -147,9 +143,6 @@ pipeline {
                             steps {
                                 sh 'API=$api APP=$app docker-compose -p andesc$BUILD_NUMBER -f docker/docker-compose.yml up -d'
                                 sh 'sleep 1'
-                                sh 'docker exec andesc${BUILD_NUMBER}_db_1 mongo andes --eval  "db.dropDatabase();"'
-                                sh 'docker cp docker/andes.gz andesc${BUILD_NUMBER}_db_1:/andes.gz'
-                                sh 'docker exec andesc${BUILD_NUMBER}_db_1 mongorestore --drop --gzip --archive=/andes.gz'
                             }
                         }
                         stage('run test') {
@@ -164,13 +157,14 @@ pipeline {
                                 HOME="${env.WORKSPACE}"
                             }
                             steps { 
-                                sh 'npx cypress run --env MONGO_URI="mongodb://andesc${BUILD_NUMBER}_db_1:27017/andes",API_SERVER="http://andesc${BUILD_NUMBER}_nginx_1" --config baseUrl=http://andesc${BUILD_NUMBER}_nginx_1,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
+                                sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
+                                sh 'npx cypress run --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx" --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
                             }
                         } 
                     }
-                }
-
+                }            
             }
+
         }
 
 
@@ -201,6 +195,7 @@ pipeline {
         always { 
             sh 'API=$api APP=$app docker-compose -p andesa$BUILD_NUMBER -f docker/docker-compose.yml down -v'
             sh 'API=$api APP=$app docker-compose -p andesb$BUILD_NUMBER -f docker/docker-compose.yml down -v'
+            sh 'API=$api APP=$app docker-compose -p andesc$BUILD_NUMBER -f docker/docker-compose.yml down -v'
             sh 'mkdir -p mochawesome-report/web/assets'
             sh 'mkdir -p cypress/screenshots' 
             sh 'cp -R cypress/screenshots/* mochawesome-report/web/assets || true'
