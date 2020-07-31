@@ -101,7 +101,7 @@ context('RUP - Punto de inicio', () => {
                             cy.wait('@agregarTurnoDinamico').then((xhr) => {
                                 const agenda = xhr.response.body;
                                 expect(agenda.dinamica).to.be.eq(true);
-                                expect(agenda.bloques[0].turnos[i + 3].paciente.id).to.be.eq(pacientes[i]._id);
+                                expect(agenda.bloques[0].turnos[i].paciente.id).to.be.eq(pacientes[i]._id);
                             });
                             cy.wait('@crearPrestacion').then((xhr) => {
                                 const prestacion = xhr.response.body;
