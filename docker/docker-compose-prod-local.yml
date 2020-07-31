@@ -1,0 +1,25 @@
+version: '2'
+services:
+  db:  
+    container_name: andes_test_db
+    image: mongo:4.0
+    ports:
+        - "27066:27017"    
+  nginx:  
+    ipc: host 
+    image: "andesnqn/nginx:${APP}"
+    container_name: andes_test_nginx
+    ports:
+        - "80:80"    
+  api:
+    ipc: host  
+    image: "andesnqn/api:${API}"
+    entrypoint: ["node", "index.js"]
+    container_name: andes_test_api
+    ports:
+        - "3002:3002"    
+    environment:
+      APP_KEY: "5gCYFZPp3dfA2m5UNElVkgRLFcFnlele"
+      MONGO_MAIN: "mongodb://db:27017/andes"
+      MONGO_LOGS: "mongodb://db:27017/logs"
+      MONGO_PUCO: "mongodb://db:27017/andes"
