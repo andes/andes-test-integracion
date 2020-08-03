@@ -194,6 +194,7 @@ context('SOLICITUDES', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
         });
+        cy.toast('success', 'Consulta de neurología');
         cy.plexButtonIcon('chevron-down').click();
         cy.plexSelectAsync('name="prestacionDestino"', 'consulta de neurología', '@getPrestaciones', '59ee2d9bf00c415246fd3d6d');
 
