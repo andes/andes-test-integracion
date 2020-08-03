@@ -43,7 +43,8 @@ context('MPI-Registro Paciente Extranjero', () => {
             expect(xhr.response.body.apellido).to.be.eq("TEST");
             expect(xhr.response.body.nombre).to.be.eq("EXTRANJERO");
         });
-        cy.toast('succes');
+        cy.contains('Los datos se actualizaron correctamente');
+        cy.get('button').contains('Aceptar').click();
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y telefono móvil', () => {
@@ -63,6 +64,7 @@ context('MPI-Registro Paciente Extranjero', () => {
             expect(xhr.response.body.apellido).to.be.eq("TEST");
             expect(xhr.response.body.nombre).to.be.eq("EXTRANJERO");
         });
-        cy.toast('succes');
+        cy.contains('Los datos se actualizaron correctamente');
+        cy.get('button').contains('Aceptar').click();
     });
 });

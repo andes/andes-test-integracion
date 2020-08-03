@@ -74,5 +74,11 @@
             "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
             "id": "57e9670e52df311059bc8964"
         }
-    }
+    },
+    "tokens": [
+        "123456892",
+        "andes",
+        "paciente",
+        "extranjero"
+    ]
 }
