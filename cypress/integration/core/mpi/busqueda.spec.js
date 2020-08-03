@@ -6,11 +6,10 @@ context('MPI-Busqueda Paciente', () => {
         cy.seed();
         cy.task('database:seed:paciente').then(ps => {
             pacientes = ps;
-        })
+        });
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });
-
     })
 
     beforeEach(() => {
@@ -32,7 +31,7 @@ context('MPI-Busqueda Paciente', () => {
                 cy.get('paciente-listado').contains(format(pacientes[i].documento));
             }
             if (pacientes[i].numeroIdentificacion) {
-                cy.get('paciente-listado').contains(format(pacientes[i].numeroIdentificacion));
+                cy.get('paciente-listado').contains(pacientes[i].numeroIdentificacion);
             }
         });
 
@@ -58,7 +57,7 @@ context('MPI-Busqueda Paciente', () => {
                     expect(xhr.response.body[0].numeroIdentificacion).to.be.eq(pacientes[i].numeroIdentificacion);
                 });
                 cy.get('paciente-listado').contains(pacientes[i].nombre);
-                cy.get('paciente-listado').contains(format(pacientes[i].numeroIdentificacion));
+                cy.get('paciente-listado').contains(pacientes[i].numeroIdentificacion);
                 cy.get('paciente-listado').contains(pacientes[i].apellido);
             }
         });
