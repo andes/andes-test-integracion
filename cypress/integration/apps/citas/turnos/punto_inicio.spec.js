@@ -167,7 +167,7 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.toast('success', 'Los cambios han sido guardados');
+        cy.toast('success');
     });
 
     it('dar asistencia y quitarla', () => {
