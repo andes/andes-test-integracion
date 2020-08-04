@@ -20,16 +20,16 @@ function getStubs() {
         "term": "Femenina",
     }]).as('expGenero');
 
-    cy.route('GET', '/api/core/term/snomed/expression?expression=^2061000013108**', [ {
-        "conceptId" : "470361",
-        "term" : "sistema de aspiración para uso general, al vacío",
-        "fsn" : "sistema de aspiración para uso general, al vacío (objeto físico)",
-        "semanticTag" : "objeto físico"
+    cy.route('GET', '/api/core/term/snomed/expression?expression=^2061000013108**', [{
+        "conceptId": "470361",
+        "term": "sistema de aspiración para uso general, al vacío",
+        "fsn": "sistema de aspiración para uso general, al vacío (objeto físico)",
+        "semanticTag": "objeto físico"
     }, {
-        "conceptId" : "470391",
-        "term" : "aporte central de oxigeno",
-        "fsn" : "aporte central de oxigeno",
-        "semanticTag" : "objeto físico"
+        "conceptId": "470391",
+        "term": "aporte central de oxigeno",
+        "fsn": "aporte central de oxigeno",
+        "semanticTag": "objeto físico"
     }]).as('expEquipamiento');
 
     cy.route('POST', '**/api/modules/rup/internacion/camas**').as('createCama')
@@ -51,7 +51,7 @@ describe('ABM Camas', () => {
                 cy.task('database:seed:paciente').then(pacientesCreados => {
                     pacientes = pacientesCreados;
                     // CREA UN MUNDO IDEAL DE INTERNACION
-                    factoryInternacion({ configCamas: [{estado: 'disponible', count: 2}] }).then(camasCreadas => {
+                    factoryInternacion({ configCamas: [{ estado: 'disponible', count: 2 }] }).then(camasCreadas => {
                         camas = camasCreadas;
                     });
                 });
@@ -63,7 +63,7 @@ describe('ABM Camas', () => {
         cy.server();
 
         getStubs();
-        
+
         cy.viewport(1920, 1080);
     });
 
@@ -90,7 +90,7 @@ describe('ABM Camas', () => {
         cy.contains('La cama fue guardada');
         cy.get('button').contains('Aceptar').click();
     });
-    
+
     it('Editar Cama', () => {
         cy.goto(`/internacion/cama/${camas[0].idCama}`, token);
         cy.plexText('label="Nombre"').clear();
@@ -100,6 +100,7 @@ describe('ABM Camas', () => {
         cy.plexSelectAsync('label="Equipamiento"', 'ap', '@expEquipamiento', 0);
         cy.plexSelectType('label="Genero"').clearSelect();
         cy.plexSelectAsync('label="Genero"', 'Fem', '@expGenero', 0);
+        cy.plexSelectType('label="Ubicación"').clearSelect();
         cy.plexSelectType('label="Ubicación"', 'edific');
         cy.plexSelectType('label="Unidad organizativa"').clearSelect();
         cy.plexSelectType('label="Unidad organizativa"', 'servicio');
