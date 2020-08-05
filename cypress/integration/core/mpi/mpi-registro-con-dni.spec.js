@@ -386,7 +386,7 @@ context('MPI-Registro Paciente Con Dni', () => {
             expect(xhr.response.body[0].apellido).to.be.eq("ANDES");
         });
         cy.get('paciente-listado').contains('20.000.000');
-        cy.get('plex-button[title="Editar paciente"]').click();
+        cy.plexButtonIcon('pencil').click();
 
         cy.wait('@findPacienteByID').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -404,7 +404,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.get('paciente-listado').contains('10.000.000').parent().parent().click();
 
         cy.plexSelectType('name="nuevaRelacion"', 'otro');
-        cy.get('plex-button[icon="plus"]').click();
+        cy.plexButtonIcon('plus').click();
         cy.contains('ANDES, PACIENTE VALIDADO');
 
         cy.plexButton('Guardar').click();

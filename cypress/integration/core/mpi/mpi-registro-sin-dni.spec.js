@@ -59,10 +59,10 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.contains('datos de contacto').click()
         cy.plexSelect('label="Tipo"', 'celular');
         cy.plexPhone('label="Número"', '2990000000');
-        cy.get('plex-button[name="agregarContacto"]').click({ force: true });
+        cy.plexButtonIcon('plus').click();
         cy.get('plex-select[label="Tipo"]').last().click().contains('Teléfono Fijo').click();
         cy.plexPhone('label="Número"').last().type('2994785215');
-        cy.get('plex-button[name="agregarContacto"]').click({ force: true });
+        cy.plexButtonIcon('plus').click();
         cy.get('plex-select[label="Tipo"]').last().click().contains('Email').click();
         cy.plexText('label="Dirección"').type('mail@mail.com');
         cy.plexBool('name="viveProvActual"', true);
@@ -153,7 +153,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.plexButton('Agregar nota').click();
         cy.plexText('name="titulo"', 'Nueva nota');
         cy.get('plex-text[name="nota"] input').first().type('Esta es una nueva nota', { force: true });
-        cy.get('plex-button[name="confirmarNota"]').click();
+        cy.plexButtonIcon('plus').click();
         cy.get('plex-item').contains('Nueva nota');
         cy.get('plex-item').contains('Esta es una nueva nota');
 

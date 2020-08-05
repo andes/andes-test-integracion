@@ -155,7 +155,6 @@ context('CITAS - punto de inicio', () => {
             cy.wait('@seleccionAgenda').then((xhr) => {
                 expect(xhr.status).to.be.eq(200)
             });
-            // cy.get('plex-button[label="Dar Turno"]').click();
             cy.plexButton('Dar Turno').click();
             cy.plexButton('Confirmar').click();
             // Confirmo que se dio el turno desde la API
