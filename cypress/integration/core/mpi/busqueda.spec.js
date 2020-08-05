@@ -9,6 +9,7 @@ context('MPI-Busqueda Paciente', () => {
         });
         cy.login('38906735', 'asd').then(t => {
             token = t;
+            cy.createPaciente('paciente-fallecido', token);
         });
     })
 
@@ -95,6 +96,20 @@ context('MPI-Busqueda Paciente', () => {
             cy.plexDatetime('label="Fecha de Nacimiento"').find('input').should('have.value', '02/10/1977');
             cy.plexSelectType('label="Seleccione sexo"', 'masculino');
         });
+    });
+
+    it('buscar paciente fallecido y verificar badge', () => {
+        let fallecido;
+        cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', true);
+        cy.plexText('name="buscador"', 'fallecido');
+        cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', false);
+        cy.wait('@busqueda').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(1);
+            expect(xhr.response.body.fechaFallecimiento).to.not.be.eq(null);
+        });
+        cy.get('paciente-listado').contains('PACIENTE, FALLECIDO');
+        cy.get('paciente-listado').find('plex-badge').contains('Fallecido: 01/01/2019');
     });
 });
 
