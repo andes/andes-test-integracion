@@ -159,9 +159,6 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
             expect(xhr.status).to.be.eq(200);
             cy.get('.badge').contains('asignada');
         });
-        cy.get("@getSolicitudes.all").then((array) => {
-            expect(array[6].response.body[0].solicitud.historial[0].accion).to.be.eq('asignacionProfesional');
-        });
         cy.get('tbody tr').should('have.length.above', 0);
     });
 });
