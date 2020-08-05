@@ -51,7 +51,7 @@ describe('TOP: Liberar turno', () => {
         seleccionarPaciente(dni);
         cy.introjsTooltip();
 
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.plexDatetime('label="Fecha de solicitud"', cy.today());
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de medicina general', '@tipoPrestacion', 0);
         cy.wait('@reglas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);

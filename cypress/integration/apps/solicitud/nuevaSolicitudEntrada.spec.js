@@ -38,7 +38,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
         cy.introjsTooltip();
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.plexDatetime('label="Fecha de solicitud"', cy.today());
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
         cy.plexSelect('label="Organización origen"', 0).click();
         cy.plexSelect('label="Tipos de Prestación Origen"', 0).then((elemento) => {
@@ -58,7 +58,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
     it('nueva solicitud autocitada exitosa', () => {
         seleccionarPaciente(dni);
         cy.introjsTooltip();
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.plexDatetime('label="Fecha de solicitud"', cy.today());
         cy.plexBool('label="Autocitado"').check({
             force: true
         });
@@ -79,9 +79,9 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.introjsTooltip();
         cy.plexButton('Guardar').click();
 
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"').validationMessage()
+        cy.plexDatetime('label="Fecha de solicitud"').validationMessage()
         cy.swal('confirm');
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.plexDatetime('label="Fecha de solicitud"', cy.today());
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
 
@@ -115,7 +115,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
     it('comprobación de reglas', () => {
         seleccionarPaciente(dni);
         cy.introjsTooltip();
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.plexDatetime('label="Fecha de solicitud"', cy.today());
         cy.plexSelectType('label="Organización origen"').find('.selectize-dropdown-content').children().should('have.length', 0);
         cy.plexSelectType('label="Tipos de Prestación Origen"').find('.selectize-dropdown-content').children().should('have.length', 0);
     });
@@ -124,7 +124,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
         cy.introjsTooltip();
-        cy.plexDatetime('label="Fecha en que el profesional solicitó la prestación"', cy.today());
+        cy.plexDatetime('label="Fecha de solicitud"', cy.today());
         cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de clinica médica');
         cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON', '@tipoPrestacion', 0);
         cy.plexSelect('label="Tipos de Prestación Origen"', 0).then((elemento) => {
