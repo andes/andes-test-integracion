@@ -130,7 +130,7 @@ context('MPI-Registro App Mobile', () => {
 
         cy.plexBadge('Cuenta pendiente de activación por el usuario');
         cy.plexButton(' Volver ').click();
-
+        cy.contains('¿Desea salir sin guardar los datos?').get('button').contains('CONFIRMAR').click();
         // verificamos datos
         cy.plexText('name="buscador"', pacValidado.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
@@ -234,7 +234,6 @@ context('MPI-Registro App Mobile', () => {
             //al menos un pacienteApp con ese mail debe traer
             expect(xhr.responseBody.length).to.be.gt(0);
         });
-
         cy.plexBadge('Su dirección no ha podido ser validada, dirección ya utilizada');
     });
 });
