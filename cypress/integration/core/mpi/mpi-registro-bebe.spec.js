@@ -1,13 +1,24 @@
 context('MPI-Registro Paciente Bebé', () => {
     let token;
-    let progenitor;
+    let progenitor, progenitorScan;
     before(() => {
         cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
             cy.task('database:create:paciente').then(p => {
                 progenitor = p;
-            })
+            });
+            cy.task('database:create:paciente', {
+                template: 'validado',
+                nombre: 'ANDES',
+                apellido: 'PACIENTE',
+                documento: 123456789,
+                sexo: "masculino",
+                genero: "masculino",
+                scan: "00535248130@PACIENTE@ANDES@M@123456789@B@26/12/1956@14/02/2018@200",
+            }).then(p => {
+                progenitorScan = p
+            });
         });
 
     })
@@ -219,18 +230,18 @@ context('MPI-Registro Paciente Bebé', () => {
 
     it('ingresar scan de progenitor existente y verificar datos básicos ingresados', () => {
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
-        cy.plexText('name="buscador"', progenitor.scan);
+        cy.plexText('name="buscador"', progenitorScan.scan);
+        cy.log(progenitorScan);
         cy.wait('@busquedaProgenitor').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            cy.plexText('name="documentoRelacion"').should('have.value', progenitor.documento);
-            cy.plexText('name="nombreRelacion"').should('have.value', progenitor.nombre);
-            cy.plexText('name="apellidoRelacion"').should('have.value', progenitor.apellido);
-            // [TODO] En local el parseo de la fecha devuelve un dia menos. En jenkins va bien. 
-            cy.plexDatetime('name="fechaNacimientoRelacion"').find('input').should('have.value', progenitor.fechaNacimiento.format('DD/MM/YYYY'));
-            cy.plexSelectType('name="sexoRelacion"').contains('Femenino');
         });
+        cy.plexText('name="documentoRelacion"').should('have.value', progenitorScan.documento);
+        cy.plexText('name="nombreRelacion"').should('have.value', progenitorScan.nombre);
+        cy.plexText('name="apellidoRelacion"').should('have.value', progenitorScan.apellido);
+        cy.plexDatetime('name="fechaNacimientoRelacion"').find('input').should('have.value', Cypress.moment(progenitorScan.fechaNacimiento).format("DD/MM/YYYY"));
+        cy.plexSelectType('name="sexoRelacion"').contains('Masculino');
     });
-
+    
 })
 
 function format(s) {
