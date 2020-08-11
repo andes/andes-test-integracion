@@ -201,7 +201,7 @@ context('SOLICITUDES', () => {
         cy.wait('@solicitudes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('table tbody tr td').contains('CORTES, JAZMIN').click();
+        cy.get('table tbody tr td').contains('CORTES, JAZMIN').click({ force: true });
         cy.plexButtonIcon('lock-alert').first().click();
         cy.plexButton('Responder').click();
         cy.get('textarea').last().type('Una observacion', {
