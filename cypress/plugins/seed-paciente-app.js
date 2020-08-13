@@ -23,6 +23,11 @@ module.exports.createPacienteApp = async (mongoUri, params) => {
         pacienteApp.sexo = (pacienteApp.sexo) ? pacienteApp.sexo : 'femenino';
         pacienteApp.genero = (pacienteApp.genero) ? pacienteApp.genero : 'femenino';
 
+        if (pacienteApp.pacientes && pacienteApp.pacientes[0].id) {
+            pacienteApp.pacientes[0].id = new ObjectId(pacienteApp.pacientes[0].id);
+            pacienteApp.pacientes[0]._id = new ObjectId();
+        };
+
         pacienteApp._id = new ObjectId();
         await PacienteDB.insertOne(pacienteApp);
         return pacienteApp;

@@ -1,6 +1,6 @@
 context('MPI-Registro App Mobile', () => {
     let token;
-    let pacValidado, pacValidado2, pacValidado3;
+    let pacValidado, pacValidado2, pacValidado3, pacValidado4;
     let pacienteApp;
     let sendMessage = [{
         status: "success",
@@ -33,6 +33,7 @@ context('MPI-Registro App Mobile', () => {
         devices: [],
         sendMessageCache: sendMessage
     }
+
     before(() => {
         cy.seed();
         cy.task('database:create:paciente', {
@@ -50,29 +51,24 @@ context('MPI-Registro App Mobile', () => {
         }).then(p => {
             pacValidado3 = p;
         });
+        cy.task('database:create:paciente', {
+            template: 'validado',
+        }).then(p => {
+            pacValidado4 = p;
+            cy.log(pacValidado4);
+            pacienteAppAux.pacientes = [
+                {
+                    relacion: "principal",
+                    id: pacValidado4._id,
+                    addedAt: "2020-08-07T14:40:40.649Z"
+                }
+            ]
+        });
         cy.task('database:create:paciente-app', pacienteAppAux).then(pacienteapp => {
             pacienteApp = pacienteapp;
         });
         cy.login('38906735', 'asd').then(t => {
             token = t;
-            cy.task('database:create:paciente', {
-                template: 'validado'
-            }).then(p => {
-                pacValidado = p;
-            });
-            cy.task('database:create:paciente', {
-                template: 'validado'
-            }).then(p => {
-                pacValidado2 = p;
-            });
-            cy.task('database:create:paciente', {
-                template: 'validado'
-            }).then(p => {
-                pacValidado3 = p;
-            });
-            cy.task('database:create:paciente-app', pacienteAppAux).then(pacienteapp => {
-                pacienteApp = pacienteapp;
-            });
         });
     });
 
