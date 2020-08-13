@@ -26,7 +26,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
+        cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('conceptosTurneables');
         cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
         cy.route('PATCH', '**/modules/rup/prestaciones/**').as('patchSolicitud');
         cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
@@ -39,7 +39,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
         cy.plexDatetime('label="Fecha de solicitud"', cy.today());
-        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@conceptosTurneables', '59ee2d9bf00c415246fd3d1c');
         cy.plexSelect('label="Organización origen"', 0).click();
         cy.plexSelect('label="Tipos de Prestación Origen"', 0).then((elemento) => {
             idPrestacion = elemento.attr('data-value');
@@ -61,7 +61,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.plexBool('label="Autocitado"').check({
             force: true
         });
-        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@conceptosTurneables', '59ee2d9bf00c415246fd3d1c');
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'un motivo lalala');
         cy.plexButton('Guardar').click();
@@ -86,7 +86,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.plexSelectType('label="Tipo de Prestación Solicitada"').validationMessage()
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
-        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@conceptosTurneables', '59ee2d9bf00c415246fd3d1c');
 
         cy.plexSelectType('label="Organización origen"').validationMessage()
         cy.plexButton('Guardar').click();
@@ -121,8 +121,8 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
         cy.plexDatetime('label="Fecha de solicitud"', cy.today());
-        cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de clinica médica');
-        cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON', '@tipoPrestacion', 0);
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de clinica médica', '@conceptosTurneables', '59ee2d9bf00c415246fd3d6b');
+        cy.plexSelect('label="Organización origen"', 0).click();
         cy.plexSelect('label="Tipos de Prestación Origen"', 0).then((elemento) => {
             idPrestacion = elemento.attr('data-value');
         }).click();
@@ -148,7 +148,6 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.wait('@patchSolicitud');
         cy.get('.badge').contains('asignada');
         cy.goto('/rup', token);
-        cy.wait('@tipoPrestacion');
         cy.plexButton('Mis solicitudes').click();
         cy.wait('@getSolicitudes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);

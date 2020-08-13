@@ -21,6 +21,7 @@ context('SOLICITUDES', () => {
         cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
         cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
+        cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('tipoPrestacion');
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
@@ -43,10 +44,7 @@ context('SOLICITUDES', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexSelectType('label="Prestación Destino"', prestacionDestino)
-        cy.wait('@getReglas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+        cy.plexSelectAsync('label="Prestación Destino"', prestacionDestino, '@tipoPrestacion', 0);
         cy.plexSelectAsync('name="organizacion"', orgOrigen, '@getOrganizaciones', 0);
 
         cy.plexButtonIcon('plus').click();
@@ -82,11 +80,7 @@ context('SOLICITUDES', () => {
         cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
 
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
-        cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de neurología');
-
-        cy.wait('@getReglas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@tipoPrestacion', 0);
         cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER', '@getPrestaciones', '57fcf038326e73143fb48dac');
         cy.plexSelectType('label="Tipos de Prestación Origen"', 'Consulta de clínica médica');
         cy.plexSelectAsync('name="profesionalOrigen"', 'cortes jazmin', '@getProfesional', 0);
@@ -118,11 +112,7 @@ context('SOLICITUDES', () => {
         cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
 
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
-        cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de neurología');
-
-        cy.wait('@getReglas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@tipoPrestacion', 0);
 
         cy.plexSelectAsync('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER', '@getPrestaciones', '57fcf038326e73143fb48dac');
 
