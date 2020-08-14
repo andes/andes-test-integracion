@@ -3,7 +3,7 @@
 function secuencia(token) {
     cy.goto('/solicitudes', token);
     cy.wait('@getSolicitudes')
-    cy.plexButton("Nueva Solicitud").click();
+    cy.plexButton("Nueva Solicitud de Entrada").click();
 }
 
 function seleccionarPaciente(dni) {
@@ -154,6 +154,6 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
             expect(xhr.status).to.be.eq(200);
             cy.get('.badge').contains('asignada');
         });
-        cy.get('tbody tr').should('have.length.above', 0);
+        cy.get('plex-item').should('have.length.above', 1);
     });
 });
