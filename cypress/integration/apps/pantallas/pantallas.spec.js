@@ -34,7 +34,7 @@ context('gestor-pantallas', () => {
             tokenPantalla = xhr.response.body.token;
             cy.get('table tr td').contains(tokenPantalla);
         });
-        cy.plexButtonIcon('pencil').click();
+        cy.plexButtonIcon('pencil').last().click();
         cy.plexSelect('label="Espacios físicos"').find('.remove-button').click();
         cy.plexSelectAsync('label="Espacios físicos"', 'Box 1', '@espacios', 0);
         cy.plexButton('Guardar').click();
