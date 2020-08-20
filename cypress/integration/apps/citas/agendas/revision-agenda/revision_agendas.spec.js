@@ -3,14 +3,23 @@
 export function buscarPaciente(dni) {
     cy.plexButton("Buscar Paciente").click();
     cy.plexText('name="buscador"', dni);
-    cy.wait('@listaPacientes');
+    cy.wait('@listaPacientes').then((xhr) => {
+        expect(xhr.status).to.be.eq(200);
+        expect(xhr.response.body[0].documento).to.be.eq(dni);
+    });
 
     const documento = dni.substr(0, dni.length - 6) + '.' + dni.substr(-6, 3) + '.' + dni.substr(-3);
     cy.get('plex-item').contains(documento).click();
-    cy.wait('@getPaciente');
+    cy.wait('@getPaciente').then((xhr) => {
+        expect(xhr.status).to.be.eq(200);
+    });
+    cy.get('plex-copy').contains(documento);
     cy.plexButton("Cambiar Paciente").click();
     cy.plexText('name="buscador"', dni);
-    cy.wait('@listaPacientes');
+    cy.wait('@listaPacientes').then((xhr) => {
+        expect(xhr.status).to.be.eq(200);
+        expect(xhr.response.body[0].documento).to.be.eq(dni);
+    });
     cy.get('plex-item').contains(documento).click();
 };
 
