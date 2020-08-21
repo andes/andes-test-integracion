@@ -241,7 +241,89 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexDatetime('name="fechaNacimientoRelacion"').find('input').should('have.value', Cypress.moment(progenitorScan.fechaNacimiento).format("DD/MM/YYYY"));
         cy.plexSelectType('name="sexoRelacion"').contains('Masculino');
     });
-    
+
+    it('cargar un bebe con un progenitor y verificar documento progenitor al buscar bebe en listado', () => {
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe'); let nombreBebe = 'VIOLETA';
+        let apellidoBebe = 'COLOR';
+        // se cargan datos basicos del bebe
+        cy.plexText('label="Apellido"', apellidoBebe);
+        cy.plexText('label="Nombre"', nombreBebe);
+        cy.plexSelectType('label="Seleccione sexo"', 'femenino');
+        cy.plexDatetime('label="Fecha de Nacimiento"', Cypress.moment().format("DD/MM/YYYY"));        // se agrega progenitor/a
+        cy.plexText('name="buscador"', progenitorScan.nombre);
+        cy.get('paciente-listado plex-item').contains(progenitorScan.nombre).click();
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.length).to.be.gte(1);
+            expect(xhr.responseBody[0]).to.have.property('nombre', progenitorScan.nombre)
+        });
+        cy.plexText('name="documentoRelacion"').should('have.value', progenitorScan.documento);        //se cargan datos de contacto
+        cy.plexTab('datos de contacto').click();
+        cy.plexBool('name="noPoseeContacto"').check({ force: true });
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexButton('Guardar').click();
+        cy.wait('@registroBebe').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estado).to.be.eq("temporal");
+            cy.log(xhr);
+            expect(xhr.response.body.apellido).to.be.eq(apellidoBebe);
+            expect(xhr.response.body.nombre).to.be.eq(nombreBebe);
+        });
+        cy.contains('Los datos se actualizaron correctamente');
+        cy.get('button').contains('Aceptar').click();
+        cy.plexText('name="buscador"', nombreBebe);
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado plex-item').contains(nombreBebe);
+        cy.plexBadge(' Sin DNI ');
+        // verificamos que se vea el documento del progenitor en paciente listado
+        cy.get('paciente-listado plex-item').contains(format(progenitorScan.documento));
+    });
+
+    it('cargar un bebe con un progenitor y verificar que se vea documento progenitor en el detalle del bebe', () => {
+        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('POST', '**api/core/mpi/pacientes**').as('registroBebe'); let nombreBebe = 'ROSA';
+        let apellidoBebe = 'COLOR';
+        //se cargan datos basicos del bebe
+        cy.plexText('label="Apellido"', apellidoBebe);
+        cy.plexText('label="Nombre"', nombreBebe);
+        cy.plexSelectType('label="Seleccione sexo"', 'femenino');
+        cy.plexDatetime('label="Fecha de Nacimiento"', Cypress.moment().format("DD/MM/YYYY"));
+        //se agrega progenitor/a
+        cy.plexText('name="buscador"', progenitorScan.nombre);
+        cy.get('paciente-listado plex-item').contains(progenitorScan.nombre).click();
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody.length).to.be.gte(1);
+            expect(xhr.responseBody[0]).to.have.property('nombre', progenitorScan.nombre)
+        });
+        cy.plexText('name="documentoRelacion"').should('have.value', progenitorScan.documento); cy.plexTab('datos de contacto').click();
+        cy.plexBool('name="noPoseeContacto"').check({ force: true });
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexButton('Guardar').click();
+        cy.wait('@registroBebe').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estado).to.be.eq("temporal");
+            cy.log(xhr);
+            expect(xhr.response.body.apellido).to.be.eq(apellidoBebe);
+            expect(xhr.response.body.nombre).to.be.eq(nombreBebe);
+        });
+        cy.contains('Los datos se actualizaron correctamente');
+        cy.get('button').contains('Aceptar').click();
+        cy.plexText('name="buscador"', nombreBebe);
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado plex-item').contains(nombreBebe).click();
+        cy.get('paciente-detalle').plexBadge(' Sin DNI ');        // verificamos que se vea el documento del progenitor en paciente detalle
+        cy.get('paciente-detalle').contains(format(progenitorScan.documento));
+        // verificamos que este el documento del progenitor en las relaciones del paciente (sidebar)
+        cy.get('plex-layout-sidebar').get('paciente-listado plex-item').contains(format(progenitorScan.documento));
+    });
 })
 
 function format(s) {
