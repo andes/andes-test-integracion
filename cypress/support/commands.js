@@ -38,10 +38,8 @@ Cypress.Commands.add("login", (usuario, password, id) => {
                 Authorization: 'JWT ' + token
             },
         }).then((response) => {
-            let org = response.body[0];
-            if (id) {
-                org.id = id;
-            }
+            //Si no se especifica id de organizacion, por defecto se usa el id del HPN
+            const defaultId = '57e9670e52df311059bc8964';
             return response = cy.request({
                 url: Cypress.env('API_SERVER') + '/api/auth/v2/organizaciones',
                 method: 'POST',
@@ -49,7 +47,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
                     Authorization: 'JWT ' + token
                 },
                 body: {
-                    organizacion: org.id
+                    organizacion: id ? id : defaultId
                 }
             }).then((response) => {
                 return response.body.token;
