@@ -42,8 +42,7 @@ context('RUP - Punto de inicio', () => {
             cy.get('plex-radio[name="agendas"] input').eq(1).click({
                 force: true
             });
-            cy.get('table').first().find('tbody tr').should('have.length', 1);
-
+            cy.get('tbody tr').contains('PEREZ, MARIA').click();
         });
 
         it('visualizar listados agendas', () => {
