@@ -145,6 +145,13 @@ module.exports.createPaciente = async (mongoUri, params) => {
         dto.apellido = params.apellido || faker.name.lastName().toLocaleUpperCase();
         // si no tiene scan y no se envió en params se le asigna null
         dto.scan = (params.scan) ? params.scan : (dto.scan) ? dto.scan : null;
+
+        // si no tiene reporte de error y no se envió en params se le asigna false
+        dto.reportarError = (params.reportarError) ? params.reportarError : (dto.reportarError) ? dto.reportarError : false;
+        // si no tiene notaError y no se envió en params se le asigna string vacío
+        dto.notaError = (params.notaError) ? params.notaError : (dto.notaError) ? dto.notaError : '';
+
+
         if (dto.documento) {
             dto.documento = (params.documento) ? params.documento + '' : ('' + faker.random.number({ min: 40000000, max: 49999999 }));
             dto.documento_fuzzy = makeNGrams(config, dto.documento);
