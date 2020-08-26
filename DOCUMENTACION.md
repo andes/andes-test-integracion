@@ -155,7 +155,7 @@ Parámetros:
 2. **password**: password del usuario a loguear
 2. **id**: id de la organización a la cual queremos entrar con el usuario
 
-Observación: Hace un GET de las organizaciones. Si no recibe un id, utilizará el del primer resultado.
+Observación: Hace un GET de las organizaciones. Si no recibe un id, utilizará por defecto el id del HPN.
 
 Ejemplos:
 
