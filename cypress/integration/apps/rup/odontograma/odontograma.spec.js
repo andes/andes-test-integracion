@@ -217,7 +217,7 @@ describe('RUP - Odontograma', () => {
 
         cy.get('button[title="Desvincular"]').eq(1).click({ force: true });
         cy.plexButton('Quitar relación').click();
-        cy.get('.badge').contains('diente 14').should('not.exist');
+        cy.get('.badge').contains('diente 18').should('not.exist');
     });
     function formatDocumento(documentoPac) {
         // armamos un documento con puntos como se muestra en la lista de pacientes

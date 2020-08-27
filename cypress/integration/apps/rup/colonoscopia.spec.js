@@ -71,7 +71,23 @@ context('prestaciones', () => {
                 force: true
             });
             cy.plexInt('name="intValue"').type('100');
-            cy.get('plex-radio[name="binario"] input').eq(15).click({
+            // cy.get('plex-radio[name="binario"] input').eq(15).click({
+            //     force: true
+            // });
+
+            cy.get('plex-radio[name="binario"] input').eq(16).click({
+                force: true
+            });
+
+            cy.get('plex-radio[name="binario"] input').eq(18).click({
+                force: true
+            });
+
+            cy.get('plex-radio[name="binario"] input').eq(22).click({
+                force: true
+            });
+
+            cy.get('plex-radio[name="binario"] input').eq(26).click({
                 force: true
             });
 
