@@ -16,7 +16,12 @@ describe('Capa Estadistica - Ingresos', () => {
                     pacientes = pacientesCreados;
 
                     // CREA UN MUNDO IDEAL DE INTERNACION
-                    factoryInternacion({ configCamas: [{ estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() }, { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate() }] }).then(camasCreadas => {
+                    factoryInternacion({
+                        configCamas: [
+                            { estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() },
+                            { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate() }
+                        ]
+                    }).then(camasCreadas => {
                         return cy.goto('/internacion/mapa-camas', token);
                     });
                 });
@@ -28,7 +33,6 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**/api/core/mpi/pacientes/undefined**', true).as('getPaciente2');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
         cy.route('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
@@ -50,8 +54,8 @@ describe('Capa Estadistica - Ingresos', () => {
             "codigo": "132"
         }]).as('getOcupacion')
 
-        cy.route('GET', '**/api/modules/rup/internacion/camas?**', true).as('getCamas');
-        cy.route('GET', '**/api/modules/rup/internacion/camas/**', true).as('getCamas2');
+        // cy.route('GET', '**/api/modules/rup/internacion/camas?**', true).as('getCamas');
+        // cy.route('GET', '**/api/modules/rup/internacion/camas/**', true).as('getCamas2');
         cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
         cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.viewport(1920, 1080);
@@ -66,12 +70,16 @@ describe('Capa Estadistica - Ingresos', () => {
             expect(xhr.responseBody.length).to.be.gte(1);
         });
 
-        cy.get('paciente-listado plex-item').contains(pacientes[0].nombre).click();
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
-        cy.plexButtonIcon('arrow-left').click();
+        cy.get('paciente-listado plex-item').contains(pacientes[0].nombre).click();
+        cy.contains('Paciente ya internado');
+        cy.swal('confirm');
+
+        // cy.wait('@getPaciente').then((xhr) => {
+        //     expect(xhr.status).to.be.eq(200);
+        // });
+
+        // cy.plexButtonIcon('arrow-left').click();
 
         cy.plexText('name="buscador"').clear();
         cy.plexText('name="buscador"', pacientes[1].nombre);
@@ -109,7 +117,7 @@ describe('Capa Estadistica - Ingresos', () => {
 
     it('Editar ingreso', () => {
         cy.get('table tr').contains(pacientes[0].nombre).first().click();
-        cy.wait('@getCamas2');
+        // cy.wait('@getCamas2');
 
         cy.get('plex-tabs ul li').eq(1).click();
         cy.get('plex-title[titulo="INGRESO"] div').eq(2).plexButtonIcon('pencil').click();

@@ -7,7 +7,10 @@ describe('Capa Médica - Ingresos', () => {
         cy.seed();
 
         // CREA USUARIO
-        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:medica', 'internacion:ingreso'] }).then(user => {
+        cy.task(
+            'database:create:usuario',
+            { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:medica', 'internacion:ingreso'] }
+        ).then(user => {
             cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
                 token = t;
 
@@ -16,7 +19,11 @@ describe('Capa Médica - Ingresos', () => {
                     pacientes = pacientesCreados;
 
                     // CREA UN MUNDO IDEAL DE INTERNACION
-                    factoryInternacion({ configCamas: [{ estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() }] }).then(camasCreadas => {
+                    factoryInternacion({
+                        configCamas: [
+                            { estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() }
+                        ]
+                    }).then(camasCreadas => {
                         return cy.goto('/internacion/mapa-camas', token);
                     });
                 });
@@ -27,8 +34,8 @@ describe('Capa Médica - Ingresos', () => {
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**/api/core/mpi/pacientes/**', true).as('getPaciente');
-        cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
+        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
         cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
         cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.viewport(1920, 1080);
@@ -64,7 +71,9 @@ describe('Capa Médica - Ingresos', () => {
 
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
-        cy.plexSelectType('label="Cama"', 'CAMA').click();
+        cy.wait('@getCamas');
+
+        cy.plexSelectType('label="Cama"', 'CAMA');
 
 
         cy.plexButtonIcon('check').click();

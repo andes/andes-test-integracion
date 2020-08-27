@@ -113,6 +113,7 @@ module.exports.createCama = async (mongoUri, params) => {
             }
 
             paciente._id = ObjectId(paciente._id);
+            paciente.id = ObjectId(paciente._id);
             dtoPrestacion.paciente.id = ObjectId(paciente._id)
             await prestacionesDB.insertOne(dtoPrestacion);
         }
