@@ -803,7 +803,7 @@
 		"$oid": "594a8651884431c25d9a0261"
 	},
 	"activo": true,
-	"componente": "TensionArterialComponent",
+	"componente": "MoleculaBaseComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"style": {
@@ -1145,7 +1145,7 @@
 		"$oid": "594a8b5c884431c25d9a0265"
 	},
 	"activo": true,
-	"componente": "SignosVitalesComponent",
+	"componente": "MoleculaBaseComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"style": {
@@ -1302,7 +1302,6 @@
 		"hallazgo",
 		"trastorno",
 		"evento",
-		"situación",
 		"objeto físico",
 		"medicamento clínico"
 	],
@@ -1371,32 +1370,9 @@
 			],
 			"conceptId": "401000013105",
 			"term": "consulta de clínica médica"
-		},
-		{
-			"conceptId": "391000013108",
-			"term": "consulta de medicina general",
-			"fsn": "consulta de medicina general",
-			"semanticTag": "procedimiento"
 		}
 	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5ad761d021e0f1ff1e77861d"
-			},
-			"concepto": {
-				"conceptId": "371531000",
-				"term": "informe del encuentro",
-				"fsn": "informe del encuentro (elemento de registro)",
-				"semanticTag": "elemento de registro"
-			},
-			"style": {
-				"columns": 12.0,
-				"cssClass": null
-			},
-			"params": null
-		}
-	],
+	"requeridos": [],
 	"frecuentes": [
 		{
 			"conceptId": "252156002",
@@ -1442,7 +1418,6 @@
 	"componente": "SolicitudPrestacionDefaultComponent",
 	"tipo": "atomo",
 	"esSolicitud": true,
-	"esTurneable": true,
 	"defaultFor": [
 		"procedimiento",
 		"régimen/tratamiento"
@@ -1538,46 +1513,7 @@
 			"semanticTag": "procedimiento"
 		}
 	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "59942adc043b595e5808b0d1"
-			},
-			"concepto": {},
-			"style": {
-				"columns": 12.0,
-				"cssClass": null
-			},
-			"params": null
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5996f9264eaf5ed36d149cb3"
-			},
-			"concepto": {},
-			"style": {
-				"columns": 12.0,
-				"cssClass": null
-			},
-			"params": null
-		},
-		{
-			"elementoRUP": {
-				"$oid": "599439e3043b595e5808b0d2"
-			},
-			"concepto": {
-				"conceptId": "432678004",
-				"term": "indicación para procedimiento",
-				"fsn": "indicación para procedimiento (entidad observable)",
-				"semanticTag": "entidad observable"
-			},
-			"style": {
-				"columns": 6.0,
-				"cssClass": null
-			},
-			"params": null
-		}
-	],
+	"requeridos": [],
 	"frecuentes": []
 },
 {
@@ -1754,7 +1690,7 @@
 			},
 			"concepto": {
 				"conceptId": "14456009",
-				"term": "medir la altura del paciente",
+				"term": "medir la altura del paciente (procedimiento)",
 				"fsn": "medir la altura del paciente (procedimiento)",
 				"refsetIds": [
 					"900000000000497000"
@@ -2306,25 +2242,6 @@
 		"cssClass": null
 	},
 	"conceptos": [
-		{
-			"fsn": "antecedente de hallazgo clínico en el sujeto (situación)",
-			"semanticTag": "situación",
-			"refsetIds": [
-				"1901000013103",
-				"900000000000497000"
-			],
-			"conceptId": "417662000",
-			"term": "antecedente de hallazgo clínico en el sujeto"
-		},
-		{
-			"fsn": "sin tumoración mamaria (situación)",
-			"semanticTag": "situación",
-			"refsetIds": [
-				"900000000000497000"
-			],
-			"conceptId": "162161004",
-			"term": "sin tumoración mamaria"
-		},
 		{
 			"conceptId": "59621000",
 			"term": "hipertensión arterial esencial (trastorno)",
@@ -3569,7 +3486,7 @@
 		"$oid": "59f89434595f60d1fe0afd4f"
 	},
 	"activo": true,
-	"componente": "FiltradoGlomerularComponent",
+	"componente": "ValorNumericoComponent",
 	"tipo": "atomo",
 	"esSolicitud": false,
 	"style": {
@@ -3589,7 +3506,13 @@
 		}
 	],
 	"requeridos": [],
-	"frecuentes": []
+	"frecuentes": [],
+	"params": {
+		"title": "Filtrado Glomerular",
+		"numericType": "float",
+		"unit": "ml/min",
+		"required": true
+	}
 },
 {
 	"_id": {
@@ -3662,7 +3585,8 @@
 	"componente": "RegistrarMedicamentoDefaultComponent",
 	"tipo": "atomo",
 	"defaultFor": [
-		"producto"
+		"producto",
+		"fármaco de uso clínico"
 	],
 	"esSolicitud": false,
 	"style": {
@@ -3708,7 +3632,7 @@
 		"$oid": "5a26e0e8291f463c1b982d97"
 	},
 	"activo": true,
-	"componente": "ColonoscopiaComponent",
+	"componente": "ObservacionesComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"style": {
@@ -3741,6 +3665,42 @@
 		}
 	],
 	"frecuentes": [
+		{
+			"fsn": "colonoscopia de control (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "310634005",
+			"term": "colonoscopia de control"
+		},
+		{
+			"fsn": "colonoscopia para cribado (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "444783004",
+			"term": "colonoscopia para tamizaje"
+		},
+		{
+			"fsn": "examen endoscópico diagnóstico sobre colon (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "174184006",
+			"term": "colonoscopia diagnóstica"
+		},
+		{
+			"fsn": "colonoscopia terapéutica (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "303587008",
+			"term": "colonoscopia terapéutica"
+		},
 		{
 			"fsn": "colonoscopia normal (hallazgo)",
 			"semanticTag": "hallazgo",
@@ -3873,15 +3833,6 @@
 			"term": "anemia"
 		},
 		{
-			"fsn": "colonoscopia de control (procedimiento)",
-			"semanticTag": "procedimiento",
-			"refsetIds": [
-				"900000000000497000"
-			],
-			"conceptId": "310634005",
-			"term": "colonoscopia de control"
-		},
-		{
 			"fsn": "anestesia para procedimiento endoscópico (procedimiento)",
 			"semanticTag": "procedimiento",
 			"refsetIds": [
@@ -3897,7 +3848,7 @@
 		"$oid": "5a27dbce291f463c1b982d99"
 	},
 	"activo": true,
-	"componente": "InformesComponent",
+	"componente": "ObservacionesComponent",
 	"tipo": "atomo",
 	"esSolicitud": false,
 	"defaultFor": [
@@ -3913,17 +3864,27 @@
 			"semanticTag": "elemento de registro",
 			"term": "informe",
 			"conceptId": "229059009"
+		},
+		{
+			"conceptId": "371531000",
+			"term": "informe del encuentro",
+			"fsn": "informe del encuentro (elemento de registro)",
+			"semanticTag": "elemento de registro"
 		}
 	],
 	"requeridos": [],
-	"frecuentes": []
+	"frecuentes": [],
+	"params": {
+		"titulo": "Informe",
+		"placeholder": "Ingreso un informe"
+	}
 },
 {
 	"_id": {
 		"$oid": "5a394487764a0b2a04d6df87"
 	},
 	"activo": true,
-	"componente": "TraumatologiaComponent",
+	"componente": "ObservacionesComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"style": {
@@ -4081,14 +4042,15 @@
 			"params": null
 		}
 	],
-	"frecuentes": []
+	"frecuentes": [],
+	"requiereDiagnosticoPrincipal": false
 },
 {
 	"_id": {
 		"$oid": "5ac503c190d3511c70fa8de2"
 	},
 	"activo": true,
-	"componente": "ConsultaDeOdontologiaComponent",
+	"componente": "ObservacionesComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"style": {
@@ -4109,14 +4071,512 @@
 	"requeridos": [],
 	"frecuentes": [
 		{
-			"fsn": "colocación de cemento de ionómero de vidrio en diente (procedimiento)",
-			"semanticTag": "procedimiento",
+			"fsn": "odontograma (elemento de registro)",
+			"semanticTag": "elemento de registro",
+			"refsetIds": [],
+			"conceptId": "3561000013109",
+			"term": "odontograma"
+		},
+		{
+			"fsn": "índice de experiencia en caries dentales (entidad observable)",
+			"semanticTag": "entidad observable",
 			"refsetIds": [
-				"721145008",
 				"900000000000497000"
 			],
+			"conceptId": "251313004",
+			"term": "índice de experiencia en caries dentales"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "10775006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tratamiento de conducto, retratamiento de un molar, explicado por el informe",
+			"fsn": "tratamiento de conducto, retratamiento de un molar, explicado por el informe (procedimiento)"
+		},
+		{
+			"semanticTag": "trastorno",
+			"conceptId": "109752002",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "fractura de corona dental, esmalte y dentina, sin exposición de la pulpa",
+			"fsn": "fractura de corona dental, esmalte y dentina, sin exposición de la pulpa (trastorno)"
+		},
+		{
+			"semanticTag": "trastorno",
+			"conceptId": "109753007",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "fractura de corona dental, esmalte y dentina, con exposición de la pulpa",
+			"fsn": "fractura de corona dental, esmalte y dentina, con exposición de la pulpa (trastorno)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "15224009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "reimplante intencional con ferulización",
+			"fsn": "reimplante intencional con ferulización (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "18076000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, dos superficies, anterior",
+			"fsn": "arreglo, resina, dos superficies, anterior (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234696006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "remoción de sarro y pulido dental",
+			"fsn": "remoción de sarro y pulido dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234700003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "preparación de cavidad dental - acceso pulpar",
+			"fsn": "preparación de cavidad dental - acceso pulpar (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234702006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "biopulpectomía parcial",
+			"fsn": "biopulpectomía parcial (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234713009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "sellado de fisura dental",
+			"fsn": "sellado de fisura dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234726008",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "ajuste oclusal",
+			"fsn": "ajuste oclusal (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234745004",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "toma de impresión bucal o dental",
+			"fsn": "toma de impresión bucal o dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234761002",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "toma de impresión para prótesis dental",
+			"fsn": "toma de impresión para prótesis dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "23580000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "hemisección del diente",
+			"fsn": "hemisección del diente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "241047004",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "radiografía periapical de diente",
+			"fsn": "radiografía periapical de diente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "241048009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "radiografía dental oclusal",
+			"fsn": "radiografía dental oclusal (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "243086005",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "educación acerca del cepillado dental",
+			"fsn": "educación acerca del cepillado dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "24717000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, tres o más superficies, posterior, permanente",
+			"fsn": "arreglo, resina, tres o más superficies, posterior, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "26119007",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "extracción de diente temporario",
+			"fsn": "extracción de diente temporario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
 			"conceptId": "277554000",
-			"term": "colocación de cemento de ionómero de vidrio en diente"
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "colocación de cemento de ionómero de vidrio en diente",
+			"fsn": "colocación de cemento de ionómero de vidrio en diente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "281674000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "diseño de prótesis dental",
+			"fsn": "diseño de prótesis dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "287443001",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "drenaje de absceso facial",
+			"fsn": "drenaje de absceso facial (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "29035001",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, dos superficies, posterior, primario",
+			"fsn": "arreglo, resina, dos superficies, posterior, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "30122005",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, una superficie, anterior",
+			"fsn": "arreglo, resina, una superficie, anterior (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "304502009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "biopsia de boca",
+			"fsn": "biopsia de boca (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "31073008",
+			"term": "arreglo con amalgama, tres superficies, primario",
+			"fsn": "arreglo con amalgama, tres superficies, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "31196005",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, dos superficies, permanente",
+			"fsn": "arreglo con amalgama, dos superficies, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "312389006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "reparación inmediata de comunicación bucosinusal",
+			"fsn": "reparación inmediata de comunicación bucosinusal (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "313042009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "aplicación de topicación dental con flúor",
+			"fsn": "aplicación de topicación dental con flúor (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "37106006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, tres o más superficies, posterior, primario",
+			"fsn": "arreglo, resina, tres o más superficies, posterior, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "trastorno",
+			"conceptId": "386207004",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "síndrome de disfunción dolorosa de la articulación temporomandibular",
+			"fsn": "síndrome de disfunción dolorosa de la articulación temporomandibular (trastorno)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "4035003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, dos superficies, posterior, permanente",
+			"fsn": "arreglo, resina, dos superficies, posterior, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "416564000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "drenaje de absceso bucal",
+			"fsn": "drenaje de absceso bucal (procedimiento)"
+		},
+		{
+			"semanticTag": "trastorno",
+			"conceptId": "41888000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "trastorno de la articulación temporomandibular",
+			"fsn": "trastorno de la articulación temporomandibular (trastorno)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "42123008",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tipo III, periodontitis moderada, tratamiento de la bolsa gingival moderada a profunda",
+			"fsn": "tipo III, periodontitis moderada, tratamiento de la bolsa gingival moderada a profunda (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "439761003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "toma de impresión para creación de prótesis obturatriz intermedia a medida",
+			"fsn": "toma de impresión para creación de prótesis obturatriz intermedia a medida (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "45447002",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, cuatro superficies o más, primario",
+			"fsn": "arreglo con amalgama, cuatro superficies o más, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "46069009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, tres superficies, anterior",
+			"fsn": "arreglo, resina, tres superficies, anterior (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "48669003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, una superficie, permanente",
+			"fsn": "arreglo con amalgama, una superficie, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "50585009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "extracción dental múltiple",
+			"fsn": "extracción dental múltiple (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "51243002",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "apexificación/recalcificación, consulta intermedia",
+			"fsn": "apexificación/recalcificación, consulta intermedia (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "56289008",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tratamiento de conducto, retratamiento de un premolar, explicado por el informe",
+			"fsn": "tratamiento de conducto, retratamiento de un premolar, explicado por el informe (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "57084002",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, dos superficies, primario",
+			"fsn": "arreglo con amalgama, dos superficies, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "57703000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "extracción de diente permanente",
+			"fsn": "extracción de diente permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "58814005",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tratamiento de conducto, retratamiento, anterior, explicado por el informe",
+			"fsn": "tratamiento de conducto, retratamiento, anterior, explicado por el informe (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "59789006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tipo I, gingivitis, tratamiento de bolsa gingival superficial",
+			"fsn": "tipo I, gingivitis, tratamiento de bolsa gingival superficial (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "64544008",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "gingivectomía o gingivoplastia, por cada diente",
+			"fsn": "gingivectomía o gingivoplastia, por cada diente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "68381003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "remoción quirúrgica de diente erupcionado con elevación de colgajo mucoperióstico y remoción de hueso y/o sección del diente",
+			"fsn": "remoción quirúrgica de diente erupcionado con elevación de colgajo mucoperióstico y remoción de hueso y/o sección del diente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "70928001",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, una superficie, posterior, permanente",
+			"fsn": "arreglo, resina, una superficie, posterior, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "711033003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "refuerzo de adhesión a régimen de tratamiento",
+			"fsn": "refuerzo de adhesión a régimen de tratamiento (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "75954006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tipo IV, periodontitis avanzada, tratamiento de la bolsa gingival profunda",
+			"fsn": "tipo IV, periodontitis avanzada, tratamiento de la bolsa gingival profunda (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "76076008",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, tres superficies, permanente",
+			"fsn": "arreglo con amalgama, tres superficies, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "76465003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, una superficie, posterior, primario",
+			"fsn": "arreglo, resina, una superficie, posterior, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "82599007",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, cuatro superficies o más, permanente",
+			"fsn": "arreglo con amalgama, cuatro superficies o más, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "91438000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, una superficie, primario",
+			"fsn": "arreglo con amalgama, una superficie, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "trastorno",
+			"conceptId": "92821006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "fisura de la cara",
+			"fsn": "fisura de la cara (trastorno)"
 		}
 	],
 	"reglas": {
@@ -4170,7 +4630,7 @@
 		"$oid": "5ad0f7689fd75bb58dd282a1"
 	},
 	"activo": true,
-	"componente": "ScreeningDeOtoemisionAcusticaNeonatalComponent",
+	"componente": "MoleculaBaseComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"style": {
@@ -4264,6 +4724,15 @@
 	],
 	"frecuentes": [
 		{
+			"fsn": "lugar de nacimiento (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "169812000",
+			"term": "lugar de nacimiento"
+		},
+		{
 			"fsn": "primera falla en el cribado para la detección de alteraciones en la audición en el niño (hallazgo)",
 			"semanticTag": "hallazgo",
 			"refsetIds": [
@@ -4327,164 +4796,10 @@
 },
 {
 	"_id": {
-		"$oid": "5af463ae39623185ab56c898"
-	},
-	"activo": true,
-	"componente": "ScreeningDeOtoemisionAcusticaNeonatalComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "screening de otoemisión acústica neonatal (procedimiento)",
-			"semanticTag": "procedimiento",
-			"refsetIds": [
-				""
-			],
-			"conceptId": "2091000013100",
-			"term": "screening de otoemisión acústica neonatal"
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5a8d9f3900161c2c15d9f463"
-			},
-			"concepto": {
-				"fsn": "evaluación de antecedentes (procedimiento)",
-				"semanticTag": "procedimiento",
-				"term": "evaluación de antecedentes",
-				"conceptId": "371580005",
-				"refsetIds": [
-					"2121000013101"
-				]
-			},
-			"style": {
-				"columns": 6.0,
-				"cssClass": ""
-			},
-			"params": {
-				"titulo": "Seleccione algún antecedente",
-				"refsetId": "2121000013101",
-				"tipoSelect": "select",
-				"multiple": true,
-				"ultimoValor": true
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5a8d9f3900161c2c15d9f463"
-			},
-			"concepto": {
-				"fsn": "otoemisión acústica de oído izquierdo (entidad observable)",
-				"semanticTag": "entidad observable",
-				"refsetIds": [
-					""
-				],
-				"conceptId": "2111000013109",
-				"term": "otoemisión acústica de oído izquierdo"
-			},
-			"style": {
-				"columns": 6.0,
-				"cssClass": ""
-			},
-			"params": {
-				"titulo": "Seleccione un resultado:",
-				"refsetId": "2281000013105",
-				"tipoSelect": "select",
-				"multiple": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5a8d9f3900161c2c15d9f463"
-			},
-			"concepto": {
-				"fsn": "otoemisión acústica de oído derecho (entidad observable)",
-				"semanticTag": "entidad observable",
-				"refsetIds": [
-					""
-				],
-				"conceptId": "2101000013106",
-				"term": "otoemisión acústica de oído derecho"
-			},
-			"style": {
-				"columns": 6.0,
-				"cssClass": ""
-			},
-			"params": {
-				"titulo": "Seleccione un resultado",
-				"refsetId": "2281000013105",
-				"tipoSelect": "select",
-				"multiple": false
-			}
-		}
-	],
-	"frecuentes": [
-		{
-			"fsn": "primera falla en el cribado para la detección de alteraciones en la audición en el niño (hallazgo)",
-			"semanticTag": "hallazgo",
-			"refsetIds": [
-				"900000000000497000"
-			],
-			"conceptId": "185577006",
-			"term": "primera falla en el cribado para la detección de alteraciones en la audición en el niño"
-		},
-		{
-			"fsn": "segunda falla en el cribado para la detección de alteraciones en la audición en el niño (hallazgo)",
-			"semanticTag": "hallazgo",
-			"refsetIds": [
-				"900000000000497000"
-			],
-			"conceptId": "185579009",
-			"term": "segunda falla en el cribado para la detección de alteraciones en la audición en el niño"
-		},
-		{
-			"fsn": "examen de garganta, nariz y oído (procedimiento)",
-			"semanticTag": "procedimiento",
-			"refsetIds": [
-				"900000000000497000"
-			],
-			"conceptId": "113028003",
-			"term": "examen de garganta, nariz y oído"
-		},
-		{
-			"fsn": "prueba de emisión otoacústica, normal (hallazgo)",
-			"term": "prueba de emisión otoacústica, normal",
-			"conceptId": "394891000",
-			"semanticTag": "hallazgo",
-			"refsetIds": [
-				"900000000000497000"
-			]
-		}
-	]
-},
-{
-	"_id": {
-		"$oid": "5af463cf39623185ab56c899"
-	},
-	"activo": true,
-	"componente": "SelectPorRefsetComponent",
-	"tipo": "atomo",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [],
-	"requeridos": [],
-	"frecuentes": [],
-	"params": null
-},
-{
-	"_id": {
 		"$oid": "5b057eaf623c22d1ac70ed94"
 	},
 	"activo": true,
-	"componente": "PercentiloPesoComponent",
+	"componente": "ValorNumericoComponent",
 	"tipo": "atomo",
 	"esSolicitud": false,
 	"style": {
@@ -4512,14 +4827,20 @@
 		}
 	],
 	"requeridos": [],
-	"frecuentes": []
+	"frecuentes": [],
+	"params": {
+		"title": "Percentilo de Peso",
+		"min": 0,
+		"max": 100,
+		"numericType": "float"
+	}
 },
 {
 	"_id": {
 		"$oid": "5b058e38623c22d1ac7117c9"
 	},
 	"activo": true,
-	"componente": "PercentiloTallaComponent",
+	"componente": "ValorNumericoComponent",
 	"tipo": "atomo",
 	"esSolicitud": false,
 	"style": {
@@ -4540,9 +4861,10 @@
 	"requeridos": [],
 	"frecuentes": [],
 	"params": {
-		"privacy": {
-			"scope": true
-		}
+		"title": "Percentilo de Talla",
+		"min": 0,
+		"max": 100,
+		"numericType": "float"
 	}
 },
 {
@@ -4550,7 +4872,7 @@
 		"$oid": "5b06c4bc623c22d1ac72f10f"
 	},
 	"activo": true,
-	"componente": "PercentiloPerimetroCefalicoComponent",
+	"componente": "ValorNumericoComponent",
 	"tipo": "atomo",
 	"esSolicitud": false,
 	"style": {
@@ -4578,14 +4900,20 @@
 		}
 	],
 	"requeridos": [],
-	"frecuentes": []
+	"frecuentes": [],
+	"params": {
+		"title": "Percentilo de Perímetro Cefálico",
+		"min": 0,
+		"max": 100,
+		"numericType": "float"
+	}
 },
 {
 	"_id": {
 		"$oid": "5b06d2ba623c22d1ac731818"
 	},
 	"activo": true,
-	"componente": "PerimetroCefalicoComponent",
+	"componente": "ValorNumericoComponent",
 	"tipo": "atomo",
 	"esSolicitud": false,
 	"style": {
@@ -4604,7 +4932,13 @@
 		}
 	],
 	"requeridos": [],
-	"frecuentes": []
+	"frecuentes": [],
+	"params": {
+		"title": "Perímetro Cefálico",
+		"min": 0,
+		"numericType": "float",
+		"unit": "cm"
+	}
 },
 {
 	"_id": {
@@ -4763,7 +5097,7 @@
 		},
 		{
 			"elementoRUP": {
-				"$oid": "5b7d733369f7df299703769d"
+				"$oid": "5b7d7a53232a219a0d8ba3c0"
 			},
 			"concepto": {
 				"conceptId": "223493006",
@@ -4908,7 +5242,7 @@
 		"$oid": "5b19309be0daff130782ed1e"
 	},
 	"activo": true,
-	"componente": "RegistrarMedidasAntropometricasNinoE3Y6AComponent",
+	"componente": "MoleculaBaseComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"style": {
@@ -4980,7 +5314,12 @@
 				"columns": 6.0,
 				"cssClass": ""
 			},
-			"params": null
+			"params": {
+				"title": "Percentilo de Talla",
+				"min": 0,
+				"max": 100,
+				"numericType": "float"
+			}
 		},
 		{
 			"elementoRUP": {
@@ -5029,10 +5368,15 @@
 				"conceptId": "446974000"
 			},
 			"style": {
-				"columns": 6.0,
+				"columns": 6,
 				"cssClass": ""
 			},
-			"params": null
+			"params": {
+				"title": "Percentilo de IMC",
+				"min": 0,
+				"max": 100,
+				"numericType": "float"
+			}
 		}
 	],
 	"frecuentes": []
@@ -5042,7 +5386,7 @@
 		"$oid": "5b1e75784cf03714c056094a"
 	},
 	"activo": true,
-	"componente": "PercentiloDeMasaCorporalComponent",
+	"componente": "ValorNumericoComponent",
 	"tipo": "atomo",
 	"esSolicitud": false,
 	"style": {
@@ -5053,22 +5397,25 @@
 		{
 			"fsn": "centilo del índice de masa corporal (entidad observable)",
 			"semanticTag": "entidad observable",
-			"refsetIds": [
-				"900000000000497000"
-			],
 			"term": "centilo del índice de masa corporal",
 			"conceptId": "446974000"
 		}
 	],
 	"requeridos": [],
-	"frecuentes": []
+	"frecuentes": [],
+	"params": {
+		"title": "Percentilo de IMC",
+		"min": 0,
+		"max": 100,
+		"numericType": "float"
+	}
 },
 {
 	"_id": {
 		"$oid": "5b1e80094cf03714c056094e"
 	},
 	"activo": true,
-	"componente": "TensionArterialPediatricaComponent",
+	"componente": "MoleculaBaseComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"style": {
@@ -5098,14 +5445,7 @@
 				"columns": 4.0,
 				"cssClass": null
 			},
-			"params": {
-				"required": true,
-				"numericType": "float",
-				"unit": "mmHG",
-				"min": 20,
-				"max": 300,
-				"autocomplete": {}
-			}
+			"params": null
 		},
 		{
 			"elementoRUP": {
@@ -5121,14 +5461,7 @@
 				"columns": 4.0,
 				"cssClass": null
 			},
-			"params": {
-				"required": true,
-				"numericType": "float",
-				"unit": "mmHG",
-				"min": 20,
-				"max": 300,
-				"autocomplete": {}
-			}
+			"params": null
 		},
 		{
 			"elementoRUP": {
@@ -5148,12 +5481,10 @@
 				"cssClass": null
 			},
 			"params": {
-				"required": true,
-				"numericType": "float",
-				"unit": "",
+				"title": "Percentilo de Tensión Arterial",
 				"min": 0,
 				"max": 100,
-				"autocomplete": {}
+				"numericType": "float"
 			}
 		}
 	],
@@ -5164,7 +5495,7 @@
 		"$oid": "5b1fd3e12f408f15366d9609"
 	},
 	"activo": true,
-	"componente": "PercentiloDeTensionArterialComponent",
+	"componente": "ValorNumericoComponent",
 	"tipo": "atomo",
 	"esSolicitud": false,
 	"style": {
@@ -5183,14 +5514,20 @@
 		}
 	],
 	"requeridos": [],
-	"frecuentes": []
+	"frecuentes": [],
+	"params": {
+		"title": "Percentilo de Tensión Arterial",
+		"min": 0,
+		"max": 100,
+		"numericType": "float"
+	}
 },
 {
 	"_id": {
 		"$oid": "5b214d58dc093c182fc2db32"
 	},
 	"activo": true,
-	"componente": "RegistrarMedidasAntropometricasNinoM2AComponent",
+	"componente": "MoleculaBaseComponent",
 	"tipo": "atomo",
 	"esSolicitud": true,
 	"style": {
@@ -5199,13 +5536,11 @@
 	},
 	"conceptos": [
 		{
-			"concepto": {
-				"fsn": "registrar las medidas antropometricas del paciente menor de 2 años (procedimiento)",
-				"semanticTag": "procedimiento",
-				"refsetIds": [],
-				"conceptId": "2551000013100",
-				"term": "registrar las medidas antropometricas del paciente menor de 2 años"
-			}
+			"fsn": "registrar las medidas antropometricas del paciente menor de 2 años (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "2551000013100",
+			"term": "registrar las medidas antropometricas del paciente menor de 2 años"
 		}
 	],
 	"requeridos": [
@@ -5245,7 +5580,12 @@
 				"columns": 6.0,
 				"cssClass": null
 			},
-			"params": null
+			"params": {
+				"title": "Percentilo de Peso",
+				"min": 0,
+				"max": 100,
+				"numericType": "float"
+			}
 		},
 		{
 			"elementoRUP": {
@@ -5280,7 +5620,12 @@
 				"columns": 6.0,
 				"cssClass": ""
 			},
-			"params": null
+			"params": {
+				"title": "Percentilo de Talla",
+				"min": 0,
+				"max": 100,
+				"numericType": "float"
+			}
 		},
 		{
 			"elementoRUP": {
@@ -5299,7 +5644,12 @@
 				"columns": 6.0,
 				"cssClass": ""
 			},
-			"params": null
+			"params": {
+				"title": "Perímetro Cefálico",
+				"min": 0,
+				"numericType": "float",
+				"unit": "cm"
+			}
 		},
 		{
 			"elementoRUP": {
@@ -5318,7 +5668,12 @@
 				"columns": 6.0,
 				"cssClass": ""
 			},
-			"params": null
+			"params": {
+				"title": "Percentilo de Perímetro Cefálico",
+				"min": 0,
+				"max": 100,
+				"numericType": "float"
+			}
 		}
 	],
 	"frecuentes": []
@@ -5591,13 +5946,6 @@
 			],
 			"conceptId": "410627007",
 			"term": "Well child visit, 6 month"
-		},
-		{
-			"fsn": "consulta de niño sano, a los 21 meses (procedimiento)",
-			"semanticTag": "procedimiento",
-			"refsetIds": [],
-			"conceptId": "2601000013103",
-			"term": "consulta de niño sano, a los 21 meses (procedimiento)"
 		},
 		{
 			"fsn": "consulta de niño sano, a los 21 meses (procedimiento)",
@@ -6296,7 +6644,7 @@
 		},
 		{
 			"elementoRUP": {
-				"$oid": "5b7d733369f7df299703769d"
+				"$oid": "5b7d7a53232a219a0d8ba3c0"
 			},
 			"concepto": {
 				"conceptId": "223493006",
@@ -6335,7 +6683,7 @@
 		"$oid": "5b2cf22d3018762894bbc61a"
 	},
 	"activo": true,
-	"componente": "RegistrarMedidasAntropometricasNinoE2Y3AComponent",
+	"componente": "MoleculaBaseComponent",
 	"tipo": "atomo",
 	"esSolicitud": true,
 	"style": {
@@ -6344,12 +6692,10 @@
 	},
 	"conceptos": [
 		{
-			"concepto": {
-				"fsn": "registrar las medidas antropométricas del paciente menor entre 2 y 3 años (procedimiento)",
-				"semanticTag": "procedimiento",
-				"conceptId": "2561000013103",
-				"term": "registrar las medidas antropométricas del paciente menor entre 2 y 3 años (procedimiento)"
-			}
+			"fsn": "registrar las medidas antropométricas del paciente menor entre 2 y 3 años (procedimiento)",
+			"semanticTag": "procedimiento",
+			"conceptId": "2561000013103",
+			"term": "registrar las medidas antropométricas del paciente menor entre 2 y 3 años (procedimiento)"
 		}
 	],
 	"requeridos": [
@@ -6364,11 +6710,11 @@
 					"900000000000497000"
 				],
 				"conceptId": "27113001",
-				"offset": 4.0,
 				"term": "peso corporal"
 			},
 			"style": {
 				"columns": 6.0,
+				"offset": 4.0,
 				"cssClass": null
 			},
 			"params": null
@@ -6409,7 +6755,12 @@
 				"columns": 6.0,
 				"cssClass": ""
 			},
-			"params": null
+			"params": {
+				"title": "Percentilo de Talla",
+				"min": 0,
+				"max": 100,
+				"numericType": "float"
+			}
 		},
 		{
 			"elementoRUP": {
@@ -6428,7 +6779,12 @@
 				"columns": 6.0,
 				"cssClass": ""
 			},
-			"params": null
+			"params": {
+				"title": "Perímetro Cefálico",
+				"min": 0,
+				"numericType": "float",
+				"unit": "cm"
+			}
 		},
 		{
 			"elementoRUP": {
@@ -6447,7 +6803,12 @@
 				"columns": 6.0,
 				"cssClass": ""
 			},
-			"params": null
+			"params": {
+				"title": "Percentilo de Perímetro Cefálico",
+				"min": 0,
+				"max": 100,
+				"numericType": "float"
+			}
 		},
 		{
 			"elementoRUP": {
@@ -6499,47 +6860,12 @@
 				"columns": 6.0,
 				"cssClass": ""
 			},
-			"params": null
-		}
-	],
-	"frecuentes": []
-},
-{
-	"_id": {
-		"$oid": "5b4dd67d9677f95a429e7538"
-	},
-	"activo": true,
-	"componente": "ConsultaPediatriaComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"conceptId": "511000013109",
-			"term": "consulta de pediatría",
-			"fsn": "consulta de pediatría",
-			"semanticTag": "procedimiento"
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5ad761d021e0f1ff1e77861d"
-			},
-			"concepto": {
-				"conceptId": "371531000",
-				"term": "informe del encuentro",
-				"fsn": "informe del encuentro (elemento de registro)",
-				"semanticTag": "elemento de registro"
-			},
-			"style": {
-				"columns": 12.0,
-				"cssClass": null
-			},
-			"params": null
+			"params": {
+				"title": "Percentilo de IMC",
+				"min": 0,
+				"max": 100,
+				"numericType": "float"
+			}
 		}
 	],
 	"frecuentes": []
@@ -6576,7 +6902,7 @@
 		"$oid": "5b576b80bd7c1f8e59413450"
 	},
 	"activo": true,
-	"componente": "ConsultaNoNominalizadaComponent",
+	"componente": "ObservacionesComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"motivoConsoltaOpcional": true,
@@ -6596,6 +6922,12 @@
 			"semanticTag": "procedimiento",
 			"conceptId": "14734007",
 			"term": "actividades de planificación, gestión y capacitación de la organización"
+		},
+		{
+			"fsn": "actividades de promoción de la salud del adolescente (procedimiento)",
+			"semanticTag": "procedimiento",
+			"conceptId": "5301000013104",
+			"term": "actividades de promoción de la salud del adolescente"
 		}
 	],
 	"requeridos": [
@@ -6638,14 +6970,15 @@
 	],
 	"frecuentes": [],
 	"defaultFor": [],
-	"__v": 1
+	"__v": 1,
+	"requiereDiagnosticoPrincipal": false
 },
 {
 	"_id": {
-		"$oid": "5b6320b69677f95a42b811b1"
+		"$oid": "5b6327d62c970725aa48fea1"
 	},
 	"activo": true,
-	"componente": "ConsultaGenericaComponent",
+	"componente": "ObservacionesComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"style": {
@@ -7626,6 +7959,42 @@
 			"semanticTag": "procedimiento"
 		},
 		{
+			"conceptId": "34043003",
+			"term": "consulta de odontología",
+			"fsn": "consulta de odontología",
+			"semanticTag": "procedimiento"
+		},
+		{
+			"conceptId": "34043003",
+			"term": "consulta de odontología (procedimiento)",
+			"fsn": "consulta de odontología (procedimiento)",
+			"semanticTag": "procedimiento"
+		},
+		{
+			"conceptId": "481000013101",
+			"term": "consulta de odontología pediátrica (procedimiento)",
+			"fsn": "consulta de odontología pediátrica (procedimiento)",
+			"semanticTag": "procedimiento"
+		},
+		{
+			"conceptId": "481000013101",
+			"term": "consulta de odontología infantil",
+			"fsn": "consulta de odontología infantil",
+			"semanticTag": "procedimiento"
+		},
+		{
+			"conceptId": "481000013101",
+			"term": "consulta de odontología pediátrica",
+			"fsn": "consulta de odontología pediátrica",
+			"semanticTag": "procedimiento"
+		},
+		{
+			"conceptId": "481000013101",
+			"term": "consulta de odontopediatría",
+			"fsn": "consulta de odontopediatría",
+			"semanticTag": "procedimiento"
+		},
+		{
 			"conceptId": "491000013103",
 			"term": "consulta de oftalmología (procedimiento)",
 			"fsn": "consulta de oftalmología (procedimiento)",
@@ -7944,12 +8313,6 @@
 			"term": "preparación de la epicrisis"
 		},
 		{
-			"fsn": "esofagogastroduodenoscopia (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "76009000",
-			"term": "esofagogastroduodenoscopia (procedimiento)"
-		},
-		{
 			"fsn": "Autocitación (procedimiento)",
 			"semanticTag": "procedimiento",
 			"conceptId": "811000013106",
@@ -8167,18 +8530,6 @@
 			"semanticTag": "procedimiento",
 			"conceptId": "2071000013101",
 			"term": "consulta de podología"
-		},
-		{
-			"fsn": "procedimiento de salud comunitaria (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "389067005",
-			"term": "procedimiento de salud comunitaria"
-		},
-		{
-			"fsn": "procedimiento administrativo (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "14734007",
-			"term": "actividades de planificación, gestión y capacitación de la organización"
 		},
 		{
 			"semanticTag": "procedimiento",
@@ -8805,12 +9156,6 @@
 			"term": "consulta de psiquiatria"
 		},
 		{
-			"fsn": "procedimiento de salud comunitaria (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "389067005",
-			"term": "actividades con la comunidad"
-		},
-		{
 			"fsn": "consulta e informe prostodóncicos (procedimiento)",
 			"semanticTag": "procedimiento",
 			"conceptId": "44340006",
@@ -8821,6 +9166,24 @@
 			"semanticTag": "procedimiento",
 			"conceptId": "3041000013103",
 			"term": "consulta de urología pediátrica"
+		},
+		{
+			"fsn": "consulta de finalización de tratamiento termal (procedimiento)",
+			"semanticTag": "procedimiento",
+			"conceptId": "4411000013107",
+			"term": "consulta de finalización de tratamiento termal"
+		},
+		{
+			"fsn": "consulta de incidencia de tratamiento (procedimiento)",
+			"semanticTag": "procedimiento",
+			"conceptId": "4421000013104",
+			"term": "consulta de incidencia para tratamiento termal"
+		},
+		{
+			"fsn": "consulta de admisión a tratamiento termal (procedimiento)",
+			"semanticTag": "procedimiento",
+			"conceptId": "4401000013109",
+			"term": "consulta de admisión a tratamiento termal"
 		}
 	],
 	"requeridos": [
@@ -8838,7 +9201,10 @@
 				"columns": 12.0,
 				"cssClass": null
 			},
-			"params": null
+			"params": {
+				"titulo": "Informe Del Encuentro",
+				"placeholder": "Ingreso un informe"
+			}
 		}
 	],
 	"frecuentes": []
@@ -8848,7 +9214,7 @@
 		"$oid": "5b686051bd7c1f8e595ffadc"
 	},
 	"activo": true,
-	"componente": "ConsultaDeNinoSanoComponent",
+	"componente": "ObservacionesComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"params": null,
@@ -8963,13 +9329,6 @@
 			"semanticTag": "procedimiento",
 			"refsetIds": [],
 			"conceptId": "2601000013103",
-			"term": "consulta de niño sano, a los 21 meses (procedimiento)"
-		},
-		{
-			"fsn": "consulta de niño sano, a los 21 meses (procedimiento)",
-			"semanticTag": "procedimiento",
-			"refsetIds": [],
-			"conceptId": "2601000013103",
 			"term": "consulta de niño sano, a los 21 meses"
 		},
 		{
@@ -9040,7 +9399,7 @@
 },
 {
 	"_id": {
-		"$oid": "5b7d733369f7df299703769d"
+		"$oid": "5b7d7a53232a219a0d8ba3c0"
 	},
 	"activo": true,
 	"componente": "ObservacionesComponent",
@@ -9054,69 +9413,6 @@
 	"requeridos": [],
 	"frecuentes": [],
 	"params": null
-},
-{
-	"_id": {
-		"$oid": "5b8435ca9677f95a42015d2b"
-	},
-	"activo": true,
-	"componente": "ConsultaHidatidosisComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"params": null,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "identificación parasitaria (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "122069003",
-			"term": "identificación parasitaria"
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "594aa43a884431c25d9a0267"
-			},
-			"concepto": {
-				"fsn": "identificación de quiste hidatídico (procedimiento)",
-				"semanticTag": "procedimiento",
-				"refsetIds": [
-					"900000000000497000"
-				],
-				"conceptId": "122003004",
-				"term": "identificación de quiste hidatídico"
-			},
-			"style": {
-				"columns": 12.0,
-				"cssClass": ""
-			},
-			"params": null
-		}
-	],
-	"frecuentes": [
-		{
-			"fsn": "enfermedad hidatídica (trastorno)",
-			"semanticTag": "trastorno",
-			"refsetIds": [
-				"900000000000497000"
-			],
-			"conceptId": "74942003",
-			"term": "hidatidosis"
-		},
-		{
-			"fsn": "lugar de la consulta (hallazgo)",
-			"semanticTag": "hallazgo",
-			"refsetIds": [
-				"900000000000497000"
-			],
-			"conceptId": "185201007",
-			"term": "lugar de la consulta"
-		}
-	]
 },
 {
 	"_id": {
@@ -9171,11 +9467,10 @@
 	"frecuentes": [],
 	"params": {
 		"titulo": "Seleccione un resultado",
-		"query": "^2281000013105",
+		"refsetId": "2281000013105",
 		"tipoSelect": "select",
 		"multiple": false,
-		"required": true,
-		"preload": true
+		"required": true
 	}
 },
 {
@@ -9213,7 +9508,7 @@
 		"$oid": "5b894a60bd7c1f8e59c26665"
 	},
 	"activo": true,
-	"componente": "ConsultaDeEnfermeriaComponent",
+	"componente": "ObservacionesComponent",
 	"tipo": "molecula",
 	"esSolicitud": false,
 	"motivoConsultaOpcional": false,
@@ -9227,6 +9522,24 @@
 			"semanticTag": "procedimiento",
 			"conceptId": "861000013109",
 			"term": "Consulta de enfermería"
+		},
+		{
+			"fsn": "Consulta de enfermería para pacientes pediátricos (procedimiento)",
+			"semanticTag": "procedimiento",
+			"conceptId": "4431000013101",
+			"term": "Consulta de enfermería para pacientes pediátricos"
+		},
+		{
+			"fsn": "Consultorio de cuidados de la piel y cicatrización de heridas (procedimiento)",
+			"semanticTag": "procedimiento",
+			"conceptId": "4451000013108",
+			"term": "Consultorio de cuidados de la piel y cicatrización de heridas"
+		},
+		{
+			"fsn": "Consultorio de procedimientos traumatológicos de enfermería (procedimiento)",
+			"semanticTag": "procedimiento",
+			"conceptId": "4441000013106",
+			"term": "Consultorio de procedimientos traumatológicos de enfermería"
 		}
 	],
 	"requeridos": [
@@ -9245,47 +9558,361 @@
 				"cssClass": null
 			},
 			"params": null
-		},
-		{
-			"elementoRUP": {
-				"$oid": "594a8b5c884431c25d9a0265"
-			},
-			"concepto": {
-				"conceptId": "61746007",
-				"term": "registrar los signos vitales del paciente",
-				"fsn": "registrar los signos vitales del paciente (procedimiento)",
-				"semanticTag": "procedimiento",
-				"refsetIds": [
-					"900000000000497000"
-				]
-			},
-			"style": {
-				"columns": 12.0,
-				"cssClass": null
-			},
-			"params": null
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5b895b28bd7c1f8e59c2ad1d"
-			},
-			"concepto": {
-				"conceptId": "9632001",
-				"term": "procedimiento de enfermería",
-				"fsn": "procedimiento de enfermería (procedimiento)",
-				"semanticTag": "procedimiento",
-				"refsetIds": [
-					"900000000000497000"
-				]
-			},
-			"style": {
-				"columns": 12.0,
-				"cssClass": null
-			},
-			"params": null
 		}
 	],
 	"frecuentes": [
+		{
+			"conceptId": "5921000013105",
+			"term": "procedimiento realizado en domicilio del sujeto",
+			"fsn": "procedimiento realizado en domicilio del sujeto (situación)",
+			"semanticTag": "situación",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "86198006",
+			"term": "vacunación antigripal",
+			"fsn": "vacunación antigripal (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "61746007",
+			"term": "registrar los signos vitales del paciente",
+			"fsn": "registrar los signos vitales del paciente (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [
+				"900000000000497000"
+			]
+		},
+		{
+			"fsn": "hidroterapia (régimen/tratamiento)",
+			"semanticTag": "régimen/tratamiento",
+			"refsetIds": [],
+			"conceptId": "46903006",
+			"term": "baño terapéutico"
+		},
+		{
+			"fsn": "hidroterapia con baño de agua fría (régimen/tratamiento)",
+			"semanticTag": "régimen/tratamiento",
+			"refsetIds": [],
+			"conceptId": "88532006",
+			"term": "hidroterapia de baño frío"
+		},
+		{
+			"fsn": "tratamiento de la fiebre (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "386305005",
+			"term": "tratamiento de la fiebre"
+		},
+		{
+			"fsn": "colocación de una sonda nasogástrica (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "87750000",
+			"term": "colocación de una sonda nasogástrica"
+		},
+		{
+			"fsn": "cateterismo (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "45211000",
+			"term": "inserción de un catéter"
+		},
+		{
+			"fsn": "inserción de catéter vascular (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "429446009",
+			"term": "inserción de catéter vascular"
+		},
+		{
+			"fsn": "inserción intravenosa (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "386339009",
+			"term": "inserción intravenosa"
+		},
+		{
+			"fsn": "aspiración (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "14766002",
+			"term": "aspiración"
+		},
+		{
+			"fsn": "limpieza por aspiración de cavidad nasal (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "308721008",
+			"term": "limpieza por aspiración de cavidad nasal"
+		},
+		{
+			"fsn": "aspiración orofaríngea (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "84856008",
+			"term": "aspiración orofaríngea"
+		},
+		{
+			"fsn": "aspiración del paciente (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "58058006",
+			"term": "aspiración del paciente"
+		},
+		{
+			"fsn": "depuración de secreciones del tracto respiratorio (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "427391006",
+			"term": "depuración de secreciones del tracto respiratorio"
+		},
+		{
+			"fsn": "procedimiento de certificación (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "310417005",
+			"term": "procedimiento de certificación"
+		},
+		{
+			"fsn": "procedimientos en el ámbito escolar (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "5091000013108",
+			"term": "procedimientos en el ámbito escolar"
+		},
+		{
+			"fsn": "recolección de espécimen (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "17636008",
+			"term": "recolección de muestra"
+		},
+		{
+			"fsn": "frecuencia cardíaca fetal (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [],
+			"conceptId": "249043002",
+			"term": "frecuencia cardíaca fetal"
+		},
+		{
+			"fsn": "características de la frecuencia cardíaca fetal basal (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [],
+			"conceptId": "364622005",
+			"term": "características de la frecuencia cardíaca fetal basal"
+		},
+		{
+			"fsn": "procedimiento electrocardiográfico (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "29303009",
+			"term": "electrocardiograma"
+		},
+		{
+			"fsn": "enema por irrigación (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "31837000",
+			"term": "enema por irrigación"
+		},
+		{
+			"fsn": "administración de enema al paciente (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "61919008",
+			"term": "administración de enema al paciente"
+		},
+		{
+			"fsn": "remoción de suturas/grampas de piel (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "184043001",
+			"term": "remoción de suturas/clips de piel"
+		},
+		{
+			"fsn": "convocatoria para inmunización (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "308433002",
+			"term": "convocatoria para inmunización"
+		},
+		{
+			"fsn": "convocatoria para control (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "308536008",
+			"term": "convocatoria para control"
+		},
+		{
+			"fsn": "convocatoria para cribado (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "308535007",
+			"term": "convocatoria para screening"
+		},
+		{
+			"fsn": "rehidratación oral (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "281798001",
+			"term": "rehidratación oral"
+		},
+		{
+			"fsn": "procedimiento de vendaje (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "118481004",
+			"term": "procedimiento de vendaje"
+		},
+		{
+			"fsn": "vendaje de herida (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "182531007",
+			"term": "vendaje de herida"
+		},
+		{
+			"fsn": "procedimiento sobre sonda vesical (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "182524008",
+			"term": "procedimiento sobre sonda vesical"
+		},
+		{
+			"fsn": "limpieza de herida (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "225150002",
+			"term": "limpieza de herida"
+		},
+		{
+			"fsn": "higiene de herida (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [],
+			"conceptId": "364555005",
+			"term": "higiene de herida"
+		},
+		{
+			"fsn": "procedimiento sobre herida (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "442460002",
+			"term": "procedimiento sobre herida"
+		},
+		{
+			"fsn": "desbridamiento de herida con agente tópico (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "225149002",
+			"term": "desbridamiento de herida con agente tópico"
+		},
+		{
+			"fsn": "administración de medicación mediante máscara de nebulización (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "445141005",
+			"term": "administración de medicación mediante máscara de nebulización"
+		},
+		{
+			"fsn": "terapia con nebulizador (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "56251003",
+			"term": "terapia con nebulizador"
+		},
+		{
+			"fsn": "reanimación cardiopulmonar (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "89666000",
+			"term": "reanimación cardiopulmonar"
+		},
+		{
+			"fsn": "instilación (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "55870005",
+			"term": "instilación"
+		},
+		{
+			"fsn": "instilación de colirio (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "225698005",
+			"term": "instilación de colirio"
+		},
+		{
+			"fsn": "instilación de gotas midriáticas en el ojo (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "424986007",
+			"term": "instilación de gotas midriáticas en el ojo"
+		},
+		{
+			"fsn": "lavado gástrico (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "173830003",
+			"term": "lavado gástrico"
+		},
+		{
+			"fsn": "monitoreo cardíaco (régimen/tratamiento)",
+			"semanticTag": "régimen/tratamiento",
+			"refsetIds": [],
+			"conceptId": "23852006",
+			"term": "monitoreo cardíaco"
+		},
+		{
+			"fsn": "agudeza visual (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [],
+			"conceptId": "363983007",
+			"term": "agudeza visual"
+		},
+		{
+			"fsn": "educación, guía y asesoramiento en promoción de la salud (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "410314003",
+			"term": "educación, guía y asesoramiento en promoción de la salud"
+		},
+		{
+			"fsn": "asesoramiento (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "409063005",
+			"term": "asesoramiento"
+		},
+		{
+			"fsn": "derivación a (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [],
+			"conceptId": "440379008",
+			"term": "derivación a"
+		},
+		{
+			"fsn": "derivación urgente (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "134403003",
+			"term": "derivación urgente"
+		},
+		{
+			"fsn": "apoyo emocional (régimen/tratamiento)",
+			"semanticTag": "régimen/tratamiento",
+			"refsetIds": [],
+			"conceptId": "133921002",
+			"term": "apoyo emocional"
+		},
+		{
+			"fsn": "terapia con broncodilatador inhalado (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": [],
+			"conceptId": "127784009",
+			"term": "terapia con broncodilatador inhalado"
+		},
 		{
 			"fsn": "índice de masa corporal (entidad observable)",
 			"semanticTag": "entidad observable",
@@ -9450,7 +10077,7 @@
 	"tipo": "atomo",
 	"esSolicitud": false,
 	"style": {
-		"columns": 6,
+		"columns": 6.0,
 		"cssClass": null
 	},
 	"conceptos": [
@@ -9504,14 +10131,12 @@
 				"readonly": false,
 				"defaultOptions": [
 					{
-						"id": 0,
-						"label": "Si",
-						"value": true
+						"id": "Si",
+						"label": "Si"
 					},
 					{
-						"id": 1,
-						"label": "No",
-						"value": false
+						"id": "No",
+						"label": "No"
 					}
 				],
 				"required": true,
@@ -9549,6 +10174,14 @@
 						"label": "Endoscopio OLYMPUS CF-H180AL | Torre EVIS EXERA II CV-180"
 					},
 					{
+						"id": "Endoscopio Olympus CF EL",
+						"label": "Endoscopio Olympus CF EL"
+					},
+					{
+						"id": "Endoscopio Olympus E3",
+						"label": "Endoscopio Olympus E3"
+					},
+					{
 						"id": "Endoscopio Pentax EC-380LKp",
 						"label": "Endoscopio Pentax EC-380LKp"
 					},
@@ -9557,7 +10190,8 @@
 						"label": "Otro"
 					}
 				],
-				"required": true
+				"required": true,
+				"title": "Endoscopio"
 			}
 		},
 		{
@@ -9568,7 +10202,7 @@
 				"fsn": "anestesia para endoscopia anorrectal (procedimiento)",
 				"semanticTag": "procedimiento",
 				"conceptId": "48372002",
-				"term": "preparación"
+				"term": "anestesia para endoscopia anorrectal"
 			},
 			"style": {
 				"columnas": 6,
@@ -9595,7 +10229,8 @@
 						"label": "Otro"
 					}
 				],
-				"required": true
+				"required": true,
+				"title": "Anestesia para endoscopia anorrectal"
 			}
 		},
 		{
@@ -9638,6 +10273,10 @@
 					{
 						"id": "No",
 						"label": "No"
+					},
+					{
+						"id": "No aplica",
+						"label": "No aplica"
 					}
 				],
 				"required": true
@@ -9675,10 +10314,10 @@
 				"$oid": "5bbf8a6361c1660cee7a754e"
 			},
 			"concepto": {
-				"fsn": "procedimiento endoscópico en el apéndice cecal (procedimiento)",
-				"semanticTag": "procedimiento",
-				"conceptId": "440588003",
-				"term": "Tiempo de retirada"
+				"fsn": "cantidad de minutos (entidad observable)",
+				"term": "cantidad de minutos",
+				"conceptId": "417239007",
+				"semanticTag": "entidad observable"
 			},
 			"style": {
 				"columns": 12,
@@ -9688,7 +10327,8 @@
 				"required": true,
 				"numericType": "integer",
 				"unit": "Minutos",
-				"showTerm": true
+				"showTerm": true,
+				"title": "Cantidad de minutos"
 			}
 		},
 		{
@@ -9696,14 +10336,15 @@
 				"$oid": "5bbf5df161c1660cee7a754c"
 			},
 			"concepto": {
-				"conceptId": "3571000013102",
-				"term": "Estudio completo",
-				"fsn": "resumen de la internación (elemento de registro)",
-				"semanticTag": "elemento de registro"
+				"fsn": "evaluación de riesgo (procedimiento)",
+				"term": "evaluación de riesgo",
+				"conceptId": "225338004",
+				"semanticTag": "procedimiento"
 			},
 			"params": {
 				"plexRadioType": "horizontal",
 				"readonly": false,
+				"titulo": "Grupo de Riesgo CCR",
 				"defaultOptions": [
 					{
 						"id": "Promedio",
@@ -9728,20 +10369,37 @@
 		},
 		{
 			"elementoRUP": {
-				"$oid": "5ad761d021e0f1ff1e77861d"
+				"$oid": "5bbf5df161c1660cee7a754c"
 			},
 			"concepto": {
-				"fsn": "motivo de consulta (hallazgo)",
-				"semanticTag": "hallazgo",
-				"conceptId": "409586006",
-				"term": " Motivo de estudio"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
+				"fsn": "complicación de procedimiento (trastorno)",
+				"term": "complicación de procedimiento",
+				"conceptId": "116224001",
+				"semanticTag": "trastorno"
 			},
 			"params": {
-				"accordion": true
+				"plexRadioType": "horizontal",
+				"readonly": false,
+				"title": "Complicaciones",
+				"defaultOptions": [
+					{
+						"id": "Ninguna",
+						"label": "Ninguna"
+					},
+					{
+						"id": "Perforacion",
+						"label": "Perforacion"
+					},
+					{
+						"id": "Sangrado",
+						"label": "Sangrado"
+					},
+					{
+						"id": "Otro",
+						"label": "Otro"
+					}
+				],
+				"required": true
 			}
 		},
 		{
@@ -9749,17 +10407,69 @@
 				"$oid": "5ad761d021e0f1ff1e77861d"
 			},
 			"concepto": {
-				"fsn": "motivo de consulta (hallazgo)",
-				"semanticTag": "hallazgo",
-				"conceptId": "310634005",
-				"term": "Preparación"
+				"fsn": "sección correspondiente al síntoma principal (elemento de registro)",
+				"term": "sección correspondiente al síntoma principal",
+				"conceptId": "422843007",
+				"semanticTag": "elemento de registro"
 			},
 			"style": {
 				"columns": 12,
 				"cssClass": null
 			},
 			"params": {
-				"accordion": true
+				"seleccionarOpcion": true,
+				"readonly": false,
+				"title": "Motivo del estudio",
+				"query": "167669009 OR 167667006 OR 5081000013105",
+				"required": true,
+				"extraQuery": [
+					{
+						"id": "no aplica",
+						"term": "no aplica"
+					}
+				]
+			}
+		},
+		{
+			"elementoRUP": {
+				"$oid": "5bbf5df161c1660cee7a754c"
+			},
+			"concepto": {
+				"fsn": "preparación para procedimiento (régimen/tratamiento)",
+				"semanticTag": "régimen/tratamiento",
+				"conceptId": "443425001",
+				"term": "preparación para procedimiento"
+			},
+			"style": {
+				"columns": 12,
+				"cssClass": null
+			},
+			"params": {
+				"plexRadioType": "horizontal",
+				"readonly": false,
+				"defaultOptions": [
+					{
+						"id": "Si",
+						"label": "Si"
+					},
+					{
+						"id": "No",
+						"label": "No"
+					}
+				],
+				"okayOptions": [
+					{
+						"id": "Fosfato monosódico / fosfato disódico",
+						"label": "Fosfato monosódico / fosfato disódico"
+					},
+					{
+						"id": "Polietilenglicol 3350",
+						"label": "Polietilenglicol 3350"
+					}
+				],
+				"required": true,
+				"accordion": true,
+				"title": "Preparacion"
 			}
 		},
 		{
@@ -9767,17 +10477,18 @@
 				"$oid": "5ad761d021e0f1ff1e77861d"
 			},
 			"concepto": {
-				"fsn": "motivo de consulta (hallazgo)",
+				"fsn": "informe final (elemento de registro)",
 				"semanticTag": "hallazgo",
-				"conceptId": "440588003",
-				"term": "Informe"
+				"conceptId": "445665009",
+				"term": "informe final"
 			},
 			"style": {
 				"columns": 12,
 				"cssClass": null
 			},
 			"params": {
-				"accordion": true
+				"accordion": true,
+				"title": "Informe"
 			}
 		},
 		{
@@ -9801,17 +10512,18 @@
 				"$oid": "5ad761d021e0f1ff1e77861d"
 			},
 			"concepto": {
-				"fsn": "motivo de consulta (hallazgo)",
-				"semanticTag": "hallazgo",
-				"conceptId": "440588003",
-				"term": "Tratamiento a seguir"
+				"fsn": "tratamiento complementario (régimen/tratamiento)",
+				"semanticTag": "régimen/tratamiento",
+				"conceptId": "225423004",
+				"term": "tratamiento complementario"
 			},
 			"style": {
 				"columns": 12,
 				"cssClass": null
 			},
 			"params": {
-				"accordion": true
+				"accordion": true,
+				"title": "Conducta"
 			}
 		},
 		{
@@ -9819,24 +10531,26 @@
 				"$oid": "5ad761d021e0f1ff1e77861d"
 			},
 			"concepto": {
-				"fsn": "motivo de consulta (hallazgo)",
+				"fsn": "sección de resultados (elemento de registro)",
 				"semanticTag": "hallazgo",
-				"conceptId": "440588003",
-				"term": "conclusiones"
+				"conceptId": "423100009",
+				"term": "sección de resultados"
 			},
 			"style": {
 				"columns": 12,
 				"cssClass": null
 			},
 			"params": {
-				"accordion": true
+				"accordion": true,
+				"title": "Conclusiones"
 			}
 		}
 	],
 	"frecuentes": [],
 	"motivoConsultaOpcional": false,
 	"params": {
-		"accordion": true
+		"accordion": true,
+		"hasSections": true
 	}
 },
 {
@@ -9857,29 +10571,6 @@
 			"term": "evaluación con la Prueba de Denominación de Boston",
 			"fsn": "evaluación con la Prueba de Denominación de Boston (procedimiento)",
 			"semanticTag": "procedimiento"
-		}
-	],
-	"requeridos": [],
-	"frecuentes": []
-},
-{
-	"_id": {
-		"$oid": "5bbf6bb461c1660cee7a754d"
-	},
-	"activo": true,
-	"componente": "AnestesiaComponent",
-	"tipo": "atomo",
-	"esSolicitud": false,
-	"style": {
-		"columns": 6,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "anestesia para endoscopia anorrectal (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "48372002",
-			"term": "anestesia para endoscopia anorrectal"
 		}
 	],
 	"requeridos": [],
@@ -9910,77 +10601,6 @@
 	"params": {
 		"numericType": "integer"
 	}
-},
-{
-	"_id": {
-		"$oid": "5bc0c6cf96edd011c3674ddb"
-	},
-	"activo": true,
-	"componente": "LapsoDeTiempoComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"style": {
-		"columns": 6,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "desarrollo psicomotor (entidad observable)",
-			"semanticTag": "entidad observable",
-			"refsetIds": [
-				"900000000000497000"
-			],
-			"conceptId": "65401001",
-			"term": "desarrollo psicomotor"
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "procedimiento endoscópico en el apéndice cecal (procedimiento)",
-				"semanticTag": "procedimiento",
-				"conceptId": "440588003",
-				"term": "procedimiento endoscópico en el apéndice cecal"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"showTerm": false,
-				"unit": "minutos",
-				"defaultValue": 0
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "procedimiento endoscópico en el apéndice cecal (procedimiento)",
-				"semanticTag": "procedimiento",
-				"conceptId": "440588003",
-				"term": "procedimiento endoscópico en el apéndice cecal"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"showTerm": false,
-				"unit": "segundos",
-				"defaultValue": 0
-			}
-		}
-	],
-	"frecuentes": []
 },
 {
 	"_id": {
@@ -10021,8 +10641,7 @@
 				"titulo": "Resumen de la Internación",
 				"hr": true,
 				"icon": "icon-andes-documento",
-				"required": true,
-				"accordion": true
+				"required": true
 			}
 		},
 		{
@@ -10042,8 +10661,7 @@
 			"params": {
 				"titulo": "Tratamiento recibido durante la internación",
 				"icon": "icon-rup-semantic-todos",
-				"required": true,
-				"accordion": true
+				"required": true
 			}
 		},
 		{
@@ -10062,8 +10680,7 @@
 			},
 			"params": {
 				"titulo": "Registros de Laboratorio/Estudios",
-				"icon": "icon-andes-laboratorio",
-				"accordion": true
+				"icon": "icon-andes-laboratorio"
 			}
 		},
 		{
@@ -10082,8 +10699,27 @@
 			},
 			"params": {
 				"titulo": "Registros de Laboratorio/Estudios",
-				"icon": "icon-rup-semantic-procedimiento",
-				"accordion": true
+				"icon": "icon-rup-semantic-procedimiento"
+			}
+		},
+		{
+			"elementoRUP": {
+				"$oid": "5ad761d021e0f1ff1e77861d"
+			},
+			"concepto": {
+				"conceptId": "4771000013105",
+				"term": "situaciones pendientes",
+				"fsn": "situaciones pendientes (elemento de registro)",
+				"semanticTag": "elemento de registro"
+			},
+			"style": {
+				"columns": 12,
+				"cssClass": null
+			},
+			"params": {
+				"titulo": "Situaciones pendientes",
+				"refsetId": "",
+				"icon": "icon-andes-cama-reloj"
 			}
 		},
 		{
@@ -10103,8 +10739,7 @@
 			"params": {
 				"titulo": "Tratamientos a seguir",
 				"refsetId": "",
-				"icon": "icon-andes-evoluciones",
-				"accordion": true
+				"icon": "icon-andes-evoluciones"
 			}
 		},
 		{
@@ -10124,8 +10759,7 @@
 			"params": {
 				"titulo": "Dieta a seguir",
 				"refsetId": "",
-				"icon": "icon-andes-dieta",
-				"accordion": true
+				"icon": "icon-andes-dieta"
 			}
 		},
 		{
@@ -10133,7 +10767,7 @@
 				"$oid": "5ad761d021e0f1ff1e77861d"
 			},
 			"concepto": {
-				"conceptId": "900000000000003001",
+				"conceptId": "3631000013101",
 				"term": "pautas de alarma post internación",
 				"fsn": "pautas de alarma post internación (elemento de registro)",
 				"semanticTag": "elemento de registro"
@@ -10145,7 +10779,7 @@
 			"params": {
 				"titulo": "Pautas de alarma",
 				"icon": "icon-andes-alertas",
-				"accordion": true
+				"noIndex": "true"
 			}
 		},
 		{
@@ -10165,34 +10799,10 @@
 			"params": {
 				"titulo": "Diagnostico al egreso",
 				"refsetId": "",
-				"icon": "icon-andes-andes-egreso",
-				"accordion": true
+				"icon": "icon-andes-andes-egreso"
 			}
 		}
 	],
-	"frecuentes": []
-},
-{
-	"_id": {
-		"$oid": "5bdb06641d4bfb26390bfe8b"
-	},
-	"activo": true,
-	"componente": "EndoscopioComponent",
-	"tipo": "atomo",
-	"esSolicitud": false,
-	"style": {
-		"columns": 6,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "endoscopio (objeto físico)",
-			"semanticTag": "objeto físico",
-			"conceptId": "37270008",
-			"term": "endoscopio"
-		}
-	],
-	"requeridos": [],
 	"frecuentes": []
 },
 {
@@ -10342,7 +10952,7 @@
 			"conceptId": "710996002",
 			"fsn": "monitorización de la talla (régimen/tratamiento)",
 			"semanticTag": "régimen/tratamiento",
-			"term": "monitorización de la talla"
+			"term": "monitorización de la talla (régimen/tratamiento)"
 		}
 	],
 	"requeridos": [],
@@ -10474,574 +11084,6 @@
 },
 {
 	"_id": {
-		"$oid": "5bedb2b4734e5722a8b6bff0"
-	},
-	"activo": true,
-	"componente": "GraficoLinealComponent",
-	"tipo": "atomo",
-	"esSolicitud": false,
-	"style": {
-		"columnas": 12,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"conceptId": "363810004",
-			"term": "medida de la composición corporal",
-			"fsn": "medida de la composición corporal (entidad observable)",
-			"semanticTag": "entidad observable"
-		}
-	],
-	"requeridos": [],
-	"frecuentes": [],
-	"params": [
-		{
-			"query": "\u003c\u003c60621009",
-			"label": "IMC",
-			"unidad": "Kg/m^2"
-		}
-	]
-},
-{
-	"_id": {
-		"$oid": "5bf81ab813e0cba8b56c7e01"
-	},
-	"activo": true,
-	"componente": "MoleculaBaseComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"style": {
-		"columnas": 6,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "radiografía simple (procedimiento)",
-			"semanticTag": "procedimiento",
-			"refsetIds": [
-				"900000000000497000"
-			],
-			"conceptId": "168537006",
-			"term": "radiografía"
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5bbf5df161c1660cee7a754c"
-			},
-			"concepto": {
-				"conceptId": "168537006",
-				"term": "radiografía",
-				"fsn": "radiografía simple (procedimiento)",
-				"semanticTag": "procedimiento"
-			},
-			"style": {
-				"columnas": 6,
-				"cssClass": null
-			},
-			"params": {
-				"plexRadioType": "vertical",
-				"readonly": false,
-				"defaultOptions": [
-					{
-						"id": "Politrauma",
-						"label": "Politrauma"
-					},
-					{
-						"id": "Cráneo",
-						"label": "Cráneo"
-					},
-					{
-						"id": "Tórax",
-						"label": "Tórax"
-					},
-					{
-						"id": "Columna",
-						"label": "Columna"
-					},
-					{
-						"id": "Extremidades superiores",
-						"label": "Extremidades superiores"
-					},
-					{
-						"id": "Abdomen",
-						"label": "Abdomen"
-					}
-				],
-				"required": false,
-				"title": "Radiografías tomadas"
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf5df161c1660cee7a754c"
-			},
-			"concepto": {
-				"fsn": "radiografía portátil (procedimiento)",
-				"semanticTag": "procedimiento",
-				"conceptId": "425583002",
-				"term": "radiografía portátil"
-			},
-			"style": {
-				"columnas": 6,
-				"cssClass": null
-			},
-			"params": {
-				"title": "Equipamiento utilizado",
-				"plexRadioType": "vertical",
-				"readonly": false,
-				"defaultOptions": [
-					{
-						"id": "Phillips DR",
-						"label": "Phillips DR"
-					},
-					{
-						"id": "Toshiba Plessart",
-						"label": "Toshiba Plessart"
-					},
-					{
-						"id": "Siemmens Mammomat 300",
-						"label": "Siemmens Mammomat 300"
-					},
-					{
-						"id": "Mamógrafo Convencional GBA (Analógico)",
-						"label": "Mamógrafo Convencional GBA (Analógico)"
-					},
-					{
-						"id": "Portátil",
-						"label": "Portátil"
-					},
-					{
-						"id": "Amulet",
-						"label": "Amulet"
-					},
-					{
-						"id": "Otro",
-						"label": "Otro"
-					}
-				],
-				"required": true
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 18x24"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 18x24 Descartada"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 24x30"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 24x30 Descartada"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 26x36F"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 26x36F Descartada"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 30x40"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 30x40 Descartada"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 35x35"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 35x35 Descartada"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 35x43"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 35x43 Descartada"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 35x43F"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Placa 35x43F Descartada"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "Fotos"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "material de dispositivo (objeto físico)",
-				"semanticTag": "objeto físico",
-				"conceptId": "707732003",
-				"term": "CD / DVD"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5ad761d021e0f1ff1e77861d"
-			},
-			"concepto": {
-				"fsn": "motivo de consulta (hallazgo)",
-				"semanticTag": "hallazgo",
-				"conceptId": "440588003",
-				"term": "Informe"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"accordion": true
-			}
-		}
-	],
-	"frecuentes": [],
-	"motivoConsultaOpcional": false,
-	"params": {
-		"accordion": true
-	}
-},
-{
-	"_id": {
-		"$oid": "5bf8243313e0cba8b56daad9"
-	},
-	"activo": true,
-	"componente": "RadiografiaComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "procedimiento radiográfico (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "363680008",
-			"term": "procedimiento radiográfico",
-			"refsetIds": []
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5bf81ab813e0cba8b56c7e01"
-			},
-			"concepto": {
-				"fsn": "radiografía simple (procedimiento)",
-				"semanticTag": "procedimiento",
-				"refsetIds": [
-					"900000000000497000"
-				],
-				"conceptId": "168537006",
-				"term": "radiografía"
-			}
-		}
-	],
-	"frecuentes": []
-},
-{
-	"_id": {
 		"$oid": "5c50661713e0cba8b55c9a77"
 	},
 	"activo": true,
@@ -11066,66 +11108,6 @@
 	},
 	"requeridos": [],
 	"frecuentes": []
-},
-{
-	"_id": {
-		"$oid": "5c641de25cd661b5037220e3"
-	},
-	"activo": true,
-	"componente": "GraficoLinealComponent",
-	"tipo": "atomo",
-	"esSolicitud": false,
-	"style": {
-		"columnas": 12,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "control de la tensión sanguínea (régimen/tratamiento)",
-			"semanticTag": "régimen/tratamiento",
-			"conceptId": "135840009",
-			"term": "monitoreo de la tensión sanguínea"
-		}
-	],
-	"requeridos": [],
-	"frecuentes": [],
-	"params": [
-		{
-			"query": "\u003c\u003c27113001",
-			"label": "riesgo de enfermedad cardiovascular",
-			"unidad": "mmHG"
-		}
-	]
-},
-{
-	"_id": {
-		"$oid": "5c642f075cd661b503725c99"
-	},
-	"activo": true,
-	"componente": "GraficoLinealComponent",
-	"tipo": "atomo",
-	"esSolicitud": false,
-	"style": {
-		"columnas": 12,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "monitoreo cardiovascular (régimen/tratamiento)",
-			"semanticTag": "régimen/tratamiento",
-			"conceptId": "48428001",
-			"term": "monitoreo cardiovascular"
-		}
-	],
-	"requeridos": [],
-	"frecuentes": [],
-	"params": [
-		{
-			"query": "\u003c\u003c441829007",
-			"label": "Riesgo de enfermedad cardiovascular",
-			"unidad": ""
-		}
-	]
 },
 {
 	"_id": {
@@ -11159,233 +11141,11 @@
 },
 {
 	"_id": {
-		"$oid": "5c757d1f5cd661b503981048"
+		"$oid": "5c8b8a301742c567652864c1"
 	},
 	"activo": true,
-	"componente": "SeccionesAccordionComponent",
+	"componente": "ObservacionesComponent",
 	"tipo": "molecula",
-	"esSolicitud": false,
-	"style": {
-		"columnas": 6,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "indicación de recaída (entidad observable)",
-			"semanticTag": "entidad observable",
-			"conceptId": "414482001",
-			"term": "indicación de recaída"
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5ad761d021e0f1ff1e77861d"
-			},
-			"concepto": {
-				"fsn": "control (atributo)",
-				"semanticTag": "atributo",
-				"conceptId": "246106000",
-				"term": "control"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"title": "Controles",
-				"allDroppable": true,
-				"accordion": true
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5ad761d021e0f1ff1e77861d"
-			},
-			"concepto": {
-				"fsn": "esquema de cuidados (régimen/tratamiento)",
-				"semanticTag": "régimen/tratamiento",
-				"conceptId": "225365006",
-				"term": "esquema de cuidados"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"title": "Cuidados",
-				"allDroppable": true,
-				"accordion": true
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5ad761d021e0f1ff1e77861d"
-			},
-			"concepto": {
-				"fsn": "esquema de cuidados (régimen/tratamiento)",
-				"semanticTag": "régimen/tratamiento",
-				"conceptId": "225365006",
-				"term": "esquema de cuidados"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"title": "Medicamentos",
-				"allDroppable": true,
-				"accordion": true
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5ad761d021e0f1ff1e77861d"
-			},
-			"concepto": {
-				"fsn": "esquema de cuidados (régimen/tratamiento)",
-				"semanticTag": "régimen/tratamiento",
-				"conceptId": "225365006",
-				"term": "esquema de cuidados"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"title": "Nutricion",
-				"allDroppable": true,
-				"accordion": true
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5ad761d021e0f1ff1e77861d"
-			},
-			"concepto": {
-				"fsn": "esquema de cuidados (régimen/tratamiento)",
-				"semanticTag": "régimen/tratamiento",
-				"conceptId": "225365006",
-				"term": "esquema de cuidados"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"title": "Plan de hidratacion",
-				"allDroppable": true,
-				"accordion": true
-			}
-		}
-	],
-	"frecuentes": [],
-	"motivoConsultaOpcional": true,
-	"params": {
-		"accordion": true
-	}
-},
-{
-	"_id": {
-		"$oid": "5c77d6a15cd661b5039ba687"
-	},
-	"activo": true,
-	"componente": "MoleculaBaseComponent",
-	"tipo": "molecula",
-	"esSolicitud": true,
-	"style": {
-		"columns": 12,
-		"cssClass": "justify-content-between"
-	},
-	"conceptos": [
-		{
-			"fsn": "prescripción (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "16076005",
-			"term": "prescripción de"
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5d1e02c55cd661b5033bc518"
-			},
-			"concepto": {
-				"conceptId": "440545006",
-				"fsn": "registro de prescripción (elemento de registro)",
-				"refsetIds": [
-					"900000000000497000"
-				],
-				"semanticTag": "elemento de registro",
-				"term": "registro de prescripción"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"title": "Descripción",
-				"html": false,
-				"multiline": true,
-				"placeholder": "Ingrese Descripción",
-				"required": true
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5c77dd485cd661b5039bb6e0"
-			},
-			"concepto": {
-				"fsn": "frecuencia (calificador)",
-				"semanticTag": "calificador",
-				"conceptId": "272123002",
-				"term": "frecuencia"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"titulo": "Frecuencia:",
-				"query": "\u003c307467005",
-				"tipoSelect": "select",
-				"multiple": false,
-				"required": true
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5cd98b155cd661b503cbab73"
-			},
-			"concepto": {
-				"fsn": "valor de la vía de administración (calificador)",
-				"semanticTag": "calificador",
-				"conceptId": "284009009",
-				"term": "valor de la vía de administración"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {
-				"titulo": "Vía:",
-				"query": "\u003c284009009",
-				"tipoSelect": "select",
-				"multiple": false,
-				"required": true
-			}
-		}
-	],
-	"frecuentes": [],
-	"motivoConsultaOpcional": false
-},
-{
-	"_id": {
-		"$oid": "5c77dd485cd661b5039bb6e0"
-	},
-	"activo": true,
-	"componente": "SelectPorRefsetComponent",
-	"tipo": "atomo",
 	"esSolicitud": false,
 	"style": {
 		"columns": 12.0,
@@ -11393,522 +11153,525 @@
 	},
 	"conceptos": [
 		{
-			"fsn": "frecuencia (calificador)",
-			"semanticTag": "calificador",
-			"conceptId": "272123002",
-			"term": "frecuencia"
+			"conceptId": "481000013101",
+			"term": "consulta de odontopediatría",
+			"fsn": "consulta de odontopediatría",
+			"semanticTag": "procedimiento"
 		}
 	],
 	"requeridos": [],
-	"frecuentes": [],
-	"params": {
-		"titulo": "Seleccione una frecuencia:",
-		"refsetId": "\u003e\u003e7389001",
-		"tipoSelect": "select",
-		"multiple": false,
-		"required": true
-	}
-},
-{
-	"_id": {
-		"$oid": "5c8274aa5cd661b503b44cd4"
-	},
-	"activo": true,
-	"componente": "PlanIndicacionComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "prescripción (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "1607600555555555",
-			"term": "prescripción"
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5c77d6a15cd661b5039ba687"
-			},
-			"concepto": {
-				"conceptId": "16076005",
-				"fsn": "prescripción (procedimiento)",
-				"refsetIds": [
-					"900000000000497000"
-				],
-				"semanticTag": "procedimiento",
-				"term": "prescripción de"
-			},
-			"style": {
-				"columns": 12,
-				"cssClass": null
-			},
-			"params": {}
-		}
-	],
-	"frecuentes": [],
-	"motivoConsultaOpcional": false,
-	"params": {
-		"btnLabel": "Agregar Indicacion"
-	}
-},
-{
-	"_id": {
-		"$oid": "5c89068d5cd661b503c48234"
-	},
-	"activo": true,
-	"componente": "MoleculaBaseComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "indicación para procedimiento (entidad observable)",
-			"semanticTag": "entidad observable",
-			"conceptId": "432678004",
-			"term": "indicación para procedimiento"
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5c8274aa5cd661b503b44cd4"
-			},
-			"concepto": {
-				"fsn": "prescripción (procedimiento)",
-				"semanticTag": "procedimiento",
-				"conceptId": "16076005",
-				"term": "prescripción"
-			},
-			"style": {
-				"columns": 12.0,
-				"cssClass": null
-			},
-			"params": null
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5c8a45a25cd661b503c7f7d0"
-			},
-			"concepto": {
-				"fsn": "procedimiento nutricional (procedimiento)",
-				"semanticTag": "procedimiento",
-				"conceptId": "278846007",
-				"term": "procedimiento nutricional"
-			},
-			"style": {
-				"columns": 12.0,
-				"cssClass": null
-			},
-			"params": null
-		}
-	],
 	"frecuentes": [
 		{
-			"fsn": "oxigenoterapia (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "57485005",
-			"term": "oxigenoterapia"
+			"fsn": "odontograma (elemento de registro)",
+			"semanticTag": "elemento de registro",
+			"refsetIds": [],
+			"conceptId": "3561000013109",
+			"term": "odontograma"
 		},
 		{
-			"conceptId": "40174006",
-			"term": "procedimiento de aislamiento",
-			"fsn": "procedimiento de aislamiento (procedimiento)",
-			"semanticTag": "procedimiento"
-		}
-	]
-},
-{
-	"_id": {
-		"$oid": "5c8a45a25cd661b503c7f7d0"
-	},
-	"activo": true,
-	"componente": "MoleculaBaseComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "procedimiento nutricional (procedimiento)",
 			"semanticTag": "procedimiento",
-			"conceptId": "278846007",
-			"term": "procedimiento nutricional"
-		}
-	],
-	"requeridos": [
+			"conceptId": "10775006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tratamiento de conducto, retratamiento de un molar, explicado por el informe",
+			"fsn": "tratamiento de conducto, retratamiento de un molar, explicado por el informe (procedimiento)"
+		},
 		{
-			"elementoRUP": {
-				"$oid": "599439e3043b595e5808b0d2"
-			},
-			"concepto": {
-				"fsn": "prescripción (procedimiento)",
-				"semanticTag": "procedimiento",
-				"conceptId": "16076005",
-				"term": "prescripción"
-			},
-			"style": {
-				"columns": 12.0,
-				"cssClass": null
-			},
-			"params": null
-		}
-	],
-	"frecuentes": []
-},
-{
-	"_id": {
-		"$oid": "5c8a64cd5cd661b503c836b8"
-	},
-	"activo": true,
-	"componente": "SeleccionBinariaComponent",
-	"tipo": "atomo",
-	"esSolicitud": false,
-	"style": {
-		"columns": 6,
-		"cssClass": null
-	},
-	"conceptos": [
+			"semanticTag": "trastorno",
+			"conceptId": "109752002",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "fractura de corona dental, esmalte y dentina, sin exposición de la pulpa",
+			"fsn": "fractura de corona dental, esmalte y dentina, sin exposición de la pulpa (trastorno)"
+		},
 		{
-			"conceptId": "40174006",
-			"term": "procedimiento de aislamiento",
-			"fsn": "procedimiento de aislamiento (procedimiento)",
-			"semanticTag": "procedimiento"
+			"semanticTag": "trastorno",
+			"conceptId": "109753007",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "fractura de corona dental, esmalte y dentina, con exposición de la pulpa",
+			"fsn": "fractura de corona dental, esmalte y dentina, con exposición de la pulpa (trastorno)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "15224009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "reimplante intencional con ferulización",
+			"fsn": "reimplante intencional con ferulización (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "18076000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, dos superficies, anterior",
+			"fsn": "arreglo, resina, dos superficies, anterior (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234696006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "remoción de sarro y pulido dental",
+			"fsn": "remoción de sarro y pulido dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234700003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "preparación de cavidad dental - acceso pulpar",
+			"fsn": "preparación de cavidad dental - acceso pulpar (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234702006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "biopulpectomía parcial",
+			"fsn": "biopulpectomía parcial (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234713009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "sellado de fisura dental",
+			"fsn": "sellado de fisura dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234726008",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "ajuste oclusal",
+			"fsn": "ajuste oclusal (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234745004",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "toma de impresión bucal o dental",
+			"fsn": "toma de impresión bucal o dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "234761002",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "toma de impresión para prótesis dental",
+			"fsn": "toma de impresión para prótesis dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "23580000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "hemisección del diente",
+			"fsn": "hemisección del diente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "241047004",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "radiografía periapical de diente",
+			"fsn": "radiografía periapical de diente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "241048009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "radiografía dental oclusal",
+			"fsn": "radiografía dental oclusal (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "243086005",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "educación acerca del cepillado dental",
+			"fsn": "educación acerca del cepillado dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "24717000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, tres o más superficies, posterior, permanente",
+			"fsn": "arreglo, resina, tres o más superficies, posterior, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "26119007",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "extracción de diente temporario",
+			"fsn": "extracción de diente temporario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "277554000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "colocación de cemento de ionómero de vidrio en diente",
+			"fsn": "colocación de cemento de ionómero de vidrio en diente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "281674000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "diseño de prótesis dental",
+			"fsn": "diseño de prótesis dental (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "287443001",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "drenaje de absceso facial",
+			"fsn": "drenaje de absceso facial (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "29035001",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, dos superficies, posterior, primario",
+			"fsn": "arreglo, resina, dos superficies, posterior, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "30122005",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, una superficie, anterior",
+			"fsn": "arreglo, resina, una superficie, anterior (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "304502009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "biopsia de boca",
+			"fsn": "biopsia de boca (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "31073008",
+			"term": "arreglo con amalgama, tres superficies, primario",
+			"fsn": "arreglo con amalgama, tres superficies, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "31196005",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, dos superficies, permanente",
+			"fsn": "arreglo con amalgama, dos superficies, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "312389006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "reparación inmediata de comunicación bucosinusal",
+			"fsn": "reparación inmediata de comunicación bucosinusal (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "313042009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "aplicación de topicación dental con flúor",
+			"fsn": "aplicación de topicación dental con flúor (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "37106006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, tres o más superficies, posterior, primario",
+			"fsn": "arreglo, resina, tres o más superficies, posterior, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "trastorno",
+			"conceptId": "386207004",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "síndrome de disfunción dolorosa de la articulación temporomandibular",
+			"fsn": "síndrome de disfunción dolorosa de la articulación temporomandibular (trastorno)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "4035003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, dos superficies, posterior, permanente",
+			"fsn": "arreglo, resina, dos superficies, posterior, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "416564000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "drenaje de absceso bucal",
+			"fsn": "drenaje de absceso bucal (procedimiento)"
+		},
+		{
+			"semanticTag": "trastorno",
+			"conceptId": "41888000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "trastorno de la articulación temporomandibular",
+			"fsn": "trastorno de la articulación temporomandibular (trastorno)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "42123008",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tipo III, periodontitis moderada, tratamiento de la bolsa gingival moderada a profunda",
+			"fsn": "tipo III, periodontitis moderada, tratamiento de la bolsa gingival moderada a profunda (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "439761003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "toma de impresión para creación de prótesis obturatriz intermedia a medida",
+			"fsn": "toma de impresión para creación de prótesis obturatriz intermedia a medida (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "45447002",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, cuatro superficies o más, primario",
+			"fsn": "arreglo con amalgama, cuatro superficies o más, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "46069009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, tres superficies, anterior",
+			"fsn": "arreglo, resina, tres superficies, anterior (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "48669003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, una superficie, permanente",
+			"fsn": "arreglo con amalgama, una superficie, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "50585009",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "extracción dental múltiple",
+			"fsn": "extracción dental múltiple (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "51243002",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "apexificación/recalcificación, consulta intermedia",
+			"fsn": "apexificación/recalcificación, consulta intermedia (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "56289008",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tratamiento de conducto, retratamiento de un premolar, explicado por el informe",
+			"fsn": "tratamiento de conducto, retratamiento de un premolar, explicado por el informe (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "57084002",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, dos superficies, primario",
+			"fsn": "arreglo con amalgama, dos superficies, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "57703000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "extracción de diente permanente",
+			"fsn": "extracción de diente permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "58814005",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tratamiento de conducto, retratamiento, anterior, explicado por el informe",
+			"fsn": "tratamiento de conducto, retratamiento, anterior, explicado por el informe (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "59789006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tipo I, gingivitis, tratamiento de bolsa gingival superficial",
+			"fsn": "tipo I, gingivitis, tratamiento de bolsa gingival superficial (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "64544008",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "gingivectomía o gingivoplastia, por cada diente",
+			"fsn": "gingivectomía o gingivoplastia, por cada diente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "68381003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "remoción quirúrgica de diente erupcionado con elevación de colgajo mucoperióstico y remoción de hueso y/o sección del diente",
+			"fsn": "remoción quirúrgica de diente erupcionado con elevación de colgajo mucoperióstico y remoción de hueso y/o sección del diente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "70928001",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, una superficie, posterior, permanente",
+			"fsn": "arreglo, resina, una superficie, posterior, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "711033003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "refuerzo de adhesión a régimen de tratamiento",
+			"fsn": "refuerzo de adhesión a régimen de tratamiento (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "75954006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "tipo IV, periodontitis avanzada, tratamiento de la bolsa gingival profunda",
+			"fsn": "tipo IV, periodontitis avanzada, tratamiento de la bolsa gingival profunda (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "76076008",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, tres superficies, permanente",
+			"fsn": "arreglo con amalgama, tres superficies, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "76465003",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo, resina, una superficie, posterior, primario",
+			"fsn": "arreglo, resina, una superficie, posterior, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "82599007",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, cuatro superficies o más, permanente",
+			"fsn": "arreglo con amalgama, cuatro superficies o más, permanente (procedimiento)"
+		},
+		{
+			"semanticTag": "procedimiento",
+			"conceptId": "91438000",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "arreglo con amalgama, una superficie, primario",
+			"fsn": "arreglo con amalgama, una superficie, primario (procedimiento)"
+		},
+		{
+			"semanticTag": "trastorno",
+			"conceptId": "92821006",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"term": "fisura de la cara",
+			"fsn": "fisura de la cara (trastorno)"
 		}
 	],
-	"requeridos": [],
-	"frecuentes": [],
-	"params": {
-		"plexRadioType": "vertical",
-		"readonly": false,
-		"defaultOptions": [
+	"reglas": {
+		"opcionales": [
 			{
-				"id": "Contacto",
-				"label": "Contacto",
-				"value": {
-					"conceptId": "170499009",
-					"term": "aislamiento de contacto infeccioso",
-					"fsn": "aislamiento de contacto infeccioso (procedimiento)",
-					"semanticTag": "procedimiento"
-				}
-			},
-			{
-				"id": "Respiratorio",
-				"label": "Respiratorio",
-				"value": {
-					"conceptId": "439742002",
-					"term": "aislamiento respiratorio",
-					"fsn": "aislamiento respiratorio (procedimiento)",
-					"semanticTag": "procedimiento"
-				}
-			},
-			{
-				"id": "Neutropenico",
-				"label": "Neutropenico",
-				"value": {
-					"conceptId": "275829005",
-					"term": "aislamiento reverso",
-					"fsn": "aislamiento reverso (procedimiento)",
-					"semanticTag": "procedimiento"
-				}
+				"motivoDeConsultaPrincipal": true
 			}
 		],
-		"required": true,
-		"title": "Seleccione aislamiento"
+		"requeridos": {
+			"registros": true,
+			"relacionesMultiples": true
+		}
 	}
-},
-{
-	"_id": {
-		"$oid": "5c8bdfc55cd661b503cc4f6d"
-	},
-	"activo": true,
-	"componente": "MoleculaBaseComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "oxigenoterapia (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "57485005",
-			"term": "oxigenoterapia"
-		}
-	],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5bbf5df161c1660cee7a754c"
-			},
-			"concepto": {
-				"conceptId": "260686004",
-				"term": "método",
-				"fsn": "método (atributo)",
-				"semanticTag": "atributo"
-			},
-			"style": {
-				"columns": 6,
-				"cssClass": null
-			},
-			"params": {
-				"plexRadioType": "vertical",
-				"readonly": false,
-				"defaultOptions": [
-					{
-						"id": "administración de oxígeno por cánula nasal",
-						"label": "administración de oxígeno por cánula nasal",
-						"value": {
-							"conceptId": "371907003",
-							"term": "administración de oxígeno por cánula nasal",
-							"fsn": "administración de oxígeno por cánula nasal(procedimiento)",
-							"semanticTag": "procedimiento"
-						}
-					},
-					{
-						"id": "administración de oxígeno con máscara de Venturi",
-						"label": "administración de oxígeno con máscara de Venturi",
-						"value": {
-							"conceptId": "429253002",
-							"term": "administración de oxígeno con máscara de Venturi",
-							"fsn": "administración de oxígeno con máscara de Venturi (procedimiento)",
-							"semanticTag": "procedimiento"
-						}
-					},
-					{
-						"id": "administración de oxígeno con máscara ",
-						"label": "administración de oxígeno con máscara ",
-						"value": {
-							"conceptId": "371908008",
-							"term": "administración de oxígeno con máscara ",
-							"fsn": "administración de oxígeno con máscara (procedimiento)",
-							"semanticTag": "procedimiento"
-						}
-					}
-				],
-				"required": false,
-				"title": "Metodo"
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "velocidad de flujo de oxígeno administrado (entidad observable)",
-				"semanticTag": "entidad observable",
-				"conceptId": "427081008",
-				"term": "velocidad de flujo de oxígeno administrado"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "l/m",
-				"showTerm": true,
-				"observe": false
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5bbf8a6361c1660cee7a754e"
-			},
-			"concepto": {
-				"fsn": "concentración de oxígeno inspirado (entidad observable)",
-				"semanticTag": "entidad observable",
-				"conceptId": "250774007",
-				"term": "concentración de oxígeno inspirado"
-			},
-			"style": {
-				"columns": 3,
-				"cssClass": null
-			},
-			"params": {
-				"required": true,
-				"numericType": "integer",
-				"unit": "%",
-				"showTerm": true,
-				"observe": false
-			}
-		}
-	],
-	"frecuentes": []
-},
-{
-	"_id": {
-		"$oid": "5cd2e3ac5cd661b503b0911a"
-	},
-	"activo": true,
-	"componente": "EstadoComponent",
-	"tipo": "atomo",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [],
-	"requeridos": [],
-	"frecuentes": [],
-	"params": null
-},
-{
-	"_id": {
-		"$oid": "5cd98b155cd661b503cbab73"
-	},
-	"activo": true,
-	"componente": "SelectPorRefsetComponent",
-	"tipo": "atomo",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "valor de la vía de administración (calificador)",
-			"semanticTag": "calificador",
-			"conceptId": "284009009",
-			"term": "valor de la vía de administración"
-		}
-	],
-	"requeridos": [],
-	"frecuentes": [],
-	"params": {
-		"titulo": "Seleccione via:",
-		"refsetId": "\u003e\u003e7389001",
-		"tipoSelect": "select",
-		"multiple": false,
-		"required": true
-	}
-},
-{
-	"_id": {
-		"$oid": "5cdad1405cd661b503d11b67"
-	},
-	"activo": true,
-	"componente": "DescripcionComponent",
-	"tipo": "atomo",
-	"esSolicitud": false,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"conceptId": "223493006",
-			"term": "procedimiento de registro",
-			"fsn": "procedimiento de documentación (procedimiento)",
-			"semanticTag": "procedimiento"
-		}
-	],
-	"requeridos": [],
-	"frecuentes": []
-},
-{
-	"_id": {
-		"$oid": "5cdd40a55cd661b503db9900"
-	},
-	"activo": true,
-	"componente": "SesionEnfermeriaComponent",
-	"tipo": "molecula",
-	"esSolicitud": false,
-	"params": null,
-	"style": {
-		"columns": 12.0,
-		"cssClass": null
-	},
-	"conceptos": [
-		{
-			"fsn": "sesión de informes de enfermería (procedimiento)",
-			"semanticTag": "procedimiento",
-			"conceptId": "11553003",
-			"term": "sesión de informes de enfermería"
-		}
-	],
-	"requeridos": [],
-	"frecuentes": []
-},
-{
-	"_id": {
-		"$oid": "5ce82ed15cd661b5030809ec"
-	},
-	"activo": true,
-	"componente": "MoleculaBaseComponent",
-	"tipo": "molecula",
-	"esSolicitud": true,
-	"esTurneable": false,
-	"defaultFor": [
-		"procedimiento",
-		"régimen/tratamiento"
-	],
-	"style": {
-		"columns": 6.0,
-		"cssClass": null
-	},
-	"conceptos": [],
-	"requeridos": [
-		{
-			"elementoRUP": {
-				"$oid": "5cdad1405cd661b503d11b67"
-			},
-			"concepto": {
-				"conceptId": "440545006",
-				"fsn": "registro de prescripción (elemento de registro)",
-				"refsetIds": [
-					"900000000000497000"
-				],
-				"semanticTag": "elemento de registro",
-				"term": "registro de prescripción"
-			},
-			"style": {
-				"columns": 6,
-				"cssClass": null
-			},
-			"params": {
-				"title": "Descripcion",
-				"hideHtml": true,
-				"multiline": true,
-				"placeholder": "Ingrese Descripcion",
-				"required": true
-			}
-		},
-		{
-			"elementoRUP": {
-				"$oid": "5c77dd485cd661b5039bb6e0"
-			},
-			"concepto": {
-				"fsn": "frecuencia (calificador)",
-				"semanticTag": "calificador",
-				"conceptId": "272123002",
-				"term": "frecuencia"
-			},
-			"style": {
-				"columns": 6,
-				"cssClass": null
-			},
-			"params": {
-				"titulo": "Frecuencia:",
-				"query": "\u003c307467005",
-				"tipoSelect": "select",
-				"multiple": false,
-				"required": true
-			}
-		}
-	],
-	"frecuentes": []
 },
 {
 	"_id": {
@@ -11939,11 +11702,214 @@
 },
 {
 	"_id": {
-		"$oid": "5d1e02c55cd661b5033bc518"
+		"$oid": "5d52ffe51ae9185f4ae78817"
 	},
 	"activo": true,
-	"componente": "ObservacionesComponent",
+	"componente": "SelectOrganizacionComponent",
 	"tipo": "atomo",
+	"esSolicitud": false,
+	"style": {
+		"columns": 6.0,
+		"cssClass": null
+	},
+	"conceptos": [
+		{
+			"fsn": "lugar de nacimiento (entidad observable)",
+			"semanticTag": "entidad observable",
+			"conceptId": "169812000",
+			"term": "lugar de nacimiento"
+		}
+	],
+	"requeridos": [],
+	"frecuentes": [],
+	"params": {
+		"title": "Lugar de Nacimiento",
+		"allowOther": true
+	}
+},
+{
+	"_id": {
+		"$oid": "5d7be0d631972e927210b66b"
+	},
+	"activo": true,
+	"componente": "ValorNumericoComponent",
+	"tipo": "atomo",
+	"esSolicitud": false,
+	"style": {
+		"columns": 6,
+		"cssClass": null
+	},
+	"conceptos": [
+		{
+			"fsn": "recuento de dientes cariados (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "251319000",
+			"term": "recuento de dientes cariados"
+		},
+		{
+			"fsn": "recuento de dientes faltantes (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "251317003",
+			"term": "recuento de dientes faltantes"
+		},
+		{
+			"fsn": "conteo de dientes arreglados (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "251318008",
+			"term": "conteo de dientes arreglados"
+		}
+	],
+	"requeridos": [],
+	"frecuentes": [],
+	"params": {
+		"numericType": "integer",
+		"max": 30,
+		"min": 0
+	}
+},
+{
+	"_id": {
+		"$oid": "5d7f7e3031972e927210f706"
+	},
+	"activo": true,
+	"componente": "MoleculaBaseComponent",
+	"tipo": "molecula",
+	"esSolicitud": false,
+	"style": {
+		"columns": 6,
+		"cssClass": null
+	},
+	"conceptos": [
+		{
+			"fsn": "índice de experiencia en caries dentales (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "251313004",
+			"term": "índice de experiencia en caries dentales"
+		}
+	],
+	"requeridos": [
+		{
+			"elementoRUP": {
+				"$oid": "5d7be0d631972e927210b66b"
+			},
+			"concepto": {
+				"conceptId": "251319000",
+				"term": "recuento de dientes cariados",
+				"fsn": "recuento de dientes cariados (entidad observable)",
+				"semanticTag": "entidad observable"
+			},
+			"style": {
+				"columns": 6,
+				"cssClass": null
+			},
+			"params": {
+				"required": true,
+				"numericType": "integer",
+				"min": 0,
+				"max": 30
+			}
+		},
+		{
+			"elementoRUP": {
+				"$oid": "5d7be0d631972e927210b66b"
+			},
+			"concepto": {
+				"conceptId": "251317003",
+				"term": "recuento de dientes faltantes",
+				"fsn": "recuento de dientes cariados (entidad observable)",
+				"semanticTag": "entidad observable"
+			},
+			"style": {
+				"columns": 6,
+				"cssClass": null
+			},
+			"params": {
+				"required": true,
+				"numericType": "integer",
+				"min": 0,
+				"max": 30
+			}
+		},
+		{
+			"elementoRUP": {
+				"$oid": "5d7be0d631972e927210b66b"
+			},
+			"concepto": {
+				"conceptId": "251318008",
+				"term": "conteo de dientes arreglados",
+				"fsn": "recuento de dientes cariados (entidad observable)",
+				"semanticTag": "entidad observable"
+			},
+			"style": {
+				"columns": 6,
+				"cssClass": null
+			},
+			"params": {
+				"required": true,
+				"numericType": "integer",
+				"min": 0,
+				"max": 30
+			}
+		}
+	],
+	"frecuentes": [],
+	"motivoConsultaOpcional": false,
+	"params": {
+		"required": true,
+		"numericType": "integer",
+		"min": 0,
+		"max": 30
+	}
+},
+{
+	"_id": {
+		"$oid": "5de1081a19c5e655dea1eb2b"
+	},
+	"activo": true,
+	"componente": "ValorFechaComponent",
+	"tipo": "atomo",
+	"esSolicitud": false,
+	"style": {
+		"columnas": 6,
+		"cssClass": null
+	},
+	"conceptos": [
+		{
+			"fsn": "último período menstrual (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "21840007",
+			"term": "último período menstrual"
+		}
+	],
+	"requeridos": [],
+	"frecuentes": [],
+	"params": {
+		"title": "Fecha",
+		"type": "date"
+	}
+},
+{
+	"_id": {
+		"$oid": "5e348313421ef6dc5b703bbc"
+	},
+	"activo": true,
+	"componente": "MoleculaBaseComponent",
+	"tipo": "molecula",
 	"esSolicitud": false,
 	"style": {
 		"columns": 12.0,
@@ -11951,24 +11917,2877 @@
 	},
 	"conceptos": [
 		{
-			"conceptId": "440545006",
-			"fsn": "registro de prescripción (elemento de registro)",
-			"refsetIds": [
-				"900000000000497000"
-			],
+			"fsn": "esofagogastroduodenoscopia (procedimiento)",
+			"semanticTag": "procedimiento",
+			"conceptId": "76009000",
+			"term": "esofagogastroduodenoscopia (procedimiento)"
+		}
+	],
+	"requeridos": [
+		{
+			"elementoRUP": {
+				"$oid": "594aa43a884431c25d9a0267"
+			},
+			"concepto": {
+				"fsn": "endoscopia de esófago (procedimiento)",
+				"semanticTag": "procedimiento",
+				"conceptId": "49230008",
+				"term": "endoscopia de esófago"
+			},
+			"style": {
+				"columns": 12.0,
+				"cssClass": null
+			},
+			"params": null
+		},
+		{
+			"elementoRUP": {
+				"$oid": "594aa43a884431c25d9a0267"
+			},
+			"concepto": {
+				"fsn": "endoscopia de estómago (procedimiento)",
+				"semanticTag": "procedimiento",
+				"conceptId": "386831001",
+				"term": "endoscopia de estómago"
+			},
+			"style": {
+				"columns": 12.0,
+				"cssClass": null
+			},
+			"params": null
+		},
+		{
+			"elementoRUP": {
+				"$oid": "594aa43a884431c25d9a0267"
+			},
+			"concepto": {
+				"fsn": "duodenoscopia (procedimiento)",
+				"semanticTag": "procedimiento",
+				"conceptId": "80267006",
+				"languageCode": "spanish",
+				"term": "endoscopia del duodeno"
+			},
+			"style": {
+				"columns": 12.0,
+				"cssClass": null
+			},
+			"params": null
+		}
+	],
+	"frecuentes": []
+},
+{
+	"_id": {
+		"$oid": "5e971758d1e77d31e9686e29"
+	},
+	"activo": true,
+	"componente": "SeccionComponent",
+	"tipo": "molecula",
+	"esSolicitud": false,
+	"style": {},
+	"conceptos": [
+		{
+			"conceptId": "419891008",
+			"term": "elemento de registro",
+			"fsn": "elemento de registro (elemento de registro)",
+			"semanticTag": "elemento de registro"
+		}
+	],
+	"requeridos": [],
+	"frecuentes": [],
+	"params": null
+},
+{
+	"_id": {
+		"$oid": "5ea451ad3b81641904a7a91f"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "SeccionadoComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eaecbeade95f2128f51d309"
+			},
+			"conceptId": "6461000013100",
+			"fsn": "sección de evaluación de paciente internado realizada por enfermería (elemento de registro)",
 			"semanticTag": "elemento de registro",
-			"term": "registro de prescripción"
+			"term": "sección de evaluación de paciente internado realizada por enfermería"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "5941000013103",
+				"fsn": "sección correspondiente a antecedentes personales (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección correspondiente a antecedentes personales"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a92c"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "422432008",
+				"fsn": "sección correspondiente a antecedentes familiares (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección correspondiente a antecedentes familiares"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a92b"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6141000013109",
+				"fsn": "sección: evaluación inicial del sistema respiratorio (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación inicial del sistema respiratorio"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a92a"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6151000013106",
+				"fsn": "sección: evaluación inicial del sistema circulatorio (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación inicial del sistema circulatorio"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a929"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6211000013104",
+				"fsn": "sección: evaluación inicial de riesgos (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación inicial de riesgos"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a928"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6181000013103",
+				"fsn": "sección: evaluación inicial de protección de tegumentos (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación inicial de protección de tegumentos"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a927"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6231000013105",
+				"fsn": "sección: evaluación inicial de necesidades espirituales (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación inicial de necesidades espirituales"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a926"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6201000013102",
+				"fsn": "sección: evaluación inicial de necesidades de sueño y reposo (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación inicial de necesidades de sueño y reposo"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a925"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6191000013100",
+				"fsn": "sección: evaluación inicial de necesidades de movimiento y vestimenta (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación inicial de necesidades de movimiento y vestimenta"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a924"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6171000013101",
+				"fsn": "sección: evaluación inicial de necesidades de eliminación realizadas (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación inicial de necesidades de eliminación realizadas"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a923"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6161000013108",
+				"fsn": "sección: evaluación inicial de características nutricionales (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación inicial de características nutricionales"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a922"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6241000013100",
+				"fsn": "sección: evaluación inicial de aprendizaje/autorrealización/recreación (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación inicial de aprendizaje/autorrealización/recreación"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a921"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6221000013107",
+				"fsn": "sección: evaluación de necesidades de comunicación y sensopercepción (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: evaluación de necesidades de comunicación y sensopercepción"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea451ad3b81641904a7a920"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "7051000013109",
+				"fsn": "sección: listado de medicación habitual (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: listado de medicación habitual"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaecd2cde95f2128f51d31a"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "7061000013106",
+				"fsn": "sección: alergias (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: alergias"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaecd2cde95f2128f51d319"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "7041000013107",
+				"fsn": "sección: datos de contacto (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: datos de contacto"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaecd2cde95f2128f51d318"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		}
+	],
+	"tipo": "molecula",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 7.0,
+	"updatedAt": {
+		"$date": "2020-05-11T00:42:12.084Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5ea452c23b81641904a7a92d"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "SeccionadoComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea452c23b81641904a7a92e"
+			},
+			"conceptId": "6501000013100",
+			"fsn": "sección de indicaciones de enfermería (elemento de registro)",
+			"semanticTag": "elemento de registro",
+			"term": "sección de indicaciones de enfermería"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6351000013109",
+				"fsn": "sección: indicaciones de controles (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: indicaciones de controles"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea453123b81641904a7a933"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6361000013106",
+				"fsn": "sección: registro de cuidados generales (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: registro de cuidados generales"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea453123b81641904a7a932"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6371000013104",
+				"fsn": "sección de cuidados especiales (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección de cuidados especiales"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea453123b81641904a7a931"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6381000013101",
+				"fsn": "sección: otras indicaciones (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: otras indicaciones"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea453113b81641904a7a930"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		}
+	],
+	"tipo": "molecula",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 4.0,
+	"updatedAt": {
+		"$date": "2020-05-11T00:42:18.703Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5ea45ef7304cbc1b74d01428"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea45ef7304cbc1b74d01429"
+			},
+			"conceptId": "6111000013105",
+			"fsn": "evaluación inicial del paciente al ingreso a servicio de internación realizada por enfermera (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "evaluación inicial del paciente al ingreso a servicio de internación realizada por enfermera"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6111000013105",
+				"fsn": "evaluación inicial del paciente al ingreso a servicio de internación realizada por enfermera (procedimiento)",
+				"semanticTag": "procedimiento",
+				"term": "evaluación inicial del paciente al ingreso a servicio de internación realizada por enfermera"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76f03c4baa64a68b04397"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 2.0,
+	"updatedAt": {
+		"$date": "2020-05-03T19:46:59.441Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5ea7029320e515102ed5c71d"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "SeccionadoComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea76ca7c4baa64a68b0437d"
+			},
+			"conceptId": "6451000013102",
+			"fsn": "sección de evaluación inicial de paciente internado realizado por médico (elemento de registro)",
+			"semanticTag": "elemento de registro",
+			"term": "sección de evaluación inicial de paciente internado realizado por médico"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "5941000013103",
+				"fsn": "sección correspondiente a antecedentes personales (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección correspondiente a antecedentes personales"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea7029320e515102ed5c724"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "422432008",
+				"fsn": "sección correspondiente a antecedentes familiares (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección correspondiente a antecedentes familiares"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea7029320e515102ed5c723"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "425044008",
+				"fsn": "sección de examen físico (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección de examen físico"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea7029320e515102ed5c722"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "422625006",
+				"fsn": "sección: antecedentes de enfermedad actual (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: antecedentes de enfermedad actual"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea7029320e515102ed5c721"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "5951000013101",
+				"fsn": "sección de estudios complementarios previos (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección de estudios complementarios previos"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea7029320e515102ed5c720"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "5961000013104",
+				"fsn": "sección de descripción de la impresión diagnóstica (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección de descripción de la impresión diagnóstica"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea7029320e515102ed5c71f"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "7051000013109",
+				"fsn": "sección: listado de medicación habitual (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: listado de medicación habitual"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaecd7dde95f2128f51d32b"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "7061000013106",
+				"fsn": "sección: alergias (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: alergias"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaecd7dde95f2128f51d32a"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "7041000013107",
+				"fsn": "sección: datos de contacto (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: datos de contacto"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaecd7dde95f2128f51d329"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		}
+	],
+	"tipo": "molecula",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 6.0,
+	"updatedAt": {
+		"$date": "2020-05-11T00:42:31.868Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5ea76d0cc4baa64a68b04384"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "SeccionadoComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea76d0cc4baa64a68b04385"
+			},
+			"conceptId": "6491000013108",
+			"fsn": "sección de indicaciones médicas (elemento de registro)",
+			"semanticTag": "elemento de registro",
+			"term": "sección de indicaciones médicas"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6311000013108",
+				"fsn": "sección: indicaciones de medicación (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: indicaciones de medicación"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76d0cc4baa64a68b04389"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6321000013100",
+				"fsn": "sección: indicaciones de hidratación (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: indicaciones de hidratación"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76d0cc4baa64a68b04388"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6331000013102",
+				"fsn": "sección: indicaciones de alimentación parenteral (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: indicaciones de alimentación parenteral"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76d0cc4baa64a68b04387"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6381000013101",
+				"fsn": "sección: otras indicaciones (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección: otras indicaciones"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76d0cc4baa64a68b04386"
+			},
+			"elementoRUP": {
+				"$oid": "5e971758d1e77d31e9686e29"
+			},
+			"params": {
+				"showText": true,
+				"textRequired": false,
+				"conceptsRequired": false,
+				"icon": "icon-andes-documento",
+				"direction": "vertical"
+			}
+		}
+	],
+	"tipo": "molecula",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 3.0,
+	"updatedAt": {
+		"$date": "2020-05-11T00:42:37.610Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5ea76de1c4baa64a68b0438a"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea76de1c4baa64a68b0438b"
+			},
+			"conceptId": "5491000013101",
+			"fsn": "evaluación médica inicial del paciente al ingreso a servicio de internación (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "evaluación médica inicial del paciente al ingreso a servicio de internación"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6451000013102",
+				"fsn": "sección de evaluación inicial de paciente internado realizado por médico (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección de evaluación inicial de paciente internado realizado por médico"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76de1c4baa64a68b0438c"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 1.0,
+	"updatedAt": {
+		"$date": "2020-05-03T19:47:23.364Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5ea76e19c4baa64a68b0438d"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea76e19c4baa64a68b0438e"
+			},
+			"conceptId": "5971000013106",
+			"fsn": "evolución de la historia clínica de paciente internado realizada por el médico (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "evolución de la historia clínica de paciente internado realizada por el médico"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6541000013103",
+				"fsn": "informe de evolución de paciente internado realizado por médico (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "informe de evolución de paciente internado realizado por médico"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76e19c4baa64a68b0438f"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 1.0,
+	"updatedAt": {
+		"$date": "2020-05-03T19:47:33.471Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5ea76e3cc4baa64a68b04390"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea76e3cc4baa64a68b04391"
+			},
+			"conceptId": "4981000013105",
+			"fsn": "plan de indicaciones médicas (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "plan de indicaciones médicas"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6491000013108",
+				"fsn": "sección de indicaciones médicas (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección de indicaciones médicas"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76e3cc4baa64a68b04392"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 1.0,
+	"updatedAt": {
+		"$date": "2020-05-03T19:47:42.343Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5ea76e5fc4baa64a68b04393"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea76e5fc4baa64a68b04394"
+			},
+			"conceptId": "6881000013107",
+			"fsn": "evolución de la historia de salud del paciente internado realizada por profesional no médico (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "evolución de la historia de salud del paciente internado realizada por profesional no médico"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6771000013100",
+				"fsn": "informe de evolución de paciente internado realizado por profesional no médico (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "informe de evolución de paciente internado realizado por profesional no médico"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76e5fc4baa64a68b04395"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 1.0,
+	"updatedAt": {
+		"$date": "2020-05-03T19:47:54.506Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5ea76f2ec4baa64a68b04398"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea76f2ec4baa64a68b04399"
+			},
+			"conceptId": "6281000013106",
+			"fsn": "evolución de la historia clínica de paciente internado realizado por enfermería (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "evolución de la historia clínica de paciente internado realizado por enfermería"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6551000013101",
+				"fsn": "informe de evolución de paciente internado realizado por enfermería (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "informe de evolución de paciente internado realizado por enfermería"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76f2ec4baa64a68b0439a"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 1.0,
+	"updatedAt": {
+		"$date": "2020-05-03T19:48:04.585Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5ea76f45c4baa64a68b0439b"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea76f45c4baa64a68b0439c"
+			},
+			"conceptId": "4991000013108",
+			"fsn": "plan de indicaciones de enfermería (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "plan de indicaciones de enfermería"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6501000013100",
+				"fsn": "sección de indicaciones de enfermería (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección de indicaciones de enfermería"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76f45c4baa64a68b0439d"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"requiereDiagnosticoPrincipal": false,
+	"__v": 1.0,
+	"updatedAt": {
+		"$date": "2020-05-03T19:48:08.656Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5ea76fb1c4baa64a68b0439e"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ea76fb1c4baa64a68b0439f"
+			},
+			"conceptId": "6891000013105",
+			"fsn": "monitoreo del paciente internado realizado por enfermería (régimen/tratamiento)",
+			"semanticTag": "régimen/tratamiento",
+			"term": "monitoreo del paciente internado realizado por enfermería"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "61746007",
+				"fsn": "registrar los signos vitales del paciente (procedimiento)",
+				"semanticTag": "procedimiento",
+				"term": "registrar los signos vitales del paciente"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76fb1c4baa64a68b043a1"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "430147008",
+				"fsn": "seguimiento del equilibrio hídrico (régimen/tratamiento)",
+				"semanticTag": "régimen/tratamiento",
+				"term": "seguimiento del equilibrio hídrico"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ea76fb1c4baa64a68b043a0"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"__v": 1.0,
+	"updatedAt": {
+		"$date": "2020-05-03T19:48:13.835Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5eaf20d4c7c4a456a8882499"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "SelectOrganizacionComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eaf20d4c7c4a456a888249a"
+			},
+			"conceptId": "306101007",
+			"fsn": "derivación a establecimiento (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "derivación a establecimiento de salud"
+		}
+	],
+	"requeridos": [],
+	"tipo": "atomo",
+	"activo": true,
+	"frecuentes": [],
+	"params": {
+		"multiple": false,
+		"title": "Organización destino",
+		"required": false,
+		"allowOther": false
+	},
+	"busqueda_guiada": [],
+	"createdAt": {
+		"$date": "2020-05-03T19:51:48.803Z"
+	},
+	"createdBy": {
+		"id": "5bf55467a117b8269a6a53c7",
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": "57e9670e52df311059bc8964",
+			"id": "57e9670e52df311059bc8964",
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"__v": 4.0,
+	"updatedAt": {
+		"$date": "2020-05-06T12:32:44.818Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eaf503bc7c4a456a888249e"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eaf503bc7c4a456a888249f"
+			},
+			"conceptId": "6971000013103",
+			"fsn": "motivos de derivación (calificador)",
+			"semanticTag": "calificador",
+			"term": "motivos de derivación"
+		}
+	],
+	"requeridos": [],
+	"tipo": "atomo",
+	"activo": true,
+	"frecuentes": [],
+	"params": {
+		"required": false
+	},
+	"busqueda_guiada": [],
+	"createdAt": {
+		"$date": "2020-05-03T23:14:03.874Z"
+	},
+	"createdBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"__v": 0.0
+},
+{
+	"_id": {
+		"$oid": "5eaf5265c7c4a456a88824a0"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "SelectSnomedComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eaf53b4619d61824d3e4435"
+			},
+			"conceptId": "107724000",
+			"fsn": "traslado del paciente (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "traslado del paciente"
+		}
+	],
+	"requeridos": [],
+	"tipo": "atomo",
+	"activo": true,
+	"frecuentes": [],
+	"params": {
+		"preload": true,
+		"required": false,
+		"title": "Tipo de traslado",
+		"query": "49122002 OR 73957001 OR 6921000013104 OR 52387005 OR 6931000013101"
+	},
+	"busqueda_guiada": [],
+	"createdAt": {
+		"$date": "2020-05-03T23:23:17.247Z"
+	},
+	"createdBy": {
+		"id": "5bf55467a117b8269a6a53c7",
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": "57e9670e52df311059bc8964",
+			"id": "57e9670e52df311059bc8964",
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"__v": 3.0,
+	"updatedAt": {
+		"$date": "2020-05-06T12:35:44.663Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	}
+},
+{
+	"_id": {
+		"$oid": "5eaf5301619d61824d3e4431"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "SelectProfesionalComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eaf5301619d61824d3e4432"
+			},
+			"conceptId": "6961000013105",
+			"fsn": "profesional que recibe al paciente derivado (persona)",
+			"semanticTag": "persona",
+			"term": "profesional que recibe al paciente derivado"
+		}
+	],
+	"requeridos": [],
+	"tipo": "atomo",
+	"activo": true,
+	"frecuentes": [],
+	"params": {
+		"allowOther": true
+	},
+	"busqueda_guiada": [],
+	"createdAt": {
+		"$date": "2020-05-03T23:25:53.161Z"
+	},
+	"createdBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"__v": 0.0
+},
+{
+	"_id": {
+		"$oid": "5eaf5320619d61824d3e4433"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "SelectProfesionalComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eaf5320619d61824d3e4434"
+			},
+			"conceptId": "6951000013108",
+			"fsn": "profesional derivante (persona)",
+			"semanticTag": "persona",
+			"term": "profesional derivante"
+		}
+	],
+	"requeridos": [],
+	"tipo": "atomo",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"createdAt": {
+		"$date": "2020-05-03T23:26:24.244Z"
+	},
+	"createdBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"__v": 0.0
+},
+{
+	"_id": {
+		"$oid": "5eaf6010619d61824d3e4436"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "MoleculaBaseComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eaf6010619d61824d3e4437"
+			},
+			"conceptId": "6911000013107",
+			"fsn": "sección: detalles del acuerdo de la derivación del paciente (elemento de registro)",
+			"semanticTag": "elemento de registro",
+			"term": "sección: detalles del acuerdo de la derivación del paciente"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "306101007",
+				"fsn": "derivación a establecimiento (procedimiento)",
+				"semanticTag": "procedimiento",
+				"term": "derivación a establecimiento de salud"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaf6010619d61824d3e443c"
+			},
+			"elementoRUP": {
+				"$oid": "5eaf20d4c7c4a456a8882499"
+			},
+			"params": {
+				"multiple": false,
+				"title": "Organización destino",
+				"required": false,
+				"allowOther": false
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6961000013105",
+				"fsn": "profesional que recibe al paciente derivado (persona)",
+				"semanticTag": "persona",
+				"term": "profesional que recibe al paciente derivado"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaf6010619d61824d3e443b"
+			},
+			"elementoRUP": {
+				"$oid": "5eaf5301619d61824d3e4431"
+			},
+			"params": {
+				"allowOther": true
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6951000013108",
+				"fsn": "profesional derivante (persona)",
+				"semanticTag": "persona",
+				"term": "profesional derivante"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaf6010619d61824d3e443a"
+			},
+			"elementoRUP": {
+				"$oid": "5eaf5320619d61824d3e4433"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "107724000",
+				"fsn": "traslado del paciente (procedimiento)",
+				"semanticTag": "procedimiento",
+				"term": "traslado del paciente"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaf6010619d61824d3e4439"
+			},
+			"elementoRUP": {
+				"$oid": "5eaf5265c7c4a456a88824a0"
+			},
+			"params": {
+				"preload": true,
+				"required": false,
+				"title": "Tipo de traslado",
+				"query": "49122002 OR 73957001 OR 6921000013104 OR 52387005 OR 6931000013101"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6971000013103",
+				"fsn": "motivos de derivación (calificador)",
+				"semanticTag": "calificador",
+				"term": "motivos de derivación"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eaf6010619d61824d3e4438"
+			},
+			"elementoRUP": {
+				"$oid": "5eaf503bc7c4a456a888249e"
+			},
+			"params": {
+				"required": false
+			}
+		}
+	],
+	"tipo": "molecula",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"createdAt": {
+		"$date": "2020-05-04T00:21:36.648Z"
+	},
+	"createdBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"__v": 0.0
+},
+{
+	"_id": {
+		"$oid": "5eaff73a4d36fee257515122"
+	},
+	"activo": true,
+	"componente": "ValorNumericoComponent",
+	"tipo": "atomo",
+	"esSolicitud": false,
+	"style": {
+		"columns": 6,
+		"cssClass": null
+	},
+	"conceptos": [
+		{
+			"conceptId": "6591000013107",
+			"term": "puntaje de la escala de evaluación de fallo orgánico secuencial - SOFA",
+			"fsn": "puntaje de la escala de evaluación de fallo orgánico secuencial - SOFA (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": []
 		}
 	],
 	"requeridos": [],
 	"frecuentes": [],
 	"params": {
-		"html": false
+		"numericType": "integer",
+		"max": 24,
+		"min": 0
 	}
 },
 {
 	"_id": {
-		"$oid": "5f2183cecfdccd7f6826668b"
+		"$oid": "5eaff7574d36fee2575157a5"
+	},
+	"activo": true,
+	"componente": "ValorNumericoComponent",
+	"tipo": "atomo",
+	"esSolicitud": false,
+	"style": {
+		"columns": 6,
+		"cssClass": null
+	},
+	"conceptos": [
+		{
+			"conceptId": "6741000013108",
+			"term": "puntaje de la escala de predicción de mortalidad en pacientes con neumonía adquirida en la comunidad",
+			"fsn": "puntaje de la escala de predicción de mortalidad en pacientes con neumonía adquirida en la comunidad (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": []
+		}
+	],
+	"requeridos": [],
+	"frecuentes": [],
+	"params": {
+		"numericType": "integer",
+		"max": 5,
+		"min": 0
+	}
+},
+{
+	"_id": {
+		"$oid": "5eaff7714d36fee257515db8"
+	},
+	"activo": true,
+	"componente": "ValorNumericoComponent",
+	"tipo": "atomo",
+	"esSolicitud": false,
+	"style": {
+		"columns": 6,
+		"cssClass": null
+	},
+	"conceptos": [
+		{
+			"conceptId": "6601000013104",
+			"term": "relación saturación arterial de oxígeno y fracción inspiratoria de oxígeno - SAFI",
+			"fsn": "relación saturación arterial de oxígeno y fracción inspiratoria de oxígeno - SAFI (entidad observable)",
+			"semanticTag": "entidad observable",
+			"refsetIds": []
+		}
+	],
+	"requeridos": [],
+	"frecuentes": [],
+	"params": {
+		"numericType": "float",
+		"max": 500,
+		"min": 0
+	}
+},
+{
+	"_id": {
+		"$oid": "5eb3f17c012de710c69d29df"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb3f17c012de710c69d29e0"
+			},
+			"conceptId": "6111000013105",
+			"fsn": "evaluación inicial del paciente al ingreso a servicio de internación realizada por enfermera (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "evaluación inicial del paciente al ingreso a servicio de internación realizada por enfermera"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "6461000013100",
+				"fsn": "sección de evaluación de paciente internado realizada por enfermería (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "sección de evaluación de paciente internado realizada por enfermería"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5eb3f22a012de710c69d29e3"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb409cd2637370e148cbcf0"
+			},
+			"conceptId": "161527007",
+			"fsn": "antecedente de: asma (situación)",
+			"semanticTag": "situación",
+			"term": "antecedente de: asma"
+		},
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb409cd2637370e148cbcef"
+			},
+			"conceptId": "266987004",
+			"fsn": "antecedente de: neoplasia maligna (situación)",
+			"semanticTag": "situación",
+			"term": "antecedente de: neoplasia maligna"
+		},
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb409cd2637370e148cbcee"
+			},
+			"conceptId": "161941007",
+			"fsn": "disnea en reposo (hallazgo)",
+			"semanticTag": "hallazgo",
+			"term": "disnea en reposo"
+		},
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb409cd2637370e148cbced"
+			},
+			"conceptId": "60845006",
+			"fsn": "disnea de esfuerzo (hallazgo)",
+			"semanticTag": "hallazgo",
+			"term": "disnea de esfuerzo"
+		},
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb409cd2637370e148cbcec"
+			},
+			"conceptId": "271620003",
+			"fsn": "músculos respiratorios accesorios utilizados (hallazgo)",
+			"semanticTag": "hallazgo",
+			"term": "músculos respiratorios accesorios utilizados"
+		},
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb409cd2637370e148cbceb"
+			},
+			"conceptId": "422587007",
+			"fsn": "náuseas (hallazgo)",
+			"semanticTag": "hallazgo",
+			"term": "náuseas"
+		},
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb409cd2637370e148cbcea"
+			},
+			"conceptId": "278615005",
+			"fsn": "prótesis dental, presente (hallazgo)",
+			"semanticTag": "hallazgo",
+			"term": "prótesis dental, presente"
+		},
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb409cd2637370e148cbce9"
+			},
+			"conceptId": "288939007",
+			"fsn": "dificultad para deglutir (hallazgo)",
+			"semanticTag": "hallazgo",
+			"term": "dificultad para deglutir"
+		},
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb409cd2637370e148cbce8"
+			},
+			"conceptId": "162020001",
+			"fsn": "dificultad para masticar (hallazgo)",
+			"semanticTag": "hallazgo",
+			"term": "dificultad para masticar"
+		},
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5eb409cd2637370e148cbce7"
+			},
+			"conceptId": "416098002",
+			"fsn": "alergia medicamentosa (trastorno)",
+			"semanticTag": "trastorno",
+			"term": "alergia medicamentosa"
+		}
+	],
+	"busqueda_guiada": [],
+	"createdAt": {
+		"$date": "2020-05-07T11:31:08.729Z"
+	},
+	"createdBy": {
+		"id": "5bf55467a117b8269a6a53c7",
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": "57e9670e52df311059bc8964",
+			"id": "57e9670e52df311059bc8964",
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"__v": 2.0,
+	"updatedAt": {
+		"$date": "2020-05-07T13:14:53.612Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5eb8825899923a42cf2332d4"
+	},
+	"activo": true,
+	"componente": "InternacionEgresoComponent",
+	"tipo": "atomo",
+	"esSolicitud": false,
+	"style": {
+		"columnas": 6.0,
+		"cssClass": null
+	},
+	"conceptos": [
+		{
+			"fsn": "alta del paciente (procedimiento)",
+			"semanticTag": "procedimiento",
+			"conceptId": "58000006",
+			"term": "alta del paciente"
+		}
+	],
+	"requeridos": [],
+	"frecuentes": []
+},
+{
+	"_id": {
+		"$oid": "5eb8826f99923a42cf23340c"
+	},
+	"activo": true,
+	"componente": "InternacionIngresoComponent",
+	"tipo": "atomo",
+	"esSolicitud": false,
+	"style": {
+		"columnas": 6.0,
+		"cssClass": null
+	},
+	"conceptos": [
+		{
+			"fsn": "documento de solicitud de admisión (elemento de registro)",
+			"semanticTag": "elemento de registro",
+			"refsetIds": [
+				"900000000000497000"
+			],
+			"conceptId": "721915006",
+			"term": "documento de solicitud de admisión"
+		}
+	],
+	"requeridos": [],
+	"frecuentes": []
+},
+{
+	"_id": {
+		"$oid": "5ebc35bf47da3178d6bfcedb"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ebc35bf47da3178d6bfcedc"
+			},
+			"conceptId": "7121000013104",
+			"fsn": "procedimientos intraquirúrgicos de enfermería (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "procedimientos intraquirúrgicos de enfermería"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "417037004",
+				"fsn": "registro intraoperatorio de enfermería (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "registro intraoperatorio de enfermería"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ebc363b47da3178d6bfcee5"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "1921000013108",
+				"fsn": "documento adjunto (procedimiento)",
+				"semanticTag": "procedimiento",
+				"term": "adjuntar archivo clínico"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ebc35bf47da3178d6bfcedd"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"createdAt": {
+		"$date": "2020-05-13T18:00:31.023Z"
+	},
+	"createdBy": {
+		"id": "5bf55467a117b8269a6a53c7",
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": "57e9670e52df311059bc8964",
+			"id": "57e9670e52df311059bc8964",
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"__v": 1.0,
+	"updatedAt": {
+		"$date": "2020-05-13T18:02:35.639Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5ebc360f47da3178d6bfcedf"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"refsetIds": [],
+			"_id": {
+				"$oid": "5ebc360f47da3178d6bfcee0"
+			},
+			"conceptId": "7141000013106",
+			"fsn": "procedimiento intraquirúrgico del médico (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "procedimiento intraquirúrgico del médico"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "7161000013105",
+				"fsn": "registro intraoperatorio del médico (elemento de registro)",
+				"semanticTag": "elemento de registro",
+				"term": "registro intraoperatorio del médico"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ebc360f47da3178d6bfcee2"
+			}
+		},
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "1921000013108",
+				"fsn": "documento adjunto (procedimiento)",
+				"semanticTag": "procedimiento",
+				"term": "adjuntar archivo clínico"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ebc360f47da3178d6bfcee1"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"createdAt": {
+		"$date": "2020-05-13T18:01:51.529Z"
+	},
+	"createdBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"__v": 0.0,
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5ef7c14a99923a42cf02a922"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"conceptId": "5881000013102",
+			"term": "consulta de telemedicina con paciente relacionado con infección por COVID-19",
+			"fsn": "consulta de telemedicina con paciente asociado a infección por COVID19 (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": []
+		}
+	],
+	"requeridos": [],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [
+		{
+			"conceptId": "6031000013100",
+			"term": "Enfermedad causada por COVID-19",
+			"fsn": "enfermedad causada por coronavirus del síndrome respiratorio agudo 2 (trastorno)",
+			"semanticTag": "trastorno",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "386661006",
+			"term": "fiebre",
+			"fsn": "fiebre (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "49727002",
+			"term": "tos",
+			"fsn": "tos (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "230145002",
+			"term": "dificultad para respirar",
+			"fsn": "dificultad para respirar (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "162397003",
+			"term": "dolor de garganta",
+			"fsn": "dolor de garganta (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "62315008",
+			"term": "diarrea",
+			"fsn": "diarrea (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "9826008",
+			"term": "conjuntivitis",
+			"fsn": "conjuntivitis (trastorno)",
+			"semanticTag": "trastorno",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "44169009",
+			"term": "ausencia del sentido del olfato",
+			"fsn": "ausencia del sentido del olfato (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "36955009",
+			"term": "ageusia",
+			"fsn": "ageusia (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		}
+	],
+	"busqueda_guiada": []
+},
+{
+	"_id": {
+		"$oid": "5ef901edaaf05f2460930778"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"conceptId": "5901000013100",
+			"term": "consulta realizada en domicilio a paciente asociado a infección por COVID-19",
+			"fsn": "consulta realizada en domicilio a paciente asociado a infección por COVID-19 (procedimiento)",
+			"semanticTag": "procedimiento"
+		}
+	],
+	"requeridos": [],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [
+		{
+			"conceptId": "6031000013100",
+			"term": "Enfermedad causada por COVID-19",
+			"fsn": "enfermedad causada por coronavirus del síndrome respiratorio agudo 2 (trastorno)",
+			"semanticTag": "trastorno",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "61746007",
+			"term": "registrar los signos vitales del paciente",
+			"fsn": "registrar los signos vitales del paciente (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "285570007",
+			"term": "hisopado",
+			"fsn": "hisopado (procedimiento)",
+			"semanticTag": "procedimiento",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "386661006",
+			"term": "fiebre",
+			"fsn": "fiebre (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "49727002",
+			"term": "tos",
+			"fsn": "tos (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "230145002",
+			"term": "dificultad para respirar",
+			"fsn": "dificultad para respirar (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "162397003",
+			"term": "dolor de garganta",
+			"fsn": "dolor de garganta (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "62315008",
+			"term": "diarrea",
+			"fsn": "diarrea (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "9826008",
+			"term": "conjuntivitis",
+			"fsn": "conjuntivitis (trastorno)",
+			"semanticTag": "trastorno",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "44169009",
+			"term": "ausencia del sentido del olfato",
+			"fsn": "ausencia del sentido del olfato (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		},
+		{
+			"conceptId": "36955009",
+			"term": "ageusia",
+			"fsn": "ageusia (hallazgo)",
+			"semanticTag": "hallazgo",
+			"refsetIds": []
+		}
+	],
+	"busqueda_guiada": []
+},
+{
+	"_id": {
+		"$oid": "5efcd15999923a42cf3d3e48"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"conceptId": "5891000013104",
+			"term": "consulta de seguimiento de paciente asociado a infección por COVID-19",
+			"fsn": "consulta de seguimiento de paciente asociado a infección por COVID-19 (procedimiento)",
+			"semanticTag": "procedimiento"
+		}
+	],
+	"requeridos": [],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [
+		{
+			"conceptId": "181000246109",
+			"term": "evaluación médica inicial de paciente internado en domicilio asociado a infección por COVID-19",
+			"fsn": "evaluación médica inicial de paciente internado en domicilio asociado a infección por COVID-19 (procedimiento)",
+			"semanticTag": "procedimiento"
+		},
+		{
+			"conceptId": "840539006",
+			"term": "enfermedad causada por COVID-19",
+			"fsn": "enfermedad causada por coronavirus del síndrome respiratorio agudo severo 2 (trastorno)",
+			"semanticTag": "trastorno"
+		},
+		{
+			"conceptId": "711000246101",
+			"term": "covid-19 confirmado por síntomas y nexo epidemiológico sin pcr",
+			"fsn": "covid-19 confirmado por síntomas y nexo epidemiológico sin pcr (trastorno)",
+			"semanticTag": "trastorno"
+		},
+		{
+			"conceptId": "840544004",
+			"term": "sospecha de enfermedad causada por COVID-19",
+			"fsn": "sospecha de enfermedad causada por coronavirus del síndrome respiratorio agudo severo 2 (situación)",
+			"semanticTag": "situación"
+		},
+		{
+			"conceptId": "6701000013106",
+			"term": "riesgo de exposición a COVID-19 por contacto estrecho",
+			"fsn": "riesgo de exposición a COVID-19 por contacto estrecho (situación)",
+			"semanticTag": "situación"
+		},
+		{
+			"conceptId": "6831000013106",
+			"term": "paciente en aislamiento domiciliario preventivo por COVID-19",
+			"fsn": "paciente en aislamiento domiciliario preventivo por COVID-19 (situación)",
+			"semanticTag": "situación"
+		},
+		{
+			"conceptId": "439708006",
+			"term": "visita domiciliaria",
+			"fsn": "visita domiciliaria (procedimiento)",
+			"semanticTag": "procedimiento"
+		},
+		{
+			"conceptId": "386473003",
+			"term": "seguimiento telefónico",
+			"fsn": "seguimiento telefónico (procedimiento)",
+			"semanticTag": "procedimiento"
+		},
+		{
+			"conceptId": "201000246105",
+			"term": "alta de paciente internado en domicilio asociado a infección por COVID-19",
+			"fsn": "alta de paciente internado en domicilio asociado a infección por COVID-19 (procedimiento)",
+			"semanticTag": "procedimiento"
+		},
+		{
+			"conceptId": "416584001",
+			"term": "manejo de caso, finalizado",
+			"fsn": "manejo de caso, finalizado (situación)",
+			"semanticTag": "situación"
+		},
+		{
+			"conceptId": "321000246107",
+			"term": "paciente informado sobre resultado positivo de prueba de COVID-19",
+			"fsn": "paciente informado sobre resultado positivo de prueba de COVID-19 (situación)",
+			"semanticTag": "situación"
+		},
+		{
+			"conceptId": "311000246102",
+			"term": "paciente informado sobre resultado negativo de prueba de COVID-19",
+			"fsn": "paciente informado sobre resultado negativo de prueba de COVID-19 (situación)",
+			"semanticTag": "situación"
+		},
+		{
+			"conceptId": "350141000221101",
+			"term": "Toma De Muestra Por Hisopado Para Detección De COVID-19",
+			"fsn": "toma de muestra por hisopado para detección de coronavirus 2 del síndrome respiratorio agudo severo (procedimiento)",
+			"semanticTag": "procedimiento"
+		},
+		{
+			"conceptId": "61746007",
+			"term": "registrar los signos vitales del paciente",
+			"fsn": "registrar los signos vitales del paciente (procedimiento)",
+			"semanticTag": "procedimiento"
+		}
+	],
+	"busqueda_guiada": []
+},
+{
+	"_id": {
+		"$oid": "5f183d076a8ae81a018372d2"
 	},
 	"activo": true,
 	"componente": "GraficoLinealComponent",
@@ -11995,5 +14814,111 @@
 			"unidad": "ºc"
 		}
 	]
+},
+{
+	"_id": {
+		"$oid": "5f313f4749fe85f583c639c4"
+	},
+	"defaultFor": [],
+	"esSolicitud": false,
+	"componente": "ObservacionesComponent",
+	"conceptos": [
+		{
+			"conceptId": "182771004",
+			"fsn": "consentimiento informado para realización de procedimiento (procedimiento)",
+			"semanticTag": "procedimiento",
+			"term": "consentimiento informado para realización de procedimiento"
+		}
+	],
+	"requeridos": [
+		{
+			"concepto": {
+				"refsetIds": [],
+				"conceptId": "1921000013108",
+				"fsn": "documento adjunto (procedimiento)",
+				"semanticTag": "procedimiento",
+				"term": "adjuntar archivo clínico"
+			},
+			"style": {
+				"columns": 12.0
+			},
+			"_id": {
+				"$oid": "5ebc35bf47da3178d6bfcedd"
+			}
+		}
+	],
+	"tipo": "prestacion",
+	"activo": true,
+	"frecuentes": [],
+	"busqueda_guiada": [],
+	"createdAt": {
+		"$date": "2020-05-13T18:00:31.023Z"
+	},
+	"createdBy": {
+		"id": "5bf55467a117b8269a6a53c7",
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": "57e9670e52df311059bc8964",
+			"id": "57e9670e52df311059bc8964",
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"__v": 1.0,
+	"updatedAt": {
+		"$date": "2020-05-13T18:02:35.639Z"
+	},
+	"updatedBy": {
+		"id": {
+			"$oid": "5bf55467a117b8269a6a53c7"
+		},
+		"nombreCompleto": "MARIANO ANDRES BOTTA",
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"username": 3.4934522e+07,
+		"documento": 3.4934522e+07,
+		"organizacion": {
+			"_id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"id": {
+				"$oid": "57e9670e52df311059bc8964"
+			},
+			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+		}
+	},
+	"requiereDiagnosticoPrincipal": false
+},
+{
+	"_id": {
+		"$oid": "5f45c09649fe85f583baa1b8"
+	},
+	"activo": true,
+	"componente": "ValorNumericoComponent",
+	"tipo": "atomo",
+	"esSolicitud": false,
+	"style": {
+		"columns": 6,
+		"cssClass": null
+	},
+	"conceptos": [
+		{
+			"conceptId": "443911005",
+			"term": "nivel de hemoglobina glicosilada",
+			"fsn": "nivel de hemoglobina glicosilada (entidad observable)",
+			"semanticTag": "entidad observable"
+		}
+	],
+	"requeridos": [],
+	"frecuentes": [],
+	"params": {
+		"numericType": "float",
+		"max": 100,
+		"min": 0,
+		"unit": "%"
+	}
 }]
 
