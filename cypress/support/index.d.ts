@@ -58,6 +58,14 @@ declare namespace Cypress {
         plexButton(label: string): Chainable<Element>;
         plexButtonIcon(icon: string): Chainable<Element>;
 
+        /**
+         * Algunos plex "input" tienen el label dinamico así que no se puede
+         * seleccionar por atributo, así que este "InputDinamico" busca el label tal cual
+         * y escribe sobre el.
+         * Permite configurar el tipo 
+         */
+        plexInputDinamico(tipo: 'text' | 'float' | 'phone' | 'int', label: string, texto?: string): Chainable<Element>;
+
 
     }
 }
