@@ -9,7 +9,11 @@ declare namespace Cypress {
          */
         seed(): Chainable<void>
 
-        goto(url: string, token?: string): Chainable<void>
+        goto(url: string, token?: string): Chainable<void>;
+
+        login(user: string, password: string, orgId?: string): Chainable<string>;
+
+        snomedSearchStub(searchText: string, conceptos: any[], alias: string);
 
         /**
          * Mapa de camas Helper para crear los usuarios según cama
@@ -22,6 +26,12 @@ declare namespace Cypress {
          */
         factoryInternacion(config: any): Chainable<any>;
 
+
+        /**
+         * Corre N veces la misma tarea una por cada argumento que se le pase
+         * Devuelve un arrray con las N respuestas
+         */
+        taskN(name: string, argumentos: any[]): Chainable<any[]>;
 
         /**
          * Busca una cama según un texto en el listado de camas

@@ -55,7 +55,6 @@ module.exports.getObjectId = getObjectId
 module.exports.checkObjectId = (id) => {
     try {
         if (mongo.ObjectID.isValid(id)) {
-            console.log(new mongo.ObjectID(id))
             return new mongo.ObjectID(id);
         }
         return getObjectId(id);

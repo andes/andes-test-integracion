@@ -17,28 +17,26 @@ describe('Capa Médica - registros', () => {
                         pacientes: [paciente],
                         fechaIngreso: Cypress.moment().add(-5, 'day')
                     }]
-            }).then(() => {
-                cy.task('database:seed:prestacion', {
+            }).then((camitas) => {
+                cy.log(camitas);
+                cy.taskN('database:seed:prestacion', [{
                     paciente: paciente._id,
                     estado: 'validada',
                     fecha: -1
-                });
-                cy.task('database:seed:prestacion', {
+                }, {
                     paciente: paciente._id,
                     estado: 'validada',
                     fecha: -6
-                });
-                cy.task('database:seed:prestacion', {
+                }, {
                     paciente: paciente._id,
                     estado: 'ejecucion',
                     fecha: -1
-                });
-                cy.task('database:seed:prestacion', {
+                }, {
                     paciente: paciente._id,
                     estado: 'ejecucion',
                     fecha: -1,
                     createdBy: user._id
-                });
+                }]);
                 return cy.goto('/internacion/mapa-camas', token);
             });
         });
@@ -62,7 +60,7 @@ describe('Capa Médica - registros', () => {
         cy.modalPrivacidad('Procesos de Auditoría');
 
         cy.wait('@acceso').then((xhr) => {
-            const body: any = xhr.request.body;
+            const body = xhr.request.body;
             expect(body.motivo).to.be.eq('Procesos de Auditoría');
             expect(body.paciente.id).to.be.eq(paciente._id);
         })
