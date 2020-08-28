@@ -1,5 +1,4 @@
-const moment = require('moment')
-const { permisosUsuario, factoryInternacion } = require('../utiles');
+const moment = require('moment');
 
 describe('Mapa Camas - Detalle de Cama', () => {
     let token;
@@ -8,34 +7,30 @@ describe('Mapa Camas - Detalle de Cama', () => {
     before(() => {
         cy.seed();
 
-        // CREA USUARIO
-        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica'], organizacion: '57e9670e52df311059bc8964' }).then(user => {
-            cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
-                token = t;
-
-                // CREA PACIENTES
-                cy.task('database:seed:paciente').then(pacientesCreados => {
-                    paciente = pacientesCreados[1];
-                    // CREA UN MUNDO IDEAL DE INTERNACION
-                    factoryInternacion({
-                        configCamas: [{ estado: 'ocupada', pacientes: [paciente], unidadOrganizativa: '309901009', 
-                        sector: {
-                            "tipoSector" : {
-                                "refsetIds" : [],
-                                "fsn" : "edificio (medio ambiente)",
-                                "term" : "edificio",
-                                "conceptId" : "2421000013105",
-                                "semanticTag" : "medio ambiente"
-                            },
-                            "_id" : "5b0586800d3951652da7daa1",
-                            "nombre" : "edificio este"
-                        }}]
-                    }).then(camasCreadas => {
-                        cama = camasCreadas[0];
-                    });
-                });
+        cy.loginCapa('estadistica').then(([user, t, pacientesCreados]) => {
+            token = t;
+            paciente = pacientesCreados[1];
+            // CREA UN MUNDO IDEAL DE INTERNACION
+            cy.factoryInternacion({
+                configCamas: [{
+                    estado: 'ocupada', pacientes: [paciente], unidadOrganizativa: '309901009',
+                    sector: {
+                        "tipoSector": {
+                            "refsetIds": [],
+                            "fsn": "edificio (medio ambiente)",
+                            "term": "edificio",
+                            "conceptId": "2421000013105",
+                            "semanticTag": "medio ambiente"
+                        },
+                        "_id": "5b0586800d3951652da7daa1",
+                        "nombre": "edificio este"
+                    }
+                }]
+            }).then(camasCreadas => {
+                cama = camasCreadas[0];
             });
         });
+
     });
 
     beforeEach(() => {
@@ -113,7 +108,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
             for (const equip of cama.cama.equipamiento) {
                 equipamiento = equipamiento + equip.term;
             }
-    
+
             // VERIF. EQUIPAMIENTO
             cy.get('plex-detail section div').eq(7).find('small').should(($span) => {
                 expect($span.text().split(',').join("")).to.equal(equipamiento.split(',').join(""));

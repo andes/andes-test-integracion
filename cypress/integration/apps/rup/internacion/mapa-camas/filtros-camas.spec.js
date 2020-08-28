@@ -1,45 +1,43 @@
-const { permisosUsuario, factoryInternacion } = require('../utiles');
-
 describe('Filtros de Mapa Camas', () => {
     const filtros = {
         unidadesOrganizativas: [
             {
-                "_id" : "5b294d1008357438f45b5974",
-                "term" : "departamento de anestesia",
-                "conceptId" : "309901009",
-            }, 
+                "_id": "5b294d1008357438f45b5974",
+                "term": "departamento de anestesia",
+                "conceptId": "309901009",
+            },
             {
-                "_id" : "5b294d1008357438f45b5973",
-                "term" : "departamento de oftalmología",
-                "conceptId" : "309988001",
-            }, 
+                "_id": "5b294d1008357438f45b5973",
+                "term": "departamento de oftalmología",
+                "conceptId": "309988001",
+            },
         ],
         sectores: [
             {
-                "tipoSector" : {
-                    "refsetIds" : [],
-                    "fsn" : "edificio (medio ambiente)",
-                    "term" : "edificio",
-                    "conceptId" : "2421000013105",
-                    "semanticTag" : "medio ambiente"
+                "tipoSector": {
+                    "refsetIds": [],
+                    "fsn": "edificio (medio ambiente)",
+                    "term": "edificio",
+                    "conceptId": "2421000013105",
+                    "semanticTag": "medio ambiente"
                 },
-                "_id" : "5b0586800d3951652da7daa1",
-                "nombre" : "edificio este"
-            }, 
+                "_id": "5b0586800d3951652da7daa1",
+                "nombre": "edificio este"
+            },
             {
-                "tipoSector" : {
-                    "refsetIds" : [],
-                    "conceptId" : "2401000013100",
-                    "term" : "habitación",
-                    "fsn" : "habitación (medio ambiente)",
-                    "semanticTag" : "medio ambiente"
+                "tipoSector": {
+                    "refsetIds": [],
+                    "conceptId": "2401000013100",
+                    "term": "habitación",
+                    "fsn": "habitación (medio ambiente)",
+                    "semanticTag": "medio ambiente"
                 },
-                "_id" : "5e8b3fde7ea96328716a599a",
-                "nombre" : "Habitación 505"
+                "_id": "5e8b3fde7ea96328716a599a",
+                "nombre": "Habitación 505"
             }
         ],
-        tipoCama: { 
-            conceptId: '229772003', term: 'cama' 
+        tipoCama: {
+            conceptId: '229772003', term: 'cama'
         },
         esCensable: false
     };
@@ -47,27 +45,17 @@ describe('Filtros de Mapa Camas', () => {
     let pacientes;
     before(() => {
         cy.seed();
-
-        // CREA USUARIO
-        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica'] }).then(user => {
-            cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
-                token = t;
-
-                // CREA PACIENTES
-                cy.task('database:seed:paciente').then(pacientesCreados => {
-                    pacientes = pacientesCreados;
-
-                    // CREA UN MUNDO IDEAL DE INTERNACION
-                    factoryInternacion({
-                        configCamas: [
-                            { estado: 'ocupada', pacientes: [pacientes[0]], sector: filtros.sectores[0] },
-                            { estado: 'disponible', count: 2, unidadOrganizativa: filtros.unidadesOrganizativas[0].conceptId, sector: filtros.sectores[0], esCensable: filtros.esCensable },
-                            { estado: 'disponible', count: 5, unidadOrganizativa: filtros.unidadesOrganizativas[1].conceptId, sector: filtros.sectores[1], tipoCama: filtros.tipoCama.conceptId }
-                        ]
-                    }).then(camasCreadas => {
-                        return cy.goto('/internacion/mapa-camas', token);
-                    });
-                });
+        cy.loginCapa('estadistica').then(([user, t, pacientesCreados]) => {
+            token = t;
+            pacientes = pacientesCreados;
+            cy.factoryInternacion({
+                configCamas: [
+                    { estado: 'ocupada', pacientes: [pacientes[0]], sector: filtros.sectores[0] },
+                    { estado: 'disponible', count: 2, unidadOrganizativa: filtros.unidadesOrganizativas[0].conceptId, sector: filtros.sectores[0], esCensable: filtros.esCensable },
+                    { estado: 'disponible', count: 5, unidadOrganizativa: filtros.unidadesOrganizativas[1].conceptId, sector: filtros.sectores[1], tipoCama: filtros.tipoCama.conceptId }
+                ]
+            }).then(camasCreadas => {
+                return cy.goto('/internacion/mapa-camas', token);
             });
         });
     });

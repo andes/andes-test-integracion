@@ -1,28 +1,21 @@
-const moment = require('moment')
-const { permisosUsuario, factoryInternacion } = require('../utiles');
+const moment = require('moment');
 
-describe('Capa Estadistica - Ingresos', () => {
+describe('Capa Estadistica - listado internacion', () => {
     let token;
     let pacientes;
     before(() => {
         cy.seed();
-
-        // CREA USUARIO
-        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica', 'internacion:ingreso'] }).then(user => {
-            cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
-                token = t;
-
-                // CREA PACIENTES
-                cy.task('database:seed:paciente').then(pacientesCreados => {
-                    pacientes = pacientesCreados;
-
-                    // CREA UN MUNDO IDEAL DE INTERNACION
-                    factoryInternacion({ configCamas: [
-                        { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate(), fechaEgreso:  moment().toDate() },
-                        { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso:  moment().toDate(), validada: true}
-                    ] }).then(camasCreadas => {
-                        return cy.goto('/internacion/listado-internacion', token);
-                    });
+        cy.loginCapa('estadistica').then(([user, t]) => {
+            token = t;
+            cy.task('database:seed:paciente').then(pacientesCreados => {
+                pacientes = pacientesCreados;
+                cy.factoryInternacion({
+                    configCamas: [
+                        { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate(), fechaEgreso: moment().toDate() },
+                        { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso: moment().toDate(), validada: true }
+                    ]
+                }).then(camasCreadas => {
+                    return cy.goto('/internacion/listado-internacion', token);
                 });
             });
         });
@@ -44,31 +37,31 @@ describe('Capa Estadistica - Ingresos', () => {
             c2: true,
             reporteC2: 'Neumonia',
         }, {
-            "id" : "59bbf1ed53916746547cb91a",
-            "idCie10" : 3,
-            "idNew" : 2384,
-            "capitulo" : "05",
-            "grupo" : "09",
-            "causa" : "F80",
-            "subcausa" : "8",
-            "codigo" : "F80.8",
-            "nombre" : "Otros trastornos del desarrollo del habla y del lenguaje",
-            "sinonimo" : "Otros trastornos del desarrollo del habla y del lenguaje",
-            "descripcion" : "05.Trastornos mentales y del comportamiento (F00-F99)",
-            "c2" : false
+            "id": "59bbf1ed53916746547cb91a",
+            "idCie10": 3,
+            "idNew": 2384,
+            "capitulo": "05",
+            "grupo": "09",
+            "causa": "F80",
+            "subcausa": "8",
+            "codigo": "F80.8",
+            "nombre": "Otros trastornos del desarrollo del habla y del lenguaje",
+            "sinonimo": "Otros trastornos del desarrollo del habla y del lenguaje",
+            "descripcion": "05.Trastornos mentales y del comportamiento (F00-F99)",
+            "c2": false
         }, {
-            "id" : "59bbf1ed53916746547cb941",
-            "idCie10" : 42,
-            "idNew" : 2423,
-            "capitulo" : "05",
-            "grupo" : "10",
-            "causa" : "F94",
-            "subcausa" : "0",
-            "codigo" : "F94.0",
-            "nombre" : "Mutismo electivo",
-            "sinonimo" : "Mutismo electivo",
-            "descripcion" : "05.Trastornos mentales y del comportamiento (F00-F99)",
-            "c2" : false
+            "id": "59bbf1ed53916746547cb941",
+            "idCie10": 42,
+            "idNew": 2423,
+            "capitulo": "05",
+            "grupo": "10",
+            "causa": "F94",
+            "subcausa": "0",
+            "codigo": "F94.0",
+            "nombre": "Mutismo electivo",
+            "sinonimo": "Mutismo electivo",
+            "descripcion": "05.Trastornos mentales y del comportamiento (F00-F99)",
+            "c2": false
         }]).as('getDiagnostico');
         cy.route('GET', '**/api/core/mpi/pacientes/**', true).as('getPaciente');
         cy.route('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
@@ -77,7 +70,7 @@ describe('Capa Estadistica - Ingresos', () => {
     });
 
     it('Validar internacion', () => {
-        cy.get('table tbody tr').eq(0).click({force: true});
+        cy.get('table tbody tr').eq(0).click({ force: true });
         cy.plexButton("VALIDAR").click();
         cy.contains("Confirmar validación");
         cy.get('button').contains('CONFIRMAR').click();
@@ -88,7 +81,7 @@ describe('Capa Estadistica - Ingresos', () => {
     });
 
     it('Romper internacion', () => {
-        cy.get('table tbody tr').eq(1).click({force: true});
+        cy.get('table tbody tr').eq(1).click({ force: true });
         cy.plexButton("ROMPER VALIDACION").click();
         cy.contains("Romper validación");
         cy.get('button').contains('CONFIRMAR').click();

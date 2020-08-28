@@ -1,30 +1,18 @@
-const { permisosUsuario, factoryInternacion } = require('../utiles');
-
 describe('Capa Estadistica - Ingresos', () => {
     let token;
     let pacientes;
     before(() => {
         cy.seed();
-
-        // CREA USUARIO
-        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica', 'internacion:ingreso'] }).then(user => {
-            cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
-                token = t;
-
-                // CREA PACIENTES
-                cy.task('database:seed:paciente').then(pacientesCreados => {
-                    pacientes = pacientesCreados;
-
-                    // CREA UN MUNDO IDEAL DE INTERNACION
-                    factoryInternacion({
-                        configCamas: [
-                            { estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() },
-                            { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate() }
-                        ]
-                    }).then(camasCreadas => {
-                        return cy.goto('/internacion/mapa-camas', token);
-                    });
-                });
+        cy.loginCapa('estadistica').then(([user, t, pacientesCreados]) => {
+            token = t;
+            pacientes = pacientesCreados;
+            cy.factoryInternacion({
+                configCamas: [
+                    { estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() },
+                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate() }
+                ]
+            }).then(camasCreadas => {
+                return cy.goto('/internacion/mapa-camas', token);
             });
         });
     });

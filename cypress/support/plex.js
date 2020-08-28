@@ -189,6 +189,10 @@ Cypress.Commands.add('plexBadge', { prevSubject: 'optional' }, (subject, label, 
     return element;
 });
 
+Cypress.Commands.add('plexOptions', { prevSubject: 'optional' }, (subject, label) => {
+    return cy.get('plex-options button', { prevSubject: subject }).contains(label);
+})
+
 Cypress.Commands.add('plexTextArea', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
     if (subject) {
@@ -222,6 +226,18 @@ Cypress.Commands.add('plexButtonIcon', { prevSubject: 'optional' }, (subject, ic
         element = cy.get(`plex-button i.mdi.mdi-${icon}`, { timeout: 30000 }).parent();
     }
     return element;
+});
+
+Cypress.Commands.add('plexLayoutMain', () => {
+    return cy.get('plex-layout-main');
+});
+
+Cypress.Commands.add('plexLayoutSidebar', () => {
+    return cy.get('plex-layout-sidebar');
+});
+
+Cypress.Commands.add('plexLayout', (name) => {
+    return cy.get('plex-layout-' + name);
 });
 
 Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, label, data = null) => {
