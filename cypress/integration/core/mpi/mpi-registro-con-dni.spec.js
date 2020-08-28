@@ -253,7 +253,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.contains('Similitud: 95 %');
     });
 
-    it('crear paciente con similitud del 81% con uno existente temporal', () => {
+    it.skip('crear paciente con similitud del 81% con uno existente temporal', () => {
         // Buscador
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
@@ -296,7 +296,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.contains('Existen pacientes similares, verifique las sugerencias');
     });
 
-    it('crear paciente con similitud del 98% con uno existente temporal', () => {
+    it.skip('crear paciente con similitud del 98% con uno existente temporal', () => {
         // Buscador
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
