@@ -51,11 +51,12 @@ context('RUP - Punto de inicio', () => {
             });
 
             cy.plexFloat('label="Peso"', 63);
-            cy.plexFloat('label="Percentilo de Peso"', 70);
+            cy.plexInputDinamico('float', 'Percentilo de Peso', 70);
             cy.plexFloat('name="talla"', 120);
-            cy.plexFloat('label="Percentilo de Talla"', 80);
-            cy.plexFloat('label="Perímetro Cefálico"', 55);
-            cy.plexFloat('label="Percentilo de Perímetro Cefálico"', 40);
+            cy.plexInputDinamico('float', 'Percentilo de Talla', 70);
+            cy.plexInputDinamico('float', 'Perímetro Cefálico', 70);
+            cy.plexInputDinamico('float', 'Percentilo de Perímetro Cefálico', 70);
+
 
             cy.get('plex-bool').first().click();
 

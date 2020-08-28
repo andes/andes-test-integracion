@@ -125,6 +125,22 @@ Cypress.Commands.add('plexFloat', { prevSubject: 'optional' }, (subject, label, 
     return element;
 });
 
+
+Cypress.Commands.add('plexInputDinamico', { prevSubject: 'optional' }, (subject, tipo, label, text = null) => {
+
+    const element = cy.get(`plex-${tipo}`, { prevSubject: subject })
+        .find('label').contains(label)
+        .parent().parent()
+        .find('input');
+
+    if (text) {
+        element.type(text);
+    }
+
+    return element;
+});
+
+
 Cypress.Commands.add('plexPhone', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
     if (subject) {
