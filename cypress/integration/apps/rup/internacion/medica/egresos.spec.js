@@ -7,6 +7,7 @@ describe('Capa Medica - Egresos', () => {
         cy.seed();
 
         cy.loginCapa('medica').then(([user, t, pacientesCreados]) => {
+            pacientes = pacientesCreados;
             token = t;
             cy.factoryInternacion({ configCamas: [{ estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: moment('2020-01-10').toDate() }] }).then(camasCreadas => {
                 return cy.goto('/internacion/mapa-camas', token);
