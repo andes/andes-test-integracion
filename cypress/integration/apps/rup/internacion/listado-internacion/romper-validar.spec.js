@@ -5,7 +5,7 @@ describe('Capa Estadistica - listado internacion', () => {
     let pacientes;
     before(() => {
         cy.seed();
-        cy.loginCapa('estadistica').then(([user, t]) => {
+        cy.loginCapa('estadistica').then(([user, t, pacientesCreados]) => {
             token = t;
             pacientes = pacientesCreados;
             cy.factoryInternacion({
