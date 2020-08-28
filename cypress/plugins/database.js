@@ -40,3 +40,27 @@ module.exports.cleanDB = async (db) => {
         await colection.deleteMany({});
     }
 }
+
+const getObjectId = (name) => {
+    const sha1 = require('sha1');
+    if (name === '') {
+        throw new Error('Name cannot be empty');
+    }
+    const hash = sha1(name);
+    return new mongo.ObjectID(hash.substring(0, 24));
+};
+
+module.exports.getObjectId = getObjectId
+
+module.exports.checkObjectId = (id) => {
+    try {
+        if (mongo.ObjectID.isValid(id)) {
+            console.log(new mongo.ObjectID(id))
+            return new mongo.ObjectID(id);
+        }
+        return getObjectId(id);
+
+    } catch (e) {
+        console.error(e);
+    }
+}

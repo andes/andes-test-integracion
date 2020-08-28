@@ -1,5 +1,4 @@
-const moment = require('moment')
-const { permisosUsuario, factoryInternacion } = require('../utiles');
+const moment = require('moment');
 
 function getStubs() {
     cy.route('GET', '/api/core/term/snomed/expression?expression=^2051000013106**', [{
@@ -42,19 +41,11 @@ describe('ABM Camas', () => {
     let camas;
     before(() => {
         cy.seed();
-
-        // CREA USUARIO
-        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [...permisosUsuario, 'internacion:rol:estadistica'] }).then(user => {
-            cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
-                token = t;
-                // CREA PACIENTES
-                cy.task('database:seed:paciente').then(pacientesCreados => {
-                    pacientes = pacientesCreados;
-                    // CREA UN MUNDO IDEAL DE INTERNACION
-                    factoryInternacion({ configCamas: [{ estado: 'disponible', count: 2 }] }).then(camasCreadas => {
-                        camas = camasCreadas;
-                    });
-                });
+        cy.loginCapa('estadistica').then(([user, t, pacientesCreados]) => {
+            token = t;
+            pacientes = pacientesCreados;
+            cy.factoryInternacion({ configCamas: [{ estado: 'disponible', count: 2 }] }).then(camasCreadas => {
+                camas = camasCreadas;
             });
         });
     });

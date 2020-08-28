@@ -1,7 +1,8 @@
 const faker = require('faker');
 const {
     connectToDB,
-    ObjectId
+    ObjectId,
+    checkObjectId
 } = require('./database');
 
 module.exports.seedPerfil = async (mongoUri, params) => {
@@ -58,7 +59,7 @@ module.exports.seedUsuario = async (mongoUri, params) => {
 
         if (params.organizacion) {
             const OrganizacionDB = await client.db().collection('organizacion');
-            const orgData = await OrganizacionDB.findOne({ _id: new ObjectId(params.organizacion) }, { projection: { nombre: 1 } });
+            const orgData = await OrganizacionDB.findOne({ _id: checkObjectId(params.organizacion) }, { projection: { nombre: 1 } });
             dto.organizaciones.push({
                 _id: ObjectId(orgData._id),
                 nombre: orgData.nombre

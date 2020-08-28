@@ -1,7 +1,7 @@
 
 const moment = require('moment');
 const request = require('request');
-const { connectToDB, ObjectId, encapsulateArray } = require('./database');
+const { connectToDB, ObjectId, checkObjectId } = require('./database');
 
 module.exports.seedPrestacion = async (mongoUri, params) => {
     try {
@@ -16,7 +16,13 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
         if (params.estado) {
             prestacion.estados[0].tipo = params.estado;
         }
+
+        if (params.createdBy) {
+            prestacion.estados[0].createdBy.id = params.createdBy;
+        }
+
         prestacion.estadoActual = prestacion.estados[0];
+
 
         if (params.turno) {
             prestacion.solicitud.turno = new ObjectId(params.turno);
@@ -43,6 +49,11 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
         prestacion.solicitud.fecha = fechaPrestacion.toDate();
         prestacion.estados[0].createdAt = fechaPrestacion.toDate();
         prestacion.createdAt = fechaPrestacion.toDate();
+
+        if (prestacion.estados[0].tipo === 'validada') {
+            prestacion.estados.push({ ...prestacion.estados[0] });
+            prestacion.estados[0].tipo = 'ejecucion';
+        }
 
         if (params.organizacion) {
             const OrganizacionDB = await client.db().collection('organizacion');

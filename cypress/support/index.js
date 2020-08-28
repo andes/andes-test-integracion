@@ -21,6 +21,8 @@ import './seed'
 import './time'
 import './gestorUsuario'
 import './rup'
+import './mapa-camas'
+import './privacidad'
 
 const addContext = require('mochawesome/addContext')
 

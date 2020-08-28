@@ -138,6 +138,9 @@ module.exports.createCama = async (mongoUri, params) => {
         dtoEstadistica.estados[index].esMovimiento = true;
         dtoEstadistica.estados[index].equipamiento = dtoCama.equipamiento || dtoEstadistica.estados[index].equipamiento;
         dtoEstadistica.estados[index].fecha = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
+
+
+
         dtoEstadistica.estados[index].equipamiento = params.equipamiento || dtoCama.equipamiento;
         dtoEstadistica.start = moment(params.fechaIngreso).startOf('month').toDate() || moment().startOf('month').toDate();
         dtoEstadistica.end = moment(params.fechaIngreso).endOf('month').toDate() || moment().endOf('month').toDate();
