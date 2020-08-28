@@ -62,8 +62,9 @@ describe('Capa Médica - registros', () => {
         cy.modalPrivacidad('Procesos de Auditoría');
 
         cy.wait('@acceso').then((xhr) => {
-            expect(xhr.request.body.motivo).to.be.eq('Procesos de Auditoría');
-            expect(xhr.request.body.paciente.id).to.be.eq(paciente._id);
+            const body: any = xhr.request.body;
+            expect(body.motivo).to.be.eq('Procesos de Auditoría');
+            expect(body.paciente.id).to.be.eq(paciente._id);
         })
 
         cy.plexLayoutSidebar().contains('Registros');
