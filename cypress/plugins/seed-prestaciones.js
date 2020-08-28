@@ -16,6 +16,7 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
         if (params.estado) {
             prestacion.estados[0].tipo = params.estado;
         }
+        prestacion.estadoActual = prestacion.estados[0];
 
         if (params.turno) {
             prestacion.solicitud.turno = new ObjectId(params.turno);
