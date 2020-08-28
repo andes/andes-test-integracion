@@ -35,6 +35,7 @@
     "@angular/cli": "^8.3.8",
     "cypress": "^3.3.1",
     "cypress-plugin-retries": "^1.5.2",
+    "cypress-select-tests": "^1.5.7",
     "mocha": "^4.1.0",
     "mocha-junit-reporter": "^1.23.2",
     "mocha-multi-reporters": "^1.1.7",
