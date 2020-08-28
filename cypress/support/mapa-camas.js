@@ -31,11 +31,14 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'medica' });
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica' });
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria' });
+
+    const camas = [];
     for (const elemento of params.configCamas) {
         const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
         for (let i = 0; i < count; i++) {
             const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
-            cy.task('database:create:cama', {
+
+            camas.push({
                 estado: elemento.estado,
                 unidadOrganizativa: elemento.unidadOrganizativa,
                 sector: elemento.sector,
@@ -48,6 +51,7 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
             });
         }
     }
+    return cy.taskN('database:create:cama', camas);
 });
 
 export const permisosUsuario = [
@@ -73,3 +77,4 @@ export const permisosUsuario = [
     'usuarios:*',
     'reportes:*',
 ];
+

@@ -7,16 +7,14 @@ describe('Capa Estadistica - listado internacion', () => {
         cy.seed();
         cy.loginCapa('estadistica').then(([user, t]) => {
             token = t;
-            cy.task('database:seed:paciente').then(pacientesCreados => {
-                pacientes = pacientesCreados;
-                cy.factoryInternacion({
-                    configCamas: [
-                        { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate(), fechaEgreso: moment().toDate() },
-                        { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso: moment().toDate(), validada: true }
-                    ]
-                }).then(camasCreadas => {
-                    return cy.goto('/internacion/listado-internacion', token);
-                });
+            pacientes = pacientesCreados;
+            cy.factoryInternacion({
+                configCamas: [
+                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate(), fechaEgreso: moment().toDate() },
+                    { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso: moment().toDate(), validada: true }
+                ]
+            }).then(camasCreadas => {
+                return cy.goto('/internacion/listado-internacion', token);
             });
         });
     });

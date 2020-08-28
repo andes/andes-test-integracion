@@ -93,3 +93,17 @@ Cypress.Commands.add('buscarPaciente', (pacienteDoc, cambiarPaciente = true) => 
         cy.get('plex-item').contains(documento).click();
     }
 });
+
+Cypress.Commands.add('taskN', (name, argumentos) => {
+    function runTask(name, argumentos, resultado) {
+        if (argumentos.length > 0) {
+            return cy.task(name, argumentos[0]).then((taskResponse) => {
+                const [_, ...args] = argumentos;
+                return runTask(name, args, [...resultado, taskResponse]);
+            })
+        } else {
+            return resultado;
+        }
+    }
+    return runTask(name, argumentos, []);
+});
