@@ -57,7 +57,7 @@ context('RUP - Punto de inicio', () => {
             cy.route({ method: 'PATCH', url: '**/api/modules/rup/prestaciones/**' }).as('patchPrestacion');
             cy.route({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
             cy.route({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
-            cy.route({ method: 'GET', url: '**/api/modules/rup/elementosRUP**', response: [] },).as('elementosRUP');
+            cy.route({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' },).as('elementosRUP');
             cy.route({ method: 'GET', url: '**/api/auth/organizaciones**' }).as('organizaciones');
             cy.route({ method: 'GET', url: '**/api/core/tm/tiposPrestaciones**' }).as('tiposPrestaciones');
             cy.route({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
@@ -129,7 +129,7 @@ context('RUP - Punto de inicio', () => {
             cy.route({ method: 'POST', url: '**/api/modules/rup/prestaciones**' }).as('crearPrestacion');
             cy.route({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
             cy.route({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
-            cy.route({ method: 'GET', url: '**/api/modules/rup/elementosRUP**', response: [] }).as('elementosRUP');
+            cy.route({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' }).as('elementosRUP');
             cy.route({ method: 'GET', url: '**/api/auth/organizaciones**' }).as('organizaciones');
             cy.route({ method: 'GET', url: '**/api/core/tm/tiposPrestaciones**' }).as('tiposPrestaciones');
             cy.route({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
@@ -366,14 +366,13 @@ context('RUP - Punto de inicio', () => {
 
 function setRoute() {
     cy.server();
-    // cy.route({ method: 'GET', url: '**api/modules/rup/elementosRUP' }, []).as('RUP');
 
     cy.route({ method: 'GET', url: '**/api/modules/turnos/agenda**' }).as('agendas');
     cy.route({ method: 'POST', url: '**/api/modules/rup/prestaciones**' }).as('crearPrestacion');
     cy.route({ method: 'PATCH', url: '**/api/modules/rup/prestaciones**' }).as('patchPrestacion');
     cy.route({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
     cy.route({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
-    cy.route({ method: 'GET', url: '**/api/modules/rup/elementosRUP**', response: [] }).as('elementosRUP');
+    cy.route({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' }).as('elementosRUP');
     cy.route({ method: 'GET', url: '**/api/core/tm/tiposPrestaciones**' }).as('tiposPrestaciones');
     cy.route({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
     cy.route({ method: 'GET', url: '/api/modules/rup/prestaciones/huds/**', response: [] }).as('huds');
