@@ -89,6 +89,8 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             prestacion.paciente.id = prestacion.paciente._id;
         }
 
+        prestacion.inicio = getInicioPrestacion(prestacion);
+
         const data = await PrestacionDB.insertOne(prestacion);
         prestacion._id = data.insertedId;
 
@@ -97,4 +99,22 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
     } catch (e) {
         throw e;
     }
+}
+
+function getInicioPrestacion(prestacion) {
+    let inicioPrestacion;
+    const estadoInicial = prestacion.estados[0];
+    if (estadoInicial.tipo === 'pendiente' || estadoInicial.tipo === 'auditoria') {
+        inicioPrestacion = 'top';
+    } else if (estadoInicial.tipo === 'ejecucion') {
+        if (prestacion.solicitud.turno) {
+            inicioPrestacion = 'agenda';
+        } else if (prestacion.solicitud.ambitoOrigen === 'ambulatorio') {
+            inicioPrestacion = 'fuera-agenda';
+        } else if (prestacion.solicitud.ambitoOrigen === 'internacion') {
+            inicioPrestacion = 'internacion';
+        }
+    }
+
+    return inicioPrestacion;
 }
