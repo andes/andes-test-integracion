@@ -45,7 +45,11 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             fechaPrestacion.add(params.hora, 'h');
         }
 
-        prestacion.ejecucion.fecha = fechaPrestacion.toDate();
+        if (params.estado !== 'pendiente') {
+            prestacion.ejecucion.fecha = fechaPrestacion.toDate();
+        } else {
+            prestacion.ejecucion.fecha = undefined;
+        }
         prestacion.solicitud.fecha = fechaPrestacion.toDate();
         prestacion.estados[0].createdAt = fechaPrestacion.toDate();
         prestacion.createdAt = fechaPrestacion.toDate();
