@@ -70,7 +70,7 @@ describe('Capa Estadistica - Egresos', () => {
 
     it('Egreso completo', () => {
         cy.wait(400)
-        cy.plexButtonIcon('minus').click()
+        cy.plexButtonIcon('menos').click()
         cy.contains('Egresar paciente').click();
 
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');

@@ -92,9 +92,9 @@ Cypress.Commands.add('isSelectedLabel', { prevSubject: 'element' }, (subject, la
 
 Cypress.Commands.add('clearSelect', { prevSubject: 'element' }, (subject, id) => {
     if (!id) {
-        return cy.wrap(subject).find('.mdi-close-circle').click();
+        return cy.wrap(subject).find('.adi-close-circle').click();
     } else {
-        return cy.wrap(subject).find(`.selectize-input .item[data-value="${id}"]`).find('.mdi-close-circle').click();
+        return cy.wrap(subject).find(`.selectize-input .item[data-value="${id}"]`).find('.adi-close-circle').click();
 
     }
 });
@@ -237,9 +237,9 @@ Cypress.Commands.add('plexButtonIcon', { prevSubject: 'optional' }, (subject, ic
     let element;
     if (subject) {
 
-        element = cy.wrap(subject).find(`plex-button i.mdi.mdi-${icon}`, { timeout: 30000 }).parent();
+        element = cy.wrap(subject).find(`plex-button i.adi.adi-${icon}`, { timeout: 30000 }).parent();
     } else {
-        element = cy.get(`plex-button i.mdi.mdi-${icon}`, { timeout: 30000 }).parent();
+        element = cy.get(`plex-button i.adi.adi-${icon}`, { timeout: 30000 }).parent();
     }
     return element;
 });
@@ -367,8 +367,8 @@ Cypress.Commands.add('plexPanel', { prevSubject: 'optional' }, (subject, index) 
 });
 
 Cypress.Commands.add('plexMenu', (icon) => {
-    cy.get('plex-app .navbar-inverse .mdi.mdi-menu').click({ force: true });
-    return cy.get('plex-app .navbar-inverse .dropdown-menu').find(`.mdi.mdi-${icon}`).first().click({ force: true });
+    cy.get('plex-app .navbar-inverse .adi.adi-menu').click({ force: true });
+    return cy.get('plex-app .navbar-inverse .dropdown-menu').find(`.adi.adi-${icon}`).first().click({ force: true });
 })
 
 /**

@@ -68,7 +68,7 @@ context('RUP - Punto de inicio', () => {
             cy.get('@tablaAgendas').find('tbody tr').find('td').contains('4');
 
 
-            cy.plexDatetime('name="horaInicio"').find('.mdi-menu-left').click();
+            cy.plexDatetime('name="horaInicio"').find('.adi-menu-left').click();
             cy.wait('@agendas');
             cy.get('@tablaAgendas').find('tbody tr').should('have.length', 2);
 
@@ -88,7 +88,7 @@ context('RUP - Punto de inicio', () => {
 
             cy.plexText('label="Paciente"', '{selectall}{backspace}31549269');
             cy.get('@tablaAgendas').find('tbody tr').contains(msgSinResultados);
-            cy.plexSelect('name="nombrePrestacion"').find('.mdi-close-circle').click();
+            cy.plexSelect('name="nombrePrestacion"').find('.adi-close-circle').click();
             cy.get('@tablaAgendas').find('tbody tr').contains(msgSinResultados);
 
             cy.plexText('label="Paciente"', '{selectall}{backspace}10000000');

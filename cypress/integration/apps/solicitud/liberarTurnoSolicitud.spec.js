@@ -87,7 +87,8 @@ describe('TOP: Liberar turno', () => {
         // CREAR SOLICITUD -->
 
         // <!-- ASIGNAR TURNO
-        cy.get('i.mdi-calendar-plus').click({ force: true });
+        cy.plexButtonIcon('calendar-plus').click();
+        // cy.get('i.adi-calendar-plus').click({ force: true });
 
         cy.wait('@getAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200)

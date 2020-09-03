@@ -102,7 +102,7 @@ context('SOLICITUDES', () => {
         cy.get('plex-text[name="searchTerm"] input').first().type('Consulta De Pediatría')
 
         // cy.get('.introjs-skipbutton').contains('Cerrar').click({force:true})
-        cy.get('.mdi-plus').first().click();
+        cy.get('.adi-plus').first().click();
         cy.get('textarea').first().type('ni', {
             force: true
         });
