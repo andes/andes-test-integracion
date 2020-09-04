@@ -1,3 +1,0 @@
-export const USER_USR_LOGIN = '';
-export const USER_PWRD_LOGIN = '';
-export const ANDES_KEY = '';

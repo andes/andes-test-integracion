@@ -24,7 +24,7 @@ describe('Capa Medica - Egresos', () => {
     });
 
     it('Egreso simplificado', () => {
-        cy.plexButtonIcon('minus').click();
+        cy.plexButtonIcon('menos').click();
         cy.contains('Egresar paciente').click();
 
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');

@@ -8,7 +8,7 @@ context('Registro novedades', () => {
         subtitulo: 'centro inteligente de agendas & turnos',
         linkAcceso: '/citas/gestor_agendas',
         color: '#982f98',
-        icono: 'mdi-calendar',
+        icono: 'mdi mdi-calendar',
         permisos: [
             'turnos:planificarAgenda:?'
         ]
@@ -56,7 +56,7 @@ context('Registro novedades', () => {
 
         cy.plexHtml('label="descripcion"', text);
 
-        cy.plexButtonIcon('image-plus'); //revisamos que el boton exista
+        cy.plexButtonIcon('image'); //revisamos que el boton exista
 
         cy.plexButton('Guardar').click();
         cy.wait('@postNovedades').then((xhr) => {
@@ -83,7 +83,7 @@ context('Registro novedades', () => {
 
         cy.plexHtml('label="descripcion"', text);
 
-        cy.plexButtonIcon('image-plus'); //revisamos que el boton exista
+        cy.plexButtonIcon('image'); //revisamos que el boton exista
 
         cy.plexButton('Guardar').click();
         cy.wait('@postNovedades').then((xhr) => {
@@ -113,7 +113,7 @@ context('Registro novedades', () => {
 
         cy.plexHtml('label="descripcion"', text);
 
-        cy.plexButtonIcon('image-plus'); //revisamos que el boton exista
+        cy.plexButtonIcon('image'); //revisamos que el boton exista
 
         cy.plexButton('Guardar').click();
         cy.wait('@postNovedades').then((xhr) => {
@@ -142,7 +142,7 @@ context('Registro novedades', () => {
 
         cy.plexHtml('label="descripcion"', text);
 
-        cy.plexButtonIcon('image-plus'); //revisamos que el boton exista
+        cy.plexButtonIcon('image'); //revisamos que el boton exista
 
         cy.plexButton('Guardar').click();
         cy.wait('@postNovedades').then((xhr) => {
