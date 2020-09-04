@@ -43,3 +43,9 @@ Cypress.on('test:after:run', (test, runnable) => {
         addContext({ test }, `assets/${Cypress.spec.name}/${screenshotFileName}`);
     }
 })
+
+Cypress.on('window:before:load', win => {
+    cy.stub(win.console, 'error', (error, mensaje) => {
+        throw Error(mensaje);
+    })
+})
