@@ -48,7 +48,7 @@ context('SOLICITUDES - REFERIR', () => {
             expect(xhr.response.body[0].solicitud.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
             expect(xhr.response.body[0].solicitud.profesional.id).to.be.eq('5c82a5a53c524e4c57f08cf2');
             expect(xhr.response.body[0].solicitud.tipoPrestacion.conceptId).to.be.eq('291000013102');
-            expect(xhr.response.body[0].solicitud.historial[0].accion).to.be.eq('referencia');
+            expect(xhr.response.body[0].solicitud.historial[0].accion).to.be.eq('referir');
         });
     });
 })
