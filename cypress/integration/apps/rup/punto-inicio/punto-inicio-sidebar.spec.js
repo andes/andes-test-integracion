@@ -80,7 +80,6 @@ context('RUP - Punto de inicio', () => {
                             cy.route('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agregarTurnoDinamico');
                             cy.goto('/rup', token);
                             cy.wait('@agendas');
-                            cy.wait('@turnero');
                             cy.wait('@prestaciones');
                             cy.wait(1000);
 
@@ -158,8 +157,6 @@ context('RUP - Punto de inicio', () => {
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
-                    cy.wait('@turnero');
-                    cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
                     cy.get('table').first().as('tablaAgendas');
@@ -196,8 +193,6 @@ context('RUP - Punto de inicio', () => {
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
-                    cy.wait('@turnero');
-                    cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
                     cy.get('table').first().as('tablaAgendas');
@@ -214,8 +209,6 @@ context('RUP - Punto de inicio', () => {
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
-                    cy.wait('@turnero');
-                    cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
                     cy.get('table').first().as('tablaAgendas');
@@ -246,7 +239,7 @@ context('RUP - Punto de inicio', () => {
                         turno: agendas['con-solicitud'].bloques[0].turnos[pacienteIndex]._id,
                         estado: 'pendiente'
                     });
-                })
+                });
             }
 
             it('iniciar prestacion', () => {
@@ -254,8 +247,6 @@ context('RUP - Punto de inicio', () => {
 
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
-                cy.wait('@turnero');
-                cy.wait('@prestaciones');
                 cy.wait('@prestaciones');
 
                 cy.get('table').first().as('tablaAgendas');
@@ -294,8 +285,6 @@ context('RUP - Punto de inicio', () => {
                 setRoute();
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
-                cy.wait('@turnero');
-                cy.wait('@prestaciones');
                 cy.wait('@prestaciones');
 
                 cy.get('table').first().as('tablaAgendas');
@@ -325,8 +314,6 @@ context('RUP - Punto de inicio', () => {
                 setRoute();
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
-                cy.wait('@turnero');
-                cy.wait('@prestaciones');
                 cy.wait('@prestaciones');
 
                 cy.get('table').first().as('tablaAgendas');
@@ -344,8 +331,6 @@ context('RUP - Punto de inicio', () => {
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
-                    cy.wait('@turnero');
-                    cy.wait('@prestaciones');
                     cy.wait('@prestaciones');
 
                     cy.get('table').first().as('tablaAgendas');
