@@ -66,6 +66,49 @@ declare namespace Cypress {
          */
         plexInputDinamico(tipo: 'text' | 'float' | 'phone' | 'int', label: string, texto?: string): Chainable<Element>;
 
+        /**
+         * Plex badge
+         */
+        plexBadge(texto: string): Chainable<Element>;
 
+        /**
+         * Plex Select
+         */
+        plexSelect(label: string, texto?: string): Chainable<Element>;
+
+        /**
+         * Plex Select Async 
+         */
+        plexSelectAsync(label: string, texto: string, route: string, position: any): Chainable<Element>;
+
+        /**
+         * Plex Select Type 
+         */
+        plexSelectType(label: string, texto: string): Chainable<Element>;
+
+        /**
+         * Plex Toast
+         */
+        plexToast(tipo: 'info' | 'success' | 'warning' | 'danger', texto?: string): Chainable<Element>;
+
+        /**
+         * Plex DateTime
+         */
+        plexDatetime(label: string, texto?: string): Chainable<Element>;
+
+        /**
+         * Plex Bool
+         */
+        plexBool(label: string, texto: boolean): Chainable<Element>;
+
+        /**
+         * Plex Dropdown
+         */
+        plexDropdown(label: string, texto?: string): Chainable<Element>;
+
+        /**
+         * Plex TextArea
+         */
+        plexTextArea(label: string, texto?: string);
     }
 }
