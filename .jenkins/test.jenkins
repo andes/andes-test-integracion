@@ -14,6 +14,7 @@ pipeline {
         monitoreo_build = "${MONITOREO_BUILD}"
         build_number = "${BUILD_NUMBER}"
         filefilter = "${FILE_FILTER.length() == 0 ? '' : ',fgrep=' + FILE_FILTER}"
+        tag="\"${APP_BRANCH},${API_BRANCH},${TEST_BRANCH}\""
     }
     stages {
         stage('Build images') {
@@ -60,8 +61,9 @@ pipeline {
  
         stage('Image build and cleanup') {
             steps {
+                sh 'git merge origin/master --no-edit'
                 sh 'rm -rf results/* mochawesome-report/* cypress/screenshots/* cypress/videos/* || true'
-                sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} --build-arg MATRICULACIONES=${matriculaciones} .'
+                sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} --build-arg MATRICULACIONES=${matriculaciones} --build-arg MONITOREO=${monitoreo} .'
             }
         }
         
@@ -105,7 +107,7 @@ pipeline {
                             }
                             steps { 
                                 sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
-                                sh 'npx cypress run --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 --parallel ${cypressparams} || true' 
+                                sh 'npx cypress run --tag {$tag} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 --parallel ${cypressparams} || true' 
                             }
                         } 
                     }
@@ -132,7 +134,7 @@ pipeline {
                             }
                             steps { 
                                 sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
-                                sh 'npx cypress run ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
+                                sh 'npx cypress run  --tag {$tag} ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
                             }
                         } 
                     }
@@ -159,11 +161,38 @@ pipeline {
                             }
                             steps { 
                                 sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
-                                sh 'npx cypress run ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
+                                sh 'npx cypress run  --tag {$tag} ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
                             }
                         } 
                     }
-                }            
+                }     
+
+                stage('D') {
+                    stages  {
+                        stage('container up') {
+                            steps {
+                                sh 'API=$api APP=$app docker-compose -p andesd$BUILD_NUMBER -f docker/docker-compose.yml up -d'
+                                sh 'sleep 1'
+                            }
+                        }
+                        stage('run test') {
+                            agent {
+                                docker {
+                                    image 'cypress/base:10'
+                                    reuseNode true
+                                    args '--ipc=host --network andesd${BUILD_NUMBER}_default'
+                                }
+                            }
+                            environment {
+                                HOME="${env.WORKSPACE}"
+                            }
+                            steps { 
+                                sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
+                                sh 'npx cypress run --tag {$tag} ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
+                            }
+                        } 
+                    }
+                }       
             }
 
         }
@@ -197,6 +226,7 @@ pipeline {
             sh 'API=$api APP=$app docker-compose -p andesa$BUILD_NUMBER -f docker/docker-compose.yml down -v'
             sh 'API=$api APP=$app docker-compose -p andesb$BUILD_NUMBER -f docker/docker-compose.yml down -v'
             sh 'API=$api APP=$app docker-compose -p andesc$BUILD_NUMBER -f docker/docker-compose.yml down -v'
+            sh 'API=$api APP=$app docker-compose -p andesd$BUILD_NUMBER -f docker/docker-compose.yml down -v'
             sh 'mkdir -p mochawesome-report/web/assets'
             sh 'mkdir -p cypress/screenshots' 
             sh 'cp -R cypress/screenshots/* mochawesome-report/web/assets || true'
