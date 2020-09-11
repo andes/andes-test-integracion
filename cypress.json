@@ -1,7 +1,6 @@
 {
   "env": {
-    "API_SERVER": "http://localhost:3002",
-    "RETRIES": 3
+    "API_SERVER": "http://localhost:3002"
   },
   "reporter": "mocha-multi-reporters",
   "reporterOptions": {
@@ -12,5 +11,9 @@
   "projectId": "xr7gft",
   "viewportWidth": 1280,
   "viewportHeight": 720,
-  "requestTimeout": 10000
+  "requestTimeout": 10000,
+  "retries": {
+    "runMode": 3,
+    "openMode": 0
+  }
 }

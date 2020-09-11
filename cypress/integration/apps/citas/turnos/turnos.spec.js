@@ -121,7 +121,7 @@ context('turnos', () => {
 
         cy.plexText('name="direccion"', 'Avenida las Flores 1200');
 
-        cy.get('plex-button[icon="map-marker"]').click();
+        cy.plexButtonIcon("map-marker").click();
 
         cy.wait('@geoReferencia').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
@@ -177,7 +177,7 @@ context('turnos', () => {
 
         cy.plexText('name="direccion"', 'Avenida las Flores 1200');
 
-        cy.get('plex-button[icon="map-marker"]').click();
+        cy.plexButtonIcon("map-marker").click();
 
         cy.wait('@geoReferencia').then((xhr) => {
             expect(xhr.status).to.be.eq(200)

@@ -19,7 +19,7 @@ context('CITAS - Espacios físicos', () => {
 
         cy.plexSelectType('name="edificio"', 'Huemul');
 
-        cy.get('plex-button[label="Buscar"]').click();
+        cy.plexButton('Buscar').click();
 
         cy.wait('@buscarEspacios').then((xhr) => {
             expect(xhr.status).to.be.eq(200);

@@ -91,7 +91,7 @@ context('Pagina de login', () => {
                 expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
             });
             cy.contains("Versión 1.2.0");
-            cy.get('plex-button').contains('NO ACEPTO').click();
+            cy.plexButton('NO ACEPTO').click();
             cy.wait(1000);
             cy.contains("Ingrese su usuario provincial OneLogin");
             cy.request({

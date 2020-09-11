@@ -214,7 +214,7 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexButton('Agregar nota').click();
         cy.plexText('name="titulo"', 'Nueva nota');
         cy.get('plex-text[name="nota"] input').first().type('Esta es una nueva nota', { force: true });
-        cy.get('plex-button[name="confirmarNota"]').click();
+        cy.plexButtonIcon('plus').click();
         cy.get('plex-item').contains('Nueva nota');
         cy.get('plex-item').contains('Esta es una nueva nota');
         cy.plexButton('Guardar').click();
@@ -260,7 +260,7 @@ context('MPI-Registro Paciente Bebé', () => {
         });
         cy.plexText('name="documentoRelacion"').should('have.value', progenitorScan.documento);        //se cargan datos de contacto
         cy.plexTab('datos de contacto').click();
-        cy.plexBool('name="noPoseeContacto"').check({ force: true });
+        cy.plexBool('name="noPoseeContacto"', true);
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
