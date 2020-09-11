@@ -24,9 +24,7 @@ import './rup'
 import './mapa-camas'
 import './privacidad'
 
-const addContext = require('mochawesome/addContext')
-
-require('cypress-plugin-retries');
+const addContext = require('mochawesome/addContext');
 
 Cypress.on('uncaught:exception', (err) => {
     if (err.message.includes('ResizeObserver')) {

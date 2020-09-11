@@ -27,18 +27,8 @@ const { createModulo } = require('./seed-modulo');
 const { cleanDB, connectToDB } = require('./database');
 
 module.exports = (on, config) => {
-    // ref: https://docs.cypress.io/api/plugins/browser-launch-api.html#Usage
-    // on('before:browser:launch', (browser = {}, args) => {
-    //     if (browser.name === 'chrome') {
-    //         args.push('--disable-dev-shm-usage')
-    //         return args
-    //     }
-
-    //     return args
-    // });
 
     on('file:preprocessor', selectTestsWithGrep(config))
-
 
     const mongoUri = config.env.MONGO_URI || 'mongodb://localhost:27066/andes';
 
@@ -111,7 +101,5 @@ module.exports = (on, config) => {
             return true;
         }
     });
-
-    require('cypress-plugin-retries/lib/plugin')(on);
 
 }

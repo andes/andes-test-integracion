@@ -155,7 +155,7 @@ context('SOLICITUDES', () => {
         cy.get('textarea').last().type('Una observacion', {
             force: true
         });
-        cy.plexButton('Confirmar').click({ force: true });
+        cy.plexButton('Confirmar').click();
         cy.wait('@auditarSolicitud').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estados[1].observaciones).to.be.eq('Una observacion');
