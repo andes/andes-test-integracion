@@ -16,6 +16,10 @@ const MATRICULACIONES_BRANCH = process.env.MATRICULACIONES_BRANCH || "master";
 const MONITOREO_BRANCH = process.env.MONITOREO_BRANCH || "master";
 const TEST_BRANCH = process.env.TEST_BRANCH || "master";
 
+const CYPRESS_PARAMS = process.env.CYPRESS_PARAMS || ''
+const FILE_FILTER = process.env.FILE_FILTER || '';
+const COMPLETO = CYPRESS_PARAMS.length === 0 && FILE_FILTER.length === 0;
+
 const BUILD_ID =
   parseInt(process.env.BUILD_NUMBER, 10) || Math.round(Math.random() * 100);
 
@@ -43,12 +47,15 @@ async function publishComment(result, repo, branch) {
         body: createStatsText(result)
       }
     );
+    if (COMPLETO) {
+      await addTag(result, repo, pr.number);
+    }
   }
 }
 
 function createStatsText(stats) {
   return `
-BUILD NUMBER: ${BUILD_ID}
+BUILD NUMBER: [${BUILD_ID}](http://condorpiedra.andes.gob.ar:85/${BUILD_ID}/mochawesome.html)
 TEST START: ${stats.start}
 TOTAL: ${stats.total}
 SUCCESS: ${stats.success}
@@ -90,3 +97,43 @@ async function main() {
 }
 
 main();
+
+async function addTag(result, repo, number) {
+  const octokit = new Octokit({
+    auth: PERSONAL_TOKEN
+  });
+
+  const res = await octokit.issues.get({
+    owner: "andes",
+    repo: repo,
+    issue_number: number,
+  })
+  const labels = res.data.labels;
+
+  const ps = labels.filter(label => label.name === 'test fail' || label.name === 'test ok').map((label) => {
+    console.log(label.name)
+    return octokit.issues.removeLabel({
+      owner: "andes",
+      repo: repo,
+      issue_number: number,
+      name: label.name,
+    });
+  });
+  await Promise.all(ps);
+
+  if (result.fail <= 0) {
+    await octokit.issues.addLabels({
+      owner: "andes",
+      repo: repo,
+      issue_number: number,
+      labels: ['test ok']
+    });
+  } else {
+    await octokit.issues.addLabels({
+      owner: "andes",
+      repo: repo,
+      issue_number: number,
+      labels: ['test fail']
+    });
+  }
+}
