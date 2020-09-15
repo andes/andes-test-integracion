@@ -67,6 +67,7 @@ describe('TOP: Liberar turno', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.paciente.documento).to.be.eq(dni);
             expect(xhr.response.body.solicitud.tipoPrestacionOrigen.conceptId).to.be.eq(idPrestacion);
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.toast('success');
         cy.wait('@getSolicitudes');
@@ -82,6 +83,9 @@ describe('TOP: Liberar turno', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estados[0].tipo).to.be.eq('auditoria');
             expect(xhr.response.body.estados[1].tipo).to.be.eq('pendiente');
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
+            expect(xhr.response.body.solicitud.historial[1].accion).to.be.eq('pendiente');
+            expect(xhr.response.body.solicitud.historial[1].observaciones).to.be.eq('prueba de observacion');
         });
         // CREAR SOLICITUD -->
 
@@ -109,6 +113,7 @@ describe('TOP: Liberar turno', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estados[0].tipo).to.be.eq('auditoria');
             expect(xhr.response.body.estados[1].tipo).to.be.eq('pendiente');
+            expect(xhr.response.body.solicitud.historial[2].accion).to.be.eq('asignarTurno');
         });
 
         // ASIGNAR TURNO -->

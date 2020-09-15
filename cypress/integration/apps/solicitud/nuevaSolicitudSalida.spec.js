@@ -50,6 +50,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.paciente.documento).to.be.eq(dni);
             expect(xhr.response.body.solicitud.tipoPrestacion.conceptId).to.be.eq(idPrestacion);
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.toast('success', 'Solicitud guardada');
     });
@@ -92,6 +93,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.plexButton('Guardar').click();
         cy.wait('@createSolicitud').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
     });
 
