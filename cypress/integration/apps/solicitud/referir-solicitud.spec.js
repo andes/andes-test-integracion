@@ -41,6 +41,7 @@ context('SOLICITUDES - REFERIR', () => {
         cy.plexButton('Confirmar').click();
         cy.wait('@auditarSolicitud').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('referir');
         });
 
         cy.wait('@solicitudes').then((xhr) => {

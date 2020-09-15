@@ -96,6 +96,7 @@ context('SOLICITUDES', () => {
         cy.wait('@guardarSolicitud').then(xhr => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.plexButtonIcon('chevron-down').click();
         cy.plexText('name="paciente"', 'SOLICITUD TEST');
@@ -133,6 +134,8 @@ context('SOLICITUDES', () => {
         cy.wait('@guardarSolicitud').then(xhr => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
+
         });
         cy.toast('success', 'consulta de neurología');
         cy.plexButtonIcon('chevron-down').click();

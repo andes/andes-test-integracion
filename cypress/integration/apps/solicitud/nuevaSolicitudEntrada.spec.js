@@ -52,6 +52,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.paciente.documento).to.be.eq(dni);
             expect(xhr.response.body.solicitud.tipoPrestacionOrigen.conceptId).to.be.eq(idPrestacion);
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.toast('success', 'Solicitud guardada');
     });
@@ -69,6 +70,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.wait('@createSolicitud').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.paciente.documento).to.be.eq(dni);
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.toast('success', 'Solicitud guardada');
     });
@@ -108,6 +110,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.plexButton('Guardar').click();
         cy.wait('@createSolicitud').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
     });
 
@@ -136,6 +139,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.paciente.documento).to.be.eq(dni);
             expect(xhr.response.body.solicitud.tipoPrestacionOrigen.conceptId).to.be.eq(idPrestacion);
+            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.toast('success');
         cy.plexButtonIcon('lock-alert').last().click();
