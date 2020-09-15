@@ -44,7 +44,7 @@ context('turnos', () => {
 
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
 
-        cy.plexDatetime('label="Fecha de Nacimiento"', cy.today());
+        cy.plexDatetime('label="Fecha y hora de Nacimiento"', cy.today());
 
         // Se completa datos
         cy.plexText('name="buscador"', validado1.documento);
