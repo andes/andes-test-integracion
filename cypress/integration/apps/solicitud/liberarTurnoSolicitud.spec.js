@@ -50,7 +50,6 @@ describe('TOP: Liberar turno', () => {
 
         // <! -- CREAR SOLICITUD
         seleccionarPaciente(dni);
-        cy.introjsTooltip();
 
         cy.plexDatetime('label="Fecha de solicitud"', cy.today());
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de medicina general', '@tipoPrestacion', 0);

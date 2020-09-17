@@ -81,8 +81,6 @@ context('SOLICITUDES', () => {
 
         cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
 
-        cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
-
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
         cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de neurología');
 
@@ -119,7 +117,6 @@ context('SOLICITUDES', () => {
         cy.wait('@consultaPaciente');
         cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
 
-        cy.get('a[class="introjs-button introjs-skipbutton introjs-donebutton"]').click();
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
         cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'Consulta de neurología');
 
