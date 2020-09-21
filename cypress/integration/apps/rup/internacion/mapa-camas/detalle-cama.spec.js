@@ -37,7 +37,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
         cy.server();
         cy.viewport(1920, 1080);
         cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
-        cy.route('GET', '**/api/modules/rup/internacion/camas/**', true).as('getCama');
+        cy.route('GET', '**/api/modules/rup/internacion/camas/**').as('getCama');
         cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
         cy.route('GET', '**/api/core/mpi/pacientes/**', paciente).as('getPaciente');
     });
