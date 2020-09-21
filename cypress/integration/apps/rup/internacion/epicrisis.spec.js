@@ -74,8 +74,8 @@ context("RUP - Epicrisis", () => {
     cy.get(
       `plex-text[name="observaciones"] quill-editor div[class="ql-container ql-snow"] div p`
     ).type(
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      { force: true }
+      "ALGO",
+      { force: true, delay: 0 }
     );
 
     cy.plexButtonIcon("chevron-left").click();
@@ -85,8 +85,8 @@ context("RUP - Epicrisis", () => {
     cy.get("textarea")
       .eq(1)
       .type(
-        "Tratamiento Recibido Durante La Internación: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        { force: true }
+        "Tratamiento Recibido Durante La Internación",
+        { force: true, delay: 0 }
       );
 
     cy.plexButtonIcon("chevron-left").click();
@@ -96,8 +96,8 @@ context("RUP - Epicrisis", () => {
     cy.get("textarea")
       .eq(2)
       .type(
-        "Resumen De Laboratorios: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        { force: true }
+        "Resumen De Laboratorios",
+        { force: true, delay: 0 }
       );
 
     cy.plexButtonIcon("chevron-left").click();
@@ -107,8 +107,8 @@ context("RUP - Epicrisis", () => {
     cy.get("textarea")
       .eq(3)
       .type(
-        "Resumen De Procedimientos: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        { force: true }
+        "Resumen De Procedimientos",
+        { force: true, delay: 0 }
       );
 
     cy.plexButtonIcon("chevron-left").click();
@@ -118,8 +118,8 @@ context("RUP - Epicrisis", () => {
     cy.get("textarea")
       .eq(4)
       .type(
-        "Situaciones Pendientes: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        { force: true }
+        "Situaciones Pendientes",
+        { force: true, delay: 0 }
       );
 
     cy.plexButtonIcon("chevron-left").click();
@@ -129,8 +129,8 @@ context("RUP - Epicrisis", () => {
     cy.get("textarea")
       .eq(5)
       .type(
-        "Tratamiento A Seguir Post Internación: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        { force: true }
+        "Tratamiento A Seguir Post Internación",
+        { force: true, delay: 0 }
       );
 
     cy.plexButtonIcon("chevron-left").click();
@@ -140,8 +140,8 @@ context("RUP - Epicrisis", () => {
     cy.get("textarea")
       .eq(6)
       .type(
-        "Dieta A Seguir Post Internación: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        { force: true }
+        "Dieta A Seguir Post Internación",
+        { force: true, delay: 0 }
       );
 
     cy.plexButtonIcon("chevron-left").click();
@@ -151,8 +151,8 @@ context("RUP - Epicrisis", () => {
     cy.get("textarea")
       .eq(7)
       .type(
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        { force: true }
+        "lorem",
+        { force: true, delay: 0 }
       );
 
     cy.plexButton("Guardar epicrisis médica").click();
