@@ -37,10 +37,7 @@ context("RUP - Epicrisis", () => {
     cy.wait("@busquedaPaciente").then(xhr => {
       expect(xhr.status).to.be.eq(200);
     });
-    cy.get(".table-striped")
-      .find("td")
-      .contains(paciente)
-      .click();
+    cy.get('paciente-listado').contains(format(paciente)).click();
 
     cy.wait("@prestacionesPaciente").then(xhr => {
       expect(xhr.status).to.be.eq(200);
@@ -158,3 +155,8 @@ context("RUP - Epicrisis", () => {
     cy.plexButton("Guardar epicrisis médica").click();
   });
 });
+
+
+function format(s) {
+  return s.substr(0, s.length - 6) + '.' + s.substr(-6, 3) + '.' + s.substr(-3);
+}
