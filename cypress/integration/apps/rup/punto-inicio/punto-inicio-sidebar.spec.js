@@ -217,7 +217,7 @@ context('RUP - Punto de inicio', () => {
                     cy.contains('Procesos de Auditoría').click({ force: true });
 
                     cy.plexButton('ACEPTAR').click();
-                    cy.url().should('include', '/rup/vista/');
+                    cy.url().should('include', '/huds/paciente/');
                 });
 
             })
@@ -339,7 +339,7 @@ context('RUP - Punto de inicio', () => {
                     cy.contains('Procesos de Auditoría').click({ force: true });
 
                     cy.plexButton('ACEPTAR').click();
-                    cy.url().should('include', '/rup/vista/');
+                    cy.url().should('include', '/huds/paciente/');
                 });
             }
 

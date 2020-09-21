@@ -23,7 +23,7 @@ context('RUP - Punto de inicio', () => {
 
         it('ver huds', () => {
             cy.plexButton('HUDS DE UN PACIENTE').click();
-            cy.url().should('include', '/rup/huds')
+            cy.url().should('include', '/huds')
         });
 
         it('autocitar paciente', () => {
