@@ -1,61 +1,71 @@
 {
     "nominalizada": true,
     "dinamica": false,
-    "bloques": [{
-        "indice": 0,
-        "cantidadTurnos": 1,
-        "horaInicio": "2019-07-01T13:00:00.000Z",
-        "horaFin": "2019-07-01T18:00:00.000Z",
-        "duracionTurno": 300,
-        "cantidadSimultaneos": null,
-        "cantidadBloque": null,
-        "accesoDirectoDelDia": 0,
-        "accesoDirectoDelDiaPorc": 0,
-        "accesoDirectoProgramado": 1,
-        "accesoDirectoProgramadoPorc": 100,
-        "reservadoGestion": 0,
-        "reservadoGestionPorc": 0,
-        "reservadoProfesional": 0,
-        "reservadoProfesionalPorc": 0,
-        "tipoPrestaciones": [{
-            "_id": "598ca8375adc68e2a0c121b7",
-            "conceptId": "391000013108",
-            "term": "consulta de medicina general (procedimiento)",
-            "fsn": "consulta de medicina general (procedimiento)",
-            "semanticTag": "procedimiento",
-            "nombre": "consulta de medicina general (procedimiento)",
-            "id": "598ca8375adc68e2a0c121b7",
-            "activo": true
-        }],
-        "turnos": [{
-            "estado": "disponible",
-            "horaInicio": "2019-07-01T13:00:00.000Z"
-        }],
-        "restantesDelDia": 0,
-        "restantesProgramados": 1,
-        "restantesGestion": 0,
-        "restantesProfesional": 0
-    }],
+    "bloques": [
+        {
+            "indice": 0,
+            "cantidadTurnos": 1,
+            "horaInicio": "2019-07-01T13:00:00.000Z",
+            "horaFin": "2019-07-01T18:00:00.000Z",
+            "duracionTurno": 300,
+            "cantidadSimultaneos": null,
+            "cantidadBloque": null,
+            "accesoDirectoDelDia": 0,
+            "accesoDirectoDelDiaPorc": 0,
+            "accesoDirectoProgramado": 1,
+            "accesoDirectoProgramadoPorc": 100,
+            "reservadoGestion": 0,
+            "reservadoGestionPorc": 0,
+            "reservadoProfesional": 0,
+            "reservadoProfesionalPorc": 0,
+            "tipoPrestaciones": [
+                {
+                    "_id": "598ca8375adc68e2a0c121b8",
+                    "conceptId": "391000013108",
+                    "term": "consulta de medicina general",
+                    "fsn": "consulta de medicina general (procedimiento)",
+                    "semanticTag": "procedimiento",
+                    "nombre": "consulta de medicina general",
+                    "id": "598ca8375adc68e2a0c121b8",
+                    "activo": true
+                }
+            ],
+            "turnos": [
+                {
+                    "estado": "disponible",
+                    "horaInicio": "2019-07-01T13:00:00.000Z"
+                }
+            ],
+            "restantesDelDia": 0,
+            "restantesProgramados": 1,
+            "restantesGestion": 0,
+            "restantesProfesional": 0
+        }
+    ],
     "fecha": "2019-07-01T03:00:00.000Z",
     "horaInicio": "2019-07-01T13:00:00.000Z",
     "horaFin": "2019-07-01T18:00:00.000Z",
-    "tipoPrestaciones": [{
-        "_id": "598ca8375adc68e2a0c121b7",
-        "conceptId": "391000013108",
-        "term": "consulta de medicina general (procedimiento)",
-        "fsn": "consulta de medicina general (procedimiento)",
-        "semanticTag": "procedimiento",
-        "nombre": "consulta de medicina general (procedimiento)",
-        "id": "598ca8375adc68e2a0c121b7"
-    }],
-    "profesionales": [{
-        "_id": "5c82a5a53c524e4c57f08cf3",
-        "nombre": "MARIA",
-        "apellido": "PEREZ",
-        "documento": "4466777",
-        "nombreCompleto": "PEREZ, MARIA",
-        "id": "5c82a5a53c524e4c57f08cf3"
-    }],
+    "tipoPrestaciones": [
+        {
+            "_id": "598ca8375adc68e2a0c121b8",
+            "conceptId": "391000013108",
+            "term": "consulta de medicina general",
+            "fsn": "consulta de medicina general (procedimiento)",
+            "semanticTag": "procedimiento",
+            "nombre": "consulta de medicina general",
+            "id": "598ca8375adc68e2a0c121b8"
+        }
+    ],
+    "profesionales": [
+        {
+            "_id": "5c82a5a53c524e4c57f08cf3",
+            "nombre": "MARIA",
+            "apellido": "PEREZ",
+            "documento": "4466777",
+            "nombreCompleto": "PEREZ, MARIA",
+            "id": "5c82a5a53c524e4c57f08cf3"
+        }
+    ],
     "espacioFisico": {
         "estado": "disponible",
         "_id": "5b843279a4fd1b39d6f4c415",
@@ -95,9 +105,7 @@
             "id": "589c578355bf4277035bcf2a"
         },
         "detalle": "Buenos Aires 450",
-        "equipamiento": [
-
-        ],
+        "equipamiento": [],
         "organizacion": {
             "_id": "57e9670e52df311059bc8964",
             "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",

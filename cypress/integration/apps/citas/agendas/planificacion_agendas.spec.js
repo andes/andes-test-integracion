@@ -161,8 +161,8 @@ context('Planificacion Agendas', () => {
             expect(xhr.response.body.estado).to.be.eq('planificacion');
             expect(xhr.response.body.bloques[0].accesoDirectoDelDia).to.be.eq(7);
             expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(7);
-            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('59ee2d9bf00c415246fd3d6a');
-            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].term).to.be.eq('Consulta de medicina general');
+            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b8');
+            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].term).to.be.eq('consulta de medicina general');
             fecha = xhr.response.body.horaInicio;
         });
         cy.toast('success', 'La agenda se guardó correctamente');

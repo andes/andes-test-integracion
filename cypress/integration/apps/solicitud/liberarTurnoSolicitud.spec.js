@@ -18,7 +18,7 @@ describe('TOP: Liberar turno', () => {
             fin: '3',
             fecha: 3,
             profesionales: '5d02602588c4d1772a8a17f8',
-            tipoPrestaciones: '59ee2d9bf00c415246fd3d6a',
+            tipoPrestaciones: '598ca8375adc68e2a0c121b8',
             tipo: 'gestion'
         });
         cy.login('30643636', 'asd').then(t => {

@@ -36,7 +36,7 @@ context('SOLICITUDES', () => {
 
         let prestacionDestino = 'Consulta de cirugía';
         let orgOrigen = 'HOSPITAL DR. HORACIO HELLER';
-        let prestacionOrigen = 'Consulta de medicina general';
+        let prestacionOrigen = 'consulta de medicina general';
 
         cy.plexButton('Reglas').click();
 
@@ -99,7 +99,7 @@ context('SOLICITUDES', () => {
         cy.plexSelectType('name="organizacion"', 'HOSPITAL DR. HORACIO HELLER');
         cy.plexSelectType('name="prestacionDestino"', 'Consulta de Neurología');
         cy.plexSelectType('name="estado"', 'auditoria');
-        cy.get('table tbody tr td').contains('Consulta de neurología');
+        cy.get('table tbody tr td').contains('consulta de neurología');
 
     })
 
@@ -131,7 +131,7 @@ context('SOLICITUDES', () => {
         });
         cy.toast('success', 'consulta de neurología');
         cy.plexButtonIcon('chevron-down').click();
-        cy.plexSelectAsync('name="prestacionDestino"', 'Consulta de Neurología', '@getPrestaciones', '59ee2d9bf00c415246fd3d6d');
+        cy.plexSelectType('name="prestacionDestino"', 'Consulta de Neurología');
 
         cy.wait('@solicitudes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
