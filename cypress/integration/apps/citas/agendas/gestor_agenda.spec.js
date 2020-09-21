@@ -46,10 +46,9 @@ describe('CITAS - Planificar Agendas', () => {
         });
 
         cy.get('table tbody div').contains('HUENCHUMAN').click();
-
         cy.plexButtonIcon('pencil').click();
-        cy.get('.remove-button').click();
-
+        cy.wait(500); // Agregado de forma forzada para que el test funcione correctamente
+        cy.plexSelect('label="Equipo de Salud"').find('.remove-button').click();
         cy.plexSelectAsync('label="Equipo de Salud"', 'prueba alicia', '@getProfesional', 0);
         cy.plexSelectAsync('label="Espacio Físico"', 'Huemul Consultorio 3 PB', '@getEspacioFisico', 0);
 
