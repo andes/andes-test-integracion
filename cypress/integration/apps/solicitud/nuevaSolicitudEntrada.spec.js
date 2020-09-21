@@ -2,6 +2,7 @@
 
 function secuencia(token) {
     cy.goto('/solicitudes', token);
+    cy.wait('@getSolicitudes')
     cy.plexButton("Nueva Solicitud").click();
 }
 
