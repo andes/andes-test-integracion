@@ -1,305 +1,306 @@
-[{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa39c"
+[
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa39c"
+		},
+		"nombre": "CITAS",
+		"descripcion": "permite la gestion y auditoria de agendas",
+		"subtitulo": "Gestor de Agendas",
+		"linkAcceso": "/citas/gestor_agendas",
+		"color": "#752F98",
+		"icono": "mdi-calendar",
+		"permisos": [
+			"turnos:planificarAgenda:?"
+		],
+		"orden": 0.0,
+		"activo": true
 	},
-	"nombre": "CITAS",
-	"descripcion": "permite la gestion y auditoria de agendas",
-	"subtitulo": "Gestor de Agendas",
-	"linkAcceso": "/citas/gestor_agendas",
-	"color": "#752F98",
-	"icono": "mdi-calendar",
-	"permisos": [
-		"turnos:planificarAgenda:?"
-	],
-	"orden": 0.0,
-	"activo": true
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa39d"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa39d"
+		},
+		"nombre": "MPI",
+		"descripcion": "optimiza el proceso de identificacion del paciente",
+		"subtitulo": "indice maestro de pacientes",
+		"linkAcceso": "/apps/mpi/busqueda",
+		"color": "#84cef0",
+		"icono": "mdi-account-multiple-outline",
+		"permisos": [
+			"mpi:?"
+		],
+		"orden": 1.0,
+		"activo": true
 	},
-	"nombre": "MPI",
-	"descripcion": "optimiza el proceso de identificacion del paciente",
-	"subtitulo": "indice maestro de pacientes",
-	"linkAcceso": "/apps/mpi/busqueda",
-	"color": "#84cef0",
-	"icono": "mdi-account-multiple-outline",
-	"permisos": [
-		"mpi:?"
-	],
-	"orden": 1.0,
-	"activo": true
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa39e"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa39e"
+		},
+		"nombre": "RUP",
+		"descripcion": "Registro Ambulatorio",
+		"subtitulo": "Registro de prestaciones ambulatorias",
+		"color": "#002B3A",
+		"icono": "mdi-contacts",
+		"linkAcceso": "/rup",
+		"activo": true,
+		"orden": 2.0,
+		"permisos": [
+			"rup:?"
+		]
 	},
-	"nombre": "RUP",
-	"descripcion": "Registro Ambulatorio",
-	"subtitulo": "Registro de prestaciones ambulatorias",
-	"color": "#002B3A",
-	"icono": "mdi-contacts",
-	"linkAcceso": "/rup",
-	"activo": true,
-	"orden": 2.0,
-	"permisos": [
-		"rup:?"
-	]
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa39f"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa39f"
+		},
+		"nombre": "HUDS",
+		"subtitulo": "HISTORIA DIGITAL DE SALUD",
+		"descripcion": "Acceso a historia digital por paciente",
+		"color": "#00A8E0",
+		"icono": "mdi-file-tree",
+		"linkAcceso": "/huds",
+		"activo": true,
+		"orden": 3.0,
+		"permisos": [
+			"huds:?"
+		]
 	},
-	"nombre": "HUDS",
-	"subtitulo": "HISTORIA DIGITAL DE SALUD",
-	"descripcion": "Acceso a historia digital por paciente",
-	"color": "#00A8E0",
-	"icono": "mdi-file-tree",
-	"linkAcceso": "/rup/huds",
-	"activo": true,
-	"orden": 3.0,
-	"permisos": [
-		"huds:?"
-	]
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3a0"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3a0"
+		},
+		"nombre": "PRESTAMOS DE CARPETAS",
+		"descripcion": "Mejora la administración de las carpetas de Historias Clínicas de los pacientes",
+		"subtitulo": "solicitudes manuales y automaticas",
+		"linkAcceso": "/prestamosHC",
+		"color": "#666600",
+		"icono": "mdi-folder",
+		"permisos": [
+			"prestamos:?"
+		],
+		"orden": 4.0,
+		"activo": true
 	},
-	"nombre": "PRESTAMOS DE CARPETAS",
-	"descripcion": "Mejora la administración de las carpetas de Historias Clínicas de los pacientes",
-	"subtitulo": "solicitudes manuales y automaticas",
-	"linkAcceso": "/prestamosHC",
-	"color": "#666600",
-	"icono": "mdi-folder",
-	"permisos": [
-		"prestamos:?"
-	],
-	"orden": 4.0,
-	"activo": true
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3a1"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3a1"
+		},
+		"nombre": "INTERNACION",
+		"descripcion": "Estado del mapa de camas de los distintos servicios de la organización",
+		"subtitulo": "mapa de camas",
+		"linkAcceso": "/internacion/mapa-camas",
+		"color": "#E2917F",
+		"icono": "mdi-bed",
+		"permisos": [
+			"internacion:mapaDeCamas:?"
+		],
+		"orden": 5.0,
+		"activo": true
 	},
-	"nombre": "INTERNACION",
-	"descripcion": "Estado del mapa de camas de los distintos servicios de la organización",
-	"subtitulo": "mapa de camas",
-	"linkAcceso": "/internacion/mapa-camas",
-	"color": "#E2917F",
-	"icono": "mdi-bed",
-	"permisos": [
-		"internacion:mapaDeCamas:?"
-	],
-	"orden": 5.0,
-	"activo": true
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3a2"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3a2"
+		},
+		"nombre": "INTERNACION",
+		"descripcion": "Registrar epicrisis de una internación",
+		"subtitulo": "punto de inicio",
+		"linkAcceso": "/internacion/inicio",
+		"color": "#00b9b1",
+		"icono": "mdi-bed",
+		"permisos": [
+			"internacion:inicio:?"
+		],
+		"orden": 6.0,
+		"activo": true
 	},
-	"nombre": "INTERNACION",
-	"descripcion": "Registrar epicrisis de una internación",
-	"subtitulo": "punto de inicio",
-	"linkAcceso": "/internacion/inicio",
-	"color": "#00b9b1",
-	"icono": "mdi-bed",
-	"permisos": [
-		"internacion:inicio:?"
-	],
-	"orden": 6.0,
-	"activo": true
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3a3"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3a3"
+		},
+		"nombre": "GESTOR DE USUARIOS",
+		"descripcion": "Permite asignar permisos a organizaciones y/o módulos",
+		"subtitulo": "asignacion de permisos",
+		"linkAcceso": "/gestor-usuarios/usuarios",
+		"color": "#257300",
+		"icono": "mdi-account-key",
+		"permisos": [
+			"usuarios:?"
+		],
+		"orden": 7.0,
+		"activo": true
 	},
-	"nombre": "GESTOR DE USUARIOS",
-	"descripcion": "Permite asignar permisos a organizaciones y/o módulos",
-	"subtitulo": "asignacion de permisos",
-	"linkAcceso": "/gestor-usuarios/usuarios",
-	"color": "#257300",
-	"icono": "mdi-account-key",
-	"permisos": [
-		"usuarios:?"
-	],
-	"orden": 7.0,
-	"activo": true
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3a4"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3a4"
+		},
+		"nombre": "DASHBOARD",
+		"descripcion": "Visualice datos estadísticos en gráficos y tablas",
+		"subtitulo": "panel de estadisticas",
+		"linkAcceso": "/dashboard",
+		"color": "#f4a03b",
+		"icono": "mdi-chart-line",
+		"permisos": [
+			"dashboard:?"
+		],
+		"orden": 8.0,
+		"activo": true
 	},
-	"nombre": "DASHBOARD",
-	"descripcion": "Visualice datos estadísticos en gráficos y tablas",
-	"subtitulo": "panel de estadisticas",
-	"linkAcceso": "/dashboard",
-	"color": "#f4a03b",
-	"icono": "mdi-chart-line",
-	"permisos": [
-		"dashboard:?"
-	],
-	"orden": 8.0,
-	"activo": true
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3a5"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3a5"
+		},
+		"nombre": "ANALYTICS",
+		"descripcion": "Permite la búsqueda, visualización y refinamiento de datos de salud registrados en ANDES",
+		"subtitulo": "navegador HUDS",
+		"linkAcceso": "/dashboard",
+		"color": "#662482",
+		"icono": "mdi-poll",
+		"permisos": [
+			"analytics:?"
+		],
+		"orden": 9.0,
+		"activo": true
 	},
-	"nombre": "ANALYTICS",
-	"descripcion": "Permite la búsqueda, visualización y refinamiento de datos de salud registrados en ANDES",
-	"subtitulo": "navegador HUDS",
-	"linkAcceso": "/dashboard",
-	"color": "#662482",
-	"icono": "mdi-poll",
-	"permisos": [
-		"analytics:?"
-	],
-	"orden": 9.0,
-	"activo": true
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3a6"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3a6"
+		},
+		"nombre": "CITAS",
+		"descripcion": "mejora la accesibilidad de pacientes a las prestaciones",
+		"subtitulo": "Punto de Inicio",
+		"linkAcceso": "/citas/punto-inicio",
+		"color": "#982f98",
+		"icono": "mdi-calendar",
+		"permisos": [
+			"turnos:puntoInicio:?"
+		],
+		"orden": 10.0,
+		"activo": true
 	},
-	"nombre": "CITAS",
-	"descripcion": "mejora la accesibilidad de pacientes a las prestaciones",
-	"subtitulo": "Punto de Inicio",
-	"linkAcceso": "/citas/punto-inicio",
-	"color": "#982f98",
-	"icono": "mdi-calendar",
-	"permisos": [
-		"turnos:puntoInicio:?"
-	],
-	"orden": 10.0,
-	"activo": true
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3a7"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3a7"
+		},
+		"nombre": "Tablas Maestras",
+		"descripcion": "Permite la gestión de Espacios Físicos",
+		"subtitulo": "Espacios Físicos",
+		"color": "#70a741",
+		"icono": "mdi-cogs",
+		"linkAcceso": "tm/mapa_espacio_fisico",
+		"activo": true,
+		"orden": 11.0,
+		"permisos": [
+			"espaciosFisicos:?"
+		]
 	},
-	"nombre": "Tablas Maestras",
-	"descripcion": "Permite la gestión de Espacios Físicos",
-	"subtitulo": "Espacios Físicos",
-	"color": "#70a741",
-	"icono": "mdi-cogs",
-	"linkAcceso": "tm/mapa_espacio_fisico",
-	"activo": true,
-	"orden": 11.0,
-	"permisos": [
-		"espaciosFisicos:?"
-	]
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3a8"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3a8"
+		},
+		"nombre": "MPI",
+		"descripcion": "Gestión de Auditorías",
+		"subtitulo": "Auditoría",
+		"color": "#e86767",
+		"icono": "mdi-account-search",
+		"linkAcceso": "apps/mpi/auditoria",
+		"activo": true,
+		"orden": 12.0,
+		"permisos": [
+			"auditoriaPacientes:?"
+		]
 	},
-	"nombre": "MPI",
-	"descripcion": "Gestión de Auditorías",
-	"subtitulo": "Auditoría",
-	"color": "#e86767",
-	"icono": "mdi-account-search",
-	"linkAcceso": "apps/mpi/auditoria",
-	"activo": true,
-	"orden": 12.0,
-	"permisos": [
-		"auditoriaPacientes:?"
-	]
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3a9"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3a9"
+		},
+		"nombre": "Reportes",
+		"descripcion": "Permite la Gestión de Reportes",
+		"subtitulo": "Gestión de reportes",
+		"color": "#24337a",
+		"icono": "mdi-file-chart",
+		"linkAcceso": "/reportes",
+		"activo": true,
+		"orden": 13.0,
+		"permisos": [
+			"reportes:?"
+		]
 	},
-	"nombre": "Reportes",
-	"descripcion": "Permite la Gestión de Reportes",
-	"subtitulo": "Gestión de reportes",
-	"color": "#24337a",
-	"icono": "mdi-file-chart",
-	"linkAcceso": "/reportes",
-	"activo": true,
-	"orden": 13.0,
-	"permisos": [
-		"reportes:?"
-	]
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3aa"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3aa"
+		},
+		"nombre": "Solicitudes",
+		"subtitulo": "TOP",
+		"descripcion": "Transito Ordenado de Pacientes",
+		"color": "#262564",
+		"icono": "mdi-account-key",
+		"linkAcceso": "/solicitudes",
+		"activo": true,
+		"orden": 14.0,
+		"permisos": [
+			"solicitudes:?"
+		]
 	},
-	"nombre": "Solicitudes",
-	"subtitulo": "TOP",
-	"descripcion": "Transito Ordenado de Pacientes",
-	"color": "#262564",
-	"icono": "mdi-account-key",
-	"linkAcceso": "/solicitudes",
-	"activo": true,
-	"orden": 14.0,
-	"permisos": [
-		"solicitudes:?"
-	]
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3ab"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3ab"
+		},
+		"nombre": "Buscador",
+		"descripcion": "Buscador de Turnos y Prestaciones",
+		"subtitulo": "Turnos y Prestaciones",
+		"color": "#949c57",
+		"icono": "mdi-table-search",
+		"linkAcceso": "/buscador",
+		"activo": true,
+		"orden": 15.0,
+		"permisos": [
+			"turnosPrestaciones:buscar"
+		]
 	},
-	"nombre": "Buscador",
-	"descripcion": "Buscador de Turnos y Prestaciones",
-	"subtitulo": "Turnos y Prestaciones",
-	"color": "#949c57",
-	"icono": "mdi-table-search",
-	"linkAcceso": "/buscador",
-	"activo": true,
-	"orden": 15.0,
-	"permisos": [
-		"turnosPrestaciones:buscar"
-	]
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3ac"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3ac"
+		},
+		"nombre": "Tablas Maestras",
+		"subtitulo": "Organizaciones",
+		"descripcion": "Tabla Maestra de Organizaciones",
+		"color": "#785578",
+		"icono": "mdi-cogs",
+		"linkAcceso": "/tm/organizacion",
+		"activo": true,
+		"orden": 16.0,
+		"permisos": [
+			"tm:organizacion:?"
+		]
 	},
-	"nombre": "Tablas Maestras",
-	"subtitulo": "Organizaciones",
-	"descripcion": "Tabla Maestra de Organizaciones",
-	"color": "#785578",
-	"icono": "mdi-cogs",
-	"linkAcceso": "/tm/organizacion",
-	"activo": true,
-	"orden": 16.0,
-	"permisos": [
-		"tm:organizacion:?"
-	]
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3ad"
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3ad"
+		},
+		"nombre": "Campaña",
+		"descripcion": "Permite la Gestión de las Campañas de Salud",
+		"subtitulo": "Campañas de Salud",
+		"color": "#1ba586",
+		"icono": "mdi-radio-tower",
+		"linkAcceso": "/campaniasSalud",
+		"activo": true,
+		"orden": 17.0,
+		"permisos": [
+			"campania:?"
+		]
 	},
-	"nombre": "Campaña",
-	"descripcion": "Permite la Gestión de las Campañas de Salud",
-	"subtitulo": "Campañas de Salud",
-	"color": "#1ba586",
-	"icono": "mdi-radio-tower",
-	"linkAcceso": "/campaniasSalud",
-	"activo": true,
-	"orden": 17.0,
-	"permisos": [
-		"campania:?"
-	]
-},
-{
-	"_id": {
-		"$oid": "5f0c6317c4bd75376b8fa3ae"
-	},
-	"nombre": "Formularios",
-	"descripcion": "Permite Generar Formularios Terapeuticos",
-	"subtitulo": "Formulario Terapéutico",
-	"color": "#db4d5e",
-	"icono": "mdi-needle",
-	"linkAcceso": "/formularioTerapeutico",
-	"activo": true,
-	"orden": 18.0,
-	"permisos": [
-		"formularioTerapeutico:?"
-	]
-}]
-
+	{
+		"_id": {
+			"$oid": "5f0c6317c4bd75376b8fa3ae"
+		},
+		"nombre": "Formularios",
+		"descripcion": "Permite Generar Formularios Terapeuticos",
+		"subtitulo": "Formulario Terapéutico",
+		"color": "#db4d5e",
+		"icono": "mdi-needle",
+		"linkAcceso": "/formularioTerapeutico",
+		"activo": true,
+		"orden": 18.0,
+		"permisos": [
+			"formularioTerapeutico:?"
+		]
+	}
+]
