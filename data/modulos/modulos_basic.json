@@ -129,22 +129,6 @@
 	},
 	{
 		"_id": {
-			"$oid": "5f0c6317c4bd75376b8fa3a4"
-		},
-		"nombre": "DASHBOARD",
-		"descripcion": "Visualice datos estadísticos en gráficos y tablas",
-		"subtitulo": "panel de estadisticas",
-		"linkAcceso": "/dashboard",
-		"color": "#f4a03b",
-		"icono": "mdi-chart-line",
-		"permisos": [
-			"dashboard:?"
-		],
-		"orden": 8.0,
-		"activo": true
-	},
-	{
-		"_id": {
 			"$oid": "5f0c6317c4bd75376b8fa3a5"
 		},
 		"nombre": "ANALYTICS",
@@ -205,22 +189,6 @@
 		"orden": 12.0,
 		"permisos": [
 			"auditoriaPacientes:?"
-		]
-	},
-	{
-		"_id": {
-			"$oid": "5f0c6317c4bd75376b8fa3a9"
-		},
-		"nombre": "Reportes",
-		"descripcion": "Permite la Gestión de Reportes",
-		"subtitulo": "Gestión de reportes",
-		"color": "#24337a",
-		"icono": "mdi-file-chart",
-		"linkAcceso": "/reportes",
-		"activo": true,
-		"orden": 13.0,
-		"permisos": [
-			"reportes:?"
 		]
 	},
 	{
@@ -302,5 +270,22 @@
 		"permisos": [
 			"formularioTerapeutico:?"
 		]
+	},
+	{
+		"_id": {
+			"$oid": "5f5a5b7a20daac7a7524efd2"
+		},
+		"permisos": [
+			"visualizacionInformacion:?"
+		],
+		"activo": true,
+		"nombre": "VISUALIZACIÓN DE INFORMACIÓN",
+		"descripcion": "Permite gestionar la visualizacion de salida de informacion",
+		"subtitulo": "Gestión de la informacion",
+		"color": "#07049f",
+		"icono": "mdi-file-chart",
+		"linkAcceso": "/visualizacion-informacion",
+		"orden": 12,
+		"__v": 0
 	}
 ]

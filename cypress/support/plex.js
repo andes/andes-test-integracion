@@ -81,6 +81,18 @@ Cypress.Commands.add('plexSelectAsync', { prevSubject: 'optional' }, (subject, l
     }
 });
 
+Cypress.Commands.add('plexSelectTypeDinamico', { prevSubject: 'optional' }, (subject, label, text = null) => {
+
+    const element = cy.get('plex-select', { prevSubject: subject })
+        .find('label').contains(label)
+        .parent().parent()
+        .find('input');
+    if (text) {
+        element.type(text);
+    }
+
+    return element;
+});
 
 Cypress.Commands.add('isSelectedID', { prevSubject: 'element' }, (subject, value) => {
     return cy.wrap(subject).find(`.selectize-input .item[data-value="${value}"]`);
@@ -273,6 +285,20 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
     return element;
 });
 
+Cypress.Commands.add('plexDateTimeDinamico', { prevSubject: 'optional' }, (subject, label, text = null) => {
+
+    const element = cy.get('plex-datetime', { prevSubject: subject })
+        .find('label').contains(label)
+        .parent().parent()
+        .find('input');
+
+    if (text) {
+        element.type(text);
+    }
+
+    return element;
+});
+
 Cypress.Commands.add('plexBool', { prevSubject: 'optional' }, (subject, label, checked = false) => {
     let element;
     if (subject) {
@@ -287,6 +313,23 @@ Cypress.Commands.add('plexBool', { prevSubject: 'optional' }, (subject, label, c
             element = element.uncheck({ force: true });
         }
     }
+    return element;
+});
+
+Cypress.Commands.add('plexBoolDinamico', { prevSubject: 'optional' }, (subject, label, checked = false) => {
+
+    let element = cy.get('plex-bool', { prevSubject: subject })
+        .find('label').contains(label)
+        .parent().parent()
+        .find('input[type="checkbox"]');
+    if (checked !== undefined) {
+        if (checked) {
+            element = element.check({ force: true });
+        } else {
+            element = element.uncheck({ force: true });
+        }
+    }
+
     return element;
 });
 
