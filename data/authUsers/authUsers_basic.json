@@ -21,7 +21,7 @@
                     "matriculaciones:*",
                     "tm:*",
                     "cda:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "descargas:*",
                     "solicitudes:*",
                     "prestamos:*",
@@ -56,37 +56,7 @@
                     "matriculaciones:*",
                     "tm:*",
                     "cda:*",
-                    "reportes:*",
-                    "descargas:*",
-                    "solicitudes:*",
-                    "espaciosFisicos:*"
-                ],
-                "_id": {
-                    "$oid": "57e9670e52df311059bc8964"
-                },
-                "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
-                "perfiles": []
-            },
-            {
-                "permisos": [
-                    "turnos:*",
-                    "mpi:*",
-                    "auditoriaPacientes:*",
-                    "rup:tipoPrestacion:598ca8375adc68e2a0c121b9",
-                    "rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
-                    "rup:tipoPrestacion:57f5069d69fe79a5980b072f",
-                    "rup:tipoPrestacion:5b61d59968954f3e6ea84586",
-                    "rup:tipoPrestacion:5a310d88764a0b2a04d6df83",
-                    "rup:tipoPrestacion:598ca8375adc68e2a0c121cc",
-                    "internacion:*",
-                    "huds:visualizacionHuds",
-                    "fa:*",
-                    "log:*",
-                    "usuarios:*",
-                    "matriculaciones:*",
-                    "tm:*",
-                    "cda:*",
-                    "reportes:*",
+                    "visualizacionInformacion:*",
                     "descargas:*",
                     "solicitudes:*",
                     "espaciosFisicos:*"
@@ -153,7 +123,7 @@
                     "usuarios:*",
                     "tm:*",
                     "cda:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "prestamos:*",
                     "turnosPrestaciones:*",
                     "huds:visualizacionHuds"
@@ -193,7 +163,7 @@
                     "fa:*",
                     "log:*",
                     "usuarios:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "cda:get",
                     "cda:list",
                     "huds:visualizacionHuds"
@@ -212,7 +182,7 @@
                     "fa:*",
                     "log:*",
                     "usuarios:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "solicitudes:*",
                     "huds:visualizacionHuds"
                 ],
@@ -229,7 +199,7 @@
                     "fa:*",
                     "log:*",
                     "usuarios:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "huds:visualizacionHuds"
                 ],
                 "_id": {
@@ -266,7 +236,7 @@
                     "usuarios:*",
                     "cda:get",
                     "cda:list",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "huds:visualizacionHuds"
                 ],
                 "_id": {
@@ -283,7 +253,7 @@
                     "rup:tipoPrestacion:57f5069d69fe79a5980b072f",
                     "log:*",
                     "usuarios:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "huds:visualizacionHuds"
                 ],
                 "_id": {
@@ -298,7 +268,7 @@
                     "mpi:*",
                     "log:*",
                     "usuarios:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "huds:visualizacionHuds"
                 ],
                 "_id": {
@@ -313,7 +283,7 @@
                     "mpi:*",
                     "log:*",
                     "usuarios:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "huds:visualizacionHuds"
                 ],
                 "_id": {
@@ -328,7 +298,7 @@
                     "mpi:*",
                     "log:*",
                     "usuarios:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "huds:visualizacionHuds"
                 ],
                 "_id": {
@@ -439,7 +409,7 @@
                     "matriculaciones:*",
                     "tm:*",
                     "cda:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "solicitudes:*",
                     "cda:get",
                     "cda:list",
@@ -554,7 +524,7 @@
                     "log:*",
                     "cda:get",
                     "cda:list",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "huds:visualizacionHuds"
                 ],
                 "_id": {
@@ -757,7 +727,7 @@
                     "fa:*",
                     "log:*",
                     "tm:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "huds:visualizacionHuds"
                 ],
                 "_id": {
@@ -789,7 +759,7 @@
                     "fa:*",
                     "log:*",
                     "cda:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "solicitudes:*",
                     "huds:visualizacionHuds"
                 ],
@@ -859,7 +829,7 @@
                     "usuarios:*",
                     "tm:*",
                     "cda:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "huds:visualizacionHuds"
                 ],
                 "_id": {
@@ -1084,7 +1054,7 @@
                     "matriculaciones:*",
                     "tm:*",
                     "cda:*",
-                    "reportes:*",
+                    "visualizacionInformacion:reportes:*",
                     "descargas:*",
                     "solicitudes:*",
                     "prestamos:*"
