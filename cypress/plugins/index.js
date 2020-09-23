@@ -19,7 +19,7 @@ const { seedPrestacion } = require('./seed-prestaciones');
 const { dropCollection } = require('./seed-drop');
 const { seedPaciente, createPaciente } = require('./seed-paciente');
 const { createElementoRup, deleteElementoRup } = require('./seed-elementos-rup');
-const { createMaquinaEstados, createCama, createEstadosCama, factoryInternacion } = require('./seed-internacion');
+const { createMaquinaEstados, createSala, createCama, createEstadosCama, factoryInternacion } = require('./seed-internacion');
 const { createPacienteApp } = require('./seed-paciente-app');
 const { seedPerfil, seedUsuario } = require('./seed-gestor-usuarios');
 const { createModulo } = require('./seed-modulo');
@@ -71,6 +71,9 @@ module.exports = (on, config) => {
         },
         'database:create:cama': (params) => {
             return createCama(mongoUri, params);
+        },
+        'database:create:sala': (params) => {
+            return createSala(mongoUri, params);
         },
         'database:create:perfil': (dto) => {
             return seedPerfil(mongoUri, dto);

@@ -32,26 +32,46 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica' });
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria' });
 
-    const camas = [];
-    for (const elemento of params.configCamas) {
-        const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
-        for (let i = 0; i < count; i++) {
-            const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
-
-            camas.push({
-                estado: elemento.estado,
-                unidadOrganizativa: elemento.unidadOrganizativa,
-                sector: elemento.sector,
-                tipoCama: elemento.tipoCama,
-                esCensable: elemento.esCensable,
-                paciente,
-                fechaIngreso: elemento.fechaIngreso,
-                fechaEgreso: elemento.fechaEgreso,
-                validada: elemento.validada
-            });
+    if (!params.sala) {
+        const camas = [];
+        for (const elemento of params.configCamas) {
+            const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
+            for (let i = 0; i < count; i++) {
+                const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
+    
+                camas.push({
+                    estado: elemento.estado,
+                    unidadOrganizativa: elemento.unidadOrganizativa,
+                    sector: elemento.sector,
+                    tipoCama: elemento.tipoCama,
+                    esCensable: elemento.esCensable,
+                    paciente,
+                    fechaIngreso: elemento.fechaIngreso,
+                    fechaEgreso: elemento.fechaEgreso,
+                    validada: elemento.validada
+                });
+            }
         }
+        return cy.taskN('database:create:cama', camas);
+    } else {
+        const salas = [];
+        for (const elemento of params.config) {
+            const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
+            for (let i = 0; i < count; i++) {
+                const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
+    
+                salas.push({
+                    estado: elemento.estado,
+                    unidadOrganizativa: elemento.unidadesOrganizativas,
+                    sector: elemento.sectores,
+                    paciente,
+                    fechaIngreso: elemento.fechaIngreso,
+                    fechaEgreso: elemento.fechaEgreso,
+                });
+            }
+        }
+        return cy.taskN('database:create:sala', salas);
     }
-    return cy.taskN('database:create:cama', camas);
 });
 
 export const permisosUsuario = [
