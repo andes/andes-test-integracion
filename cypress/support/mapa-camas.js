@@ -62,8 +62,8 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
     
                 salas.push({
                     estado: elemento.estado,
-                    unidadOrganizativa: elemento.unidadesOrganizativas,
-                    sector: elemento.sectores,
+                    unidadesOrganizativas: elemento.unidadesOrganizativas,
+                    sectores: elemento.sectores,
                     paciente,
                     fechaIngreso: elemento.fechaIngreso,
                     fechaEgreso: elemento.fechaEgreso,
@@ -87,6 +87,9 @@ export const permisosUsuario = [
     'internacion:censo',
     'internacion:inicio',
     'internacion:descargarListado',
+    'internacion:sala:create',
+    'internacion:sala:edit',
+    'internacion:sala:delete',
     'rup:tipoPrestacion:5951051aa784f4e1a8e2afe1',
     'rup:tipoPrestacion:5a26e113291f463c1b982d98',
     'rup:tipoPrestacion:598ca8375adc68e2a0c121c3',

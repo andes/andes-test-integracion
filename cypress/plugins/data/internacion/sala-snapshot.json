@@ -1,0 +1,35 @@
+{
+    "idSalaComun" : "5f6b820487dac8aa716f8c81",
+    "fecha" : "2020-01-01T03:00:00.000Z",
+    "ocupacion" : [],
+    "nombre" : "Sala 666",
+    "organizacion" : {
+        "_id" : "57e9670e52df311059bc8964",
+        "id" : "57e9670e52df311059bc8964",
+        "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+    },
+    "capacidad" : 99999,
+    "ambito" : "internacion",
+    "estado" : null,
+    "sectores" : [ 
+        {
+            "_id" : "5b0586800d3951652da7daa1",
+            "tipoSector" : {
+                "fsn" : "edificio (medio ambiente)",
+                "term" : "edificio",
+                "conceptId" : "2421000013105",
+                "semanticTag" : "medio ambiente"
+            },
+            "nombre" : "edificio este"
+        }
+    ],
+    "unidadOrganizativas" : [ 
+        {
+            "_id" : "5b294d1008357438f45b5974",
+            "fsn" : "departamento de anestesia (medio ambiente)",
+            "term" : "departamento de anestesia",
+            "conceptId" : "309901009",
+            "semanticTag" : "medio ambiente"
+        }
+    ]
+}

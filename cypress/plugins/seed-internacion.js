@@ -192,6 +192,7 @@ module.exports.createSala = async (mongoUri, params) => {
 
         dtoSala.organizacion = params.organizacion || dtoSala.organizacion;
         dtoSala.organizacion._id = ObjectId(dtoSala.organizacion._id);
+        dtoSala.organizacion.id = ObjectId(dtoSala.organizacion._id);
         dtoSala.nombre = params.nombre || ('SALA ' + faker.random.number({ min: 0, max: 9999 }));
         
         if (params.unidadesOrganizativas) {
@@ -217,7 +218,23 @@ module.exports.createSala = async (mongoUri, params) => {
         dtoSala._id = new ObjectId();
         await salaDB.insertOne(dtoSala);
 
-        return dtoSala;
+        // SNAPSHOT DE SALA
+        const salaSnapshotDB = await client.db().collection('internacionSalaComunSnapshot');
+        let dtoSnapshot = require('./data/internacion/sala-snapshot');
+
+        dtoSnapshot = JSON.parse(JSON.stringify(dtoSnapshot));
+        dtoSnapshot['idSalaComun'] = ObjectId(dtoSala._id);
+        dtoSnapshot['organizacion'] = dtoSala.organizacion;
+        dtoSnapshot.organizacion['id'] = ObjectId(dtoSala.organizacion._id);
+        dtoSnapshot['nombre'] = dtoSala.nombre;
+        dtoSnapshot['capacidad'] = dtoSala.capacidad;
+        dtoSnapshot['unidadOrganizativas'] = dtoSala.unidadOrganizativas || dtoSnapshot.unidadOrganizativas;
+        dtoSnapshot['sectores'] = dtoSala.sectores || dtoSnapshot.sectores;
+        dtoSnapshot['fecha'] = moment().startOf('month').toDate();
+
+        await salaSnapshotDB.insertOne(dtoSnapshot);
+
+        return dtoSnapshot;
     }
     catch (e) {
         return e;
