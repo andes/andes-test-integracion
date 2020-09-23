@@ -16,7 +16,7 @@ describe('Capa Médica - Ingresos', () => {
                     { estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() }
                 ]
             }).then(camasCreadas => {
-                    camas = camasCreadas
+                camas = camasCreadas
                 cy.factoryInternacion({
                     sala: true,
                     config: [

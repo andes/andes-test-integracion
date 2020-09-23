@@ -234,6 +234,34 @@ module.exports.createSala = async (mongoUri, params) => {
 
         await salaSnapshotDB.insertOne(dtoSnapshot);
 
+        // MOVIMIENTO SALA
+        if (params.paciente) {
+            const salaMovimientoDB = await client.db().collection('internacionSalaComunMovimientos');
+            let dtoMovimiento = {
+                accion: 'IN',
+                idSalaComun: ObjectId(dtoSala._id),
+                organizacion: dtoSala.organizacion,
+                paciente: {
+                    id : ObjectId(params.paciente._id),
+                    documento: params.paciente.documento,
+                    nombre: params.paciente.nombre,
+                    apellido: params.paciente.apellido,
+                    sexo: params.paciente.sexo,
+                    genero: params.paciente.genero,
+                    fechaNacimiento: params.paciente.fechaNacimiento
+                },
+                idInternacion: new ObjectId(),
+                fecha: moment(params.fechaIngreso).toDate(),
+                extras: {
+                    ingreso: true
+                },
+                unidadOrganizativas: dtoSala.unidadOrganizativas,
+                createdAt: moment(params.fechaIngreso).toDate(),
+            }
+
+            await salaMovimientoDB.insertOne(dtoMovimiento);
+        }
+
         return dtoSnapshot;
     }
     catch (e) {
