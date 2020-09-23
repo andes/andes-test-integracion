@@ -88,7 +88,6 @@ describe('Capa Médica - Ingresos', () => {
     });
 
     it('Ingreso a sala comun', () => {
-        console.log(salas[0].nombre)
         cy.get('table tr').contains(salas[0].nombre).first().click();
         cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('plus').click();
 
