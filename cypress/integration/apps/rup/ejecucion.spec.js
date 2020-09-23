@@ -227,7 +227,7 @@ context('RUP - Punto de inicio', () => {
         });
     });
 
-    it('Iniciar prestación fuera de agenda con nota privada', () => {
+    it.only('Iniciar prestación fuera de agenda con nota privada', () => {
         cy.goto('/rup', token);
 
         cy.server();

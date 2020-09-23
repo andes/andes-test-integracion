@@ -99,9 +99,7 @@ context('punto de inicio', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?**').as('getHistorial');
         cy.route('GET', '**/api/core/log/paciente?**').as('getLog');
-        cy.route('GET', '**/api/modules/obraSocial/prepagas**').as('getPrepagas');
         cy.route('GET', '**/api/core/tm/localidades?**').as('getLocalidades');
-        cy.route('GET', '**/api/core/tm/paises?**').as('getPaises');
         cy.route('GET', '**/api/core/tm/provincias?**').as('getProvincias');
 
 
@@ -123,22 +121,6 @@ context('punto de inicio', () => {
         });
 
         cy.wait('@getLog').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getPrepagas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getLocalidades').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getPaises').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getProvincias').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
@@ -166,8 +148,6 @@ context('punto de inicio', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?**').as('getTurnos');
         cy.route('GET', '**/api/core/log/paciente?**').as('getLog');
-        cy.route('GET', '**/api/core/tm/paises?**').as('getPaises');
-        cy.route('GET', '**/api/modules/obraSocial/prepagas**').as('getPrepagas');
         cy.route('GET', '**/api/core/tm/provincias**').as('getProvincias');
         cy.route('GET', '**/api/core/tm/provincias?**').as('getNeuquen');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
@@ -187,14 +167,6 @@ context('punto de inicio', () => {
         });
 
         cy.wait('@getLog').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getPaises').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getPrepagas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
@@ -247,8 +219,6 @@ context('punto de inicio', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?**').as('getTurnos');
         cy.route('GET', '**/api/core/log/paciente?**').as('getLog');
-        cy.route('GET', '**/api/core/tm/paises?**').as('getPaises');
-        cy.route('GET', '**/api/modules/obraSocial/prepagas**').as('getPrepagas');
         cy.route('GET', '**/api/core/tm/provincias**').as('getProvincias');
         cy.route('GET', '**/api/core/tm/provincias?**').as('getNeuquen');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('getTurnosAgenda');
@@ -269,14 +239,6 @@ context('punto de inicio', () => {
         });
 
         cy.wait('@getLog').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getPaises').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getPrepagas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
