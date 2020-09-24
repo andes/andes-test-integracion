@@ -25,7 +25,7 @@ describe('Capa Medica - Movimientos', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/api/modules/rup/internacion/camas/historial?**').as('getHistorial');
+        cy.route('GET', '**/api/modules/rup/internacion/medica/**').as('getHistorial');
         cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
         cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.route('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('egresoSalaComun');
@@ -35,8 +35,13 @@ describe('Capa Medica - Movimientos', () => {
 
     it('Movimiento Sala -> Cama', () => {
         cy.get('table tr').contains(salas[0].nombre).first().click();
+
+        cy.wait('@getHistorial').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
         cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('menos').click();
-        cy.contains('Cambiar de unidad organizativa').click();
+        cy.contains('Pase de unidad organizativa').click();
 
         cy.plexSelectType('label="Cama"', 'CAMA');
 
@@ -50,7 +55,7 @@ describe('Capa Medica - Movimientos', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Cambio de cama exitoso!')
+        cy.contains('Pase de unidad organizativa exitoso!')
         cy.contains('Aceptar').click();
     });
 });

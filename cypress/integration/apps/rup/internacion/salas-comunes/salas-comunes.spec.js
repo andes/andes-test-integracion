@@ -51,13 +51,10 @@ describe('ABM Salas', () => {
             expect(cama.unidadOrganizativas[0].term).to.be.eq('servicio médico');
             expect(cama.sectores[0].nombre).to.be.eq('habi1');
         });
-
-        cy.contains('La sala fue guardada');
-        cy.get('button').contains('Aceptar').click();
     });
 
     it('Modificación Sala', () => {
-        cy.goto(`/internacion/sala-comun/${salas[0]._id}`, token);
+        cy.goto(`/internacion/sala-comun/${salas[0].idSalaComun}`, token);
         cy.plexText('label="Nombre"').clear();
         cy.plexText('label="Nombre"', 'Sala 666');
         cy.plexFloat('label="Capacidad"').clear();
@@ -75,8 +72,5 @@ describe('ABM Salas', () => {
             expect(sala.unidadOrganizativas[0].term).to.be.eq('servicio médico');
             expect(sala.sectores[0].nombre).to.be.eq('habi1');
         });
-
-        cy.contains('La sala fue guardada');
-        cy.get('button').contains('Aceptar').click();
     });
 });
