@@ -32,8 +32,15 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica' });
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria' });
 
-    if (!params.sala) {
-        const camas = [];
+    if (params.sala) {
+        return crearSalas(params);
+    } else {
+        return crearCamas(params);
+    }
+});
+
+function crearCamas(params) {
+    const camas = [];
         for (const elemento of params.configCamas) {
             const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
             for (let i = 0; i < count; i++) {
@@ -52,9 +59,11 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
                 });
             }
         }
-        return cy.taskN('database:create:cama', camas);
-    } else {
-        const salas = [];
+    return cy.taskN('database:create:cama', camas);
+}
+
+function crearSalas(params) {
+    const salas = [];
         for (const elemento of params.config) {
             const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
             for (let i = 0; i < count; i++) {
@@ -70,9 +79,8 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
                 });
             }
         }
-        return cy.taskN('database:create:sala', salas);
-    }
-});
+    return cy.taskN('database:create:sala', salas);
+}
 
 export const permisosUsuario = [
     'turnos:*',
