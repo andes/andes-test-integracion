@@ -19,7 +19,7 @@ context('Perfiles de usuario', () => {
 
     beforeEach(() => {
         cy.seed();
-        cy.task('database:create:perfil', { permisos: ['rup:tipoPrestacion:598ca8375adc68e2a0c121b7'] }).then(p => {
+        cy.task('database:create:perfil', { permisos: ['rup:tipoPrestacion:598ca8375adc68e2a0c121b8'] }).then(p => {
             perfil1 = p;
         });
         cy.goto('/gestor-usuarios/usuarios', token);

@@ -64,7 +64,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexSelectAsync('label="Prestación"', 'consulta de medicina general', '@prestaciones', 1);
+        cy.plexSelectAsync('label="Prestación"', 'consulta de medicina general', '@prestaciones', 0);
         if (cy.esFinDeMes()) {
             cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().add(1, 'days').format('DD/MM/YYYY'));
             cy.plexButton("Buscar").click();

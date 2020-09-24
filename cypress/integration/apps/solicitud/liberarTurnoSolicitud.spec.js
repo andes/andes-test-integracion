@@ -18,7 +18,7 @@ describe('TOP: Liberar turno', () => {
             fin: '3',
             fecha: 3,
             profesionales: '5d02602588c4d1772a8a17f8',
-            tipoPrestaciones: '59ee2d9bf00c415246fd3d6a',
+            tipoPrestaciones: '598ca8375adc68e2a0c121b8',
             tipo: 'gestion'
         });
         cy.login('30643636', 'asd').then(t => {
@@ -32,7 +32,7 @@ describe('TOP: Liberar turno', () => {
         cy.server();
         cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
         cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
-        cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
+        cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('tipoPrestacion');
         cy.route('GET', '**/api/modules/top/reglas?**').as('reglas');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgenda');
         cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?**').as('getSolicitudes');

@@ -20,13 +20,13 @@
             "reservadoProfesionalPorc": 0,
             "tipoPrestaciones": [
                 {
-                    "_id": "59ee2d9bf00c415246fd3d6a",
+                    "_id": "598ca8375adc68e2a0c121b8",
                     "fsn": "Consulta de medicina general (procedimiento)",
                     "semanticTag": "procedimiento",
                     "conceptId": "391000013108",
                     "term": "Consulta de medicina general",
                     "nombre": "Consulta de medicina general",
-                    "id": "59ee2d9bf00c415246fd3d6a",
+                    "id": "598ca8375adc68e2a0c121b8",
                     "activo": true
                 }
             ],
@@ -60,13 +60,13 @@
     ],
     "tipoPrestaciones": [
         {
-            "_id": "59ee2d9bf00c415246fd3d6a",
+            "_id": "598ca8375adc68e2a0c121b8",
             "fsn": "Consulta de medicina general (procedimiento)",
             "semanticTag": "procedimiento",
             "conceptId": "391000013108",
             "term": "Consulta de medicina general",
             "nombre": "Consulta de medicina general",
-            "id": "59ee2d9bf00c415246fd3d6a"
+            "id": "598ca8375adc68e2a0c121b8"
         }
     ],
     "organizacion": {

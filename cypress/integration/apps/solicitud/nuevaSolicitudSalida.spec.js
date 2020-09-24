@@ -27,7 +27,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/core/tm/tiposPrestaciones?turneable=1**').as('tipoPrestacion');
+        cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('conceptosTurneables');
         cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
         cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
         cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
@@ -38,7 +38,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
         cy.plexDatetime('label="Fecha de solicitud"', cy.today());
-        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@conceptosTurneables', '59ee2d9bf00c415246fd3d1c');
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexSelect('label="Organización destino"', 0).click();
         cy.plexSelect('label="Tipo de Prestación Solicitada"', 0).then((elemento) => {
@@ -68,7 +68,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.plexSelectType('label="Tipos de Prestación Origen"').validationMessage()
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
-        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@tipoPrestacion', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@conceptosTurneables', '59ee2d9bf00c415246fd3d1c');
 
         cy.plexSelectType('label="Profesional solicitante"').validationMessage()
         cy.plexButton('Guardar').click();
