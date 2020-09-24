@@ -83,8 +83,7 @@ describe('Capa Médica - Ingresos', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Paciente internado')
-        cy.contains('Aceptar').click();
+        cy.swal('confirm', 'Paciente internado');
     });
 
     it('Ingreso a sala comun', () => {
@@ -112,7 +111,6 @@ describe('Capa Médica - Ingresos', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Paciente internado')
-        cy.contains('Aceptar').click();
+        cy.swal('confirm', 'Paciente internado');
     });
 });

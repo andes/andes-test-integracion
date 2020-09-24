@@ -36,7 +36,7 @@ describe('Capa Medica - Egresos', () => {
     it('Egreso simplificado', () => {
         cy.get('table tr').contains(camas[0].cama.nombre).first().click();
         cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('menos').click();
-        cy.contains('Egresar paciente').click();
+        cy.plexButton('Egresar paciente').click();
 
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
         cy.plexDatetime('label="Fecha Egreso"', { clear: true, skipEnter: true });
@@ -51,7 +51,7 @@ describe('Capa Medica - Egresos', () => {
     it('Egreso en Sala Comun', () => {
         cy.get('table tr').contains(salas[0].nombre).first().click();
         cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('menos').click();
-        cy.contains('Egresar paciente').click();
+        cy.plexButton('Egresar paciente').click();
 
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
         cy.plexDatetime('label="Fecha Egreso"', { clear: true, skipEnter: true });

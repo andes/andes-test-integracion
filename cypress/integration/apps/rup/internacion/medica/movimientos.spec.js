@@ -41,7 +41,7 @@ describe('Capa Medica - Movimientos', () => {
         });
 
         cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('menos').click();
-        cy.contains('Pase de unidad organizativa').click();
+        cy.plexButton('Pase de unidad organizativa').click();
 
         cy.plexSelectType('label="Cama"', 'CAMA');
 
@@ -55,7 +55,6 @@ describe('Capa Medica - Movimientos', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Pase de unidad organizativa exitoso!')
-        cy.contains('Aceptar').click();
+        cy.swal('confirm', 'Pase de unidad organizativa exitoso');
     });
 });

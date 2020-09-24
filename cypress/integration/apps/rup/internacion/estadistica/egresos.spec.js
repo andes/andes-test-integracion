@@ -71,7 +71,7 @@ describe('Capa Estadistica - Egresos', () => {
     it('Egreso completo', () => {
         cy.wait(400)
         cy.plexButtonIcon('menos').click()
-        cy.contains('Egresar paciente').click();
+        cy.plexButton('Egresar paciente').click();
 
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
         cy.plexSelectAsync('label="Diagnostico Principal al egreso"', 'Neumo', '@getDiagnostico', 0);
@@ -89,8 +89,7 @@ describe('Capa Estadistica - Egresos', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Los datos se actualizaron correctamente')
-        cy.contains('Aceptar').click();
+        cy.swal('confirm', 'Los datos se actualizaron correctamente');
     });
 
     it('Editar egreso', () => {
@@ -115,7 +114,6 @@ describe('Capa Estadistica - Egresos', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Los datos se actualizaron correctamente')
-        cy.contains('Aceptar').click();
+        cy.swal('confirm', 'Los datos se actualizaron correctamente');
     });
 });
