@@ -2,7 +2,8 @@
 /// <reference types="Cypress" />
 
 context('TOP: nuevo turno', () => {
-    let token
+    let token;
+    const pasadoManiana = Cypress.moment().add(3, 'days');
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
@@ -44,17 +45,20 @@ context('TOP: nuevo turno', () => {
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        if (cy.esFinDeMes()) {
+
+        if (pasadoManiana > Cypress.moment().endOf('month') || cy.esFinDeMes()) {
             cy.plexButtonIcon('chevron-right').click();
+            cy.wait('@agendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
         }
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
         });
 
-        cy.wait('@agenda').then((xhr) => {
-            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
-        });
+        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
+
         cy.plexButton(' No se asigna turno ').click();
         cy.wait('@listaEspera').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -85,9 +89,15 @@ context('TOP: nuevo turno', () => {
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        if (cy.esFinDeMes()) {
+
+
+        if (pasadoManiana > Cypress.moment().endOf('month') || cy.esFinDeMes()) {
             cy.plexButtonIcon('chevron-right').click();
+            cy.wait('@agendas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
         }
+
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
