@@ -1,0 +1,101 @@
+[
+    {
+        "_id": {
+            "$oid": "5f6a31bcc95d4cc3eb929ad3"
+        },
+        "estadoInicial": "pendiente",
+        "estadoFinal": "denegada",
+        "soloCOM": true,
+        "modificaDestino": false
+    },
+    {
+        "_id": {
+            "$oid": "5f6a31d1c95d4cc3eb929ae7"
+        },
+        "estadoInicial": "pendiente",
+        "estadoFinal": "aprobada",
+        "soloCOM": true,
+        "modificaDestino": false
+    },
+    {
+        "_id": {
+            "$oid": "5f6a3aecc95d4cc3eb92a3d1"
+        },
+        "estadoInicial": "aprobada",
+        "estadoFinal": "asignada",
+        "soloCOM": true,
+        "modificaDestino": true
+    },
+    {
+        "_id": {
+            "$oid": "5f6a42eac95d4cc3eb92ac5e"
+        },
+        "estadoInicial": "asignada",
+        "estadoFinal": "aceptada",
+        "soloCOM": false,
+        "modificaDestino": false
+    },
+    {
+        "_id": {
+            "$oid": "5f6cd7e97bd9c84a2247ae84"
+        },
+        "estadoInicial": "asignada",
+        "estadoFinal": "rechazada",
+        "soloCOM": false,
+        "modificaDestino": false
+    },
+    {
+        "_id": {
+            "$oid": "5f6cd8757bd9c84a2247aef5"
+        },
+        "estadoInicial": "aceptada",
+        "estadoFinal": "finalizada",
+        "soloCOM": true,
+        "modificaDestino": false
+    },
+    {
+        "_id": {
+            "$oid": "5f6cdcd17bd9c84a2247b32c"
+        },
+        "estadoInicial": "rechazada",
+        "estadoFinal": "asignada",
+        "soloCOM": true,
+        "modificaDestino": true
+    },
+    {
+        "_id": {
+            "$oid": "5f6cdd4d7bd9c84a2247b392"
+        },
+        "estadoInicial": "asignada",
+        "estadoFinal": "aceptada por omision",
+        "soloCOM": true,
+        "modificaDestino": false
+    },
+    {
+        "_id": {
+            "$oid": "5f6cdd9b7bd9c84a2247b3d9"
+        },
+        "estadoInicial": "aceptada por omision",
+        "estadoFinal": "finalizada",
+        "soloCOM": true,
+        "modificaDestino": false
+    },
+    {
+        "_id": {
+            "$oid": "5f6cddab7bd9c84a2247b3e6"
+        },
+        "estadoInicial": "denegada",
+        "estadoFinal": "finalizada",
+        "soloCOM": true,
+        "modificaDestino": false
+    },
+    {
+        "_id": {
+            "$oid": "5f760631a106f84934e39971"
+        },
+        "estadoInicial": "rechazada",
+        "estadoFinal": "finalizada",
+        "soloCOM": true,
+        "modificaDestino": false
+    }
+]

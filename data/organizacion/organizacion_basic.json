@@ -1,4 +1,63 @@
 [{
+    "_id" : {
+        "$oid": "5f68c547cbd0db303ac4aee9"
+    },
+    "activo" : true,
+    "turnosMobile" : false,
+    "codigo" : {
+        "_id" : {
+            "$oid": "5f68c547cbd0db303ac4aeea"
+        },
+        "sisa" : "-1",
+        "cuie" : "",
+        "remediar" : ""
+    },
+    "nombre" : "CENTRO OPERATIVO MEDICO",
+    "tipoEstablecimiento" : {
+        "_id" : {
+            "$oid": "57fd037186254722dd3a019a"
+        },
+        "nombre" : "SubSecretaria de Salud",
+        "descripcion" : "SubSecretaria de Salud",
+        "idTipoEfector" : 5
+    },
+    "direccion" : {
+        "geoReferencia" : null,
+        "activo" : true,
+        "_id" : {
+            "$oid": "5f68c547cbd0db303ac4aeec"
+        },
+        "valor" : "",
+        "codigoPostal" : "",
+        "ubicacion" : {
+            "_id" : {
+                "$oid": "5f68c547cbd0db303ac4aeed"
+            },
+            "barrio" : null,
+            "localidad" : null,
+            "provincia" : null,
+            "pais" : {
+                "_id" : {
+                    "$oid": "57f3b5c469fe79a598e6281f"
+                },
+                "nombre" : "Argentina"
+            }
+        },
+        "ranking" : 0,
+        "ultimaActualizacion" : "2020-09-21T12:22:11.637-03:00"
+    },
+    "contacto" : [],
+    "edificio" : [],
+    "nivelComplejidad" : 0,
+    "fechaAlta" : "2020-09-21T12:22:11.637-03:00",
+    "fechaBaja" : "2020-09-21T12:22:11.637-03:00",
+    "unidadesOrganizativas" : [],
+    "showMapa" : false,
+    "mapaSectores" : [],
+    "aceptaDerivacion" : false,
+    "esCOM" : true
+},
+    {
 	"_id": {
 		"$oid": "57e9670e52df311059bc8964"
 	},
@@ -788,7 +847,8 @@
 	"_id": {
 		"$oid": "57fcf037326e73143fb48aee"
 	},
-	"nombre": "HOSPITAL DE AREA TRICAO MALAL",
+    "nombre": "HOSPITAL DE AREA TRICAO MALAL",
+    "aceptaDerivacion":true,
 	"contacto": [],
 	"direccion": {
 		"valor": "VOLCAN TROMEN S/N",
@@ -1444,7 +1504,8 @@
 		"$oid": "57fcf037326e73143fb48b24"
 	},
 	"nombre": "CENTRO DE SALUD VALENTINA NORTE",
-	"integracionActiva": true,
+    "integracionActiva": true,
+    "aceptaDerivacion":true,
 	"contacto": [],
 	"direccion": {
 		"activo": true,
@@ -45427,7 +45488,8 @@
 	"_id": {
 		"$oid": "5bae6b7b9677f95a425d9ee8"
 	},
-	"nombre": "HOSPITAL AÑELO",
+    "nombre": "HOSPITAL AÑELO",
+    "aceptaDerivacion":true,
 	"activo": true,
 	"contacto": [],
 	"telecom": [
