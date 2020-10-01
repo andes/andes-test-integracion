@@ -63,6 +63,7 @@ context('RUP - Punto de inicio', () => {
             cy.route({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
             cy.route({ method: 'GET', url: '/api/modules/rup/prestaciones/huds/**', response: [] }).as('huds');
             cy.route({ method: 'GET', url: '/api/modules/top/reglas**', response: [] }).as('reglas');
+            cy.route({ method: 'GET', url: '**/api/modules/rup/plantillas?conceptId=**' }).as('plantillas');
 
         });
 
@@ -108,6 +109,40 @@ context('RUP - Punto de inicio', () => {
                                 expect(prestacion.solicitud.tipoPrestacion.conceptId).to.be.eq(agendas['dinamica'].tipoPrestaciones[0].conceptId);
                             });
                         });
+                    }
+                });
+            }
+
+            if (typeAgenda !== 'no-nominalizada') {
+                it('Anular inicio de prestación', () => {
+                    cy.goto('/rup', token);
+                    cy.wait('@agendas');
+                    cy.wait('@prestaciones');
+
+                    cy.get('table').first().as('tablaAgendas');
+
+                    cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
+
+                    cy.plexButton('INICIAR PRESTACIÓN').click();
+                    cy.swal('confirm');
+                    cy.wait('@crearPrestacion');
+                    cy.wait('@prestaciones');
+                    cy.wait('@huds');
+
+                    cy.plexButton('Punto de Inicio').click({ force: true });
+                    cy.swal('confirm');
+                    cy.wait('@agendas');
+                    cy.wait('@prestaciones');
+
+                    cy.get('table').first().as('tablaAgendas');
+                    cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
+
+                    if (typeAgenda !== 'no-nominalizada') {
+                        cy.plexButton('ANULAR INICIO DE PRESTACIÓN').click();
+                        cy.wait('@prestaciones').then((xhr) => {
+                            expect(xhr.status).to.be.eq(200);
+                        });
+                        cy.swal('confirm');
                     }
                 });
             }
