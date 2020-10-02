@@ -19,7 +19,9 @@ context('Pagina de login', () => {
                 win.sessionStorage.clear();
             }
         });
-    })
+    });
+
+
 
     it('Login de usuario con disclaimer', () => {
         cy.request({

@@ -1,0 +1,39 @@
+{
+    "privacy": {
+        "scope": "public"
+    },
+    "destacado": false,
+    "esSolicitud": false,
+    "esDiagnosticoPrincipal": false,
+    "relacionadoCon": [],
+    "elementoRUP": null,
+    "nombre": "documento de solicitud de admisión",
+    "concepto": {
+        "fsn": "documento de solicitud de admisión (elemento de registro)",
+        "semanticTag": "elemento de registro",
+        "refsetIds": [
+            "900000000000497000"
+        ],
+        "conceptId": "721915006",
+        "term": "documento de solicitud de admisión"
+    },
+    "valor": {},
+    "registros": [],
+    "hasSections": false,
+    "isSection": false,
+    "noIndex": false,
+    "createdAt": "2020-02-07T18:09:28.434Z",
+    "createdBy": {
+        "id": "5e3d9e385d07c3718fb86696",
+        "nombreCompleto": "PREUBA PREUBA",
+        "nombre": "PREUBA",
+        "apellido": "PREUBA",
+        "username": 123456789,
+        "documento": 123456789,
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+            "id": "57e9670e52df311059bc8964"
+        }
+    }
+}

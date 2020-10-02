@@ -1,0 +1,132 @@
+[
+    {
+        "frecuencia": 20,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "371531000",
+            "term": "informe del encuentro",
+            "fsn": "informe del encuentro (elemento de registro)",
+            "semanticTag": "elemento de registro"
+        }
+    },
+    {
+        "frecuencia": 8,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "704425001",
+            "term": "fiebre crónica",
+            "fsn": "fiebre crónica (hallazgo)",
+            "semanticTag": "hallazgo"
+        }
+    },
+    {
+        "frecuencia": 5,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "281399006",
+            "term": "no asistió",
+            "fsn": "no asistió (hallazgo)",
+            "semanticTag": "hallazgo"
+        }
+    },
+    {
+        "frecuencia": 3,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "46635009",
+            "term": "diabetes mellitus tipo 1",
+            "fsn": "diabetes mellitus tipo 1 (trastorno)",
+            "semanticTag": "trastorno"
+        }
+    },
+    {
+        "frecuencia": 2,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "186788009",
+            "term": "fiebre Q",
+            "fsn": "fiebre Q (trastorno)",
+            "semanticTag": "trastorno"
+        }
+    },
+    {
+        "frecuencia": 2,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "410634009",
+            "term": "consulta de niño sano, a los 3 años",
+            "fsn": "consulta de niño sano, a los 3 años (procedimiento)",
+            "semanticTag": "procedimiento"
+        }
+    },
+    {
+        "frecuencia": 1,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "185329007",
+            "term": "no concurrió - turno confundido",
+            "fsn": "no concurrió - turno confundido (hallazgo)",
+            "semanticTag": "hallazgo"
+        }
+    },
+    {
+        "frecuencia": 1,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "2551000013100",
+            "term": "registrar las medidas antropométricas del paciente menor de 2 años",
+            "fsn": "registrar las medidas antropométricas del paciente menor de 2 años (procedimiento)",
+            "semanticTag": "procedimiento"
+        }
+    },
+    {
+        "frecuencia": 1,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "2571000013105",
+            "term": "registrar las medidas antropométricas del paciente mayor de 3 años",
+            "fsn": "registrar las medidas antropométricas del paciente mayor de 3 años (procedimiento)",
+            "semanticTag": "procedimiento"
+        }
+    },
+    {
+        "frecuencia": 1,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "386661006",
+            "term": "fiebre",
+            "fsn": "fiebre (hallazgo)",
+            "semanticTag": "hallazgo"
+        }
+    },
+    {
+        "frecuencia": 1,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "73211009",
+            "term": "diabetes mellitus",
+            "fsn": "diabetes mellitus (trastorno)",
+            "semanticTag": "trastorno"
+        }
+    },
+    {
+        "frecuencia": 1,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "90226004",
+            "term": "Pap",
+            "fsn": "procedimiento de citopatología, preparado de extendido, muestra de origen genital (procedimiento)",
+            "semanticTag": "procedimiento"
+        }
+    },
+    {
+        "frecuencia": 0,
+        "esSolicitud": false,
+        "concepto": {
+            "conceptId": "4291000013101",
+            "term": "nota privada",
+            "fsn": "nota privada (elemento de registro)",
+            "semanticTag": "elemento de registro"
+        }
+    }
+]

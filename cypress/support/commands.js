@@ -59,7 +59,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
 
 
 
-Cypress.Commands.add('goto', (url, token) => {
+Cypress.Commands.add('goto', (url, token, hudsToken) => {
     if (token) {
         cy.server();
         cy.route('GET', '**/api/auth/sesion**').as('sesion');
@@ -69,7 +69,12 @@ Cypress.Commands.add('goto', (url, token) => {
             if (token) {
                 win.sessionStorage.setItem('jwt', token);
             } else {
-                win.sessionStorage.clear('jwt');
+                win.sessionStorage.removeItem('jwt');
+            }
+            if (hudsToken) {
+                win.sessionStorage.setItem('huds-token', hudsToken);
+            } else {
+                win.sessionStorage.removeItem('huds-token');
             }
         }
     });

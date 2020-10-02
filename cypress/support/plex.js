@@ -100,12 +100,8 @@ Cypress.Commands.add('clearSelect', { prevSubject: 'element' }, (subject, id) =>
 });
 
 Cypress.Commands.add('plexInt', { prevSubject: 'optional' }, (subject, label, text = null) => {
-    let element;
-    if (subject) {
-        element = cy.wrap(subject).find(`plex-int[${label}] input`);
-    } else {
-        element = cy.get(`plex-int[${label}] input`);
-    }
+    cy.log(`GET plex-int[${label}]`);
+    const element = cy.get(`plex-int[${label}] input`, { withinSubject: subject, log: false });
     if (text) {
         element.type(text);
     }
@@ -226,9 +222,9 @@ Cypress.Commands.add('plexButton', { prevSubject: 'optional' }, (subject, label)
     let element;
     if (subject) {
 
-        element = cy.wrap(subject).find('plex-button', { timeout: 30000 }).contains(label);
+        element = cy.wrap(subject).find('plex-button', { timeout: 10000 }).contains(label);
     } else {
-        element = cy.get('plex-button', { timeout: 30000 }).contains(label);
+        element = cy.get('plex-button', { timeout: 10000 }).contains(label);
     }
     return element;
 });
@@ -237,9 +233,9 @@ Cypress.Commands.add('plexButtonIcon', { prevSubject: 'optional' }, (subject, ic
     let element;
     if (subject) {
 
-        element = cy.wrap(subject).find(`plex-button i.adi.adi-${icon}`, { timeout: 30000 }).parent();
+        element = cy.wrap(subject).find(`plex-button i.adi.adi-${icon}`, { timeout: 10000 }).parent();
     } else {
-        element = cy.get(`plex-button i.adi.adi-${icon}`, { timeout: 30000 }).parent();
+        element = cy.get(`plex-button i.adi.adi-${icon}`, { timeout: 10000 }).parent();
     }
     return element;
 });

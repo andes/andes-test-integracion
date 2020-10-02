@@ -1,0 +1,3212 @@
+[
+    {
+        "conceptId": "386661006",
+        "term": "fiebre",
+        "fsn": "fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "186788009",
+        "term": "fiebre Q",
+        "fsn": "fiebre Q (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "89805002",
+        "term": "fiebre Catu",
+        "fsn": "enfermedad por el virus Catu (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "304213008",
+        "term": "fiebre baja",
+        "fsn": "fiebre baja (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "81472005",
+        "term": "fiebre Ossa",
+        "fsn": "enfermedad por el virus Ossa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "3928002",
+        "term": "fiebre Zika",
+        "fsn": "enfermedad por virus Zika (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "48400007",
+        "term": "fiebre Guama",
+        "fsn": "enfermedad por el virus Guama (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "80795005",
+        "term": "fiebre Dugbe",
+        "fsn": "enfermedad por el virus Dugbe (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "47277009",
+        "term": "fiebre Izumi",
+        "fsn": "fiebre Izumi (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "10151000132103",
+        "term": "fiebre viral",
+        "fsn": "fiebre causada por virus (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "62674007",
+        "term": "fiebre Batai",
+        "fsn": "fiebre Batai (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "10151000132103",
+        "term": "fiebre vírica",
+        "fsn": "fiebre causada por virus (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "85436005",
+        "term": "fiebre Itaqui",
+        "fsn": "enfermedad por el virus Itaqui (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "36448002",
+        "term": "fiebre Guaroa",
+        "fsn": "enfermedad por el virus Guaroa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "44583001",
+        "term": "fiebre Bwamba",
+        "fsn": "enfermedad por el virus Bwamba (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "46121008",
+        "term": "fiebre Calovo",
+        "fsn": "enfermedad por el virus Calovo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "38362002",
+        "term": "fiebre dengue",
+        "fsn": "dengue (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "30945003",
+        "term": "fiebre Tahyna",
+        "fsn": "fiebre Tahyna (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "37780006",
+        "term": "fiebre Ilesha",
+        "fsn": "enfermedad por el virus Ilesha (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "74581008",
+        "term": "fiebre Ganjam",
+        "fsn": "enfermedad por el virus Ganjam (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "48922006",
+        "term": "fiebre Restan",
+        "fsn": "enfermedad por el virus Restan (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "93465000",
+        "term": "fiebre otoñal",
+        "fsn": "nanukayami (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "60774007",
+        "term": "fiebre Madrid",
+        "fsn": "enfermedad por el virus Madrid (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "51638003",
+        "term": "fiebre Thogoto",
+        "fsn": "enfermedad por el virus Thogoto (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "409553007",
+        "term": "fiebre Q aguda",
+        "fsn": "fiebre Q aguda (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "53632005",
+        "term": "fiebre Indiana",
+        "fsn": "estomatitis vesicular por virus Indiana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "41348000",
+        "term": "fiebre de Piry",
+        "fsn": "enfermedad por virus Piry (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "25582006",
+        "term": "fiebre Oriboca",
+        "fsn": "enfermedad por el virus Oriboca (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "28477001",
+        "term": "fiebre Sindbis",
+        "fsn": "fiebre Sindbis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "704425001",
+        "term": "fiebre crónica",
+        "fsn": "fiebre crónica (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "42136008",
+        "term": "fiebre héctica",
+        "fsn": "fiebre héctica (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "52715007",
+        "term": "fiebre cíclica",
+        "fsn": "fiebre cíclica (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "135883003",
+        "term": "tos con fiebre",
+        "fsn": "tos con fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "186803007",
+        "term": "fiebre dum-dum",
+        "fsn": "leishmaniasis visceral (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "248449003",
+        "term": "fiebre central",
+        "fsn": "fiebre central (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "36989005",
+        "term": "fiebre urliana",
+        "fsn": "parotiditis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "82214002",
+        "term": "fiebre quintana",
+        "fsn": "fiebre de las trincheras (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240499000",
+        "term": "fiebre de Sepik",
+        "fsn": "fiebre de Sepik (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240453002",
+        "term": "fiebre de Oroya",
+        "fsn": "fiebre de Oroya (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "186774005",
+        "term": "fiebre botonosa",
+        "fsn": "fiebre botonosa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "248444008",
+        "term": "fiebre bifásica",
+        "fsn": "fiebre bifásica (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "111950007",
+        "term": "fiebre facticia",
+        "fsn": "fiebre facticia (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "95627000",
+        "term": "fiebre neonatal",
+        "fsn": "fiebre del recién nacido (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "271751000",
+        "term": "fiebre continua",
+        "fsn": "fiebre continua (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248437004",
+        "term": "fiebre palúdica",
+        "fsn": "fiebre palúdica (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248442007",
+        "term": "fiebre cuartana",
+        "fsn": "fiebre cuartana (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248451004",
+        "term": "fiebre posparto",
+        "fsn": "fiebre posparto (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248440004",
+        "term": "fiebre terciana",
+        "fsn": "fiebre terciana (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "21719001",
+        "term": "fiebre del heno",
+        "fsn": "rinitis alérgica causada por polen (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "19065005",
+        "term": "fiebre de Lassa",
+        "fsn": "fiebre de Lassa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "4834000",
+        "term": "fiebre tifoidea",
+        "fsn": "fiebre tifoidea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "73701003",
+        "term": "fiebre Murutucu",
+        "fsn": "enfermedad por el virus Murutucu (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "16541001",
+        "term": "fiebre amarilla",
+        "fsn": "fiebre amarilla (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "9164007",
+        "term": "fiebre de Uruma",
+        "fsn": "fiebre de Mayaro (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "9619006",
+        "term": "fiebre aséptica",
+        "fsn": "fiebre aséptica (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "24776000",
+        "term": "fiebre Caraparu",
+        "fsn": "enfermedad por el virus Caraparu (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "21013006",
+        "term": "fiebre Sennetsu",
+        "fsn": "fiebre Sennetsu (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "44362006",
+        "term": "fiebre Tacaiuma",
+        "fsn": "enfermedad por el virus Tacaiuma (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "32556003",
+        "term": "fiebre Wyeomyia",
+        "fsn": "enfermedad por el virus Wyeomyia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "42523002",
+        "term": "fiebre Kemerovo",
+        "fsn": "enfermedad por el virus Kemerovo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "75336004",
+        "term": "fiebre Marituba",
+        "fsn": "enfermedad por el virus Marituba (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "75702008",
+        "term": "fiebre de Malta",
+        "fsn": "brucelosis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "6270009",
+        "term": "fiebre de Banzi",
+        "fsn": "enfermedad por virus Banzi (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "72880002",
+        "term": "fiebre Oropouche",
+        "fsn": "enfermedad por el virus Oropouche (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "69931008",
+        "term": "fiebre Germistan",
+        "fsn": "enfermedad por el virus Germistan (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "271558008",
+        "term": "fiebre glandular",
+        "fsn": "mononucleosis infecciosa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "102496004",
+        "term": "fiebre ondulante",
+        "fsn": "fiebre ondulante (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "87048000",
+        "term": "fiebre de Kunjin",
+        "fsn": "fiebre de Kunjin (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "237348005",
+        "term": "fiebre puerperal",
+        "fsn": "pirexia puerperal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "271753002",
+        "term": "fiebre irregular",
+        "fsn": "fiebre irregular (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248438009",
+        "term": "fiebre cotidiana",
+        "fsn": "fiebre cotidiana (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248451004",
+        "term": "fiebre postparto",
+        "fsn": "fiebre posparto (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "409552002",
+        "term": "fiebre Q crónica",
+        "fsn": "fiebre Q crónica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "268984004",
+        "term": "examen de fiebre",
+        "fsn": "examen de fiebre (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "271425001",
+        "term": "fiebre de Kedani",
+        "fsn": "fiebre fluvial del Japón (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "402918008",
+        "term": "fiebre de Crimea",
+        "fsn": "fiebre de Crimea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "19044004",
+        "term": "fiebre espirilar",
+        "fsn": "fiebre espirilar (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "75702008",
+        "term": "fiebre ondulante",
+        "fsn": "brucelosis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "2858002",
+        "term": "fiebre puerperal",
+        "fsn": "sepsis puerperal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "11917008",
+        "term": "fiebre de Bebaru",
+        "fsn": "fiebre de Bebaru (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "58718002",
+        "term": "fiebre reumática",
+        "fsn": "fiebre reumática (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "62166005",
+        "term": "fiebre histérica",
+        "fsn": "fiebre histérica (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "9164007",
+        "term": "fiebre de Mayaro",
+        "fsn": "fiebre de Mayaro (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "9602009",
+        "term": "fiebre de Tensaw",
+        "fsn": "enfermedad por el virus Tensaw (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "26275000",
+        "term": "fiebre pretibial",
+        "fsn": "fiebre debida a Leptospira autumnalis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "50386009",
+        "term": "fiebre Tataguine",
+        "fsn": "enfermedad por el virus Tataguine (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "51682007",
+        "term": "fiebre Quaranfil",
+        "fsn": "fiebre Quaranfil (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "43098002",
+        "term": "fiebre por cobre",
+        "fsn": "fiebre por cobre (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "63993003",
+        "term": "fiebre remitente",
+        "fsn": "fiebre remitente (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "72163003",
+        "term": "fiebre del lunes",
+        "fsn": "fiebre por metal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "72163003",
+        "term": "fiebre por metal",
+        "fsn": "fiebre por metal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240512008",
+        "term": "fiebre calchaquí",
+        "fsn": "fiebre calchaquí (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240522002",
+        "term": "fiebre de Candiru",
+        "fsn": "fiebre de Candiru (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "271897009",
+        "term": "al examen: fiebre",
+        "fsn": "al examen: fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248431003",
+        "term": "fase de la fiebre",
+        "fsn": "fase de la fiebre (entidad observable)",
+        "semanticTag": "entidad observable"
+    },
+    {
+        "conceptId": "186612006",
+        "term": "fiebre por Pixuna",
+        "fsn": "fiebre por Pixuna (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240447002",
+        "term": "fiebre de Pontiac",
+        "fsn": "fiebre de Pontiac (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240513003",
+        "term": "fiebre de Isfahan",
+        "fsn": "fiebre de Isfahan (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "79376002",
+        "term": "fiebre Bunyamwera",
+        "fsn": "enfermedad por el virus Bunyamwera (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "111950007",
+        "term": "fiebre artificial",
+        "fsn": "fiebre facticia (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "93465000",
+        "term": "fiebre nanukayami",
+        "fsn": "nanukayami (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "76872006",
+        "term": "fiebre de Chagres",
+        "fsn": "enfermedad por el virus Chagres (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "248435007",
+        "term": "fiebre prolongada",
+        "fsn": "fiebre prolongada (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "19044004",
+        "term": "fiebre recurrente",
+        "fsn": "fiebre espirilar (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "43416006",
+        "term": "fiebre de Mucambo",
+        "fsn": "fiebre de Mucambo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "79958002",
+        "term": "fiebre por granos",
+        "fsn": "fiebre por granos (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "111866008",
+        "term": "fiebre Bussuquara",
+        "fsn": "enfermedad por virus Bussuquara (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "76446006",
+        "term": "fiebre Changuinola",
+        "fsn": "enfermedad por el virus Changuinola (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240502001",
+        "term": "fiebre por Maguari",
+        "fsn": "fiebre por Maguari (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240507007",
+        "term": "fiebre trivittatus",
+        "fsn": "fiebre trivittatus (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "186774005",
+        "term": "fiebre de Marsella",
+        "fsn": "fiebre botonosa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "266123003",
+        "term": "fiebre de Guaitara",
+        "fsn": "bartonelosis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "268058007",
+        "term": "fiebre de Katamaya",
+        "fsn": "infección por Schistosoma japonicum (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "248427009",
+        "term": "síntomas de fiebre",
+        "fsn": "síntomas de fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "420079008",
+        "term": "fiebre recidivante",
+        "fsn": "fiebre recidivante (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "271752007",
+        "term": "fiebre en escalera",
+        "fsn": "fiebre en escalera (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "44110002",
+        "term": "fiebre de Uganda S",
+        "fsn": "fiebre de Uganda S (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "86699002",
+        "term": "ausencia de fiebre",
+        "fsn": "apirexia (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "240822009",
+        "term": "fiebre elefantoide",
+        "fsn": "fiebre filariásica bancroftiana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "75702008",
+        "term": "fiebre mediterránea",
+        "fsn": "brucelosis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "77957000",
+        "term": "fiebre intermitente",
+        "fsn": "fiebre intermitente (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "308905009",
+        "term": "fiebre del soldador",
+        "fsn": "fiebre del soldador (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "386305005",
+        "term": "manejo de la fiebre",
+        "fsn": "tratamiento de la fiebre (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "186772009",
+        "term": "fiebre de San Pablo",
+        "fsn": "fiebre manchada de las Montañas Rocosas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "33877000",
+        "term": "fiebre de Spondweni",
+        "fsn": "fiebre de Spondweni (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "22404003",
+        "term": "fiebre por Elokomin",
+        "fsn": "fiebre por Elokomin (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "52138004",
+        "term": "fiebre de Haverhill",
+        "fsn": "fiebre estreptobacilar (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "85904008",
+        "term": "fiebre paratifoidea",
+        "fsn": "fiebre paratifoidea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "75116005",
+        "term": "fiebre de los loros",
+        "fsn": "ornitosis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "111950007",
+        "term": "fiebre autoinducida",
+        "fsn": "fiebre facticia (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "4416007",
+        "term": "fiebre uveoparotídea",
+        "fsn": "síndrome de Heerfordt (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "77377001",
+        "term": "fiebre de Queensland",
+        "fsn": "leptospirosis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "405543000",
+        "term": "fiebre medicamentosa",
+        "fsn": "hiperpirexia medicamentosa (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "123471000119103",
+        "term": "fiebre posvacunación",
+        "fsn": "fiebre posvacunación (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "2858002",
+        "term": "fiebre del puerperio",
+        "fsn": "sepsis puerperal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "248450003",
+        "term": "fiebre posoperatoria",
+        "fsn": "fiebre posoperatoria (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "23122001",
+        "term": "fiebre del Río Bravo",
+        "fsn": "fiebre del Río Bravo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "26275000",
+        "term": "fiebre de Fort Bragg",
+        "fsn": "fiebre debida a Leptospira autumnalis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "271425001",
+        "term": "fiebre tsutsugamushi",
+        "fsn": "fiebre fluvial del Japón (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "81182003",
+        "term": "fiebre de Chandipura",
+        "fsn": "enfermedad por virus Chandipura (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "248447001",
+        "term": "fiebre defervescente",
+        "fsn": "fiebre defervescente (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248446005",
+        "term": "fiebre diurna inversa",
+        "fsn": "fiebre diurna inversa (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "449129007",
+        "term": "fiebre paraneoplásica",
+        "fsn": "fiebre paraneoplásica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "19265001",
+        "term": "fiebre de los conejos",
+        "fsn": "tularemia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "41497008",
+        "term": "convulsión por fiebre",
+        "fsn": "convulsión febril (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "56625005",
+        "term": "fiebre del agua negra",
+        "fsn": "fiebre del agua negra (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "43220007",
+        "term": "fiebre de Wesselsbron",
+        "fsn": "fiebre de Wesselsbron (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "186694006",
+        "term": "sudoración por fiebre",
+        "fsn": "transpiración por fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "111864006",
+        "term": "fiebre de Chikungunya",
+        "fsn": "fiebre de Chikungunya (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "248439001",
+        "term": "fiebre cotidiana doble",
+        "fsn": "fiebre cotidiana doble (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "38362002",
+        "term": "fiebre quebrantahuesos",
+        "fsn": "dengue (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "409554001",
+        "term": "hepatitis por fiebre Q",
+        "fsn": "hepatitis por fiebre Q (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "16901001",
+        "term": "fiebre láctea difásica",
+        "fsn": "encefalitis de Europa Central (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "274640006",
+        "term": "fiebre con escalofríos",
+        "fsn": "fiebre con escalofríos (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "26424001",
+        "term": "fiebre reumática aguda",
+        "fsn": "fiebre reumática activa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "56625005",
+        "term": "fiebre hemoglobinúrica",
+        "fsn": "fiebre del agua negra (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "52138004",
+        "term": "fiebre estreptobacilar",
+        "fsn": "fiebre estreptobacilar (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "74166005",
+        "term": "fiebre amarilla urbana",
+        "fsn": "fiebre amarilla urbana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "32286006",
+        "term": "neumonía en la fiebre Q",
+        "fsn": "neumonía en la fiebre Q (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "123977005",
+        "term": "fiebre por etiocolanona",
+        "fsn": "fiebre por etiocolanona (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "130091000119103",
+        "term": "fiebre posprocedimiento",
+        "fsn": "fiebre posterior a procedimiento (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "17658005",
+        "term": "fiebre de la Costa Este",
+        "fsn": "infección causada por Theileria parva (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "24043009",
+        "term": "fiebre catarral maligna",
+        "fsn": "fiebre catarral maligna (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "62676009",
+        "term": "fiebre terciana maligna",
+        "fsn": "paludismo por Plasmodium falciparum (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "26424001",
+        "term": "fiebre reumática activa",
+        "fsn": "fiebre reumática activa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "52715007",
+        "term": "fiebre de Pel - Ebstein",
+        "fsn": "fiebre cíclica (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "186788009",
+        "term": "fiebre de los mataderos",
+        "fsn": "fiebre Q (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "248441000",
+        "term": "fiebre terciana maligna",
+        "fsn": "fiebre terciana maligna (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "75702008",
+        "term": "fiebre del Mediterráneo",
+        "fsn": "brucelosis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "82214002",
+        "term": "fiebre de los cinco días",
+        "fsn": "fiebre de las trincheras (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "186694006",
+        "term": "transpiración por fiebre",
+        "fsn": "transpiración por fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "233774000",
+        "term": "fiebre por humidificador",
+        "fsn": "fiebre por humidificador (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "84579002",
+        "term": "fiebre de los Everglades",
+        "fsn": "enfermedad virósica de los Everglades (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240523007",
+        "term": "fiebre hemorrágica viral",
+        "fsn": "fiebre hemorrágica viral (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "271425001",
+        "term": "fiebre fluvial del Japón",
+        "fsn": "fiebre fluvial del Japón (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "93465000",
+        "term": "fiebre de los siete días",
+        "fsn": "nanukayami (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "95627000",
+        "term": "fiebre del recién nacido",
+        "fsn": "fiebre del recién nacido (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "386305005",
+        "term": "tratamiento de la fiebre",
+        "fsn": "tratamiento de la fiebre (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "248445009",
+        "term": "fiebre, variación diurna",
+        "fsn": "fiebre, variación diurna (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "409556004",
+        "term": "encefalitis por fiebre Q",
+        "fsn": "encefalitis por fiebre Q (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "10151000132103",
+        "term": "fiebre causada por virus",
+        "fsn": "fiebre causada por virus (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "119751000146104",
+        "term": "fiebre debida a COVID-19",
+        "fsn": "fiebre causada por coronavirus 2 del síndrome respiratorio agudo severo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "60261000",
+        "term": "fiebre reumática crónica",
+        "fsn": "fiebre reumática crónica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "82214002",
+        "term": "fiebre de las trincheras",
+        "fsn": "fiebre de las trincheras (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "233867000",
+        "term": "miocarditis por fiebre Q",
+        "fsn": "miocarditis por fiebre Q (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "85579005",
+        "term": "fiebre de O'nyong - nyong",
+        "fsn": "fiebre de O'nyong - nyong (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "233884006",
+        "term": "pericarditis por fiebre Q",
+        "fsn": "pericarditis por fiebre Q (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "95890006",
+        "term": "endocarditis por fiebre Q",
+        "fsn": "endocarditis por fiebre Q (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "722892007",
+        "term": "fiebre debida a infección",
+        "fsn": "fiebre debida a infección (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "402917003",
+        "term": "fiebre del valle del Rift",
+        "fsn": "fiebre del valle del Rift (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "427533008",
+        "term": "vacuna contra la fiebre Q",
+        "fsn": "vacuna contra la fiebre Q (producto)",
+        "semanticTag": "producto"
+    },
+    {
+        "conceptId": "240523007",
+        "term": "fiebre hemorrágica vírica",
+        "fsn": "fiebre hemorrágica viral (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "49142006",
+        "term": "fiebre del bosque Semliki",
+        "fsn": "fiebre del bosque Semliki (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "20927009",
+        "term": "fiebre hemorrágica dengue",
+        "fsn": "fiebre hemorrágica dengue (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "70385007",
+        "term": "fiebre faringoconjuntival",
+        "fsn": "faringoconjuntivitis adenoviral (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "42100005",
+        "term": "fiebre amarilla selvática",
+        "fsn": "fiebre amarilla de la jungla (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "71085009",
+        "term": "fiebre paratifoidea tipo B",
+        "fsn": "fiebre paratifoidea tipo B (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "76623002",
+        "term": "fiebre paratifoidea tipo A",
+        "fsn": "fiebre paratifoidea tipo A (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "164299002",
+        "term": "al examen: nivel de fiebre",
+        "fsn": "al examen: nivel de fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "164309006",
+        "term": "al examen: fiebre continua",
+        "fsn": "al examen: fiebre continua (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "199177009",
+        "term": "fiebre por arañazo de gato",
+        "fsn": "fiebre por arañazo de gato (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "271749004",
+        "term": "aumento agudo de la fiebre",
+        "fsn": "aumento agudo de la fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248434006",
+        "term": "fase de caída de la fiebre",
+        "fsn": "fase de caída de la fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "409557008",
+        "term": "osteomielitis por fiebre Q",
+        "fsn": "osteomielitis por fiebre Q (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "721000221106",
+        "term": "fiebre del nilo occidental",
+        "fsn": "fiebre del nilo occidental (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "15908004",
+        "term": "fiebre por vapores de cinc",
+        "fsn": "fiebre de los trabajadores del cinc (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "15908004",
+        "term": "fiebre por vapores de zinc",
+        "fsn": "fiebre de los trabajadores del cinc (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "14175009",
+        "term": "fiebre reumática articular",
+        "fsn": "fiebre reumática articular (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "48113006",
+        "term": "fiebre hemorrágica de Omsk",
+        "fsn": "fiebre hemorrágica de Omsk (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "8554002",
+        "term": "fiebre purpúrica brasileña",
+        "fsn": "fiebre purpúrica brasileña (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "30945003",
+        "term": "fiebre por el virus Tahyna",
+        "fsn": "fiebre Tahyna (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "51254007",
+        "term": "fiebre paratifoidea tipo C",
+        "fsn": "fiebre paratifoidea tipo C (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "79974007",
+        "term": "fiebre por arañazo de gato",
+        "fsn": "enfermedad por arañazo de gato (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "164285001",
+        "term": "al examen: fiebre - general",
+        "fsn": "al examen: fiebre - general (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "164311002",
+        "term": "al examen: fiebre remitente",
+        "fsn": "al examen: fiebre remitente (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "240041006",
+        "term": "nódulo por fiebre reumática",
+        "fsn": "nódulo por fiebre reumática (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "365977007",
+        "term": "patrón de fiebre - hallazgo",
+        "fsn": "hallazgo relacionado con el patrón de fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "772154007",
+        "term": "sospecha de fiebre tifoidea",
+        "fsn": "sospecha de fiebre tifoidea (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "772162004",
+        "term": "sospecha de fiebre amarilla",
+        "fsn": "sospecha de fiebre amarilla (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "248433000",
+        "term": "fase de meseta de la fiebre",
+        "fsn": "fase de meseta de la fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "170484009",
+        "term": "portador de fiebre tifoidea",
+        "fsn": "portador de fiebre tifoidea (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "5497006",
+        "term": "fiebre por virus Manzanilla",
+        "fsn": "fiebre por virus Manzanilla (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240832002",
+        "term": "fiebre filariásica de Timor",
+        "fsn": "fiebre filariásica de Timor (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240832002",
+        "term": "fiebre filariósica de Timor",
+        "fsn": "fiebre filariásica de Timor (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "19065005",
+        "term": "fiebre hemorrágica de Lassa",
+        "fsn": "fiebre de Lassa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "19265001",
+        "term": "fiebre del valle de Pahvant",
+        "fsn": "tularemia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "38933006",
+        "term": "fiebre reumática recurrente",
+        "fsn": "fiebre reumática recurrente (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "42100005",
+        "term": "fiebre amarilla de la selva",
+        "fsn": "fiebre amarilla de la jungla (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "72163003",
+        "term": "fiebre por vapores de metal",
+        "fsn": "fiebre por metal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "164314005",
+        "term": "al examen: fiebre irregular",
+        "fsn": "al examen: fiebre irregular (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "171118001",
+        "term": "cribado para fiebre amarilla",
+        "fsn": "cribado para la detección de fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "240525000",
+        "term": "fiebre hemorrágica filoviral",
+        "fsn": "fiebre hemorrágica filoviral (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "248443002",
+        "term": "fiebre hepática intermitente",
+        "fsn": "fiebre hepática intermitente (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "67247008",
+        "term": "fiebre hemorrágica boliviana",
+        "fsn": "fiebre hemorrágica boliviana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "371112003",
+        "term": "inmune contra fiebre urliana",
+        "fsn": "inmune contra parotiditis urliana (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "271750004",
+        "term": "aumento gradual de la fiebre",
+        "fsn": "aumento gradual de la fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248432005",
+        "term": "fase ascendente de la fiebre",
+        "fsn": "fase ascendente de la fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "248436008",
+        "term": "fiebre ligeramente remitente",
+        "fsn": "fiebre ligeramente remitente (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "402790006",
+        "term": "fiebre periódica hereditaria",
+        "fsn": "fiebre periódica hereditaria (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "402919000",
+        "term": "fiebre hemorrágica del Congo",
+        "fsn": "fiebre hemorrágica del Congo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "171118001",
+        "term": "cribaje para fiebre amarilla",
+        "fsn": "cribado para la detección de fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "171118001",
+        "term": "rastreo para fiebre amarilla",
+        "fsn": "cribado para la detección de fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "240524001",
+        "term": "fiebre hemorrágica brasileña",
+        "fsn": "fiebre hemorrágica brasileña (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "365989009",
+        "term": "fase de la fiebre - hallazgo",
+        "fsn": "hallazgo relacionado con la fase de la fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "716585008",
+        "term": "fiebre hemorrágica de Zambia",
+        "fsn": "fiebre hemorrágica causada por virus Lujo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "7520000",
+        "term": "fiebre de origen desconocido",
+        "fsn": "fiebre de origen desconocido (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "1685005",
+        "term": "fiebre por mordedura de rata",
+        "fsn": "fiebre por mordedura de rata (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "12579009",
+        "term": "fiebre mediterránea familiar",
+        "fsn": "fiebre mediterránea familiar (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "58868000",
+        "term": "fiebre hemorrágica argentina",
+        "fsn": "fiebre hemorrágica argentina (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "43489008",
+        "term": "fiebre hemorrágica de Crimea",
+        "fsn": "fiebre hemorrágica del Congo y Crimea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "38933006",
+        "term": "fiebre reumática recidivante",
+        "fsn": "fiebre reumática recurrente (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "42100005",
+        "term": "fiebre amarilla de la jungla",
+        "fsn": "fiebre amarilla de la jungla (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "271754008",
+        "term": "descenso rápido de la fiebre",
+        "fsn": "descenso rápido de la fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "359673001",
+        "term": "fiebre hemorrágica venezolana",
+        "fsn": "fiebre hemorrágica venezolana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "164313004",
+        "term": "al examen: fiebre en escalera",
+        "fsn": "al examen: fiebre en escalera (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "240493004",
+        "term": "fiebre hemorrágica por Hazara",
+        "fsn": "fiebre hemorrágica por Hazara (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "271755009",
+        "term": "descenso gradual de la fiebre",
+        "fsn": "descenso gradual de la fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "371063000",
+        "term": "no inmune a la fiebre urliana",
+        "fsn": "no inmune a la parotiditis urliana (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "20927009",
+        "term": "fiebre hemorrágica del dengue",
+        "fsn": "fiebre hemorrágica dengue (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "186772009",
+        "term": "fiebre exantemática brasileña",
+        "fsn": "fiebre manchada de las Montañas Rocosas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240827003",
+        "term": "fiebre filariásica de Malasia",
+        "fsn": "fiebre filariásica de Malasia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "233622005",
+        "term": "neumonía por fiebre glandular",
+        "fsn": "neumonía por mononucleosis infecciosa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "171118001",
+        "term": "pesquisa para fiebre amarilla",
+        "fsn": "cribado para la detección de fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "171118001",
+        "term": "tamizaje para fiebre amarilla",
+        "fsn": "cribado para la detección de fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "441604003",
+        "term": "mioclonía asociada con fiebre",
+        "fsn": "mioclonía asociada con fiebre (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "73730005",
+        "term": "fiebre hemorrágica arenaviral",
+        "fsn": "fiebre hemorrágica arenavirósica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "27578005",
+        "term": "fiebre recurrente del Cáucaso",
+        "fsn": "fiebre recurrente del Cáucaso (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "469536006",
+        "term": "paño para alivio de la fiebre",
+        "fsn": "paño para alivio de la fiebre (objeto físico)",
+        "semanticTag": "objeto físico"
+    },
+    {
+        "conceptId": "72163003",
+        "term": "fiebre del lunes por la mañana",
+        "fsn": "fiebre por metal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "82214002",
+        "term": "fiebre por Bartonella quintana",
+        "fsn": "fiebre de las trincheras (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "232401004",
+        "term": "faringitis en fiebre glandular",
+        "fsn": "faringitis por mononucleosis infecciosa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "164312009",
+        "term": "al examen: fiebre intermitente",
+        "fsn": "al examen: fiebre intermitente (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "186957004",
+        "term": "fiebre por Leptorpira canicola",
+        "fsn": "fiebre por Leptorpira canicola (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "95888005",
+        "term": "fiebre micoplasmática posparto",
+        "fsn": "fiebre puerperal por micoplasma (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "186772009",
+        "term": "fiebre de las Montañas Rocosas",
+        "fsn": "fiebre manchada de las Montañas Rocosas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "171118001",
+        "term": "screening para fiebre amarilla",
+        "fsn": "cribado para la detección de fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "94001000119104",
+        "term": "antecedente de fiebre tifoidea",
+        "fsn": "antecedente de fiebre tifoidea (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "31803008",
+        "term": "fiebre por vapores de polímero",
+        "fsn": "fiebre por vapores de polímero (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "45312009",
+        "term": "neumonía en la fiebre tifoidea",
+        "fsn": "neumonía en la fiebre tifoidea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "77470003",
+        "term": "fiebre exantematosa enteroviral",
+        "fsn": "fiebre exantematosa enteroviral (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240822009",
+        "term": "fiebre filariásica bancroftiana",
+        "fsn": "fiebre filariásica bancroftiana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "359673001",
+        "term": "fiebre hemorrágica de Guanarito",
+        "fsn": "fiebre hemorrágica venezolana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "161524000",
+        "term": "antecedente de: fiebre del heno",
+        "fsn": "antecedente de: fiebre del heno (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "197342009",
+        "term": "hepatitis en la fiebre amarilla",
+        "fsn": "hepatitis en la fiebre amarilla (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "772164003",
+        "term": "sospecha de fiebre paratifoidea",
+        "fsn": "sospecha de fiebre paratifoidea (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "95887000",
+        "term": "fiebre micoplasmática posaborto",
+        "fsn": "fiebre micoplasmática secundaria a un aborto (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "82214002",
+        "term": "fiebre por Rochalimaea quintana",
+        "fsn": "fiebre de las trincheras (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240668005",
+        "term": "fiebre recurrente (borreliosis)",
+        "fsn": "borreliosis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "95888005",
+        "term": "fiebre puerperal por micoplasma",
+        "fsn": "fiebre puerperal por micoplasma (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "30982007",
+        "term": "fiebre hemorrágica sudamericana",
+        "fsn": "fiebre hemorrágica sudamericana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "88036000",
+        "term": "fiebre del Valle de San Joaquín",
+        "fsn": "coccidioidomicosis pulmonar primaria (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "77957000",
+        "term": "fiebre periódica, sin enfermedad",
+        "fsn": "fiebre intermitente (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "161500008",
+        "term": "antecedente de: fiebre reumática",
+        "fsn": "antecedente de: fiebre reumática (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "95887000",
+        "term": "fiebre micoplasmática postaborto",
+        "fsn": "fiebre micoplasmática secundaria a un aborto (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "409555000",
+        "term": "meningitis aséptica por fiebre Q",
+        "fsn": "meningitis aséptica por fiebre Q (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "130091000119103",
+        "term": "fiebre posterior a procedimiento",
+        "fsn": "fiebre posterior a procedimiento (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "16766000",
+        "term": "fiebre hemorrágica por arbovirus",
+        "fsn": "fiebre hemorrágica por arbovirus (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "53632005",
+        "term": "fiebre por estomatitis vesicular",
+        "fsn": "estomatitis vesicular por virus Indiana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "56844000",
+        "term": "vacuna contra la fiebre amarilla",
+        "fsn": "vacuna contra la fiebre amarilla (producto)",
+        "semanticTag": "producto"
+    },
+    {
+        "conceptId": "73730005",
+        "term": "fiebre hemorrágica arenavirósica",
+        "fsn": "fiebre hemorrágica arenavirósica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "231855007",
+        "term": "conjuntivitis por fiebre del heno",
+        "fsn": "conjuntivitis alérgica estacional (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "186772009",
+        "term": "fiebre manchada de las Rocallosas",
+        "fsn": "fiebre manchada de las Montañas Rocosas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "111864006",
+        "term": "fiebre hemorrágica de Chikungunya",
+        "fsn": "fiebre de Chikungunya (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "6452009",
+        "term": "fiebre por garrapatas de Colorado",
+        "fsn": "fiebre por garrapatas de Colorado (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "74800004",
+        "term": "fiebre de los fundidores de latón",
+        "fsn": "fiebre de los fundidores de latón (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "20927009",
+        "term": "fiebre quebrantahuesos hemorrágica",
+        "fsn": "fiebre hemorrágica dengue (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "703119002",
+        "term": "carditis debida a fiebre reumática",
+        "fsn": "carditis debida a fiebre reumática (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "37109004",
+        "term": "fiebre hemorrágica por virus Ébola",
+        "fsn": "enfermedad por virus Ébola (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "416113008",
+        "term": "trastorno caracterizado por fiebre",
+        "fsn": "trastorno febril (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "58868000",
+        "term": "fiebre hemorrágica por virus Junín",
+        "fsn": "fiebre hemorrágica argentina (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "43489008",
+        "term": "fiebre hemorrágica de Asia Central",
+        "fsn": "fiebre hemorrágica del Congo y Crimea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "19265001",
+        "term": "fiebre de las moscas de los ciervos",
+        "fsn": "tularemia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "426000000",
+        "term": "fiebre superior a 38 grados Celsius",
+        "fsn": "fiebre superior a 38 grados Celsius (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "710581006",
+        "term": "educación sobre manejo de la fiebre",
+        "fsn": "educación sobre manejo de la fiebre (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "15908004",
+        "term": "fiebre de los trabajadores del cinc",
+        "fsn": "fiebre de los trabajadores del cinc (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240615004",
+        "term": "fiebre de la garrapata de la madera",
+        "fsn": "fiebre manchada de las Montañas Rocosas occidentales (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "67247008",
+        "term": "fiebre hemorrágica por virus Machupo",
+        "fsn": "fiebre hemorrágica boliviana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "67308009",
+        "term": "vacunación contra la fiebre amarilla",
+        "fsn": "vacunación contra la fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "164307008",
+        "term": "al examen: fiebre - elevación súbita",
+        "fsn": "al examen: fiebre - elevación súbita (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "772158005",
+        "term": "sospecha de fiebre hemorrágica viral",
+        "fsn": "sospecha de fiebre hemorrágica viral (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "186774005",
+        "term": "fiebre exantemática del Mediterráneo",
+        "fsn": "fiebre botonosa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "60025004",
+        "term": "fiebre transitoria del recién nacido",
+        "fsn": "fiebre transitoria del recién nacido (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "31120005",
+        "term": "fiebre recurrente de Asia Y/O África",
+        "fsn": "fiebre recurrente de Asia Y/O África (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "84871007",
+        "term": "fiebre reumática aguda con valvulitis",
+        "fsn": "fiebre reumática aguda con valvulitis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "26275000",
+        "term": "fiebre debida a Leptospira autumnalis",
+        "fsn": "fiebre debida a Leptospira autumnalis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240515005",
+        "term": "fiebre por virus del grupo Uukiuniemi",
+        "fsn": "fiebre por virus del grupo Uukiuniemi (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "716864001",
+        "term": "fiebre hemorrágica con síndrome renal",
+        "fsn": "fiebre hemorrágica con síndrome renal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "2291000221109",
+        "term": "fiebre amarilla sospecha de epizootia",
+        "fsn": "fiebre amarilla sospecha de epizootia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "7141001",
+        "term": "vacunación contra la fiebre ondulante",
+        "fsn": "vacunación contra la brucelosis (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "43489008",
+        "term": "fiebre hemorrágica del Congo y Crimea",
+        "fsn": "fiebre hemorrágica del Congo y Crimea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "45312009",
+        "term": "fiebre tifoidea agravada por neumonía",
+        "fsn": "neumonía en la fiebre tifoidea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "164308003",
+        "term": "al examen: fiebre - elevación gradual",
+        "fsn": "al examen: fiebre - elevación gradual (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "84871007",
+        "term": "fiebre reumática activa con valvulitis",
+        "fsn": "fiebre reumática aguda con valvulitis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "200277008",
+        "term": "fiebre puerperal de origen desconocido",
+        "fsn": "fiebre puerperal de origen desconocido (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "209516003",
+        "term": "fiebre recidivante de África del norte",
+        "fsn": "fiebre recidivante de África del norte (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "194709000",
+        "term": "fiebre reumática aguda con miocarditis",
+        "fsn": "miocarditis reumática aguda (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "409676000",
+        "term": "fiebre hemorrágica por Dengue, grado I",
+        "fsn": "fiebre hemorrágica por Dengue, grado I (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "472822008",
+        "term": "fiebre exantemática del lejano oriente",
+        "fsn": "fiebre exantemática del lejano oriente (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "1084791000119106",
+        "term": "paro cardíaco debido a fiebre tifoidea",
+        "fsn": "paro cardíaco debido a fiebre tifoidea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "192648008",
+        "term": "meningitis causada por fiebre tifoidea",
+        "fsn": "meningitis causada por fiebre tifoidea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "67308009",
+        "term": "inmunización contra la fiebre amarilla",
+        "fsn": "vacunación contra la fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "160379003",
+        "term": "antecedente familiar de fiebre del heno",
+        "fsn": "antecedente familiar de fiebre del heno (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "164306004",
+        "term": "al examen: características de la fiebre",
+        "fsn": "al examen: características de la fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "186772009",
+        "term": "fiebre manchada de las Montañas Rocosas",
+        "fsn": "fiebre manchada de las Montañas Rocosas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "409677009",
+        "term": "fiebre hemorrágica por Dengue, grado II",
+        "fsn": "fiebre hemorrágica por Dengue, grado II (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "409679007",
+        "term": "fiebre hemorrágica por Dengue, grado IV",
+        "fsn": "fiebre hemorrágica por Dengue, grado IV (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "18192007",
+        "term": "fiebre reumática aguda con endocarditis",
+        "fsn": "endocarditis reumática aguda (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "15676002",
+        "term": "fiebre reumática aguda con pericarditis",
+        "fsn": "pericarditis reumática aguda (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "164290003",
+        "term": "al examen: método de registro de fiebre",
+        "fsn": "al examen: método de registro de fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "194709000",
+        "term": "fiebre reumática activa con miocarditis",
+        "fsn": "miocarditis reumática aguda (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "418741007",
+        "term": "exposición al virus de la fiebre urliana",
+        "fsn": "exposición al virus de la parotiditis urliana (evento)",
+        "semanticTag": "evento"
+    },
+    {
+        "conceptId": "83798008",
+        "term": "vacunación contra la fiebre paratifoidea",
+        "fsn": "vacunación contra la fiebre paratifoidea (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "186781003",
+        "term": "fiebre de la garrapata del norte de Asia",
+        "fsn": "tifus del Norte de Asia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "14683004",
+        "term": "fiebre recurrente transmitida por piojos",
+        "fsn": "fiebre recurrente transmitida por piojos (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "409678004",
+        "term": "fiebre hemorrágica por Dengue, grado III",
+        "fsn": "fiebre hemorrágica por Dengue, grado III (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "430777009",
+        "term": "antecedente familiar de fiebre reumática",
+        "fsn": "antecedente familiar de fiebre reumática (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "171118001",
+        "term": "detección selectiva para fiebre amarilla",
+        "fsn": "cribado para la detección de fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "18192007",
+        "term": "fiebre reumática activa con endocarditis",
+        "fsn": "endocarditis reumática aguda (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "15676002",
+        "term": "fiebre reumática activa con pericarditis",
+        "fsn": "pericarditis reumática aguda (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "24363009",
+        "term": "fiebre reumática sin compromiso cardíaco",
+        "fsn": "fiebre reumática sin compromiso cardíaco (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "186771002",
+        "term": "fiebre manchada por Rickettsia rickettsii",
+        "fsn": "enfermedad por ricketsias del grupo de las fiebres exantemáticas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "406558002",
+        "term": "fiebre por picadura de garrapata africana",
+        "fsn": "fiebre por picadura de garrapata africana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "397420007",
+        "term": "fiebre del Oeste del Nilo sin encefalitis",
+        "fsn": "fiebre del Nilo occidental sin encefalitis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "426000000",
+        "term": "fiebre superior a 100,4 grados Fahrenheit",
+        "fsn": "fiebre superior a 38 grados Celsius (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "717231003",
+        "term": "síndrome de Marshall con fiebre periódica",
+        "fsn": "síndrome de fiebre periódica y estomatitis aftosa con faringitis y linfadenitis cervical (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "716585008",
+        "term": "fiebre hemorrágica causada por virus Lujo",
+        "fsn": "fiebre hemorrágica causada por virus Lujo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "75116005",
+        "term": "fiebre de los loros por Chlamydia psitacci",
+        "fsn": "ornitosis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "88808006",
+        "term": "fiebre recurrente de Irán Y/O Asia Central",
+        "fsn": "fiebre recurrente de Irán Y/O Asia Central (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "83798008",
+        "term": "inmunización contra la fiebre paratifoidea",
+        "fsn": "vacunación contra la fiebre paratifoidea (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "186772009",
+        "term": "fiebre manchada de las Montañas Rocallosas",
+        "fsn": "fiebre manchada de las Montañas Rocosas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240616003",
+        "term": "fiebre de la garrapata del perro americana",
+        "fsn": "fiebre manchada de las Montañas Rocosas orientales (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "698580004",
+        "term": "fiebre posterior a vacunación antitetánica",
+        "fsn": "fiebre posterior a vacunación antitetánica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "698579002",
+        "term": "fiebre después de vacunación antidiftérica",
+        "fsn": "fiebre después de vacunación antidiftérica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "397420007",
+        "term": "fiebre del Nilo occidental sin encefalitis",
+        "fsn": "fiebre del Nilo occidental sin encefalitis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "14683004",
+        "term": "fiebre recurrente por Borrelia recurrentis",
+        "fsn": "fiebre recurrente transmitida por piojos (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "164316007",
+        "term": "al examen: fiebre de caída rápida en lisis",
+        "fsn": "al examen: fiebre de caída rápida en lisis (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "14683004",
+        "term": "fiebre recidivante por Borrelia recurrentis",
+        "fsn": "fiebre recurrente transmitida por piojos (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "164315006",
+        "term": "al examen: fiebre de caída rápida en crisis",
+        "fsn": "al examen: fiebre de caída rápida en crisis (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "333707007",
+        "term": "vacuna contra hepatitis A y fiebre tifoidea",
+        "fsn": "vacuna contra hepatitis A y fiebre tifoidea (producto)",
+        "semanticTag": "producto"
+    },
+    {
+        "conceptId": "186772009",
+        "term": "fiebre exantemática de las Montañas Rocosas",
+        "fsn": "fiebre manchada de las Montañas Rocosas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "234538002",
+        "term": "hiperinmunoglobulina D con fiebre periódica",
+        "fsn": "hiperinmunoglobulina D con fiebre periódica (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "722401001",
+        "term": "fiebre severa con síndrome trombocitopénico",
+        "fsn": "síndrome viral de fiebre severa con trombocitopenia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240494005",
+        "term": "fiebre hemorrágica transmitida por roedores",
+        "fsn": "fiebre hemorrágica transmitida por roedores (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "95887000",
+        "term": "fiebre micoplasmática secundaria a un aborto",
+        "fsn": "fiebre micoplasmática secundaria a un aborto (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "415561000",
+        "term": "fiebre por picadura de garrapata sudafricana",
+        "fsn": "fiebre por picadura de garrapata sudafricana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "171118001",
+        "term": "cribado para la detección de fiebre amarilla",
+        "fsn": "cribado para la detección de fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "365977007",
+        "term": "hallazgo relacionado con el patrón de fiebre",
+        "fsn": "hallazgo relacionado con el patrón de fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "716584007",
+        "term": "fiebre hemorrágica causada por virus Chapare",
+        "fsn": "fiebre hemorrágica causada por virus Chapare (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "788952008",
+        "term": "fiebre hemorrágica causada por virus Alkhurma",
+        "fsn": "fiebre hemorrágica causada por virus Alkhurma (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "365989009",
+        "term": "hallazgo relacionado con la fase de la fiebre",
+        "fsn": "hallazgo relacionado con la fase de la fiebre (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "16766000",
+        "term": "fiebre hemorrágica transmitida por artrópodos",
+        "fsn": "fiebre hemorrágica por arbovirus (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "10301003",
+        "term": "fiebre recidivante transmitida por garrapatas",
+        "fsn": "fiebre recidivante transmitida por garrapatas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "49513005",
+        "term": "deshidratación por fiebre en el recién nacido",
+        "fsn": "deshidratación por fiebre en el recién nacido (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "312591002",
+        "term": "fiebre reumática aguda con compromiso cardíaco",
+        "fsn": "carditis reumática aguda (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "58868000",
+        "term": "fiebre hemorrágica del noreste de Buenos Aires",
+        "fsn": "fiebre hemorrágica argentina (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "200951007",
+        "term": "eritema marginado en la fiebre reumática aguda",
+        "fsn": "eritema marginado en la fiebre reumática aguda (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "367528006",
+        "term": "amiloidosis de la fiebre mediterránea familiar",
+        "fsn": "amiloidosis de la fiebre mediterránea familiar (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "74873003",
+        "term": "fiebre recurrente de Centroamérica y Sudamérica",
+        "fsn": "fiebre recurrente de América Central Y/O América del Sur (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "19044004",
+        "term": "fiebre por mordedura de rata por Spirillum minus",
+        "fsn": "fiebre espirilar (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "78168002",
+        "term": "fiebre recurrente de América del Norte occidental",
+        "fsn": "fiebre recurrente de América del Norte occidental (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "117841000119108",
+        "term": "vacunación contra la fiebre tifoidea administrada",
+        "fsn": "vacunación contra la fiebre tifoidea administrada (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "151111000119100",
+        "term": "vacunación contra la fiebre amarilla administrada",
+        "fsn": "vacunación contra la fiebre amarilla administrada (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "43626008",
+        "term": "fiebre recurrente de África Central Y/O Sudáfrica",
+        "fsn": "fiebre recurrente de África Central Y/O Sudáfrica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "39002001",
+        "term": "fiebre recurrente del oeste de los Estados Unidos",
+        "fsn": "fiebre recurrente del oeste de los Estados Unidos (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240616003",
+        "term": "fiebre manchada de las Montañas Rocosas orientales",
+        "fsn": "fiebre manchada de las Montañas Rocosas orientales (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "111301006",
+        "term": "pericarditis debida a fiebre mediterránea familiar",
+        "fsn": "pericarditis debida a fiebre mediterránea familiar (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240727006",
+        "term": "fiebre del Valle de San Joaquín que afecta la piel",
+        "fsn": "coccidioidomicosis cutánea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "698581000",
+        "term": "fiebre posterior a vacunación contra la tos ferina",
+        "fsn": "fiebre posterior a vacunación contra la tos ferina (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "73301000",
+        "term": "reacción a una transfusión con fiebre y escalofríos",
+        "fsn": "reacción febril a una transfusión (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "192706006",
+        "term": "encefalitis posvacunación contra la fiebre tifoidea",
+        "fsn": "encefalitis posvacunación contra la fiebre tifoidea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "192716003",
+        "term": "encefalitis posvacunación contra la fiebre amarilla",
+        "fsn": "encefalitis posvacunación contra la fiebre amarilla (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "170545001",
+        "term": "requiere una dosis de vacuna contra fiebre amarilla",
+        "fsn": "requiere una dosis de vacuna contra fiebre amarilla (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "240519004",
+        "term": "fiebre de Nápoles transmitida por mosquito simúlido",
+        "fsn": "fiebre de Nápoles transmitida por mosquito simúlido (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "186781003",
+        "term": "fiebre del norte de Asia transmitida por garrapatas",
+        "fsn": "tifus del Norte de Asia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "403834003",
+        "term": "síndrome de fiebre periódica asociada con hiper-IgD",
+        "fsn": "síndrome de fiebre periódica asociada con hiperinmunoglobulinemia D (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "473168001",
+        "term": "antecedente de vacunación contra la fiebre amarilla",
+        "fsn": "antecedente de vacunación contra la fiebre amarilla (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "719320000",
+        "term": "vacunación contra la fiebre amarilla contraindicada",
+        "fsn": "vacunación contra la fiebre amarilla contraindicada (situación)",
+        "semanticTag": "situación"
+    },
+    {
+        "conceptId": "722401001",
+        "term": "síndrome viral de fiebre severa con trombocitopenia",
+        "fsn": "síndrome viral de fiebre severa con trombocitopenia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240615004",
+        "term": "fiebre manchada de las Montañas Rocosas occidentales",
+        "fsn": "fiebre manchada de las Montañas Rocosas occidentales (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "206598002",
+        "term": "fiebre recidivante del sudoeste de EE.UU. Y/O México",
+        "fsn": "fiebre recidivante del sudoeste de Estados Unidos de Norteamérica Y/O México (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "698613000",
+        "term": "educación sobre brote epidémico de fiebre por dengue",
+        "fsn": "educación sobre brote epidémico de fiebre por dengue (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "722401001",
+        "term": "síndrome vírico de fiebre severa con trombocitopenia",
+        "fsn": "síndrome viral de fiebre severa con trombocitopenia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "707858008",
+        "term": "con alto riesgo de fiebre hemorrágica por virus Ébola",
+        "fsn": "con alto riesgo de enfermedad por virus Ébola (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "707856007",
+        "term": "con bajo riesgo de fiebre hemorrágica por virus Ébola",
+        "fsn": "con bajo riesgo de enfermedad por virus Ébola (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "122307008",
+        "term": "determinación del ARN del virus de la fiebre amarilla",
+        "fsn": "determinación del ácido ribonucleico del virus de la fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "397420007",
+        "term": "fiebre del Nilo occidental sin compromiso neurológico",
+        "fsn": "fiebre del Nilo occidental sin encefalitis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "11842003",
+        "term": "vacunación contra la fiebre manchada de las Rocallosas",
+        "fsn": "vacunación contra la fiebre manchada de las Rocallosas (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "111301006",
+        "term": "pericarditis asociada con fiebre mediterránea familiar",
+        "fsn": "pericarditis debida a fiebre mediterránea familiar (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240616003",
+        "term": "fiebre exantemática de las Montañas Rocosas orientales",
+        "fsn": "fiebre manchada de las Montañas Rocosas orientales (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "192707002",
+        "term": "encefalitis posvacunación contra la fiebre paratifoidea",
+        "fsn": "encefalitis posvacunación contra la fiebre paratifoidea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "333652001",
+        "term": "vacuna contra la fiebre amarilla a virus vivo, inyección",
+        "fsn": "vacuna contra la fiebre amarilla a virus vivo, inyección (producto)",
+        "semanticTag": "producto"
+    },
+    {
+        "conceptId": "74873003",
+        "term": "fiebre recurrente de América Central Y/O América del Sur",
+        "fsn": "fiebre recurrente de América Central Y/O América del Sur (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "45355008",
+        "term": "vacuna contra la fiebre manchada de las Montañas Rocosas",
+        "fsn": "vacuna contra la fiebre manchada de las Montañas Rocosas (producto)",
+        "semanticTag": "producto"
+    },
+    {
+        "conceptId": "122147008",
+        "term": "medición de anticuerpos anti-virus de la fiebre amarilla",
+        "fsn": "medición de anticuerpos anti-virus de la fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "333652001",
+        "term": "vacuna contra la fiebre amarilla a virus vivo, inyectable",
+        "fsn": "vacuna contra la fiebre amarilla a virus vivo, inyección (producto)",
+        "semanticTag": "producto"
+    },
+    {
+        "conceptId": "186781003",
+        "term": "fiebre por Rickettsia siberica transmitida por garrapatas",
+        "fsn": "tifus del Norte de Asia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "789034003",
+        "term": "requiere vacunación contra fiebre tifoidea y paratifoidea",
+        "fsn": "requiere vacunación contra fiebre tifoidea y paratifoidea (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "240520005",
+        "term": "fiebre por orbivirus transmitida por el mosquito simúlido",
+        "fsn": "fiebre por orbivirus transmitida por el mosquito simúlido (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "240521009",
+        "term": "fiebre por rhabdovirus transmitida por el mosquito simúlido",
+        "fsn": "fiebre por rhabdovirus transmitida por el mosquito simúlido (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "90974009",
+        "term": "salmonelosis (excepto fiebre tifoidea y paratifoidea humanas)",
+        "fsn": "salmonelosis (excepto fiebre tifoidea y paratifoidea humanas) (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "403833009",
+        "term": "síndrome de fiebre periódica asociado con el receptor del TNF",
+        "fsn": "síndrome de fiebre periódica asociado con el receptor del factor de necrosis tumoral (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "219095000",
+        "term": "reacción adversa causada por vacuna contra la fiebre amarilla",
+        "fsn": "reacción adversa causada por vacuna contra la fiebre amarilla (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "6452009",
+        "term": "fiebre transportada por garrapatas de las montañas americanas",
+        "fsn": "fiebre por garrapatas de Colorado (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "52138004",
+        "term": "fiebre por mordedura de rata por Streptobacillus moniliformis",
+        "fsn": "fiebre estreptobacilar (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "403833009",
+        "term": "síndrome de fiebre periódica asociado con el receptor del FNT",
+        "fsn": "síndrome de fiebre periódica asociado con el receptor del factor de necrosis tumoral (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "186771002",
+        "term": "enfermedad por rickettsias del grupo de la fiebre exantemática",
+        "fsn": "enfermedad por ricketsias del grupo de las fiebres exantemáticas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "164287009",
+        "term": "al examen: evaluación de la fiebre - no se detectaron anomalías",
+        "fsn": "al examen: evaluación de la fiebre - no se detectaron anomalías (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "425732004",
+        "term": "prueba serológica de cribado para virus de la fiebre hemorrágica",
+        "fsn": "prueba serológica de cribado para virus de la fiebre hemorrágica (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "186771002",
+        "term": "enfermedad por ricketsias del grupo de las fiebres exantemáticas",
+        "fsn": "enfermedad por ricketsias del grupo de las fiebres exantemáticas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "250511008",
+        "term": "título de anticuerpos anti - agente etiológico de fiebre entérica",
+        "fsn": "medición del título de anticuerpos anti - agente etiológico de fiebre entérica (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "315093003",
+        "term": "nivel de anticuerpos anti-agente de la fiebre por rasguño de gato",
+        "fsn": "nivel de anticuerpos anti-agente de la fiebre por rasguño de gato (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "403834003",
+        "term": "síndrome de fiebre periódica asociada con hiperinmunoglobulinemia D",
+        "fsn": "síndrome de fiebre periódica asociada con hiperinmunoglobulinemia D (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "122307008",
+        "term": "determinación del ácido ribonucleico del virus de la fiebre amarilla",
+        "fsn": "determinación del ácido ribonucleico del virus de la fiebre amarilla (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "52635002",
+        "term": "fiebre recurrente de la Península Ibérica Y/O del noroeste de África",
+        "fsn": "fiebre recurrente de la Península Ibérica Y/O del noroeste de África (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "397420007",
+        "term": "enfermedad por virus de la fiebre del Oeste del Nilo no neuroinvasiva",
+        "fsn": "fiebre del Nilo occidental sin encefalitis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "119751000146104",
+        "term": "fiebre causada por coronavirus 2 del síndrome respiratorio agudo severo",
+        "fsn": "fiebre causada por coronavirus 2 del síndrome respiratorio agudo severo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "90974009",
+        "term": "salmonelosis (con excepción de la fiebre tifoidea humana y la paratifoidea)",
+        "fsn": "salmonelosis (excepto fiebre tifoidea y paratifoidea humanas) (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "121972005",
+        "term": "medición de anticuerpos anti-virus de la fiebre por garrapatas del Colorado",
+        "fsn": "medición de anticuerpos anti-virus de la fiebre por garrapatas del Colorado (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "206598002",
+        "term": "fiebre recidivante del sudoeste de Estados Unidos de Norteamérica Y/O México",
+        "fsn": "fiebre recidivante del sudoeste de Estados Unidos de Norteamérica Y/O México (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "54049006",
+        "term": "fiebre causada por el virus de la fiebre siciliana transmitida por flebótomos",
+        "fsn": "fiebre causada por el virus de la fiebre siciliana transmitida por flebótomos (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "250511008",
+        "term": "medición del título de anticuerpos anti - agente etiológico de fiebre entérica",
+        "fsn": "medición del título de anticuerpos anti - agente etiológico de fiebre entérica (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "443589007",
+        "term": "medición de anticuerpo contra rickettsia del grupo de las fiebres exantemáticas",
+        "fsn": "medición de anticuerpo contra rickettsia del grupo de las fiebres exantemáticas (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "698578005",
+        "term": "fiebre posterior a vacunación antidiftérica, antitetánica y contra la tos ferina",
+        "fsn": "fiebre posterior a vacunación antidiftérica, antitetánica y contra la tos ferina (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "118111000",
+        "term": "ensayo de ácido ribonucleico de ricketsias del grupo de las fiebres exantemáticas",
+        "fsn": "análisis de ácido ribonucleico de ricketsias del grupo de las fiebres exantemáticas (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "333708002",
+        "term": "vacuna contra hepatitis A y fiebre tifoidea, 1.440 UI/25 mcg/ml, jeringa precargada",
+        "fsn": "vacuna contra hepatitis A y fiebre tifoidea, 1.440 UI/25 mcg, solución inyectable, jeringa precargada de 1 ml (producto)",
+        "semanticTag": "producto"
+    },
+    {
+        "conceptId": "58827009",
+        "term": "fiebre recurrente del sur de los Estados Unidos, México, Centroamérica y Sudamérica",
+        "fsn": "fiebre recurrente del sur de los Estados Unidos, México, América Central Y/O América del Sur (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "118111000",
+        "term": "análisis de ácido ribonucleico de ricketsias del grupo de las fiebres exantemáticas",
+        "fsn": "análisis de ácido ribonucleico de ricketsias del grupo de las fiebres exantemáticas (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "403833009",
+        "term": "síndrome de fiebre periódica asociado con el receptor del factor de necrosis tumoral",
+        "fsn": "síndrome de fiebre periódica asociado con el receptor del factor de necrosis tumoral (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "717231003",
+        "term": "síndrome de fiebre periódica y estomatitis aftosa con faringitis y linfadenitis cervical",
+        "fsn": "síndrome de fiebre periódica y estomatitis aftosa con faringitis y linfadenitis cervical (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "783146009",
+        "term": "síndrome de fiebre periódica hereditaria asociado a la proteína NLR con dominio pirina 12",
+        "fsn": "síndrome de fiebre periódica hereditaria asociado a la proteína NLR con dominio pirina 12 (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "58827009",
+        "term": "fiebre recurrente del sur de los Estados Unidos, México, América Central Y/O América del Sur",
+        "fsn": "fiebre recurrente del sur de los Estados Unidos, México, América Central Y/O América del Sur (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "713731001",
+        "term": "fiebre de origen desconocido concomitante con infección por virus de la inmunodeficiencia humana",
+        "fsn": "pirexia de origen desconocido concomitante con infección por virus de la inmunodeficiencia humana (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "722401001",
+        "term": "El síndrome viral de fiebre severa con trombocitopenia (SFST) es una nueva enfermedad infecciosa emergente.",
+        "fsn": "síndrome viral de fiebre severa con trombocitopenia (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "333708002",
+        "term": "vacuna contra hepatitis A y fiebre tifoidea, 1.440 UI/25 mcg, solución inyectable, jeringa precargada de 1 ml",
+        "fsn": "vacuna contra hepatitis A y fiebre tifoidea, 1.440 UI/25 mcg, solución inyectable, jeringa precargada de 1 ml (producto)",
+        "semanticTag": "producto"
+    },
+    {
+        "conceptId": "58428007",
+        "term": "panel de aglutininas febriles de fiebre tifoidea O y H, fiebre paratifoidea A y B, Brucella y Proteus OX - 19",
+        "fsn": "panel de aglutininas febriles de fiebre tifoidea O y H, fiebre paratifoidea A y B, Brucella y Proteus OX - 19 (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "765327005",
+        "term": "síndrome de anemia sideroblástica congénita, inmunodeficiencia de linfocitos B, fiebre periódica y retraso del desarrollo",
+        "fsn": "síndrome de anemia sideroblástica congénita, inmunodeficiencia de linfocitos B, fiebre periódica y retraso del desarrollo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "431193003",
+        "term": "Presencia de patógenos vivos en la sangre que producen consecuencias clínicas significativas como fiebre, escalofríos o hipotensión.",
+        "fsn": "infección del torrente sanguíneo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "104273003",
+        "term": "medición de aglutininas febriles, Brucella, Francisella, tifo murino, fiebre Q, fiebre manchada de las Rocallosas, tifo de los matorrales",
+        "fsn": "medición de aglutininas febriles, Brucella, Francisella, tifo murino, fiebre Q, fiebre manchada de las Rocallosas, tifo de los matorrales (procedimiento)",
+        "semanticTag": "procedimiento"
+    },
+    {
+        "conceptId": "123471000119103",
+        "term": "Fiebre dentro del período de recuperación habitual con la posibilidad de que se encuentre vinculada etiológicamente con la vacunación y que podría indicar una complicación.",
+        "fsn": "fiebre posvacunación (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "130091000119103",
+        "term": "Fiebre dentro del período de recuperación habitual con la posibilidad de que se encuentre vinculada etiológicamente con un procedimiento y que podría indicar una complicación.",
+        "fsn": "fiebre posterior a procedimiento (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    {
+        "conceptId": "716648006",
+        "term": "Una neoplasia maligna primaria infantil rara, de origen mesenquimático. Rara vez se produce en adultos. Se manifiesta por una masa abdominal, dolor en el cuadrante superior derecho o en el epigastrio, náuseas, anorexia, fiebre intermitente o cefalea.",
+        "fsn": "sarcoma embrionario de hígado (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "716585008",
+        "term": "Una enfermedad zoonótica de Zambia, África, causada por el virus Lujo, cuyo reservorio es desconocido. Se caracteriza por fiebre y manifestaciones hemorrágicas con una tasa de mortalidad sumamente elevada, de 80% y un nivel de transmisión hospitalaria moderado a elevado.",
+        "fsn": "fiebre hemorrágica causada por virus Lujo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "447931005",
+        "term": "Presencia de fiebre, hipotensión u oliguria en un paciente que cumple con los tres criterios siguientes: no se realizó hemocultivo o no se aislaron microorganismos; no se observa una infección evidente en otro lugar y se inició el tratamiento antimicrobiano apropiado para sepsis",
+        "fsn": "sepsis clínica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "716864001",
+        "term": "La fiebre hemorrágica con síndrome renal es una enfermedad potencialmente severa transmitida por roedores, causada por hantavirus del Viejo Mundo y caracterizada por fiebre elevada, malestar, cefalea, mialgia, artralgia, dolor de espalda, dolor abdominal, oliguria/insuficiencia renal y manifestaciones hemorrágicas sistémicas.",
+        "fsn": "fiebre hemorrágica con síndrome renal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "721090002",
+        "term": "Enfermedad caracterizada por ulceración cutánea recurrente, artralgia, fiebre, osteólisis periarticular, oligodoncia y distrofia ungueal. La enfermedad se describió en cinco hermanos de una familia de Kirguistán (Asia Central). Tres de ellos también presentaban queratitis que dio lugar a alteración de la visión o ceguera. La transmisión es autosómica recesiva.",
+        "fsn": "dermatosteólisis, tipo kirguisa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "716584007",
+        "term": "Causada por el virus Chapare, descubierto en un pequeño brote epidémico en Cochabamba, Bolivia, entre 2003 y 2004. Una fiebre hemorrágica aguda de etiología viral, caracterizada por fiebre, mialgia, artralgia y múltiples signos de hemorragia. Alrededor de un tercio de los casos no tratados progresan a enfermedad más severa con delirio, coma, convulsiones y muerte.",
+        "fsn": "fiebre hemorrágica causada por virus Chapare (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "702809001",
+        "term": "Una reacción de hipersensibilidad medicamentosa con un período de latencia relativamente prolongado después de la exposición, caracterizada por erupción, fiebre, linfadenopatía, anomalías hematológicas que incluyen eosinofilia y linfocitosis atípica y compromiso de órganos internos. La presentación clínica es muy variable. En 50-90% de los casos se observa eosinofilia.",
+        "fsn": "reacción medicamentosa con eosinofilia y síntomas sistémicos (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "766935007",
+        "term": "Hemopatía linfoide infrecuente caracterizada por tumores óseos (único o múltiples) no asociada con compromiso maligno extraganglionar o de otros ganglios linfáticos fuera del área. Suele presentarse con dolor óseo, compresión nerviosa y una tumoración o fractura palpable. No suelen observarse otras características sistémicas como fiebre, sudoración nocturna, fatiga, pérdida del apetito y pérdida de peso.",
+        "fsn": "linfoma primario de hueso (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "770684008",
+        "term": "Una neoplasia epitelial primaria extremadamente rara del hígado y la vía biliar que se origina en el epitelio de la vía biliar intrahepática. Histológicamente se caracteriza por la presencia de queratinización y/o puentes intracelulares. Los pacientes típicamente se presentan con dolor abdominal en el cuadrante superior derecho, ictericia, náuseas, vómitos, anorexia, descenso de peso, fiebre y/o dispepsia.",
+        "fsn": "carcinoma escamocelular de hígado y vía biliar intrahepática (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "770903003",
+        "term": "Enfermedad genitourinaria infrecuente caracterizada por la aparición de síntomas de tipo gripal (fiebre, fatiga extrema, mialgia, ardor y picazón en los ojos, congestión nasal/rinorrea), así como cambios de ánimo, irritabilidad y concentración, dificultades de memoria y atención unos minutos o algunas horas después de la eyaculación. Los síntomas desaparecen espontáneamente de 3 a 7 días después del inicio.",
+        "fsn": "síndrome de enfermedad postorgásmica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "784339002",
+        "term": "Un síndrome autoinflamatorio raro, de causa genética, con una enfermedad de deficiencia inmunitaria caracterizada por exacerbaciones recurrentes y severas de psoriasis pustulosa generalizada asociada con fiebre elevada astenia e inflamación sistémica, debida a deficiencia de un antagonista de IL36R. Ocasionalmente puede asociarse con cambios ungueales psoriásicos (por ejemplo, fositas ungueales y onicomadesis).",
+        "fsn": "deficiencia de antagonista de receptor de interleucina 36 (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "783146009",
+        "term": "Un síndrome autoinflamatorio raro, caracterizado por períodos episódicos y recurrentes de fiebre combinados con diversas manifestaciones sistémicas como mialgia, artralgia, tumefacción articular, urticaria, cefalea y erupción cutánea. Un desencadenante frecuente de estos episodios es el frío. Hay evidencias que indican que la enfermedad se produce por una mutación heterocigota en el gen NLRP12 en el cromosoma 19q13.",
+        "fsn": "síndrome de fiebre periódica hereditaria asociado a la proteína NLR con dominio pirina 12 (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "771309000",
+        "term": "Una inmunodeficiencia combinada de linfocitos T y B rara, con predisposición al síndrome linfoproliferativo. Se caracteriza por viremia de Epstein-Barr peristente sintomática e hipogammaglobulinemia que se presenta en forma variable con fiebre, linfadenopatía y afecciones inflamatorias sistémicas incluyendo hepatitis, neumonía y sepsis. Puede asociarse con linfoma, linfohistiocitosis hemofagocítica y anemia aplásica.",
+        "fsn": "enfermedad linfoproliferativa autosómica recesiva (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "782915004",
+        "term": "Una linfohistiocitosis hemofagocítica secundaria rara caracterizada por su presentación inicial como una enfermedad maligna o en cualquier etapa durante la quimioterapia. Las neoplasias malignas asociadas frecuentemente son leucemias, linfomas de linfocitos B, T o NK y linfoma de Hodgkin. La manifestación clínica típica incluye fiebre, hepatoesplenomegalia y citopenias combinadas con hallazgos de laboratorio específicos.",
+        "fsn": "linfohistiocitosis hemofagocítica adquirida asociada con enfermedad maligna (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "764998005",
+        "term": "Una enfermedad inflamatoria/neurológica autoinmunitaria rara caracterizada por comienzo agudo (o subagudo) de alteración de la consciencia (que en ocasiones se presenta como convulsiones) y fiebre elevada, asociada con lesiones cerebrales (en las imágenes de resonancia magnética), limitadas al sistema límbico (en particular hipocampo y amígdalas), sin afecciones virales, bacteriales, fúngicas, paraneoplásicas o de otro tipo.",
+        "fsn": "encefalitis límbica aguda no herpética (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "725903003",
+        "term": "Una miopatía metabólica rara caracterizada por mialgia episódica inducida por fiebre, infecciones virales o bacterianas, ejercicio prologado o abuso de alcohol y que en ocasiones podría dar lugar a insuficiencia renal aguda. Entre los episodios los pacientes pueden estar asintomáticos o presentar niveles elevados de creatina cinasa y debilidad muscular leve. No se publicaron nuevas descripciones en la bibliografía desde 1997.",
+        "fsn": "mioglobinuria autosómica dominante (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "773582002",
+        "term": "Infección viral infrecuente causada por el virus Hendra, caracterizada por síntomas iniciales similares a los de la gripe (fiebre, mialgia, cefalea y letargo) aproximadamente una semana después de entrar en contacto cercano con los líquidos corporales de caballos infectados. Se han descripto manifestaciones neurológicas (por ejemplo, vértigo, confusión y ataxia), así como insuficiencia respiratoria progresiva que deriva en la muerte.",
+        "fsn": "infección causada por virus Hendra (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "765095002",
+        "term": "Un subtipo agresivo raro de carcinoma de células renales caracterizado por un tumor infiltrante de gran tamaño, firme, de color blanco o tostado, con focos similares a microabscesos, centrado en la médula renal, que se presenta típicamente con hematuria, dolor abdominal o en el flanco, pérdida de peso y fiebre. Se asocia con rasgo y enfermedad drepanocítica y las metástasis a huesos y pulmones son frecuentes en el momento del diagnóstico.",
+        "fsn": "carcinoma de la médula renal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "717329009",
+        "term": "Una lesión benigna semejante a un tumor. Se informaron alrededor de 140 casos en todo el mundo, con mayor prevalencia en varones adultos de origen asiático y en sujetos afectados por enfermedades sistémicas como artritis reumatoide. Se informaron dos presentaciones clínicas. LA forma activa se manifiesta con mayor frecuencia con dolor abdominal, fiebre y descenso de peso. LA segunda forma suele ser clínicamente silenciosa. Se desconoce la etiopatogenia.",
+        "fsn": "pseudotumor inflamatorio de hígado (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "716788007",
+        "term": "Una forma rara de linfoma difuso de grandes linfocitos B, que se observa con mayor frecuencia en pacientes mayores de 50 años (por lo general entre 70-75 años de edad), sin inmunodeficiencia evidente y se presenta con compromiso ganglionar y extraganglionar (en localizaciones como el estómago, los pulmones, la piel y el páncreas) y síntomas B (fiebre, sudoración nocturna, descenso de peso). El tumor se caracteriza por un curso agresivo y una tasa de supervivencia breve.",
+        "fsn": "linfoma difuso de grandes linfocitos B positivo para virus de Epstein-Barr del anciano (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "764104003",
+        "term": "Una enfermedad rara, transmitida por pulgas, causada por infección por Rickettsia felis. Los pacientes pueden ser asintomáticos o presentarse con síntomas inespecíficos como fiebre, cefalea, erupción maculopapular generalizada, mialgia, artralgia y ocasionalmente escaras, linfadenopatías, náuseas, vómitos, pérdida de apetito y dolor abdominal. En raros casos pueden producirse manifestaciones serias e incluyen disfunción neurológica (fotofobia, hipoacusia y signos meníngeos) y compromiso pulmonar.",
+        "fsn": "infección causada por Rickettsia felis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "764694005",
+        "term": "Un subtipo raro de carcinoma de células renales con anomalías genéticas recurrentes, portadoras de reordenamientos de los genes TFE3 (Xp11 t-RCC) o TFEB [t(6;11) t-RCC]. El reordenamiento t(6;11) t-RCC tiene características histológicas distintivas de apariencia bifásica con células epitelioides de mayor tamaño y eosinofílicas más pequeñas. Los síntomas por lo general son inespecíficos e incluyen hematuria, dolor en el flanco, masa abdominal palpable y/o síntomas sistémicos de anemia, fatiga y fiebre.",
+        "fsn": "carcinoma de células renales con translocación de la familia MiT (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "763803004",
+        "term": "Una enfermedad neurológica adquirida rara, potencialmente fatal, caracterizada por neuromiotonía, disautonomía y encefalopatía con insomnio severo. Se informaron signos de hiperactividad central (por ejemplo, alucinaciones, confusión, amnesia, mioclonía), autonómica (por ejemplo, variaciones de la presión arterial, hiperhidrosis) y periférica (por ejemplo, calambres dolorosos, mioquimia), así como manifestaciones sistémicas (como descenso de peso, prurito, fiebre). En algunos casos se informaron timomas",
+        "fsn": "síndrome de Morvan (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "774206008",
+        "term": "Una enfermedad neuroinflamatoria rara, caracterizada por comienzo de ataxia, disartria y cambios en la sustancia blanca encefálica desencadenados por una infección viral. Se observa neurodegeneración episódica progresiva (que se manifiesta con pérdida de habilidades motrices y verbales, debilidad muscular, mayor degeneración de la sustancia blanca cerebral y finalmente, muerte) sin patología hematológica, producción excesiva de citocinas, fiebre, hipertrigliceridemia, hipofibrinogenemia e hiperferritinemia.",
+        "fsn": "trastorno neurodegenerativo postviral fatal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "764993001",
+        "term": "Una encefalitis infecciosa rara caracterizada por signos y síntomas neurológicos de comienzo agudo (alteración de la consciencia, convulsiones, cefaleas, signos meníngeos, cambios de conducta) debida a la infección bacteriana por Mycoplasma pneumoniae. Los pacientes típicamente presentan signos o signos inespecíficos como fiebre, náuseas, vómitos, fatiga antes del comienzo de las manifestaciones neurológicas y frecuentemente tienen antecedentes de una infección del tracto respiratorio (neumonía, bronquiolitis, faringitis),",
+        "fsn": "encefalitis causada por Mycoplasma pneumoniae (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "763772002",
+        "term": "Una enfermedad infecciosa bacteriana rara causada por la infección extraintestinal de serotipos no tifoideos de Salmonella enterica en pacientes con infección subyacente por VIH, paludismo o neoplasias malignas. Tiene una elevada tasa de mortalidad y los pacientes típicamente se presentan con fiebre, palidez y signos respiratorios (tos, taquipnea, neumonía). Las manifestaciones gastrointestinales (diarrea, vómitos, dolor abdominal) no son frecuentes. Ocasionalmente se observan abscesos en órganos, choque séptico y meningitis.",
+        "fsn": "salmonelosis no tifoidea invasiva (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "773702002",
+        "term": "Un síndrome autoinflamatorio raro, de causa genética, caracterizado por pustulosis cutánea neutrofílica generalizada que suele iniciarse en el período neonatal y osteomielitis aséptica multifocal recurrente severa con periostitis acentuada, que afecta típicamente las costillas distales, los huesos largos y los cuerpos vertebrales. A menudo se observan niveles elevados de reactantes de la fase aguda (sin fiebre asociada) y onicosis como signos adicionales. Se produce por una mutación homocigota en el gen IL1RN en el cromosoma 2q14.",
+        "fsn": "osteomielitis multifocal estéril con periostitis y pustulosis (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "718217000",
+        "term": "Una vasculitis de pequeños vasos que se presenta con púrpura y lesiones urticarianas palpables que preceden a las lesiones purpúricas observadas con mayor frecuencia en las piernas. Pueden observarse síntomas sistémicos, incluyendo fiebre, tos, hemoptisis, sinusitis, artralgia, artritis, mialgia, dolor abdominal, diarrea, enterorragia, parestesias, debilidad y hematuria. Puede ser idiopática (hasta 50% de los casos) o secundaria a infecciones, medicamentos (como fármacos antituberculosos), enfermedades vasculares del colágeno o neoplasias.",
+        "fsn": "vasculitis leucocitoclástica cutánea (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "763719001",
+        "term": "Un trastorno linfoproliferativo maligno muy raro, asociado con el virus de Epstein-Barr, caracterizado por una erupción vesicopapular crónica, recurrente, que posteriormente se ulcera y cicatriza, localizado principalmente en áreas expuestas al sol y asociado con manifestaciones sistémicas, como fiebre, descenso de peso, astenia, edema facial, artralgia, linfadenopatía, hepatoesplenomegalia y/o aumento de enzimas hepáticas. Se ha asociado con hipersensibilidad a picaduras de mosquito y se informó mayor riesgo de desarrollo de linfoma sistémico.",
+        "fsn": "linfoma semejante a hidroa vacciniforme (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "765435009",
+        "term": "Enfermedad caracterizada por inflamación anormal en todo el cuerpo, que puede dañar tejidos y órganos, incluido el aparato gastrointestinal, las articulaciones y la piel. Los primeros síntomas aparecen en las primeras semanas de vida e incluyen episodios recidivantes de fiebre, diarrea, dolor y tumefacción articular, y erupción cutánea. Algunos pacientes presentan lipodistrofia. El trastorno se hereda según un patrón autosómico recesivo y es causado por una mutación en el gen OTULIN, que produce una proteína que ayuda a controlar la inflamación.",
+        "fsn": "Síndrome autoinflamatorio asociado a OTULIN (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "783007005",
+        "term": "Un trastorno de inmunodeficiencia primaria raro, de causa genética, caracterizado por aumento de la susceptibilidad a infecciones bacterianas por Neisseria como consecuencia de la deficiencia de factor D del complemento. Las manifestaciones típicas son infecciones respiratorias recurrentes, meningitis y/o septicemias recurrentes. Los pacientes típicamente presentan fiebre, erupción purpúrica, artralgia, mialgia y concentraciones plasmáticas de factor D del complemento indetectables. Se produce por una mutación homocigota en el gen CFD en el cromosoma 19p13.",
+        "fsn": "infección recurrente por Neisseria debida a deficiencia de factor D (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "784393004",
+        "term": "Un trastorno de inmunodeficiencia adquirida raro, caracterizado por la aparición de susceptibilidad a infecciones oportunistas diseminadas (en particular, infecciones diseminadas a micobacterias no tuberculosas, salmonelosis, penicillosis e infección por virus varicela zóster) en adultos previamente sanos (negativos para VIH), asociadas con la presencia de autoanticuerpos adquiridos contra el interferón gamma. Las manifestaciones clínicas típicas incluyen linfadenopatías (cervicales o generalizadas), fiebre, descenso de peso y/o lesiones cutáneas reactivas.",
+        "fsn": "inmunodeficiencia de comienzo en la vida adulta con autoanticuerpos anti-interferón gamma (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "763888005",
+        "term": "Una enfermedad infecciosa bacteriana del pulmón, rara, causada por una cepa de Staphylococcus aureus productora de leucocidina de Panton-Valentine, caracterizada por insuficiencia respiratoria severa, neumonía extensa, rápidamente progresiva y necrosis pulmonar hemorrágica. Los pacientes típicamente se presentan con síntomas gripales, como fiebre, tos y dolor torácico, así como hemoptisis, hipotensión, leucopenia y síntomas respiratorios severos que evolucionan rápidamente a síndrome de dificultad respiratoria aguda y choque séptico. Se asocia con elevada mortalidad.",
+        "fsn": "neumonía necrosante causada por Staphylococcus aureus productor de leucocidina de Panton-Valentine (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "770687001",
+        "term": "Una enfermedad sistémica y reumatológica rara, de causa genética, debida a mutaciones inactivadoras de la enzima adenosina desaminasa 2, que combina características variables de autoinflamación, vasculitis e inmunodeficiencia leve. La presentación clínica variable incluye inflamación sistémica crónica o recurrente con fiebre, livedo reticular o racemosa, accidentes cerebrovasculares isquémicos o hemorrágicos de comienzo temprano, neuropatía periférica, dolor abdominal, hepatoesplenomegalia, hipertensión portal, poliarteritis nudosa cutánea, citopenia variable y deficiencia de inmunoglobulinas.",
+        "fsn": "vasculitis debida a deficiencia de desaminasa de adenosina 2 (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "770402000",
+        "term": "Una forma agresiva, muy rara, de mastocitosis sistémica caracterizada por crecimiento y proliferación anormales de mastocitos neoplásicos en la médula ósea y/o la sangre, así como en otros tejidos como hígado, peritoneo, bazo o hueso. Los pacientes típicamente se presentan con síntomas relacionados con la activación de mastocitos (por ejemplo, sofocos, fiebre, malestar, diarrea, taquicardia), descenso de peso, anorexia, hepatoesplenomegalia o con menor frecuencia, mastocitosis cutánea. También se informaron úlceras gastroduodenales (a menudo complicadas por hemorragias), ascitis e hipertensión portal.",
+        "fsn": "leucemia mastocítica aleucémica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "720751000",
+        "term": "Una entidad bien definida en el grupo de los trastornos autoinflamatorios. Es una enfermedad rara con 49 casos documentados hasta la fecha. Afecta principalmente a adultos jóvenes y se caracteriza por ataques recurrentes de fiebre y colecciones similares a abscesos profundos, localizadas con mayor frecuencia en el abdomen. Los abscesos asépticos pueden ser aislados o asociarse con una afección subyacente, como policondritis recidivante o enfermedad inflamatoria del intestino. Los antibióticos no curan a los pacientes pero se observan mejorías sorprendentes con corticosteroides y fármacos inmunosupresivos.",
+        "fsn": "síndrome de absceso aséptico sensible a los corticosteroides (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "765089003",
+        "term": "Un trastorno neurológico raro, de causa genética, con convulsiones tempranas de comienzo en la lactancia, discapacidad intelectual limítrofe a moderada, características cerebelares que incluyen disartria y ataxia y atrofia del cerebelo y engrosamiento cortical observado en las imágenes de RM. Las convulsiones típicamente son focales (con parpadeo prominente, contracciones faciales y de los miembros), precipitadas por fiebre y a menudo se inician con aura sensitiva oral. Cuando no se controlan adecuadamente con medicamentos antiepilépticos se observa una frecuencia semanal y persistencia hasta la vida adulta.",
+        "fsn": "síndrome de epilepsia focal, discapacidad intelectual y malformación cerebro-cerebelosa (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "780841002",
+        "term": "Una forma agresiva, muy rara, de mastocitosis sistémica caracterizada por crecimiento y proliferación anormales de mastocitos neoplásicos (>20%) en la médula ósea y/o la sangre, así como en otros tejidos como hígado, peritoneo, bazo o hueso. Los pacientes típicamente se presentan con síntomas relacionados con la activación de mastocitos (por ejemplo, sofocos, fiebre, malestar, diarrea, taquicardia), descenso de peso, anorexia, hepatoesplenomegalia o con menor frecuencia, mastocitosis cutánea. También se informaron úlceras gastroduodenales (a menudo complicadas por hemorragias), ascitis e hipertensión portal.",
+        "fsn": "leucemia mastocítica clásica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "764856008",
+        "term": "Un subtipo raro de carcinoma de células renales, producido en el contexto de una enfermedad renal terminal y quística adquirida, caracterizado por un tumor sólido, bien circunscripto, multifocal, bilateral con formación de microluces intercelulares o intracelulares (que dan lugar a una estructura cribiforme). Los tumores a menudo se diagnostican incidentalmente en los estadios tempranos, aunque las complicaciones causadas por los quistes renales (matidez en el flanco o dolor abdominal, fiebre) o el sangrado del parénquima renal pueden enmascarar el proceso neoplásico subyacente. La mayoría tienen un comportamiento indolente.",
+        "fsn": "carcinoma de células renales asociado con enfermedad quística adquirida (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "725290000",
+        "term": "Una forma de inmunodeficiencia combinada de linfocitos T y B caracterizada por infección severa y persistente por citomegalovirus y pancitopenia autoinmunitaria. Los pacientes se presentan antes del primer año de vida con infecciones diseminadas severas por citomegalovirus, que pueden manifestarse con fiebre y esplenomegalia e infecciones concomitantes recurrentes y severas, incluyendo sepsis y neumonitis. Se produce por una mutación hipomórfica en el gen RAG1 (11p13). Esto da como resultado una expansión oligoclonal de células T con receptor gamma-delta (TCR) y linfopenia de células T con TCR alfa-beta. La transmisión es autosómica recesiva.",
+        "fsn": "inmunodeficiencia combinada debida a deficiencia parcial del gen 1 de recombinación-activación (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "733608000",
+        "term": "Un subtipo raro de carcinoma de células renales originado en el epitelio de los túbulos renales y que exhibe un patrón de crecimiento papilar, que se manifiesta típicamente con hematuria, dolor en el flanco, una masa abdominal palpable o síntomas inespecíficos como fatiga, descenso de peso o fiebre. Frecuentemente se asocian síntomas relacionados con la propagación metastásica, como dolor óseo o tos persistente, debido a que el diagnóstico temprano no es común. Típicamente es multifocal, bilateral y en la mayoría de los casos esporádico, aunque distintos síndromes hereditarios podrían predisponer al desarrollo de carcinoma papilar de células renales.",
+        "fsn": "carcinoma papilar de células renales (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "722431007",
+        "term": "Una anomalía urogenital congénita rara caracterizada por la presencia de útero doble (didelfo, bicorne o con tabique completo o parcial), obstrucción cervicovaginal unilateral y anomalías renales ipsilaterales (agenesia renal y/u otras anomalías de la vía urinaria). Por lo general el diagnóstico se realiza en la pubertad después de la menarca debido a dismenorrea severa recurrente, dolor pélvico crónico, flujo mucopurulento excesivo, maloliente y sangrado intermenstrual (dependiente de la existencia de comunicaciones uterinas o vaginales). También pueden estar presentes fiebre, dispareunia y una masa abdominal, pélvica o vaginal palpable (mucocolpos o piocolpos).",
+        "fsn": "síndrome de útero doble, hemivagina y agenesia renal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "770758009",
+        "term": "Encefalopatía aguda con estado epiléptico mediado por inflamación, caracterizada por un estado epiléptico refractario agudo, típicamente de tipo tónico-clónico, que se desarrolla posteriormente a síntomas prodrómicos tales como confusión, fiebre, fatiga, cefalea, síntomas de infección gastrointestinal o de vías respiratorias superiores, cambios conductuales o alucinaciones. Durante un episodio agudo suelen observarse anomalías en la RM cerebral, así como hallazgos anormales en líquido cefalorraquídeo, como pleocitosis y/o niveles elevados de proteínas. Las consecuencias frecuentes de este cuadro incluyen epilepsia refractaria, y trastornos cognitivos y psiquiátricos.",
+        "fsn": "estado epiléptico refractario nuevo (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "782672006",
+        "term": "Un tumor maligno de células germinales, raro, que se produce en la línea media del cuerpo como resultado de la migración anormal de células germinales durante la embriogénesis. Las manifestaciones clínicas son variables y dependen de la localización y el tamaño del tumor. Los tumores del sistema nervioso central podrían presentarse con cefalea, alteraciones visuales, anomalías endocrinas y signos de aumento de la presión intracraneal. Un tumor mediastínico frecuentemente se presenta con dolor torácico, disnea, tos y fiebre. Las presentaciones clínicas frecuentes de los tumores retroperitoneales son una masa abdominal con dolor o sin él, dolor de espalda y disminución del peso.",
+        "fsn": "germinoma extragonadal (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "765188009",
+        "term": "Un trastorno genético, raro, de inmunodeficiencia combinada severa, negativa para linfocitos T y B, debido a mutaciones nulas en el gen activador de la recombinación (RAG) 1 y/o RAG2, que da lugar a menos de 1% de actividad de la recombinación natural V(D)J. Los pacientes presentan infecciones recurrentes severas, potencialmente fatales, desde el período neonatal, causadas por hongos, virus y bacterias oportunistas, así como erupciones cutáneas, diarrea crónica, falta de progreso y fiebre. Las observaciones inmunológicas incluyen linfopenia T y B profunda, recuentos normales de células NK e inmunoglobulinas séricas disminuidas o ausentes. Algunos pacientes pueden tener eosinofilia.",
+        "fsn": "inmunodeficiencia combinada severa debida a deficiencia de los genes activadores de la recombinación 1 y/o 2 (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "771233008",
+        "term": "Lesión neoplásica infrecuente del estroma submucoso, que puede desarrollarse en cualquier órgano, aunque es más frecuente en pulmones, mesenterio, epiplón y región retroperitoneal. Desde el análisis histológico, es heterogéneo y se compone de células fusiformes, miofibroblastos y células inflamatorias. Suele tratarse de un tumor benigno, si bien puede desarrollarse invasión local, recidiva, malignización con invasión vascular y metástasis. La presentación es inespecífica y depende del órgano afectado. Algunos pacientes desarrollan síndrome paraneoplásico (fiebre, malestar, pérdida de peso, trombocitosis) o síntomas relacionados con la compresión de órganos adyacentes, tales como obstrucción intestinal.",
+        "fsn": "tumor miofibroblástico inflamatorio (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "703540008",
+        "term": "Un trastorno genético multisistémico extremadamente raro, caracterizado por osteomielitis multifocal recurrente crónica, anemia diseritropoyética congénita, que podría acompañarse de dermatosis neutrofílica. La enfermedad puede asociarse con fiebre, dolor articular, retraso de la edad ósea, falta de crecimiento, baja estatura en la vida adulta y desarrollo de contracturas en flexión. Otras manifestaciones informadas incluyen falta de progreso, hepatomegalia, neutropenia e ictericia colestásica transitoria. El curso clínico es crónico. Se produce por una mutación en LPIN2 (18p11.31), que codifica la fosfatidato fosfatasa LPIN2 (Lipin-2), importante en el metabolismo de los lípidos. El patrón de herencia es autosómico recesivo.",
+        "fsn": "osteomielitis multifocal recurrente crónica, anemia diseritropoyética congénita y dermatosis neutrofílica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "717231003",
+        "term": "Un síndrome autoinflamatorio con características de episodios febriles recurrentes asociados con estomatitis aftosa, faringitis y adenitis cervical. Por lo general se presenta en la primera infancia con episodios recurrentes de fiebre durante los cuales los niños tienen una apariencia muy enferma. La estomatitis aftosa se presenta con lesiones pequeñas relativamente indoloras, redondas y superficiales en la lengua y la mucosa bucal que se recuperan completamente en 10-14 días. La mayoría de los pacientes presentan amigdalitis y ocasionalmente, exudados blancos y faringitis generalizada. Los episodios recidivan cada 3-5 semanas, a menudo en forma previsible con pacientes que describen malestar leve el día previo a la recurrencia. Es una afección inflamatoria idiopática.",
+        "fsn": "síndrome de fiebre periódica y estomatitis aftosa con faringitis y linfadenitis cervical (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "718230004",
+        "term": "Una variante genética de susceptibilidad mendeliana a enfermedades por micobacterias, caracterizada por deficiencia completa del receptor 1 de interferón gamma (IFN-gammaR1), que produce alteración de la inmunidad relacionada con el IFN-gamma y en consecuencia, infecciones severas y a menudo fatales con bacilo de Calmette-Guérin y otras micobacterias ambientales. La infección es diseminada y puede afectar las partes blandas, médula ósea, pulmones, piel, huesos y ganglios linfáticos. Las manifestaciones incluyen fiebre, descenso de peso, hepatoesplenomegalia, linfadenopatías y lesiones semejantes a las de la lepra lepromatosa. Se produce por deficiencia completa de IFN-gammaR1 por mutaciones en el gen IFNGR1 en el cromosoma 6q23-q24. La transmisión es autosómica recesiva.",
+        "fsn": "susceptibilidad mendeliana a enfermedad por micobacterias debida a deficiencia completa de receptor 1 de interferón gamma (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "738527001",
+        "term": "Una enfermedad neoplásica maligna rara caracterizada por proliferación clonal de precursores mieloides y/o linfoides portadores de reordenamientos del gen PDGFRA en la sangre, la médula ósea y frecuentemente también en otros tejidos (bazo, ganglios linfáticos, piel). Por lo general se presenta como leucemia eosinofílica crónica o con menor frecuencia, como leucemia mieloide aguda o linfoblástica T con eosinofilia. Los pacientes por lo general se presentan con eosinofilia, anemia, trombocitopenia, neutrofilia, esplenomegalia, linfadenopatías, fiebre, sudoración y/o descenso de peso. La infiltración tisular por eosinófilos puede manifestarse con erupción cutánea, eritema, tos, alteraciones neurológicas, síntomas gastrointestinales o en raros casos, con fibrosis endomiocárdica y micardiopatía restrictiva.",
+        "fsn": "neoplasia mieloide y/o linfoide asociada con reordenamiento de receptor alfa de factor de crecimiento derivado de las plaquetas (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "725049005",
+        "term": "Los tumores desmoides pueden producirse en cualquier parte del cuerpo: extraabdominales (cuello, hombros, miembros superiores, región glútea), abdominales (originados en la fascia muscular o en la pared abdominal/torácica) y más raramente, intraabdominales, en el mesenterio o el retroperitoneo. Según la localización del tumor, los síntomas pueden incluir dolor, fiebre y alteración funcional o pérdida de la función del órgano afectado. Los tumores desmoides son el resultado de la proliferación de miofibroblastos bien diferenciados. Aún se desconoce el mecanismo etiopatogénico exacto, pero tendrían un origen multifuncional con participación de factores hormonales y genéticos. Se hallaron mutaciones somáticas en el gen CTNNB1 (3q21) que codifica a la beta-catenina en alrededor de 85% de los casos esporádicos.",
+        "fsn": "fibromatosis agresiva (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "768667002",
+        "term": "Enfermedad autoinflamatoria crónica por la cual la respuesta inmunitaria innata se activa de manera anormal causando fiebre y lesiones inflamatorias en los tejidos y órganos. Los episodios pueden durar por varios días y aparecer cada cierta cantidad de semanas o meses. Las manifestaciones incluyen placas eritematosas en la piel, dolor abdominal, ojos y boca secos, llagas en la boca, dolor de pecho e hipertrofia glandular. La causa probable de esta enfermedad es una combinación de factores genéticos y ambientales. Las variaciones en el gen NOD2 aumentan el riesgo y se sospecha que ciertos factores ambientales tales como infecciones pueden también jugar un papel en desencadenar la enfermedad en personas con variables genéticas que aumentan el riesgo. El síndrome parece ser una enfermedad compleja sin una causa genética única.",
+        "fsn": "enfermedad autoinflamatoria asociada a dominio de oligomerización por unión de nucleótidos que contiene la proteína 2 (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "768946000",
+        "term": "Una enfermedad cutánea aguda severa caracterizada clínicamente y desde una perspectiva histológica por destrucción y desprendimiento del epitelio cutáneo y las membranas mucosas. Puede iniciarse a cualquier edad, pero el riesgo aumenta después de los 40 años. Se describieron tres subformas de acuerdo con el porcentaje de superficie corporal afectada: síndrome de Stevens-Johnson (menos de 10%), síndrome de Lyell (más de 30%) y una forma intermedia (10-29%). Las manifestaciones iniciales son inespecíficas: una erupción aparentemente banal, fiebre y sensación de ardor que afecta los ojos, la boca y los genitales. La erupción progresa rápidamente y se convierte en vesicular y ampollar en la cara y el cuerpo. La fiebre elevada es una característica constante. Dos tercios de los casos se desencadenan por una alergia medicamentosa. En raros casos, la enfermedad se asocia con infecciones o trasplante de la médula ósea. el 25-30% restante de los casos se clasifican como idiopáticos. El pronóstico para pacientes con formas extensas es malo.",
+        "fsn": "síndrome de Stevens-Johnson, espectro de necrólisis epidérmica tóxica (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "818950005",
+        "term": "Una enfermedad inflamatoria sistémica rara, caracterizada por artritis granulomatosa de comienzo temprano, uveítis y erupción cutánea. El síndrome de Blau (SB) ahora se refiere a las formas familiar y esporádica (anteriormente conocida como sarcoidosis de comienzo temprano) de la misma enfermedad. La erupción cutánea por lo general es la primera manifestación. Las manifestaciones articulares suelen comenzar antes de los 10 años de edad con tumefacciones similares a quistes en el dorso de pies y muñecas. A menudo se describe camptodactilia debida a tenosinovitis hipertrófica a medida que progresa la enfermedad. El espectro de manifestaciones clínicas incluye fiebre, hipertensión sistémica maligna y pulmonar, vasculitis granulomatosa de grandes vasos e inflamación granulomatosa de hígado, riñones y pulmones. El SB se debe a una mutación hereditaria o nueva en el gen NOD2 (16q12), responsable de alteraciones en la respuesta inmunitaria innata, inflamación y muerte celular. El SB es un trastorno autosómico dominante en la forma familiar.",
+        "fsn": "síndrome de Blau (trastorno)",
+        "semanticTag": "trastorno"
+    },
+    {
+        "conceptId": "721226005",
+        "term": "Un trastorno potencialmente fatal, considerado una manifestación clínica cardiovascular de la enfermedad de Behcet, con la asociación de múltiples aneurismas de la arteria pulmonar y trombosis venosa periférica. Se desconoce la prevalencia pero se informaron menos de 30 casos en la bibliografía desde la primera descripción en 1959 por Hughes y Stovin. Los pacientes (en la mayoría de los casos varones de 12 a 40 años) en general se presentan con los signos inespecíficos de aneurismas en la arteria pulmonar después de una historia de trombosis venosa periférica. Otros signos asociados pueden incluir fiebre e hipertensión endocraneana. Pueden producirse aneurismas en cualquier localización de la circulación sistémica. La flebitis recurrente también afecta frecuentemente a los grandes vasos, lo que da lugar a la formación de trombos. En general se observa una predisposición a la formación de trombos que afectan las venas periféricas. Se supone que la enfermedad es una forma de vasculitis que sigue un mecanismo patogénico similar al que se observa en la enfermedad de Behcet.",
+        "fsn": "síndrome de Hughes Stovin (trastorno)",
+        "semanticTag": "trastorno"
+    }
+]
