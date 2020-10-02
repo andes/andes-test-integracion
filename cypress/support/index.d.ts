@@ -26,7 +26,7 @@ declare namespace Cypress {
          * @param conceptos Array de resultados o nombre del fixture
          * @param alias Alias para hacer un wait si es necesario
          */
-        snomedSearchStub(searchText: string, conceptos: any[] | string, alias: string): Chainable<void>;
+        snomedSearchStub(searchText: string, conceptos: any[] | string, alias?: string): Chainable<void>;
 
         /**
          * Stub automatico de frecuentes rup
@@ -34,6 +34,13 @@ declare namespace Cypress {
          */
         snomedFrecuentesStub(conceptos: any[] | string): Chainable<void>;
 
+        /**
+         * Stub automatico de una busqueda de expresion Snomed
+         * @param expression  experssion a buscar
+         * @param conceptos  array de conceptos o string de fixture
+         * @param alias 
+         */
+        expressionStub(expression: string, conceptos: any[] | string, alias?: string)
         /**
          * Realiza una busqueda de SNOMED en la ejecución de rup
          * @param searchText Campo a buscar en rup-buscador 
@@ -185,6 +192,7 @@ declare namespace Cypress {
 
         plexText(label: string, texto?: string);
         plexInt(label: string, texto?: string);
+        plexFloat(label: string, texto?: string);
 
         toast(type: 'success' | 'danger' | 'warning' | 'alert');
 
