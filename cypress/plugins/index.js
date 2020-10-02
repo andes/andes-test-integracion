@@ -24,7 +24,8 @@ const { createPacienteApp } = require('./seed-paciente-app');
 const { seedPerfil, seedUsuario } = require('./seed-gestor-usuarios');
 const { createModulo } = require('./seed-modulo');
 
-const { cleanDB, connectToDB } = require('./database');
+const { cleanDB, connectToDB, fetch } = require('./database');
+const { InitDatabase } = require('./database-initial');
 
 module.exports = (on, config) => {
 
@@ -81,24 +82,11 @@ module.exports = (on, config) => {
         'database:create:modulo': (params = {}) => {
             return createModulo(mongoUri, params);
         },
-        'database:initial': async () => {
-            // Borra todas las collecciones y carga el dataset inicial en la carpeta ./data
-            // [NEXT] Poder elegir la carpeta y las colleccionara borrar. Podría ayudar a preparar ciertos scenarios. 
-            // [NEXT] También es util para test unitarios en la APi. Debería estar todo en un monorepo. 
-
-            const client = await connectToDB(mongoUri);
-            await cleanDB(client.db());
-
-            const { Seeder } = require('mongo-seeding');
-            const config = {
-                database: mongoUri,
-                dropDatabase: false,
-            };
-            const seeder = new Seeder(config);
-            const path = require('path');
-            const collections = seeder.readCollectionsFromPath(path.resolve("./data"));
-            await seeder.import(collections);
-            return true;
+        'database:initial': () => {
+            return InitDatabase(mongoUri);
+        },
+        'database:fetch': ({ collection, params }) => {
+            return fetch(mongoUri, collection, params);
         }
     });
 
