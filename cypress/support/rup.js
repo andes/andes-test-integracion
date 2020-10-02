@@ -21,7 +21,17 @@ Cypress.Commands.add('snomedFrecuentesStub', (response) => {
     }
 });
 
-// SUGERIDOS BUSCADOR BÁSICO  MIS FRECUENTES   FRECUENTES POR PRESTACION 
+Cypress.Commands.add('expressionStub', (expression, response, alias = 'snomed-expression') => {
+    const url = '**/api/core/term/snomed/expression?expression=' + expression + '**';
+    if (typeof response === 'string') {
+        return cy.fixture(response).then(response => {
+            return cy.route(url, response).as(alias);
+        });
+    } else {
+        return cy.route(url, response).as(alias);
+    }
+});
+
 Cypress.Commands.add('RupBuscarConceptos', (term, type = 'BUSCADOR BÁSICO', alias = 'rup-buscador') => {
     cy.log('BUSQUEDA SNOMED' + term);
     cy.get('rup-buscador button', { log: false }).contains(type, { log: false }).click();
