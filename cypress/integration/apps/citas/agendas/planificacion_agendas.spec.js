@@ -581,42 +581,42 @@ context('Planificacion Agendas', () => {
         cy.contains('El valor debe ser mayor a 1');
     });
 
-    it.skip('Guardar agenda con bloques vacíos', () => {
-        complete({
-            fecha: cy.today(),
-            horaInicio: "10:00",
-            horaFin: "12:00"
-        });
+    // it.skip('Guardar agenda con bloques vacíos', () => {
+    //     complete({
+    //         fecha: cy.today(),
+    //         horaInicio: "10:00",
+    //         horaFin: "12:00"
+    //     });
 
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+    //     cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
 
-        cy.plexDatetime('label="Hora Inicio"', { clear: true });
-        cy.plexDatetime('label="Hora Fin"', { clear: true });
+    //     cy.plexDatetime('label="Hora Inicio"', { clear: true });
+    //     cy.plexDatetime('label="Hora Fin"', { clear: true });
 
-        complete({
-            bloque: {
-                horaInicio: "10:00",
-                horaFin: "11:00",
-                cantidadTurnos: 7,
-                accesoDirectoDelDia: 7,
-            },
-        });
+    //     complete({
+    //         bloque: {
+    //             horaInicio: "10:00",
+    //             horaFin: "11:00",
+    //             cantidadTurnos: 7,
+    //             accesoDirectoDelDia: 7,
+    //         },
+    //     });
 
-        cy.wait(1000);
+    //     cy.wait(1000);
 
-        cy.plexButtonIcon('plus').click();
+    //     cy.plexButtonIcon('plus').click();
 
-        complete({
-            bloque: {
-                horaInicio: "11:00",
-                horaFin: "12:00",
-            }
-        });
+    //     complete({
+    //         bloque: {
+    //             horaInicio: "11:00",
+    //             horaFin: "12:00",
+    //         }
+    //     });
 
-        cy.get('div[class="list-group-item justify-content-between hover"]').eq(0).click()
+    //     cy.get('div[class="list-group-item justify-content-between hover"]').eq(0).click()
 
-        cy.contains('Existen bloques incompletos');
-    });
+    //     cy.contains('Existen bloques incompletos');
+    // });
 
     it('crear agenda dinamica en una institucion', () => {
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');

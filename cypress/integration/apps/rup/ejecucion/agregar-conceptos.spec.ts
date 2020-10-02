@@ -83,7 +83,7 @@ context('RUP - Ejecucion', () => {
         });
     });
 
-    describe.only('evolucionar trastorno', () => {
+    describe('evolucionar trastorno', () => {
         let idPrestacion;
 
         before(() => {
