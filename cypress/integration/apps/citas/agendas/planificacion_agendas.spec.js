@@ -645,7 +645,9 @@ context('Planificacion Agendas', () => {
         cy.wait('@create');
         cy.contains('La agenda se guardó correctamente').click();
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + ayer.format('DD/MM/YYYY'));
-        cy.get('table tbody td').contains('actividades con la comunidad').click();
+        cy.wait('@agendas');
+        cy.get('table tbody td').contains('actividades con la comunidad');
+        cy.plexBadge('En planificación').click();
         cy.plexButtonIcon('arrow-up-bold-circle-outline').click();
         cy.wait('@edicionAgenda');
         cy.toast('success', 'La agenda cambió el estado a disponible');
@@ -653,7 +655,14 @@ context('Planificacion Agendas', () => {
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + ayer.format('DD/MM/YYYY'));
         cy.get('table tbody td').contains('actividades con la comunidad').click();
         cy.plexButtonIcon('content-copy').click();
+
         cy.wait('@agendas');
+
+        if (ayer.format('DD/MM/YYYY') === ayer.endOf('month').format('DD/MM/YYYY')) {
+            cy.plexButtonIcon('chevron-right').click();
+            cy.wait('@agendas');
+        }
+
         cy.get('table').contains(hoy.format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
