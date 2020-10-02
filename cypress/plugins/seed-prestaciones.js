@@ -93,6 +93,19 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             prestacion.paciente.id = prestacion.paciente._id;
         }
 
+        if (params.registros) {
+            const registroTemp = require('./data/prestacion/registro.json');
+            prestacion.ejecucion.registros = params.registros.map(r => {
+                const registro = JSON.parse(JSON.stringify(registroTemp));
+                registro.id = new ObjectId(r.id);
+                registro._id = new ObjectId(r.id);
+                registro.concepto = r.concepto;
+                registro.nombre = r.concepto.term;
+                registro.valor = r.valor;
+                return registro;
+            })
+        }
+
         prestacion.inicio = getInicioPrestacion(prestacion);
 
         const data = await PrestacionDB.insertOne(prestacion);

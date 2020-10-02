@@ -7,13 +7,80 @@ declare namespace Cypress {
          * @example
          * cy.seed()
          */
-        seed(): Chainable<void>
+        seed(): Chainable<void>;
 
-        goto(url: string, token?: string): Chainable<void>;
+        /**
+         * Borra todos los elementos de uno o mas colecciones
+         * @param colecciones 
+         */
+
+        cleanDB(colecciones?: string[]): Chainable<void>;
+
+        goto(url: string, token?: string, hudsToken?: string): Chainable<void>;
 
         login(user: string, password: string, orgId?: string): Chainable<string>;
 
-        snomedSearchStub(searchText: string, conceptos: any[], alias: string);
+        /**
+         * Crea un stub de la busqueda de conceptos de SNOMED
+         * @param searchText Campo a buscar en rup-buscador
+         * @param conceptos Array de resultados o nombre del fixture
+         * @param alias Alias para hacer un wait si es necesario
+         */
+        snomedSearchStub(searchText: string, conceptos: any[] | string, alias: string): Chainable<void>;
+
+        /**
+         * Stub automatico de frecuentes rup
+         * @param conceptos 
+         */
+        snomedFrecuentesStub(conceptos: any[] | string): Chainable<void>;
+
+        /**
+         * Realiza una busqueda de SNOMED en la ejecución de rup
+         * @param searchText Campo a buscar en rup-buscador 
+         * @param alias Alias para hacer un wait si es necesario
+         */
+        RupBuscarConceptos(term: string, type?: 'SUGERIDOS' | 'BUSCADOR BÁSICO' | 'MIS FRECUENTES' | 'FRECUENTES POR PRESTACION', alias?: string): Chainable<void>;
+
+        /**
+         * Chequea el estado de un registro, termino y semantic tags.
+         * @param index 
+         * @param params 
+         */
+        assertRupCard(index: number, params: { semanticTag?: string, term?: string }): Chainable<void>;
+
+        /**
+         * Agrega un item de la lista de busqueda.
+         * @param term 
+         */
+        seleccionarConcepto(term: number | string): Chainable<void>;
+
+        /**
+         * Setea filtros del buscador RUP
+         * @param search 
+         */
+        RupSetearFiltros(search: number | 'todos' | 'hallazgo' | 'trastorno' | 'procedimiento' | 'producto' | 'solicitud');
+
+        /**
+         * Setea filtros de busqueda HUDS
+         * @param search 
+         */
+        HudsBusquedaFiltros(search: number | 'prestaciones' | 'solicitudes' | 'hallazgo' | 'trastorno' | 'procedimiento' | 'producto' | 'vacunas' | 'laboratorios');
+
+        /**
+         * Elimina un registro
+         * @param index 
+         */
+        removeRupCard(index: number);
+
+        relacionarRUPCard(cardIndex: number, relIndex: number | string);
+
+        /**
+         * Crea una prestacion 
+         * @param name 
+         * @param params paciente, tipoPrestacion ,etc
+         */
+
+        task(name: 'database:seed:prestacion', params: any): Chainable<any>;
 
         /**
          * Mapa de camas Helper para crear los usuarios según cama
@@ -110,5 +177,17 @@ declare namespace Cypress {
          * Plex TextArea
          */
         plexTextArea(label: string, texto?: string);
+
+        /**
+         * Plex TextArea
+         */
+        plexHtml(label: string, texto?: string);
+
+        plexText(label: string, texto?: string);
+        plexInt(label: string, texto?: string);
+
+        toast(type: 'success' | 'danger' | 'warning' | 'alert');
+
+        swal(action: 'confirm' | 'cancel');
     }
 }
