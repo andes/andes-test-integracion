@@ -19,6 +19,8 @@ module.exports.createElementoRup = async (mongoUri, params) => {
             dto.params = params.params;
         }
 
+        dto.permiteRepetidos = params.permiteRepetidos || false;
+
         if (params.conceptos) {
             dto.conceptos = params.conceptos;
         }

@@ -8,7 +8,7 @@ module.exports.encapsulateArray = function (item) {
     return Array.isArray(item) ? item : [item];
 }
 
-module.exports.connectToDB = async (uri) => {
+const connectToDB = async (uri) => {
 
     let connectionString = 'mongodb://localhost/seed_db';
 
@@ -33,6 +33,8 @@ module.exports.connectToDB = async (uri) => {
         return false;
     }
 };
+
+module.exports.connectToDB = connectToDB;
 
 module.exports.cleanDB = async (db) => {
     const colections = await db.collections();
@@ -62,4 +64,11 @@ module.exports.checkObjectId = (id) => {
     } catch (e) {
         console.error(e);
     }
+}
+
+module.exports.fetch = async (mongoUri, collection, params) => {
+    const client = await connectToDB(mongoUri);
+    const coll = await client.db().collection(collection);
+    const data = await coll.find(params).toArray();
+    return data;
 }

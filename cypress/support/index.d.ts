@@ -88,6 +88,10 @@ declare namespace Cypress {
          */
 
         task(name: 'database:seed:prestacion', params: any): Chainable<any>;
+        task(name: 'database:fetch', params: { collection: string, params: any }): Chainable<any>;
+        task(name: 'database:seed:elemento-rup', params: any): Chainable<any>;
+
+
 
         /**
          * Mapa de camas Helper para crear los usuarios según cama
@@ -194,7 +198,7 @@ declare namespace Cypress {
         plexInt(label: string, texto?: string);
         plexFloat(label: string, texto?: string);
 
-        toast(type: 'success' | 'danger' | 'warning' | 'alert');
+        toast(type: 'success' | 'danger' | 'warning' | 'alert' | 'error');
 
         swal(action: 'confirm' | 'cancel');
     }
