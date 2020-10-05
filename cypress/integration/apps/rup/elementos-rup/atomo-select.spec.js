@@ -110,7 +110,7 @@ context('RUP - Ejecucion', () => {
             }];
 
             cy.snomedSearchStub('derivaci', resultadoSnomed, 'rup-buscador');
-            cy.route('GET', '/api/core/term/snomed/expression?expression=440377005&field=term&words=derivación', resultadoSnomed).as('query');
+            cy.route('GET', '/api/core/term/snomed?expression=440377005&search=derivación', resultadoSnomed).as('query');
 
             cy.cleanDB(['prestaciones']);
 
