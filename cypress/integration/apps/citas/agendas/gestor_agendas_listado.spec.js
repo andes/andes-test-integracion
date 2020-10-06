@@ -140,7 +140,7 @@ describe('CITAS - Gestor de Agendas', () => {
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('div.bloques-y-turnos').plexButtonIcon('help-circle').click();
+        cy.get('div.bloques-y-turnos').plexButtonIcon('information-variant').click();
         cy.get('div.bloques-y-turnos').get('label').contains('Fecha');
         cy.get('div.bloques-y-turnos').get('label').contains('Tipos de prestación');
         cy.get('div.bloques-y-turnos').get('label').contains('Equipo de Salud');
@@ -167,7 +167,7 @@ describe('CITAS - Gestor de Agendas', () => {
         cy.get('botones-agenda').plexButtonIcon('folder-account');
     });
 
-    it('Visualizar detalle de la configuración inicial del bloque', () => {
+    it.only('Visualizar detalle de la configuración inicial del bloque', () => {
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -176,7 +176,7 @@ describe('CITAS - Gestor de Agendas', () => {
         cy.get('table tbody tr').first().click();
         cy.get("span").contains("En planificación")
 
-        cy.get('div.lista-turnos').plexButtonIcon('help-circle').click();
+        cy.get('div.lista-turnos').plexButtonIcon('cog').click();
         cy.get('div.bloques-y-turnos').get('plex-help').contains('Configuración inicial del bloque');
         cy.get('div.bloques-y-turnos').get('plex-help').contains('4');
         cy.get('div.bloques-y-turnos').get('plex-help').contains('Turnos del día');
