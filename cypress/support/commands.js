@@ -24,6 +24,8 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+import 'cypress-file-upload';
+
 Cypress.Commands.add("login", (usuario, password, id) => {
     let token;
     return cy.request('POST', Cypress.env('API_SERVER') + '/api/auth/login', {

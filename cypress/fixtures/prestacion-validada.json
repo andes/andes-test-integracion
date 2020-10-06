@@ -1,0 +1,151 @@
+{
+    "_id" : "5f7762530bc129596e4bc7b8",
+    "createdBy" : {
+        "organizacion" : {
+            "id" : "57fcf037326e73143fb48bd8",
+            "nombre" : "HOSPITAL ZONAL CUTRAL CO-PLAZA HUINCUL",
+            "_id" : "57fcf037326e73143fb48bd8"
+        },
+        "documento" : 30643636,
+        "username" : 30643636,
+        "apellido" : "Huenchuman",
+        "nombre" : "Natalia Huenchuman",
+        "nombreCompleto" : "Natalia Huenchuman"
+    },
+    "createdAt" : "2020-10-02T17:00:00.000Z",
+    "estados" : [ 
+        {
+            "createdBy" : {
+                "organizacion" : {
+                    "_id" : "57e9670e52df311059bc8964",
+                    "id" : "57e9670e52df311059bc8964",
+                    "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+                },
+                "documento" : 30643636,
+                "username" : 30643636,
+                "apellido" : "Huenchuman",
+                "nombre" : "Natalia Huenchuman",
+                "nombreCompleto" : "Natalia Huenchuman"
+            },
+            "createdAt" : "2020-10-02T17:00:00.000Z",
+            "tipo" : "ejecucion",
+            "_id" : "5a32802ff0894b0b34640c1a"
+        }
+    ],
+    "ejecucion" : {
+        "fecha" : "2020-10-02T17:00:00.000Z",
+        "registros" : [ 
+            {
+                "privacy" : {
+                    "scope" : "public"
+                },
+                "_id" : "5f7762a93df7da4d35d8b01a",
+                "destacado" : false,
+                "esSolicitud" : false,
+                "esDiagnosticoPrincipal" : false,
+                "relacionadoCon" : [],
+                "elementoRUP" : "59a6ea645c30be1a41919d9d",
+                "nombre" : "documento adjunto",
+                "concepto" : {
+                    "term" : "documento adjunto",
+                    "fsn" : "documento adjunto (procedimiento)",
+                    "conceptId" : "1921000013108",
+                    "semanticTag" : "procedimiento"
+                },
+                "valor" : {
+                    "documentos" : []
+                },
+                "registros" : [],
+                "hasSections" : false,
+                "isSection" : false,
+                "noIndex" : false,
+                "isEmpty" : true,
+                "createdAt" : "2020-10-02T17:26:13.465Z",
+                "createdBy" : {
+                    "id" : "59e76172b7c39e57a13b38c5",
+                    "nombreCompleto" : "Natalia Huenchuman",
+                    "nombre" : "Natalia",
+                    "apellido" : "Huenchuman",
+                    "username" : 30643636,
+                    "documento" : 30643636,
+                    "organizacion" : {
+                        "_id" : "57e9670e52df311059bc8964",
+                        "id" : "57e9670e52df311059bc8964",
+                        "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+                    }
+                }
+            }
+        ],
+        "organizacion" : {
+            "_id" : "57e9670e52df311059bc8964",
+            "id" : "57e9670e52df311059bc8964",
+            "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+        }
+    },
+    "solicitud" : {
+        "tipoPrestacion" : {
+            "fsn" : "sesión de informes de enfermería (procedimiento)",
+            "semanticTag" : "procedimiento",
+            "conceptId" : "11553003",
+            "term" : "sesión de informes de enfermería"
+        },
+        "organizacion" : {
+            "id" : "57e9670e52df311059bc8964",
+            "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+        },
+        "profesional" : {
+            "id" : "5d02602588c4d1772a8a17f8",
+            "nombre" : "Natalia",
+            "apellido" : "Huenchuman",
+            "documento" : "30643636"
+        },
+        "ambitoOrigen" : "ambulatorio",
+        "fecha" : "2020-10-02T17:00:00.000Z",
+        "turno" : null,
+        "registros" : [],
+        "historial" : []
+    },
+    "paciente" : {
+        "_id" : "586e6e8627d3107fde116cdb",
+        "documento" : "10000000",
+        "nombre" : "PACIENTE VALIDADO",
+        "apellido" : "ANDES",
+        "sexo" : "masculino",
+        "fechaNacimiento" : "1956-12-26T00:00:00.000-03:00",
+        "id" : "586e6e8627d3107fde116cdb"
+    },
+    "updatedAt" : "2020-10-02T17:26:13.468Z",
+    "updatedBy" : {
+        "id" : "59e76172b7c39e57a13b38c5",
+        "nombreCompleto" : "Natalia Huenchuman",
+        "nombre" : "Natalia",
+        "apellido" : "Huenchuman",
+        "username" : 30643636,
+        "documento" : 30643636,
+        "organizacion" : {
+            "_id" : "57e9670e52df311059bc8964",
+            "id" : "57e9670e52df311059bc8964",
+            "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+        }
+    },
+    "estadoActual" : {
+        "createdBy" : {
+            "organizacion" : {
+                "_id" : "57e9670e52df311059bc8964",
+                "id" : "57e9670e52df311059bc8964",
+                "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+            },
+            "documento" : 30643636,
+            "username" : 30643636,
+            "apellido" : "Huenchuman",
+            "nombre" : "Natalia Huenchuman",
+            "nombreCompleto" : "Natalia Huenchuman"
+        },
+        "createdAt" : "2020-10-02T17:00:00.000Z",
+        "tipo" : "ejecucion",
+        "_id" : "5a32802ff0894b0b34640c1a"
+    },
+    "noNominalizada" : false,
+    "inicio" : "fuera-agenda",
+    "__v" : 1
+}
