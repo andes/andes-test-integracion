@@ -59,7 +59,8 @@
                     "visualizacionInformacion:*",
                     "descargas:*",
                     "solicitudes:*",
-                    "espaciosFisicos:*"
+                    "espaciosFisicos:*",
+                    "com:*"
                 ],
                 "_id": {
                     "$oid": "57e9670e52df311059bc8964"
@@ -126,7 +127,8 @@
                     "visualizacionInformacion:reportes:*",
                     "prestamos:*",
                     "turnosPrestaciones:*",
-                    "huds:visualizacionHuds"
+                    "huds:visualizacionHuds",
+                    "com:*"
                 ],
                 "_id": {
                     "$oid": "57f67d090166fa6aedb2f9fb"
@@ -761,7 +763,8 @@
                     "cda:*",
                     "visualizacionInformacion:reportes:*",
                     "solicitudes:*",
-                    "huds:visualizacionHuds"
+                    "huds:visualizacionHuds",
+                    "com:*"
                 ],
                 "_id": {
                     "$oid": "5bae6b7b9677f95a425d9ee8"
