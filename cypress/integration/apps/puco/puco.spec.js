@@ -1,14 +1,18 @@
 context('PUCO', () => {
     let pacientes = [];
+    let token;
     before(() => {
         cy.seed();
         cy.task('database:create:paciente', { template: 'validado', nombre: 'andes', apellido: 'paciente', documento: 123456789 }).then(p => { pacientes.push(p) });
         cy.task('database:create:paciente', { template: 'temporal', nombre: 'andes', apellido: 'temporal', documento: 987654321 }).then(p => { pacientes.push(p) });
+        cy.login('30643636', 'asd').then(t => {
+            token = t;
+        });
     });
 
     beforeEach(() => {
         cy.server();
-        cy.goto('/puco');
+        cy.goto('/puco', token);
     });
 
     it('should llamar a la api', () => {
@@ -22,7 +26,7 @@ context('PUCO', () => {
             "financiador": "OBRA SOCIAL DE LOS EMPLEADOS DE COMERCIO Y ACTIVIDADES CIVILES",
             "version": "2019-06-01T00:00:00.000Z"
         }];
-        cy.route('GET', '**/api/modules/obraSocial/profe/?dni=45687&periodo=**', respuesta).as('consulta');
+        cy.route('GET', '**/api/modules/obraSocial/puco/?dni=45687&periodo=**', respuesta).as('consulta');
 
         cy.get('div[class="buscador"] input').first().type('45687');
 
