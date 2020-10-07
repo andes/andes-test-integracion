@@ -13,7 +13,10 @@ describe('Mapa Camas - Detalle de Cama', () => {
             // CREA UN MUNDO IDEAL DE INTERNACION
             cy.factoryInternacion({
                 configCamas: [{
-                    estado: 'ocupada', pacientes: [paciente], unidadOrganizativa: '309901009',
+                    estado: 'ocupada', pacientes: [paciente],
+                    extras: { ingreso: true },
+                    fechaIngreso: moment().subtract(1, 'd').toDate(),
+                    unidadOrganizativa: '309901009',
                     sector: {
                         "tipoSector": {
                             "refsetIds": [],
@@ -40,6 +43,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
         cy.route('GET', '**/api/modules/rup/internacion/camas/**').as('getCama');
         cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
         cy.route('GET', '**/api/core/mpi/pacientes/**', paciente).as('getPaciente');
+        cy.route('PATCH', '**/api/modules/rup/internacion/deshacer/**').as('deshacer');
     });
 
     it('Verificar datos de cama', () => {
@@ -54,8 +58,6 @@ describe('Mapa Camas - Detalle de Cama', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-
-
         // VERIF. NOMBRE
         cy.get('plex-detail section div').eq(1).find('div').should(($div) => {
             expect($div.get(0).innerText).to.equal(cama.cama.nombre);
@@ -63,29 +65,29 @@ describe('Mapa Camas - Detalle de Cama', () => {
 
         // VERIF. ESTADO
         cy.get('plex-detail section div').eq(1).find('plex-badge').eq(0).find('span').should(($span) => {
-            expect($span.text().trim().toLowerCase()).to.equal(cama.estados[0].estado.toLowerCase());
+            expect($span.text().trim().toLowerCase()).to.equal(cama.estados[1].estado.toLowerCase());
         });
 
         // VERIF. CENSABLE
-        const censable = (cama.estados[0].esCensable) ? 'censable' : 'no censable'
+        const censable = (cama.estados[1].esCensable) ? 'censable' : 'no censable'
         cy.get('plex-detail section div').eq(1).find('plex-badge').eq(1).find('span').should(($span) => {
             expect($span.text().trim().toLowerCase()).to.equal(censable);
         });
 
         // VERIF. GENERO
-        const genero = (cama.estados[0].genero.term === 'género masculino') ? 'cama masculina' : 'cama femenina';
+        const genero = (cama.estados[1].genero.term === 'género masculino') ? 'cama masculina' : 'cama femenina';
         cy.get('plex-detail section div').eq(1).find('plex-badge').eq(2).find('span').should(($span) => {
             expect($span.text().trim().toLowerCase()).to.equal(genero);
         });
 
         // VERIF. UNIDAD ORGANIZATIVA
         cy.get('plex-detail plex-grid plex-label').eq(0).find('small').should(($span) => {
-            expect($span.text()).to.equal(cama.estados[0].unidadOrganizativa.term);
+            expect($span.text()).to.equal(cama.estados[1].unidadOrganizativa.term);
         });
 
         // VERIF. ESPECIALIDADES
         let esp = '';
-        for (const especialidad of cama.estados[0].especialidades) {
+        for (const especialidad of cama.estados[1].especialidades) {
             esp = esp + especialidad.term;
         }
 
@@ -139,6 +141,23 @@ describe('Mapa Camas - Detalle de Cama', () => {
         cy.get('plex-detail').eq(1).find('plex-grid').find('plex-label').eq(1).find('small').should(($span) => {
             expect($span.text()).to.equal(moment(paciente.fechaNacimiento).format('DD/MM/YYYY'));
         });
+    });
+
+    it('Deshacer internacion', () => {
+        cy.goto('/internacion/mapa-camas', token);
+        cy.wait('@getCamas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.getCama(cama.cama.nombre).click();
+
+        cy.deshacerInternacion();
+
+        cy.wait('@deshacer').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.swal('confirm', 'Se deshizo la internacion');
     });
 });
 
