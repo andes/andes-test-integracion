@@ -93,6 +93,38 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.contains('Solicitante: PRUEBA, TEST').should('not.exist');
     });
 
+    it('crear nueva derivacion y sumar nota', () => {
+        seleccionarPaciente(dni);
+        cy.plexSelectAsync('label="Profesional solicitante"', 'TEST PRUEBA', '@profesionalSolicitante', 0);
+        cy.plexTextArea('label="Detalle"', 'sumar nota');
+        cy.plexButton("Guardar").click({ force: true });
+        cy.wait('@createDerivacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.documento).to.be.eq(dni);
+        });
+        cy.toast('success', 'Derivación guardada');
+        cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
+        cy.get('plex-label').contains('Solicitante: PRUEBA, TEST').should('have.length', 1);
+        cy.contains('SUMAR NOTA/ADJUNTO').click();
+        cy.plexTextArea('label="Observacion"', 'nueva nota');
+        cy.plexButton("Guardar").click();
+        cy.wait('@editDerivacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.documento).to.be.eq(dni);
+        });
+        cy.wait('@getDerivaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('plex-tabs').contains('DERIVACIONES ENTRANTES').click({ force: true });
+        cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
+        cy.contains('solicitada').click({ force: true });
+        cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
+        cy.get('tbody tr').should('have.length', 2);
+        cy.get('tbody tr').contains('Natalia Huenchuman de HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+        cy.get('tbody tr').contains('OBSERVACIONES: nueva nota');
+
+    });
+
     it('crear nueva derivacion', () => {
         seleccionarPaciente(dni);
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
