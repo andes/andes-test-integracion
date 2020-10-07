@@ -16,7 +16,8 @@ context('CITAS - punto de inicio', () => {
         cy.server();
         cy.goto('/citas/punto-inicio', token);
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**api/core/log/paciente?idPaciente=**').as('seleccionPaciente');
+        cy.route('GET', '**api/core/mpi/pacientes/**').as('getPaciente');
+        // cy.route('GET', '**api/core/log/paciente?idPaciente=**').as('seleccionPaciente');
         cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
@@ -27,7 +28,6 @@ context('CITAS - punto de inicio', () => {
 
     it('Buscar agenda por prestación (0 resultados)', () => {
         darTurno(pacientes[0]);
-        cy.wait('@prestaciones');
         cy.plexSelectAsync('name="tipoPrestacion"', 'Consulta de adolescencia', '@prestaciones', 0);
         cy.wait('@cargaAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -38,7 +38,6 @@ context('CITAS - punto de inicio', () => {
 
     it('Buscar agenda por prestación (2 resultados)', () => {
         darTurno(pacientes[0]);
-        cy.wait('@prestaciones');
         cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
         if (cy.esFinDeMes()) {
             cy.wait('@cargaAgendas').then((xhr) => {
@@ -61,7 +60,6 @@ context('CITAS - punto de inicio', () => {
 
     it('Buscar agenda por profesional (0 resultados)', () => {
         darTurno(pacientes[0]);
-        cy.wait('@prestaciones');
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
 
         cy.wait('@cargaAgendas').then((xhr) => {
@@ -72,7 +70,6 @@ context('CITAS - punto de inicio', () => {
 
     it('Buscar agenda por profesional (1 resultados)', () => {
         darTurno(pacientes[0]);
-        cy.wait('@prestaciones');
         cy.plexSelectAsync('name="profesional"', 'HUENCHUMAN NATALIA', '@getProfesionales', 0);
 
         if (cy.esFinDeMes()) {
@@ -98,7 +95,6 @@ context('CITAS - punto de inicio', () => {
             const paciente = pacientes[i];
             darTurno(paciente);
 
-            cy.wait('@prestaciones');
             cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
 
             if (cy.esFinDeMes()) {
@@ -147,8 +143,6 @@ context('CITAS - punto de inicio', () => {
             const paciente = pacientes[i];
             darTurno(paciente);
 
-            cy.wait('@prestaciones');
-
             cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
             cy.wait('@cargaAgendas');
             cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
@@ -169,7 +163,6 @@ context('CITAS - punto de inicio', () => {
             const paciente = pacientes[i];
             darTurno(paciente);
 
-            cy.wait('@prestaciones');
             cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
             cy.wait('@cargaAgendas');
             cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
@@ -185,7 +178,6 @@ context('CITAS - punto de inicio', () => {
     it('Verifica fecha/hora y usuario de dacion de turno', () => {
         const hoy = Cypress.moment().format('DD/MM/YYYY')
         darTurno(pacientes[0]);
-        cy.wait('@prestaciones');
         cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@prestaciones', 0);
         if (cy.esFinDeMes()) {
             cy.wait('@cargaAgendas').then((xhr) => {
@@ -239,9 +231,9 @@ function darTurno(paciente) {
         expect(xhr.status).to.be.eq(200);
     });
     cy.get('paciente-listado plex-item').contains(searchList).click();
-    cy.wait('@seleccionPaciente').then((xhr) => {
-        expect(xhr.status).to.be.eq(200);
-    });
+
+    cy.wait(500);
+
     cy.plexButtonIcon('calendar-plus').click({ force: true });
     return cy.wait('@darTurnoPaciente').then((xhr) => {
         expect(xhr.status).to.be.eq(200);

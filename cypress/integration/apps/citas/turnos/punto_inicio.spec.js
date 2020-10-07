@@ -30,7 +30,6 @@ context('punto de inicio', () => {
         cy.server();
         cy.goto('/citas/punto-inicio', token);
         cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**api/core/log/paciente?idPaciente=**').as('seleccionPaciente');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
     })
 
@@ -50,9 +49,6 @@ context('punto de inicio', () => {
         });
 
         cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
-        cy.wait('@seleccionPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
         cy.plexButtonIcon('open-in-app').click();
         cy.wait('@generarSolicitudPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -98,9 +94,6 @@ context('punto de inicio', () => {
     it('editar datos de contacto', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?**').as('getHistorial');
-        cy.route('GET', '**/api/core/log/paciente?**').as('getLog');
-        cy.route('GET', '**/api/core/tm/localidades?**').as('getLocalidades');
-        cy.route('GET', '**/api/core/tm/provincias?**').as('getProvincias');
 
 
         cy.route('GET', '**/api/core/tm/barrios?**').as('getBarrios');
@@ -113,14 +106,6 @@ context('punto de inicio', () => {
 
         cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
         cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getHistorial').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getLog').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
@@ -146,9 +131,6 @@ context('punto de inicio', () => {
 
     it('dar asistencia y quitarla', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**/api/modules/turnos/historial?**').as('getTurnos');
-        cy.route('GET', '**/api/core/log/paciente?**').as('getLog');
-        cy.route('GET', '**/api/core/tm/provincias**').as('getProvincias');
         cy.route('GET', '**/api/core/tm/provincias?**').as('getNeuquen');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
 
@@ -162,23 +144,7 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@getTurnos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getLog').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
         cy.get('plex-tabs').contains('Turnos').click({ force: true });
-
-        cy.wait('@getTurnos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getLog').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
         cy.get('li[class="list-group-item"]').find('div[class=" list-group-item-text"]').find('div[class="row"]')
             .find('div[class="col-md-12"]').eq(1).plexButton("Dar Asistencia").click();
@@ -189,13 +155,6 @@ context('punto de inicio', () => {
 
         cy.toast('success', 'Se registro la asistencia del paciente');
 
-        cy.wait('@getTurnos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getLog').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
         cy.get('li[class="list-group-item"]').find('div[class=" list-group-item-text"]').find('div[class="row"]')
             .find('div[class="col-md-12"]').eq(1).plexButton("Quitar Asistencia").click({ force: true });
@@ -206,21 +165,10 @@ context('punto de inicio', () => {
 
         cy.toast('alert', 'Se registro la inasistencia del paciente');
 
-        cy.wait('@getTurnos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getLog').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
     });
 
     it('liberar turno', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**/api/modules/turnos/historial?**').as('getTurnos');
-        cy.route('GET', '**/api/core/log/paciente?**').as('getLog');
-        cy.route('GET', '**/api/core/tm/provincias**').as('getProvincias');
-        cy.route('GET', '**/api/core/tm/provincias?**').as('getNeuquen');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('getTurnosAgenda');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
 
@@ -234,23 +182,10 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@getTurnos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
-        cy.wait('@getLog').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
         cy.get('plex-tabs').contains('Turnos').click({ force: true });
 
-        cy.wait('@getTurnos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getLog').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
         cy.get('li[class="list-group-item"]').find('div[class=" list-group-item-text"]').find('div[class="row"]')
             .find('div[class="col-md-12"]').eq(1).plexButton("Liberar Turno").click({ force: true });
@@ -267,19 +202,12 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@getTurnos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
-        cy.wait('@getLog').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
     });
 
     it('Historial', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
-        cy.route('GET', '**/api/modules/turnos/historial?*').as('getTurnos');
 
         cy.plexText('name="buscador"', paciente.documento);
 
@@ -293,9 +221,6 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@getTurnos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
         cy.get('plex-tabs').contains('Historial').click({ force: true });
 
@@ -311,7 +236,6 @@ context('punto de inicio', () => {
     it('Carpetas', () => {
         cy.route('GET', '**api/modules/carpetas/carpetasPacientes?*').as('getCarpetas');
         cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
-        cy.route('GET', '**/api/modules/turnos/historial?*').as('getTurnos');
         cy.route('PATCH', '**/api/core/mpi/pacientes/*').as('carpetaNueva');
         cy.route('POST', '**/api/modules/carpetas/incrementarCuenta').as('incrementaCarpeta');
 
@@ -326,9 +250,6 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.wait('@getTurnos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
         cy.get('plex-tabs').contains('Carpetas').click({ force: true });
 
@@ -356,16 +277,10 @@ context('punto de inicio', () => {
 
     it('Editar direccion del paciente', () => {
         cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('PUT', '**/api/core/mpi/pacientes/**').as('guardar');
 
 
         cy.plexText('name="buscador"', paciente.documento);
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].apellido).to.be.eq(paciente.apellido);
-            expect(xhr.response.body[0].nombre).to.be.eq(paciente.nombre);
-        });
 
         cy.get('paciente-listado plex-item').contains(formatDocumento(paciente.documento)).click();
         cy.wait('@getPaciente').then((xhr) => {
@@ -392,9 +307,6 @@ context('punto de inicio', () => {
 
             cy.plexText('name="buscador"', pacientes[i].documento);
 
-            cy.wait('@busquedaPaciente').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-            });
             cy.get('paciente-listado plex-item').contains(formatDocumento(pacientes[i].documento)).click();
             cy.wait('@getPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
@@ -414,9 +326,6 @@ context('punto de inicio', () => {
             cy.route('GET', '**/api/modules/obraSocial/prepagas/**').as('prepagas');
             cy.plexText('name="buscador"', pacientes[i].documento);
 
-            cy.wait('@busquedaPaciente').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-            });
             cy.get('paciente-listado plex-item').contains(formatDocumento(pacientes[i].documento)).click();
 
             cy.wait('@getPaciente').then((xhr) => {
