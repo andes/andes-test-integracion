@@ -21,7 +21,6 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.route('PATCH', '**/modules/com/derivaciones/**').as('editDerivacion');
         cy.route('POST', '/api/auth/v2/organizaciones').as('selectOrg');
         cy.route('GET', '**/api/auth/organizaciones').as('getOrganizaciones');
-        cy.route('GET', '**/api/core/tm/disclaimer?**').as('disclaimer');
         secuencia(tokenOriginal);
     });
 
@@ -44,7 +43,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton('Nueva derivación').click({ force: true });
         seleccionarPaciente(dni);
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
-        cy.plexTextArea('label="Detalle"', 'prueba de nueva derivación a rechazar');
+        cy.plexTextArea('label="Detalle"', 'a rechazar');
         cy.plexButton("Guardar").click({ force: true });
         cy.wait('@createDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -59,7 +58,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
         cy.get('plex-label').contains('Solicitante: CORTES, JAZMIN').should('have.length', 1);
         cy.get('plex-item').last().click();
-        cy.get('plex-grid').contains('prueba de nueva derivación a rechazar');
+        cy.get('plex-grid').contains('a rechazar');
         cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('inhabilitada').click();
         cy.plexTextArea('label="Observacion"', 'derivación denegada');
         cy.plexButton("Guardar").click();
@@ -75,7 +74,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
     it('crear nueva derivacion y cancelarla', () => {
         seleccionarPaciente(dni);
         cy.plexSelectAsync('label="Profesional solicitante"', 'TEST PRUEBA', '@profesionalSolicitante', 0);
-        cy.plexTextArea('label="Detalle"', 'prueba de nueva derivación para cancelar');
+        cy.plexTextArea('label="Detalle"', 'para cancelar');
         cy.plexButton("Guardar").click({ force: true });
         cy.wait('@createDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -109,7 +108,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
     it('crear derivacion, aprobarla, asignarla, aceptarla, finalizarla', () => {
         seleccionarPaciente(dni);
         cy.plexSelectAsync('label="Profesional solicitante"', 'NATALIA HUENCHUMAN', '@profesionalSolicitante', 0);
-        cy.plexTextArea('label="Detalle"', 'prueba de nueva derivación a aceptar');
+        cy.plexTextArea('label="Detalle"', 'a aceptar');
         cy.plexButton("Guardar").click({ force: true });
         cy.wait('@createDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -124,7 +123,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
         cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
         cy.get('plex-item').last().click();
-        cy.get('plex-grid').contains('prueba de nueva derivación a aceptar');
+        cy.get('plex-grid').contains('a aceptar');
         cy.plexTextArea('label="Observacion"', 'derivación aprobada');
         cy.plexSelect('label="Nuevo estado"', 1).click();
         cy.plexButton("Guardar").click();
@@ -178,7 +177,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
     it('crear derivacion, aprobarla, asignarla, rechazarla, finalizarla', () => {
         seleccionarPaciente(dni);
         cy.plexSelectAsync('label="Profesional solicitante"', 'ALICIA PRUEBA', '@profesionalSolicitante', 0);
-        cy.plexTextArea('label="Detalle"', 'prueba de nueva derivación a aceptar');
+        cy.plexTextArea('label="Detalle"', 'a aceptar');
         cy.plexButton("Guardar").click({ force: true });
         cy.wait('@createDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -191,7 +190,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         });
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-item').last().click();
-        cy.get('plex-grid').contains('prueba de nueva derivación a aceptar');
+        cy.get('plex-grid').contains('a aceptar');
         cy.plexTextArea('label="Observacion"', 'derivación habilitada');
         cy.plexSelect('label="Nuevo estado"', 1).click();
         cy.plexButton("Guardar").click();
