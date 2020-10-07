@@ -35,7 +35,7 @@ context('RUP - Punto de inicio', () => {
         });
 
         it('no visualiza agendas de otros profesionales', () => {
-            cy.cleanDB(['prestaciones']);
+            cy.cleanDB(['prestaciones', 'agenda']);
             cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', profesionales: '5c82a5a53c524e4c57f08cf3' });
             cy.goto('/rup', token);
             cy.get('table').contains('No hay agendas programadas para este día');
@@ -59,8 +59,7 @@ context('RUP - Punto de inicio', () => {
 
             cy.get('@tablaAgendas').find('tbody tr').should('have.length', 1);
             cy.wait('@prestaciones');
-            cy.wait('@turnero');
-            cy.wait(1000);
+
             cy.get('@tablaAgendas').find('tbody tr').find('td div').contains('consulta con médico general');
             cy.get('@tablaAgendas').find('tbody tr').find('td').contains('pacientes');
             cy.get('@tablaAgendas').find('tbody tr').find('td').contains('1');

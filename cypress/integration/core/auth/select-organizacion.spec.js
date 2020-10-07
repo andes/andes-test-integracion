@@ -32,9 +32,6 @@ context('select organizacion', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(3);
         });
-        cy.wait('@disclaimer').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
         cy.get('.userinfo > div span:nth-child(3)').contains('HOSPITAL DE AREA PLOTTIER');
     })
 })
