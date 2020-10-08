@@ -7,23 +7,13 @@ function getStubs() {
 
 describe('ABM Salas', () => {
     let token;
-    let pacientes;
     let salas;
     before(() => {
         cy.seed();
-
-        // CREA USUARIO
-        cy.task('database:create:usuario', { organizacion: '57e9670e52df311059bc8964', permisos: [cy.permisosUsuario, 'internacion:rol:medica', 'internacion:sala:create', 'internacion:sala:edit'] }).then(user => {
-            cy.login(user.usuario, user.password, user.organizaciones[0]._id).then(t => {
-                token = t;
-                // CREA PACIENTES
-                cy.task('database:seed:paciente').then(pacientesCreados => {
-                    pacientes = pacientesCreados;
-                    // CREA UN MUNDO IDEAL DE INTERNACION
-                    cy.factoryInternacion({ sala: true, config: [{ estado: 'disponible', count: 1 }] }).then(salasCreadas => {
-                        salas = salasCreadas;
-                    });
-                });
+        cy.loginCapa('estadistica').then(([user, t, pacientesCreados]) => {
+            token = t;
+            cy.factoryInternacion({ sala: true, config: [{ estado: 'disponible', count: 1 }] }).then(salasCreadas => {
+                salas = salasCreadas;
             });
         });
     });
@@ -39,7 +29,7 @@ describe('ABM Salas', () => {
     it('Alta Sala', () => {
         cy.goto('/internacion/sala-comun', token);
         cy.plexText('label="Nombre"', 'Sala 666');
-        cy.plexFloat('label="Capacidad"', 9999);
+        // cy.plexFloat('label="Capacidad"', 9999);
         cy.plexSelectType('label="Unidades Organizativas"', 'servicio');
         cy.plexSelectType('label="Sectores"', 'H');
 
@@ -57,8 +47,8 @@ describe('ABM Salas', () => {
         cy.goto(`/internacion/sala-comun/${salas[0].idSalaComun}`, token);
         cy.plexText('label="Nombre"').clear();
         cy.plexText('label="Nombre"', 'Sala 666');
-        cy.plexFloat('label="Capacidad"').clear();
-        cy.plexFloat('label="Capacidad"', 9999);
+        // cy.plexFloat('label="Capacidad"').clear();
+        // cy.plexFloat('label="Capacidad"', 9999);
         cy.plexSelectType('label="Unidades Organizativas"').clearSelect();
         cy.plexSelectType('label="Unidades Organizativas"', 'servicio');
         cy.plexSelectType('label="Sectores"').clearSelect();
