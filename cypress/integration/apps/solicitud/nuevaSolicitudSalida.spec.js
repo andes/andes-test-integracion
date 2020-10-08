@@ -2,8 +2,8 @@
 
 function secuencia(token) {
     cy.goto('/solicitudes', token);
-    cy.plexTab('Solicitudes de Salida').click();
-    cy.plexButton("Nueva Solicitud").click();
+    cy.plexTab('Salida').click();
+    cy.plexButton("Nueva Solicitud de Salida").click();
 }
 
 function seleccionarPaciente(dni) {

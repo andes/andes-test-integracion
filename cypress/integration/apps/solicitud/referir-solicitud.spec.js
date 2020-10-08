@@ -23,19 +23,19 @@ context('SOLICITUDES - REFERIR', () => {
         cy.server();
         cy.route('GET', '**/api/modules/top/reglas?**').as('getReglas');
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
-        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
+        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes**').as('solicitudes');
         cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('auditarSolicitud');
         cy.route('GET', '**/api/core/tm/tiposPrestaciones').as('tipoPrestaciones');
     })
 
     it('crear solicitud de entrada y referirla', () => {
-        cy.get('table tbody tr td').contains('CORTES, JAZMIN').click();
+        cy.get('plex-item').contains('CORTES, JAZMIN').click();
         cy.plexButtonIcon('lock-alert').first().click();
 
         cy.plexButton('Referir').click();
 
         cy.plexSelectAsync('label="Organización destino"', 'HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON', '@getReglas', 0);
-        cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'consulta de cardiología');
+        cy.plexSelectType('label="Tipo de Prestación Solicitada"', 'consulta de cardiología').click({ force: true });
         cy.plexSelectAsync('label="Profesional destino"', 'ALICIA', '@getProfesional', 0);
 
         cy.plexButton('Confirmar').click();

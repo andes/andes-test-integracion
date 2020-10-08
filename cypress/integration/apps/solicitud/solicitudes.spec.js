@@ -24,8 +24,8 @@ context('SOLICITUDES', () => {
         cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('conceptosTurneables');
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
-        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
-        cy.route('GET', '**/api/core/tm/organizaciones').as('getOrganizaciones');
+        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes**').as('solicitudes');
+        cy.route('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
         cy.route('POST', '**/api/modules/top/reglas').as('guardarRegla');
         cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('auditarSolicitud');
@@ -37,15 +37,15 @@ context('SOLICITUDES', () => {
         let prestacionDestino = 'Consulta de cirugía';
         let orgOrigen = 'HOSPITAL DR. HORACIO HELLER';
         let prestacionOrigen = 'consulta de medicina general';
-
-        cy.plexButton('Reglas').click();
+        cy.plexButton('Reglas de entrada').click();
 
         cy.wait('@getPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
         cy.plexSelectAsync('label="Prestación Destino"', prestacionDestino, '@getPrestaciones', 0);
-        cy.plexSelectAsync('name="organizacion"', orgOrigen, '@getOrganizaciones', 0);
+        
+        cy.plexSelectAsync('placeholder="OrganizacionOrigen"', orgOrigen, '@getOrganizaciones', 0);
 
         cy.plexButtonIcon('plus').click();
 
@@ -71,7 +71,7 @@ context('SOLICITUDES', () => {
 
     it('crear solicitud de entrada y verificar filtros', () => {
 
-        cy.plexButton('Nueva Solicitud').click();
+        cy.plexButton('Nueva Solicitud de Entrada').click();
         cy.plexText('name="buscador"', '32589654');
         cy.wait('@consultaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -81,6 +81,10 @@ context('SOLICITUDES', () => {
 
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@conceptosTurneables', 0);
+
+        cy.wait('@getReglas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.plexSelectType('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER');
         cy.plexSelectType('label="Tipos de Prestación Origen"', 'Consulta de clínica médica');
         cy.plexSelectAsync('name="profesionalOrigen"', 'cortes jazmin', '@getProfesional', 0);
@@ -96,12 +100,10 @@ context('SOLICITUDES', () => {
         cy.plexButtonIcon('chevron-down').click();
         cy.plexText('name="paciente"', 'SOLICITUD TEST');
 
-        cy.plexSelectType('name="organizacion"', 'HOSPITAL DR. HORACIO HELLER');
-        cy.plexSelectType('name="prestacionDestino"', 'Consulta de Neurología');
+        cy.plexSelectType('name="prestacionDestino"', 'Consulta de neurología');
         cy.plexSelectType('name="estado"', 'auditoria');
-        cy.get('table tbody tr td').contains('consulta de neurología');
-
-    })
+        cy.get('plex-list').find('plex-item').first('contain', 'consulta de neurología');
+    });
 
     it('crear solicitud de entrada y auditarla', () => {
         cy.server();
@@ -113,6 +115,9 @@ context('SOLICITUDES', () => {
 
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@conceptosTurneables', 0);
+        cy.wait('@getReglas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
 
         cy.plexSelectType('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER');
 
@@ -136,7 +141,7 @@ context('SOLICITUDES', () => {
         cy.wait('@solicitudes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('table tbody tr td').contains('CORTES, JAZMIN').click({ force: true });
+        cy.get('div span').contains('CORTES, JAZMIN');
         cy.plexButtonIcon('lock-alert').first().click();
         cy.plexButton('Responder').click();
         cy.get('textarea').last().type('Una observacion', {

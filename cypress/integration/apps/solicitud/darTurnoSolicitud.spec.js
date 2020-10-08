@@ -20,7 +20,7 @@ context('TOP: nuevo turno', () => {
 
         cy.route('GET', '**/api/modules/turnos/agenda?**').as('agendas');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
-        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes?solicitudDesde=**').as('solicitudes');
+        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes**').as('solicitudes');
         cy.route('POST', '**/api/modules/turnos/listaEspera**').as('listaEspera');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
     });
@@ -39,7 +39,7 @@ context('TOP: nuevo turno', () => {
             expect(xhr.response.body[0].solicitud.tipoPrestacion.id).to.be.eq('59ee2d9bf00c415246fd3d6b');
             expect(xhr.response.body[0].solicitud.tipoPrestacion.term).to.be.eq('Consulta de clínica médica');
         });
-        cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
+        cy.get('plex-item').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.plexButtonIcon('calendar-plus').click();
 
         cy.wait('@agendas').then((xhr) => {
@@ -65,7 +65,7 @@ context('TOP: nuevo turno', () => {
             expect(xhr.response.body.profesional.nombre).to.be.eq('MARIA');
             expect(xhr.response.body.profesional.apellido).to.be.eq('PEREZ');
         })
-        cy.get('tbody td').should('contain', 'pendiente').and('contain', 'PEREZ, MARIA');
+        cy.get('plex-item').should('contain', 'pendiente').and('contain', 'PEREZ, MARIA');
     });
 
 
@@ -83,7 +83,7 @@ context('TOP: nuevo turno', () => {
             expect(xhr.response.body[0].solicitud.tipoPrestacion.id).to.be.eq('59ee2d9bf00c415246fd3d6b');
             expect(xhr.response.body[0].solicitud.tipoPrestacion.term).to.be.eq('Consulta de clínica médica');
         });
-        cy.get('tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
+        cy.get('plex-item').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
         cy.plexButtonIcon('calendar-plus').click();
 
         cy.wait('@agendas').then((xhr) => {
