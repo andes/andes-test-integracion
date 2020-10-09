@@ -8,6 +8,9 @@ const { Octokit } = require("@octokit/rest");
 // const APP_ID = process.env.GITHUB_APP_ID;
 // const INSTALATION_ID = process.env.GITHUB_INSTALATION_ID;
 
+const USERNAME = process.env.USERNAME;
+
+
 const PERSONAL_TOKEN = process.env.GITHUB_PERSONAL_TOKEN;
 
 const APP_BRANCH = process.env.APP_BRANCH || "master";
@@ -54,14 +57,19 @@ async function publishComment(result, repo, branch) {
 }
 
 function createStatsText(stats) {
-  return `
+  const body = `
+USUARIO: ${USERNAME}  
 BUILD NUMBER: [${BUILD_ID}](http://condorpiedra.andes.gob.ar:85/${BUILD_ID}/mochawesome.html)
 TEST START: ${stats.start}
 TOTAL: ${stats.total}
 SUCCESS: ${stats.success}
 FAIL: ${stats.fail}
 SKIPPED: ${stats.pending}
+${stats.total < 310 ? ':warning::warning::warning::warning:\nHay archivos que no corrieron. Vuelva a intentar.' : ''}
     `;
+
+
+  return body;
 }
 
 function readTestResult() {
@@ -111,7 +119,6 @@ async function addTag(result, repo, number) {
   const labels = res.data.labels;
 
   const ps = labels.filter(label => label.name === 'test fail' || label.name === 'test ok').map((label) => {
-    console.log(label.name)
     return octokit.issues.removeLabel({
       owner: "andes",
       repo: repo,
@@ -121,7 +128,7 @@ async function addTag(result, repo, number) {
   });
   await Promise.all(ps);
 
-  if (result.fail <= 0) {
+  if (result.fail <= 0 || result.total < 310) {
     await octokit.issues.addLabels({
       owner: "andes",
       repo: repo,
