@@ -1,0 +1,46 @@
+{
+    "nombre" : "Sala 666",
+    "organizacion" : {
+        "_id" : "57e9670e52df311059bc8964",
+        "id" : "57e9670e52df311059bc8964",
+        "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+    },
+    "unidadOrganizativas" : [ 
+        {
+            "_id" : "5b294d1008357438f45b596f",
+            "fsn" : "servicio médico (medio ambiente)",
+            "term" : "servicio médico",
+            "conceptId" : "309912009",
+            "semanticTag" : "medio ambiente"
+        }
+    ],
+    "ambito" : "internacion",
+    "estado" : null,
+    "sectores" : [ 
+        {
+            "_id" : "5b0703952483bc2afa04e73c",
+            "tipoSector" : {
+                "fsn" : "habitación (medio ambiente)",
+                "term" : "habitación",
+                "conceptId" : "2401000013100",
+                "semanticTag" : "medio ambiente"
+            },
+            "nombre" : "habi1"
+        }
+    ],
+    "capacidad" : 9999,
+    "createdAt" : "2020-09-23T14:34:43.564Z",
+    "createdBy" : {
+        "id" : "5f6b5cf5cef6a8e7451de3d6",
+        "nombreCompleto" : "LOUVENIA VONRUEDEN",
+        "nombre" : "LOUVENIA",
+        "apellido" : "VONRUEDEN",
+        "username" : 49855858,
+        "documento" : 49855858,
+        "organizacion" : {
+            "_id" : "57e9670e52df311059bc8964",
+            "id" : "57e9670e52df311059bc8964",
+            "nombre" : "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+        }
+    }
+}

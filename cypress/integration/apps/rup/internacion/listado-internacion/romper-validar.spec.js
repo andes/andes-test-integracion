@@ -70,8 +70,7 @@ describe('Capa Estadistica - listado internacion', () => {
     it('Validar internacion', () => {
         cy.get('table tbody tr').eq(0).click({ force: true });
         cy.plexButton("VALIDAR").click();
-        cy.contains("Confirmar validación");
-        cy.get('button').contains('CONFIRMAR').click();
+        cy.swal('confirm', 'Confirmar validación');
         cy.wait('@patchPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estados[xhr.response.body.estados.length - 1].tipo).to.be.eq('validada');
@@ -81,8 +80,7 @@ describe('Capa Estadistica - listado internacion', () => {
     it('Romper internacion', () => {
         cy.get('table tbody tr').eq(1).click({ force: true });
         cy.plexButton("ROMPER VALIDACION").click();
-        cy.contains("Romper validación");
-        cy.get('button').contains('CONFIRMAR').click();
+        cy.swal('confirm', 'Romper validación');
         cy.wait('@patchPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estados[xhr.response.body.estados.length - 1].tipo).to.be.eq('ejecucion');

@@ -32,27 +32,55 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica' });
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria' });
 
-    const camas = [];
-    for (const elemento of params.configCamas) {
-        const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
-        for (let i = 0; i < count; i++) {
-            const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
-
-            camas.push({
-                estado: elemento.estado,
-                unidadOrganizativa: elemento.unidadOrganizativa,
-                sector: elemento.sector,
-                tipoCama: elemento.tipoCama,
-                esCensable: elemento.esCensable,
-                paciente,
-                fechaIngreso: elemento.fechaIngreso,
-                fechaEgreso: elemento.fechaEgreso,
-                validada: elemento.validada
-            });
-        }
+    if (params.sala) {
+        return crearSalas(params);
+    } else {
+        return crearCamas(params);
     }
-    return cy.taskN('database:create:cama', camas);
 });
+
+function crearCamas(params) {
+    const camas = [];
+        for (const elemento of params.configCamas) {
+            const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
+            for (let i = 0; i < count; i++) {
+                const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
+    
+                camas.push({
+                    estado: elemento.estado,
+                    unidadOrganizativa: elemento.unidadOrganizativa,
+                    sector: elemento.sector,
+                    tipoCama: elemento.tipoCama,
+                    esCensable: elemento.esCensable,
+                    paciente,
+                    fechaIngreso: elemento.fechaIngreso,
+                    fechaEgreso: elemento.fechaEgreso,
+                    validada: elemento.validada
+                });
+            }
+        }
+    return cy.taskN('database:create:cama', camas);
+}
+
+function crearSalas(params) {
+    const salas = [];
+        for (const elemento of params.config) {
+            const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
+            for (let i = 0; i < count; i++) {
+                const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
+    
+                salas.push({
+                    estado: elemento.estado,
+                    unidadesOrganizativas: elemento.unidadesOrganizativas,
+                    sectores: elemento.sectores,
+                    paciente,
+                    fechaIngreso: elemento.fechaIngreso,
+                    fechaEgreso: elemento.fechaEgreso,
+                });
+            }
+        }
+    return cy.taskN('database:create:sala', salas);
+}
 
 export const permisosUsuario = [
     'turnos:*',
@@ -67,6 +95,9 @@ export const permisosUsuario = [
     'internacion:censo',
     'internacion:inicio',
     'internacion:descargarListado',
+    'internacion:sala:create',
+    'internacion:sala:edit',
+    'internacion:sala:delete',
     'rup:tipoPrestacion:5951051aa784f4e1a8e2afe1',
     'rup:tipoPrestacion:5a26e113291f463c1b982d98',
     'rup:tipoPrestacion:598ca8375adc68e2a0c121c3',

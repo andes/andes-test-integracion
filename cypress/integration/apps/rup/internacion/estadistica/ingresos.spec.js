@@ -60,8 +60,7 @@ describe('Capa Estadistica - Ingresos', () => {
 
 
         cy.get('paciente-listado plex-item').contains(pacientes[0].nombre).click();
-        cy.contains('Paciente ya internado');
-        cy.swal('confirm');
+        cy.swal('confirm', 'Paciente ya internado');
 
         // cy.wait('@getPaciente').then((xhr) => {
         //     expect(xhr.status).to.be.eq(200);
@@ -99,13 +98,11 @@ describe('Capa Estadistica - Ingresos', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Paciente internado')
-        cy.contains('Aceptar').click();
+        cy.swal('confirm', 'Paciente internado');
     });
 
     it('Editar ingreso', () => {
         cy.get('table tr').contains(pacientes[0].nombre).first().click();
-        // cy.wait('@getCamas2');
 
         cy.get('plex-tabs ul li').eq(1).click();
         cy.get('plex-title[titulo="INGRESO"] div').eq(2).plexButtonIcon('pencil').click();
@@ -128,7 +125,6 @@ describe('Capa Estadistica - Ingresos', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.contains('Los datos se actualizaron correctamente')
-        cy.contains('Aceptar').click();
+        cy.swal('confirm', 'Los datos se actualizaron correctamente');
     });
 });

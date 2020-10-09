@@ -1,4 +1,7 @@
-Cypress.Commands.add('swal', (acction) => {
+Cypress.Commands.add('swal', (acction, message = null) => {
+    if (message) {
+        cy.get('div.swal2-modal').contains(message);
+    }
     return cy.get('div.swal2-modal').find(`.swal2-${acction}`).click({ force: true });
 });
 

@@ -1,6 +1,8 @@
 const moment = require('moment');
 
 function getStubs() {
+    cy.route('**/internacion**/**').as('backToMapa');
+
     cy.route('GET', '/api/core/term/snomed/expression?expression=^2051000013106**', [{
         "conceptId": "12345",
         "term": "Cama",
@@ -78,8 +80,7 @@ describe('ABM Camas', () => {
             expect(cama.tipoCama.term).to.be.eq('Cama');
         });
 
-        cy.contains('La cama fue guardada');
-        cy.get('button').contains('Aceptar').click();
+        cy.swal('confirm', 'La cama fue guardada');
     });
 
     it('Editar Cama', () => {
@@ -105,13 +106,11 @@ describe('ABM Camas', () => {
             expect(cama.tipoCama.term).to.be.eq('Cama');
         });;
 
-        cy.contains('La cama fue guardada');
-        cy.get('button').contains('Aceptar').click();
+        cy.swal('confirm', 'La cama fue guardada');
     });
 
     it('Baja Cama', () => {
         cy.goto(`/internacion/cama/${camas[camas.length - 1].idCama}`, token);
-        cy.wait(100)
         cy.plexButton('INACTIVAR CAMA').click();
         cy.get('button').contains('CONFIRMAR').click();
 
@@ -119,7 +118,8 @@ describe('ABM Camas', () => {
             expect(xhr.status).to.be.eq(200);
         });;
 
-        cy.contains('La cama fue dada de baja');
-        cy.get('button').contains('Aceptar').click();
+        cy.wait(200)
+
+        cy.swal('confirm', 'La cama fue dada de baja');
     });
 });

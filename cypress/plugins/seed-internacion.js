@@ -181,6 +181,94 @@ module.exports.createCama = async (mongoUri, params) => {
     }
 }
 
+module.exports.createSala = async (mongoUri, params) => {
+    params = params || {};
+    try {
+        const client = await connectToDB(mongoUri);
+        const salaDB = await client.db().collection('internacionSalaComun');
+
+        let dtoSala = require('./data/internacion/sala-default');
+        dtoSala = JSON.parse(JSON.stringify(dtoSala));
+
+        dtoSala.organizacion = params.organizacion || dtoSala.organizacion;
+        dtoSala.organizacion._id = ObjectId(dtoSala.organizacion._id);
+        dtoSala.organizacion.id = ObjectId(dtoSala.organizacion._id);
+        dtoSala.nombre = params.nombre || ('SALA ' + faker.random.number({ min: 0, max: 9999 }));
+        
+        if (params.unidadesOrganizativas) {
+            const organizacionDB = await client.db().collection('organizacion');
+            const organizacion = await organizacionDB.findOne({ _id: dtoSala.organizacion._id });
+            dtoSala.unidadOrganizativas = [];
+            organizacion.unidadesOrganizativas.map(unidadOrg => {
+                if (unidadOrg.conceptId === params.unidadOrganizativa) {
+                    dtoSala.unidadOrganizativas.push(unidadOrg);
+                }
+            });
+        }
+
+        if (params.sectores) {
+            const organizacionDB = await client.db().collection('organizacion');
+            const organizacion = await organizacionDB.findOne({ _id: dtoCama.organizacion._id });
+            dtoSala.sectores = [];
+            params.sectores.map(sector => {
+                dtoSala.sectores.push(getRuta(organizacion, sector));
+            });
+        }
+
+        dtoSala._id = new ObjectId();
+        await salaDB.insertOne(dtoSala);
+
+        // SNAPSHOT DE SALA
+        const salaSnapshotDB = await client.db().collection('internacionSalaComunSnapshot');
+        let dtoSnapshot = require('./data/internacion/sala-snapshot');
+
+        dtoSnapshot = JSON.parse(JSON.stringify(dtoSnapshot));
+        dtoSnapshot['idSalaComun'] = ObjectId(dtoSala._id);
+        dtoSnapshot['organizacion'] = dtoSala.organizacion;
+        dtoSnapshot.organizacion['id'] = ObjectId(dtoSala.organizacion._id);
+        dtoSnapshot['nombre'] = dtoSala.nombre;
+        dtoSnapshot['capacidad'] = dtoSala.capacidad;
+        dtoSnapshot['unidadOrganizativas'] = dtoSala.unidadOrganizativas || dtoSnapshot.unidadOrganizativas;
+        dtoSnapshot['sectores'] = dtoSala.sectores || dtoSnapshot.sectores;
+        dtoSnapshot['fecha'] = moment().startOf('month').toDate();
+
+        await salaSnapshotDB.insertOne(dtoSnapshot);
+
+        // MOVIMIENTO SALA
+        if (params.paciente) {
+            const salaMovimientoDB = await client.db().collection('internacionSalaComunMovimientos');
+            let dtoMovimiento = {
+                accion: 'IN',
+                idSalaComun: ObjectId(dtoSala._id),
+                organizacion: dtoSala.organizacion,
+                paciente: {
+                    id : ObjectId(params.paciente._id),
+                    documento: params.paciente.documento,
+                    nombre: params.paciente.nombre,
+                    apellido: params.paciente.apellido,
+                    sexo: params.paciente.sexo,
+                    genero: params.paciente.genero,
+                    fechaNacimiento: params.paciente.fechaNacimiento
+                },
+                idInternacion: new ObjectId(),
+                fecha: moment(params.fechaIngreso).toDate(),
+                extras: {
+                    ingreso: true
+                },
+                unidadOrganizativas: dtoSala.unidadOrganizativas,
+                createdAt: moment(params.fechaIngreso).toDate(),
+            }
+
+            await salaMovimientoDB.insertOne(dtoMovimiento);
+        }
+
+        return dtoSnapshot;
+    }
+    catch (e) {
+        return e;
+    }
+}
+
 function getRuta(organizacion, item) {
     for (let sector of organizacion.mapaSectores) {
         let res = makeTree(sector, item);
