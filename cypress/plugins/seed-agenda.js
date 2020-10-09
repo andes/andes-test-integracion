@@ -12,7 +12,6 @@ module.exports.seedAgenda = async (mongoUri, params) => {
         const dto = require('./data/agendas/agenda-' + templateName);
 
         const agenda = JSON.parse(JSON.stringify(dto));
-
         if (params.estado) {
             agenda.estado = params.estado;
         }

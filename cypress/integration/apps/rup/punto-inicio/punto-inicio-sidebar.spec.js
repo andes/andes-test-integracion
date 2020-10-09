@@ -127,22 +127,19 @@ context('RUP - Punto de inicio', () => {
                     cy.swal('confirm');
                     cy.wait('@crearPrestacion');
                     cy.wait('@prestaciones');
-                    cy.wait('@huds');
 
-                    cy.plexButton('Punto de Inicio').click({ force: true });
-                    cy.swal('confirm');
-                    cy.wait('@agendas');
+                    cy.goto('/rup', token)
                     cy.wait('@prestaciones');
-
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
 
                     if (typeAgenda !== 'no-nominalizada') {
                         cy.plexButton('ANULAR INICIO DE PRESTACIÓN').click();
+                        cy.swal('confirm');
                         cy.wait('@prestaciones').then((xhr) => {
                             expect(xhr.status).to.be.eq(200);
+                            expect(xhr.response.body.length).to.be.eq(0);
                         });
-                        cy.swal('confirm');
                     }
                 });
             }
