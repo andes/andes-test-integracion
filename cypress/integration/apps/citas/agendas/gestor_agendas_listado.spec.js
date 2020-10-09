@@ -167,7 +167,7 @@ describe('CITAS - Gestor de Agendas', () => {
         cy.get('botones-agenda').plexButtonIcon('folder-account');
     });
 
-    it.only('Visualizar detalle de la configuración inicial del bloque', () => {
+    it('Visualizar detalle de la configuración inicial del bloque', () => {
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
