@@ -2,6 +2,9 @@ const fs = require("fs");
 const { createAppAuth } = require("@octokit/auth-app");
 const { Octokit } = require("@octokit/rest");
 
+const { sedMessage, sendMessage } = require('./slack');
+const { getBuildNumber } = require('./cypress');
+
 // const PRIVATE_KEY = fs.readFileSync(process.env.GITHUB_PRIVATE_KEY, 'utf8');
 // const CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 // const CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
@@ -60,6 +63,7 @@ function createStatsText(stats) {
   const body = `
 USUARIO: ${USERNAME}  
 BUILD NUMBER: [${BUILD_ID}](http://condorpiedra.andes.gob.ar:85/${BUILD_ID}/mochawesome.html)
+CYPRESS RUN: [${stats.cyNumber}](https://dashboard.cypress.io/projects/xr7gft/runs/${stats.cyNumber}/specs)
 TEST START: ${stats.start}
 TOTAL: ${stats.total}
 SUCCESS: ${stats.success}
@@ -97,11 +101,17 @@ function readTestResult() {
 async function main() {
   const result = readTestResult();
 
+  const cypressNumber = await getBuildNumber();
+  result.cyNumber = cypressNumber;
+
   await publishComment(result, "app", APP_BRANCH);
   await publishComment(result, "api", API_BRANCH);
   await publishComment(result, "andes-test-integracion", TEST_BRANCH);
   await publishComment(result, "monitoreo-app", MONITOREO_BRANCH);
   await publishComment(result, "matriculaciones", MATRICULACIONES_BRANCH);
+
+  const texto = createStatsText(result);
+  sendMessage(USERNAME, texto);
 }
 
 main();
