@@ -138,7 +138,7 @@ async function addTag(result, repo, number) {
   });
   await Promise.all(ps);
 
-  if (result.fail <= 0 || result.total < 310) {
+  if (result.fail <= 0 && result.total > 310) {
     await octokit.issues.addLabels({
       owner: "andes",
       repo: repo,
