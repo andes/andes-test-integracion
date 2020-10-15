@@ -78,7 +78,7 @@ context('RUP - Ejecucion', () => {
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).contains('resumen de la internación');
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).should('not.contain', 'No hay conceptos registrados');
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).find('.card .collapse').should('have.class', 'show');
-            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).find('.icon-andes-documento');
+            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(0).find('.adi-documento');
 
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(1).find('.card .collapse').should('not.have.class', 'show');
 
@@ -136,7 +136,7 @@ const requeridos = [
         },
         "params": {
             "hr": true,
-            "icon": "icon-andes-documento",
+            "icon": "adi-documento",
             "required": true
         }
     },
@@ -172,7 +172,7 @@ const requeridos = [
             "cssClass": null
         },
         "params": {
-            "icon": "icon-andes-laboratorio",
+            "icon": "adi-recipiente",
             "showText": false
         }
     },

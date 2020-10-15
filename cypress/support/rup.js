@@ -54,7 +54,7 @@ Cypress.Commands.add('assertRupCard', (index, { semanticTag, term }) => {
     cy.get('plex-layout-main .rup-card').eq(index).then($elem => {
         if (semanticTag) {
             cy.wrap($elem).should('have.class', semanticTag);
-            cy.wrap($elem).find('.icon-rup i').should('have.class', 'icon-rup-semantic-' + (semanticTag === 'solicitud' ? 'plan' : semanticTag));
+            cy.wrap($elem).find('.icon-rup i').should('have.class', getCSSIcon(semanticTag));
         }
         if (term) {
             cy.wrap($elem).find('.title').contains(term);
@@ -141,3 +141,35 @@ Cypress.Commands.add('assertRUPMiniCard', { prevSubject: true }, (subject, { ter
         cy.wrap(subject).plexBadge(badge);
     }
 });
+
+
+export function getCSSIcon(semanticTag) {
+    switch (semanticTag) {
+        case 'solicitud':
+            return 'adi-mano-corazon';
+        case 'hallazgo':
+        case 'evento':
+        case 'situación':
+            return 'adi-lupa-ojo';
+
+        case 'trastorno':
+            return 'adi-trastorno';
+
+        case 'procedimiento':
+        case 'entidad observable':
+        case 'régimen/tratamiento':
+            return 'adi-termometro';
+
+        case 'producto':
+        case 'objeto físico':
+        case 'medicamento clínico':
+        case 'fármaco de uso clínico':
+            return 'adi-pildoras';
+
+        case 'elemento de registro':
+            return 'adi-documento-lapiz';
+        default:
+            // No debería
+            return semanticTag;
+    }
+}
