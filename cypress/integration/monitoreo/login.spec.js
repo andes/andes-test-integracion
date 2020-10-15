@@ -32,7 +32,7 @@ context('Pagina de login', () => {
         cy.route('POST', '**/api/auth/login').as('login');
 
         cy.plexInt('name="usuario"').type('100001100010998771111');
-        cy.plexText('name="password"', 'anypasswordfornow');
+        cy.plexText('name="password"', 'asd');
         cy.plexButton('Iniciar sesión').click();
 
         cy.wait('@login').then((xhr) => {
