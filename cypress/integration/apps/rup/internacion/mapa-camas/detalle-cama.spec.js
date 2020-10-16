@@ -43,7 +43,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
         cy.route('GET', '**/api/modules/rup/internacion/camas/**').as('getCama');
         cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
         cy.route('GET', '**/api/core/mpi/pacientes/**', paciente).as('getPaciente');
-        cy.route('PATCH', '**/api/modules/rup/internacion/deshacer/**').as('deshacer');
+        cy.route('PATCH', '**/api/modules/rup/internacion/deshacer').as('deshacer');
     });
 
     it('Verificar datos de cama', () => {
