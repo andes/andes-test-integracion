@@ -130,18 +130,30 @@ module.exports.createCama = async (mongoUri, params) => {
         const unidadOrg = dtoEstadistica.estados[index].unidadOrganizativa;
         const especialidades = dtoEstadistica.estados[index].especialidades;
         dtoEstadistica.estados[index].estado = params.estado;
+        dtoEstadistica.estados[index].extras = params.extras;
         dtoEstadistica.estados[index].paciente = paciente;
         dtoEstadistica.estados[index].unidadOrganizativa = dtoCama.unidadOrganizativaOriginal || unidadOrg;
         dtoEstadistica.estados[index].especialidades = dtoCama.especialidades || especialidades;
         dtoEstadistica.estados[index].idInternacion = dtoPrestacion._id || null;
         dtoEstadistica.estados[index].esCensable = (params.esCensable !== undefined) ? params.esCensable : true;
         dtoEstadistica.estados[index].esMovimiento = true;
-        dtoEstadistica.estados[index].equipamiento = dtoCama.equipamiento || dtoEstadistica.estados[index].equipamiento;
         dtoEstadistica.estados[index].fecha = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
-
-
-
         dtoEstadistica.estados[index].equipamiento = params.equipamiento || dtoCama.equipamiento;
+
+        if (paciente) {
+            dtoEstadistica.estados.unshift({
+                estado: 'disponible',
+                fecha: moment(dtoEstadistica.estados[index].fecha).subtract(2, 'hours').toDate(),
+                esMovimiento: true,
+                paciente: null,
+                unidadOrganizativa: dtoCama.unidadOrganizativaOriginal || unidadOrg,
+                especialidades: especialidades,
+                idInternacion: null,
+                esCensable: (params.esCensable !== undefined) ? params.esCensable : true,
+                equipamiento: dtoCama.equipamiento || dtoEstadistica.estados[index].equipamiento
+            });
+        }
+
         dtoEstadistica.start = moment(params.fechaIngreso).startOf('month').toDate() || moment().startOf('month').toDate();
         dtoEstadistica.end = moment(params.fechaIngreso).endOf('month').toDate() || moment().endOf('month').toDate();
 

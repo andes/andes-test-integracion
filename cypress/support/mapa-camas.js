@@ -16,6 +16,11 @@ Cypress.Commands.add('createUsuarioByCapa', (capa) => {
     );
 });
 
+Cypress.Commands.add('deshacerInternacion', () => {
+    cy.get('plex-layout-sidebar plex-title').eq(1).plexButtonIcon('account-off').click();
+    cy.swal('confirm', '¿Quiere deshacer esta internación?');
+})
+
 Cypress.Commands.add('loginCapa', (capa) => {
     return cy.createUsuarioByCapa(capa).then((user) => {
         return cy.login(user.usuario, user.password, user.organizaciones[0]._id).then((token) => {
@@ -41,44 +46,46 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
 
 function crearCamas(params) {
     const camas = [];
-        for (const elemento of params.configCamas) {
-            const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
-            for (let i = 0; i < count; i++) {
-                const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
-    
-                camas.push({
-                    estado: elemento.estado,
-                    unidadOrganizativa: elemento.unidadOrganizativa,
-                    sector: elemento.sector,
-                    tipoCama: elemento.tipoCama,
-                    esCensable: elemento.esCensable,
-                    paciente,
-                    fechaIngreso: elemento.fechaIngreso,
-                    fechaEgreso: elemento.fechaEgreso,
-                    validada: elemento.validada
-                });
-            }
+    for (const elemento of params.configCamas) {
+        const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
+        for (let i = 0; i < count; i++) {
+            const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
+
+            camas.push({
+                estado: elemento.estado,
+                unidadOrganizativa: elemento.unidadOrganizativa,
+                sector: elemento.sector,
+                tipoCama: elemento.tipoCama,
+                esCensable: elemento.esCensable,
+                paciente,
+                fechaIngreso: elemento.fechaIngreso,
+                fechaEgreso: elemento.fechaEgreso,
+                validada: elemento.validada,
+                extras: elemento.extras,
+
+            });
         }
+    }
     return cy.taskN('database:create:cama', camas);
 }
 
 function crearSalas(params) {
     const salas = [];
-        for (const elemento of params.config) {
-            const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
-            for (let i = 0; i < count; i++) {
-                const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
-    
-                salas.push({
-                    estado: elemento.estado,
-                    unidadesOrganizativas: elemento.unidadesOrganizativas,
-                    sectores: elemento.sectores,
-                    paciente,
-                    fechaIngreso: elemento.fechaIngreso,
-                    fechaEgreso: elemento.fechaEgreso,
-                });
-            }
+    for (const elemento of params.config) {
+        const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
+        for (let i = 0; i < count; i++) {
+            const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
+
+            salas.push({
+                estado: elemento.estado,
+                unidadesOrganizativas: elemento.unidadesOrganizativas,
+                sectores: elemento.sectores,
+                paciente,
+                fechaIngreso: elemento.fechaIngreso,
+                fechaEgreso: elemento.fechaEgreso,
+            });
         }
+    }
     return cy.taskN('database:create:sala', salas);
 }
 
