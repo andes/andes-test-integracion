@@ -291,8 +291,9 @@ context('RUP - Punto de inicio', () => {
                 if (typeAgenda !== 'con-solicitud') {
                     cy.wait('@crearPrestacion');
                 } else {
-                    cy.wait('@patchPrestacion')
+                    cy.wait('@patchPrestacion');
                 }
+                cy.wait(100)
                 cy.url().should('include', '/rup/ejecucion/').then($url => {
                     const parts = $url.split('/');
                     idPrestacion = parts[parts.length - 1];
