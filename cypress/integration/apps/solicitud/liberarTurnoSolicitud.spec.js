@@ -134,6 +134,9 @@ describe('TOP: Liberar turno', () => {
         cy.goto('/solicitudes', token);
 
         cy.get('span.badge-info').contains('pendiente');
+        cy.get('plex-item').contains('Huenchuman, Natalia').click();
+        cy.get('historial-solicitud .item-list').should('length', 4);
+        cy.get('historial-solicitud').contains('Turno liberado por Natalia Huenchuman');
         // <! -- LIBERAR TURNO
     });
 });

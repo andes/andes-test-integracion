@@ -53,6 +53,8 @@ describe('TOP: Nueva Solicitud de Salida', () => {
             expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.toast('success', 'Solicitud guardada');
+        cy.get('plex-item').contains('CORTES, JAZMIN').click();
+        cy.get('historial-solicitud').contains('Creada por Natalia Huenchuman');
     });
 
     it('campos requeridos', () => {
@@ -75,7 +77,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
         cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
-        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
+        cy.plexSelectAsync('label="Profesional solicitante"', 'HUENCHUMAN NATALIA', '@profesionalSolicitante', 0);
 
         cy.plexSelectType('label="Organización destino"').validationMessage()
         cy.plexButton('Guardar').click();
@@ -95,6 +97,8 @@ describe('TOP: Nueva Solicitud de Salida', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
+        cy.get('plex-item').contains('Huenchuman, Natalia').click();
+        cy.get('historial-solicitud').contains('Creada por Natalia Huenchuman');
     });
 
     it('comprobación de reglas', () => {
