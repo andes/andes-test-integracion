@@ -99,24 +99,19 @@ const filtrosMap = {
 }
 
 Cypress.Commands.add('HudsBusquedaFiltros', (search) => {
-    if (typeof search === 'number') {
-        cy.get('rup-hudsbusqueda .menu-buscador button').eq(search).click();
-    } else {
-        cy.get('rup-hudsbusqueda .menu-buscador button').eq(filtrosMap[search]).click();
-    }
+    const index = typeof search === 'number' ? search : filtrosMap[search];
+    cy.get('rup-hudsbusqueda .menu-buscador button').eq(index).click();
 });
 
 Cypress.Commands.add('assertHudsBusquedaFiltros', (search, count) => {
-    if (typeof search === 'number') {
-        cy.get('rup-hudsbusqueda .menu-buscador li').eq(search);
-    } else {
-        cy.get('rup-hudsbusqueda .menu-buscador li').eq(filtrosMap[search]);
-    }
-    if (count > 0) {
-        cy.contains(count);
-    } else {
-        cy.find('small').should('not.exist');
-    }
+    const index = typeof search === 'number' ? search : filtrosMap[search];
+    cy.get('rup-hudsbusqueda .menu-buscador li').eq(index).then(elem => {
+        if (count > 0) {
+            cy.wrap(elem).contains(count);
+        } else {
+            cy.wrap(elem).find('small').should('not.exist');
+        }
+    });
 });
 
 
@@ -126,4 +121,23 @@ Cypress.Commands.add('relacionarRUPCard', (cardIndex, relIndex) => {
         cy.wrap($elem).plexDropdown('icon="link-variant"', relIndex);
         cy.wrap($elem).plexBadge(relIndex, 'info')
     });
-})
+});
+
+Cypress.Commands.add('getHUDSItems', () => {
+    return cy.get('plex-layout-sidebar .rup-card.mini');
+});
+
+Cypress.Commands.add('assertRUPMiniCard', { prevSubject: true }, (subject, { term, profesional, fecha, badge }) => {
+    if (term) {
+        cy.wrap(subject).contains(term);
+    }
+    if (profesional) {
+        cy.wrap(subject).contains(profesional);
+    }
+    if (fecha) {
+        cy.wrap(subject).contains(fecha);
+    }
+    if (badge) {
+        cy.wrap(subject).plexBadge(badge);
+    }
+});

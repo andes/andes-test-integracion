@@ -21,7 +21,6 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             prestacion.estados[0].createdBy.id = params.createdBy;
         }
 
-        prestacion.estadoActual = prestacion.estados[0];
 
 
         if (params.turno) {
@@ -58,6 +57,9 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             prestacion.estados.push({ ...prestacion.estados[0] });
             prestacion.estados[0].tipo = 'ejecucion';
         }
+
+        prestacion.estadoActual = prestacion.estados[prestacion.estados.length - 1];
+
 
         if (params.organizacion) {
             const OrganizacionDB = await client.db().collection('organizacion');
@@ -102,6 +104,8 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
                 registro.concepto = r.concepto;
                 registro.nombre = r.concepto.term;
                 registro.valor = r.valor;
+                registro.createdAt = fechaPrestacion.toDate();
+                registro.updatedAt = fechaPrestacion.toDate();
                 return registro;
             })
         }

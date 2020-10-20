@@ -1,7 +1,5 @@
 /// <reference types="Cypress" />
 
-import { beforeEach } from "mocha";
-
 context('RUP - Ejecucion', () => {
     let token, idPrestacion;
 
