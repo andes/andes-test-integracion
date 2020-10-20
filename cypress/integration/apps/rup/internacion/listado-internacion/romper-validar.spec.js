@@ -14,7 +14,7 @@ describe('Capa Estadistica - listado internacion', () => {
                     { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso: moment().toDate(), validada: true }
                 ]
             }).then(camasCreadas => {
-                return cy.goto('/internacion/listado-internacion', token);
+                return cy.goto('/mapa-camas/listado-internacion', token);
             });
         });
     });

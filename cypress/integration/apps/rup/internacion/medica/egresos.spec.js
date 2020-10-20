@@ -18,7 +18,7 @@ const moment = require('moment');
                         cy.factoryInternacion({ sala: true, config: [{ estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(1, 'hour').toDate() }] })
                             .then(salasCreadas => {
                                 salas = salasCreadas;
-                                return cy.goto('/internacion/mapa-camas', token);
+                                return cy.goto('/mapa-camas', token);
                             });
                     });
             });

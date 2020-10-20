@@ -39,7 +39,7 @@
                         fecha: -1,
                         createdBy: user._id
                     }]);
-                    return cy.goto('/internacion/mapa-camas', token);
+                    return cy.goto('/mapa-camas', token);
                 });
             });
         });

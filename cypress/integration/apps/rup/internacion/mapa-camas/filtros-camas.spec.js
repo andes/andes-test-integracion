@@ -55,7 +55,7 @@ describe('Filtros de Mapa Camas', () => {
                     { estado: 'disponible', count: 5, unidadOrganizativa: filtros.unidadesOrganizativas[1].conceptId, sector: filtros.sectores[1], tipoCama: filtros.tipoCama.conceptId }
                 ]
             }).then(camasCreadas => {
-                return cy.goto('/internacion/mapa-camas', token);
+                return cy.goto('/mapa-camas', token);
             });
         });
     });

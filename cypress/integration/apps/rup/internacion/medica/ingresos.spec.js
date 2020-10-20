@@ -24,7 +24,7 @@
                         ]
                     }).then(salasCreadas => {
                         salas = salasCreadas
-                        return cy.goto('/internacion/mapa-camas', token);
+                        return cy.goto('/mapa-camas', token);
                     });
                 });
             });
