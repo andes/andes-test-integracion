@@ -1,7 +1,5 @@
 /// <reference types="Cypress" />
 
-import { beforeEach } from "mocha";
-
 context('RUP - Ejecucion', () => {
     let token, idPrestacion;
 
@@ -9,6 +7,7 @@ context('RUP - Ejecucion', () => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => token = t);
         cy.task('database:seed:paciente');
+
         cy.cleanDB(['prestaciones']);
 
         cy.task(
@@ -29,6 +28,20 @@ context('RUP - Ejecucion', () => {
                         "estado": "activo",
                         "fechaInicio": new Date(),
                         "evolucion": "<p>hola mundo</p>"
+                    },
+                },
+                {
+                    id: "5f772b7ac9264781190bc794",
+                    concepto: {
+                        "conceptId": "386661006",
+                        "term": "fiebre",
+                        "fsn": "fiebre (hallazgo)",
+                        "semanticTag": "hallazgo"
+                    },
+                    valor: {
+                        "estado": "activo",
+                        "fechaInicio": new Date(),
+                        "evolucion": "<p>SOY FIEBRE</p>"
                     },
                 }]
             }
@@ -56,51 +69,26 @@ context('RUP - Ejecucion', () => {
                 }]
             }
         );
-
-        cy.task(
-            'database:seed:prestacion',
-            { paciente: '586e6e8627d3107fde116cdb', tipoPrestacion: '5cdc4c865cd661b503d727a6' }
-        ).then((prestacion) => {
-            idPrestacion = prestacion._id;
-            cy.goto('/rup/ejecucion/' + idPrestacion, token);
-        });
     });
 
 
     beforeEach(() => {
         cy.server();
+        cy.route('GET', '/api/modules/rup/prestaciones/huds/586e6e8627d3107fde116cdb?**', []).as('huds');
         cy.route('GET', '/api/modules/seguimiento-paciente**', []);
         cy.route('GET', '/api/modules/huds/accesos**', []);
-        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-
-
-        cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
-
-
-
     });
 
-    it('evolucionar trastorno desde buscador', () => {
-        cy.route('GET', '/api/core/term/snomed/expression?expression=**', []);
+    it('no puedo entrar sin token HUDS', () => {
+        cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token);
+        cy.url().should('include', 'inicio');
+    });
 
-        cy.plexTab('Historia de Salud').click();
-        cy.get('plex-layout-sidebar .rup-card').should('have.length', 2);
+    it('visualizar HUDS', () => {
+        cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
+        cy.assertHudsBusquedaFiltros('trastorno', 1);
+        cy.assertHudsBusquedaFiltros('producto', 0);
         cy.HudsBusquedaFiltros('trastorno');
-        cy.get('plex-layout-sidebar .rup-card').should('have.length', 1);
-        // cy.seleccionarConcepto('fiebre Q');
-
-        // [TODO] En la HUDS no hay un plex-button para añadir así que hay que hacerlo a mano
-        cy.get('plex-layout-sidebar .rup-card').contains('fiebre Q').parentsUntil('.rup-card').find('.mdi-plus').click();
-
-        cy.assertRupCard(0, { semanticTag: 'trastorno', term: 'fiebre Q' }).then(($elem) => {
-            cy.wrap($elem).contains('Inicio del Hallazgo');
-            cy.wrap($elem).should('not.contain', 'plex-int');
-        });
-
-
     });
 
-});
-
-
-//
+}); 

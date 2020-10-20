@@ -86,23 +86,40 @@ Cypress.Commands.add('RupSetearFiltros', (search) => {
     }
 });
 
+
+const filtrosMap = {
+    prestaciones: 0,
+    solicitudes: 1,
+    hallazgo: 2,
+    trastorno: 3,
+    procedimiento: 4,
+    producto: 5,
+    laboratorio: 6,
+    vacunas: 7
+}
+
 Cypress.Commands.add('HudsBusquedaFiltros', (search) => {
-    const filtrosMap = {
-        prestaciones: 0,
-        solicitudes: 1,
-        hallazgo: 2,
-        trastorno: 3,
-        procedimiento: 4,
-        producto: 5,
-        laboratorio: 6,
-        vacunas: 7
-    }
     if (typeof search === 'number') {
         cy.get('rup-hudsbusqueda .menu-buscador button').eq(search).click();
     } else {
         cy.get('rup-hudsbusqueda .menu-buscador button').eq(filtrosMap[search]).click();
     }
 });
+
+Cypress.Commands.add('assertHudsBusquedaFiltros', (search, count) => {
+    if (typeof search === 'number') {
+        cy.get('rup-hudsbusqueda .menu-buscador li').eq(search);
+    } else {
+        cy.get('rup-hudsbusqueda .menu-buscador li').eq(filtrosMap[search]);
+    }
+    if (count > 0) {
+        cy.contains(count);
+    } else {
+        cy.find('small').should('not.exist');
+    }
+});
+
+
 
 Cypress.Commands.add('relacionarRUPCard', (cardIndex, relIndex) => {
     cy.get('plex-layout-main .rup-card').eq(cardIndex).then($elem => {

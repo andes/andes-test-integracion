@@ -73,6 +73,14 @@ declare namespace Cypress {
          */
         HudsBusquedaFiltros(search: number | 'prestaciones' | 'solicitudes' | 'hallazgo' | 'trastorno' | 'procedimiento' | 'producto' | 'vacunas' | 'laboratorios');
 
+
+        /**
+         * Chequea el numero elementos en los filtros en la HUDS
+         * @param search 
+         * @param count 
+         */
+        assertHudsBusquedaFiltros(search: number | 'prestaciones' | 'solicitudes' | 'hallazgo' | 'trastorno' | 'procedimiento' | 'producto' | 'vacunas' | 'laboratorios', count: number);
+
         /**
          * Elimina un registro
          * @param index 
