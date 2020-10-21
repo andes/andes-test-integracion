@@ -35,7 +35,7 @@ const moment = require('moment');
         });
 
         it('Movimiento Sala -> Cama', () => {
-            cy.get('table tr').contains(salas[0].nombre).first().click();
+            cy.getCama(pacientes[0].apellido).click();
 
             cy.wait('@getHistorial').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
@@ -57,6 +57,8 @@ const moment = require('moment');
             });
 
             cy.swal('confirm', 'Pase de unidad organizativa exitoso');
+
+            cy.getCama().should('have.length', 2);
         });
     });
 });

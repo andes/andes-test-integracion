@@ -35,7 +35,8 @@ const moment = require('moment');
         });
 
         it('Egreso simplificado', () => {
-            cy.get('table tr').contains(camas[0].cama.nombre).first().click();
+            cy.getCama(pacientes[0].apellido).click();
+            // cy.get('table tr').contains(camas[0].cama.nombre).first().click();
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('menos').click();
             cy.plexButton('Egresar paciente').click();
 
@@ -50,7 +51,7 @@ const moment = require('moment');
         });
 
         it('Egreso en Sala Comun', () => {
-            cy.get('table tr').contains(salas[0].nombre).first().click();
+            cy.getCama(pacientes[0].apellido).click();
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('menos').click();
             cy.plexButton('Egresar paciente').click();
 
@@ -64,6 +65,7 @@ const moment = require('moment');
                 expect(xhr.status).to.be.eq(200);
             });
             cy.toast('success', 'Prestacion guardada correctamente');
+            cy.getCama().should('have.length', 2);
         });
     });
 });
