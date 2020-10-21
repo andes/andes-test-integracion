@@ -84,8 +84,6 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
-        cy.plexText('name="motivo"', 'Estornudo');
-        cy.plexSelectAsync('name="especialidad"', 'Enf', '@expEspecialidad', 0);
         cy.plexSelectType('label="Cobertura"', 'Ninguno');
         cy.plexSelectType('name="situacionLaboral"', 'No trabaja y no busca trabajo');
         cy.plexSelectAsync('name="ocupacionHabitual"', 'Abog', '@getOcupacion', 0);
@@ -112,8 +110,6 @@ describe('Capa Estadistica - Ingresos', () => {
 
         cy.plexSelect('name="profesional"').clearSelect();
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
-        cy.plexText('name="motivo"', 'Estornudo');
-        cy.plexSelectAsync('name="especialidad"', 'Dol', '@expEspecialidad', 0);
         cy.plexSelectType('label="Cobertura"', 'Plan o Seguro publico');
         cy.plexSelectType('name="situacionLaboral"', 'Trabaja o está de licencia');
         cy.plexSelectAsync('name="ocupacionHabitual"', 'Med', '@getOcupacion', 0);
