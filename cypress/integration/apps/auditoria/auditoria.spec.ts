@@ -49,15 +49,11 @@ context('auditoria', () => {
 
     beforeEach(() => {
         cy.server();
+        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/core/mpi/pacientes/search**').as('busquedaPaciente');
         cy.route('PUT', '**api/core/mpi/pacientes/auditoria/setActivo').as('setActivo');
         cy.goto('/apps/mpi/auditoria', token);
     })
-
-
-    /* OBSERVACION: Al seleccionar un paciente para vinculacion, cuando debería visualizarse el modal,
-        cypress lanza una excepcion (ResizeObserver loop). Se recomienda ejecutar en electron para evitar este problema
-     */
 
     it('vincular dos pacientes validados', () => {
         cy.plexText('name="buscadorAuditoria"', validado1.documento);
@@ -66,7 +62,6 @@ context('auditoria', () => {
         });
         cy.get('auditoria-listado').contains(format(validado1.documento));
         cy.get('plex-dropDown').click().get('a').contains('VINCULAR').click();
-
         cy.plexText('name="buscador"', validado2.documento);
 
         cy.wait('@busquedaPaciente').then((xhr) => {
@@ -80,12 +75,15 @@ context('auditoria', () => {
             expect(xhr.response.body.documento).to.eq(validado2.documento);
             expect(xhr.response.body.activo).to.eq(false);
         });
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         // chequea que el paciente figure en lista de vinculados
-        cy.get('plex-list').find('plex-item').first('contain', validado2.documento);
-        cy.toast('success');
+        cy.get('plex-list').find('plex-item').contains(format(validado2.documento));
+        cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
-        cy.swal('confirm');
-        cy.toast('success');
+        cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
+        cy.toast('success', 'La desvinculación ha sido realizada correctamente');
     });
 
     it('vincular dos pacientes temporales', () => {
@@ -109,12 +107,15 @@ context('auditoria', () => {
             expect(xhr.response.body.documento).to.eq(temporal2.documento);
             expect(xhr.response.body.activo).to.eq(false);
         });
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         // chequea que el paciente figure en lista de vinculados
-        cy.get('plex-list').find('plex-item').first('contain', temporal2.documento);
-        cy.toast('success');
+        cy.get('plex-list').find('plex-item').contains(format(temporal2.documento));
+        cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
-        cy.swal('confirm');
-        cy.toast('success');
+        cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
+        cy.toast('success', 'La desvinculación ha sido realizada correctamente');
     });
 
     it('vincular un paciente validado con uno temporal', () => {
@@ -138,12 +139,15 @@ context('auditoria', () => {
             expect(xhr.response.body.documento).to.eq(temporal1.documento);
             expect(xhr.response.body.activo).to.eq(false);
         });
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         // chequea que el paciente figure en lista de vinculados
-        cy.get('plex-list').find('plex-item').first('contain', temporal1.documento);
-        cy.toast('success');
+        cy.get('plex-list').find('plex-item').contains(format(temporal1.documento));
+        cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
-        cy.swal('confirm');
-        cy.toast('success');
+        cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
+        cy.toast('success', 'La desvinculación ha sido realizada correctamente');
     });
 
     it('vincular un paciente validado con uno sin documento', () => {
@@ -166,12 +170,16 @@ context('auditoria', () => {
             expect(xhr.response.body.activo).to.eq(false);
             expect(xhr.response.body.nombre).to.be.eq(sinDocumento1.nombre);
         });
+
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         // chequea que el paciente figure en lista de vinculados
-        cy.get('plex-list').find('plex-item').first('contain', sinDocumento1.nombre);
-        cy.toast('success');
+        cy.get('plex-list').find('plex-item').contains(sinDocumento1.nombre);
+        cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
-        cy.swal('confirm');
-        cy.toast('success');
+        cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
+        cy.toast('success', 'La desvinculación ha sido realizada correctamente');
     });
 
     it('vincular un paciente temporal con uno sin documento', () => {
@@ -194,12 +202,15 @@ context('auditoria', () => {
             expect(xhr.response.body.activo).to.eq(false);
             expect(xhr.response.body.nombre).to.be.eq(sinDocumento1.nombre);
         });
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         // chequea que el paciente figure en lista de vinculados
-        cy.get('plex-list').find('plex-item').first('contain', sinDocumento1.nombre);
-        cy.toast('success');
+        cy.get('plex-list').find('plex-item').contains(sinDocumento1.nombre);
+        cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
-        cy.swal('confirm');
-        cy.toast('success');
+        cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
+        cy.toast('success', 'La desvinculación ha sido realizada correctamente');
     });
 
     it('vincular dos pacientes sin documento', () => {
@@ -222,12 +233,12 @@ context('auditoria', () => {
             expect(xhr.response.body.activo).to.eq(false);
             expect(xhr.response.body.nombre).to.be.eq(sinDocumento2.nombre);
         });
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         // chequea que el paciente figure en lista de vinculados
-        cy.get('plex-list').find('plex-item').first('contain', sinDocumento2.nombre);
-        cy.toast('success');
-        cy.plexButton('desvincular').click();
-        cy.swal('confirm');
-        cy.toast('success');
+        cy.get('plex-list').find('plex-item').contains(sinDocumento2.nombre);
+        cy.toast('success', 'La vinculación ha sido realizada correctamente');
     });
 })
 
