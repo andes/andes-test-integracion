@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+const tipoAgendas = ['comun', 'dinamica', 'no-nominalizada', 'con-solicitud'];
+
 context('RUP - Punto de inicio', () => {
     let token;
     let pacientes;
@@ -22,31 +24,37 @@ context('RUP - Punto de inicio', () => {
 
             cy.cleanDB(['agenda', 'prestaciones']);
 
-            cy.task('database:seed:agenda', {
-                inicio: '0',
-                fin: '4',
-                pacientes: pacientes.map(p => p._id)
-            }).then(agenda => agendas['comun'] = agenda);
+            if (tipoAgendas.includes('comun')) {
+                cy.task('database:seed:agenda', {
+                    inicio: '0',
+                    fin: '4',
+                    pacientes: pacientes.map(p => p._id)
+                }).then(agenda => agendas['comun'] = agenda);
+            }
+            if (tipoAgendas.includes('dinamica')) {
+                cy.task('database:seed:agenda', {
+                    inicio: '1',
+                    fin: '5',
+                    pacientes: pacientes.map(p => p._id),
+                    dinamica: true
+                }).then((agenda) => agendas['dinamica'] = agenda);
+            }
 
-            cy.task('database:seed:agenda', {
-                inicio: '1',
-                fin: '5',
-                pacientes: pacientes.map(p => p._id),
-                dinamica: true
-            }).then((agenda) => agendas['dinamica'] = agenda);
+            if (tipoAgendas.includes('no-nominalizada')) {
+                cy.task('database:seed:agenda', {
+                    inicio: '2',
+                    fin: '5',
+                    tipoPrestaciones: '5b61d59968954f3e6ea84586'
+                }).then(agenda => agendas['no-nominalizada'] = agenda);
+            }
 
-            cy.task('database:seed:agenda', {
-                inicio: '2',
-                fin: '5',
-                tipoPrestaciones: '5b61d59968954f3e6ea84586'
-            }).then(agenda => agendas['no-nominalizada'] = agenda);
-
-            cy.task('database:seed:agenda', {
-                inicio: '3',
-                fin: '6',
-                pacientes: pacientes.map(p => p._id),
-            }).then(agenda => agendas['con-solicitud'] = agenda);
-
+            if (tipoAgendas.includes('con-solicitud')) {
+                cy.task('database:seed:agenda', {
+                    inicio: '3',
+                    fin: '6',
+                    pacientes: pacientes.map(p => p._id),
+                }).then(agenda => agendas['con-solicitud'] = agenda);
+            }
         })
 
         beforeEach(() => {
@@ -67,7 +75,7 @@ context('RUP - Punto de inicio', () => {
 
         });
 
-        ['comun', 'dinamica', 'no-nominalizada', 'con-solicitud'].forEach((typeAgenda, agendaIndex) => {
+        tipoAgendas.forEach((typeAgenda, agendaIndex) => {
             if (typeAgenda === 'no-nominalizada') {
                 flujoPrestacion(typeAgenda, agendaIndex, null, 0);
             } else {
@@ -288,15 +296,12 @@ context('RUP - Punto de inicio', () => {
 
                 cy.plexButton('INICIAR PRESTACIÓN').click();
                 cy.swal('confirm');
-                if (typeAgenda !== 'con-solicitud') {
-                    cy.wait('@crearPrestacion');
-                } else {
-                    cy.wait('@patchPrestacion');
-                }
-                cy.wait(100)
-                cy.url().should('include', '/rup/ejecucion/').then($url => {
-                    const parts = $url.split('/');
-                    idPrestacion = parts[parts.length - 1];
+
+                const wait = typeAgenda !== 'con-solicitud' ? cy.wait('@crearPrestacion') : cy.wait('@patchPrestacion');
+                wait.then(xhr => {
+                    const body = xhr.response.body;
+                    idPrestacion = body.id;
+                    cy.url().should('include', '/rup/ejecucion/' + idPrestacion);
                     cy.route('GET', '**/api/modules/rup/prestaciones/' + idPrestacion).as('findPrestacion');
                     cy.wait('@findPrestacion').then((xhr) => {
                         const prestacion = xhr.response.body;
