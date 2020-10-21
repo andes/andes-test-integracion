@@ -1,0 +1,40 @@
+[
+    {
+        "_id": {
+            "$oid": "59d095442ad22a064cf9b7e5"
+        },
+        "idvacuna": 3,
+        "documento": "35593546",
+        "nombre": "MARIANO ANDRES",
+        "apellido": "PALAVECINO",
+        "fechaNacimiento": {
+            "$date": "1991-01-18T20:00:00.000-03:00"
+        },
+        "sexo": "masculino",
+        "vacuna": "Neumococo Conjugada VCN 13",
+        "dosis": "1er Dosis",
+        "fechaAplicacion": {
+            "$date": "2014-07-26T21:00:00.000-03:00"
+        },
+        "efector": "CENTRO DE SALUD SAN LORENZO SUR"
+    },
+    {
+        "_id": {
+            "$oid": "59d095442ad12a064cf9b7e2"
+        },
+        "idvacuna": 5,
+        "documento": "35593546",
+        "nombre": "MARIANO ANDRES",
+        "apellido": "PALAVECINO",
+        "fechaNacimiento": {
+            "$date": "1991-01-18T20:00:00.000-03:00"
+        },
+        "sexo": "masculino",
+        "vacuna": "Vacuna Coronavirus",
+        "dosis": "Unica",
+        "fechaAplicacion": {
+            "$date": "2018-07-26T21:00:00.000-03:00"
+        },
+        "efector": "CENTRO DE SALUD SAN LORENZO SUR"
+    }
+]

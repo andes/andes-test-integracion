@@ -1,0 +1,11 @@
+[
+    {
+        "_id": {
+            "$oid": "5f340e1936e980b0ee4baa3e"
+        },
+        "titulo": "Certificados",
+        "expresionSnomed": "103695000",
+        "descargaAdjuntos": true,
+        "busquedaPor": "registros"
+    }
+]

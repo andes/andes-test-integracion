@@ -1,0 +1,147 @@
+[
+    {
+        "_id": {
+            "$oid": "5c09238753b0eb3173416730"
+        },
+        "claveBlocking": [
+            "PLVZMRN",
+            "PLVZN",
+            "MRNNDR",
+            "051466966394",
+            "05146"
+        ],
+        "entidadesValidadoras": [
+            ""
+        ],
+        "financiador": [
+            {
+                "_id": {
+                    "$oid": "5a7c837274342a1a5221dbdb"
+                }
+            }
+        ],
+        "documento": "35593546",
+        "cuil": "23355935469",
+        "activo": true,
+        "estado": "validado",
+        "nombre": "MARIANO ANDRES",
+        "apellido": "PALAVECINO",
+        "alias": null,
+        "contacto": [
+            {
+                "activo": true,
+                "_id": {
+                    "$oid": "5dde719e76e53d4744cb2d56"
+                },
+                "tipo": "celular",
+                "valor": "2944785630",
+                "ranking": 0,
+                "ultimaActualizacion": {
+                    "$date": "2019-11-27T09:52:26.413-03:00"
+                }
+            }
+        ],
+        "sexo": "masculino",
+        "genero": "masculino",
+        "fechaNacimiento": {
+            "$date": "1991-01-18T20:00:00.000-03:00"
+        },
+        "fechaFallecimiento": null,
+        "direccion": [],
+        "estadoCivil": "soltero",
+        "relaciones": [
+            {
+                "_id": {
+                    "$oid": "5d010f7d5e41517adb9f3b9a"
+                },
+                "relacion": {
+                    "_id": {
+                        "$oid": "59247c571ebf0273353b23c1"
+                    },
+                    "nombre": "hermano/a",
+                    "opuesto": "hermano/a"
+                },
+                "referencia": {
+                    "$oid": "586e6e9b27d3107fde194b2b"
+                },
+                "nombre": "CRISTIAN ORLANDO",
+                "apellido": "PALAVECINO",
+                "documento": "28105392",
+                "foto": ""
+            },
+            {
+                "_id": {
+                    "$oid": "5d77cb34936d2a2f9e257a45"
+                },
+                "relacion": {
+                    "_id": {
+                        "$oid": "59247c391ebf0273353b23c0"
+                    },
+                    "nombre": "hijo/a",
+                    "opuesto": "progenitor/a"
+                },
+                "referencia": {
+                    "$oid": "5d77cb2f936d2a2f9e257a2a"
+                },
+                "nombre": "NOM8",
+                "apellido": "APE8",
+                "documento": "",
+                "foto": null
+            },
+            {
+                "_id": {
+                    "$oid": "5ddbe71c5c074708990a8705"
+                },
+                "relacion": {
+                    "_id": {
+                        "$oid": "59247cb81ebf0273353b23c3"
+                    },
+                    "nombre": "nieto/a",
+                    "opuesto": "abuelo/a"
+                },
+                "referencia": {
+                    "$oid": "586e6e8d27d3107fde142030"
+                },
+                "nombre": "EDUARDO MIGUEL",
+                "apellido": "PALAVECINO",
+                "documento": "7380580",
+                "foto": ""
+            }
+        ],
+        "identificadores": null,
+        "scan": null,
+        "reportarError": false,
+        "notaError": "",
+        "notas": [],
+        "tipoIdentificacion": {},
+        "documento_fuzzy": [
+            "546",
+            "354",
+            "935",
+            "593",
+            "559",
+            "355",
+            "3546",
+            "9354",
+            "5935",
+            "5593",
+            "3559",
+            "93546",
+            "59354",
+            "55935",
+            "35593",
+            "593546",
+            "559354",
+            "355935",
+            "5593546",
+            "3559354",
+            "35593546"
+        ],
+        "tokens": [
+            "35593546",
+            "mariano",
+            "andres",
+            "palavecino"
+        ]
+    }
+]

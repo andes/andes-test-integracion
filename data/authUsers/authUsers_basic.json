@@ -1086,5 +1086,41 @@
         "organizaciones": [],
         "__v": 1,
         "documento": "33650509"
+    },
+    {
+        "_id": {
+            "$oid": "5f92ebdc50617ab2818fc50f"
+        },
+        "usuario": 4402222,
+        "nombre": "JAZMIN",
+        "apellido": "CORTEZ",
+        "password": "b3430a15f76504e6ddd305f848fe5b3e1a1843ef",
+        "organizaciones": [
+            {
+                "permisos": [
+                    "turnos:*",
+                    "mpi:*",
+                    "rup:tipoPrestacion:5a26e113291f463c1b982d98",
+                    "huds:visualizacionHuds",
+                    "fa:*",
+                    "log:*",
+                    "usuarios:*",
+                    "matriculaciones:*",
+                    "tm:*",
+                    "cda:*",
+                    "visualizacionInformacion:reportes:*",
+                    "descargas:*",
+                    "solicitudes:*",
+                    "prestamos:*"
+                ],
+                "_id": {
+                    "$oid": "57e9670e52df311059bc8964"
+                },
+                "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+                "perfiles": []
+            }
+        ],
+        "__v": 1,
+        "documento": "4402222"
     }
 ]
