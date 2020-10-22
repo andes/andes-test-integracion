@@ -250,18 +250,17 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-
         cy.get('plex-tabs').contains('Carpetas').click({ force: true });
 
         cy.wait('@getCarpetas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexButton("Nueva Carpeta").click();
+        cy.plexButton("registrar nueva carpeta").click();
 
-        cy.plexText('label="Número de Carpeta"', '123');
+        cy.plexText('label="Nuevo número de Carpeta"', '123');
 
-        cy.plexButton("Guardar").click();
+        cy.plexButtonIcon('check').click();
 
         cy.wait('@carpetaNueva').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
