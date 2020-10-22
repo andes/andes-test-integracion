@@ -73,6 +73,17 @@ declare namespace Cypress {
          */
         HudsBusquedaFiltros(search: number | 'prestaciones' | 'solicitudes' | 'hallazgo' | 'trastorno' | 'procedimiento' | 'producto' | 'vacunas' | 'laboratorios');
 
+
+        getHUDSItems(): Chainable<Element>;
+        assertRUPMiniCard(params: any): Chainable<Element>;
+
+        /**
+         * Chequea el numero elementos en los filtros en la HUDS
+         * @param search 
+         * @param count 
+         */
+        assertHudsBusquedaFiltros(search: number | 'prestaciones' | 'solicitudes' | 'hallazgo' | 'trastorno' | 'procedimiento' | 'producto' | 'vacunas' | 'laboratorios', count: number);
+
         /**
          * Elimina un registro
          * @param index 
@@ -147,7 +158,7 @@ declare namespace Cypress {
         /**
          * Plex badge
          */
-        plexBadge(texto: string): Chainable<Element>;
+        plexBadge(texto: string, type?: 'info' | 'success' | 'warning' | 'danger'): Chainable<Element>;
 
         /**
          * Plex Select

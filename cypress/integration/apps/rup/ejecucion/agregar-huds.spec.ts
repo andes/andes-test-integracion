@@ -7,18 +7,6 @@ context('RUP - Ejecucion', () => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => token = t);
         cy.task('database:seed:paciente');
-    });
-
-
-    before(() => {
-        cy.server();
-        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-        cy.route('GET', '/api/modules/seguimiento-paciente**', []);
-        cy.route('GET', '/api/modules/huds/accesos**', []);
-
-
-        cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
-
         cy.cleanDB(['prestaciones']);
 
         cy.task(
@@ -74,6 +62,19 @@ context('RUP - Ejecucion', () => {
             idPrestacion = prestacion._id;
             cy.goto('/rup/ejecucion/' + idPrestacion, token);
         });
+    });
+
+
+    beforeEach(() => {
+        cy.server();
+        cy.route('GET', '/api/modules/seguimiento-paciente**', []);
+        cy.route('GET', '/api/modules/huds/accesos**', []);
+        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+
+
+        cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+
+
 
     });
 

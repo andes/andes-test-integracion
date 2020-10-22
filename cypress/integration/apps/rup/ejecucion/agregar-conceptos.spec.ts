@@ -79,7 +79,6 @@ context('RUP - Ejecucion', () => {
 
             cy.assertRupCard(0, { semanticTag: 'hallazgo', term: 'fiebre crónica' });
 
-
         });
     });
 
