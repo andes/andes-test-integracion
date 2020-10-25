@@ -247,3 +247,16 @@ Cypress.Commands.add('createTurno', (fixtureName, idTurno, idBloque, idAgenda, p
         });
     });
 });
+
+Cypress.Commands.add('createPrestacionAdjunto', (fixtureName, token) => {
+    return cy.fixture(fixtureName).then((data) => {
+        cy.request({
+            method: 'POST',
+            url: `${Cypress.env('API_SERVER')}/api/modules/mobileApp/prestaciones-adjuntar`,
+            body: data,
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        });
+    });
+});

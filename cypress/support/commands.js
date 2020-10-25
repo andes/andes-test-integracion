@@ -24,6 +24,8 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+import 'cypress-file-upload';
+
 Cypress.Commands.add("login", (usuario, password, id) => {
     let token;
     return cy.request('POST', Cypress.env('API_SERVER') + '/api/auth/login', {
@@ -55,6 +57,40 @@ Cypress.Commands.add("login", (usuario, password, id) => {
         });
     });
 });
+
+Cypress.Commands.add("loginMobile", (usuario, password, id) => {
+    let token;
+    return cy.request('POST', Cypress.env('API_SERVER') + '/api/auth/login', {
+        usuario,
+        password,
+        mobile: true
+    }).then((response) => {
+        token = response.body.token;
+        return response = cy.request({
+            url: Cypress.env('API_SERVER') + '/api/auth/organizaciones',
+            method: 'GET',
+            headers: {
+                Authorization: 'JWT ' + token
+            },
+        }).then((response) => {
+            //Si no se especifica id de organizacion, por defecto se usa el id del HPN
+            const defaultId = '57e9670e52df311059bc8964';
+            return response = cy.request({
+                url: Cypress.env('API_SERVER') + '/api/auth/v2/organizaciones',
+                method: 'POST',
+                headers: {
+                    Authorization: 'JWT ' + token
+                },
+                body: {
+                    organizacion: id ? id : defaultId
+                }
+            }).then((response) => {
+                return response.body.token;
+            });
+        });
+    });
+});
+
 
 Cypress.Commands.add('goto', (url, token, hudsToken) => {
     if (token) {
