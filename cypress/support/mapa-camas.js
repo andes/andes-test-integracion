@@ -1,5 +1,9 @@
 Cypress.Commands.add('getCama', (name) => {
-    cy.get('plex-layout-main table tr').contains(name);
+    if (name) {
+        return cy.get('plex-layout-main table tbody tr').contains(name);
+    } else {
+        return cy.get('plex-layout-main table tbody tr');
+    }
 });
 
 Cypress.Commands.add('getRegistrosMedicos', () => {
