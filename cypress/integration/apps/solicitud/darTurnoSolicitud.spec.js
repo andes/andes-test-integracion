@@ -110,6 +110,12 @@ context('TOP: nuevo turno', () => {
             expect(xhr.response.body.profesionales[0].nombre).to.be.eq('MARIA');
             expect(xhr.response.body.profesionales[0].apellido).to.be.eq('PEREZ');
         });
+
+        cy.plexButtonIcon('chevron-down').click();
+        cy.plexSelectType('label="Estado"').clearSelect();
+        cy.plexSelectType('label="Estado"', 'turno dado');
+        cy.get('plex-item').contains('PEREZ, MARIA').click();
+        cy.get('historial-solicitud').contains('Turno asignado por Natalia Huenchuman');
     });
 
 });

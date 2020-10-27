@@ -51,5 +51,8 @@ context('SOLICITUDES - REFERIR', () => {
             expect(xhr.response.body[0].solicitud.tipoPrestacion.conceptId).to.be.eq('291000013102');
             expect(xhr.response.body[0].solicitud.historial[0].accion).to.be.eq('referir');
         });
+        cy.get('plex-item').contains('CORTES, JAZMIN').click();
+        cy.get('historial-solicitud').contains('Referida por Natalia Huenchuman');
+
     });
 })
