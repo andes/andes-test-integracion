@@ -51,6 +51,7 @@ context('auditoria', () => {
         cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/core/mpi/pacientes/search**').as('busquedaPaciente');
+        cy.route('PUT', '**/api/core/mpi/pacientes/**').as('putPaciente');
         cy.route('PUT', '**api/core/mpi/pacientes/auditoria/setActivo').as('setActivo');
         cy.goto('/apps/mpi/auditoria', token);
     })
@@ -83,6 +84,9 @@ context('auditoria', () => {
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
+        cy.wait('@putPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.toast('success', 'La desvinculación ha sido realizada correctamente');
     });
 
@@ -115,6 +119,9 @@ context('auditoria', () => {
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
+        cy.wait('@putPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.toast('success', 'La desvinculación ha sido realizada correctamente');
     });
 
@@ -147,6 +154,9 @@ context('auditoria', () => {
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
+        cy.wait('@putPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.toast('success', 'La desvinculación ha sido realizada correctamente');
     });
 
@@ -179,6 +189,9 @@ context('auditoria', () => {
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
+        cy.wait('@putPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.toast('success', 'La desvinculación ha sido realizada correctamente');
     });
 
@@ -210,6 +223,9 @@ context('auditoria', () => {
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
+        cy.wait('@putPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.toast('success', 'La desvinculación ha sido realizada correctamente');
     });
 
