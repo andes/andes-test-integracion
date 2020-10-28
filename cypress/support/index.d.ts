@@ -209,8 +209,8 @@ declare namespace Cypress {
         plexInt(label: string, texto?: string);
         plexFloat(label: string, texto?: string);
 
-        toast(type: 'success' | 'danger' | 'warning' | 'alert' | 'error');
+        toast(type: 'success' | 'danger' | 'warning' | 'alert' | 'error', texto?: string);
 
-        swal(action: 'confirm' | 'cancel');
+        swal(action: 'confirm' | 'cancel', texto?: string);
     }
 }
