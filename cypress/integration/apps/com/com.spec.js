@@ -42,8 +42,12 @@ context('CENTRO OPERATIVO MÉDICO', () => {
     it('crear nueva derivacion y denegarla en el COM', () => {
         cy.plexButton('Nueva derivación').click({ force: true });
         seleccionarPaciente(dni);
-        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
+        cy.wait('@profesionalSolicitante').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.plexTextArea('label="Detalle"', 'a rechazar');
+        cy.plexSelectType('name="profesionalOrigen"').clearSelect();
+        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexButton("Guardar").click({ force: true });
         cy.wait('@createDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -73,8 +77,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear nueva derivacion y cancelarla', () => {
         seleccionarPaciente(dni);
-        cy.plexSelectAsync('label="Profesional solicitante"', 'TEST PRUEBA', '@profesionalSolicitante', 0);
         cy.plexTextArea('label="Detalle"', 'para cancelar');
+        cy.plexSelectType('name="profesionalOrigen"').clearSelect();
+        cy.plexSelectAsync('label="Profesional solicitante"', 'TEST PRUEBA', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
         cy.wait('@createDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -95,8 +100,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear nueva derivacion y sumar nota', () => {
         seleccionarPaciente(dni);
-        cy.plexSelectAsync('label="Profesional solicitante"', 'TEST PRUEBA', '@profesionalSolicitante', 0);
         cy.plexTextArea('label="Detalle"', 'sumar nota');
+        cy.plexSelectType('name="profesionalOrigen"').clearSelect();
+        cy.plexSelectAsync('label="Profesional solicitante"', 'TEST PRUEBA', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
         cy.wait('@createDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -127,8 +133,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear nueva derivacion', () => {
         seleccionarPaciente(dni);
-        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexTextArea('label="Detalle"', 'prueba de nueva derivación');
+        cy.plexSelectType('name="profesionalOrigen"').clearSelect();
+        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexButton("Guardar").click({ force: true });
         cy.wait('@createDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -139,8 +146,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear derivacion, aprobarla, asignarla, aceptarla, finalizarla', () => {
         seleccionarPaciente(dni);
-        cy.plexSelectAsync('label="Profesional solicitante"', 'NATALIA HUENCHUMAN', '@profesionalSolicitante', 0);
         cy.plexTextArea('label="Detalle"', 'a aceptar');
+        cy.plexSelectType('name="profesionalOrigen"').clearSelect();
+        cy.plexSelectAsync('label="Profesional solicitante"', 'NATALIA HUENCHUMAN', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
         cy.wait('@createDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -208,8 +216,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear derivacion, aprobarla, asignarla, rechazarla, finalizarla', () => {
         seleccionarPaciente(dni);
-        cy.plexSelectAsync('label="Profesional solicitante"', 'ALICIA PRUEBA', '@profesionalSolicitante', 0);
         cy.plexTextArea('label="Detalle"', 'a aceptar');
+        cy.plexSelectType('name="profesionalOrigen"').clearSelect();
+        cy.plexSelectAsync('label="Profesional solicitante"', 'ALICIA PRUEBA', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
         cy.wait('@createDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
