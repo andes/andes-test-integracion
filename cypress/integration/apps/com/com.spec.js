@@ -168,6 +168,10 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexSelect('label="Nuevo estado"', 1).click();
         cy.plexButton("Guardar").click();
         cy.toast('success');
+        cy.plexSelectType('label="Estado"').click().get('.option').contains('HABILITADA').click();
+        cy.wait('@getDerivaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.get('plex-badge').contains('habilitada').should('have.length', 1);
         cy.contains('habilitada').click();
         cy.get('plex-item').last().click();
@@ -181,8 +185,11 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.toast('success');
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
+        cy.plexSelectType('label="Estado"').click().get('.option').contains('ASIGNADA').click();
+        cy.wait('@getDerivaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.get('plex-badge').contains('asignada').should('have.length', 1);
-
         cy.login('30643636', 'asd', '5bae6b7b9677f95a425d9ee8').then(t => {
             token = t;
             cy.goto('/com', token);
@@ -206,7 +213,6 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('finalizada').click();
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
-        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 0);
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
         cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
         cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').first().click();
@@ -236,6 +242,10 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexSelect('label="Nuevo estado"', 1).click();
         cy.plexButton("Guardar").click();
         cy.toast('success');
+        cy.plexSelectType('label="Estado"').click().get('.option').contains('HABILITADA').click();
+        cy.wait('@getDerivaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.get('plex-badge').contains('habilitada').should('have.length', 1);
         cy.contains('habilitada').click();
         cy.get('plex-item').last().click();
@@ -249,8 +259,11 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.toast('success');
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
+        cy.plexSelectType('label="Estado"').click().get('.option').contains('ASIGNADA').click();
+        cy.wait('@getDerivaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.get('plex-badge').contains('asignada').should('have.length', 1);
-
         cy.login('30643636', 'asd', '5bae6b7b9677f95a425d9ee8').then(t => {
             token = t;
             cy.goto('/com', token);
@@ -261,19 +274,16 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexTextArea('label="Observacion"', 'derivación rechazada');
         cy.plexButton("Guardar").click();
         cy.toast('success');
-
         cy.login('30643636', 'asd', '5f68c547cbd0db303ac4aee9').then(t => {
             token = t;
             cy.goto('/com', token);
         });
-
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
         cy.get('plex-badge').contains('rechazada').should('have.length', 1);
         cy.get('plex-item').contains('rechazada').last().click();
         cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('finalizada').click();
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
-        cy.get('plex-label').contains('rechazada').should('have.length', 0);
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').first().click();
