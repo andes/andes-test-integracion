@@ -72,6 +72,66 @@ Cypress.Commands.add('createProfesional', (name, token) => {
     });
 });
 
+Cypress.Commands.add('createAgendaMatriculaciones', (fixtureName, daysOffset, horaInicioOffset, horaFinOffset, duracionTurno, token) => {
+    return cy.fixture(fixtureName).then((agenda) => {
+        let newDate = Cypress.moment(); //.format('YYYY-MM-DD');
+        let endDate = Cypress.moment().add(daysOffset, 'days'); //.format('YYYY-MM-DD');
+        let newFechaInicio = Cypress.moment().set({
+            'year': newDate.year(),
+            'month': newDate.month(),
+            'date': newDate.date(),
+            'hour': Cypress.moment().add(horaInicioOffset, 'hours').format('HH'),
+            'minute': 0,
+            'second': 0,
+            'millisecond': 0
+        });
+
+        let newFechaFin = Cypress.moment().set({
+            'year': endDate.year(),
+            'month': endDate.month(),
+            'date': endDate.date(),
+            'hour': Cypress.moment().add(horaFinOffset, 'hours').format('HH'),
+            'minute': 0,
+            'second': 0,
+            'millisecond': 0
+        });
+        agenda.diasHabilitados = [
+            {
+                "id": 0,
+                "nombre": "Lunes"
+            },
+            {
+                "id": 1,
+                "nombre": "Martes"
+            },
+            {
+                "id": 2,
+                "nombre": "Miercoles"
+            },
+            {
+                "id": 3,
+                "nombre": "Jueves"
+            },
+            {
+                "id": 4,
+                "nombre": "Viernes"
+            }
+        ];
+        agenda.horarioInicioTurnos = newFechaInicio;
+        agenda.horarioFinTurnos = newFechaFin;
+        agenda.duracionTurno = duracionTurno;
+
+        return cy.request({
+            method: 'POST',
+            url: Cypress.env('API_SERVER') + '/api/modules/matriculaciones/agendaMatriculaciones',
+            body: agenda,
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        })
+    });
+});
+
 Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset, horaFinOffset, token) => {
     return cy.fixture(fixtureName).then((agenda) => {
         if (horaInicioOffset !== null) {

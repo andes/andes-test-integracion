@@ -1,0 +1,134 @@
+{
+    "_id": "5e454c042f494004658c6079",
+    "habilitado": true,
+    "incluidoSuperintendencia": false,
+    "rematriculado": false,
+    "nombre": "Atahualpa",
+    "apellido": "Estepa",
+    "tipoDocumento": "DNI",
+    "documento": "10001020",
+    "documentoViejo": null,
+    "documentoVencimiento": null,
+    "cuit": "20100010203",
+    "fechaNacimiento": "1920-12-25T01:00:00.000-03:00",
+    "lugarNacimiento": "Neuquén",
+    "nacionalidad": {
+        "_id": "57f3b5c469fe79a598e6281f",
+        "nombre": "Argentina"
+    },
+    "sexo": "femenino",
+    "contactos": [
+        {
+            "activo": true,
+            "_id": "5e4544762f494004658c5d07",
+            "tipo": "celular",
+            "valor": "2986666666",
+            "ultimaActualizacion": "2020-02-13T09:43:15.159-03:00"
+        }
+    ],
+    "domicilios": [
+        {
+            "activo": true,
+            "_id": "5e4544762f494004658c5d12",
+            "tipo": "real",
+            "valor": "Chacabuco 700",
+            "codigoPostal": "8353",
+            "ubicacion": {
+                "_id": "5e4544762f494004658c5d13",
+                "localidad": {
+                    "_id": "57f538a472325875a199a856",
+                    "nombre": "Andacollo"
+                },
+                "provincia": {
+                    "_id": "57f3f3aacebd681cc2014c53",
+                    "nombre": "Neuquén"
+                },
+                "pais": {
+                    "_id": "5e4544762f494004658c5d16",
+                    "nombre": "Argentina"
+                }
+            },
+            "ultimaActualizacion": "2020-02-13T09:43:15.159-03:00"
+        },
+        {
+            "activo": true,
+            "_id": "5e4544762f494004658c5d0d",
+            "tipo": "legal",
+            "valor": "Chacabuco 700",
+            "codigoPostal": "8353",
+            "ubicacion": {
+                "_id": "5e4544762f494004658c5d0e",
+                "localidad": {
+                    "_id": "57f538a472325875a199a856",
+                    "nombre": "Andacollo"
+                },
+                "provincia": {
+                    "_id": "57f3f3aacebd681cc2014c53",
+                    "nombre": "Neuquén"
+                },
+                "pais": {
+                    "_id": "5e4544762f494004658c5d11",
+                    "nombre": "Argentina"
+                }
+            },
+            "ultimaActualizacion": "2020-02-13T09:43:15.159-03:00"
+        },
+        {
+            "activo": true,
+            "_id": "5e4544762f494004658c5d08",
+            "tipo": "profesional",
+            "valor": "Chacabuco 700",
+            "codigoPostal": "8353",
+            "ubicacion": {
+                "_id": "5e4544762f494004658c5d09",
+                "localidad": {
+                    "_id": "57f538a472325875a199a856",
+                    "nombre": "Andacollo"
+                },
+                "provincia": {
+                    "_id": "57f3f3aacebd681cc2014c53",
+                    "nombre": "Neuquén"
+                },
+                "pais": {
+                    "_id": "5e4544762f494004658c5d0c",
+                    "nombre": "Argentina"
+                }
+            },
+            "ultimaActualizacion": "2020-02-13T09:43:15.159-03:00"
+        }
+    ],
+    "fotoArchivo": null,
+    "firmas": null,
+    "formacionGrado": [
+        {
+            "renovacion": false,
+            "papelesVerificados": false,
+            "revalida": false,
+            "_id": "5e4544762f494004658c5d17",
+            "profesion": {
+                "_id": "5b97b8c27669f0926701de3d",
+                "codigo": 1,
+                "tipoDeFormacion": "Grado Universitario",
+                "nombre": "Médico",
+                "habilitado": true,
+                "profesionCodigoRef": 35
+            },
+            "entidadFormadora": {
+                "_id": "5e4544762f494004658c5d19",
+                "nombre": "Universidad de Economía",
+                "codigo": null
+            },
+            "titulo": "Médico",
+            "fechaEgreso": "2015-01-25T00:00:00.000-03:00",
+            "fechaTitulo": null,
+            "matriculacion": null
+        }
+    ],
+    "formacionPosgrado": null,
+    "sanciones": null,
+    "notas": null,
+    "agenteMatriculador": "",
+    "OtrosDatos": null,
+    "idRenovacion": null,
+    "__v": 0
+}
