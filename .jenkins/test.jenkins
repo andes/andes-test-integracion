@@ -8,13 +8,16 @@ pipeline {
         api = "${API_BRANCH}"
         matriculaciones = "${MATRICULACIONES_BRANCH}"
         monitoreo = "${MONITOREO_BRANCH}"
+        mobile = "${MOBILE_BRANCH}"
         app_build = "${APP_BUILD}"
         api_build = "${API_BUILD}"
         matriculaciones_build = "${MATRICULACIONES_BUILD}"
         monitoreo_build = "${MONITOREO_BUILD}"
         build_number = "${BUILD_NUMBER}"
         filefilter = "${FILE_FILTER.length() == 0 ? '' : ',fgrep=' + FILE_FILTER}"
-        tag="\"${APP_BRANCH},${API_BRANCH},${TEST_BRANCH}\""
+        tag="${APP_BRANCH},${API_BRANCH},${TEST_BRANCH},${CYPRESS_PARAMS.length() == 0 && FILE_FILTER.length() == 0 ? 'completo' : 'reducido' }"
+        TZ="America/Argentina/Buenos_Aires"
+        
     }
     stages {
         stage('Build images') {
@@ -47,6 +50,12 @@ pipeline {
                          build job: "andes-monitoreo", parameters: [string(name: 'GIT_BRANCH', value: monitoreo )] 
                     }
                 }
+                
+                stage('build mobile') { 
+                    steps {
+                         build job: "app-mobile", parameters: [string(name: 'GIT_BRANCH', value: mobile )] 
+                    }
+                }
             }
         }
         
@@ -63,7 +72,8 @@ pipeline {
             steps {
                 sh 'git merge origin/master --no-edit'
                 sh 'rm -rf results/* mochawesome-report/* cypress/screenshots/* cypress/videos/* || true'
-                sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} --build-arg MATRICULACIONES=${matriculaciones} --build-arg MONITOREO=${monitoreo} .'
+                sh 'cd docker && docker build -t andesnqn/nginx:${app} --file=andes.Dockerfile  --build-arg  APP=${app} --build-arg MATRICULACIONES=${matriculaciones} --build-arg MONITOREO=${monitoreo} --build-arg MOBILE=${mobile} .'
+                sh 'echo ${USERS_JSON} | base64 --decode  > scripts/users.json'
             }
         }
         
@@ -81,6 +91,9 @@ pipeline {
                 }
                 steps {
                     sh 'npm ci'
+                    wrap([$class: 'BuildUser']) { 
+                        sh 'USERNAME=${BUILD_USER_ID} node scripts/start-test.js'
+                    }
                 }
             } 
         
@@ -107,7 +120,7 @@ pipeline {
                             }
                             steps { 
                                 sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
-                                sh 'npx cypress run --tag {$tag} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 --parallel ${cypressparams} || true' 
+                                sh 'npx cypress run --tag $tag --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 --parallel ${cypressparams} || true' 
                             }
                         } 
                     }
@@ -134,7 +147,7 @@ pipeline {
                             }
                             steps { 
                                 sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
-                                sh 'npx cypress run  --tag {$tag} ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
+                                sh 'npx cypress run  --tag $tag ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
                             }
                         } 
                     }
@@ -161,7 +174,7 @@ pipeline {
                             }
                             steps { 
                                 sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
-                                sh 'npx cypress run  --tag {$tag} ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
+                                sh 'npx cypress run  --tag $tag ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
                             }
                         } 
                     }
@@ -188,11 +201,40 @@ pipeline {
                             }
                             steps { 
                                 sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
-                                sh 'npx cypress run --tag {$tag} ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
+                                sh 'npx cypress run --tag $tag ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
                             }
                         } 
                     }
-                }       
+                }   
+                
+                stage('E') {
+                    stages  {
+                        stage('container up') {
+                            steps {
+                                sh 'API=$api APP=$app docker-compose -p andese$BUILD_NUMBER -f docker/docker-compose.yml up -d'
+                                sh 'sleep 1'
+                            }
+                        }
+                        stage('run test') {
+                            agent {
+                                docker {
+                                    image 'cypress/base:10'
+                                    reuseNode true
+                                    args '--ipc=host --network andese${BUILD_NUMBER}_default'
+                                }
+                            }
+                            environment {
+                                HOME="${env.WORKSPACE}"
+                            }
+                            steps { 
+                                sh 'MONGO_URI="mongodb://db:27017/andes" node scripts/seeder.js'
+                                sh 'npx cypress run --tag $tag ${filefilter} --env MONGO_URI="mongodb://db:27017/andes",API_SERVER="http://nginx"${filefilter} --config baseUrl=http://nginx,video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false --record --key d6b64714-ccf9-4fc9-959c-5923d23f2a06 ${cypressparams} --parallel || true' 
+                            }
+                        } 
+                    }
+                }
+                
+                
             }
 
         }
@@ -214,9 +256,10 @@ pipeline {
             }
             steps {
                 sh 'npm run report'
-                sh 'ELASTICSEARCH_HOST=http://elklogger.andes.gob.ar:9201  node scripts/dashboard.js'
                 withCredentials([string(credentialsId: 'GITHUB_PERSONAL_TOKEN', variable: 'TOKEN')]) {
-                    sh 'GITHUB_PERSONAL_TOKEN=$TOKEN node scripts/github.js'
+                    wrap([$class: 'BuildUser']) { 
+                        sh 'USERNAME=${BUILD_USER_ID} GITHUB_PERSONAL_TOKEN=$TOKEN node scripts/github.js'
+                    }
                 }
             }
         }
@@ -227,6 +270,7 @@ pipeline {
             sh 'API=$api APP=$app docker-compose -p andesb$BUILD_NUMBER -f docker/docker-compose.yml down -v'
             sh 'API=$api APP=$app docker-compose -p andesc$BUILD_NUMBER -f docker/docker-compose.yml down -v'
             sh 'API=$api APP=$app docker-compose -p andesd$BUILD_NUMBER -f docker/docker-compose.yml down -v'
+            sh 'API=$api APP=$app docker-compose -p andese$BUILD_NUMBER -f docker/docker-compose.yml down -v'
             sh 'mkdir -p mochawesome-report/web/assets'
             sh 'mkdir -p cypress/screenshots' 
             sh 'cp -R cypress/screenshots/* mochawesome-report/web/assets || true'
