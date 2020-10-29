@@ -3,7 +3,7 @@
 
 context('TOP: nuevo turno', () => {
     let token;
-    const pasadoManiana = Cypress.moment().add(3, 'days');
+    const pasadoManiana = Cypress.moment().add(2, 'days');
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {

@@ -9,14 +9,14 @@ function seleccionarPaciente(dni) {
 
 describe('TOP: Liberar turno', () => {
     let token, dni;
-    const pasadoManiana = Cypress.moment().add(3, 'days');
+    const pasadoManiana = Cypress.moment().add(2, 'days');
 
     before(() => {
         cy.seed();
         cy.task('database:seed:agenda', {
             inicio: '1',
             fin: '3',
-            fecha: 3,
+            fecha: 2,
             profesionales: '5d02602588c4d1772a8a17f8',
             tipoPrestaciones: '598ca8375adc68e2a0c121b8',
             tipo: 'gestion'
