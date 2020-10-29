@@ -15,27 +15,64 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.route('POST', '**api/core/mpi/pacientes**').as('guardar');
     });
 
-    it('ingresar documento, sexo del paciente y validar con Renaper', () => {
+    it('Validar paciente con Renaper y deshacer validación, luego volver a validar verificando datos', () => {
+        /* El primer paciente validado posee foto y fecha de fallecimiento, el segundo no.
+           Se espera que los datos de la primera validación no se filtren a la segunda.  */
 
-        // Intercepta la llamada a la ruta validar y devuelve paciente_validado
+        // Intercepta la llamada a la ruta validar y devuelve un paciente validado
         cy.fixture('mpi/paciente-validado').as('paciente_validado');
-        cy.route('POST', '**api/core/mpi/pacientes/validar', '@paciente_validado').as('renaper');
+        cy.fixture('mpi/paciente-validado4').as('paciente_validado4');
+        cy.route('POST', '**api/core/mpi/pacientes/validar', '@paciente_validado4').as('renaper4');
+
+        let validado1 = {
+            documento: 12325489,
+            sexo: 'Masculino',
+            nombre: 'JOSE',
+            apellido: 'TEST'
+        }
+        // Posee fecha de fallecimiento y foto
+        let validado4 = {
+            documento: 17618221,
+            sexo: 'Masculino'
+        }
 
         // Buscador
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
         // Se completa datos básicos
-        cy.plexInt('name="documento"', '12345489');
-        cy.plexSelectType('name="sexo"', 'Masculino');
-        // Se valida con FA RENAPER
+        cy.plexInt('name="documento"', validado4.documento);
+        cy.plexSelectType('name="sexo"', validado4.sexo);
+
+        // Se valida con FA RENAPER y verifica que posee foto y fecha de fallecimiento
         cy.plexButton('Validar Paciente').click();
-        cy.wait('@renaper').then((xhr) => {
+        cy.wait('@renaper4').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.fechaFallecimiento).to.be.not.eq(null);
+            expect(xhr.response.body.paciente.foto).to.be.not.eq(null);
         });
-        // Se verifican que los datos se muestren correctamente
-        cy.plexText('name="apellido"').should('have.value', 'TEST');
-        cy.contains('TEST, JOSE');
+
+        // Deshacemos la validación y verificamos que los datos se hayan reestablecido correctamente
+        cy.plexButton('Deshacer Validación').click();
+        cy.plexText('name="apellido"').should('not.have.value');
+        cy.plexText('name="nombre"').should('not.have.value');
+        cy.plexDatetime('label="Fecha de Nacimiento"').find('input').should('not.have.value');
+
+        cy.route('POST', '**api/core/mpi/pacientes/validar', '@paciente_validado').as('renaper1');
+
+        // Validamos con nuevo dni
+        cy.plexInt('name="documento"').clear();
+        cy.plexInt('name="documento"', validado1.documento);
+        cy.plexButton('Validar Paciente').click();
+        cy.wait('@renaper1').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.fechaFallecimiento).to.be.eq(null);
+            expect(xhr.response.body.paciente.foto).to.be.eq('');
+            expect(xhr.response.body.paciente.nombre).to.be.eq(validado1.nombre);
+            expect(xhr.response.body.paciente.apellido).to.be.eq(validado1.apellido);
+            cy.get('plex-detail').find('plex-badge').contains('Fallecido').should('not.exist');
+        });
+
         cy.contains('Paciente Validado').click();
         cy.plexTab('datos de contacto').click();
         cy.plexBool('label="Sin datos de contacto"', true);

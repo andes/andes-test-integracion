@@ -1,0 +1,104 @@
+{
+    "paciente": {
+        "id": null,
+        "documento": 17618221,
+        "cuil": "27176182216",
+        "activo": true,
+        "estado": "validado",
+        "nombre": "JUAN",
+        "apellido": "TEST",
+        "nombreCompleto": "",
+        "alias": "",
+        "contacto": [
+            {
+                "tipo": "celular",
+                "valor": "",
+                "ranking": 0,
+                "activo": true,
+                "ultimaActualizacion": "2019-06-25T11:46:48.465Z"
+            }
+        ],
+        "sexo": {
+            "id": "masculino",
+            "nombre": "Masculino"
+        },
+        "genero": "masculino",
+        "fechaNacimiento": "1962-05-14T00:00:00.000Z",
+        "tipoIdentificacion": "",
+        "numeroIdentificacion": "",
+        "edad": null,
+        "edadReal": null,
+        "fechaFallecimiento": "2019-11-02T00:00:00.000Z",
+        "direccion": [
+            {
+                "valor": "RUTA 328 KM  20",
+                "codigoPostal": "",
+                "ubicacion": {
+                    "pais": null,
+                    "provincia": null,
+                    "localidad": null,
+                    "barrio": null
+                },
+                "ranking": 0,
+                "geoReferencia": null,
+                "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
+                "activo": true
+            },
+            {
+                "valor": "AVENIDA LAS FLORES 1200",
+                "codigoPostal": "",
+                "ubicacion": {
+                    "pais": null,
+                    "provincia": null,
+                    "localidad": null,
+                    "barrio": null
+                },
+                "ranking": 0,
+                "geoReferencia": null,
+                "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
+                "activo": true
+            }
+        ],
+        "foto": "data:image/jpeg;base64,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",
+        "relaciones": null,
+        "financiador": null,
+        "identificadores": null,
+        "claveBlocking": null,
+        "entidadesValidadoras": [
+            ""
+        ],
+        "scan": null,
+        "reportarError": false,
+        "notaError": ""
+    },
+    "validado": true,
+    "existente": false,
+    "documento_fuzzy": [
+        "221",
+        "822",
+        "182",
+        "618",
+        "761",
+        "176",
+        "8221",
+        "1822",
+        "6182",
+        "7618",
+        "1761",
+        "18221",
+        "61822",
+        "76182",
+        "17618",
+        "618221",
+        "761822",
+        "176182",
+        "7618221",
+        "1761822",
+        "17618221"
+    ],
+    "tokens": [
+        "17618221",
+        "test",
+        "juan"
+    ]
+}
