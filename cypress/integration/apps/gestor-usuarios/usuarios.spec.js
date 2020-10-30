@@ -41,7 +41,7 @@ context('Gestor de Usuarios', () => {
 
         cy.get('plex-layout-sidebar').within(() => {
             cy.plexSelectType('placeholder="Seleccione una organización"', 'dr. eduardo castro rendon{enter}');
-            cy.plexButton('AGREGAR').click();
+            cy.plexButton('AGREGAR').click({ force: true });
         });
         cy.wait('@getPerfiles').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
