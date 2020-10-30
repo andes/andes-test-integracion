@@ -107,9 +107,9 @@ Cypress.Commands.add('isSelectedLabel', { prevSubject: 'element' }, (subject, la
 
 Cypress.Commands.add('clearSelect', { prevSubject: 'element' }, (subject, id) => {
     if (!id) {
-        return cy.wrap(subject).find('.adi-close-circle').click();
+        return cy.wrap(subject).find('.adi-close-circle').click({ force: true });
     } else {
-        return cy.wrap(subject).find(`.selectize-input .item[data-value="${id}"]`).find('.adi-close-circle').click();
+        return cy.wrap(subject).find(`.selectize-input .item[data-value="${id}"]`).find('.adi-close-circle').click({ force: true });
 
     }
 });

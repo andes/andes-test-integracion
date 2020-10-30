@@ -17,6 +17,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
         cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
         cy.route('GET', '**/modules/com/derivaciones**').as('getDerivaciones');
+        cy.route('GET', '**/api/core/tm/organizaciones?esCOM=true').as('getOrganizacion');
         cy.route('POST', '**/modules/com/derivaciones**').as('createDerivacion');
         cy.route('PATCH', '**/modules/com/derivaciones/**').as('editDerivacion');
         cy.route('POST', '/api/auth/v2/organizaciones').as('selectOrg');
@@ -146,6 +147,12 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear derivacion, aprobarla, asignarla, aceptarla, finalizarla', () => {
         seleccionarPaciente(dni);
+        cy.wait('@profesionalSolicitante').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@getOrganizacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.plexTextArea('label="Detalle"', 'a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'NATALIA HUENCHUMAN', '@profesionalSolicitante', 0);
@@ -216,6 +223,12 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear derivacion, aprobarla, asignarla, rechazarla, finalizarla', () => {
         seleccionarPaciente(dni);
+        cy.wait('@profesionalSolicitante').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@getOrganizacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.plexTextArea('label="Detalle"', 'a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'ALICIA PRUEBA', '@profesionalSolicitante', 0);
