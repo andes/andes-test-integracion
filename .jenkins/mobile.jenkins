@@ -1,0 +1,37 @@
+pipeline {
+  environment {
+    registryCredential = "dockerhub"
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git (
+            url: 'https://github.com/andes/mobile-app.git',
+            branch: '${GIT_BRANCH}'
+        )
+      }
+    }
+    stage('Building image') {
+      environment {
+        HASH = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+      }
+      when {
+        expression {
+            HASH =  sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+            SCRIPT = 'docker images -q ${IMAGE_NAME}:${GIT_BRANCH}-' + HASH  
+            IMAGE_ID = sh(returnStdout: true, script: SCRIPT).trim()
+            return IMAGE_ID == ""  
+         }
+      }
+      steps{
+          sh 'git merge origin/master --no-edit' 
+          sh 'docker build  -t ${IMAGE_NAME}:${GIT_BRANCH}-${HASH}  -t ${IMAGE_NAME}:${GIT_BRANCH} . --build-arg ENVIRONMENT=${ENVIRONMENT}'
+      }
+    }
+       
+  }
+}
+
+ 
+    
