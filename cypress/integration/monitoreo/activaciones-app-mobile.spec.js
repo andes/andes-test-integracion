@@ -74,9 +74,11 @@ context('Monitoreo de Activaciones app-mobile', () => {
 
     it('buscar paciente por documento que exista y verificar que devuelva datos', () => {
         cy.plexText('name="buscador"', pacienteApp.documento);
+
         cy.wait('@busqueda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+        cy.get('table').find('tbody tr').should('have.length', 1);
         cy.get('tbody').find('td').contains(pacienteApp.documento);
         cy.get('tbody').find('td').contains(pacienteApp.nombre);
         cy.get('tbody').find('td').contains(pacienteApp.sexo);
@@ -86,6 +88,7 @@ context('Monitoreo de Activaciones app-mobile', () => {
         cy.plexText('name="buscador"', pacienteApp.documento);
         cy.wait('@busqueda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+
         });
         cy.get('tbody').find('td').contains(pacienteApp.documento);
         cy.get('tbody').find('tr').first().click();
