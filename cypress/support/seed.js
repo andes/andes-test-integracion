@@ -247,3 +247,16 @@ Cypress.Commands.add('createTurno', (fixtureName, idTurno, idBloque, idAgenda, p
         });
     });
 });
+
+Cypress.Commands.add('createCampania', (name, token) => {
+    return cy.fixture(name).then((campania) => {
+        return cy.request({
+            method: 'POST',
+            url: Cypress.env('API_SERVER') + '/api/core/tm/campanias',
+            body: campania,
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        });
+    });
+});

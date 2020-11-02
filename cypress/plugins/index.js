@@ -15,6 +15,7 @@
 const selectTestsWithGrep = require('cypress-select-tests/grep')
 
 const { seedAgenda } = require('./seed-agenda');
+const { seedNomivac } = require('./seed-nomivac');
 const { seedPrestacion } = require('./seed-prestaciones');
 const { dropCollection } = require('./seed-drop');
 const { seedPaciente, createPaciente } = require('./seed-paciente');
@@ -51,6 +52,9 @@ module.exports = (on, config) => {
         },
         'database:seed:agenda': (dto) => {
             return seedAgenda(mongoUri, dto);
+        },
+        'database:seed:nomivac': (dto) => {
+            return seedNomivac(mongoUri, dto);
         },
         'factory:internacion': (params) => {
             return factoryInternacion(params);
