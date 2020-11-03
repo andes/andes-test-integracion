@@ -5,7 +5,9 @@ context('RUP - Ejecucion', () => {
 
     before(() => {
         cy.seed();
-        cy.login('30643636', 'asd').then(t => token = t);
+        cy.login('30643636', 'asd').then(t => {
+            token = t;
+        });
         cy.task('database:seed:paciente');
 
         cy.cleanDB(['prestaciones']);
@@ -118,6 +120,58 @@ context('RUP - Ejecucion', () => {
                     },
                     valor: 90,
                 }]
+            }
+        );
+
+        cy.task(
+            'database:seed:prestacion',
+            {
+                paciente: '586e6e8627d3107fde116cdb',
+                tipoPrestacion: '598ca8375adc68e2a0c121b8',
+                tipoPrestacionOrigen: '598ca8375adc68e2a0c121b8',
+                ambitoOrigen: "ambulatorio",
+                profesional: '5d02602588c4d1772a8a17f8',
+                profesionalOrigen: '5d02602588c4d1772a8a17f8',
+                estado: {
+                    idOrigenModifica: null,
+                    motivoREchazo: null,
+                    observaciones: null,
+                    tipo: "auditoria",
+                },
+                registroSolicitud: [{
+                    id: "5f8eff346b215afada0dabc0",
+                    concepto: {
+                        "conceptId": "391000013108",
+                        "term": "consulta de medicina general",
+                        "fsn": "consulta de medicina general",
+                        "semanticTag": "procedimiento",
+                        "nombre": "consulta de medicina general",
+                        "id": "598ca8375adc68e2a0c121b8"
+                    },
+                    nombre: "consulta de medicina general",
+                    destacado: "false",
+                    esDiagnosticoPrincipal: "false",
+                    esSolicitud: "false",
+                    privacy: {
+                        "scope": "public"
+                    },
+                    valor: {
+                        solicitudPrestacion: {
+                            "motivo": "prueba",
+                            "autocitado": false
+                        }
+                    },
+                }],
+                historial: [{
+                    organizacion: {
+                        "id": "57e9670e52df311059bc8964",
+                        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+                    },
+                    accion: "creacion",
+                    descripcion: "Creada",
+                    observaciones: "asd"
+                }],
+                inicio: "top"
             }
         );
     });
