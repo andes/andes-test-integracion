@@ -115,6 +115,7 @@ context('TOP: nuevo turno', () => {
         cy.plexSelectType('label="Estado"').clearSelect();
         cy.plexSelectType('label="Estado"', 'turno dado');
         cy.get('plex-item').contains('PEREZ, MARIA').click();
+        cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('historial-solicitud').contains('Turno asignado por Natalia Huenchuman');
     });
 
