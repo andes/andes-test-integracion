@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 context('RUP - Ejecucion', () => {
-    let token, idPrestacion;
+    let token;
 
     before(() => {
         cy.seed();
@@ -44,6 +44,15 @@ context('RUP - Ejecucion', () => {
                         "fechaInicio": new Date(),
                         "evolucion": "<p>SOY FIEBRE</p>"
                     },
+                },
+                {
+                    id: "5f8eff346b215afada0dabc0",
+                    concepto: {
+                        "conceptId": "62315008",
+                        "term": "diarrea",
+                        "fsn": "diarrea(hallazgo)",
+                        "semanticTag": "hallazgo"
+                    },
                 }]
             }
         );
@@ -71,6 +80,46 @@ context('RUP - Ejecucion', () => {
                 }]
             }
         );
+
+        cy.task(
+            'database:seed:prestacion',
+            {
+                paciente: '586e6e8627d3107fde116cdb',
+                tipoPrestacion: '598ca8375adc68e2a0c121b8',
+
+                estado: 'validada',
+                registros: [{
+                    id: "5f8eff346b215afada0dabc0",
+                    concepto: {
+                        "conceptId": "400268004",
+                        "term": "ibuprofeno+mentol",
+                        "fsn": "ibuprofeno+mentol(producto)",
+                        "semanticTag": "producto"
+                    },
+                    valor: {
+                        "cantidad": 2,
+                        "unidad": "unidades",
+                        "recetable": true,
+                        "indicacion": "prueba",
+                        "estado": "activo",
+                        duracion: {
+                            "cantidad": 20,
+                            "unidad": "dias"
+                        }
+                    },
+                },
+                {
+                    id: "5f8eff406b215afada0dabc1",
+                    concepto: {
+                        "conceptId": "27113001",
+                        "term": "peso corporal",
+                        "fsn": "peso corporal(entidad observable)",
+                        "semanticTag": "entidad observable"
+                    },
+                    valor: 90,
+                }]
+            }
+        );
     });
 
 
@@ -89,10 +138,10 @@ context('RUP - Ejecucion', () => {
     it('visualizar HUDS', () => {
         cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
         cy.assertHudsBusquedaFiltros('trastorno', 1);
-        cy.assertHudsBusquedaFiltros('producto', 0);
+        cy.assertHudsBusquedaFiltros('producto', 1);
+        cy.assertHudsBusquedaFiltros('procedimiento', 1);
 
-        cy.getHUDSItems().should('have.length', 2);
-
+        cy.getHUDSItems().should('have.length', 3);
 
         cy.getHUDSItems().eq(0).assertRUPMiniCard({
             term: 'consulta de clínica médica ',
@@ -102,6 +151,13 @@ context('RUP - Ejecucion', () => {
         });
 
         cy.getHUDSItems().eq(1).assertRUPMiniCard({
+            term: 'consulta de medicina general',
+            fecha: Cypress.moment().format('DD/MM/YYYY'),
+            profesional: 'Natalia Huenchuman',
+            badge: 'validada'
+        });
+
+        cy.getHUDSItems().eq(2).assertRUPMiniCard({
             term: 'sesión de informes de enfermería',
             fecha: Cypress.moment().subtract(1, 'day').format('DD/MM/YYYY'),
             profesional: 'Natalia Huenchuman',
@@ -109,6 +165,19 @@ context('RUP - Ejecucion', () => {
         });
 
         cy.getHUDSItems().eq(1).click();
+        cy.assertRupCard(0, { semanticTag: 'producto', term: ' Ibuprofeno+mentol ' }).then((elem) => {
+            cy.wrap(elem).contains('activo'); //Estado
+            cy.wrap(elem).contains('20 dias'); //Durante
+            cy.wrap(elem).contains('prueba'); //Indicación
+            cy.wrap(elem).contains('2 unidades'); //Cantidad
+            cy.wrap(elem).contains('si'); //Recetable
+        });
+
+        cy.assertRupCard(1, { semanticTag: 'procedimiento', term: ' Peso corporal ' }).then((elem) => {
+            cy.wrap(elem).contains('90 Kg'); //Peso
+        });
+
+        cy.getHUDSItems().eq(2).click();
 
         cy.assertRupCard(0, { semanticTag: 'trastorno', term: 'Fiebre Q' }).then((elem) => {
             cy.wrap(elem).contains('hola mundo');
@@ -116,7 +185,7 @@ context('RUP - Ejecucion', () => {
         });
 
         cy.HudsBusquedaFiltros('hallazgo');
-        cy.getHUDSItems().should('have.length', 1);
+        cy.getHUDSItems().should('have.length', 2);
         cy.getHUDSItems().eq(0).assertRUPMiniCard({
             term: 'fiebre',
             fecha: Cypress.moment().subtract(1, 'day').format('DD/MM/YYYY'),
@@ -135,7 +204,75 @@ context('RUP - Ejecucion', () => {
         cy.get('vista-registro .menu-left').click();
         cy.get('vista-registro').plexBadge('fiebre');
         cy.get('vista-registro').plexBadge('fiebre Q');
-
     });
 
-}); 
+    it('HUDS - Filtro por texto libre', () => {
+        cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
+
+        //Hallazgo
+        cy.HudsBusquedaFiltros('hallazgo');
+
+        cy.plexText('name="searchTerm"', "diarrea");
+        cy.getHUDSItems().eq(0).assertRUPMiniCard({
+            term: 'diarrea',
+            fecha: Cypress.moment().subtract(1, 'day').format('DD/MM/YYYY'),
+            profesional: 'Natalia Huenchuman'
+        }).click();
+
+        //Trastorno
+        cy.HudsBusquedaFiltros('trastorno');
+
+        cy.plexText('name="searchTerm"').clear();
+        cy.plexText('name="searchTerm"', "fiebre");
+        cy.getHUDSItems().eq(0).assertRUPMiniCard({
+            term: 'fiebre Q',
+            fecha: Cypress.moment().format('DD/MM/YYYY'),
+            profesional: 'Natalia Huenchuman',
+            badge: 'activo'
+        }).click();
+
+        //Procedimiento
+        cy.HudsBusquedaFiltros('procedimiento');
+
+        cy.plexText('name="searchTerm"').clear();
+        cy.plexText('name="searchTerm"', "peso corporal");
+        cy.getHUDSItems().eq(0).assertRUPMiniCard({
+            term: 'peso corporal',
+            fecha: Cypress.moment().format('DD/MM/YYYY'),
+            profesional: 'Natalia Huenchuman'
+        }).click();
+
+        cy.get('.prestacion-offset').plexBadge('Registro Privado', 'danger');
+
+        //Producto
+        cy.HudsBusquedaFiltros('producto');
+
+        cy.plexText('name="searchTerm"').clear();
+        cy.plexText('name="searchTerm"', "ibuprofeno+mentol");
+        cy.getHUDSItems().eq(0).assertRUPMiniCard({
+            term: 'ibuprofeno+mentol',
+            fecha: Cypress.moment().format('DD/MM/YYYY'),
+            badge: 'activo'
+        }).click();
+
+        cy.get('.prestacion-offset').plexBadge('Registro Privado', 'danger');
+    })
+
+    it('HUDS - Filtro ambulatorio', () => {
+        cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
+
+        cy.HudsBusquedaFiltros('prestaciones');
+
+        cy.plexButtonIcon('chevron-down').click();
+
+        cy.plexSelectType('label="Prestación"', 'sesion de informes de enfermeria');
+        cy.plexDatetime('name="fechaInicio"', Cypress.moment().subtract(1, 'day').format('DD/MM/YYYY'));
+
+        cy.getHUDSItems().eq(0).assertRUPMiniCard({
+            term: 'sesión de informes de enfermería',
+            fecha: Cypress.moment().subtract(1, 'day').format('DD/MM/YYYY'),
+            profesional: 'Natalia Huenchuman',
+            badge: 'validada'
+        }).click();
+    })
+});
