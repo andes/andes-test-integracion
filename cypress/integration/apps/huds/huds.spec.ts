@@ -5,9 +5,7 @@ context('RUP - Ejecucion', () => {
 
     before(() => {
         cy.seed();
-        cy.login('30643636', 'asd').then(t => {
-            token = t;
-        });
+        cy.login('30643636', 'asd').then(t => token = t);
         cy.task('database:seed:paciente');
 
         cy.cleanDB(['prestaciones']);
@@ -126,18 +124,14 @@ context('RUP - Ejecucion', () => {
         cy.task(
             'database:seed:prestacion',
             {
+                template: 'solicitud',
                 paciente: '586e6e8627d3107fde116cdb',
                 tipoPrestacion: '598ca8375adc68e2a0c121b8',
                 tipoPrestacionOrigen: '598ca8375adc68e2a0c121b8',
                 ambitoOrigen: "ambulatorio",
                 profesional: '5d02602588c4d1772a8a17f8',
                 profesionalOrigen: '5d02602588c4d1772a8a17f8',
-                estado: {
-                    idOrigenModifica: null,
-                    motivoREchazo: null,
-                    observaciones: null,
-                    tipo: "auditoria",
-                },
+                estado: 'auditoria',
                 registroSolicitud: [{
                     id: "5f8eff346b215afada0dabc0",
                     concepto: {
@@ -157,7 +151,7 @@ context('RUP - Ejecucion', () => {
                     },
                     valor: {
                         solicitudPrestacion: {
-                            "motivo": "prueba",
+                            "motivo": "motivo de la solicitud",
                             "autocitado": false
                         }
                     },
@@ -169,7 +163,7 @@ context('RUP - Ejecucion', () => {
                     },
                     accion: "creacion",
                     descripcion: "Creada",
-                    observaciones: "asd"
+                    observaciones: "observacion de la solcitud"
                 }],
                 inicio: "top"
             }
@@ -328,5 +322,28 @@ context('RUP - Ejecucion', () => {
             profesional: 'Natalia Huenchuman',
             badge: 'validada'
         }).click();
+    })
+
+    it('HUDS - Controlar datos de solicitud', () => {
+        cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
+
+        //Hallazgo
+        cy.HudsBusquedaFiltros('solicitudes');
+        cy.getHUDSItems().should('have.length', 1);
+
+        cy.getHUDSItems().eq(0).assertRUPMiniCard({
+            term: 'consulta de medicina general',
+            fecha: Cypress.moment().format('DD/MM/YYYY'),
+            profesional: 'Huenchuman, Natalia',
+        }).click();
+
+        cy.get('.columna-completa').contains("consulta de medicina general"); //Tipo de prestación origen
+        cy.get('.columna-completa').contains("HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"); //Organización origen
+        cy.get('.columna-completa').contains("motivo de la solicitud"); //Motivo de la solicitud
+        cy.get('.columna-completa').contains("auditoria"); //Estado de la solicitud
+
+        cy.get('historial-solicitud').plexLabel(Cypress.moment().format('DD/MM/YYYY'));
+        cy.get('historial-solicitud').plexLabel('Creada por Natalia Huenchuman');
+        cy.get('historial-solicitud').plexLabel('Creacion de solicitud');
     })
 });

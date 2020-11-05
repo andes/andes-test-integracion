@@ -208,6 +208,8 @@ declare namespace Cypress {
         plexText(label: string, texto?: string);
         plexInt(label: string, texto?: string);
         plexFloat(label: string, texto?: string);
+        plexLabel(texto: string);
+        plexTitle(texto: string);
 
         toast(type: 'success' | 'danger' | 'warning' | 'alert' | 'error', texto?: string);
 
