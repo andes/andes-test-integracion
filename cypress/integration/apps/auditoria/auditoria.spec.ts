@@ -51,8 +51,7 @@ context('auditoria', () => {
         cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/core/mpi/pacientes/search**').as('busquedaPaciente');
-        cy.route('PUT', '**/api/core/mpi/pacientes/**').as('putPaciente');
-        cy.route('PUT', '**api/core/mpi/pacientes/auditoria/setActivo').as('setActivo');
+        cy.route('PATCH', '**/api/core-v2/mpi/pacientes/**').as('patchPaciente');
         cy.goto('/apps/mpi/auditoria', token);
     })
 
@@ -71,23 +70,21 @@ context('auditoria', () => {
         cy.get('paciente-listado').contains(format(validado2.documento)).click();
         cy.plexButton('Confirmar vinculación').click();
 
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.documento).to.eq(validado2.documento);
-            expect(xhr.response.body.activo).to.eq(false);
+            expect(xhr.response.body.documento).to.eq(validado1.documento);
+            expect(xhr.response.body.activo).to.eq(true);
         });
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.activo).to.eq(false);
         });
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(format(validado2.documento));
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
-        cy.wait('@putPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.toast('success', 'La desvinculación ha sido realizada correctamente');
@@ -109,23 +106,21 @@ context('auditoria', () => {
         cy.get('paciente-listado').contains(format(temporal2.documento)).click();
         cy.plexButton('Confirmar vinculación').click();
 
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.documento).to.eq(temporal2.documento);
-            expect(xhr.response.body.activo).to.eq(false);
+            expect(xhr.response.body.documento).to.eq(temporal1.documento);
+            expect(xhr.response.body.activo).to.eq(true);
         });
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.activo).to.eq(false);
         });
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(format(temporal2.documento));
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
-        cy.wait('@putPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.toast('success', 'La desvinculación ha sido realizada correctamente');
@@ -147,23 +142,21 @@ context('auditoria', () => {
         cy.get('paciente-listado').contains(format(temporal1.documento)).click();
         cy.plexButton('Confirmar vinculación').click();
 
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.documento).to.eq(temporal1.documento);
-            expect(xhr.response.body.activo).to.eq(false);
+            expect(xhr.response.body.documento).to.eq(validado1.documento);
+            expect(xhr.response.body.activo).to.eq(true);
         });
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.activo).to.eq(false);
         });
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(format(temporal1.documento));
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
-        cy.wait('@putPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.toast('success', 'La desvinculación ha sido realizada correctamente');
@@ -184,24 +177,22 @@ context('auditoria', () => {
         cy.get('paciente-listado').contains(sinDocumento1.nombre).click();
         cy.plexButton('Confirmar vinculación').click();
 
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.activo).to.eq(false);
-            expect(xhr.response.body.nombre).to.be.eq(sinDocumento1.nombre);
+            expect(xhr.response.body.activo).to.eq(true);
+            expect(xhr.response.body.nombre).to.be.eq(validado1.nombre);
         });
 
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.activo).to.eq(false);
         });
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(sinDocumento1.nombre);
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
-        cy.wait('@putPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.toast('success', 'La desvinculación ha sido realizada correctamente');
@@ -222,23 +213,21 @@ context('auditoria', () => {
         cy.get('paciente-listado').contains(sinDocumento1.nombre).click();
         cy.plexButton('Confirmar vinculación').click();
 
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.activo).to.eq(false);
-            expect(xhr.response.body.nombre).to.be.eq(sinDocumento1.nombre);
+            expect(xhr.response.body.activo).to.eq(true);
+            expect(xhr.response.body.nombre).to.be.eq(temporal1.nombre);
         });
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.activo).to.eq(false);
         });
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(sinDocumento1.nombre);
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
-        cy.wait('@putPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.toast('success', 'La desvinculación ha sido realizada correctamente');
@@ -259,13 +248,14 @@ context('auditoria', () => {
         cy.get('paciente-listado').contains(sinDocumento2.nombre).click();
         cy.plexButton('Confirmar vinculación').click();
 
-        cy.wait('@setActivo').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.activo).to.eq(false);
-            expect(xhr.response.body.nombre).to.be.eq(sinDocumento2.nombre);
+            expect(xhr.response.body.activo).to.eq(true);
+            expect(xhr.response.body.nombre).to.be.eq(sinDocumento1.nombre);
         });
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.activo).to.eq(false);
         });
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(sinDocumento2.nombre);
