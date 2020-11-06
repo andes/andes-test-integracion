@@ -72,7 +72,7 @@ context('TM Profesional', () => {
             documento: '11111111'
         });
 
-        cy.plexPhone('label="Número"', '29945876as12').should('have.value', '2994587612');
+        cy.plexPhone('label="Número"', '2994587612').should('have.value', '2994587612');
 
         cy.plexButton("Guardar").click();
 
@@ -90,7 +90,7 @@ context('TM Profesional', () => {
         cy.server();
         cy.route('POST', '**/core/tm/profesionales**').as('create');
         cy.fixture('renaper-1').as('fxRenaper')
-        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=26487951&sexo=masculino', '@fxRenaper').as('renaper');
+        cy.route('POST', '**/core-v2/mpi/validacion', '@fxRenaper').as('renaper');
 
         complete({
             sexo: 'masculino',
@@ -129,7 +129,7 @@ context('TM Profesional', () => {
         cy.goto('/tm/profesional/create', token);
 
         cy.server();
-        cy.route('GET', '**/api/modules/fuentesAutenticas/renaper?documento=15654898&sexo=femenino').as('renaper');
+        cy.route('POST', '**/core-v2/mpi/validacion').as('renaper');
 
         cy.route('POST', '**/core/tm/profesionales**').as('create');
 
@@ -140,10 +140,9 @@ context('TM Profesional', () => {
 
         cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
         cy.wait('@renaper').then((xhr) => {
-            expect(xhr.response.body).to.be.eq(null);
+            expect(xhr.response.body).to.have.property('message', 'ciudadano inexistente')
         });
 
-        cy.contains('El profesional no se encontró en RENAPER');
         cy.swal('confirm');
 
         cy.plexText('label="Nombre"', 'Julieta');
