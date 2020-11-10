@@ -120,6 +120,7 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
                 registro.concepto = r.concepto;
                 registro.nombre = r.concepto.term;
                 registro.valor = r.valor;
+                registro.registros = r.registros ? r.registros : [];
                 registro.createdAt = fechaPrestacion.toDate();
                 registro.updatedAt = fechaPrestacion.toDate();
                 return registro;

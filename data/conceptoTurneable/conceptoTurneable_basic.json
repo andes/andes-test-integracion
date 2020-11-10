@@ -3694,5 +3694,14 @@
 			"900000000000497000"
 		],
 		"term": "sesión de informes de enfermería"
+	},
+	{
+		"_id": {
+			"$oid": "5cac99471742c567658b46db"
+		},
+		"fsn": "epicrisis médica (elemento de registro)",
+		"semanticTag": "elemento de registro",
+		"conceptId": "2341000013106",
+		"term": "epicrisis médica"
 	}
 ]

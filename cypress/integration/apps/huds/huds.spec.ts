@@ -86,7 +86,6 @@ context('RUP - Ejecucion', () => {
             {
                 paciente: '586e6e8627d3107fde116cdb',
                 tipoPrestacion: '598ca8375adc68e2a0c121b8',
-
                 estado: 'validada',
                 registros: [{
                     id: "5f8eff346b215afada0dabc0",
@@ -156,6 +155,120 @@ context('RUP - Ejecucion', () => {
                     observaciones: "observacion de la solcitud"
                 }],
                 inicio: "top"
+            }
+        );
+
+        cy.task(
+            'database:seed:prestacion',
+            {
+                paciente: '586e6e8627d3107fde116cdb',
+                tipoPrestacion: '5cac99471742c567658b46db',
+                estado: 'validada',
+                ambito: 'internacion',
+                registros: [{
+                    concepto: {
+                        "conceptId": "373942005",
+                        "term": "informe de alta",
+                        "fsn": "informe de alta (elemento de registro)",
+                        "semanticTag": "elemento de registro"
+                    },
+                    valor: {
+                        "unidadOrganizativa": {
+                            "_id": "5e8b4213b2ce3c28662a966f",
+                            "conceptId": "3161000013100",
+                            "term": "servicio de clínica médica",
+                            "fsn": "servicio de clínica médica (medio ambiente)",
+                            "semanticTag": "medio ambiente",
+                            "id": "5e8b4213b2ce3c28662a966f"
+                        },
+                        "fechaDesde": '2020-10-22 03:00:00.000Z',
+                        "fechaHasta": '2020-10-27 11:19:18.134Z'
+                    },
+                    registros: [
+                        {
+                            concepto: {
+                                "conceptId": "3571000013102",
+                                "term": "resumen de la internación",
+                                "fsn": "resumen de la internación (elemento de registro)",
+                                "semanticTag": "elemento de registro"
+                            },
+                            valor: 'Texto resumen de la internación',
+                        },
+                        {
+                            concepto: {
+                                "conceptId": "3581000013104",
+                                "term": "tratamiento recibido durante la internación",
+                                "fsn": "tratamiento recibido durante la internación (elemento de registro)",
+                                "semanticTag": "elemento de registro"
+                            },
+                            valor: 'Texto del tratamiento recibido durante la internacion',
+                        },
+                        {
+                            concepto: {
+                                "conceptId": "3591000013101",
+                                "term": "resumen de laboratorios",
+                                "fsn": "resumen de laboratorios(elemento de registro)",
+                                "semanticTag": "elemento de registro"
+                            },
+                            valor: 'Texto del resumen de laboratorios',
+                        },
+                        {
+                            concepto: {
+                                "conceptId": "3601000013109",
+                                "term": "resumen de procedimientos",
+                                "fsn": "resumen de procedimientos(elemento de registro)",
+                                "semanticTag": "elemento de registro"
+                            },
+                            valor: 'Texto del resumen de procedimientos',
+                        },
+                        {
+                            concepto: {
+                                "conceptId": "4771000013105",
+                                "term": "situaciones pendientes",
+                                "fsn": "situaciones pendientes (elemento de registro)",
+                                "semanticTag": "elemento de registro"
+                            },
+                            valor: 'Texto de situaciones pendientes',
+                        },
+                        {
+                            concepto: {
+                                "conceptId": "3611000013107",
+                                "term": "tratamiento a seguir post internación",
+                                "fsn": "tratamiento a seguir post internación (elemento de registro)",
+                                "semanticTag": "elemento de registro"
+                            },
+                            valor: 'Texto de tratamiento a seguir post internacion',
+                        },
+                        {
+                            concepto: {
+                                "conceptId": "900000000000003001",
+                                "term": "dieta a seguir post internación",
+                                "fsn": "dieta a seguir post internación (elemento de registro)",
+                                "semanticTag": "elemento de registro"
+                            },
+                            valor: 'Texto de dieta a seguir post internacion',
+                        },
+                        {
+                            concepto: {
+                                "conceptId": "3631000013101",
+                                "term": "pautas de alarma post internación",
+                                "fsn": "pautas de alarma post internación (elemento de registro)",
+                                "semanticTag": "elemento de registro"
+                            },
+                            valor: 'Texto de pautas de alarma post internacion',
+                        },
+                        {
+                            concepto: {
+                                "conceptId": "3641000013106",
+                                "term": "diagnóstico al egreso",
+                                "fsn": "diagnóstico al egreso (elemento de registro)",
+                                "semanticTag": "elemento de registro"
+                            },
+                            valor: 'Texto de diagnostico de egreso',
+                        },
+                    ]
+                },
+                ]
             }
         );
     });
@@ -314,7 +427,7 @@ context('RUP - Ejecucion', () => {
         }).click();
     })
 
-    it.only('HUDS - Controlar datos de solicitud', () => {
+    it('HUDS - Controlar datos de solicitud', () => {
         cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
 
         //Hallazgo
@@ -335,5 +448,38 @@ context('RUP - Ejecucion', () => {
         cy.get('historial-solicitud').plexLabel(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('historial-solicitud').plexLabel('Creada por Natalia Huenchuman');
         cy.get('historial-solicitud').plexLabel('Creacion de solicitud');
+    });
+
+    it('HUDS - Filtro internacion', () => {
+        cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
+        cy.assertHudsBusquedaFiltros('prestaciones', 4);
+        cy.HudsBusquedaFiltros('prestaciones');
+        cy.plexOptions('Internación').click();
+
+        cy.plexButtonIcon('chevron-down').click();
+
+        cy.plexSelectType('label="Prestación"', 'epicrisis medica');
+        cy.plexDatetime('name="fechaInicio"', Cypress.moment().subtract(1, 'day').format('DD/MM/YYYY'));
+
+        cy.getHUDSItems().eq(0).assertRUPMiniCard({
+            term: 'epicrisis médica',
+            fecha: Cypress.moment().format('DD/MM/YYYY'),
+            profesional: 'Natalia Huenchuman',
+            badge: 'validada'
+        }).click();
+
+        cy.assertRupCard(0, { term: ' Informe de alta ' }).then((elem) => {
+            cy.wrap(elem).contains(' servicio de clínica médica '); // UNIDAD ORGANIZATIVA DE LA EPICRISIS
+            cy.wrap(elem).contains('Texto resumen de la internación'); // RESUMEN DE LA INTERNACIÓN
+            cy.wrap(elem).contains(' Texto del tratamiento recibido durante la internacion '); // TRATAMIENTO RECIBIDO DURANTE LA INTERNACIÓN
+            cy.wrap(elem).contains(' Texto del resumen de laboratorios '); // REGISTROS DE LABORATORIOS/ESTUDIOS (Resumen de laboratorios)
+            cy.wrap(elem).contains(' Texto del resumen de procedimientos '); // REGISTROS DE LABORATORIOS/ESTUDIOS ( Resumen de procedimientos)
+            cy.wrap(elem).contains(' Texto de situaciones pendientes '); // SITUACIONES PENDIENTES
+            cy.wrap(elem).contains(' Texto de tratamiento a seguir post internacion '); // TRATAMIENTOS A SEGUIR
+            cy.wrap(elem).contains(' Texto de dieta a seguir post internacion '); // DIETA A SEGUIR
+            cy.wrap(elem).contains(' Texto de pautas de alarma post internacion '); // PAUTAS DE ALARMA
+            cy.wrap(elem).contains(' Texto de diagnostico de egreso '); // DIAGNOSTICO AL EGRESO
+        });
     })
+
 });
