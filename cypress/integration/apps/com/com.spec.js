@@ -70,7 +70,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.toast('success');
         cy.get('plex-badge').contains('inhabilitada').should('have.length', 1);
         cy.contains('inhabilitada').click();
-        cy.get('plex-item').last().click();
+
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('tbody tr').should('have.length', 2);
         cy.get('tbody tr').contains('Pasa a inhabilitada por Natalia Huenchuman de CENTRO OPERATIVO MEDICO');
@@ -111,8 +111,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         });
         cy.toast('success', 'Derivación guardada');
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
+        cy.plexSelectType('label="Estado"').click().get('.option').contains('SOLICITADA').click();
         cy.get('plex-label').contains('Solicitante: PRUEBA, TEST').should('have.length', 1);
-        cy.contains('SUMAR NOTA/ADJUNTO').click();
+        cy.contains(' SUMAR NOTA/ADJUNTO ').click();
         cy.plexTextArea('label="Observacion"', 'nueva nota');
         cy.plexButton("Guardar").click();
         cy.wait('@editDerivacion').then((xhr) => {
