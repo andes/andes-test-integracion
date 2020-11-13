@@ -18,7 +18,6 @@ describe('CITAS - Planificar Agendas', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getTiposPrestacion');
         cy.route('GET', '**/api/modules/turnos/agenda?**').as('getAgendas');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('findAgenda');
         cy.route('GET', '**/api/modules/turnos/agenda/candidatas?**').as('getCandidatas');
@@ -91,10 +90,6 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexDatetime('label="Fecha"', '{selectall}{backspace}' + manana);
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getTiposPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
         });
 
         cy.plexSelect('label="Tipos de prestación"').find('.remove-button').click();
@@ -264,7 +259,6 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexButton('Gestor de Agendas').click();
 
         cy.wait('@getAgendas');
-        cy.wait('@getTiposPrestacion');
 
         cy.get('table tbody td div').contains('servicio de neumonología').click();
         cy.get('.lista-turnos .badge-info').contains('Reasignado');
@@ -324,12 +318,11 @@ describe('CITAS - Planificar Agendas', () => {
 
     it('editar agenda dinamica con institucion', () => {
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.plexButton("Crear una nueva agenda").click();
         cy.plexDatetime('name="modelo.fecha"', cy.today());
         cy.plexDatetime('name="modelo.horaInicio"', "08:00");
         cy.plexDatetime('name="modelo.horaFin"', "16:00");
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
         cy.plexBool('label="Dinámica"', true);
         cy.plexBool('name="espacioFisicoPropios"', false);
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
@@ -347,12 +340,11 @@ describe('CITAS - Planificar Agendas', () => {
 
     it('clonar agenda con una institucion asignada', () => {
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.plexButton("Crear una nueva agenda").click();
         cy.plexDatetime('name="modelo.fecha"', cy.today());
         cy.plexDatetime('name="modelo.horaInicio"', "08:00");
         cy.plexDatetime('name="modelo.horaFin"', "16:00");
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
         cy.plexBool('label="Dinámica"', true);
         cy.plexBool('name="espacioFisicoPropios"', false);
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);

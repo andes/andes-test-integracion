@@ -318,7 +318,6 @@ context('punto de inicio', () => {
         it('Sacar turno y seleccionar prepaga ' + type, () => {
             cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
             cy.route('GET', '**/api/modules/turnos/historial?*').as('getHistorial');
-            cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
             cy.route('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
             cy.route('GET', '**/api/modules/turnos/agenda?**').as('getAgendas');
             cy.route('GET', '**/api/modules/turnos/agenda/**').as('getAgenda');
@@ -337,14 +336,11 @@ context('punto de inicio', () => {
             cy.wait('@getPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
             });
-            cy.wait('@getPrestaciones').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-            });
             cy.wait('@getCarpetas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
             });
 
-            cy.plexSelectAsync('name="tipoPrestacion"', 'servicio de neumonología', '@getPrestaciones', 0);
+            cy.plexSelectType('name="tipoPrestacion"', 'servicio de neumonología');
 
             cy.wait('@getAgendas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);

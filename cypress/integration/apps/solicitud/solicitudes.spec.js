@@ -20,8 +20,7 @@ context('SOLICITUDES', () => {
         cy.goto('/solicitudes', token);
         cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
-        cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('conceptosTurneables');
+        cy.route('GET', '**/api/core/tm/conceptos-turneables?**').as('conceptosTurneables');
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
         cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes**').as('solicitudes');
@@ -39,21 +38,15 @@ context('SOLICITUDES', () => {
         let prestacionOrigen = 'consulta de medicina general';
         cy.plexButton('Reglas de entrada').click();
 
-        cy.wait('@getPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+        cy.plexSelectAsync('label="Prestación Destino"', prestacionDestino, '@conceptosTurneables', 0);
 
-        cy.plexSelectAsync('label="Prestación Destino"', prestacionDestino, '@getPrestaciones', 0);
-        
         cy.plexSelectAsync('placeholder="OrganizacionOrigen"', orgOrigen, '@getOrganizaciones', 0);
 
         cy.plexButtonIcon('plus').click();
 
-        cy.wait('@getPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
-        cy.plexSelectAsync('name="prestacionOrigen"', prestacionOrigen, '@getPrestaciones', 0);
+        cy.plexSelectAsync('name="prestacionOrigen"', prestacionOrigen, '@conceptosTurneables', 0);
+
 
         cy.plexButtonIcon('plus').eq(1).click();
 
@@ -62,7 +55,7 @@ context('SOLICITUDES', () => {
         cy.wait('@guardarRegla').then(xhr => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body[0].destino.organizacion.nombre).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-            expect(xhr.response.body[0].destino.prestacion.nombre).to.be.eq(prestacionDestino);
+            expect(xhr.response.body[0].destino.prestacion.nombre).to.be.eq(prestacionDestino.toLocaleLowerCase());
             expect(xhr.response.body[0].origen.organizacion.nombre).to.be.eq(orgOrigen);
             expect(xhr.response.body[0].origen.prestaciones[0].prestacion.nombre).to.be.eq(prestacionOrigen);
         });

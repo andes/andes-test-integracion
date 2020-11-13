@@ -195,8 +195,6 @@ context('turnos', () => {
 
     it('dar turno de día', () => {
         cy.server();
-        //Rutas de control
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
         cy.route('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');
@@ -215,9 +213,8 @@ context('turnos', () => {
         cy.plexButtonIcon('calendar-plus').click();
 
         cy.wait('@getCarpetas');
-        cy.wait('@getPrestaciones');
 
-        cy.plexSelectAsync('placeholder="Tipos de Prestación"', 'consulta con médico general', '@getPrestaciones', 0);
+        cy.plexSelectType('placeholder="Tipos de Prestación"', 'consulta con médico general');
 
         cy.wait('@getAgendas');
 

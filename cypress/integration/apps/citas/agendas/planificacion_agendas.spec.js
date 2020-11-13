@@ -88,7 +88,6 @@ context('Planificacion Agendas', () => {
         cy.route('POST', '**/api/modules/turnos/agenda**').as('create');
         cy.route('GET', '**/api/modules/turnos/espacioFisico**').as('espacios');
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('GET', '**/api/modules/rup/prestaciones**').as('prestacionesRup');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
         cy.route('GET', '**/api/modules/turnero/pantalla**').as('pantallas');
@@ -108,11 +107,7 @@ context('Planificacion Agendas', () => {
             horaFin: "12:00",
         });
 
-        cy.wait('@prestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
-        });
-
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
         cy.plexSelectAsync('label="Equipo de Salud"', 'CORTES JAZMIN', '@profesionales', 0);
 
         cy.wait('@agendas').then((xhr) => {
@@ -148,8 +143,7 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.wait('@prestaciones');
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
         complete({
             cantidadTurnos: 7,
             accesoDirectoDelDia: 7,
@@ -182,7 +176,6 @@ context('Planificacion Agendas', () => {
         cy.contains('La Agenda se clonó correctamente');
         cy.swal('confirm');
         cy.wait('@agendas');
-        cy.wait('@prestaciones');
     });
 
 
@@ -193,7 +186,7 @@ context('Planificacion Agendas', () => {
             horaFin: "12:00"
         });
 
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         cy.plexDatetime('label="Hora Inicio"', { clear: true });
         cy.plexDatetime('label="Hora Fin"', { clear: true });
@@ -238,7 +231,7 @@ context('Planificacion Agendas', () => {
             horaFin: "12:00"
         });
 
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         cy.plexBool('label="Dinámica"', true);
 
@@ -257,7 +250,7 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         cy.plexBool('label="Dinámica"', true);
 
@@ -284,7 +277,7 @@ context('Planificacion Agendas', () => {
         });
         cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgendas');
 
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         complete({
             cantidadTurnos: 7,
@@ -304,7 +297,7 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         complete({
             cantidadTurnos: 7,
@@ -327,7 +320,7 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         complete({
             cantidadTurnos: 7,
@@ -355,7 +348,7 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         complete({
             cantidadTurnos: 7,
@@ -383,7 +376,7 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         complete({
             cantidadTurnos: 7,
@@ -411,7 +404,7 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         complete({
             cantidadTurnos: 7,
@@ -433,7 +426,7 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         complete({
             cantidadTurnos: 7,
@@ -455,8 +448,8 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de clinica médica', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de clinica médica');
 
         cy.plexDatetime('label="Hora Inicio"', { clear: true });
         cy.plexDatetime('label="Hora Fin"', { clear: true });
@@ -474,7 +467,7 @@ context('Planificacion Agendas', () => {
         cy.plexButtonIcon('plus').click();
         cy.wait(1000);
         cy.get('div[class="col-7 h-100"]').find('plex-box').find('div[class="row"]')
-            .find('div[class="col-6"]').eq(5).find('plex-bool').eq(0).click()
+            .find('div[class="col-6"]').eq(5).find('plex-bool').eq(1).click()
 
         complete({
             bloque: {
@@ -502,8 +495,7 @@ context('Planificacion Agendas', () => {
             horaFin: "12:00",
         });
 
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         cy.plexDatetime('label="Hora Inicio"', { clear: true });
         cy.plexDatetime('label="Hora Fin"', { clear: true });
@@ -527,8 +519,7 @@ context('Planificacion Agendas', () => {
             horaFin: "12:00",
         });
 
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         complete({
             cantidadTurnos: 7,
@@ -545,8 +536,7 @@ context('Planificacion Agendas', () => {
             horaFin: "12:00",
         });
 
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         complete({
             cantidadTurnos: 7,
@@ -563,9 +553,8 @@ context('Planificacion Agendas', () => {
             horaFin: "12:00"
         });
 
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
 
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
         complete({
             cantidadTurnos: 7,
@@ -588,7 +577,7 @@ context('Planificacion Agendas', () => {
     //         horaFin: "12:00"
     //     });
 
-    //     cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+    //     cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general' );
 
     //     cy.plexDatetime('label="Hora Inicio"', { clear: true });
     //     cy.plexDatetime('label="Hora Fin"', { clear: true });
@@ -623,7 +612,7 @@ context('Planificacion Agendas', () => {
         cy.plexDatetime('name="modelo.fecha"', cy.today());
         cy.plexDatetime('name="modelo.horaInicio"', "08:00");
         cy.plexDatetime('name="modelo.horaFin"', "16:00");
-        cy.plexSelectAsync('label="Tipos de prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
         cy.plexBool('label="Dinámica"', true);
         cy.plexBool('name="espacioFisicoPropios"', false);
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
@@ -640,7 +629,7 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.plexSelectAsync('label="Tipos de prestación"', 'actividades con la comunidad', '@prestaciones', 0);
+        cy.plexSelectType('label="Tipos de prestación"', 'actividades con la comunidad');
         cy.plexButton("Guardar").click();
         cy.wait('@create');
         cy.contains('La agenda se guardó correctamente').click();
@@ -670,12 +659,11 @@ context('Planificacion Agendas', () => {
         cy.contains('La Agenda se clonó correctamente');
         cy.swal('confirm');
         cy.wait('@agendas');
-        cy.wait('@prestaciones');
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().date());
         cy.wait('@agendas');
         cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().date());
         cy.wait('@agendas');
-        cy.plexSelectAsync('name="prestaciones"', 'actividades con la comunidad', '@prestaciones', 0);
+        cy.plexSelectType('name="prestaciones"', 'actividades con la comunidad');
         cy.wait('@agendas');
         cy.get('table tbody td').contains('En planificación').click();
 
@@ -686,7 +674,6 @@ context('Planificacion Agendas', () => {
         cy.toast('success', 'La agenda cambió el estado a disponible');
         cy.wait('@agendas');
         cy.goto('/rup', token);
-        cy.wait('@prestaciones');
         cy.wait('@pantallas');
         cy.wait('@agendas');
         cy.wait('@prestacionesRup');

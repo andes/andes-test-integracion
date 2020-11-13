@@ -42,7 +42,6 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/api/modules/estadistica/turnos_prestaciones**').as('turnosPrestaciones');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
         cy.goto('/buscador', token);
     });
@@ -64,7 +63,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexSelectAsync('label="Prestación"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('label="Prestación"', 'consulta de medicina general');
         if (cy.esFinDeMes()) {
             cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().add(1, 'days').format('DD/MM/YYYY'));
             cy.plexButton("Buscar").click();

@@ -26,7 +26,6 @@ context('RUP - Punto de inicio', () => {
         cy.route('GET', /api\/core\/term\/snomed\?/, fixtures).as('search');
         // api/modules/rup/prestaciones/huds
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
         cy.route('GET', '**api/core/mpi/pacientes?**').as('pacientes');
@@ -34,7 +33,7 @@ context('RUP - Punto de inicio', () => {
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
 
-        cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
 
 
         // cy.get('plex-text input').first().type('3399661');
@@ -245,14 +244,13 @@ context('RUP - Punto de inicio', () => {
         cy.route('GET', /api\/core\/term\/snomed\?search=fiebre/, fixtures2).as('search2');
 
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-        cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
 
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
 
-        cy.plexSelectAsync('name="nombrePrestacion"', 'consulta de medicina general', '@prestaciones', 0);
+        cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
 
         cy.plexText('name="buscador"', '31549268');
         cy.get('paciente-listado plex-item').contains(formatDocumento('31549268')).click();

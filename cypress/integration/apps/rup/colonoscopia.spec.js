@@ -20,7 +20,6 @@ context('prestaciones', () => {
         it('Registrar Prestación de Colonoscopia, Fuera de Agenda, paciente ' + type, () => {
             const paciente = pacientes[i];
             cy.server();
-            cy.route('GET', '**api/core/tm/tiposPrestaciones**').as('prestaciones');
             cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
             cy.route('GET', '**/api/modules/rup/prestaciones*').as('guardar');
@@ -28,7 +27,7 @@ context('prestaciones', () => {
             cy.route('GET', '/api/modules/cda/paciente/**', []).as('cda');
             cy.route('GET', '/api/core/term/snomed/**', []).as('search');
             cy.plexButton('PACIENTE FUERA DE AGENDA').click();
-            cy.plexSelectAsync('name="nombrePrestacion"', 'colonoscopia', '@prestaciones', 0);
+            cy.plexSelectType('name="nombrePrestacion"', 'colonoscopia');
 
 
 
