@@ -127,7 +127,18 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
         }
 
         if (params.registroSolicitud) {
-            prestacion.solicitud.registros = params.registroSolicitud;
+            const registroTemp = require('./data/prestacion/registro.json');
+            prestacion.solicitud.registros = params.registroSolicitud.map(r => {
+                const registro = JSON.parse(JSON.stringify(registroTemp));
+                registro.id = new ObjectId(r.id);
+                registro._id = new ObjectId(r.id);
+                registro.concepto = r.concepto;
+                registro.nombre = r.concepto.term;
+                registro.valor = r.valor;
+                registro.createdAt = fechaPrestacion.toDate();
+                registro.updatedAt = fechaPrestacion.toDate();
+                return registro;
+            })
         }
 
         if (params.historial) {
