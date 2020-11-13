@@ -21,8 +21,6 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             prestacion.estados[0].createdBy.id = params.createdBy;
         }
 
-
-
         if (params.turno) {
             prestacion.solicitud.turno = new ObjectId(params.turno);
         } else {
@@ -72,6 +70,12 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             prestacion.ejecucion.organizacion._id = new ObjectId(prestacion.ejecucion.organizacion._id);
         }
 
+        if (params.organizacionOrigen) {
+            const OrganizacionDB = await client.db().collection('organizacion');
+            const orgData = await OrganizacionDB.findOne({ _id: new ObjectId(params.organizacionOrigen) }, { projection: { nombre: 1 } });
+            prestacion.solicitud.organizacionOrigen = orgData;
+        }
+
         if (params.tipoPrestacion) {
             const ConceptosTurneablesDB = await client.db().collection('conceptoTurneable');
             const tipoPrestacion = await ConceptosTurneablesDB.findOne({ _id: new ObjectId(params.tipoPrestacion) });
@@ -80,12 +84,24 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             prestacion.solicitud.tipoPrestacion._id = new ObjectId(prestacion.solicitud.tipoPrestacion._id);
         }
 
+        if (params.tipoPrestacionOrigen) {
+            const ConceptosTurneablesDB = await client.db().collection('conceptoTurneable');
+            const tipoPrestacion = await ConceptosTurneablesDB.findOne({ _id: new ObjectId(params.tipoPrestacionOrigen) });
+            prestacion.solicitud.tipoPrestacionOrigen = tipoPrestacion;
+        }
+
         if (params.profesional) {
             const ProfesionalDB = await client.db().collection('profesional');
             const profesional = await ProfesionalDB.findOne({ _id: new ObjectId(params.profesional) });
             prestacion.solicitud.profesional = profesional;
         } else {
             prestacion.solicitud.profesional.id = new ObjectId(prestacion.solicitud.profesional._id);
+        }
+
+        if (params.profesionalOrigen) {
+            const ProfesionalDB = await client.db().collection('profesional');
+            const profesional = await ProfesionalDB.findOne({ _id: new ObjectId(params.profesionalOrigen) });
+            prestacion.solicitud.profesionalOrigen = profesional;
         }
 
         if (params.paciente) {
@@ -110,7 +126,44 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
             })
         }
 
-        prestacion.inicio = getInicioPrestacion(prestacion);
+        if (params.registroSolicitud) {
+            const registroTemp = require('./data/prestacion/registro.json');
+            prestacion.solicitud.registros = params.registroSolicitud.map(r => {
+                const registro = JSON.parse(JSON.stringify(registroTemp));
+                registro.id = new ObjectId(r.id);
+                registro._id = new ObjectId(r.id);
+                registro.concepto = r.concepto;
+                registro.nombre = r.concepto.term;
+                registro.valor = r.valor;
+                registro.createdAt = fechaPrestacion.toDate();
+                registro.updatedAt = fechaPrestacion.toDate();
+                return registro;
+            })
+        }
+
+        if (params.historial) {
+            const historialTemp = require('./data/prestacion/historial.json');
+            prestacion.solicitud.historial = params.historial.map(r => {
+                const historial = JSON.parse(JSON.stringify(historialTemp));
+                historial._id = new ObjectId(r.id);
+                historial.accion = r.accion;
+                historial.descripcion = r.descripcion;
+                historial.createdAt = fechaPrestacion.toDate();
+                historial.updatedAt = fechaPrestacion.toDate();
+                return historial;
+            })
+        }
+
+        if (params.ambitoOrigen) {
+            prestacion.ambitoOrigen = params.ambitoOrigen;
+        }
+
+        if (params.inicio) {
+            prestacion.inicio = params.inicio;
+        } else {
+            prestacion.inicio = getInicioPrestacion(prestacion);
+        }
+
 
         const data = await PrestacionDB.insertOne(prestacion);
         prestacion._id = data.insertedId;

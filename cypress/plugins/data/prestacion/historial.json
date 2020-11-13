@@ -1,0 +1,23 @@
+{
+    "organizacion": {
+        "id": "57e9670e52df311059bc8964",
+        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+    },
+    "accion": "creacion",
+    "descripcion": "Creada",
+    "observaciones": "Creacion de solicitud",
+    "createdAt": "2020-11-02T17:12:44.096Z",
+    "createdBy": {
+        "id": "59e76172b7c39e57a13b38c5",
+        "nombreCompleto": "Natalia Huenchuman",
+        "nombre": "Natalia",
+        "apellido": "Huenchuman",
+        "username": 30643636,
+        "documento": 30643636,
+        "organizacion": {
+            "_id": "57e9670e52df311059bc8964",
+            "id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+        }
+    }
+}

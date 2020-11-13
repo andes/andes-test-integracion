@@ -120,6 +120,44 @@ context('RUP - Ejecucion', () => {
                 }]
             }
         );
+
+        cy.task(
+            'database:seed:prestacion',
+            {
+                paciente: '586e6e8627d3107fde116cdb',
+                tipoPrestacion: '598ca8375adc68e2a0c121b8',
+                tipoPrestacionOrigen: '598ca8375adc68e2a0c121b8',
+                ambitoOrigen: "ambulatorio",
+                profesional: '5d02602588c4d1772a8a17f8',
+                profesionalOrigen: '5d02602588c4d1772a8a17f8',
+                organizacionOrigen: '57e9670e52df311059bc8964',
+                estado: 'auditoria',
+                registroSolicitud: [{
+                    concepto: {
+                        "conceptId": "391000013108",
+                        "term": "consulta de medicina general",
+                        "fsn": "consulta de medicina general",
+                        "semanticTag": "procedimiento",
+                    },
+                    valor: {
+                        solicitudPrestacion: {
+                            "motivo": "motivo de la solicitud",
+                            "autocitado": false
+                        }
+                    },
+                }],
+                historial: [{
+                    organizacion: {
+                        "id": "57e9670e52df311059bc8964",
+                        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+                    },
+                    accion: "creacion",
+                    descripcion: "Creada",
+                    observaciones: "observacion de la solcitud"
+                }],
+                inicio: "top"
+            }
+        );
     });
 
 
@@ -274,5 +312,28 @@ context('RUP - Ejecucion', () => {
             profesional: 'Natalia Huenchuman',
             badge: 'validada'
         }).click();
+    })
+
+    it.only('HUDS - Controlar datos de solicitud', () => {
+        cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
+
+        //Hallazgo
+        cy.HudsBusquedaFiltros('solicitudes');
+        cy.getHUDSItems().should('have.length', 1);
+
+        cy.getHUDSItems().eq(0).assertRUPMiniCard({
+            term: 'consulta de medicina general',
+            fecha: Cypress.moment().format('DD/MM/YYYY'),
+            profesional: 'Huenchuman, Natalia',
+        }).click();
+
+        cy.get('.columna-completa').contains("consulta de medicina general"); //Tipo de prestación origen
+        cy.get('.columna-completa').contains("HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"); //Organización origen
+        cy.get('.columna-completa').contains("motivo de la solicitud"); //Motivo de la solicitud
+        cy.get('.columna-completa').contains("auditoria"); //Estado de la solicitud
+
+        cy.get('historial-solicitud').plexLabel(Cypress.moment().format('DD/MM/YYYY'));
+        cy.get('historial-solicitud').plexLabel('Creada por Natalia Huenchuman');
+        cy.get('historial-solicitud').plexLabel('Creacion de solicitud');
     })
 });
