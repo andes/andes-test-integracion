@@ -69,7 +69,7 @@ TOTAL: ${stats.total}
 SUCCESS: ${stats.success}
 FAIL: ${stats.fail}
 SKIPPED: ${stats.pending}
-${stats.total < 310 ? ':warning::warning::warning::warning:\nHay archivos que no corrieron. Vuelva a intentar.' : ''}
+${stats.total < 330 ? ':warning::warning::warning::warning:\nHay archivos que no corrieron. Vuelva a intentar.' : ''}
     `;
 
 
@@ -138,7 +138,7 @@ async function addTag(result, repo, number) {
   });
   await Promise.all(ps);
 
-  if (result.fail <= 0 && result.total > 310) {
+  if (result.fail <= 0 && result.total > 330) {
     await octokit.issues.addLabels({
       owner: "andes",
       repo: repo,
