@@ -96,11 +96,16 @@ declare namespace Cypress {
          * Crea una prestacion 
          * @param name 
          * @param params paciente, tipoPrestacion ,etc
+         * [TODO] completar interfaces
          */
 
         task(name: 'database:seed:prestacion', params: any): Chainable<any>;
         task(name: 'database:fetch', params: { collection: string, params: any }): Chainable<any>;
         task(name: 'database:seed:elemento-rup', params: any): Chainable<any>;
+        task(name: 'database:seed:agenda', params: any): Chainable<any>;
+        task(name: 'database:create:paciente', params: any): Chainable<any>;
+
+
 
 
 
@@ -207,6 +212,7 @@ declare namespace Cypress {
 
         plexText(label: string, texto?: string);
         plexInt(label: string, texto?: string);
+        plexPhone(label: string, texto?: string);
         plexFloat(label: string, texto?: string);
         plexLabel(texto: string);
         plexTitle(texto: string);

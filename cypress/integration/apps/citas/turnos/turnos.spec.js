@@ -201,6 +201,8 @@ context('turnos', () => {
         cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgendas');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
+        cy.route('GET', '**/api/core/tm/conceptos-turneables**').as('conceptoTurneables');
+
 
         // cy.get('paciente-buscar input').first().type('36425896');
         cy.plexText('name="buscador"', validado1.documento);
@@ -214,7 +216,8 @@ context('turnos', () => {
 
         cy.wait('@getCarpetas');
 
-        cy.plexSelectType('placeholder="Tipos de Prestación"', 'consulta con médico general');
+        cy.plexSelectAsync('placeholder="Tipos de Prestación"', 'consulta con médico general', '@conceptoTurneables', 0);
+
 
         cy.wait('@getAgendas');
 

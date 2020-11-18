@@ -83,7 +83,9 @@ context('punto de inicio', () => {
         cy.plexButton('Activar app').click();
         cy.wait('@clickActivarApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody.message).to.be.eq("OK");
+            if (typeof xhr.responseBody === 'object') {
+                expect(xhr.responseBody.message).to.be.eq("OK");
+            }
         });
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -322,6 +324,8 @@ context('punto de inicio', () => {
             cy.route('GET', '**/api/modules/turnos/agenda?**').as('getAgendas');
             cy.route('GET', '**/api/modules/turnos/agenda/**').as('getAgenda');
             cy.route('GET', '**/api/modules/obraSocial/prepagas/**').as('prepagas');
+            cy.route('GET', '**/api/core/tm/conceptos-turneables**').as('conceptoTurneables');
+
             cy.plexText('name="buscador"', pacientes[i].documento);
 
             cy.get('paciente-listado plex-item').contains(formatDocumento(pacientes[i].documento)).click();
@@ -340,7 +344,7 @@ context('punto de inicio', () => {
                 expect(xhr.status).to.be.eq(200);
             });
 
-            cy.plexSelectType('name="tipoPrestacion"', 'servicio de neumonología');
+            cy.plexSelectAsync('name="tipoPrestacion"', 'servicio de neumonología', '@conceptoTurneables', 0);
 
             cy.wait('@getAgendas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
