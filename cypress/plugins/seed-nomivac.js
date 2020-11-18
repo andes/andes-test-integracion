@@ -1,16 +1,30 @@
-const { connectToDB } = require('./database');
+
+const { connectToDB, ObjectId } = require('./database');
 
 module.exports.seedNomivac = async (mongoUri, params) => {
     try {
         const client = await connectToDB(mongoUri);
         const NomivacDB = await client.db().collection('nomivac');
 
-        const templateName = params.template || 'default';
-        const dto = require('../fixtures/nomivac/vacuna');
+        const PacienteDB = await client.db().collection('paciente');
+        const paciente = await PacienteDB.findOne({ _id: new ObjectId(params.paciente) });
 
-        const vacuna = JSON.parse(JSON.stringify(dto));
-        const data = await NomivacDB.insertOne(vacuna);
-        vacuna._id = data.insertedId;
+        const vacuna = {
+            "_id": new ObjectId(),
+            "idvacuna": 3,
+            "documento": paciente.documento,
+            "nombre": paciente.nombre,
+            "apellido": paciente.apellido,
+            "fechaNacimiento": paciente.fechaNacimiento,
+            "sexo": paciente.sexo,
+            "vacuna": "Neumococo Conjugada VCN 13",
+            "dosis": "1er Dosis",
+            "fechaAplicacion": new Date("2014-07-26T21:00:00.000-03:00"),
+            "efector": "CENTRO DE SALUD SAN LORENZO SUR"
+        }
+
+        await NomivacDB.insertOne(vacuna);
+
         return vacuna;
 
     } catch (e) {

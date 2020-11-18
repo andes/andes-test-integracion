@@ -48,6 +48,7 @@ context('Monitoreo de Activaciones app-mobile', () => {
         sendMessageCache: sendMessage
     }
     before(() => {
+        cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
             cy.task('database:create:paciente-app', pacienteAppAux).then(pacienteapp => {
@@ -114,9 +115,9 @@ context('Monitoreo de Activaciones app-mobile', () => {
         cy.wait('@sendMessage').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('plex-layout-sidebar').find('td').contains(pacienteApp.sendMessageCache[0].email);
-        cy.get('plex-layout-sidebar').find('td').contains(pacienteApp.sendMessageCache[0].status);
-        cy.get('plex-layout-sidebar').find('td').contains(pacienteApp.sendMessageCache[0].extras.codigo);
+        cy.get('plex-layout-sidebar').find('td').contains(sendMessage[0].email);
+        cy.get('plex-layout-sidebar').find('td').contains(sendMessage[0].status);
+        cy.get('plex-layout-sidebar').find('td').contains(sendMessage[0].extras.codigo);
     });
 
 

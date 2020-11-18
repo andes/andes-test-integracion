@@ -24,6 +24,7 @@ const { createMaquinaEstados, createSala, createCama, createEstadosCama, factory
 const { createPacienteApp } = require('./seed-paciente-app');
 const { seedPerfil, seedUsuario } = require('./seed-gestor-usuarios');
 const { createModulo } = require('./seed-modulo');
+const { seedCampania } = require('./seed-campanias');
 
 const { cleanDB, connectToDB, fetch } = require('./database');
 const { InitDatabase } = require('./database-initial');
@@ -94,7 +95,11 @@ module.exports = (on, config) => {
         },
         'database:fetch': ({ collection, params }) => {
             return fetch(mongoUri, collection, params);
-        }
+        },
+        'database:seed:campania': (dto) => {
+            return seedCampania(mongoUri, dto);
+        },
+
     });
 
 }

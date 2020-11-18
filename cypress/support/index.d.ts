@@ -102,6 +102,13 @@ declare namespace Cypress {
         task(name: 'database:fetch', params: { collection: string, params: any }): Chainable<any>;
         task(name: 'database:seed:elemento-rup', params: any): Chainable<any>;
 
+        task(name: 'database:seed:paciente', params?: any): Chainable<any[]>;
+        task(name: 'database:create:paciente-app', params: any): Chainable<any>;
+        task(name: 'database:seed:nomivac', params: { paciente: string }): Chainable<any>;
+        task(name: 'database:seed:campania'): Chainable<any>;
+
+
+
 
 
         /**
