@@ -72,8 +72,10 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.contains('inhabilitada').click();
         cy.get('plex-item').last().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
-        cy.get('tbody tr').should('have.length', 2);
-        cy.get('tbody tr').contains('Pasa a inhabilitada por Natalia Huenchuman de CENTRO OPERATIVO MEDICO');
+        cy.get('plex-panel').should('have.length', 2);
+        cy.get('.card').contains('Pasa a inhabilitada por');
+        cy.get('small').contains('Natalia Huenchuman de CENTRO OPERATIVO MEDICO');
+
     });
 
     it('crear nueva derivacion y cancelarla', () => {
@@ -126,9 +128,10 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
         cy.contains('solicitada').click({ force: true });
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
-        cy.get('tbody tr').should('have.length', 2);
-        cy.get('tbody tr').contains('Natalia Huenchuman de HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-        cy.get('tbody tr').contains('OBSERVACIONES: nueva nota');
+        cy.get('plex-panel').should('have.length', 2);
+        cy.get('.card').contains('Nota sumada por');
+        cy.get('small').contains('Natalia Huenchuman de HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+        cy.get('.card').contains('nueva nota');
 
     });
 
@@ -183,8 +186,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.contains('habilitada').click();
         cy.get('plex-item').last().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
-        cy.get('tbody tr').should('have.length', 2);
-        cy.get('tbody tr').contains('Pasa a habilitada por Natalia Huenchuman de CENTRO OPERATIVO MEDICO');
+        cy.get('plex-panel').should('have.length', 2);
+        cy.get('.card').contains('Pasa a habilitada por');
+        cy.get('small').contains('Natalia Huenchuman de CENTRO OPERATIVO MEDICO');
         cy.get('plex-options div div button').contains('DERIVACIÓN').click({ force: true });
         cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('asignada').click({ force: true });
         cy.plexTextArea('label="Observacion"', 'derivación asignada');
@@ -224,7 +228,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
         cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').first().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
-        cy.get('tbody tr').should('have.length', 5);
+        cy.get('plex-panel').should('have.length', 5);
     });
 
     it('crear derivacion, aprobarla, asignarla, rechazarla, finalizarla', () => {
@@ -263,8 +267,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.contains('habilitada').click();
         cy.get('plex-item').last().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
-        cy.get('tbody tr').should('have.length', 2);
-        cy.get('tbody tr').contains('Pasa a habilitada por Natalia Huenchuman de CENTRO OPERATIVO MEDICO');
+        cy.get('plex-panel').should('have.length', 2);
+        cy.get('.card').contains('Pasa a habilitada por');
+        cy.get('small').contains('Natalia Huenchuman de CENTRO OPERATIVO MEDICO');
         cy.get('plex-options div div button').contains('DERIVACIÓN').click({ force: true });
         cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('asignada').click({ force: true });
         cy.plexTextArea('label="Observacion"', 'derivación asignada');
@@ -301,6 +306,6 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').first().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
-        cy.get('tbody tr').should('have.length', 5);
+        cy.get('plex-panel').should('have.length', 5);
     });
 });
