@@ -64,7 +64,6 @@ describe('ABM Camas', () => {
 
     it('Alta Cama', () => {
         cy.plexDropdown('label="NUEVO RECURSO"', "CAMA");
-
         cy.plexText('label="Nombre"', 'Cama 666');
         cy.plexSelectAsync('label="Tipo de cama"', 'Cam', '@expTipoDeCama', 0);
         cy.plexSelectAsync('label="Equipamiento"', 'sis', '@expEquipamiento', 0);
