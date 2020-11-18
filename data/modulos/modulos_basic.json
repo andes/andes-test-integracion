@@ -114,7 +114,7 @@
                 "nombre": "Mapa de<br><b>Camas</b>",
                 "class": "int camas",
                 "color": "#6e6187",
-                "linkAcceso": "internacion/mapa-camas/medica",
+                "linkAcceso": "/mapa-camas/internacion/medica",
                 "permisos": [
                     "internacion:mapaDeCamas:?"
                 ]

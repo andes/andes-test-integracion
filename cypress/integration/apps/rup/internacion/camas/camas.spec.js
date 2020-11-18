@@ -15,10 +15,10 @@ function getStubs() {
 
     cy.route('GET', '/api/core/term/snomed/expression?expression=70311**', [{
         "conceptId": "5555",
-        "term": "Masculina",
+        "term": "género masculino",
     }, {
         "conceptId": "888",
-        "term": "Femenina",
+        "term": "género femenino",
     }]).as('expGenero');
 
     cy.route('GET', '/api/core/term/snomed/expression?expression=^2061000013108**', [{
@@ -58,10 +58,13 @@ describe('ABM Camas', () => {
         getStubs();
 
         cy.viewport(1920, 1080);
+
+        cy.goto('/mapa-camas', token);
     });
 
     it('Alta Cama', () => {
-        cy.goto('/internacion/cama', token);
+        cy.plexDropdown('label="NUEVO RECURSO"', "CAMA");
+
         cy.plexText('label="Nombre"', 'Cama 666');
         cy.plexSelectAsync('label="Tipo de cama"', 'Cam', '@expTipoDeCama', 0);
         cy.plexSelectAsync('label="Equipamiento"', 'sis', '@expEquipamiento', 0);
@@ -84,7 +87,9 @@ describe('ABM Camas', () => {
     });
 
     it('Editar Cama', () => {
-        cy.goto(`/internacion/cama/${camas[0].idCama}`, token);
+        cy.getCama(camas[0].cama.nombre).click();
+        cy.get('[label="CAMA"] > plex-title > .plex-title > .title-content').plexButtonIcon('pencil').click();
+
         cy.plexText('label="Nombre"').clear();
         cy.plexText('label="Nombre"', 'Cama 888');
         cy.plexSelectAsync('label="Tipo de cama"', 'Cam', '@expTipoDeCama', 0);
@@ -110,7 +115,9 @@ describe('ABM Camas', () => {
     });
 
     it('Baja Cama', () => {
-        cy.goto(`/internacion/cama/${camas[camas.length - 1].idCama}`, token);
+        cy.getCama(camas[camas.length - 1].cama.nombre).click();
+        cy.get('[label="CAMA"] > plex-title > .plex-title > .title-content').plexButtonIcon('pencil').click();
+
         cy.plexButton('INACTIVAR CAMA').click();
         cy.get('button').contains('CONFIRMAR').click();
 

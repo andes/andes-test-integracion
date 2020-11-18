@@ -12,7 +12,7 @@ describe('Capa Estadistica - Ingresos', () => {
                     { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate() }
                 ]
             }).then(camasCreadas => {
-                return cy.goto('/internacion/mapa-camas', token);
+                return cy.goto('/mapa-camas', token);
             });
         });
     });

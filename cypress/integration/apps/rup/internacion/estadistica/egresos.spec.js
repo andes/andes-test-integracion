@@ -13,7 +13,7 @@ describe('Capa Estadistica - Egresos', () => {
                     { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: moment('2020-01-10').toDate() },
                     { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso: moment().toDate() }]
             }).then(camasCreadas => {
-                return cy.goto('/internacion/mapa-camas', token);
+                return cy.goto('/mapa-camas', token);
             });
         });
     });

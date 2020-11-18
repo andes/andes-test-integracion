@@ -27,7 +27,7 @@ describe('ABM Salas', () => {
     });
 
     it('Alta Sala', () => {
-        cy.goto('/internacion/sala-comun', token);
+        cy.goto('/mapa-camas/internacion/sala-comun', token);
         cy.plexText('label="Nombre"', 'Sala 666');
         // cy.plexFloat('label="Capacidad"', 9999);
         cy.plexSelectType('label="Unidades Organizativas"', 'servicio');
@@ -44,7 +44,7 @@ describe('ABM Salas', () => {
     });
 
     it('Modificación Sala', () => {
-        cy.goto(`/internacion/sala-comun/${salas[0].idSalaComun}`, token);
+        cy.goto(`/mapa-camas/internacion/sala-comun/${salas[0].idSalaComun}`, token);
         cy.plexText('label="Nombre"').clear();
         cy.plexText('label="Nombre"', 'Sala 666');
         // cy.plexFloat('label="Capacidad"').clear();
