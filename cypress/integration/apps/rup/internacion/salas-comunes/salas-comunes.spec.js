@@ -10,7 +10,7 @@ describe('ABM Salas', () => {
     let salas;
     before(() => {
         cy.seed();
-        cy.loginCapa('estadistica').then(([user, t, pacientesCreados]) => {
+        cy.loginCapa('medica').then(([user, t, pacientesCreados]) => {
             token = t;
             cy.factoryInternacion({ sala: true, config: [{ estado: 'disponible', count: 1 }] }).then(salasCreadas => {
                 salas = salasCreadas;
@@ -24,10 +24,12 @@ describe('ABM Salas', () => {
         getStubs();
 
         cy.viewport(1920, 1080);
+
+        cy.goto('/mapa-camas/internacion', token);
     });
 
     it('Alta Sala', () => {
-        cy.goto('/mapa-camas/internacion/sala-comun', token);
+        cy.plexDropdown('label="NUEVO RECURSO"', "SALA");
         cy.plexText('label="Nombre"', 'Sala 666');
         // cy.plexFloat('label="Capacidad"', 9999);
         cy.plexSelectType('label="Unidades Organizativas"', 'servicio');
@@ -44,7 +46,8 @@ describe('ABM Salas', () => {
     });
 
     it('Modificación Sala', () => {
-        cy.goto(`/mapa-camas/internacion/sala-comun/${salas[0].idSalaComun}`, token);
+        cy.getCama(salas[0].nombre).click();
+        cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('pencil').click();
         cy.plexText('label="Nombre"').clear();
         cy.plexText('label="Nombre"', 'Sala 666');
         // cy.plexFloat('label="Capacidad"').clear();
