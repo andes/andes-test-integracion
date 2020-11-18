@@ -15,6 +15,7 @@
 const selectTestsWithGrep = require('cypress-select-tests/grep')
 
 const { seedAgenda } = require('./seed-agenda');
+const { seedNomivac } = require('./seed-nomivac');
 const { seedPrestacion } = require('./seed-prestaciones');
 const { dropCollection } = require('./seed-drop');
 const { seedPaciente, createPaciente } = require('./seed-paciente');
@@ -23,6 +24,7 @@ const { createMaquinaEstados, createSala, createCama, createEstadosCama, factory
 const { createPacienteApp } = require('./seed-paciente-app');
 const { seedPerfil, seedUsuario } = require('./seed-gestor-usuarios');
 const { createModulo } = require('./seed-modulo');
+const { seedCampania } = require('./seed-campanias');
 
 const { cleanDB, connectToDB, fetch } = require('./database');
 const { InitDatabase } = require('./database-initial');
@@ -51,6 +53,9 @@ module.exports = (on, config) => {
         },
         'database:seed:agenda': (dto) => {
             return seedAgenda(mongoUri, dto);
+        },
+        'database:seed:nomivac': (dto) => {
+            return seedNomivac(mongoUri, dto);
         },
         'factory:internacion': (params) => {
             return factoryInternacion(params);
@@ -90,7 +95,11 @@ module.exports = (on, config) => {
         },
         'database:fetch': ({ collection, params }) => {
             return fetch(mongoUri, collection, params);
-        }
+        },
+        'database:seed:campania': (dto) => {
+            return seedCampania(mongoUri, dto);
+        },
+
     });
 
 }

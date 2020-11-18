@@ -58,9 +58,6 @@ Cypress.Commands.add("login", (usuario, password, id) => {
     });
 });
 
-
-
-
 Cypress.Commands.add('goto', (url, token, hudsToken) => {
     if (token) {
         cy.server();

@@ -1,0 +1,28 @@
+{
+    "activacionApp": true,
+    "permisos": [],
+    "nombre": "PACIENTE",
+    "apellido": "VALIDADO",
+    "email": "pacientevalidado@gmail.com",
+    "password": "$2a$05$oydp4dRGv9ORVEzKrfzFcuMVeNdlSfFXgPUhiQCoM0GukpPUTSAki",
+    "telefono": "2994565656",
+    "nacionalidad": "Argentina",
+    "documento": "10000000",
+    "fechaNacimiento": "1991-01-18T23:00:00.000-03:00",
+    "sexo": "masculino",
+    "genero": "masculino",
+    "pacientes": [
+        {
+            "relacion": "principal",
+            "_id": "586e6e8627d3107fde116cdb",
+            "id": "586e6e8627d3107fde116cdb"
+        }
+    ],
+    "devices": [
+        {
+            "_id": "5e564c45c285ab00b0d65b10",
+            "device_type": "Android 9",
+            "app_version": 344
+        }
+    ]
+}
