@@ -190,7 +190,7 @@ declare namespace Cypress {
         /**
          * Plex DateTime
          */
-        plexDatetime(label: string, texto?: string): Chainable<Element>;
+        plexDatetime(label: string, data?: string | { text?: string, clear?: Boolean, skipEnter?: Boolean }): Chainable<Element>;
 
         /**
          * Plex Bool
