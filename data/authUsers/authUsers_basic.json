@@ -50,6 +50,7 @@
                     "rup:tipoPrestacion:598ca8375adc68e2a0c121cc",
                     "internacion:*",
                     "huds:visualizacionHuds",
+                    "huds:exportarHuds",
                     "fa:*",
                     "log:*",
                     "usuarios:*",
