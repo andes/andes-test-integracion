@@ -7,7 +7,19 @@ Cypress.Commands.add('seed', () => {
     }
 });
 
-const collectionList = ['paciente', 'agenda', 'prestaciones', 'internacionCamas', 'internacionCamaEstados', 'internacionEstados', 'internacionCenso', 'internacionSalaComun', 'internacionSalaComunMovimientos', 'internacionSalaComunSnapshot'];
+const collectionList = [
+    'paciente',
+    'pacienteApp',
+    'agenda',
+    'prestaciones',
+    'internacionCamas',
+    'internacionCamaEstados',
+    'internacionEstados',
+    'internacionCenso',
+    'internacionSalaComun',
+    'internacionSalaComunMovimientos',
+    'internacionSalaComunSnapshot'
+];
 
 Cypress.Commands.add('cleanDB', (collection) => {
     if (!collection) {
