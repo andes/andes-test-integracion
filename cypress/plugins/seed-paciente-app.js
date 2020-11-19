@@ -1,4 +1,5 @@
 const faker = require('faker');
+const { ObjectID } = require('mongodb');
 const { connectToDB, ObjectId } = require('./database');
 
 module.exports.createPacienteApp = async (mongoUri, params) => {
@@ -12,9 +13,13 @@ module.exports.createPacienteApp = async (mongoUri, params) => {
         const dto = require('./data/pacienteApp/paciente-app-' + templateName);
         const pacienteApp = JSON.parse(JSON.stringify(dto));
 
-        if (params.fromPaciente) {
-            const PacienteDB = await client.db().collection('paciente');
-            const paciente = await PacienteDB.findOne({ _id: new ObjectId(params.fromPaciente) });
+        if (params.fromPaciente || params.fromProfesional) {
+            const PacienteDB = await client.db().collection(params.fromPaciente ? 'paciente' : 'profesional');
+            const paciente = await PacienteDB.findOne({ _id: new ObjectId(params.fromPaciente || params.fromProfesional) });
+
+            if (params.fromProfesional) {
+                pacienteApp.profesionalId = paciente._id;
+            }
 
             pacienteApp.documento = paciente.documento;
             pacienteApp.nombre = paciente.nombre;
@@ -25,6 +30,12 @@ module.exports.createPacienteApp = async (mongoUri, params) => {
             if (pacienteApp.pacientes && pacienteApp.pacientes[0].id) {
                 pacienteApp.pacientes[0].id = paciente._id;
                 pacienteApp.pacientes[0]._id = paciente._id;
+            }
+
+            if (params.device) {
+                pacienteApp.devices = [
+                    params.device
+                ]
             }
 
         } else {
