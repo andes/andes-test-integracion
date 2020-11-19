@@ -33,6 +33,7 @@ Cypress.Commands.add('cleanDB', (collection) => {
     return cy.wait(1000);
 });
 
+
 Cypress.Commands.add('createPaciente', (name, token) => {
     return cy.fixture(name).then((paciente) => {
         return cy.request({
@@ -253,19 +254,6 @@ Cypress.Commands.add('createTurno', (fixtureName, idTurno, idBloque, idAgenda, p
             method: 'PATCH',
             url: Cypress.env('API_SERVER') + `/api/modules/turnos/turno/${idTurno}/${idBloque}/${idAgenda}`,
             body: turno,
-            headers: {
-                Authorization: `JWT ${token}`
-            }
-        });
-    });
-});
-
-Cypress.Commands.add('createCampania', (name, token) => {
-    return cy.fixture(name).then((campania) => {
-        return cy.request({
-            method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/core/tm/campanias',
-            body: campania,
             headers: {
                 Authorization: `JWT ${token}`
             }
