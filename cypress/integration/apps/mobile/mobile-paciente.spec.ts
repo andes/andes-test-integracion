@@ -7,6 +7,7 @@ context('Pagina de login', () => {
             cy.task('database:seed:nomivac', { paciente: paciente._id, });
             cy.task('database:create:paciente-app', { fromPaciente: paciente._id });
             cy.task('database:seed:campania');
+            cy.task('database:seed:turnomobile');
         });
     })
 
@@ -19,6 +20,11 @@ context('Pagina de login', () => {
         cy.route('GET', '**/api/modules/mobileApp/paciente/**').as('getProfile');
         cy.route('GET', '**/api/modules/mobileApp/vacunas/count**').as('countVacunas');
         cy.route('GET', '**/api/modules/mobileApp/vacunas**').as('getVacunas');
+        cy.route('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
+        cy.fixture('/apps/citas/agendas/agenda-disponible').then(response =>
+            cy.route('GET', '**/agendasDisponibles?**', response).as('agendasDisponibles')
+        );
+        cy.route('PATCH', '**api/modules/turnos/turno/**').as('patchTurno');
     });
 
     it('Login de paciente inexistente', () => {
@@ -95,5 +101,24 @@ context('Pagina de login', () => {
 
         cy.get('.andes-list').find('li').should('have.length', 1);
         cy.get('.back-button').last().click();
+    });
+
+    it('Sacar turno on line', () => {
+        cy.contains('Hola PACIENTE VALIDADO');
+        cy.get('[name="andes-turno"]').click();
+
+        cy.wait('@getTurnosMobile');
+
+        cy.get('button').contains('Solicitar Turno').click();
+        cy.wait('@agendasDisponibles');
+        cy.get('[name="ios-arrow-forward-outline"]').last().click();
+        cy.get('[name="ios-arrow-forward-outline"]').last().click();
+
+        cy.get('[name="andes-confirmar"]').click();
+
+        cy.get('button').contains('Confirmar').click();
+        cy.wait('@patchTurno').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
     });
 }); 

@@ -14,7 +14,7 @@
 
 const selectTestsWithGrep = require('cypress-select-tests/grep')
 
-const { seedAgenda } = require('./seed-agenda');
+const { seedAgenda, seedTurnoMobile } = require('./seed-agenda');
 const { seedNomivac } = require('./seed-nomivac');
 const { seedPrestacion } = require('./seed-prestaciones');
 const { dropCollection } = require('./seed-drop');
@@ -51,8 +51,8 @@ module.exports = (on, config) => {
         'database:create:paciente-app': (params = {}) => {
             return createPacienteApp(mongoUri, params);
         },
-        'database:seed:agenda': (dto) => {
-            return seedAgenda(mongoUri, dto);
+        'database:seed:agenda': (dto, params) => {
+            return seedAgenda(mongoUri, dto, params);
         },
         'database:seed:nomivac': (dto) => {
             return seedNomivac(mongoUri, dto);
@@ -99,7 +99,10 @@ module.exports = (on, config) => {
         'database:seed:campania': (dto) => {
             return seedCampania(mongoUri, dto);
         },
-
+        'database:seed:turnomobile': () => {
+            return seedTurnoMobile(mongoUri);
+        }
+        
     });
 
 }

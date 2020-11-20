@@ -186,3 +186,29 @@ module.exports.seedAgenda = async (mongoUri, params) => {
         return e;
     }
 }
+
+module.exports.seedTurnoMobile = async (mongoUri) => {
+    try {
+        const client = await connectToDB(mongoUri);
+        const AgendaDB = await client.db().collection('agenda');
+
+        const dto = require('./data/agendas/agenda-turno-mobile.json');
+        const agenda = JSON.parse(JSON.stringify(dto));
+
+        agenda.bloques[0].horaInicio = moment().add(2, 'days').toDate();
+        agenda.bloques[0].turnos[0].horaInicio = moment().add(2, 'days').toDate();
+        agenda.bloques[0].turnos[0].estado = 'disponible';
+        agenda.bloques[0].turnos[0].paciente = null;
+
+        agenda.horaInicio = moment().add(2, 'days').toDate();
+        agenda._id = ObjectId(agenda._id);
+        const data = await AgendaDB.insertOne(agenda);
+        agenda._id = data.insertedId;
+
+        return agenda;
+
+    } catch (e) {
+        console.log(e)
+        return e;
+    }
+}

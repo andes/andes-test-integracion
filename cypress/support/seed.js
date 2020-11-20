@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 Cypress.Commands.add('seed', () => {
     const develop = Cypress.env('ENVIRONMENT') === 'develop';
     if (develop) {
@@ -254,6 +256,27 @@ Cypress.Commands.add('createTurno', (fixtureName, idTurno, idBloque, idAgenda, p
             method: 'PATCH',
             url: Cypress.env('API_SERVER') + `/api/modules/turnos/turno/${idTurno}/${idBloque}/${idAgenda}`,
             body: turno,
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        });
+    });
+});
+
+Cypress.Commands.add('createAgendaCupoMobile', (name, token) => {
+    return cy.fixture(name).then((agenda) => {
+        agenda.bloques[0].horaInicio = moment().add(2, 'days').toDate();
+        agenda.bloques[0].turnos[0].horaInicio = moment().add(2, 'days').toDate();
+        agenda.bloques[0].turnos[0].estado = 'disponible';
+        agenda.bloques[0].turnos[0].paciente = null;
+
+        agenda.horaInicio = moment().add(2, 'days').toDate();
+        agenda.bloques[0].restantesMobile= 1;
+        agenda.bloques[0].restantesProgramados= 1;
+        cy.request({
+            method: 'POST',
+            url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
+            body: agenda,
             headers: {
                 Authorization: `JWT ${token}`
             }
