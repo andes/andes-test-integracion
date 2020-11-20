@@ -103,7 +103,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         }
     });
     it('Exportar todas las prestaciones filtradas entre dos fechas', () => {
-        let hoy = Cypress.moment().format('DD/MM/YYYY hh:mm');
+        let hoy = Cypress.moment().format('DD/MM/YYYY');
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -123,7 +123,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.get('plex-list').find('plex-item').contains(hoy);
     });
     it('Exportar una prestacion de las filtradas entre dos fechas', () => {
-        let hoy = Cypress.moment().format('DD/MM/YYYY hh:mm');
+        let hoy = Cypress.moment().format('DD/MM/YYYY');
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
