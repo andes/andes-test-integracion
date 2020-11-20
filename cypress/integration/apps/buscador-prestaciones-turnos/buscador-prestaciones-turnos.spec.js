@@ -43,6 +43,8 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.server();
         cy.route('GET', '**/api/modules/estadistica/turnos_prestaciones**').as('turnosPrestaciones');
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
+        cy.route('POST', '**/api/modules/huds/export').as('exportHuds');
+        cy.route('GET', '**/api/modules/huds/export?**').as('pendientes');
         cy.goto('/buscador', token);
     });
     it('Listar turnos con filtros de fechas', () => {
@@ -99,5 +101,45 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
                 expect(xhr.response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
             });
         }
+    });
+    it('Exportar todas las prestaciones filtradas entre dos fechas', () => {
+        let hoy = Cypress.moment().format('DD/MM/YYYY hh:mm');
+        cy.wait('@turnosPrestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexBool('name="all"', true);
+        cy.plexButton("Exportar").click();
+        cy.wait('@exportHuds').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.request.body.arrayPrestaciones).to.have.length(3);
+        });
+        cy.plexButton("Descargas pendientes").click();
+        cy.wait('@pendientes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].user.usuario.apellido).to.be.eq('Huenchuman');
+            expect(xhr.response.body[0].user.usuario.nombre).to.be.eq('Natalia');
+            expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
+        });
+        cy.get('plex-list').find('plex-item').contains(hoy);
+    });
+    it('Exportar una prestacion de las filtradas entre dos fechas', () => {
+        let hoy = Cypress.moment().format('DD/MM/YYYY hh:mm');
+        cy.wait('@turnosPrestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('table tbody tr td plex-bool').first().click();
+        cy.plexButton("Exportar").click();
+        cy.wait('@exportHuds').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.request.body.arrayPrestaciones).to.have.length(1);
+        });
+        cy.plexButton("Descargas pendientes").click();
+        cy.wait('@pendientes').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].user.usuario.apellido).to.be.eq('Huenchuman');
+            expect(xhr.response.body[0].user.usuario.nombre).to.be.eq('Natalia');
+            expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
+        });
+        cy.get('plex-list').find('plex-item').contains(hoy);
     });
 });
