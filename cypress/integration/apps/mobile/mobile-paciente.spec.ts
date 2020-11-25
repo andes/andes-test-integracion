@@ -39,7 +39,12 @@ context('Pagina de login', () => {
     });
 
     it('Login de paciente existente', () => {
-        cy.goto("/mobile/");
+        cy.goto("/mobile/", null, null, {
+            "coords": {
+                "latitude": -38.9502334061469,
+                "longitude": -68.0569198206332
+            }
+        });
         cy.get('.nologin').click();
         cy.get('input').first().type('pacientevalidado@gmail.com');
         cy.get('#password').first().type('martin');
@@ -95,5 +100,38 @@ context('Pagina de login', () => {
 
         cy.get('.andes-list').find('li').should('have.length', 1);
         cy.get('.back-button').last().click();
+    });
+
+    it('Sacar turno on line', () => {
+
+        cy.task('database:seed:agenda', {
+            tipoPrestaciones: '598ca8375adc68e2a0c121bc',
+            estado: 'publicada',
+            organizacion: '57e9670e52df311059bc8964',
+            inicio: '3',
+            fin: '4',
+            fecha: 1,
+            tipo: 'programado'
+        });
+
+        cy.route('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
+        cy.route('PATCH', '**api/modules/turnos/turno/**').as('patchTurno');
+        cy.route('GET', '**/agendasDisponibles?**').as('agendasDisponibles');
+
+        cy.get('[name="andes-turno"]').click();
+
+        cy.wait('@getTurnosMobile');
+
+        cy.get('button').contains('Solicitar Turno').last().click();
+        cy.wait('@agendasDisponibles');
+        cy.get('page-turnos-prestaciones [name="ios-arrow-forward-outline"]').last().click();
+        cy.get('[name="ios-arrow-forward-outline"]').last().click();
+
+        cy.get('[name="andes-confirmar"]').first().click();
+
+        cy.get('button').contains('Confirmar').click();
+        cy.wait('@patchTurno').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
     });
 }); 

@@ -18,7 +18,9 @@ const collectionList = [
     'internacionCenso',
     'internacionSalaComun',
     'internacionSalaComunMovimientos',
-    'internacionSalaComunSnapshot'
+    'internacionSalaComunSnapshot',
+    'nomivac',
+    'campanias'
 ];
 
 Cypress.Commands.add('cleanDB', (collection) => {

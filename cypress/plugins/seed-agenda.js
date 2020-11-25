@@ -122,6 +122,11 @@ module.exports.seedAgenda = async (mongoUri, params) => {
         agenda.bloques[0][labelTipoTurnoRestante] = cantTurnos;
         agenda.bloques[0].cantidadTurnos = cantTurnos;
 
+        if (params.tipo === 'programado') {
+            agenda.bloques[0].cupoMobile = cantTurnos;
+            agenda.bloques[0]['restantesMobile'] = cantTurnos;
+        }
+
         const pacientesIDs = encapsulateArray(params.pacientes);
 
         if (!agenda.nominalizada) {

@@ -16,7 +16,7 @@ declare namespace Cypress {
 
         cleanDB(colecciones?: string[]): Chainable<void>;
 
-        goto(url: string, token?: string, hudsToken?: string): Chainable<void>;
+        goto(url: string, token?: string, hudsToken?: string, location?: any): Chainable<void>;
 
         login(user: string, password: string, orgId?: string): Chainable<string>;
 

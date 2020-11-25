@@ -58,7 +58,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
     });
 });
 
-Cypress.Commands.add('goto', (url, token, hudsToken) => {
+Cypress.Commands.add('goto', (url, token, hudsToken, location) => {
     if (token) {
         cy.server();
         cy.route('GET', '**/api/auth/sesion**').as('sesion');
@@ -74,6 +74,11 @@ Cypress.Commands.add('goto', (url, token, hudsToken) => {
                 win.sessionStorage.setItem('huds-token', hudsToken);
             } else {
                 win.sessionStorage.removeItem('huds-token');
+            }
+            if (location) {
+                win.navigator.geolocation.getCurrentPosition = (s, e, o) => {
+                    s(location);
+                }
             }
         }
     });
