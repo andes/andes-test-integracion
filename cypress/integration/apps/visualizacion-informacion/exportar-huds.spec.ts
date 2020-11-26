@@ -116,7 +116,7 @@ context('Exportar HUDS', () => {
         });
         cy.plexDatetime('label="Desde"', ayer);
         cy.plexDatetime('label="Hasta"', { text: hoy, skipEnter: true });
-        cy.plexSelectAsync('label="Prestaciones"', 'consulta de clinica medica', '@prestaciones', 0);
+        cy.plexSelectType('label="Prestaciones"', 'consulta de clinica medica');
         cy.plexButton(' Generar ').click();
         cy.wait('@peticionExport').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
