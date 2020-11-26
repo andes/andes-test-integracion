@@ -14,7 +14,6 @@ describe('CITAS - Gestor de Agendas', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getTiposPrestacion');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgendas');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
 
@@ -26,19 +25,12 @@ describe('CITAS - Gestor de Agendas', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(2);
         });
-        cy.wait('@getTiposPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
     });
 
     it('visualizar agendas de ayer y hoy', () => {
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(2);
-        });
-
-        cy.wait('@getTiposPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
         });
 
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
@@ -53,9 +45,6 @@ describe('CITAS - Gestor de Agendas', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(2);
         });
-        cy.wait('@getTiposPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
         cy.wait('@getAgendas');
         cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().add(+1, 'days').format('DD/MM/YYYY'));
@@ -69,11 +58,8 @@ describe('CITAS - Gestor de Agendas', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(2);
         });
-        cy.wait('@getTiposPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
-        cy.plexSelectAsync('label="Prestación"', 'consulta para cuidados paliativos (procedimiento)', '@getTiposPrestacion', 0);
+        cy.plexSelectType('label="Prestación"', 'consulta para cuidados paliativos (procedimiento)');
 
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -87,11 +73,8 @@ describe('CITAS - Gestor de Agendas', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(2);
         });
-        cy.wait('@getTiposPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
 
-        cy.plexSelectAsync('label="Prestación"', 'Consulta de cirugía general', '@getTiposPrestacion', 0);
+        cy.plexSelectType('label="Prestación"', 'Consulta de cirugía general');
 
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -104,9 +87,6 @@ describe('CITAS - Gestor de Agendas', () => {
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(2);
-        });
-        cy.wait('@getTiposPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
         });
         cy.plexButtonIcon('chevron-down').click();
 
@@ -122,9 +102,6 @@ describe('CITAS - Gestor de Agendas', () => {
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(2);
-        });
-        cy.wait('@getTiposPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
         });
         cy.plexButtonIcon('chevron-down').click();
         cy.plexSelectAsync('label="Equipo de Salud"', 'CORTES JAZMIN', '@getProfesionales', 0);

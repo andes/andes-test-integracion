@@ -27,7 +27,7 @@ context('Perfiles de usuario', () => {
         cy.route('GET', '**/api/modules/gestor-usuarios/perfiles').as('perfil');
         cy.route('PATCH', '**/api/modules/gestor-usuarios/perfiles/**').as('savePerfil');
         cy.route('POST', '**/api/modules/gestor-usuarios/perfiles').as('postPerfil');
-        cy.route('**api/core/tm/tiposPrestaciones?term=**').as('prestaciones');
+        cy.route('GET', '**/api/core/tm/conceptos-turneables?term=**').as('conceptoTurneables');
         cy.plexButton("PERFILES").click();
         cy.wait('@perfil');
     });
@@ -48,7 +48,7 @@ context('Perfiles de usuario', () => {
         cy.get('@mpiAccordion').plexBool('type="slide"', true);
         cy.buscarPermisos(2, 0).as('rupAccordion');
         cy.get('@rupAccordion').plexPanel(0).click();
-        cy.get('@rupAccordion').plexSelectAsync('name="plexSelect"', 'Consulta de medicina general', '@prestaciones', 0);
+        cy.get('@rupAccordion').plexSelectAsync('name="plexSelect"', 'Consulta de medicina general', '@conceptoTurneables', 0);
         cy.buscarPermisos(8, 0).as('internacionAccordion');
         cy.get('@internacionAccordion').within((item) => {
             cy.get('plex-bool input[type="checkbox"]').eq(1).check({
@@ -98,7 +98,7 @@ context('Perfiles de usuario', () => {
 
         cy.get('@rupAccordion').plexPanel(0).click();
 
-        cy.get('@rupAccordion').plexSelectAsync('name="plexSelect"', 'colonoscopia', '@prestaciones', 0);
+        cy.get('@rupAccordion').plexSelectAsync('name="plexSelect"', 'colonoscopia', '@conceptoTurneables', 0);
 
         cy.plexButton('Guardar').click();
         cy.wait('@savePerfil').then((xhr) => {
@@ -114,7 +114,7 @@ context('Perfiles de usuario', () => {
         cy.buscarPermisos(2, 0).as('rupAccordion');
         cy.get('@rupAccordion').plexPanel(0).click();
 
-        cy.get('@rupAccordion').plexSelectAsync('name="plexSelect"', 'consulta de nutrición', '@prestaciones', 0);
+        cy.get('@rupAccordion').plexSelectType('name="plexSelect"', 'consulta de nutrición');
 
         cy.plexButton('Cancelar').click();
         cy.wait('@perfil').then((xhr) => {

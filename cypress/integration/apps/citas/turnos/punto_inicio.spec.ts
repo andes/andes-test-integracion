@@ -83,7 +83,9 @@ context('punto de inicio', () => {
         cy.plexButton('Activar app').click();
         cy.wait('@clickActivarApp').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody.message).to.be.eq("OK");
+            if (typeof xhr.responseBody === 'object') {
+                expect(xhr.responseBody.message).to.be.eq("OK");
+            }
         });
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -318,11 +320,12 @@ context('punto de inicio', () => {
         it('Sacar turno y seleccionar prepaga ' + type, () => {
             cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
             cy.route('GET', '**/api/modules/turnos/historial?*').as('getHistorial');
-            cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
             cy.route('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
             cy.route('GET', '**/api/modules/turnos/agenda?**').as('getAgendas');
             cy.route('GET', '**/api/modules/turnos/agenda/**').as('getAgenda');
             cy.route('GET', '**/api/modules/obraSocial/prepagas/**').as('prepagas');
+            cy.route('GET', '**/api/core/tm/conceptos-turneables**').as('conceptoTurneables');
+
             cy.plexText('name="buscador"', pacientes[i].documento);
 
             cy.get('paciente-listado plex-item').contains(formatDocumento(pacientes[i].documento)).click();
@@ -337,14 +340,11 @@ context('punto de inicio', () => {
             cy.wait('@getPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
             });
-            cy.wait('@getPrestaciones').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-            });
             cy.wait('@getCarpetas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
             });
 
-            cy.plexSelectAsync('name="tipoPrestacion"', 'servicio de neumonología', '@getPrestaciones', 0);
+            cy.plexSelectAsync('name="tipoPrestacion"', 'servicio de neumonología', '@conceptoTurneables', 0);
 
             cy.wait('@getAgendas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);

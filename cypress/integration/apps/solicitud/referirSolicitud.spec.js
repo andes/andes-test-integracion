@@ -16,11 +16,10 @@ context(' REFERIR SOLICITUD', () => {
         })
     })
 
-     beforeEach(() => {
+    beforeEach(() => {
         cy.goto('/solicitudes', token);
         cy.server();
         cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones?turneable=1').as('getPrestaciones');
         cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('conceptosTurneables');
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');
@@ -44,7 +43,7 @@ context(' REFERIR SOLICITUD', () => {
         cy.wait('@auditarSolicitud').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             const i = xhr.response.body.solicitud.historial.length - 1;
-            expect(xhr.response.body.solicitud.historial[i].observaciones).to.be.eq('Una observacion referir');  
+            expect(xhr.response.body.solicitud.historial[i].observaciones).to.be.eq('Una observacion referir');
             expect(xhr.response.body.solicitud.historial[i].descripcion).to.be.eq('Referida');
         });
         cy.get('plex-badge').contains('auditoria');
