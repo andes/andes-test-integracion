@@ -136,6 +136,35 @@ Cypress.Commands.add('plexFloat', { prevSubject: 'optional' }, (subject, label, 
     return element;
 });
 
+Cypress.Commands.add('plexRadio', { prevSubject: 'optional' }, (subject, label, option) => {
+    let element;
+    if (subject) {
+        element = cy.wrap(subject).find(`plex-radio[${label}] mat-radio-button`);
+    } else {
+        element = cy.get(`plex-radio[${label}] mat-radio-button`);
+    }
+    if (option !== undefined && option !== null) {
+
+        element.eq(option).click();
+
+    }
+    return element;
+});
+
+Cypress.Commands.add('plexRadioMultiple', { prevSubject: 'optional' }, (subject, label, option) => {
+    let element;
+    if (subject) {
+        element = cy.wrap(subject).find(`plex-radio[${label}] mat-checkbox`);
+    } else {
+        element = cy.get(`plex-radio[${label}] mat-checkbox`);
+    }
+    if (option !== undefined && option !== null) {
+
+        element.eq(option).click();
+
+    }
+    return element;
+});
 
 Cypress.Commands.add('plexInputDinamico', { prevSubject: 'optional' }, (subject, tipo, label, text = null) => {
 

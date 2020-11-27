@@ -224,6 +224,10 @@ declare namespace Cypress {
         plexLabel(texto: string);
         plexTitle(texto: string);
 
+        plexRadio(label: string, index: number);
+        plexRadioMultiple(label: string, index: number);
+
+
         toast(type: 'success' | 'danger' | 'warning' | 'alert' | 'error', texto?: string);
 
         swal(action: 'confirm' | 'cancel', texto?: string);
