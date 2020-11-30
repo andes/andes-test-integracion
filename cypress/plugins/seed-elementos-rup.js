@@ -34,6 +34,10 @@ module.exports.createElementoRup = async (mongoUri, params) => {
             dto.frecuentes = params.frecuentes;
         }
 
+        if (params.rules) {
+            dto.rules = params.rules;
+        }
+
         if (params.esSolicitud !== undefined && params.esSolicitud !== null) {
             dto.esSolicitud = params.esSolicitud;
         }
