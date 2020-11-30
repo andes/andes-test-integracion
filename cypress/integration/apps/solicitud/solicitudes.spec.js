@@ -40,7 +40,7 @@ context('SOLICITUDES', () => {
 
         cy.plexSelectAsync('label="Prestación Destino"', prestacionDestino, '@conceptosTurneables', 0);
 
-        cy.plexSelectAsync('placeholder="OrganizacionOrigen"', orgOrigen, '@getOrganizaciones', 0);
+        cy.plexSelectAsync('placeholder="Seleccione la organización origen"', orgOrigen, '@getOrganizaciones', 0);
 
         cy.plexButtonIcon('plus').click();
 
