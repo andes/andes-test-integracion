@@ -7,11 +7,11 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.login('30643636', 'asd').then(t => {
             tokenOriginal = t;
             token = t;
-            cy.createPaciente('apps/com/paciente1', token);
-            cy.createPaciente('apps/com/paciente2', token);
-            cy.createPaciente('apps/com/paciente3', token);
-            cy.createPaciente('apps/com/paciente4', token);
-            cy.createPaciente('apps/com/paciente5', token);
+            cy.task('database:create:paciente', { template: 'validado', nombre: 'DERIVACION', apellido: 'NUEVA', documento: 2006891 });
+            cy.task('database:create:paciente', { template: 'validado', nombre: 'PACIENTE', apellido: 'COM 2', documento: 2006712 });
+            cy.task('database:create:paciente', { template: 'validado', nombre: 'PACIENTE', apellido: 'COM 3', documento: 2111893 });
+            cy.task('database:create:paciente', { template: 'validado', nombre: 'PACIENTE', apellido: 'COM 4', documento: 2001294 });
+            cy.task('database:create:paciente', { template: 'validado', nombre: 'PACIENTE', apellido: 'COM 5', documento: 2504195 });
         })
     });
 
@@ -139,7 +139,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     });
 
-    it.only('crear nueva derivacion y control de derivación en curso', () => {
+    it('crear nueva derivacion y control de derivación en curso', () => {
         seleccionarPaciente('2001294');
         cy.plexTextArea('label="Detalle"', 'prueba de nueva derivación');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
