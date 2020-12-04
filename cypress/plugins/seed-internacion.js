@@ -14,6 +14,7 @@ module.exports.createMaquinaEstados = async (mongoUri, params) => {
         dto.organizacion = params.organizacion || ObjectId(dto.organizacion);
         dto.ambito = params.ambito || dto.ambito;
         dto.capa = params.capa || dto.capa;
+        dto.configPases.sala = ObjectId(params.configPases.sala);
 
         if (params.estados && params.estados.length > 0) {
             dto.estados.push(...params.estados);
@@ -201,7 +202,13 @@ module.exports.createSala = async (mongoUri, params) => {
 
         let dtoSala = require('./data/internacion/sala-default');
         dtoSala = JSON.parse(JSON.stringify(dtoSala));
-
+        
+        if (params.idFijo) {
+            dtoSala['_id'] = ObjectId(params.idFijo);
+        } else {
+            dtoSala._id = new ObjectId();
+        }
+        
         dtoSala.organizacion = params.organizacion || dtoSala.organizacion;
         dtoSala.organizacion._id = ObjectId(dtoSala.organizacion._id);
         dtoSala.organizacion.id = ObjectId(dtoSala.organizacion._id);
@@ -227,7 +234,6 @@ module.exports.createSala = async (mongoUri, params) => {
             });
         }
 
-        dtoSala._id = new ObjectId();
         await salaDB.insertOne(dtoSala);
 
         // SNAPSHOT DE SALA

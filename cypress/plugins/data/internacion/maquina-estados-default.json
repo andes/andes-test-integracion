@@ -44,5 +44,9 @@
             "icon": "menos",
             "accion": "desocuparCama"
         }
-    ]
+    ],
+    "configPases": {
+        "sala": "5f6b820487dac8aa716f8c81",
+        "allowCama": true
+    }
 }

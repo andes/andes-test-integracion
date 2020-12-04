@@ -81,6 +81,7 @@ function crearSalas(params) {
             const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
 
             salas.push({
+                idFijo: elemento.idFijo,
                 estado: elemento.estado,
                 unidadesOrganizativas: elemento.unidadesOrganizativas,
                 sectores: elemento.sectores,
