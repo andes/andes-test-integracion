@@ -140,7 +140,7 @@ context('TM Profesional', () => {
 
         cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
         cy.wait('@renaper').then((xhr) => {
-            expect(xhr.response.body).to.have.property('message', 'ciudadano inexistente')
+            expect(xhr.response.body).to.have.property('message', 'ciudadano no encontrado')
         });
 
         cy.swal('confirm');
