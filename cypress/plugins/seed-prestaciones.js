@@ -168,7 +168,20 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
 
         const data = await PrestacionDB.insertOne(prestacion);
         prestacion._id = data.insertedId;
-
+        const datos = data.ops[0];
+        if (datos.inicio === "fuera-agenda") {
+            const CodificacionDB = await client.db().collection('codificacion');
+            let codificacion = {};
+            codificacion.ambitoPrestacion = datos.solicitud.ambitoOrigen;
+            codificacion.idPrestacion = prestacion._id;
+            codificacion.paciente = datos.paciente;
+            codificacion.createdAt = datos.createdAt;
+            codificacion.createdBy = datos.createdBy;
+            codificacion.createdBy.organizacion.id = datos.ejecucion.organizacion._id.toString();
+            codificacion.createdBy.organizacion._id = datos.ejecucion.organizacion._id.toString();
+            codificacion.createdBy.organizacion.nombre = datos.ejecucion.organizacion.nombre;
+            await CodificacionDB.insertOne(codificacion);
+        }
         return prestacion;
 
     } catch (e) {
