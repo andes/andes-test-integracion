@@ -2,6 +2,7 @@
 
 context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
     let token;
+    let pacientePrestacion;
     before(() => {
         cy.seed();
         cy.task('database:seed:paciente');
@@ -34,6 +35,36 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
                 fin: '6'
             });
         });
+        cy.task('database:create:paciente', {
+            template: 'validado'
+        }).then(pac => {
+            pacientePrestacion = pac;
+            cy.task(
+                'database:seed:prestacion',
+                {
+                    paciente: pac._id,
+                    tipoPrestacion: '598ca8375adc68e2a0c121b8',
+                    organizacion: '57f67d090166fa6aedb2f9fb',
+                    estado: 'validada',
+                    registros: [{
+                        id: "5f772b7ac9264781190bc790",
+                        concepto: {
+                            "conceptId": "186788009",
+                            "term": "fiebre Q",
+                            "fsn": "fiebre Q (trastorno)",
+                            "semanticTag": "trastorno"
+                        },
+                        valor: {
+                            "idRegistroOrigen": "5f772b7ac9264781190bc794",
+                            "estado": "activo",
+                            "fechaInicio": new Date(),
+                            "evolucion": "<p>hola mundo</p>"
+                        },
+                    }]
+                }
+            );
+        })
+
         cy.login('30643636', 'asd', '57f67d090166fa6aedb2f9fb').then(t => {
             token = t;
         });
@@ -51,13 +82,13 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         if (cy.esFinDeMes()) {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(3);
+                expect(xhr.response.body).to.have.length(4);
             });
 
         } else {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(3);
+                expect(xhr.response.body).to.have.length(4);
             });
         }
     });
@@ -71,13 +102,13 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             cy.plexButton("Buscar").click();
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(2);
+                expect(xhr.response.body).to.have.length(3);
             });
         } else {
             cy.plexButton("Buscar").click();
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(2);
+                expect(xhr.response.body).to.have.length(3);
             });
         }
     });
@@ -89,14 +120,14 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         if (cy.esFinDeMes()) {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(3);
+                expect(xhr.response.body).to.have.length(4);
                 expect(xhr.response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
                 expect(xhr.response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
             });
         } else {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(3);
+                expect(xhr.response.body).to.have.length(4);
                 expect(xhr.response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
                 expect(xhr.response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
             });
@@ -111,7 +142,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.plexButton("Exportar").click();
         cy.wait('@exportHuds').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.request.body.arrayPrestaciones).to.have.length(3);
+            expect(xhr.request.body.prestaciones).to.have.length(1);
         });
         cy.plexButton("Descargas pendientes").click();
         cy.wait('@pendientes').then((xhr) => {
@@ -127,11 +158,18 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+        cy.plexText('label="Documento"', pacientePrestacion.documento);
+        cy.plexButton("Buscar").click();
+        cy.wait('@turnosPrestaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(1);
+        });
+
         cy.get('table tbody tr td plex-bool').first().click();
         cy.plexButton("Exportar").click();
         cy.wait('@exportHuds').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.request.body.arrayPrestaciones).to.have.length(1);
+            expect(xhr.request.body.prestaciones).to.have.length(1);
         });
         cy.plexButton("Descargas pendientes").click();
         cy.wait('@pendientes').then((xhr) => {
