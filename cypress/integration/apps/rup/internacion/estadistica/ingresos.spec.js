@@ -19,8 +19,8 @@ describe('Capa Estadistica - Ingresos', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
         cy.route('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{

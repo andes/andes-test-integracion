@@ -51,8 +51,8 @@ context('CITAS - Revisión de Agendas', () => {
     beforeEach(() => {
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
     });
 
     it('Comprueba datos de la agenda', () => {

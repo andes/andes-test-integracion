@@ -1,87 +1,60 @@
 {
-    "paciente": {
-        "id": null,
-        "documento": 33650509,
-        "cuil": "2033650509",
-        "activo": true,
-        "estado": "validado",
-        "nombre": "MARTIN",
-        "apellido": "BUCAREY",
-        "nombreCompleto": "",
-        "alias": "",
-        "contacto": [
-            {
-                "tipo": "celular",
-                "valor": "",
-                "ranking": 0,
-                "activo": true,
-                "ultimaActualizacion": "2020-01-16T11:46:48.465Z"
-            }
-        ],
-        "sexo": {
-            "id": "masculino",
-            "nombre": "Masculino"
-        },
-        "genero": "masculino",
-        "fechaNacimiento": "1989-04-09T00:00:00.000Z",
-        "tipoIdentificacion": "",
-        "numeroIdentificacion": "",
-        "edad": null,
-        "edadReal": null,
-        "fechaFallecimiento": null,
-        "direccion": [
-            {
-                "valor": "LUNA DE CUARZO 1674",
-                "codigoPostal": "",
-                "ubicacion": {
-                    "pais": null,
-                    "provincia": null,
-                    "localidad": null,
-                    "barrio": null
-                },
-                "ranking": 0,
-                "geoReferencia": null,
-                "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
-                "activo": true
-            }
-        ],
-        "foto": "",
-        "relaciones": null,
-        "financiador": null,
-        "identificadores": null,
-        "claveBlocking": null,
-        "entidadesValidadoras": [
-            ""
-        ],
-        "scan": null,
-        "reportarError": false,
-        "notaError": ""
-    },
-    "validado": true,
-    "existente": false,
-    "documento_fuzzy": [
-        "509",
-        "050",
-        "505",
-        "650",
-        "365",
-        "336",
-        "0509",
-        "5050",
-        "6505",
-        "3650",
-        "3365",
-        "50509",
-        "65050",
-        "36505",
-        "33650",
-        "650509",
-        "365050",
-        "336505",
-        "3650509",
-        "3365050",
-        "33650509"
+    "id": null,
+    "documento": 33650509,
+    "cuil": "2033650509",
+    "activo": true,
+    "estado": "validado",
+    "nombre": "MARTIN",
+    "apellido": "BUCAREY",
+    "nombreCompleto": "",
+    "alias": "",
+    "contacto": [
+        {
+            "tipo": "celular",
+            "valor": "",
+            "ranking": 0,
+            "activo": true,
+            "ultimaActualizacion": "2020-01-16T11:46:48.465Z"
+        }
     ],
+    "sexo": {
+        "id": "masculino",
+        "nombre": "Masculino"
+    },
+    "genero": "masculino",
+    "fechaNacimiento": "1989-04-09T00:00:00.000Z",
+    "tipoIdentificacion": "",
+    "numeroIdentificacion": "",
+    "edad": null,
+    "edadReal": null,
+    "fechaFallecimiento": null,
+    "direccion": [
+        {
+            "valor": "LUNA DE CUARZO 1674",
+            "codigoPostal": "",
+            "ubicacion": {
+                "pais": null,
+                "provincia": null,
+                "localidad": null,
+                "barrio": null
+            },
+            "ranking": 0,
+            "geoReferencia": null,
+            "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
+            "activo": true
+        }
+    ],
+    "foto": "",
+    "relaciones": null,
+    "financiador": null,
+    "identificadores": null,
+    "claveBlocking": null,
+    "entidadesValidadoras": [
+        ""
+    ],
+    "scan": null,
+    "reportarError": false,
+    "notaError": "",
     "tokens": [
         "33650509",
         "bucarey",

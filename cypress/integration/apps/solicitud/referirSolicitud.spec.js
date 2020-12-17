@@ -19,7 +19,7 @@ context(' REFERIR SOLICITUD', () => {
     beforeEach(() => {
         cy.goto('/solicitudes', token);
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('consultaPaciente');
         cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('conceptosTurneables');
         cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');

@@ -40,10 +40,8 @@ Cypress.Commands.add('createPaciente', (name, token) => {
     return cy.fixture(name).then((paciente) => {
         return cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/core/mpi/pacientes',
-            body: {
-                paciente
-            },
+            url: Cypress.env('API_SERVER') + '/api/core-v2/mpi/pacientes',
+            body: paciente,
             headers: {
                 Authorization: `JWT ${token}`
             }

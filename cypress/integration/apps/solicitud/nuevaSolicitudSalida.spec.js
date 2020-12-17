@@ -29,7 +29,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.server();
         cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('conceptosTurneables');
         cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('searchPaciente');
         cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
         secuencia(token);
     });

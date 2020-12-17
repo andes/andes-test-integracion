@@ -13,9 +13,9 @@ context('MPI-Registro de Pacientes Similares', () => {
         cy.server();
 
         // Intercepta la llamada a la ruta validar y devuelve paciente_validado
-        cy.route('POST', '**api/core/mpi/pacientes**').as('postPaciente');
-        cy.route('PUT', '**api/core/mpi/pacientes/**').as('putPaciente');
-        cy.route('GET', '**api/core/mpi/pacientes/**').as('getPaciente');
+        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('postPaciente');
+        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('getPaciente');
     })
 
     function irANuevoPaciente() {
@@ -42,11 +42,9 @@ context('MPI-Registro de Pacientes Similares', () => {
 
         cy.wait('@postPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.resultadoMatching.length).to.be.eq(1);
-            expect(xhr.response.body.resultadoMatching[0].match).to.be.gte(0.94);
-            expect(xhr.response.body.resultadoMatching[0].paciente._id).to.be.eq('586e6e8627d3107fde116cdb');
-            expect(xhr.response.body.macheoAlto).to.be.eq(true);
-            expect(xhr.response.body.dniRepetido).to.be.eq(true);
+            expect(xhr.response.body.sugeridos.length).to.be.eq(1);
+            expect(xhr.response.body.sugeridos[0]._score).to.be.gte(0.94);
+            expect(xhr.response.body.sugeridos[0].paciente._id).to.be.eq('586e6e8627d3107fde116cdb');
         });
         // Popup alert
 
@@ -54,7 +52,7 @@ context('MPI-Registro de Pacientes Similares', () => {
         cy.plexButton('Guardar').should('have.prop', 'disabled', true);
         cy.plexButton('Seleccionar').click();
         cy.plexButton('Guardar').click();
-        cy.wait('@putPaciente').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
     });
@@ -75,18 +73,16 @@ context('MPI-Registro de Pacientes Similares', () => {
 
         cy.wait('@postPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.resultadoMatching.length).to.be.eq(1);
-            expect(xhr.response.body.resultadoMatching[0].match).to.be.lt(0.94);
-            expect(xhr.response.body.resultadoMatching[0].paciente._id).to.be.eq('586e6e8627d3107fde116cdb');
-            expect(xhr.response.body.macheoAlto).to.be.eq(false);
-            expect(xhr.response.body.dniRepetido).to.be.eq(true);
+            expect(xhr.response.body.sugeridos.length).to.be.eq(1);
+            expect(xhr.response.body.sugeridos[0]._score).to.be.lt(0.94);
+            expect(xhr.response.body.sugeridos[0].paciente._id).to.be.eq('586e6e8627d3107fde116cdb');
         });
         // Popup alert
 
         cy.swal('confirm');
         cy.plexButton('Seleccionar').click();
         cy.plexButton('Guardar').click();
-        cy.wait('@putPaciente').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
     });
@@ -107,11 +103,9 @@ context('MPI-Registro de Pacientes Similares', () => {
 
         cy.wait('@postPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.resultadoMatching.length).to.be.eq(1);
-            expect(xhr.response.body.resultadoMatching[0].match).to.be.lt(0.94);
-            expect(xhr.response.body.resultadoMatching[0].paciente._id).to.be.eq('586e6e8627d3107fde116cdb');
-            expect(xhr.response.body.macheoAlto).to.be.eq(false);
-            expect(xhr.response.body.dniRepetido).to.be.eq(false);
+            expect(xhr.response.body.sugeridos.length).to.be.eq(1);
+            expect(xhr.response.body.sugeridos[0]._score).to.be.lt(0.94);
+            expect(xhr.response.body.sugeridos[0].paciente._id).to.be.eq('586e6e8627d3107fde116cdb');
         });
         // Popup alert
 

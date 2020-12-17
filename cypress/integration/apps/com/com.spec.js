@@ -17,7 +17,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('searchPaciente');
         cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
         cy.route('GET', '**/modules/com/derivaciones**').as('getDerivaciones');
         cy.route('GET', '**/api/core/tm/organizaciones?esCOM=true').as('getOrganizacion');

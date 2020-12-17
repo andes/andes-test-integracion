@@ -74,11 +74,10 @@ context('MPI-Registro App Mobile', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('POST', '**api/modules/mobileApp/create/**').as('clickActivarApp');
-        cy.route('GET', '**api/core/mpi/pacientes/**').as('findPacienteByID');
-        cy.route('PUT', '**api/core/mpi/pacientes/**').as('putPaciente');
-        cy.route('PATCH', '**api/core/mpi/pacientes/**').as('patchPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
+        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
         cy.route('GET', '**api/modules/mobileApp/check/**').as('clickGestionApp');
         cy.route('GET', '**api/modules/mobileApp/email/**').as('verificarEmail');
         cy.goto('/apps/mpi/busqueda', token);
@@ -194,7 +193,7 @@ context('MPI-Registro App Mobile', () => {
         cy.plexBadge('Cuenta pendiente de activación por el usuario');
         cy.plexButton('Guardar').click();
 
-        cy.wait('@putPaciente').then((xhr) => {
+        cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq(pacValidado2.estado);
             expect(xhr.response.body.nombre).to.be.eq(pacValidado2.nombre);

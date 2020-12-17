@@ -32,8 +32,8 @@ context('Exportar HUDS', () => {
     beforeEach(() => {
         cy.server();
         cy.goto('/visualizacion-informacion/exportar-huds', token);
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('POST', '**api/modules/huds/export').as('peticionExport');
         cy.route('GET', '**api/modules/huds/export?**').as('pendientes');
         cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');

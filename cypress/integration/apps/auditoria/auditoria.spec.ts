@@ -49,8 +49,8 @@ context('auditoria', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**/api/core/mpi/pacientes/search**').as('busquedaPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('PATCH', '**/api/core-v2/mpi/pacientes/**').as('patchPaciente');
         cy.goto('/apps/mpi/auditoria', token);
     })

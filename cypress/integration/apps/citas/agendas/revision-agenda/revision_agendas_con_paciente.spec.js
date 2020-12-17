@@ -41,7 +41,7 @@ context('CITAS - Revisión de Agendas', () => {
 
         cy.server();
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('paciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('paciente');
         cy.route('PUT', '**/api/modules/turnos/turno/*/bloque/*/agenda/**').as('putTurno');
 
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
@@ -132,7 +132,7 @@ context('CITAS - Revisión de Agendas', () => {
         cy.route('POST', '**/api/auth/organizaciones**').as('organizacionesPost');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('agendaPatch');
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
 
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
 
@@ -157,10 +157,10 @@ context('CITAS - Revisión de Agendas', () => {
 
     });
 
-    it.only('Se agrega sobreturno agenda dinamica', () => {
+    it('Se agrega sobreturno agenda dinamica', () => {
         cy.server();
         cy.route('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agendaPatch');
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
         cy.goto(`/citas/gestor_agendas`, token);
 
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));

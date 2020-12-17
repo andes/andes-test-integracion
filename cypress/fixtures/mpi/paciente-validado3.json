@@ -1,87 +1,60 @@
 {
-    "paciente": {
-        "id": null,
-        "documento": 32247537,
-        "cuil": "2032247537",
-        "activo": true,
-        "estado": "validado",
-        "nombre": "MARIA CELESTE",
-        "apellido": "RAMOS",
-        "nombreCompleto": "",
-        "alias": "",
-        "contacto": [
-            {
-                "tipo": "celular",
-                "valor": "",
-                "ranking": 0,
-                "activo": true,
-                "ultimaActualizacion": "2020-01-16T11:46:48.465Z"
-            }
-        ],
-        "sexo": {
-            "id": "femenino",
-            "nombre": "Femenino"
-        },
-        "genero": "femenino",
-        "fechaNacimiento": "1986-08-28T00:00:00.000Z",
-        "tipoIdentificacion": "",
-        "numeroIdentificacion": "",
-        "edad": null,
-        "edadReal": null,
-        "fechaFallecimiento": null,
-        "direccion": [
-            {
-                "valor": "LUNA DE CUARZO 1674",
-                "codigoPostal": "",
-                "ubicacion": {
-                    "pais": null,
-                    "provincia": null,
-                    "localidad": null,
-                    "barrio": null
-                },
-                "ranking": 0,
-                "geoReferencia": null,
-                "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
-                "activo": true
-            }
-        ],
-        "foto": "",
-        "relaciones": null,
-        "financiador": null,
-        "identificadores": null,
-        "claveBlocking": null,
-        "entidadesValidadoras": [
-            ""
-        ],
-        "scan": null,
-        "reportarError": false,
-        "notaError": ""
-    },
-    "validado": true,
-    "existente": false,
-    "documento_fuzzy": [
-        "537",
-        "753",
-        "475",
-        "247",
-        "224",
-        "322",
-        "7537",
-        "4753",
-        "2475",
-        "2247",
-        "3224",
-        "47537",
-        "24753",
-        "22475",
-        "32247",
-        "247537",
-        "224753",
-        "322475",
-        "2247537",
-        "3224753",
-        "32247537"
+    "id": null,
+    "documento": 32247537,
+    "cuil": "2032247537",
+    "activo": true,
+    "estado": "validado",
+    "nombre": "MARIA CELESTE",
+    "apellido": "RAMOS",
+    "nombreCompleto": "",
+    "alias": "",
+    "contacto": [
+        {
+            "tipo": "celular",
+            "valor": "",
+            "ranking": 0,
+            "activo": true,
+            "ultimaActualizacion": "2020-01-16T11:46:48.465Z"
+        }
     ],
+    "sexo": {
+        "id": "femenino",
+        "nombre": "Femenino"
+    },
+    "genero": "femenino",
+    "fechaNacimiento": "1986-08-28T00:00:00.000Z",
+    "tipoIdentificacion": "",
+    "numeroIdentificacion": "",
+    "edad": null,
+    "edadReal": null,
+    "fechaFallecimiento": null,
+    "direccion": [
+        {
+            "valor": "LUNA DE CUARZO 1674",
+            "codigoPostal": "",
+            "ubicacion": {
+                "pais": null,
+                "provincia": null,
+                "localidad": null,
+                "barrio": null
+            },
+            "ranking": 0,
+            "geoReferencia": null,
+            "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
+            "activo": true
+        }
+    ],
+    "foto": "",
+    "relaciones": null,
+    "financiador": null,
+    "identificadores": null,
+    "claveBlocking": null,
+    "entidadesValidadoras": [
+        ""
+    ],
+    "scan": null,
+    "reportarError": false,
+    "notaError": "",
     "tokens": [
         "32247537",
         "ramos",
