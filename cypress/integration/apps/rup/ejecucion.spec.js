@@ -28,7 +28,7 @@ context('RUP - Punto de inicio', () => {
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('pacientes');
+        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('pacientes');
 
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 

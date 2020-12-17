@@ -17,7 +17,7 @@ context("RUP - Epicrisis", () => {
   beforeEach(() => {
     cy.server();
     cy.goto("/internacion/inicio", token);
-    cy.route("GET", "**api/core/mpi/pacientes?**").as("busquedaPaciente");
+    cy.route("GET", "**api/core-v2/mpi/pacientes?**").as("busquedaPaciente");
     cy.route("GET", "**api/core/log/paciente?idPaciente=**").as(
       "seleccionPaciente"
     );

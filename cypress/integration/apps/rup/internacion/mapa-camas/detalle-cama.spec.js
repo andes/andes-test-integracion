@@ -42,7 +42,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
         cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
         cy.route('GET', '**/api/modules/rup/internacion/camas/**').as('getCama');
         cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
-        cy.route('GET', '**/api/core/mpi/pacientes/**', paciente).as('getPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**', paciente).as('getPaciente');
         cy.route('PATCH', '**/api/modules/rup/internacion/deshacer').as('deshacer');
         cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('anularPrestacion');
     });
@@ -160,7 +160,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
 
         cy.wait('@anularPrestacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-        }) 
+        })
 
         cy.swal('confirm', 'Se deshizo la internacion');
     });

@@ -27,13 +27,13 @@ context('CITAS - Revisión de Agendas', () => {
     });
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('busquedaPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('busquedaPaciente');
     });
 
     it('Se selecciona la primera de dos prestaciones, luego se cambia por la segunda', () => {
         cy.goto(`/citas/revision_agenda/${agenda._id}`, token);
         cy.get('tbody:nth-child(1) tr:nth-child(3)').click();
-        
+
         cy.buscarPaciente(paciente.documento, false);
         cy.plexSelectType('name="tipoPrestacionTurno"').click().get('.option').contains(agenda.tipoPrestaciones[0].term).click();
         cy.plexSelectType('name="tipoPrestacionTurno"').click().get('.option').contains(agenda.tipoPrestaciones[1].term).click();

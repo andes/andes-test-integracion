@@ -32,8 +32,8 @@
 
         beforeEach(() => {
             cy.server();
-            cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
-            cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
+            cy.route('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
+            cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
             cy.route('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
             cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
             cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');

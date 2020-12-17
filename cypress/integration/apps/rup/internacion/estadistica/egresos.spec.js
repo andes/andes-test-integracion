@@ -61,7 +61,7 @@ describe('Capa Estadistica - Egresos', () => {
             "descripcion": "05.Trastornos mentales y del comportamiento (F00-F99)",
             "c2": false
         }]).as('getDiagnostico');
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
         cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
         cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');

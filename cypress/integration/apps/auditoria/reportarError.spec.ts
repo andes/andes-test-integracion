@@ -42,15 +42,15 @@ context('auditoria', () => {
 
     beforeEach(() => {
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**/api/core/mpi/pacientes/search?reportarError**').as('getReportados');
-        cy.route('PUT', '**api/core/mpi/pacientes/**').as('putPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes?reportarError**').as('getReportados');
+        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
         cy.goto('/apps/mpi/auditoria', token);
     })
 
     // it('Reportar error desde mpi y verificar que aparezca en el listado y detalle', () => {
     //     cy.goto('/apps/mpi/busqueda', token);
-    //     cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
+    //     cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
 
     //     cy.plexText('name="buscador"', `${validado5.nombre} ${validado5.apellido}`);
     //     cy.wait('@busquedaPaciente').then((xhr) => {
@@ -75,7 +75,7 @@ context('auditoria', () => {
     //     cy.plexBool('name="viveLocActual"', true);
 
     //     cy.plexButton('Guardar').click();
-    //     cy.wait('@putPaciente').then((xhr) => {
+    //     cy.wait('@patchPaciente').then((xhr) => {
     //         expect(xhr.status).to.be.eq(200);
     //         expect(xhr.response.body.reportarError).to.eq(true);
     //         expect(xhr.response.body.notaError).to.eq(notaError);
@@ -116,7 +116,7 @@ context('auditoria', () => {
         cy.plexButton(' ACEPTAR ').click();
 
         // verificamos que se guarde el cambio en el campo nombre
-        cy.wait('@putPaciente').then(xhr => {
+        cy.wait('@patchPaciente').then(xhr => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.responseBody.nombre).to.be.eq(nombreCorrecto);
             expect(xhr.responseBody.apellido).to.be.eq(validado6.apellido);
@@ -154,7 +154,7 @@ context('auditoria', () => {
         cy.plexButton(' ACEPTAR ').click();
 
         // verificamos que se guarde el cambio en el campo apellido
-        cy.wait('@putPaciente').then(xhr => {
+        cy.wait('@patchPaciente').then(xhr => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.responseBody.nombre).to.be.eq(validado7.nombre);
             expect(xhr.responseBody.apellido).to.be.eq(apellidoCorrecto);

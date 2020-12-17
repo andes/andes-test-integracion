@@ -31,7 +31,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y sin contacto', () => {
-        cy.route('POST', '**api/core/mpi/pacientes**').as('registroSinDni');
+        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
@@ -51,7 +51,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos contactos', () => {
-        cy.route('POST', '**api/core/mpi/pacientes**').as('registroSinDni');
+        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
@@ -79,7 +79,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
 
     it('buscar en la pestaña relaciones un paciente por dni que no exista y verificar mensaje', () => {
         cy.plexTab('Relaciones').click();
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaRelacion');
+        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', '000000001');
         cy.wait('@busquedaRelacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -90,7 +90,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
 
     it('buscar en la pestaña relaciones un paciente por dni que exista y verificar mensaje', () => {
         cy.plexTab('Relaciones').click();
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaRelacion');
+        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', paciente.documento);
         cy.wait('@busquedaRelacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -101,7 +101,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
 
     it('buscar en la pestaña relaciones un paciente por nombre/apellido que exista y verificar mensaje', () => {
         cy.plexTab('Relaciones').click();
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaRelacion');
+        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', paciente.nombre);
         cy.wait('@busquedaRelacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -118,7 +118,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
 
     it('buscar en la pestaña relaciones scan de progenitor y verificar datos básicos ingresados', () => {
         cy.plexTab('Relaciones').click();
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaRelacion');
+        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', '00535248130@ANDES@PACIENTE VALIDADO@M@10000000@B@26/12/1956@14/02/2018@200');
         cy.wait('@busquedaRelacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -130,7 +130,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
 
     it('buscar en la pestaña relaciones un paciente por nombre/apellido que no exista y verificar mensaje', () => {
         cy.plexTab('Relaciones').click();
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaRelacion');
+        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', 'INEXISTENTE');
         cy.wait('@busquedaRelacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -140,7 +140,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y una nota', () => {
-        cy.route('POST', '**api/core/mpi/pacientes**').as('registroSinDni');
+        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');

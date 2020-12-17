@@ -1,0 +1,7 @@
+{
+    "error": {
+        "message": "ciudadano no encontrado",
+        "status": 200
+    },
+    "message": "ciudadano no encontrado"
+}

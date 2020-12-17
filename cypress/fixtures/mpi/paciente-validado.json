@@ -1,101 +1,74 @@
 {
-    "paciente": {
-        "id": null,
-        "documento": 12325489,
-        "cuil": "23123254899",
-        "activo": true,
-        "estado": "validado",
-        "nombre": "JOSE",
-        "apellido": "TEST",
-        "nombreCompleto": "",
-        "alias": "",
-        "contacto": [
-            {
-                "tipo": "celular",
-                "valor": "",
-                "ranking": 0,
-                "activo": true,
-                "ultimaActualizacion": "2019-06-25T11:46:48.465Z"
-            }
-        ],
-        "sexo": {
-            "id": "masculino",
-            "nombre": "Masculino"
-        },
-        "genero": "masculino",
-        "fechaNacimiento": "1958-04-30T00:00:00.000Z",
-        "tipoIdentificacion": "",
-        "numeroIdentificacion": "",
-        "edad": null,
-        "edadReal": null,
-        "fechaFallecimiento": null,
-        "direccion": [
-            {
-                "valor": "RUTA 328 KM  20",
-                "codigoPostal": "",
-                "ubicacion": {
-                    "pais": null,
-                    "provincia": null,
-                    "localidad": null,
-                    "barrio": null
-                },
-                "ranking": 0,
-                "geoReferencia": null,
-                "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
-                "activo": true
-            },
-            {
-                "valor": "AVENIDA LAS FLORES 1200",
-                "codigoPostal": "",
-                "ubicacion": {
-                    "pais": null,
-                    "provincia": null,
-                    "localidad": null,
-                    "barrio": null
-                },
-                "ranking": 0,
-                "geoReferencia": null,
-                "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
-                "activo": true
-            }
-        ],
-        "foto": "",
-        "relaciones": null,
-        "financiador": null,
-        "identificadores": null,
-        "claveBlocking": null,
-        "entidadesValidadoras": [
-            ""
-        ],
-        "scan": null,
-        "reportarError": false,
-        "notaError": ""
-    },
-    "validado": true,
-    "existente": false,
-    "documento_fuzzy": [
-        "489",
-        "548",
-        "254",
-        "325",
-        "232",
-        "123",
-        "5489",
-        "2548",
-        "3254",
-        "2325",
-        "1232",
-        "25489",
-        "32548",
-        "23254",
-        "12325",
-        "325489",
-        "232548",
-        "123254",
-        "2325489",
-        "1232548",
-        "12325489"
+    "id": null,
+    "documento": 12325489,
+    "cuil": "23123254899",
+    "activo": true,
+    "estado": "validado",
+    "nombre": "JOSE",
+    "apellido": "TEST",
+    "nombreCompleto": "",
+    "alias": "",
+    "contacto": [
+        {
+            "tipo": "celular",
+            "valor": "",
+            "ranking": 0,
+            "activo": true,
+            "ultimaActualizacion": "2019-06-25T11:46:48.465Z"
+        }
     ],
+    "sexo": {
+        "id": "masculino",
+        "nombre": "Masculino"
+    },
+    "genero": "masculino",
+    "fechaNacimiento": "1958-04-30T00:00:00.000Z",
+    "tipoIdentificacion": "",
+    "numeroIdentificacion": "",
+    "edad": null,
+    "edadReal": null,
+    "fechaFallecimiento": null,
+    "direccion": [
+        {
+            "valor": "RUTA 328 KM  20",
+            "codigoPostal": "",
+            "ubicacion": {
+                "pais": null,
+                "provincia": null,
+                "localidad": null,
+                "barrio": null
+            },
+            "ranking": 0,
+            "geoReferencia": null,
+            "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
+            "activo": true
+        },
+        {
+            "valor": "AVENIDA LAS FLORES 1200",
+            "codigoPostal": "",
+            "ubicacion": {
+                "pais": null,
+                "provincia": null,
+                "localidad": null,
+                "barrio": null
+            },
+            "ranking": 0,
+            "geoReferencia": null,
+            "ultimaActualizacion": "2019-06-25T11:46:48.465Z",
+            "activo": true
+        }
+    ],
+    "foto": "",
+    "relaciones": null,
+    "financiador": null,
+    "identificadores": null,
+    "claveBlocking": null,
+    "entidadesValidadoras": [
+        ""
+    ],
+    "scan": null,
+    "reportarError": false,
+    "notaError": "",
     "tokens": [
         "12325489",
         "test",

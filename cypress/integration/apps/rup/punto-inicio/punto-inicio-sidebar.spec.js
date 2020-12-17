@@ -84,7 +84,7 @@ context('RUP - Punto de inicio', () => {
 
                     if (typeAgenda === 'dinamicaa') {
                         it(`agregar paciente agenda dinamica - ${typePaciente}`, () => {
-                            cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+                            cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('consultaPaciente');
                             cy.route('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agregarTurnoDinamico');
                             cy.goto('/rup', token);
                             cy.wait('@agendas');

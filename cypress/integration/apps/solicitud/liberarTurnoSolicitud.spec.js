@@ -31,7 +31,7 @@ describe('TOP: Liberar turno', () => {
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('searchPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('searchPaciente');
         cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('tipoPrestacion');
         cy.route('GET', '**/api/modules/top/reglas?**').as('reglas');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgenda');

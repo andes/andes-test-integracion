@@ -15,8 +15,8 @@ context('CITAS - punto de inicio', () => {
     beforeEach(() => {
         cy.server();
         cy.goto('/citas/punto-inicio', token);
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**api/core/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/core/tm/conceptos-turneables').as('conceptoTurneables');
         cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
@@ -219,7 +219,7 @@ context('CITAS - punto de inicio', () => {
 });
 
 function darTurno(paciente) {
-    cy.route('GET', '**api/core/mpi/pacientes/**').as('darTurnoPaciente');
+    cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('darTurnoPaciente');
     // definimos el campo a buscar en el listado puede contener un documento con puntos o el nombre de paciente
     const searchList = (paciente.documento) ? paciente.documento.substr(0, paciente.documento.length - 6) + '.' +
         paciente.documento.substr(-6, 3) + '.' + paciente.documento.substr(-3) : paciente.nombre

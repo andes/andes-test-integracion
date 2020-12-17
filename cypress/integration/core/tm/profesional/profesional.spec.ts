@@ -130,7 +130,8 @@ context('TM Profesional', () => {
 
         cy.server();
         cy.route('POST', '**/core-v2/mpi/validacion').as('renaper');
-
+        cy.fixture('renaper-error').as('fxRenaperError')
+        cy.route('POST', '**/core-v2/mpi/validacion', '@fxRenaperError').as('renaperError');
         cy.route('POST', '**/core/tm/profesionales**').as('create');
 
         cy.plexInt('label="Número de Documento"', '15654898');
@@ -139,7 +140,10 @@ context('TM Profesional', () => {
         cy.plexSelectType('label="Sexo"', 'femenino');
 
         cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
-        cy.wait('@renaper');
+        cy.wait('@renaperError').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body).to.have.property('message', 'ciudadano no encontrado');
+        });
     });
 
     it('crear profesional duplicado', () => {
@@ -226,10 +230,6 @@ context('TM Profesional', () => {
         cy.get('plex-layout-sidebar div[class="row mb-1"] div[class="col"]').find('plex-badge[type="warning"]').should('contain', 'No Matriculado');
         cy.get('plex-layout-sidebar').should('contain', 'Femenino');
         cy.get('plex-layout-sidebar').should('contain', '1217429393');
-        // cy.get('plex-layout-sidebar').should('contain', 'Médico - Matrícula: 2');
-        // cy.get('plex-layout-sidebar').should('contain', 'Citogenética (R) - Matrícula: 412');
-        // cy.get('plex-layout-sidebar').should('contain', 'Bioquímica y Nutrición (R) - Matrícula: 533');
-
     });
 
 })

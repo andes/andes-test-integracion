@@ -143,6 +143,8 @@ module.exports.createPaciente = async (mongoUri, params) => {
 
         dto.nombre = params.nombre || faker.name.firstName().toLocaleUpperCase();
         dto.apellido = params.apellido || faker.name.lastName().toLocaleUpperCase();
+        dto.sexo = params.sexo || 'masculino';
+        dto.genero = dto.sexo;
         // si no tiene scan y no se envió en params se le asigna null
         dto.scan = (params.scan) ? params.scan : (dto.scan) ? dto.scan : null;
 

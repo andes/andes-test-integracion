@@ -28,9 +28,9 @@ context('turnos', () => {
 
         cy.server();
         // Rutas para control
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaProgenitor');
-        cy.route('PATCH', '**api/core/mpi/pacientes/**').as('relacionProgenitor');
-        cy.route('POST', '**api/core/mpi/pacientes').as('bebeAgregado');
+        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaProgenitor');
+        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('relacionProgenitor');
+        cy.route('POST', '**api/core-v2/mpi/pacientes').as('bebeAgregado');
 
         cy.get('paciente-buscar input').first().type('4659874562');
         cy.get('div').contains('NUEVO PACIENTE').click();
@@ -81,7 +81,7 @@ context('turnos', () => {
     it('registrar paciente sin dni argentino desde punto de Inicio de Turnos', () => {
         cy.server();
         //Rutas para control
-        cy.route('POST', '**api/core/mpi/pacientes').as('sinDniGuardar');
+        cy.route('POST', '**api/core-v2/mpi/pacientes').as('sinDniGuardar');
         cy.route('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
 
         // Buscador
@@ -141,7 +141,7 @@ context('turnos', () => {
     it('registrar paciente con dni argentino desde punto de Inicio de Turnos', () => {
         cy.server();
         //Rutas para control
-        cy.route('POST', '**api/core/mpi/pacientes**').as('conDniGuardar');
+        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('conDniGuardar');
         cy.route('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
 
         // Buscador
@@ -195,7 +195,7 @@ context('turnos', () => {
 
     it('dar turno de día', () => {
         cy.server();
-        cy.route('GET', '**/api/core/mpi/pacientes**').as('consultaPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('consultaPaciente');
         cy.route('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');
         cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgendas');

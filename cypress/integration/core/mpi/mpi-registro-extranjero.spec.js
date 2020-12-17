@@ -27,7 +27,7 @@ context('MPI-Registro Paciente Extranjero', () => {
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y sin contacto', () => {
-        cy.route('POST', '**api/core/mpi/pacientes**').as('registroExtranjero');
+        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroExtranjero');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'EXTRANJERO');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
@@ -48,7 +48,7 @@ context('MPI-Registro Paciente Extranjero', () => {
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y telefono móvil', () => {
-        cy.route('POST', '**api/core/mpi/pacientes**').as('registroExtranjero');
+        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroExtranjero');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'EXTRANJERO');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');

@@ -29,7 +29,7 @@ context('punto de inicio', () => {
 
         cy.server();
         cy.goto('/citas/punto-inicio', token);
-        cy.route('GET', '**api/core/mpi/pacientes?**').as('busquedaPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
     })
 
@@ -52,12 +52,12 @@ context('punto de inicio', () => {
         cy.plexButtonIcon('open-in-app').click();
         cy.wait('@generarSolicitudPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            cy.get('lista-solicitud-turno-ventanilla').plexButton('Cargar Solicitud nueva').click();
         });
-        cy.get('lista-solicitud-turno-ventanilla').plexButton('Cargar Solicitud nueva').click();
     });
 
     it('activar app mobile', () => {
-        cy.route('PATCH', '**api/core/mpi/pacientes/**').as('patchPaciente');
+        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
         cy.route('POST', '**api/modules/mobileApp/create/**').as('clickActivarApp');
         cy.route('GET', '**api/modules/mobileApp/email/**').as('verificarEmail');
 
@@ -94,12 +94,12 @@ context('punto de inicio', () => {
     })
 
     it('editar datos de contacto', () => {
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/historial?**').as('getHistorial');
 
 
         cy.route('GET', '**/api/core/tm/barrios?**').as('getBarrios');
-        cy.route('PUT', '**/api/core/mpi/pacientes/**').as('guardar');
+        cy.route('PATCH', '**/api/core-v2/mpi/pacientes/**').as('guardar');
 
         cy.plexText('name="buscador"', paciente.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
@@ -132,7 +132,7 @@ context('punto de inicio', () => {
     });
 
     it('dar asistencia y quitarla', () => {
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/core/tm/provincias?**').as('getNeuquen');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
 
@@ -170,7 +170,7 @@ context('punto de inicio', () => {
     });
 
     it('liberar turno', () => {
-        cy.route('GET', '**/api/core/mpi/pacientes/**').as('getPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('getTurnosAgenda');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
 
@@ -209,7 +209,7 @@ context('punto de inicio', () => {
     });
 
     it('Historial', () => {
-        cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/*').as('getPaciente');
 
         cy.plexText('name="buscador"', paciente.documento);
 
@@ -237,8 +237,8 @@ context('punto de inicio', () => {
 
     it('Carpetas', () => {
         cy.route('GET', '**api/modules/carpetas/carpetasPacientes?*').as('getCarpetas');
-        cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
-        cy.route('PATCH', '**/api/core/mpi/pacientes/*').as('carpetaNueva');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/*').as('getPaciente');
+        cy.route('PATCH', '**/api/core-v2/mpi/pacientes/*').as('carpetaNueva');
         cy.route('POST', '**/api/modules/carpetas/incrementarCuenta').as('incrementaCarpeta');
 
         cy.plexText('name="buscador"', paciente.documento);
@@ -277,8 +277,8 @@ context('punto de inicio', () => {
     });
 
     it('Editar direccion del paciente', () => {
-        cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
-        cy.route('PUT', '**/api/core/mpi/pacientes/**').as('guardar');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/*').as('getPaciente');
+        cy.route('PATCH', '**/api/core-v2/mpi/pacientes/**').as('guardar');
 
 
         cy.plexText('name="buscador"', paciente.documento);
@@ -304,7 +304,7 @@ context('punto de inicio', () => {
 
 
         it('Verificar obra social de un paciente ' + type, () => {
-            cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
+            cy.route('GET', '**/api/core-v2/mpi/pacientes/*').as('getPaciente');
 
             cy.plexText('name="buscador"', pacientes[i].documento);
 
@@ -318,7 +318,7 @@ context('punto de inicio', () => {
         });
 
         it('Sacar turno y seleccionar prepaga ' + type, () => {
-            cy.route('GET', '**/api/core/mpi/pacientes/*').as('getPaciente');
+            cy.route('GET', '**/api/core-v2/mpi/pacientes/*').as('getPaciente');
             cy.route('GET', '**/api/modules/turnos/historial?*').as('getHistorial');
             cy.route('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
             cy.route('GET', '**/api/modules/turnos/agenda?**').as('getAgendas');

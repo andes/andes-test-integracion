@@ -16,7 +16,7 @@ context('MPI-Busqueda Paciente', () => {
     beforeEach(() => {
         cy.goto('/apps/mpi/busqueda', token);
         cy.server();
-        cy.route('GET', '**api/core/mpi/pacientes**').as('busqueda');
+        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('busqueda');
     });
 
     ['validado', 'temporal', 'sin-documento', 'extranjero'].forEach((type, i) => {
