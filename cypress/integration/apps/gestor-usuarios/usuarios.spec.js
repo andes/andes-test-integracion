@@ -32,6 +32,7 @@ context('Gestor de Usuarios', () => {
     });
 
     it('Asignar un perfil a un usuario', () => {
+        cy.contains('Gestor de Usuarios');
         cy.plexText('placeholder="Buscar por DNI, nombre o apellido"', usuario.documento);
         cy.wait('@busquedaUsuario');
 

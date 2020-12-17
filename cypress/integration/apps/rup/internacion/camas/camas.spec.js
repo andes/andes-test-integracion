@@ -117,7 +117,7 @@ describe('ABM Camas', () => {
     it('Baja Cama', () => {
         cy.getCama(camas[camas.length - 1].cama.nombre).click();
         cy.get('[label="CAMA"] > plex-title > .plex-title > .title-content').plexButtonIcon('pencil').click();
-
+        cy.contains('INACTIVAR CAMA');
         cy.plexButton('INACTIVAR CAMA').click();
         cy.get('button').contains('CONFIRMAR').click();
 
