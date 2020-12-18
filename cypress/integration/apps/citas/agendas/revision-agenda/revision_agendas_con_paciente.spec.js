@@ -14,6 +14,13 @@ context('CITAS - Revisión de Agendas', () => {
 
     beforeEach(() => {
         cy.cleanDB();
+        cy.task('database:seed:agenda', {
+            tipoPrestaciones: '598ca8375adc68e2a0c121d5',
+            dinamica: true,
+            profesionales: null,
+            fecha: '-1',
+            inicio: '22', fin: '23'
+        });
 
         cy.login('30643636', 'asd').then(t => {
             token = t;
@@ -150,4 +157,27 @@ context('CITAS - Revisión de Agendas', () => {
 
     });
 
+    it.only('Se agrega sobreturno agenda dinamica', () => {
+        cy.server();
+        cy.route('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agendaPatch');
+        cy.route('GET', '**/api/core/mpi/pacientes**').as('listaPacientes');
+        cy.goto(`/citas/gestor_agendas`, token);
+
+        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
+
+        cy.get('table tr').eq(0).click();
+        cy.plexButtonIcon('format-list-checks').click();
+
+        cy.plexButton('Agregar Paciente').click();
+        cy.plexText('name="buscador"', pacienteDoc.documento);
+        cy.wait('@listaPacientes').then(xhrPacientes => {
+            cy.log(xhrPacientes);
+            cy.expect(xhrPacientes.responseBody[0].documento).to.be.eq(pacienteDoc.documento)
+        })
+        cy.get('plex-item').contains(pacienteDoc.nombre).contains(pacienteDoc.apellido).click();
+        cy.plexButton('Guardar').click();
+        cy.wait('@agendaPatch').then(xhrAgendaPatch => {
+            cy.expect(xhrAgendaPatch.status).to.be.eq(200);
+        });
+    });
 })
