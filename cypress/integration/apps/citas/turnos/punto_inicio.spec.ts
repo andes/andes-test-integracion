@@ -148,7 +148,7 @@ context('punto de inicio', () => {
 
         cy.get('plex-tabs').contains('Turnos').click({ force: true });
 
-        cy.get('li[class="list-group-item"]').find('div[class=" list-group-item-text"]').find('div[class="row"]')
+        cy.get('li[class="list-group-item"]').find('div[class="list-group-item-text"]').find('div[class="row"]')
             .find('div[class="col-md-12"]').eq(1).plexButton("Dar Asistencia").click();
 
         cy.wait('@patchAgenda').then((xhr) => {
@@ -158,7 +158,7 @@ context('punto de inicio', () => {
         cy.toast('success', 'Se registro la asistencia del paciente');
 
 
-        cy.get('li[class="list-group-item"]').find('div[class=" list-group-item-text"]').find('div[class="row"]')
+        cy.get('li[class="list-group-item"]').find('div[class="list-group-item-text"]').find('div[class="row"]')
             .find('div[class="col-md-12"]').eq(1).plexButton("Quitar Asistencia").click({ force: true });
 
         cy.wait('@patchAgenda').then((xhr) => {
@@ -189,7 +189,7 @@ context('punto de inicio', () => {
         cy.get('plex-tabs').contains('Turnos').click({ force: true });
 
 
-        cy.get('li[class="list-group-item"]').find('div[class=" list-group-item-text"]').find('div[class="row"]')
+        cy.get('li[class="list-group-item"]').find('div[class="list-group-item-text"]').find('div[class="row"]')
             .find('div[class="col-md-12"]').eq(1).plexButton("Liberar Turno").click({ force: true });
 
         cy.wait('@getTurnosAgenda').then((xhr) => {
