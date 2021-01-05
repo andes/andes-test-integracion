@@ -23,6 +23,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.route('GET', '**/api/core/tm/organizaciones?esCOM=true').as('getOrganizacion');
         cy.route('POST', '**/modules/com/derivaciones**').as('createDerivacion');
         cy.route('PATCH', '**/modules/com/derivaciones/**').as('editDerivacion');
+        cy.route('POST', '**/modules/com/derivaciones/**/historial').as('updateHistorial');
         cy.route('POST', '/api/auth/v2/organizaciones').as('selectOrg');
         cy.route('GET', '**/api/auth/organizaciones').as('getOrganizaciones');
         secuencia(tokenOriginal);
@@ -121,7 +122,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.contains(' ACTUALIZAR ').click();
         cy.plexTextArea('label="Observacion"', 'nueva nota');
         cy.plexButton("Guardar").click();
-        cy.wait('@editDerivacion').then((xhr) => {
+        cy.wait('@updateHistorial').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.paciente.documento).to.be.eq('2111893');
         });
