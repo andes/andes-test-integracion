@@ -111,7 +111,49 @@ context('RUP - Ejecucion', () => {
             cy.contains('Valor requerido');
         });
 
-    })
+    });
+
+    describe('checklist atomo - allowOtherQuery', () => {
+
+        createTest(
+            {
+                title: 'PRUEBA',
+                items: resultadoSnomed,
+                idField: 'conceptId',
+                labelField: 'term',
+                multiple: true,
+                required: true,
+                allowOtherQuery: "<<404684003"
+            }
+        );
+
+        it.only('test opcion multiple', () => {
+            cy.expressionStub('<<404684003', [{
+                "conceptId": "386661006",
+                "term": "fiebre",
+                "fsn": "fiebre (hallazgo)",
+                "semanticTag": "hallazgo"
+            }], 'expFiebre');
+
+            cy.snomedSearchStub('derivacion', search, 'rup-buscador');
+            cy.RupBuscarConceptos('derivacion');
+            cy.seleccionarConcepto(0);
+
+            cy.plexSelectAsync('name=otros', 'fiebre', '@expFiebre', 0);
+
+            cy.assertRupCard(0, { semanticTag: 'procedimiento', term: 'derivación por' }).then(card => {
+                cy.wrap(card).plexRadioMultiple('name="plex-radio"', 0);
+            });
+
+            cy.plexButton('Guardar sesión de informes de enfermería').click();
+            cy.url().should('include', 'validacion');
+            cy.contains('concepto uno');
+            cy.contains('fiebre');
+
+
+        });
+
+    });
 })
 
 
