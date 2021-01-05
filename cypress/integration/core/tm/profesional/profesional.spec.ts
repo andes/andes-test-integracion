@@ -125,7 +125,7 @@ context('TM Profesional', () => {
         cy.contains('¡El profesional se creó con éxito!');
     });
 
-    it('crear profesional no matriculado no existente en renaper', () => {
+    it('se intenta validar nuevo profesional que no existente en renaper', () => {
         cy.goto('/tm/profesional/create', token);
 
         cy.server();
@@ -139,27 +139,7 @@ context('TM Profesional', () => {
         cy.plexSelectType('label="Sexo"', 'femenino');
 
         cy.get('plex-layout-sidebar').plexButton('Validar con servicios de Renaper').click();
-        cy.wait('@renaper').then((xhr) => {
-            expect(xhr.response.body).to.have.property('message', 'ciudadano no encontrado')
-        });
-
-        cy.swal('confirm');
-
-        cy.plexText('label="Nombre"', 'Julieta');
-        cy.plexText('label="Apellido"', 'Rodriguez');
-        cy.plexDatetime('label="Fecha de nacimiento"', '05/12/1987');
-
-        cy.plexBool('label="No posee ningún tipo de contacto"', true).should('be.checked');
-
-        cy.plexButton('Guardar').click();
-
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.apellido).to.be.eq('Rodriguez');
-            expect(xhr.response.body.nombre).to.be.eq('Julieta');
-            expect(xhr.response.body.documento).to.be.eq('15654898');
-        });
-        cy.contains('¡El profesional se creó con éxito!');
+        cy.wait('@renaper');
     });
 
     it('crear profesional duplicado', () => {
