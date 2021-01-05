@@ -118,7 +118,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
         cy.plexSelectType('label="Estado"').click().get('.option').contains('SOLICITADA').click();
         cy.get('plex-label').contains('Solicitante: PRUEBA, TEST').should('have.length', 1);
-        cy.contains(' SUMAR NOTA/ADJUNTO ').click();
+        cy.contains(' ACTUALIZAR ').click();
         cy.plexTextArea('label="Observacion"', 'nueva nota');
         cy.plexButton("Guardar").click();
         cy.wait('@editDerivacion').then((xhr) => {
@@ -133,7 +133,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.contains('solicitada').click({ force: true });
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 2);
-        cy.get('.card').contains('Nota sumada por');
+        cy.get('.card').contains('Actualizado por');
         cy.get('small').contains('Natalia Huenchuman de HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
         cy.get('.card').contains('nueva nota');
 
