@@ -330,6 +330,9 @@ describe('CITAS - Planificar Agendas', () => {
         cy.toast('success');
         cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click();
         cy.plexButtonIcon('pencil').click();
+        cy.wait('@getAgendas').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
         cy.plexSelect('label="Espacio Físico"').click();
         cy.plexSelect('label="Espacio Físico"').find('.remove-button').click();
         cy.plexSelectAsync('label="Espacio Físico"', 'CE.M.O.E. SAN JOSE OBRERO', '@institucion', 0);
