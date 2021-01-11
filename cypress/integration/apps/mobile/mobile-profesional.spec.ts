@@ -51,7 +51,7 @@ context('Pagina de login', () => {
 
 
     it('cargar adjunto', () => {
-        cy.route('POST', '/api/modules/rup/store**').as('store');
+        cy.route('POST', '/api/drive**').as('store');
         cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
 
