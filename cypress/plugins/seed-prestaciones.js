@@ -62,6 +62,7 @@ module.exports.seedPrestacion = async (mongoUri, params) => {
         if (params.organizacion) {
             const OrganizacionDB = await client.db().collection('organizacion');
             const orgData = await OrganizacionDB.findOne({ _id: new ObjectId(params.organizacion) }, { projection: { nombre: 1 } });
+            orgData.id = orgData._id;
             prestacion.solicitud.organizacion = orgData;
             prestacion.ejecucion.organizacion = orgData;
         } else {
