@@ -97,10 +97,6 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.plexSelect('label="Organización origen"', 0).click();
 
         cy.plexSelect('label="Tipos de Prestación Origen"', 0).click();
-
-        cy.plexSelectType('label="Profesional solicitante"').validationMessage()
-        cy.plexButton('Guardar').click();
-        cy.swal('confirm');
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
 
         cy.plexTextArea('label="Notas / Diagnóstico / Motivo"').validationMessage()
