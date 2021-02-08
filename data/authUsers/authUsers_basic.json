@@ -10,6 +10,18 @@
         "organizaciones": [
             {
                 "permisos": [
+                    "com:*",
+                    "mpi:*"
+                ],
+                "activo": true,
+                "perfiles": [],
+                "_id": {
+                    "$oid": "5ef7ae883e3de57c0a429797"
+                },
+                "nombre": "SIEN - SISTEMA INTEGRADO DE EMERGENCIA DE NEUQUEN"
+            },
+            {
+                "permisos": [
                     "turnos:*",
                     "mpi:*",
                     "rup:tipoPrestacion:59ee2d9bf00c415246fd3d6a",

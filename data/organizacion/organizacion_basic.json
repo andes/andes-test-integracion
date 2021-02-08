@@ -46274,5 +46274,199 @@
 			}
 		},
 		"__v": 0
+	},
+	{
+		"_id": {
+			"$oid": "5ef7ae883e3de57c0a429797"
+		},
+		"activo": true,
+		"turnosMobile": false,
+		"codigo": {
+			"_id": {
+				"$oid": "5ef7ae883e3de57c0a429798"
+			},
+			"sisa": "53580352168581",
+			"cuie": "",
+			"remediar": ""
+		},
+		"nombre": "SIEN - SISTEMA INTEGRADO DE EMERGENCIA DE NEUQUEN",
+		"trasladosEspeciales": [
+			{
+				"_id": {
+					"$oid": "6011a1d85d7b650c40bc12a4"
+				},
+				"nombre": "VUELO SANITARIO",
+				"id": "6011a1d85d7b650c40bc12a4"
+			},
+			{
+				"_id": {
+					"$oid": "601ac9d1a9431a5262d582c5"
+				},
+				"nombre": "AMBULANCIA EXTERNA",
+				"id": "601ac9d1a9431a5262d582c5"
+			}
+		],
+		"tipoEstablecimiento": {
+			"_id": {
+				"$oid": "5ef7ad4c99923a42cf01bff2"
+			},
+			"nombre": "Establecimiento de salud complementario",
+			"descripcion": "Establecimiento de salud complementario",
+			"idTipoEfector": 8
+		},
+		"direccion": {
+			"activo": true,
+			"_id": {
+				"$oid": "5ef7ae883e3de57c0a42979a"
+			},
+			"valor": "Gregorio Martinez 65",
+			"codigoPostal": "8300",
+			"ubicacion": {
+				"_id": {
+					"$oid": "5ef7ae883e3de57c0a42979b"
+				},
+				"barrio": null,
+				"localidad": {
+					"_id": {
+						"$oid": "57f538a472325875a199a82d"
+					},
+					"nombre": "Neuquén"
+				},
+				"provincia": {
+					"_id": {
+						"$oid": "57f3f3aacebd681cc2014c53"
+					},
+					"nombre": "Neuquén"
+				},
+				"pais": {
+					"_id": {
+						"$oid": "57f3b5c469fe79a598e6281f"
+					},
+					"nombre": "Argentina"
+				}
+			},
+			"ranking": 0,
+			"geoReferencia": null,
+			"ultimaActualizacion": {
+				"$date": "2020-06-27T20:36:38.271Z"
+			}
+		},
+		"contacto": [
+			{
+				"activo": true,
+				"_id": {
+					"$oid": "5ef7ae883e3de57c0a4297a0"
+				},
+				"tipo": "fijo",
+				"valor": "107",
+				"ranking": 0,
+				"ultimaActualizacion": {
+					"$date": "2020-06-27T20:36:38.271Z"
+				}
+			},
+			{
+				"activo": true,
+				"_id": {
+					"$oid": "5ef7ae883e3de57c0a42979f"
+				},
+				"tipo": "fijo",
+				"valor": "08003331002",
+				"ranking": 0,
+				"ultimaActualizacion": {
+					"$date": "2020-06-27T20:36:38.288Z"
+				}
+			}
+		],
+		"edificio": [
+			{
+				"_id": {
+					"$oid": "5ef7ae883e3de57c0a4297a1"
+				},
+				"descripcion": "Central",
+				"contacto": {
+					"activo": true,
+					"_id": {
+						"$oid": "5ef7ae883e3de57c0a4297a2"
+					},
+					"tipo": "fijo",
+					"valor": "107",
+					"ranking": 0,
+					"ultimaActualizacion": {
+						"$date": "2020-06-27T20:36:38.271Z"
+					}
+				},
+				"direccion": {
+					"activo": true,
+					"_id": {
+						"$oid": "5ef7ae883e3de57c0a4297a3"
+					},
+					"valor": "Gregorio Martinez 65",
+					"codigoPostal": "8300",
+					"ubicacion": {
+						"_id": {
+							"$oid": "5ef7ae883e3de57c0a4297a4"
+						},
+						"barrio": null,
+						"localidad": {
+							"_id": {
+								"$oid": "57f538a472325875a199a82d"
+							},
+							"nombre": "Neuquén"
+						},
+						"provincia": {
+							"_id": {
+								"$oid": "57f3f3aacebd681cc2014c53"
+							},
+							"nombre": "Neuquén"
+						},
+						"pais": {
+							"_id": {
+								"$oid": "57f3b5c469fe79a598e6281f"
+							},
+							"nombre": "Argentina"
+						}
+					},
+					"ranking": 0,
+					"geoReferencia": null,
+					"ultimaActualizacion": {
+						"$date": "2020-06-27T20:36:38.271Z"
+					}
+				}
+			}
+		],
+		"nivelComplejidad": 0,
+		"fechaAlta": {
+			"$date": "2020-06-27T20:36:38.271Z"
+		},
+		"fechaBaja": {
+			"$date": "2020-06-27T20:36:38.271Z"
+		},
+		"unidadesOrganizativas": [],
+		"ofertaPrestacional": [
+			{
+				"_id": {
+					"$oid": "5ef7ae883e3de57c0a4297a8"
+				}
+			}
+		],
+		"showMapa": false,
+		"mapaSectores": [],
+		"createdAt": {
+			"$date": "2020-06-27T20:39:36.325Z"
+		},
+		"createdBy": {
+			"id": "59e76173b7c39e57a13b38d8",
+			"nombreCompleto": "SILVINA ANALIA ROA",
+			"nombre": "SILVINA ANALIA",
+			"apellido": "ROA",
+			"username": 30093263,
+			"documento": 30093263,
+			"organizacion": {
+				"_id": "57e9670e52df311059bc8964",
+				"id": "57e9670e52df311059bc8964",
+				"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+			}
+		},
+		"__v": 0
 	}
 ]

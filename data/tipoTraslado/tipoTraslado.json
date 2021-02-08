@@ -1,0 +1,14 @@
+[
+    {
+        "_id": {
+            "$oid": "6011a1d85d7b650c40bc12a4"
+        },
+        "nombre": "VUELO SANITARIO"
+    },
+    {
+        "_id": {
+            "$oid": "601ac9d1a9431a5262d582c5"
+        },
+        "nombre": "AMBULANCIA EXTERNA"
+    }
+]
