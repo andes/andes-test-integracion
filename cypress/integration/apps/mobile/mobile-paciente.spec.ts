@@ -4,7 +4,7 @@ context('Pagina de login', () => {
         cy.seed();
         cy.task('database:seed:paciente').then(pacientes => {
             paciente = pacientes[0];
-            cy.task('database:seed:nomivac', { paciente: paciente._id, });
+            cy.task('database:seed:nomivac', { paciente: paciente._id, vacuna: 'Neumococo Conjugada VCN 13', dosis: '1er Dosis' });
             cy.task('database:create:paciente-app', { fromPaciente: paciente._id });
             cy.task('database:seed:campania');
         });

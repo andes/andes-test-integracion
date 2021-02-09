@@ -54,7 +54,6 @@ context('Pagina de login', () => {
         cy.route('POST', '/api/drive**').as('store');
         cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
-
         cy.goto('/rup/ejecucion/' + idPrestacion, token);
         cy.plexButtonIcon('chevron-down').eq(0).click({ force: true });
 
@@ -70,6 +69,7 @@ context('Pagina de login', () => {
             expect(xhr.response.body.ejecucion.registros[0].valor.documentos[0].ext).to.be.eq('png');
         });
     });
+
 
     it('Log in', () => {
         cy.post(
@@ -97,18 +97,19 @@ context('Pagina de login', () => {
     });
 
     it('Adjunto RUP', () => {
-        cy.get('[name="andes-vacuna"]').eq(1).click();
+        cy.get('[name="andes-vacuna"]').click();
         cy.wait('@prestaciones-adjuntar').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('[name="search"]').click();
+        cy.get('[name="search"]').click({ force: true });
         const fileName = '/archivos/cat.png';
         cy.get('[type="file"]').attachFile(fileName);
-        cy.get('[name="checkmark"]').click();
+        cy.get('ion-button').get('.ion-color-success').click();
         cy.wait('@patch-adjuntar').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.status).to.be.eq("ok");
         });
     });
+
 });
 
