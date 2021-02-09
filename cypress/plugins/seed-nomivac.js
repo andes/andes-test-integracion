@@ -8,6 +8,8 @@ module.exports.seedNomivac = async (mongoUri, params) => {
 
         const PacienteDB = await client.db().collection('paciente');
         const paciente = await PacienteDB.findOne({ _id: new ObjectId(params.paciente) });
+        const nombreVacuna = params.vacuna;
+        const dosis = params.dosis;
 
         const vacuna = {
             "_id": new ObjectId(),
@@ -17,8 +19,8 @@ module.exports.seedNomivac = async (mongoUri, params) => {
             "apellido": paciente.apellido,
             "fechaNacimiento": paciente.fechaNacimiento,
             "sexo": paciente.sexo,
-            "vacuna": "Neumococo Conjugada VCN 13",
-            "dosis": "1er Dosis",
+            "vacuna": nombreVacuna,
+            "dosis": dosis,
             "fechaAplicacion": new Date("2014-07-26T21:00:00.000-03:00"),
             "efector": "CENTRO DE SALUD SAN LORENZO SUR"
         }
