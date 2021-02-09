@@ -1,4 +1,4 @@
-context('Pagina de login', () => {
+context('mobile paciente', () => {
     let paciente;
     before(() => {
         cy.seed();
@@ -8,6 +8,8 @@ context('Pagina de login', () => {
             cy.task('database:create:paciente-app', { fromPaciente: paciente._id });
             cy.task('database:seed:campania');
         });
+
+        cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '598ca8375adc68e2a0c121b8', fecha: -1 });
     })
 
     beforeEach(() => {
@@ -16,6 +18,7 @@ context('Pagina de login', () => {
         cy.route('POST', '**/api/auth/login').as('loginProfesional');
         cy.route('GET', '**/api/core/tm/campanias').as('campanias');
         cy.route('PUT', '**/api/modules/mobileApp/account').as('updateAccount');
+        cy.route('PUT', '**/api/modules/mobileApp/paciente/**').as('updatePaciente');
         cy.route('GET', '**/api/modules/mobileApp/paciente/**').as('getProfile');
         cy.route('GET', '**/api/modules/vacunas/**').as('getVacunas');
         cy.viewport(550, 750);
@@ -27,7 +30,7 @@ context('Pagina de login', () => {
                 return false;
             }
         })
-        cy.goto("/home/");
+        cy.goto("/mobile/home/");
         cy.get('.nologin').click();
         cy.get('input').first().type('pepe@gmail.com');
         cy.get('#password').first().type('pepe');
@@ -39,7 +42,7 @@ context('Pagina de login', () => {
     });
 
     it('Login de paciente existente', () => {
-        cy.goto("/home/", null, null, {
+        cy.goto("/mobile/home/", null, null, {
             "coords": {
                 "latitude": -38.9502334061469,
                 "longitude": -68.0569198206332
@@ -65,18 +68,57 @@ context('Pagina de login', () => {
         cy.contains(Cypress.moment(paciente.fechaNacimiento).format('DD/MM/YYYY'));
     });
 
-    it.skip('Modificación de email', () => {
-        cy.get('ion-menu-button').first().click();
-        cy.contains('Datos Personales').click({ force: true });
-        cy.get('ion-tab-button').last().click({ force: true });
-        cy.get('[placeholder="Dirección de e-mail"]').type('nuevoemail@gmail.com');
+    it('Modificacion de datos de acceso', () => {
+        cy.contains('Configurar cuenta').click({ force: true });
+        cy.get('input').first().clear();
+        cy.get('input').first().type('2944575757');
         cy.get('.success').click();
-        cy.get('.back-button').last().click();
+        cy.wait('@updateAccount').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('ion-menu-button').first().click({ force: true });
+        cy.contains('Configurar cuenta').click({ force: true });
+        cy.focused().click();
+        cy.get('[placeholder="Teléfono"]').should('have.value', '2944575757');
+        cy.get('[placeholder="Correo Electrónico"]').should('have.value', 'pacientevalidado@gmail.com');
+    });
 
+    it('Cambiar contraseña', () => {
+        cy.contains('Configurar cuenta').click({ force: true });
+        cy.get('.danger').click();
+        cy.get('[placeholder="Contraseña actual"]').type('martin');
+        cy.get('[placeholder="Nueva contraseña"]').type('martin123');
+        cy.get('[placeholder="Repita contraseña"]').type('martin123');
+        cy.get('.success').contains('Actualizar').click();
+        cy.wait('@updateAccount').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+    });
+
+    it('Modificación de email', () => {
+        cy.contains('Datos Personales').click({ force: true });
+        cy.wait('@getProfile').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('ion-tab-button').last().click({ force: true });
+
+        cy.get('[placeholder="Dirección de e-mail"]').first().type('nuevoemail@gmail.com');
+        cy.get('.ion-color-success').click();
+        cy.wait('@updatePaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('ion-back-button').click({ force: true });
+    });
+
+    it('Verificar historial de turnos', () => {
+        cy.contains('Mi historial de turnos').click({ force: true });
+        cy.contains('consulta de medicina general');
+        cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+        cy.contains('HUENCHUMAN, NATALIA VANESA');
+        cy.get('ion-back-button').click({ force: true });
     });
 
     it('Verificar campañas', () => {
-        cy.get('ion-back-button').click({ force: true });
         cy.get('[name="andes-agendas"]').click({ force: true });
         cy.wait('@campanias').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -101,7 +143,7 @@ context('Pagina de login', () => {
         cy.get('ion-back-button').click({ force: true });
     });
 
-    it('Sacar turno on line', () => {
+    it.skip('Sacar turno on line', () => {
 
         cy.task('database:seed:agenda', {
             tipoPrestaciones: '598ca8375adc68e2a0c121bc',

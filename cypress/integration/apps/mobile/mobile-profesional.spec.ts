@@ -1,4 +1,4 @@
-context('Pagina de login', () => {
+context('mobile profesional', () => {
     let token, idPrestacion;
     before(() => {
         cy.seed();
