@@ -21,6 +21,8 @@ const API_BRANCH = process.env.API_BRANCH || "master";
 const MATRICULACIONES_BRANCH = process.env.MATRICULACIONES_BRANCH || "master";
 const MONITOREO_BRANCH = process.env.MONITOREO_BRANCH || "master";
 const TEST_BRANCH = process.env.TEST_BRANCH || "master";
+const MOBILE_BRANCH = process.env.MOBILE_BRANCH || "master";
+
 
 const CYPRESS_PARAMS = process.env.CYPRESS_PARAMS || ''
 const FILE_FILTER = process.env.FILE_FILTER || '';
@@ -109,6 +111,8 @@ async function main() {
   await publishComment(result, "andes-test-integracion", TEST_BRANCH);
   await publishComment(result, "monitoreo-app", MONITOREO_BRANCH);
   await publishComment(result, "matriculaciones", MATRICULACIONES_BRANCH);
+  await publishComment(result, "mobile-app", MOBILE_BRANCH);
+
 
   const texto = createStatsText(result);
   sendMessage(USERNAME, texto);
