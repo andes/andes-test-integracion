@@ -19,6 +19,7 @@ module.exports.createPacienteApp = async (mongoUri, params) => {
 
             if (params.fromProfesional) {
                 pacienteApp.profesionalId = paciente._id;
+                pacienteApp.email = paciente.documento;
             }
 
             pacienteApp.documento = paciente.documento;

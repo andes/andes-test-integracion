@@ -14,7 +14,7 @@ declare namespace Cypress {
          * @param colecciones 
          */
 
-        cleanDB(colecciones?: string[]): Chainable<void>;
+        cleanDB(colecciones?: string | string[]): Chainable<void>;
 
         goto(url: string, token?: string, hudsToken?: string, location?: any): Chainable<void>;
 

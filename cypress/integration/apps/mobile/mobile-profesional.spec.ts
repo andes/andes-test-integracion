@@ -2,6 +2,7 @@ context('mobile profesional', () => {
     let token, idPrestacion;
     before(() => {
         cy.seed();
+        cy.cleanDB('authDisclaimers');
         cy.task('database:seed:paciente');
         cy.task('database:create:paciente-app',
             {
