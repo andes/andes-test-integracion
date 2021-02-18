@@ -10,6 +10,16 @@ context('mobile paciente', () => {
         });
 
         cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '598ca8375adc68e2a0c121b8', fecha: -1 });
+
+        cy.task('database:seed:agenda', {
+            tipoPrestaciones: '598ca8375adc68e2a0c121bc',
+            estado: 'publicada',
+            organizacion: '57e9670e52df311059bc8964',
+            inicio: '3',
+            fin: '4',
+            fecha: 1,
+            tipo: 'programado'
+        });
     })
 
     beforeEach(() => {
@@ -143,34 +153,42 @@ context('mobile paciente', () => {
         cy.get('ion-back-button').click({ force: true });
     });
 
-    it.skip('Sacar turno on line', () => {
-
-        cy.task('database:seed:agenda', {
-            tipoPrestaciones: '598ca8375adc68e2a0c121bc',
-            estado: 'publicada',
-            organizacion: '57e9670e52df311059bc8964',
-            inicio: '3',
-            fin: '4',
-            fecha: 1,
-            tipo: 'programado'
-        });
+    it('Dacion de turno', () => {
 
         cy.route('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
+        cy.route('GET', '**/api/modules/mobileApp/turnos/agenda**').as('getAgenda');
         cy.route('PATCH', '**api/modules/turnos/turno/**').as('patchTurno');
         cy.route('GET', '**/agendasDisponibles?**').as('agendasDisponibles');
 
-        cy.get('[name="andes-turno"]').click();
-
+        cy.get('.circle-container').find('li').first().find('ion-icon').get('[name="andes-turno"]').click({ force: true });
         cy.wait('@getTurnosMobile');
         cy.contains('No tienes ningún turno programado');
-        // cy.get('ion-button').contains('Solicitar Turno').last().click();
-        // cy.wait('@agendasDisponibles');
-        // cy.get('page-turnos-prestaciones [name="ios-arrow-forward-outline"]').last().click();
-        // cy.get('[name="ios-arrow-forward-outline"]').last().click();
-        // cy.get('[name="andes-confirmar"]').first().click();
-        // cy.get('button').contains('Confirmar').click();
-        // cy.wait('@patchTurno').then((xhr) => {
-        //expect(xhr.status).to.be.eq(200);
-        //});
+        cy.contains('Solicitar Turno').click({ force: true });
+        cy.wait(500);
+        cy.wait('@agendasDisponibles').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody[0].agendas[0].estado).to.be.eq('publicada');
+            expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].conceptId).to.be.eq('401000013105');
+            expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].term).to.be.eq('consulta de clínica médica');
+        });
+        cy.get('.andes-list').find('ion-icon').get('[name="chevron-forward-outline"]').click({ force: true });
+        cy.wait('@agendasDisponibles').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.responseBody[0].domicilio).to.be.eq('Buenos Aires 450');
+            expect(xhr.responseBody[0].organizacion).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+        });
+        cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON').click();
+        cy.wait('@agendasDisponibles');
+        cy.get('ion-list-header').find('ion-label').contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+        cy.get('ion-list-header').find('ion-label').contains('HUENCHUMAN NATALIA VANESA');
+        cy.get('ion-item').find('ion-button').get('[name="checkmark"]').first().click({ force: true }).then(() => {
+            cy.get('ion-content').find('.ion-margin-vertical').contains('HUENCHUMAN NATALIA VANESA');
+            cy.get('ion-content').find('.titulo-prefix').contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+            cy.get('ion-content').find('.titulo-secundario').contains('consulta de clínica médica');
+            cy.get('ion-content').find('.andes-list-subtitle').contains('IMPORTANTE: Si Ud. no puede concurrir al turno por favor recuerde cancelarlo a través de esta aplicación móvil, o comunicándose telefónicamente al Centro de Salud, para que otro paciente pueda tomarlo. ¡Muchas gracias!');
+            cy.get('ion-content').find('button').contains('Confirmar').click({ force: true });
+        });
+        cy.wait('@getProfile');
+        cy.wait('@patchTurno');
     });
 }); 
