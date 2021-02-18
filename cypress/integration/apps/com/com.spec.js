@@ -426,7 +426,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
-        cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').first().click({ force: true });
+        cy.get('plex-item plex-badge i.adi-avion').click();
         cy.get('span').contains('Traslado');
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 6);
