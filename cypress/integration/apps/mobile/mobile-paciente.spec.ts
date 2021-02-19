@@ -163,8 +163,9 @@ context('mobile paciente', () => {
         cy.get('.circle-container').find('li').first().find('ion-icon').get('[name="andes-turno"]').click({ force: true });
         cy.wait('@getTurnosMobile');
         cy.contains('No tienes ningún turno programado');
-        cy.contains('Solicitar Turno').click({ force: true });
-        cy.wait(500);
+        cy.get('ion-button').contains('Solicitar Turno').first().click({ multiple: true, force: true });
+
+        cy.url().should('include', 'mobile/turnos/prestaciones');
         cy.wait('@agendasDisponibles').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.responseBody[0].agendas[0].estado).to.be.eq('publicada');
