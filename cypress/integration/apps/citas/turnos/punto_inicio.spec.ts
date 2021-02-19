@@ -291,7 +291,7 @@ context('punto de inicio', () => {
         });
 
         //Esta mal el formato que viene por defecto por eso se modifica el numero de telefono
-        cy.plexPhone('label="Número"', '{selectall}{backspace}2222222222');
+        cy.plexPhone('label="Número"', '{selectall}{backspace}2996333222');
         cy.plexText('name="divValor"', '{selectall}{backspace}Avenida Las Flores 1200');
         cy.plexButton("Guardar").click();
         cy.wait('@guardar').then((xhr) => {
