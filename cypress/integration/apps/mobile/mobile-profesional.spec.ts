@@ -48,10 +48,11 @@ context('mobile profesional', () => {
         cy.route('POST', '**/api/auth/login').as('loginProfesional');
         cy.route('GET', '**/api/modules/mobileApp/prestaciones-adjuntar').as('prestaciones-adjuntar');
         cy.route('PATCH', '**/api/modules/mobileApp/prestaciones-adjuntar/**').as('patch-adjuntar');
+        cy.viewport(550, 750);
     });
 
 
-    it('cargar adjunto', () => {
+    it.skip('cargar adjunto', () => {
         cy.route('POST', '/api/drive**').as('store');
         cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
@@ -110,6 +111,9 @@ context('mobile profesional', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.status).to.be.eq("ok");
         });
+        cy.get('ion-back-button').last().click({ force: true });
+        cy.get('[name="log-out-outline"]').click({ force: true });
+
     });
 
 });
