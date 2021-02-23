@@ -44,13 +44,13 @@ context('mobile profesional', () => {
             return false;
         })
         cy.server();
+        cy.viewport(550, 750);
         cy.route('POST', '**/api/modules/mobileApp/login').as('login');
         cy.route('POST', '**/api/auth/login').as('loginProfesional');
         cy.route('GET', '**/api/modules/mobileApp/prestaciones-adjuntar').as('prestaciones-adjuntar');
         cy.route('PATCH', '**/api/modules/mobileApp/prestaciones-adjuntar/**').as('patch-adjuntar');
-        cy.viewport(550, 750);
+        // cy.route('GET', '**/rup/ejecucion/' + idPrestacion, token).as('ejecucion-rup');
     });
-
 
     it.skip('cargar adjunto', () => {
         cy.route('POST', '/api/drive**').as('store');
@@ -74,45 +74,57 @@ context('mobile profesional', () => {
 
 
     it('Log in', () => {
-        cy.post(
-            '/api/modules/mobileApp/prestaciones-adjuntar',
-            {
-                "paciente": "586e6e8627d3107fde116cdb",
-                "prestacion": idPrestacion,
-                "registro": "5f94594bdc5f1a0f691a67f2",
-                "profesional": "5d02602588c4d1772a8a17f8"
-            },
-            token
-        );
 
         cy.goto("/mobile/");
-        cy.get('.nologin').click();
-        cy.get('input').first().type('30643636');
-        cy.get('#password').first().type('asd');
-        cy.get('.success').click();
-        cy.wait('@loginProfesional').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
+        cy.wait(500);
+        cy.get('.nologin').click().then(() => {
+            cy.get('input').first().type('30643636');
+            cy.get('#password').first().type('asd');
+            cy.get('.success').click();
+            cy.wait('@loginProfesional').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
+                cy.post(
+                    '/api/modules/mobileApp/prestaciones-adjuntar',
+                    {
+                        "paciente": "586e6e8627d3107fde116cdb",
+                        "prestacion": idPrestacion,
+                        "registro": "5f94594bdc5f1a0f691a67f2",
+                        "profesional": "5d02602588c4d1772a8a17f8"
+                    },
+                    xhr.responseBody.token
+                );
+            });
+            cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON').click();
+            cy.contains('Hola Natalia');
+
         });
-        cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON').click();
-        cy.contains('Hola Natalia');
     });
 
     it('Adjunto RUP', () => {
+        cy.wait(500);
         cy.get('[name="andes-vacuna"]').click();
         cy.wait('@prestaciones-adjuntar').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+
+        cy.wait(500);
         cy.get('[name="search"]').click({ force: true });
-        const fileName = '/archivos/cat.png';
-        cy.get('[type="file"]').attachFile(fileName);
-        cy.get('ion-button').get('.ion-color-success').click();
-        cy.wait('@patch-adjuntar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.status).to.be.eq("ok");
+
+        cy.get('[icon="ball-triangle"]').should('not.exist').then(() => {
+            const fileName = '/archivos/cat.png';
+            cy.get('[type="file"]').attachFile(fileName);
+
+            // Btn "confirmar"
+            cy.get('ion-button').then($btn => {
+                cy.wait(500);
+                cy.get('.ion-color-success').click();
+                cy.wait('@patch-adjuntar').then((xhr) => {
+                    expect(xhr.status).to.be.eq(200);
+                    expect(xhr.response.body.status).to.be.eq("ok");
+                });
+            });
         });
-        cy.get('ion-back-button').last().click({ force: true });
-        cy.get('[name="log-out-outline"]').click({ force: true });
 
     });
 

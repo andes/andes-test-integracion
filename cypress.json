@@ -9,8 +9,8 @@
   "chromeWebSecurity": false,
   "modifyObstructiveCode": false,
   "projectId": "xr7gft",
-  "viewportWidth": 1280,
-  "viewportHeight": 720,
+  "viewportHeight": 550,
+  "viewportWidth": 750,
   "requestTimeout": 10000,
   "retries": {
     "runMode": 3,
