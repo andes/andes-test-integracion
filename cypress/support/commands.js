@@ -77,6 +77,7 @@ Cypress.Commands.add('goto', (url, token, hudsToken, location) => {
             }
             if (location) {
                 win.navigator.geolocation.getCurrentPosition = (s, e, o) => {
+
                     s(location);
                 }
             }
