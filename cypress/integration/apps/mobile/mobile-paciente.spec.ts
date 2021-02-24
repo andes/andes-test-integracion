@@ -163,6 +163,7 @@ context('mobile paciente', () => {
         cy.get('.circle-container').find('li').first().find('ion-icon').get('[name="andes-turno"]').click({ force: true });
         cy.wait('@getTurnosMobile');
         cy.contains('No tienes ningún turno programado');
+
         cy.get('ion-button').contains('Solicitar Turno').first().click({ multiple: true, force: true });
 
         cy.url().should('include', 'mobile/turnos/prestaciones');
