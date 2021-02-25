@@ -89,7 +89,7 @@ context('RUP - Ejecucion', () => {
 
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(2).find('rup-seccion-component > form > label').should('not.exist');
 
-            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(3).find('rup-seccion-component .row > div.col-12').should('have.length', 2);
+            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(3).find('rup-seccion-component .row > div.col-12').should('have.length', 1);
 
             cy.plexButton('Guardar').click();
             cy.toast('error');
@@ -110,7 +110,7 @@ context('RUP - Ejecucion', () => {
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(1).find('.card-header').click();
 
             // No es un elemento plex
-            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(1).find('textarea').type('escribo algo');
+            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(1).find('plex-text').type('escribo algo');
 
             cy.plexButton('Guardar').click();
 
