@@ -103,17 +103,22 @@ context('mobile paciente', () => {
         cy.wait('@updateAccount').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+
     });
 
     it('Modificación de email', () => {
-        cy.contains('Datos Personales').click({ force: true });
+        cy.contains('Datos Personales').parent().click({ force: true });
+        cy.get('ion-content').eq(2).click(500, 500, { force: true })
         cy.wait('@getProfile').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
+
+        cy.wait(500);
         cy.get('ion-tab-button').last().click({ force: true });
 
-        cy.get('[placeholder="Dirección de e-mail"]').first().type('nuevoemail@gmail.com');
-        cy.get('.ion-color-success').click();
+        cy.wait(500);
+        cy.get('ion-input[name="email"] input').first().type('nuevoemail@gmail.com', { force: true });
+        cy.get('.ion-color-success').click({ force: true });
         cy.wait('@updatePaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
