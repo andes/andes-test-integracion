@@ -89,7 +89,7 @@ context('RUP - Ejecucion', () => {
 
             cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(2).find('rup-seccion-component > form > label').should('not.exist');
 
-            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(3).find('rup-seccion-component .row > div.col-12').should('have.length', 1);
+            cy.get('rup-seccionnado-component plex-accordion plex-panel').eq(3).find('rup-seccion-component .row > div.col-12').should('have.length', 2);
 
             cy.plexButton('Guardar').click();
             cy.toast('error');
