@@ -10,16 +10,6 @@ context('mobile paciente', () => {
         });
 
         cy.task('database:seed:agenda', { pacientes: '586e6e8627d3107fde116cdb', tipoPrestaciones: '598ca8375adc68e2a0c121b8', fecha: -1 });
-
-        cy.task('database:seed:agenda', {
-            tipoPrestaciones: '598ca8375adc68e2a0c121bc',
-            estado: 'publicada',
-            organizacion: '57e9670e52df311059bc8964',
-            inicio: '3',
-            fin: '4',
-            fecha: 1,
-            tipo: 'programado'
-        });
     })
 
     beforeEach(() => {
@@ -40,7 +30,7 @@ context('mobile paciente', () => {
                 return false;
             }
         })
-        cy.goto("/mobile/home/");
+        cy.goto("/mobile/home");
         cy.get('.nologin').click();
         cy.get('input').first().type('pepe@gmail.com');
         cy.get('#password').first().type('pepe');
@@ -52,7 +42,7 @@ context('mobile paciente', () => {
     });
 
     it('Login de paciente existente', () => {
-        cy.goto("/mobile/home/", null, null, {
+        cy.goto("/mobile/home", null, null, {
             "coords": {
                 "latitude": -38.9502334061469,
                 "longitude": -68.0569198206332
@@ -158,44 +148,67 @@ context('mobile paciente', () => {
         cy.get('ion-back-button').click({ force: true });
     });
 
+
+    it('No hay turnos programados', () => {
+        cy.route('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
+        cy.get('.circle-container',).within($container => {
+            cy.wrap($container).find('[name="andes-turno"]').click();
+        });
+
+        cy.wait('@getTurnosMobile');
+        cy.contains('No tienes ningún turno programado');
+        cy.get('ion-back-button').click({ force: true });
+    });
+
     it('Dacion de turno', () => {
 
         cy.route('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
         cy.route('GET', '**/api/modules/mobileApp/turnos/agenda**').as('getAgenda');
         cy.route('PATCH', '**api/modules/turnos/turno/**').as('patchTurno');
-        cy.route('GET', '**/agendasDisponibles?**').as('agendasDisponibles');
+        cy.route('GET', '**/agendasDisponibles**').as('agendasDisponibles1');
 
-        cy.get('.circle-container').find('li').first().find('ion-icon').get('[name="andes-turno"]').click({ force: true });
+        cy.task('database:seed:agenda', {
+            tipoPrestaciones: '598ca8375adc68e2a0c121b8',
+            estado: 'publicada',
+            organizacion: '57e9670e52df311059bc8964',
+            inicio: '3',
+            fin: '4',
+            fecha: 1,
+            tipo: 'programado'
+        });
+
+        cy.get('.circle-container',).within($container => {
+            cy.wrap($container).find('[name="andes-turno"]').click();
+        });
+
         cy.wait('@getTurnosMobile');
-        cy.contains('No tienes ningún turno programado');
 
-        cy.get('ion-button').contains('Solicitar Turno').first().click({ multiple: true, force: true });
+        cy.get('.icono-text-container.no-item').within(() => {
+            cy.get('ion-button').click({ force: true });
+            cy.url().should('include', 'mobile/turnos/prestaciones');
+        });
 
-        cy.url().should('include', 'mobile/turnos/prestaciones');
-        cy.wait('@agendasDisponibles').then((xhr) => {
+        cy.wait('@agendasDisponibles1').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.responseBody[0].agendas[0].estado).to.be.eq('publicada');
-            expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].conceptId).to.be.eq('401000013105');
-            expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].term).to.be.eq('consulta de clínica médica');
+            expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].conceptId).to.be.eq('391000013108');
+            expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].term).to.be.eq('consulta de medicina general');
         });
+
         cy.get('.andes-list').find('ion-icon').get('[name="chevron-forward-outline"]').click({ force: true });
-        cy.wait('@agendasDisponibles').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody[0].domicilio).to.be.eq('Buenos Aires 450');
-            expect(xhr.responseBody[0].organizacion).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-        });
-        cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON').click();
-        cy.wait('@agendasDisponibles');
+        cy.wait('@agendasDisponibles1');
+        cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON').click({ force: true });
+        cy.wait('@agendasDisponibles1');
         cy.get('ion-list-header').find('ion-label').contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
         cy.get('ion-list-header').find('ion-label').contains('HUENCHUMAN NATALIA VANESA');
-        cy.get('ion-item').find('ion-button').get('[name="checkmark"]').first().click({ force: true }).then(() => {
-            cy.get('ion-content').find('.ion-margin-vertical').contains('HUENCHUMAN NATALIA VANESA');
+        cy.get('ion-item').find('ion-button').get('[name="checkmark"]').first().click({ force: true }).then((xhr) => {
             cy.get('ion-content').find('.titulo-prefix').contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-            cy.get('ion-content').find('.titulo-secundario').contains('consulta de clínica médica');
+            cy.get('ion-content').find('.titulo-secundario').contains('consulta de medicina general');
             cy.get('ion-content').find('.andes-list-subtitle').contains('IMPORTANTE: Si Ud. no puede concurrir al turno por favor recuerde cancelarlo a través de esta aplicación móvil, o comunicándose telefónicamente al Centro de Salud, para que otro paciente pueda tomarlo. ¡Muchas gracias!');
             cy.get('ion-content').find('button').contains('Confirmar').click({ force: true });
-        });
+        })
         cy.wait('@getProfile');
         cy.wait('@patchTurno');
+        cy.contains('No tienes ningún turno programado');
     });
 }); 
