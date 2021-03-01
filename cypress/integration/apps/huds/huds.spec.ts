@@ -471,14 +471,14 @@ context('RUP - Ejecucion', () => {
         cy.assertRupCard(0, { term: ' Informe de alta ' }).then((elem) => {
             cy.wrap(elem).contains(' servicio de clínica médica '); // UNIDAD ORGANIZATIVA DE LA EPICRISIS
             cy.wrap(elem).contains('Texto resumen de la internación'); // RESUMEN DE LA INTERNACIÓN
-            cy.wrap(elem).contains(' Texto del tratamiento recibido durante la internacion '); // TRATAMIENTO RECIBIDO DURANTE LA INTERNACIÓN
-            cy.wrap(elem).contains(' Texto del resumen de laboratorios '); // REGISTROS DE LABORATORIOS/ESTUDIOS (Resumen de laboratorios)
-            cy.wrap(elem).contains(' Texto del resumen de procedimientos '); // REGISTROS DE LABORATORIOS/ESTUDIOS ( Resumen de procedimientos)
-            cy.wrap(elem).contains(' Texto de situaciones pendientes '); // SITUACIONES PENDIENTES
-            cy.wrap(elem).contains(' Texto de tratamiento a seguir post internacion '); // TRATAMIENTOS A SEGUIR
-            cy.wrap(elem).contains(' Texto de dieta a seguir post internacion '); // DIETA A SEGUIR
-            cy.wrap(elem).contains(' Texto de pautas de alarma post internacion '); // PAUTAS DE ALARMA
-            cy.wrap(elem).contains(' Texto de diagnostico de egreso '); // DIAGNOSTICO AL EGRESO
+            cy.wrap(elem).contains('Texto del tratamiento recibido durante la internacion'); // TRATAMIENTO RECIBIDO DURANTE LA INTERNACIÓN
+            cy.wrap(elem).contains('Texto del resumen de laboratorios'); // REGISTROS DE LABORATORIOS/ESTUDIOS (Resumen de laboratorios)
+            cy.wrap(elem).contains('Texto del resumen de procedimientos'); // REGISTROS DE LABORATORIOS/ESTUDIOS ( Resumen de procedimientos)
+            cy.wrap(elem).contains('Texto de situaciones pendientes'); // SITUACIONES PENDIENTES
+            cy.wrap(elem).contains('Texto de tratamiento a seguir post internacion'); // TRATAMIENTOS A SEGUIR
+            cy.wrap(elem).contains('Texto de dieta a seguir post internacion'); // DIETA A SEGUIR
+            cy.wrap(elem).contains('Texto de pautas de alarma post internacion'); // PAUTAS DE ALARMA
+            cy.wrap(elem).contains('Texto de diagnostico de egreso'); // DIAGNOSTICO AL EGRESO
         });
     })
 
