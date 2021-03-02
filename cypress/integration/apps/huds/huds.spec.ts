@@ -80,7 +80,30 @@ context('RUP - Ejecucion', () => {
                 }]
             }
         );
-
+        cy.task(
+            'database:seed:prestacion',
+            {
+                paciente: '586e6e8627d3107fde116cdb',
+                tipoPrestacion: '598ca8375adc68e2a0c121bc',
+                organizacion: '57f67d090166fa6aedb2f9fb',
+                estado: 'validada',
+                registros: [{
+                    id: "5f772b7ac9264781190bc790",
+                    concepto: {
+                        "conceptId": "186788009",
+                        "term": "fiebre Q",
+                        "fsn": "fiebre Q (trastorno)",
+                        "semanticTag": "trastorno"
+                    },
+                    valor: {
+                        "idRegistroOrigen": "5f772b7ac9264781190bc794",
+                        "estado": "activo",
+                        "fechaInicio": new Date(),
+                        "evolucion": "<p>hola mundo2</p>"
+                    },
+                }]
+            }
+        );
         cy.task(
             'database:seed:prestacion',
             {
@@ -157,7 +180,6 @@ context('RUP - Ejecucion', () => {
                 inicio: "top"
             }
         );
-
         cy.task(
             'database:seed:prestacion',
             {
@@ -292,7 +314,7 @@ context('RUP - Ejecucion', () => {
         cy.assertHudsBusquedaFiltros('producto', 1);
         cy.assertHudsBusquedaFiltros('procedimiento', 1);
 
-        cy.getHUDSItems().should('have.length', 3);
+        cy.getHUDSItems().should('have.length', 4);
 
         cy.getHUDSItems().eq(0).assertRUPMiniCard({
             term: 'consulta de clínica médica ',
@@ -302,20 +324,27 @@ context('RUP - Ejecucion', () => {
         });
 
         cy.getHUDSItems().eq(1).assertRUPMiniCard({
-            term: 'consulta de medicina general',
+            term: 'consulta de clínica médica ',
             fecha: Cypress.moment().format('DD/MM/YYYY'),
             profesional: 'Natalia Huenchuman',
             badge: 'validada'
         });
 
         cy.getHUDSItems().eq(2).assertRUPMiniCard({
+            term: 'consulta de medicina general',
+            fecha: Cypress.moment().format('DD/MM/YYYY'),
+            profesional: 'Natalia Huenchuman',
+            badge: 'validada'
+        });
+
+        cy.getHUDSItems().eq(3).assertRUPMiniCard({
             term: 'sesión de informes de enfermería',
             fecha: Cypress.moment().subtract(1, 'day').format('DD/MM/YYYY'),
             profesional: 'Natalia Huenchuman',
             badge: 'validada'
         });
 
-        cy.getHUDSItems().eq(1).click();
+        cy.getHUDSItems().eq(2).click();
         cy.assertRupCard(0, { semanticTag: 'producto', term: ' Ibuprofeno+mentol ' }).then((elem) => {
             cy.wrap(elem).contains('activo'); //Estado
             cy.wrap(elem).contains('20 dias'); //Durante
@@ -328,7 +357,7 @@ context('RUP - Ejecucion', () => {
             cy.wrap(elem).contains('90 Kg'); //Peso
         });
 
-        cy.getHUDSItems().eq(2).click();
+        cy.getHUDSItems().eq(3).click();
 
         cy.assertRupCard(0, { semanticTag: 'trastorno', term: 'Fiebre Q' }).then((elem) => {
             cy.wrap(elem).contains('hola mundo');
@@ -426,6 +455,24 @@ context('RUP - Ejecucion', () => {
             badge: 'validada'
         }).click();
     })
+    it('HUDS - Filtro ambulatorio por organizacion', () => {
+        cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
+
+        cy.HudsBusquedaFiltros('prestaciones');
+
+        cy.plexButtonIcon('chevron-down').click();
+
+        cy.plexSelectType('label="Organización"', 'HOSPITAL DE AREA CENTENARIO - DR. NATALIO BURD');
+        cy.plexDatetime('name="fechaInicio"', Cypress.moment().subtract(1, 'day').format('DD/MM/YYYY'));
+
+        cy.getHUDSItems().eq(0).assertRUPMiniCard({
+            term: ' consulta de clínica médica ',
+            fecha: Cypress.moment().format('DD/MM/YYYY'),
+            profesional: 'Natalia Huenchuman',
+            badge: 'validada'
+        }).click();
+
+    });
 
     it('HUDS - Controlar datos de solicitud', () => {
         cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
@@ -452,7 +499,7 @@ context('RUP - Ejecucion', () => {
 
     it('HUDS - Filtro internacion', () => {
         cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
-        cy.assertHudsBusquedaFiltros('prestaciones', 4);
+        cy.assertHudsBusquedaFiltros('prestaciones', 5);
         cy.HudsBusquedaFiltros('prestaciones');
         cy.plexOptions('Internación').click();
 
