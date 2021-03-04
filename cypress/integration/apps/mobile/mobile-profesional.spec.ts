@@ -56,7 +56,6 @@ context('mobile profesional', () => {
         cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
         cy.goto('/rup/ejecucion/' + idPrestacion, token);
-        cy.plexButtonIcon('chevron-down').eq(0).click({ force: true });
 
         const fileName = '/archivos/cat.png';
         cy.get('[type="file"]').attachFile(fileName);
