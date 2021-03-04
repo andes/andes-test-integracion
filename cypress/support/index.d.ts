@@ -20,6 +20,8 @@ declare namespace Cypress {
 
         login(user: string, password: string, orgId?: string): Chainable<string>;
 
+        today(format?: any);
+
         /**
          * Crea un stub de la busqueda de conceptos de SNOMED
          * @param searchText Campo a buscar en rup-buscador
@@ -188,6 +190,11 @@ declare namespace Cypress {
         plexSelectType(label: string, texto: string): Chainable<Element>;
 
         /**
+         * Plex Select Type Dinámico
+         */
+        plexSelectTypeDinamico(label: string, texto?: string): Chainable<Element>;
+
+        /**
          * Plex Toast
          */
         plexToast(tipo: 'info' | 'success' | 'warning' | 'danger', texto?: string): Chainable<Element>;
@@ -196,6 +203,11 @@ declare namespace Cypress {
          * Plex DateTime
          */
         plexDatetime(label: string, data?: string | { text?: string, clear?: Boolean, skipEnter?: Boolean }): Chainable<Element>;
+
+        /**
+         * Plex DateTime Dinámico
+         */
+        plexDateTimeDinamico(label: string, data?: string | { text?: string, clear?: Boolean, skipEnter?: Boolean }): Chainable<Element>;
 
         /**
          * Plex Bool
@@ -223,6 +235,7 @@ declare namespace Cypress {
         plexFloat(label: string, texto?: string);
         plexLabel(texto: string);
         plexTitle(texto: string);
+        plexIcon(icon: string);
 
         plexRadio(label: string, index: number);
         plexRadioMultiple(label: string, index: number);

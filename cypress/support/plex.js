@@ -442,6 +442,16 @@ Cypress.Commands.add('plexMenu', (icon) => {
     return cy.get('plex-app .navbar-inverse .dropdown-menu').find(`.adi.adi-${icon}`).first().click({ force: true });
 })
 
+Cypress.Commands.add('plexIcon', { prevSubject: 'optional' }, (subject, icon) => {
+    let element;
+    if (subject) {
+        element = cy.wrap(subject).find(`plex-icon i.adi.adi-${icon}`);
+    } else {
+        element = cy.get(`plex-icon i.adi.adi-${icon}`);
+    }
+    return element;
+});
+
 /**
  * @decrecated
  */

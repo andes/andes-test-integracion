@@ -1,0 +1,986 @@
+{
+    "_id": "600ceaf8220da69a4bbe7223",
+    "active": true,
+    "name": "covid19",
+    "type": "covicho",
+    "sections": [
+        {
+            "_id": "600aca822f344454af894c21",
+            "type": "section",
+            "name": "Usuario",
+            "id": "usuario",
+            "fields": [
+                {
+                    "_id": "600ecba69df44c25abbf6bdd",
+                    "key": "organizacion",
+                    "label": "organizacion",
+                    "type": "select",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "preload": false,
+                    "resources": "organizaciones"
+                },
+                {
+                    "_id": "600ecba69df44c25abbf6bde",
+                    "key": "localidad",
+                    "label": "localidad",
+                    "type": "select",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "preload": false,
+                    "resources": "localidades"
+                },
+                {
+                    "_id": "600ecba69df44c25abbf6bdf",
+                    "key": "provincia",
+                    "label": "provincia",
+                    "type": "select",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "preload": false,
+                    "resources": "provincias"
+                },
+                {
+                    "_id": "600ecba69df44c25abbf6be0",
+                    "key": "fechanotificacion",
+                    "label": "fecha de notificacion",
+                    "type": "date",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "600ecba69df44c25abbf6be1",
+                    "key": "responsable",
+                    "label": "responsable",
+                    "type": "string",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "600ecba69df44c25abbf6be2",
+                    "key": "telefonoinstitucion",
+                    "label": "Telefono organizacion",
+                    "type": "phone",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "600ecba69df44c25abbf6be3",
+                    "key": "email",
+                    "label": "email organizacion",
+                    "type": "string",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601061b07406db28e08b2139",
+                    "key": "funcionusuario",
+                    "label": "función dentro del sistema",
+                    "type": "string",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                }
+            ]
+        },
+        {
+            "_id": "600ad14f98422d5610d5c419",
+            "type": "section",
+            "name": "Mpi",
+            "id": "mpi",
+            "fields": [
+                {
+                    "_id": "600ecba69df44c25abbf6be5",
+                    "key": "etnia",
+                    "label": "etnia",
+                    "type": "string",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "600ecba69df44c25abbf6be6",
+                    "key": "nacionalidad",
+                    "label": "nacionalidad",
+                    "type": "string",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "600ecca89df44c25abbf6bfa",
+                    "key": "telefonocaso",
+                    "label": "telefono",
+                    "type": "phone",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "600ecca89df44c25abbf6bfb",
+                    "key": "lugarresidencia",
+                    "label": "provincia de residencia",
+                    "type": "select",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "provincias",
+                    "preload": false
+                },
+                {
+                    "_id": "600ecca89df44c25abbf6bfc",
+                    "key": "localidadresidencia",
+                    "label": "localidad de residencia",
+                    "type": "select",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "localidades",
+                    "preload": false
+                },
+                {
+                    "_id": "600ecca89df44c25abbf6bfd",
+                    "key": "barrioresidencia",
+                    "label": "barrio/asentamiento de residencai",
+                    "type": "string",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "600ecca89df44c25abbf6bfe",
+                    "key": "resideinstitucion",
+                    "label": "reside en una institucion",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601007b97406db28e08b0acf",
+                    "key": "tipoinstitucion",
+                    "label": "tipo de institución",
+                    "type": "dependencia",
+                    "description": "tiene que ser select",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601007b97406db28e08b0ad0",
+                    "key": "lugarinstitucion",
+                    "label": "lugar de la institucion",
+                    "type": "dependencia",
+                    "description": "tiene que ser select",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                }
+            ]
+        },
+        {
+            "_id": "600b0224525a71d3f3138184",
+            "type": "section",
+            "name": "Clasificacion",
+            "id": "clasificacion",
+            "fields": [
+                {
+                    "_id": "601004da7406db28e08b0a05",
+                    "key": "clasificacion",
+                    "label": "Clasificacion",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601004da7406db28e08b0a06",
+                    "key": "tipobusqueda",
+                    "label": "tipo de busqueda",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                }
+            ]
+        },
+        {
+            "_id": "60101eec525a71d3f34363ee",
+            "type": "section",
+            "name": "Antecedentes Epidemiologicos",
+            "id": "antecedentesEpidemiologicos",
+            "fields": [
+                {
+                    "_id": "601021e87406db28e08b0e7d",
+                    "key": "personalsalud",
+                    "label": "personal de salud",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e7e",
+                    "key": "labor",
+                    "label": "labor",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e7f",
+                    "key": "funcion",
+                    "label": "función",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e80",
+                    "key": "asistiocasos",
+                    "label": "Asistió como personal de salud a casos confirmados de COVID-19 en los últimos 14 días?",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e81",
+                    "key": "lugarasistencia",
+                    "label": "Lugar en el que asistió",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e82",
+                    "key": "fechaasistencia",
+                    "label": "fecha de asistencia",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e83",
+                    "key": "personalseguridad",
+                    "label": "personal de seguridad",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e84",
+                    "key": "funcionseguridad",
+                    "label": "funcion",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e85",
+                    "key": "comisaria",
+                    "label": "Institución /N° Comisaría / Unidad",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false,
+                    "min": 0,
+                    "max": 100
+                },
+                {
+                    "_id": "601021e87406db28e08b0e86",
+                    "key": "realizoviajes",
+                    "label": "Realizo viajes en los últimos 14 días?",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e87",
+                    "key": "lugarviaje",
+                    "label": "lugar de viaje",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e88",
+                    "key": "fechaviaje",
+                    "label": "fecha de viaje",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e89",
+                    "key": "contactoconconfirmado",
+                    "label": "Mantuvo CE con casos confirmados de COVID-19 en los últimos 14 días?",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e8a",
+                    "key": "nombrecompletoconfirmado",
+                    "label": "apellido y nombre del caso confirmado",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e8b",
+                    "key": "dniconfirmado",
+                    "label": "DNI del caso confirmado",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e8c",
+                    "key": "tipocontactoconfirmado",
+                    "label": "tipo de contacto",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e8d",
+                    "key": "fechacontactoconfirmado",
+                    "label": "fecha del último contacto",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e8e",
+                    "key": "recibioatencion",
+                    "label": "Recibió atención en algún centro de salud que atiende casos de COVID -19 en los últimos 14 días?",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e8f",
+                    "key": "lugaratencion",
+                    "label": "Lugar de atención",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601021e87406db28e08b0e90",
+                    "key": "fechaatencion",
+                    "label": "fecha de antención",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                }
+            ]
+        },
+        {
+            "_id": "600ee674525a71d3f337df5c",
+            "type": "section",
+            "name": "EnfermedadesPrevias",
+            "id": "enfermedadesPrevias",
+            "fields": [
+                {
+                    "_id": "601006b07406db28e08b0a6c",
+                    "key": "presenta",
+                    "label": "presenta",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a6d",
+                    "key": "desconoce",
+                    "label": "desconoce",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a6e",
+                    "key": "asma",
+                    "label": "asma",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a6f",
+                    "key": "diabetes",
+                    "label": "diabetes",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a70",
+                    "key": "oncologica",
+                    "label": "enfermedad oncológica actual",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a71",
+                    "key": "renalcondialisis",
+                    "label": "enfermedad renal crónica con dialisis",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a72",
+                    "key": "renalsindialisis",
+                    "label": "enfermedad renal crónica sin dialisis",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a73",
+                    "key": "epoc",
+                    "label": "EPOC",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a74",
+                    "key": "exfumador",
+                    "label": "ex fumador",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a75",
+                    "key": "fumador",
+                    "label": "fumador",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a76",
+                    "key": "hipertension",
+                    "label": "hipertensión arterial",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a77",
+                    "key": "inmunosupresion",
+                    "label": "Inmunosupresión congénita o adquirida",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601006b07406db28e08b0a78",
+                    "key": "obesidad",
+                    "label": "obesidad",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                }
+            ]
+        },
+        {
+            "_id": "60100cf2525a71d3f342b9da",
+            "type": "section",
+            "name": "Informacion Clinica",
+            "id": "informacionClinica",
+            "fields": [
+                {
+                    "_id": "60100ed07406db28e08b0c64",
+                    "key": "fechasintomas",
+                    "label": "fecha de inicio de 1º síntoma",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c65",
+                    "key": "semanaepidemiologica",
+                    "label": "Semana epidemiológica de FIS",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c66",
+                    "key": "fechaprimerconsulta",
+                    "label": "Fecha 1° consulta",
+                    "type": "date",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c67",
+                    "key": "establecimientoconsulta",
+                    "label": "Efector",
+                    "type": "select",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "preload": false,
+                    "resources": "organizaciones"
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c68",
+                    "key": "ambulatorio",
+                    "label": "ambulatorio",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c69",
+                    "key": "internado",
+                    "label": "internado",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c6a",
+                    "key": "lugarinternado",
+                    "label": "lugar de internado",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "organizaciones",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c6b",
+                    "key": "fechainternacion",
+                    "label": "fecha de internación",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c6c",
+                    "key": "embarazada",
+                    "label": "embarazada",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c6d",
+                    "key": "casofallecido",
+                    "label": "caso fallecido",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c6e",
+                    "key": "fallecimientohospital",
+                    "label": "fallecimiento en institución hospital",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c6f",
+                    "key": "fallecimientodomicilio",
+                    "label": "fallecimiento en domicilio",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "60100ed07406db28e08b0c70",
+                    "key": "otros",
+                    "label": "otros",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                }
+            ]
+        },
+        {
+            "_id": "60101295525a71d3f342ef52",
+            "type": "section",
+            "name": "Signos y Sintomas",
+            "id": "signosSintomas",
+            "fields": [
+                {
+                    "_id": "601013c47406db28e08b0cd1",
+                    "key": "anosmia",
+                    "label": "Anosmia de reciente aparición",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601013c47406db28e08b0cd2",
+                    "key": "cefalea",
+                    "label": "cefalea",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601013c47406db28e08b0cd3",
+                    "key": "diarrea",
+                    "label": "diarrea",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601013c47406db28e08b0cd4",
+                    "key": "disgeusia",
+                    "label": "Disgeusia",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601013c47406db28e08b0cd5",
+                    "key": "dolorabdominal",
+                    "label": "dolor abdominal",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601013c47406db28e08b0cd6",
+                    "key": "fiebre",
+                    "label": "fiebre",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601013c47406db28e08b0cd7",
+                    "key": "mialgias",
+                    "label": "mialgias",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601013c47406db28e08b0cd8",
+                    "key": "odinofagia",
+                    "label": "odinofagia",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601013c47406db28e08b0cd9",
+                    "key": "tos",
+                    "label": "tos",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601013c47406db28e08b0cda",
+                    "key": "vomitos",
+                    "label": "vómitos",
+                    "type": "boolean",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                }
+            ]
+        },
+        {
+            "_id": "60101537525a71d3f34308ad",
+            "type": "section",
+            "name": "Clasificacion y Final",
+            "id": "clasificacionFinal",
+            "fields": [
+                {
+                    "_id": "601016027406db28e08b0d36",
+                    "key": "segundaclasificacion",
+                    "label": "segunda clasificación",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601016027406db28e08b0d37",
+                    "key": "tipomuestra",
+                    "label": "tipo de muestra",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601016027406db28e08b0d38",
+                    "key": "fechamuestra",
+                    "label": "fecha de toma de muestra",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601016027406db28e08b0d39",
+                    "key": "antigeno",
+                    "label": "antígeno",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601016027406db28e08b0d3a",
+                    "key": "pcr",
+                    "label": "PCR",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
+                    "_id": "601016027406db28e08b0d3b",
+                    "key": "clasificacionfinal",
+                    "label": "clasificación final",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                }
+            ]
+        },
+        {
+            "_id": "60101755525a71d3f3431ccd",
+            "type": "section",
+            "name": "Contactos Estrechos",
+            "id": "contactosEstrechos",
+            "fields": [
+                {
+                    "_id": "601abb1108e02c46b66e6fbe",
+                    "key": "tablacontactos",
+                    "label": "Contactos Estrechos",
+                    "type": "table",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                }
+            ]
+        }
+    ],
+    "__v": 53,
+    "snomedCode": null
+}
