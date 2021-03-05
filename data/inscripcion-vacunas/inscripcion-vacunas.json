@@ -1,0 +1,49 @@
+{
+    "_id": "6040e5f42f3c79499ec3b401",
+    "validaciones": [
+        "domicilio"
+    ],
+    "fechaRegistro": "2021-03-04T13:51:46.315Z",
+    "documento": "36753219",
+    "nombre": "JULIANA",
+    "apellido": "OTERO",
+    "nroTramite": "142454582",
+    "grupo": {
+        "nombre": "personal-salud"
+    },
+    "sexo": "femenino",
+    "fechaNacimiento": "1992-09-22 03:00:00.000Z",
+    "localidad": {
+        "_id": "57f538a472325875a199a82d",
+        "nombre": "Neuquén"
+    },
+    "telefono": "2995888202",
+    "email": "juli.otero01@gmail.com",
+    "cud": "",
+    "alergia": false,
+    "condicion": false,
+    "enfermedad": false,
+    "convaleciente": false,
+    "aislamiento": false,
+    "vacuna": false,
+    "plasma": false,
+    "amamantando": false,
+    "embarazada": true,
+    "profesion": "",
+    "matricula": null,
+    "establecimiento": "CAM",
+    "localidadEstablecimiento": {
+        "_id": "57f538a472325875a199a82d",
+        "nombre": "Neuquén"
+    },
+    "relacion": "",
+    "estado": "pendiente",
+    "diaseleccionados": "",
+    "validado": true,
+    "__v": 0,
+    "personal_salud": false,
+    "paciente": {
+        "addAt": "2021-03-04T13:51:49.079Z",
+        "id": "5fa2b2e128eb1727867afd73"
+    }
+}
