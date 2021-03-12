@@ -56,7 +56,15 @@
 		"showMapa": false,
 		"mapaSectores": [],
 		"aceptaDerivacion": false,
-		"esCOM": true
+		"esCOM": true,
+		"configuraciones": {
+			"emails": [
+				{
+					"nombre": "recupero",
+					"email": "pruebaANDES@gmail.com"
+				}
+			]
+		},
 	},
 	{
 		"_id": {
