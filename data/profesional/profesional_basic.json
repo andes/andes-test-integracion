@@ -7,14 +7,14 @@
 		"apellido": "CORTES",
 		"tipoDocumento": "DNIM",
 		"documento": "4402222",
-		"fechaNacimiento": {
-			"$date": "1943-01-08T03:00:00.000Z"
-		},
 		"tokens": [
 			"jazmin",
 			"cortes",
 			"4402222"
 		],
+		"fechaNacimiento": {
+			"$date": "1943-01-08T03:00:00.000Z"
+		},
 		"lugarNacimiento": "CAPITAL FEDERAL",
 		"nacionalidad": {
 			"codigo": "200",
@@ -44,7 +44,7 @@
 						"folio": "195/196/197",
 						"inicio": 1970,
 						"fin": {
-							"$date": "2017-01-08T03:00:00.000Z"
+							"$date": "2022-01-08T03:00:00.000Z"
 						},
 						"baja": {
 							"motivo": "",
@@ -72,7 +72,7 @@
 						"libro": "II",
 						"folio": "40/41",
 						"fin": {
-							"$date": "1996-01-01T03:00:00.000Z"
+							"$date": "1922-01-01T03:00:00.000Z"
 						}
 					}
 				],
@@ -252,15 +252,15 @@
 		"nombre": "MARIA",
 		"apellido": "PEREZ",
 		"documento": "4466777",
-		"cuit": "27041637825",
-		"fechaNacimiento": {
-			"$date": "1941-01-11T03:00:00.000Z"
-		},
 		"tokens": [
 			"maria",
 			"perez",
 			"4466777"
 		],
+		"cuit": "27041637825",
+		"fechaNacimiento": {
+			"$date": "1941-01-11T03:00:00.000Z"
+		},
 		"sexo": "Femenino",
 		"formacionGrado": [
 			{
@@ -274,7 +274,44 @@
 				}
 			}
 		],
-		"formacionPosgrado": null,
+		"formacionPosgrado": [
+			{
+				"matriculado": false,
+				"revalida": false,
+				"papelesVerificados": false,
+				"notas": [],
+				"_id": "5ee8c2b5773f33fdd5a4dda8",
+				"matriculacion": [
+					{
+						"_id": "5ee8c2b5773f33fdd5a4dda9",
+						"baja": {
+							"motivo": "",
+							"fecha": null
+						},
+						"matriculaNumero": 640,
+						"libro": "II",
+						"folio": "46/47",
+						"fin": "2022-01-01T00:00:00.000-03:00"
+					}
+				],
+				"fechasDeAltas": [
+					{
+						"_id": "5ee8c2b5773f33fdd5a4ddaa",
+						"fecha": "1992-03-04T00:00:00.000-03:00"
+					}
+				],
+				"profesion": {
+					"_id": "5ee8c286cd09abeeedac0747",
+					"codigo": 1,
+					"nombre": "MEDICO"
+				},
+				"especialidad": {
+					"_id": "5ee8c286cd09abeeedac0748",
+					"nombre": "CLINICA MEDICA"
+				},
+				"tieneVencimiento": true
+			}
+		],
 		"profesionalMatriculado": true
 	},
 	{
@@ -395,7 +432,7 @@
 		"habilitado": true,
 		"incluidoSuperintendencia": false,
 		"rematriculado": 0,
-		"profesionalMatriculado": false,
+		"profesionalMatriculado": true,
 		"nombre": "Natalia",
 		"apellido": "Huenchuman",
 		"documento": "30643636",
@@ -424,7 +461,57 @@
 		"sexo": "femenino",
 		"domicilios": [],
 		"firmas": [],
-		"formacionGrado": [],
+		"formacionGrado": [
+			{
+				"renovacion": false,
+				"papelesVerificados": true,
+				"matriculado": true,
+				"_id": "5ee8c2b5773f33fdd5a4dda4",
+				"matriculacion": [
+					{
+						"_id": "5ee8c2b5773f33fdd5a4dda5",
+						"baja": {
+							"motivo": "",
+							"fecha": null
+						},
+						"matriculaNumero": 1892,
+						"libro": "IX",
+						"folio": "82/83",
+						"inicio": "1989-01-01T00:00:00.000-03:00",
+						"fin": "2020-05-31T00:00:00.000-03:00"
+					},
+					{
+						"_id": "5ee8c6924662fbb5a8ec2aca",
+						"matriculaNumero": 1892,
+						"libro": "",
+						"folio": "",
+						"inicio": "2020-06-16T10:17:54.738-03:00",
+						"baja": {
+							"motivo": "",
+							"fecha": ""
+						},
+						"notificacionVencimiento": false,
+						"fin": "2100-05-31T00:00:00.000-03:00",
+						"revalidacionNumero": 2
+					}
+				],
+				"profesion": {
+					"_id": "5ee8c286cd09abeeedac0745",
+					"codigo": 1,
+					"nombre": "MEDICO",
+					"tipoDeFormacion": "Grado Universitario"
+				},
+				"entidadFormadora": {
+					"_id": "5ab1008b94ecce092548dea3",
+					"codigo": 1172,
+					"nombre": "UNIVERSIDAD DE BUENOS AIRES",
+					"habilitado": true
+				},
+				"titulo": "MEDICO",
+				"fechaEgreso": "1983-12-16T00:00:00.000-03:00",
+				"fechaDeInscripcion": "2010-07-13T00:00:00.000-03:00"
+			}
+		],
 		"formacionPosgrado": [],
 		"sanciones": [],
 		"OtrosDatos": [],
@@ -556,5 +643,195 @@
 			"$date": "1995-12-12T03:00:00.000Z"
 		},
 		"profesionalMatriculado": false
+	},
+	{
+		"_id": {
+			"$oid": "58f74fd3d03019f919ea06b1"
+		},
+		"nombre": "MARIANO ANDRES",
+		"apellido": "BOTTA",
+		"tipoDocumento": "DNI",
+		"documento": "34934522",
+		"documentoVencimiento": "2026-11-01T00:00:00.000-03:00",
+		"cuit": "2034934522",
+		"fechaNacimiento": "1989-04-09T00:00:00.000-03:00",
+		"lugarNacimiento": "NEUQUEN",
+		"nacionalidad": {
+			"_id": "5ee8c286cd09abeeedac0744",
+			"codigo": 200,
+			"nombre": "Argentina"
+		},
+		"sexo": "masculino",
+		"notas": [
+			""
+		],
+		"formacionGrado": [
+			{
+				"renovacion": false,
+				"papelesVerificados": true,
+				"matriculado": true,
+				"_id": "5ee8c2b5773f33fdd5a4dda4",
+				"matriculacion": [
+					{
+						"_id": "5ee8c2b5773f33fdd5a4dda5",
+						"baja": {
+							"motivo": "",
+							"fecha": null
+						},
+						"matriculaNumero": 1892,
+						"libro": "IX",
+						"folio": "82/83",
+						"inicio": "1989-01-01T00:00:00.000-03:00",
+						"fin": "2019-05-31T00:00:00.000-03:00"
+					},
+					{
+						"_id": "5ee8c6924662fbb5a8ec2aca",
+						"matriculaNumero": 1892,
+						"libro": "",
+						"folio": "",
+						"inicio": "2020-06-16T10:17:54.738-03:00",
+						"baja": {
+							"motivo": "",
+							"fecha": ""
+						},
+						"notificacionVencimiento": false,
+						"fin": "2019-05-31T00:00:00.000-03:00",
+						"revalidacionNumero": 2
+					}
+				],
+				"profesion": {
+					"_id": "5ee8c286cd09abeeedac0745",
+					"codigo": 1,
+					"nombre": "MEDICO",
+					"tipoDeFormacion": "Grado Universitario"
+				},
+				"entidadFormadora": {
+					"_id": "5ab1008b94ecce092548dea3",
+					"codigo": 1172,
+					"nombre": "UNIVERSIDAD DE BUENOS AIRES",
+					"habilitado": true
+				},
+				"titulo": "MEDICO",
+				"fechaEgreso": "1983-12-16T00:00:00.000-03:00",
+				"fechaDeInscripcion": "2010-07-13T00:00:00.000-03:00"
+			}
+		],
+		"formacionPosgrado": [
+			{
+				"matriculado": false,
+				"revalida": false,
+				"papelesVerificados": false,
+				"notas": [],
+				"_id": "5ee8c2b5773f33fdd5a4dda8",
+				"matriculacion": [
+					{
+						"_id": "5ee8c2b5773f33fdd5a4dda9",
+						"baja": {
+							"motivo": "",
+							"fecha": null
+						},
+						"matriculaNumero": 640,
+						"libro": "II",
+						"folio": "46/47",
+						"fin": "2019-01-01T00:00:00.000-03:00"
+					}
+				],
+				"fechasDeAltas": [
+					{
+						"_id": "5ee8c2b5773f33fdd5a4ddaa",
+						"fecha": "1992-03-04T00:00:00.000-03:00"
+					}
+				],
+				"profesion": {
+					"_id": "5ee8c286cd09abeeedac0747",
+					"codigo": 1,
+					"nombre": "MEDICO"
+				},
+				"especialidad": {
+					"_id": "5ee8c286cd09abeeedac0748",
+					"nombre": "CLINICA MEDICA"
+				},
+				"tieneVencimiento": true
+			}
+		],
+		"sanciones": [
+			{
+				"_id": "5ee8c2b5773f33fdd5a4ddad",
+				"sancion": {
+					"id": null
+				},
+				"numero": null,
+				"motivo": null,
+				"normaLegal": null,
+				"fecha": null,
+				"vencimiento": null
+			}
+		],
+		"domicilios": [
+			{
+				"activo": true,
+				"_id": "5ee8c2b5773f33fdd5a4ddb8",
+				"tipo": "legal",
+				"valor": "Bruno Ramirez 306",
+				"codigoPostal": "8300",
+				"ubicacion": {
+					"_id": "5ee8c286cd09abeeedac0751",
+					"pais": {
+						"_id": "57f3b5c469fe79a598e6281f",
+						"nombre": "Argentina"
+					},
+					"provincia": {
+						"_id": "5ee8c286cd09abeeedac0753",
+						"nombre": "Neuquén"
+					},
+					"localidad": {
+						"_id": "5ee8c286cd09abeeedac0754",
+						"nombre": "Neuquén"
+					}
+				}
+			}
+		],
+		"contactos": [
+			{
+				"activo": true,
+				"_id": "604668ebe348dd1d4d604500",
+				"tipo": "email",
+				"valor": "martin@gmail.com"
+			},
+			{
+				"activo": true,
+				"_id": "604668ebe348dd1d4d604501",
+				"tipo": "celular",
+				"valor": "2222222"
+			}
+		],
+		"rematriculado": 1,
+		"turno": "2015-09-17T10:00:00.000-03:00",
+		"profesionalMatriculado": true,
+		"OtrosDatos": [],
+		"__v": 7,
+		"agenteMatriculador": "ROBERTO VILLAR",
+		"firmas": [],
+		"habilitado": true,
+		"incluidoSuperintendencia": false,
+		"updatedAt": "2021-03-08T15:11:55.730-03:00",
+		"updatedBy": {
+			"id": "5dd7d67767eca275fdb45c05",
+			"nombreCompleto": "Martin Bucarey",
+			"nombre": "Martin",
+			"apellido": "Bucarey",
+			"username": 33650509,
+			"documento": 33650509,
+			"organizacion": {
+				"_id": "57e9670e52df311059bc8964",
+				"id": "57e9670e52df311059bc8964",
+				"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+			}
+		},
+		"validadoRenaper": false,
+		"supervisor": {
+			"id": "5bb20ba37230737c69435aca",
+			"nombreCompleto": "ROBERTO VILLAR"
+		}
 	}
 ]
