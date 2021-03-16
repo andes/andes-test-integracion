@@ -1,0 +1,86 @@
+{
+    "profesional": {
+        "habilitado": true,
+        "validadoRenaper": false,
+        "incluidoSuperintendencia": false,
+        "notas": [],
+        "rematriculado": 0,
+        "profesionalMatriculado": true,
+        "_id": "5c82a5a53c524e4c57f08cf3",
+        "nombre": "MARIA",
+        "apellido": "PEREZ",
+        "documento": "4466777",
+        "cuit": "27041637825",
+        "fechaNacimiento": "1941-01-11T03:00:00.000Z",
+        "sexo": "Femenino",
+        "formacionGrado": [
+            {
+                "renovacion": false,
+                "papelesVerificados": false,
+                "matriculado": false,
+                "matriculacion": [
+                    {
+                        "matriculaNumero": 681,
+                        "id": null
+                    }
+                ],
+                "profesion": {
+                    "_id": "6050eda12048cf032ffa51ec",
+                    "nombre": "FARMACEUTICO",
+                    "id": "6050eda12048cf032ffa51ec"
+                },
+                "id": null
+            }
+        ],
+        "formacionPosgrado": [
+            {
+                "matriculado": false,
+                "revalida": false,
+                "papelesVerificados": false,
+                "notas": [],
+                "_id": "5ee8c2b5773f33fdd5a4dda8",
+                "matriculacion": [
+                    {
+                        "baja": {
+                            "motivo": "",
+                            "fecha": null
+                        },
+                        "_id": "5ee8c2b5773f33fdd5a4dda9",
+                        "matriculaNumero": 640,
+                        "libro": "II",
+                        "folio": "46/47",
+                        "fin": "2022-01-01T03:00:00.000Z",
+                        "id": "5ee8c2b5773f33fdd5a4dda9"
+                    }
+                ],
+                "fechasDeAltas": [
+                    {
+                        "_id": "5ee8c2b5773f33fdd5a4ddaa",
+                        "fecha": "1992-03-04T03:00:00.000Z",
+                        "id": "5ee8c2b5773f33fdd5a4ddaa"
+                    }
+                ],
+                "profesion": {
+                    "_id": "5ee8c286cd09abeeedac0747",
+                    "codigo": 1,
+                    "nombre": "MEDICO",
+                    "id": "5ee8c286cd09abeeedac0747"
+                },
+                "especialidad": {
+                    "_id": "5ee8c286cd09abeeedac0748",
+                    "nombre": "CLINICA MEDICA",
+                    "id": "5ee8c286cd09abeeedac0748"
+                },
+                "tieneVencimiento": true,
+                "id": "5ee8c2b5773f33fdd5a4dda8"
+            }
+        ],
+        "contactos": [],
+        "domicilios": [],
+        "firmas": [],
+        "sanciones": [],
+        "OtrosDatos": [],
+        "nombreCompleto": "PEREZ, MARIA",
+        "id": "5c82a5a53c524e4c57f08cf3"
+    }
+}
