@@ -108,14 +108,14 @@ context('SOLICITUDES', () => {
         cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
 
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
-        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@conceptosTurneables', 0);
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de cirugía infantil', '@conceptosTurneables', '59ee2d9bf00c415246fd3d18');
         cy.wait('@getReglas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexSelectType('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER');
+        cy.plexSelectType('label="Organización origen"', 'HOSPITAL DE AREA PLOTTIER');
 
-        cy.plexSelectType('label="Tipos de Prestación Origen"', 'Consulta de clínica médica');
+        cy.plexSelect('label="Tipos de Prestación Origen"', 0).click();
 
         cy.plexSelectAsync('name="profesionalOrigen"', 'cortes jazmin', '@getProfesional', 0);
 
@@ -130,9 +130,9 @@ context('SOLICITUDES', () => {
             expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
 
         });
-        cy.toast('success', 'consulta de neurología');
+        cy.toast('success', 'Consulta de cirugía infantil');
         cy.plexButtonIcon('chevron-down').click();
-        cy.plexSelectType('name="prestacionDestino"', 'Consulta de Neurología');
+        cy.plexSelectType('name="prestacionDestino"', 'Consulta de cirugía infantil');
 
         cy.wait('@solicitudes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);

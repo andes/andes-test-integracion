@@ -85,7 +85,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.swal('confirm');
         cy.plexSelect('label="Organización destino"', 0).click();
 
-        cy.plexSelect('label="Tipo de Prestación Solicitada"', 0).click();
+        cy.plexSelect('label="Tipo de Prestación Solicitada"', 1).click();
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
 
