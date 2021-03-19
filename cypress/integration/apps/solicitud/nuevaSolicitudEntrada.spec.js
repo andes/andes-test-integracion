@@ -63,7 +63,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.plexBool('label="Autocitado"').check({
             force: true
         });
-        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@conceptosTurneables', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de nutrición', '@conceptosTurneables', '59ee2d9bf00c415246fd3d90');
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'un motivo lalala');
         cy.plexButton('Guardar').click();
@@ -89,7 +89,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.plexSelectType('label="Tipo de Prestación Solicitada"').validationMessage()
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
-        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de esterilidad', '@conceptosTurneables', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de cirugía infantil', '@conceptosTurneables', '59ee2d9bf00c415246fd3d18');
 
         cy.plexSelectType('label="Organización origen"').validationMessage()
         cy.plexButton('Guardar').click();
