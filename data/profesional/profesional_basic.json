@@ -1,518 +1,560 @@
-[{
-	"_id": {
-		"$oid": "58f74fd3d03019f919e9fff2"
-	},
-	"nombre": "JAZMIN",
-	"apellido": "CORTES",
-	"tipoDocumento": "DNIM",
-	"documento": "4402222",
-	"fechaNacimiento": {
-		"$date": "1943-01-08T03:00:00.000Z"
-	},
-	"lugarNacimiento": "CAPITAL FEDERAL",
-	"nacionalidad": {
-		"codigo": "200",
-		"nombre": "Argentina"
-	},
-	"sexo": "Masculino",
-	"notas": "",
-	"formacionGrado": [
-		{
-			"profesion": {
-				"codigo": 1,
-				"nombre": "MEDICO",
-				"tipoDeFormacion": "Grado Universitario"
-			},
-			"entidadFormadora": {
-				"codigo": "1172",
-				"nombre": "UNIV. DE BS. AS."
-			},
-			"titulo": "MEDICO",
-			"fechaEgreso": {
-				"$date": "1967-01-09T03:00:00.000Z"
-			},
-			"matriculacion": [
-				{
-					"matriculaNumero": 299,
-					"libro": "III",
-					"folio": "195/196/197",
-					"inicio": 1970,
-					"fin": {
-						"$date": "2017-01-08T03:00:00.000Z"
+[
+	{
+		"_id": {
+			"$oid": "58f74fd3d03019f919e9fff2"
+		},
+		"nombre": "JAZMIN",
+		"apellido": "CORTES",
+		"tipoDocumento": "DNIM",
+		"documento": "4402222",
+		"fechaNacimiento": {
+			"$date": "1943-01-08T03:00:00.000Z"
+		},
+		"tokens": [
+			"jazmin",
+			"cortes",
+			"4402222"
+		],
+		"lugarNacimiento": "CAPITAL FEDERAL",
+		"nacionalidad": {
+			"codigo": "200",
+			"nombre": "Argentina"
+		},
+		"sexo": "Masculino",
+		"notas": "",
+		"formacionGrado": [
+			{
+				"profesion": {
+					"codigo": 1,
+					"nombre": "MEDICO",
+					"tipoDeFormacion": "Grado Universitario"
+				},
+				"entidadFormadora": {
+					"codigo": "1172",
+					"nombre": "UNIV. DE BS. AS."
+				},
+				"titulo": "MEDICO",
+				"fechaEgreso": {
+					"$date": "1967-01-09T03:00:00.000Z"
+				},
+				"matriculacion": [
+					{
+						"matriculaNumero": 299,
+						"libro": "III",
+						"folio": "195/196/197",
+						"inicio": 1970,
+						"fin": {
+							"$date": "2017-01-08T03:00:00.000Z"
+						},
+						"baja": {
+							"motivo": "",
+							"fecha": null
+						}
+					}
+				],
+				"matriculado": false,
+				"papelesVerificados": false,
+				"renovacion": false
+			}
+		],
+		"formacionPosgrado": [
+			{
+				"matriculado": false,
+				"revalida": false,
+				"papelesVerificados": false,
+				"matriculacion": [
+					{
+						"baja": {
+							"motivo": "",
+							"fecha": null
+						},
+						"matriculaNumero": 555,
+						"libro": "II",
+						"folio": "40/41",
+						"fin": {
+							"$date": "1996-01-01T03:00:00.000Z"
+						}
+					}
+				],
+				"profesion": {
+					"_id": {
+						"$oid": "5b9a49e907924d16f06426eb"
 					},
-					"baja": {
-						"motivo": "",
-						"fecha": null
+					"codigo": 1,
+					"nombre": "MEDICO"
+				},
+				"especialidad": {
+					"_id": {
+						"$oid": "5b9a49e907924d16f06426ec"
+					},
+					"codigo": 58,
+					"tipo": 1,
+					"nombre": "MEDICINA DEL TRABAJO"
+				}
+			}
+		],
+		"sanciones": [
+			{
+				"numero": null,
+				"sancion": {
+					"id": null
+				},
+				"motivo": null,
+				"normaLegal": null,
+				"fecha": null,
+				"vencimiento": null
+			}
+		],
+		"domicilios": [
+			{
+				"activo": true,
+				"tipo": "legal",
+				"valor": "LOS ALERCES 610",
+				"codigoPostal": "8324",
+				"ubicacion": {
+					"pais": {
+						"_id": {
+							"$oid": "57f3b5c469fe79a598e6281f"
+						},
+						"nombre": "Argentina"
+					},
+					"provincia": {
+						"nombre": "Río Negro"
+					},
+					"localidad": {
+						"nombre": "CIPOLLETTI"
 					}
 				}
-			],
-			"matriculado": false,
-			"papelesVerificados": false,
-			"renovacion": false
-		}
-	],
-	"formacionPosgrado": [
-		{
-			"matriculado": false,
-			"revalida": false,
-			"papelesVerificados": false,
-			"matriculacion": [
-				{
-					"baja": {
-						"motivo": "",
-						"fecha": null
+			},
+			{
+				"activo": true,
+				"tipo": "profesional",
+				"valor": "J. J. LASTRA 5400",
+				"codigoPostal": "8300",
+				"ubicacion": {
+					"pais": {
+						"_id": {
+							"$oid": "57f3b5c469fe79a598e6281f"
+						},
+						"nombre": "Argentina"
 					},
-					"matriculaNumero": 555,
-					"libro": "II",
-					"folio": "40/41",
-					"fin": {
-						"$date": "1996-01-01T03:00:00.000Z"
+					"provincia": {
+						"nombre": "Neuquén"
+					},
+					"localidad": {
+						"nombre": "NEUQUEN"
 					}
 				}
-			],
-			"profesion": {
+			},
+			{
+				"activo": true,
+				"tipo": "real",
+				"valor": "LOS ALERCES 610",
+				"codigoPostal": "8324",
+				"ubicacion": {
+					"pais": {
+						"_id": {
+							"$oid": "57f3b5c469fe79a598e6281f"
+						},
+						"nombre": "Argentina"
+					},
+					"provincia": {
+						"nombre": "Río Negro"
+					},
+					"localidad": {
+						"nombre": "CIPOLLETTI"
+					}
+				}
+			}
+		],
+		"contactos": [
+			{
+				"tipo": "celular",
+				"valor": "0299-154058003",
+				"activo": true
+			},
+			{
+				"tipo": "email",
+				"valor": "crisbuschi@yahoo.com.ar",
+				"activo": true
+			},
+			{
+				"tipo": "fijo",
+				"valor": "0299-4775460",
+				"activo": true
+			}
+		],
+		"OtrosDatos": [],
+		"firmas": [],
+		"habilitado": true,
+		"incluidoSuperintendencia": false,
+		"rematriculado": false,
+		"__v": 1,
+		"profesionalMatriculado": true
+	},
+	{
+		"_id": {
+			"$oid": "5c82a5a53c524e4c57f08cf2"
+		},
+		"documento": "1711999",
+		"apellido": "PRUEBA",
+		"nombre": "ALICIA",
+		"tokens": [
+			"prueba",
+			"alicia",
+			"1711999"
+		],
+		"formacionGrado": [
+			{
+				"matriculacion": [
+					{
+						"matriculaNumero": 2.0
+					}
+				],
+				"profesion": {
+					"nombre": "Médico"
+				}
+			}
+		],
+		"formacionPosgrado": [
+			{
+				"matriculacion": [
+					{
+						"matriculaNumero": 412.0
+					}
+				],
+				"especialidad": {
+					"nombre": "Citogenética (R)"
+				}
+			},
+			{
+				"matriculacion": [
+					{
+						"matriculaNumero": 533.0
+					}
+				],
+				"especialidad": {
+					"nombre": "Bioquímica y Nutrición (R)"
+				}
+			}
+		],
+		"sexo": "femenino",
+		"cuit": "1217429393",
+		"fechaNacimiento": {
+			"$date": "1995-12-12T03:00:00.000Z"
+		},
+		"profesionalMatriculado": false
+	},
+	{
+		"_id": {
+			"$oid": "5c82a5a53c524e4c57f08cf3"
+		},
+		"nombre": "MARIA",
+		"apellido": "PEREZ",
+		"documento": "4466777",
+		"cuit": "27041637825",
+		"fechaNacimiento": {
+			"$date": "1941-01-11T03:00:00.000Z"
+		},
+		"tokens": [
+			"maria",
+			"perez",
+			"4466777"
+		],
+		"sexo": "Femenino",
+		"formacionGrado": [
+			{
+				"matriculacion": [
+					{
+						"matriculaNumero": 681.0
+					}
+				],
+				"profesion": {
+					"nombre": "FARMACEUTICO"
+				}
+			}
+		],
+		"formacionPosgrado": null,
+		"profesionalMatriculado": true
+	},
+	{
+		"_id": {
+			"$oid": "5c9118d5c09cdce4f07574e3"
+		},
+		"documento": "38906735",
+		"apellido": "USUARIO",
+		"nombre": "PRUEBA",
+		"tokens": [
+			"usuario",
+			"prueba",
+			"38906735"
+		],
+		"formacionGrado": [
+			{
+				"matriculacion": [
+					{
+						"matriculaNumero": 2.0
+					}
+				],
+				"profesion": {
+					"nombre": "Médico"
+				}
+			}
+		],
+		"formacionPosgrado": [
+			{
+				"matriculacion": [
+					{
+						"matriculaNumero": 412.0
+					}
+				],
+				"especialidad": {
+					"nombre": "Citogenética (R)"
+				}
+			},
+			{
+				"matriculacion": [
+					{
+						"matriculaNumero": 533.0
+					}
+				],
+				"especialidad": {
+					"nombre": "Bioquímica y Nutrición (R)"
+				}
+			}
+		],
+		"sexo": "femenino",
+		"cuit": "1217429393",
+		"fechaNacimiento": {
+			"$date": "1995-12-12T03:00:00.000Z"
+		},
+		"profesionalMatriculado": false
+	},
+	{
+		"_id": {
+			"$oid": "5ce6dc045167b5526c72ed13"
+		},
+		"habilitado": true,
+		"incluidoSuperintendencia": false,
+		"rematriculado": 0,
+		"profesionalMatriculado": false,
+		"nombre": "TEST",
+		"apellido": "PRUEBA",
+		"documento": "325877758",
+		"tokens": [
+			"test",
+			"prueba",
+			"325877758"
+		],
+		"contactos": [
+			{
+				"activo": true,
 				"_id": {
-					"$oid": "5b9a49e907924d16f06426eb"
+					"$oid": "5ce6dc045167b5526c72ed14"
 				},
-				"codigo": 1,
-				"nombre": "MEDICO"
-			},
-			"especialidad": {
+				"tipo": "celular",
+				"valor": "",
+				"ranking": 0,
+				"ultimaActualizacion": {
+					"$date": "2019-05-23T17:44:14.571Z"
+				}
+			}
+		],
+		"fechaNacimiento": {
+			"$date": "2019-05-01T17:44:29.784Z"
+		},
+		"sexo": "masculino",
+		"domicilios": [],
+		"firmas": [],
+		"formacionGrado": [],
+		"formacionPosgrado": [],
+		"sanciones": [],
+		"OtrosDatos": [],
+		"createdAt": {
+			"$date": "2019-05-23T17:44:36.150Z"
+		},
+		"createdBy": {
+			"id": "59e76172b7c39e57a13b38c5",
+			"nombreCompleto": "30643636 30643636",
+			"nombre": "30643636",
+			"apellido": "30643636",
+			"username": 30643636,
+			"documento": 30643636,
+			"organizacion": {
+				"_id": "59380153db8e90fe4602ec02",
+				"nombre": "SUBSECRETARIA DE SALUD",
+				"id": "59380153db8e90fe4602ec02"
+			}
+		},
+		"__v": 0
+	},
+	{
+		"_id": {
+			"$oid": "5d02602588c4d1772a8a17f8"
+		},
+		"habilitado": true,
+		"incluidoSuperintendencia": false,
+		"rematriculado": 0,
+		"profesionalMatriculado": false,
+		"nombre": "Natalia",
+		"apellido": "Huenchuman",
+		"documento": "30643636",
+		"tokens": [
+			"natalia",
+			"huenchuman",
+			"30643636"
+		],
+		"contactos": [
+			{
+				"activo": true,
 				"_id": {
-					"$oid": "5b9a49e907924d16f06426ec"
+					"$oid": "5d02602588c4d1772a8a17f9"
 				},
-				"codigo": 58,
-				"tipo": 1,
-				"nombre": "MEDICINA DEL TRABAJO"
+				"tipo": "celular",
+				"valor": "",
+				"ranking": 0,
+				"ultimaActualizacion": {
+					"$date": "2019-06-13T14:39:07.120Z"
+				}
 			}
-		}
-	],
-	"sanciones": [
-		{
-			"numero": null,
-			"sancion": {
-				"id": null
+		],
+		"fechaNacimiento": {
+			"$date": "1984-03-07T03:00:00.000Z"
+		},
+		"sexo": "femenino",
+		"domicilios": [],
+		"firmas": [],
+		"formacionGrado": [],
+		"formacionPosgrado": [],
+		"sanciones": [],
+		"OtrosDatos": [],
+		"createdAt": {
+			"$date": "2019-06-13T14:39:33.434Z"
+		},
+		"createdBy": {
+			"id": "59e76172b7c39e57a13b38c5",
+			"nombreCompleto": "30643636 30643636",
+			"nombre": "30643636",
+			"apellido": "30643636",
+			"username": 30643636,
+			"documento": 30643636,
+			"organizacion": {
+				"_id": "57e9670e52df311059bc8964",
+				"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+				"id": "57e9670e52df311059bc8964"
+			}
+		},
+		"__v": 0
+	},
+	{
+		"_id": {
+			"$oid": "5d419ab20ae227149d50844f"
+		},
+		"habilitado": true,
+		"incluidoSuperintendencia": false,
+		"rematriculado": 0,
+		"profesionalMatriculado": false,
+		"nombre": "prueba",
+		"apellido": "darSobreturno",
+		"documento": "15789463",
+		"tokens": [
+			"prueba",
+			"darsobreturno",
+			"15789463"
+		],
+		"contactos": [
+			{
+				"activo": true,
+				"_id": {
+					"$oid": "5d419ab20ae227149d508450"
+				},
+				"tipo": "celular",
+				"valor": "",
+				"ranking": 0,
+				"ultimaActualizacion": {
+					"$date": "2019-07-31T13:18:27.558Z"
+				}
+			}
+		],
+		"fechaNacimiento": {
+			"$date": "2000-01-01T03:00:00.000Z"
+		},
+		"sexo": "masculino",
+		"domicilios": [],
+		"firmas": [],
+		"formacionGrado": [],
+		"formacionPosgrado": [],
+		"sanciones": [],
+		"OtrosDatos": [],
+		"createdAt": {
+			"$date": "2019-07-31T13:42:10.410Z"
+		},
+		"createdBy": {
+			"id": "59e76172b7c39e57a13b38c5",
+			"nombreCompleto": "30643636 30643636",
+			"nombre": "30643636",
+			"apellido": "30643636",
+			"username": 30643636,
+			"documento": 30643636,
+			"organizacion": {
+				"_id": "57e9670e52df311059bc8964",
+				"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+				"id": "57e9670e52df311059bc8964"
+			}
+		},
+		"__v": 0
+	},
+	{
+		"_id": {
+			"$oid": "5d49fa8bb6834a1d95e277b8"
+		},
+		"documento": "4163782",
+		"apellido": "ESPOSITO",
+		"nombre": "ALICIA BEATRIZ",
+		"tokens": [
+			"esposito",
+			"alicia",
+			"beatriz",
+			"4163782"
+		],
+		"formacionGrado": [
+			{
+				"matriculacion": [
+					{
+						"matriculaNumero": 2.0
+					}
+				],
+				"profesion": {
+					"nombre": "Médico"
+				}
+			}
+		],
+		"formacionPosgrado": [
+			{
+				"matriculacion": [
+					{
+						"matriculaNumero": 412.0
+					}
+				],
+				"especialidad": {
+					"nombre": "Citogenética (R)"
+				}
 			},
-			"motivo": null,
-			"normaLegal": null,
-			"fecha": null,
-			"vencimiento": null
-		}
-	],
-	"domicilios": [
-		{
-			"activo": true,
-			"tipo": "legal",
-			"valor": "LOS ALERCES 610",
-			"codigoPostal": "8324",
-			"ubicacion": {
-				"pais": {
-					"_id": {
-						"$oid": "57f3b5c469fe79a598e6281f"
-					},
-					"nombre": "Argentina"
-				},
-				"provincia": {
-					"nombre": "Río Negro"
-				},
-				"localidad": {
-					"nombre": "CIPOLLETTI"
+			{
+				"matriculacion": [
+					{
+						"matriculaNumero": 550
+					}
+				],
+				"especialidad": {
+					"nombre": "Bioquímica y Nutrición (R)"
 				}
 			}
+		],
+		"sexo": "femenino",
+		"fechaNacimiento": {
+			"$date": "1995-12-12T03:00:00.000Z"
 		},
-		{
-			"activo": true,
-			"tipo": "profesional",
-			"valor": "J. J. LASTRA 5400",
-			"codigoPostal": "8300",
-			"ubicacion": {
-				"pais": {
-					"_id": {
-						"$oid": "57f3b5c469fe79a598e6281f"
-					},
-					"nombre": "Argentina"
-				},
-				"provincia": {
-					"nombre": "Neuquén"
-				},
-				"localidad": {
-					"nombre": "NEUQUEN"
-				}
-			}
-		},
-		{
-			"activo": true,
-			"tipo": "real",
-			"valor": "LOS ALERCES 610",
-			"codigoPostal": "8324",
-			"ubicacion": {
-				"pais": {
-					"_id": {
-						"$oid": "57f3b5c469fe79a598e6281f"
-					},
-					"nombre": "Argentina"
-				},
-				"provincia": {
-					"nombre": "Río Negro"
-				},
-				"localidad": {
-					"nombre": "CIPOLLETTI"
-				}
-			}
-		}
-	],
-	"contactos": [
-		{
-			"tipo": "celular",
-			"valor": "0299-154058003",
-			"activo": true
-		},
-		{
-			"tipo": "email",
-			"valor": "crisbuschi@yahoo.com.ar",
-			"activo": true
-		},
-		{
-			"tipo": "fijo",
-			"valor": "0299-4775460",
-			"activo": true
-		}
-	],
-	"OtrosDatos": [],
-	"firmas": [],
-	"habilitado": true,
-	"incluidoSuperintendencia": false,
-	"rematriculado": false,
-	"__v": 1,
-	"profesionalMatriculado": true
-},
-{
-	"_id": {
-		"$oid": "5c82a5a53c524e4c57f08cf2"
-	},
-	"documento": "1711999",
-	"apellido": "PRUEBA",
-	"nombre": "ALICIA",
-	"formacionGrado": [
-		{
-			"matriculacion": [
-				{
-					"matriculaNumero": 2.0
-				}
-			],
-			"profesion": {
-				"nombre": "Médico"
-			}
-		}
-	],
-	"formacionPosgrado": [
-		{
-			"matriculacion": [
-				{
-					"matriculaNumero": 412.0
-				}
-			],
-			"especialidad": {
-				"nombre": "Citogenética (R)"
-			}
-		},
-		{
-			"matriculacion": [
-				{
-					"matriculaNumero": 533.0
-				}
-			],
-			"especialidad": {
-				"nombre": "Bioquímica y Nutrición (R)"
-			}
-		}
-	],
-	"sexo": "femenino",
-	"cuit": "1217429393",
-	"fechaNacimiento": {
-		"$date": "1995-12-12T03:00:00.000Z"
-	},
-	"profesionalMatriculado": false
-},
-{
-	"_id": {
-		"$oid": "5c82a5a53c524e4c57f08cf3"
-	},
-	"nombre": "MARIA",
-	"apellido": "PEREZ",
-	"documento": "4466777",
-	"cuit": "27041637825",
-	"fechaNacimiento": {
-		"$date": "1941-01-11T03:00:00.000Z"
-	},
-	"sexo": "Femenino",
-	"formacionGrado": [
-		{
-			"matriculacion": [
-				{
-					"matriculaNumero": 681.0
-				}
-			],
-			"profesion": {
-				"nombre": "FARMACEUTICO"
-			}
-		}
-	],
-	"formacionPosgrado": null,
-	"profesionalMatriculado": true
-},
-{
-	"_id": {
-		"$oid": "5c9118d5c09cdce4f07574e3"
-	},
-	"documento": "38906735",
-	"apellido": "USUARIO",
-	"nombre": "PRUEBA",
-	"formacionGrado": [
-		{
-			"matriculacion": [
-				{
-					"matriculaNumero": 2.0
-				}
-			],
-			"profesion": {
-				"nombre": "Médico"
-			}
-		}
-	],
-	"formacionPosgrado": [
-		{
-			"matriculacion": [
-				{
-					"matriculaNumero": 412.0
-				}
-			],
-			"especialidad": {
-				"nombre": "Citogenética (R)"
-			}
-		},
-		{
-			"matriculacion": [
-				{
-					"matriculaNumero": 533.0
-				}
-			],
-			"especialidad": {
-				"nombre": "Bioquímica y Nutrición (R)"
-			}
-		}
-	],
-	"sexo": "femenino",
-	"cuit": "1217429393",
-	"fechaNacimiento": {
-		"$date": "1995-12-12T03:00:00.000Z"
-	},
-	"profesionalMatriculado": false
-},
-{
-	"_id": {
-		"$oid": "5ce6dc045167b5526c72ed13"
-	},
-	"habilitado": true,
-	"incluidoSuperintendencia": false,
-	"rematriculado": 0,
-	"profesionalMatriculado": false,
-	"nombre": "TEST",
-	"apellido": "PRUEBA",
-	"documento": "325877758",
-	"contactos": [
-		{
-			"activo": true,
-			"_id": {
-				"$oid": "5ce6dc045167b5526c72ed14"
-			},
-			"tipo": "celular",
-			"valor": "",
-			"ranking": 0,
-			"ultimaActualizacion": {
-				"$date": "2019-05-23T17:44:14.571Z"
-			}
-		}
-	],
-	"fechaNacimiento": {
-		"$date": "2019-05-01T17:44:29.784Z"
-	},
-	"sexo": "masculino",
-	"domicilios": [],
-	"firmas": [],
-	"formacionGrado": [],
-	"formacionPosgrado": [],
-	"sanciones": [],
-	"OtrosDatos": [],
-	"createdAt": {
-		"$date": "2019-05-23T17:44:36.150Z"
-	},
-	"createdBy": {
-		"id": "59e76172b7c39e57a13b38c5",
-		"nombreCompleto": "30643636 30643636",
-		"nombre": "30643636",
-		"apellido": "30643636",
-		"username": 30643636,
-		"documento": 30643636,
-		"organizacion": {
-			"_id": "59380153db8e90fe4602ec02",
-			"nombre": "SUBSECRETARIA DE SALUD",
-			"id": "59380153db8e90fe4602ec02"
-		}
-	},
-	"__v": 0
-},
-{
-	"_id": {
-		"$oid": "5d02602588c4d1772a8a17f8"
-	},
-	"habilitado": true,
-	"incluidoSuperintendencia": false,
-	"rematriculado": 0,
-	"profesionalMatriculado": false,
-	"nombre": "Natalia",
-	"apellido": "Huenchuman",
-	"documento": "30643636",
-	"contactos": [
-		{
-			"activo": true,
-			"_id": {
-				"$oid": "5d02602588c4d1772a8a17f9"
-			},
-			"tipo": "celular",
-			"valor": "",
-			"ranking": 0,
-			"ultimaActualizacion": {
-				"$date": "2019-06-13T14:39:07.120Z"
-			}
-		}
-	],
-	"fechaNacimiento": {
-		"$date": "1984-03-07T03:00:00.000Z"
-	},
-	"sexo": "femenino",
-	"domicilios": [],
-	"firmas": [],
-	"formacionGrado": [],
-	"formacionPosgrado": [],
-	"sanciones": [],
-	"OtrosDatos": [],
-	"createdAt": {
-		"$date": "2019-06-13T14:39:33.434Z"
-	},
-	"createdBy": {
-		"id": "59e76172b7c39e57a13b38c5",
-		"nombreCompleto": "30643636 30643636",
-		"nombre": "30643636",
-		"apellido": "30643636",
-		"username": 30643636,
-		"documento": 30643636,
-		"organizacion": {
-			"_id": "57e9670e52df311059bc8964",
-			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
-			"id": "57e9670e52df311059bc8964"
-		}
-	},
-	"__v": 0
-},
-{
-	"_id": {
-		"$oid": "5d419ab20ae227149d50844f"
-	},
-	"habilitado": true,
-	"incluidoSuperintendencia": false,
-	"rematriculado": 0,
-	"profesionalMatriculado": false,
-	"nombre": "prueba",
-	"apellido": "darSobreturno",
-	"documento": "15789463",
-	"contactos": [
-		{
-			"activo": true,
-			"_id": {
-				"$oid": "5d419ab20ae227149d508450"
-			},
-			"tipo": "celular",
-			"valor": "",
-			"ranking": 0,
-			"ultimaActualizacion": {
-				"$date": "2019-07-31T13:18:27.558Z"
-			}
-		}
-	],
-	"fechaNacimiento": {
-		"$date": "2000-01-01T03:00:00.000Z"
-	},
-	"sexo": "masculino",
-	"domicilios": [],
-	"firmas": [],
-	"formacionGrado": [],
-	"formacionPosgrado": [],
-	"sanciones": [],
-	"OtrosDatos": [],
-	"createdAt": {
-		"$date": "2019-07-31T13:42:10.410Z"
-	},
-	"createdBy": {
-		"id": "59e76172b7c39e57a13b38c5",
-		"nombreCompleto": "30643636 30643636",
-		"nombre": "30643636",
-		"apellido": "30643636",
-		"username": 30643636,
-		"documento": 30643636,
-		"organizacion": {
-			"_id": "57e9670e52df311059bc8964",
-			"nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
-			"id": "57e9670e52df311059bc8964"
-		}
-	},
-	"__v": 0
-},
-{
-	"_id": {
-		"$oid": "5d49fa8bb6834a1d95e277b8"
-	},
-	"documento": "4163782",
-	"apellido": "ESPOSITO",
-	"nombre": "ALICIA BEATRIZ",
-	"formacionGrado": [
-		{
-			"matriculacion": [
-				{
-					"matriculaNumero": 2.0
-				}
-			],
-			"profesion": {
-				"nombre": "Médico"
-			}
-		}
-	],
-	"formacionPosgrado": [
-		{
-			"matriculacion": [
-				{
-					"matriculaNumero": 412.0
-				}
-			],
-			"especialidad": {
-				"nombre": "Citogenética (R)"
-			}
-		},
-		{
-			"matriculacion": [
-				{
-					"matriculaNumero": 550
-				}
-			],
-			"especialidad": {
-				"nombre": "Bioquímica y Nutrición (R)"
-			}
-		}
-	],
-	"sexo": "femenino",
-	"fechaNacimiento": {
-		"$date": "1995-12-12T03:00:00.000Z"
-	},
-	"profesionalMatriculado": false
-}]
-
+		"profesionalMatriculado": false
+	}
+]
