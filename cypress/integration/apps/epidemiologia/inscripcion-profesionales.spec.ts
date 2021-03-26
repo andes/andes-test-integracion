@@ -54,6 +54,7 @@ context('Inscripción profesionales COVID 19', () => {
             expect(xhr.response.body.profesional.apellido).to.be.eq('PEREZ');
             expect(xhr.response.body.profesional.sexo).to.be.eq('Femenino');
         });
+        cy.plexText('name="email"', 'prueba@gmail.com');
         cy.plexBool('name="aceptaPermisos"', true);
         cy.wait('@getUsuario').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
