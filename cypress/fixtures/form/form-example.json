@@ -1,0 +1,69 @@
+{
+    "active": true,
+    "name": "Virus Zombie",
+    "type": "coronazombie",
+    "sections": [
+        {
+            "type": "section",
+            "name": "Usuario",
+            "id": "usuario",
+            "fields": [
+                {
+                    "key": "organizacion",
+                    "label": "organizacion",
+                    "type": "select",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "preload": false,
+                    "resources": "organizaciones"
+                },
+                {
+                    "key": "intkey",
+                    "label": "Int label",
+                    "type": "int",
+                    "description": "Int description",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false,
+                    "min": 10,
+                    "max": 100
+                },
+                {
+                    "key": "snomedkey",
+                    "label": "Snomed label",
+                    "type": "snomed",
+                    "description": "Snomed description",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false,
+                    "snomedCodeOrQuery": "snomed"
+                },
+                {
+                    "key": "localidad",
+                    "label": "localidad",
+                    "type": "select",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "preload": false,
+                    "resources": "localidades"
+                },
+                {
+                    "key": "provincia",
+                    "label": "provincia",
+                    "type": "select",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "preload": false,
+                    "resources": "provincias"
+                }
+     
+            ]
+        }
+    ],
+    "snomedCode": null
+}

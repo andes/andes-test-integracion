@@ -1,0 +1,142 @@
+[
+	{
+		"_id": {
+			"$oid": "60079380dcc44a77e6179cdb"
+		},
+		"activo": true,
+		"name": "Provincias",
+		"id": "provincias",
+		"type": "normal",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "600794fbdcc44a77e6179cdc"
+		},
+		"activo": true,
+		"name": "Localidades",
+		"id": "localidades",
+		"type": "normal",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "6007950bdcc44a77e6179cdd"
+		},
+		"activo": true,
+		"name": "Personal",
+		"id": "personal",
+		"type": "normal",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "6008216a525a71d3f3f7b9f9"
+		},
+		"activo": true,
+		"name": "Efectores",
+		"id": "organizaciones",
+		"type": "normal",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "600aca102f344454af894c20"
+		},
+		"activo": true,
+		"type": "normal",
+		"name": "Enfermedades",
+		"id": "enfermedades",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "600aca822f344454af894c21"
+		},
+		"activo": true,
+		"type": "section",
+		"name": "Usuario",
+		"id": "usuario",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "600ad14f98422d5610d5c419"
+		},
+		"activo": true,
+		"type": "section",
+		"name": "Mpi",
+		"id": "mpi",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "600b0224525a71d3f3138184"
+		},
+		"activo": true,
+		"type": "section",
+		"name": "Clasificacion",
+		"id": "clasificacion",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "600ee674525a71d3f337df5c"
+		},
+		"activo": true,
+		"type": "section",
+		"name": "EnfermedadesPrevias",
+		"id": "enfermedadesPrevias",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "60100cf2525a71d3f342b9da"
+		},
+		"activo": true,
+		"type": "section",
+		"name": "Informacion Clinica",
+		"id": "informacionClinica",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "60101295525a71d3f342ef52"
+		},
+		"activo": true,
+		"type": "section",
+		"name": "Signos y Sintomas",
+		"id": "signosSintomas",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "60101537525a71d3f34308ad"
+		},
+		"activo": true,
+		"type": "section",
+		"name": "Clasificacion y Final",
+		"id": "clasificacionFinal",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "60101755525a71d3f3431ccd"
+		},
+		"activo": true,
+		"type": "section",
+		"name": "Contactos Estrechos",
+		"id": "contactosEstrechos",
+		"__v": 0.0
+	},
+	{
+		"_id": {
+			"$oid": "60101eec525a71d3f34363ee"
+		},
+		"activo": true,
+		"type": "section",
+		"name": "Antecedentes Epidemiologicos",
+		"id": "antecedentesEpidemiologicos",
+		"__v": 0.0
+	}
+]
