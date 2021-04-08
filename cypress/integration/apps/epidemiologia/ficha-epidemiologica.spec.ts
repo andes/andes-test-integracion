@@ -38,6 +38,7 @@ context('Ficha Epidemiológica', () => {
         });
         cy.get('paciente-listado plex-item').contains(validado.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
+        cy.plexText('name="identifier"', '1111111111111');
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
         cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
@@ -63,6 +64,7 @@ context('Ficha Epidemiológica', () => {
         });
         cy.get('paciente-listado plex-item').contains(validado2.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
+        cy.plexText('name="identifier"', '1111111111112');
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}299');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
         cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
@@ -103,6 +105,7 @@ context('Ficha Epidemiológica', () => {
         });
         cy.get('paciente-listado plex-item').contains(validado.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
+        cy.plexText('name="identifier"', '1111111111113');
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
         cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
