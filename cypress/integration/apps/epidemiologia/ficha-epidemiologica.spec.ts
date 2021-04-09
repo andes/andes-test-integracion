@@ -45,7 +45,7 @@ context('Ficha Epidemiológica', () => {
         cy.plexSelectTypeDinamico('segunda clasificación', 'PCR{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
         cy.plexSelectTypeDinamico('antígeno', 'Positivo{enter}');
-        cy.plexSelectTypeDinamico('PCR', 'Positivo{enter}');
+        cy.plexSelectTypeDinamico('PCR', 'Se detecta{enter}');
         cy.plexButton('Registrar ficha').click();
         cy.wait('@registroFicha').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -70,7 +70,7 @@ context('Ficha Epidemiológica', () => {
         cy.plexSelectTypeDinamico('segunda clasificación', 'PCR{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
         cy.plexSelectTypeDinamico('antígeno', 'Positivo{enter}');
-        cy.plexSelectTypeDinamico('PCR', 'Positivo{enter}');
+        cy.plexSelectTypeDinamico('PCR', 'Se detecta{enter}');
         cy.plexButton('Registrar ficha').click();
         cy.wait('@registroFicha').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -110,7 +110,7 @@ context('Ficha Epidemiológica', () => {
         cy.plexSelectTypeDinamico('segunda clasificación', 'PCR{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
         cy.plexSelectTypeDinamico('antígeno', 'Positivo{enter}');
-        cy.plexSelectTypeDinamico('PCR', 'Positivo{enter}');
+        cy.plexSelectTypeDinamico('PCR', 'Se detecta{enter}');
         cy.plexButton('Agregar contacto').click();
         cy.plexText('name="apellidoNombre"', 'nuevo contacto');
         cy.plexText('name="dni"', '22222222');
