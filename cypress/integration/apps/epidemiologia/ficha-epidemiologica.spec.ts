@@ -39,6 +39,8 @@ context('Ficha Epidemiológica', () => {
         cy.get('paciente-listado plex-item').contains(validado.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
+        cy.plexSelectTypeDinamico('provincia de residencia', 'Neuquen{enter}');
+        cy.plexSelectTypeDinamico('localidad de residencia', 'Neuquen{enter}');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
         cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
@@ -64,6 +66,8 @@ context('Ficha Epidemiológica', () => {
         cy.get('paciente-listado plex-item').contains(validado2.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}299');
+        cy.plexSelectTypeDinamico('provincia de residencia', 'Neuquen{enter}');
+        cy.plexSelectTypeDinamico('localidad de residencia', 'Neuquen{enter}');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
         cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
@@ -104,6 +108,8 @@ context('Ficha Epidemiológica', () => {
         cy.get('paciente-listado plex-item').contains(validado.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
+        cy.plexSelectTypeDinamico('provincia de residencia', 'Neuquen{enter}');
+        cy.plexSelectTypeDinamico('localidad de residencia', 'Neuquen{enter}');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
         cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
