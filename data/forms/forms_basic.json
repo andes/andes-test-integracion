@@ -938,9 +938,20 @@
                     "preload": false
                 },
                 {
+                    "_id": "6063496ba78c8435d066ed43",
+                    "key": "lamp",
+                    "label": "LAMP (NeoKit)",
+                    "type": "dependencia",
+                    "description": "",
+                    "required": false,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
                     "_id": "601016027406db28e08b0d3a",
                     "key": "pcr",
-                    "label": "PCR",
+                    "label": "Muestra tomada de PCR",
                     "type": "dependencia",
                     "description": "",
                     "required": true,
