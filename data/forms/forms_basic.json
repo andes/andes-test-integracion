@@ -143,22 +143,22 @@
                     "_id": "600ecca89df44c25abbf6bfb",
                     "key": "lugarresidencia",
                     "label": "provincia de residencia",
-                    "type": "select",
+                    "type": "dependencia",
                     "description": "",
                     "required": false,
                     "subfilter": false,
-                    "resources": "provincias",
+                    "resources": "",
                     "preload": false
                 },
                 {
                     "_id": "600ecca89df44c25abbf6bfc",
                     "key": "localidadresidencia",
                     "label": "localidad de residencia",
-                    "type": "select",
+                    "type": "dependencia",
                     "description": "",
                     "required": false,
                     "subfilter": false,
-                    "resources": "localidades",
+                    "resources": "",
                     "preload": false
                 },
                 {

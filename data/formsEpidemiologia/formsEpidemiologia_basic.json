@@ -113,7 +113,10 @@
             ]
         }
     ],
-    "type": "covid19",
+    "type": {
+        "id": "59e76172b7c39e57a13b38c8",
+        "name": "covid19"
+    },
     "paciente": {
         "id": {
             "$oid": "605ddc37b2f5356afea60a05"

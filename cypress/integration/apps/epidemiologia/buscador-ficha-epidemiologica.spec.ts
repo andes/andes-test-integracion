@@ -31,7 +31,7 @@ context('Ficha Epidemiológica', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body[0].paciente.documento).to.be.eq('33650500');
             expect(xhr.response.body[0].paciente.id).to.be.eq('605ddc37b2f5356afea60a05');
-            expect(xhr.response.body[0].type).to.be.eq('covid19');
+            expect(xhr.response.body[0].type.name).to.be.eq('covid19');
             expect(xhr.response.body[0]._id).to.be.eq('605ddc8966231e538584ee3c');
         });
     });
@@ -43,7 +43,7 @@ context('Ficha Epidemiológica', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body[0].paciente.documento).to.be.eq('33650500');
             expect(xhr.response.body[0].paciente.id).to.be.eq('605ddc37b2f5356afea60a05');
-            expect(xhr.response.body[0].type).to.be.eq('covid19');
+            expect(xhr.response.body[0].type.name).to.be.eq('covid19');
             expect(xhr.response.body[0]._id).to.be.eq('605ddc8966231e538584ee3c');
         });
     });
@@ -61,7 +61,7 @@ context('Ficha Epidemiológica', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body[0].paciente.documento).to.be.eq('33650500');
             expect(xhr.response.body[0].paciente.id).to.be.eq('605ddc37b2f5356afea60a05');
-            expect(xhr.response.body[0].type).to.be.eq('covid19');
+            expect(xhr.response.body[0].type.name).to.be.eq('covid19');
             expect(xhr.response.body[0]._id).to.be.eq('605ddc8966231e538584ee3c');
         });
     });
