@@ -1,5 +1,7 @@
 {
-    "_id": "600ceaf8220da69a4bbe7223",
+    "_id": {
+        "$oid": "600ceaf8220da69a4bbe7223"
+    },
     "active": true,
     "name": "covid19",
     "type": "covicho",
