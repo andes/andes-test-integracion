@@ -140,6 +140,17 @@
                     "preload": false
                 },
                 {
+                    "_id": "604a587ef3dc9f47404afb0f",
+                    "key": "direccioncaso",
+                    "label": "Dirección de residencia",
+                    "type": "string",
+                    "description": "",
+                    "required": true,
+                    "subfilter": false,
+                    "resources": "",
+                    "preload": false
+                },
+                {
                     "_id": "600ecca89df44c25abbf6bfb",
                     "key": "lugarresidencia",
                     "label": "provincia de residencia",
