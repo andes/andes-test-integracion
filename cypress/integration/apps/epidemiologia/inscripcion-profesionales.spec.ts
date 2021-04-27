@@ -29,7 +29,6 @@ context('Inscripción profesionales COVID 19', () => {
         });
 
 
-        // cy.fixture('profesionales/profesional-validado-renaper').as('paciente_validado');
         cy.route('POST', '**/api/core/tm/profesionales/validar').as('pacienteValidado');
 
 
@@ -56,7 +55,6 @@ context('Inscripción profesionales COVID 19', () => {
 
     it('Crear usuario para profesional con matricula vigente', () => {
 
-        // cy.fixture('profesionales/profesional-validado-renaper2').as('paciente_validado2');
         cy.route('POST', '**/api/core/tm/profesionales/validar').as('pacienteValidado2');
         cy.plexText('name="documento"', '4466777');
         cy.plexSelectType('label="Seleccione sexo"', 'femenino');
@@ -86,7 +84,6 @@ context('Inscripción profesionales COVID 19', () => {
     })
 
     it('Validar profesional con matricula vencida', () => {
-        // cy.fixture('profesionales/profesional-validado-renaper3').as('paciente_validado3');
         cy.route('POST', '**/api/core/tm/profesionales/validar').as('pacienteValidado3');
         cy.plexText('name="documento"', '34934522');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');

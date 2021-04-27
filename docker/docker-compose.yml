@@ -14,3 +14,4 @@ services:
       MONGO_MAIN: "mongodb://db:27017/andes"
       MONGO_LOGS: "mongodb://db:27017/logs"
       MONGO_PUCO: "mongodb://db:27017/andes"
+      EMAIL_ACTIVE: "false"
