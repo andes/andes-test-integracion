@@ -641,7 +641,7 @@
                     "_id": "60100ed07406db28e08b0c64",
                     "key": "fechasintomas",
                     "label": "fecha de inicio de 1º síntoma",
-                    "type": "dependencia",
+                    "type": "date",
                     "description": "",
                     "required": true,
                     "subfilter": false,
