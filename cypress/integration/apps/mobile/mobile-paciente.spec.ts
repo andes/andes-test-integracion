@@ -108,7 +108,8 @@ context('mobile paciente', () => {
 
         cy.wait(500);
         cy.get('ion-input[name="email"] input').first().type('nuevoemail@gmail.com', { force: true });
-        cy.get('.ion-color-success').click({ force: true });
+        cy.get('ion-button').click({ force: true });
+
         cy.wait('@updatePaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
