@@ -44,7 +44,6 @@ context('Ficha Epidemiológica', () => {
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
         cy.plexSelectTypeDinamico('segunda clasificación', 'LAMP{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
-        cy.plexSelectTypeDinamico('antígeno', 'Positivo{enter}');
         cy.plexSelectTypeDinamico('LAMP (NeoKit)', 'Se detecta genoma de SARS-CoV-2{enter}');
         cy.plexButton('Registrar ficha').click();
         cy.wait('@registroFicha').then((xhr) => {
@@ -69,7 +68,6 @@ context('Ficha Epidemiológica', () => {
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
         cy.plexSelectTypeDinamico('segunda clasificación', 'LAMP{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
-        cy.plexSelectTypeDinamico('antígeno', 'Positivo{enter}');
         cy.plexSelectTypeDinamico('LAMP (NeoKit)', 'Se detecta genoma de SARS-CoV-2{enter}');
         cy.plexButton('Registrar ficha').click();
         cy.wait('@registroFicha').then((xhr) => {
@@ -107,10 +105,9 @@ context('Ficha Epidemiológica', () => {
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
         cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
-        cy.plexSelectTypeDinamico('segunda clasificación', 'LAMP{enter}');
+        cy.plexSelectTypeDinamico('segunda clasificación', 'antigeno{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
-        cy.plexSelectTypeDinamico('antígeno', 'Positivo{enter}');
-        cy.plexSelectTypeDinamico('LAMP (NeoKit)', 'Se detecta genoma de SARS-CoV-2{enter}');
+        cy.plexSelectTypeDinamico('antígeno', 'Reactivo{enter}');
         cy.plexButton('Agregar contacto').click();
         cy.plexText('name="apellidoNombre"', 'nuevo contacto');
         cy.plexText('name="dni"', '22222222');
