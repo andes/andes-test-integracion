@@ -1,0 +1,126 @@
+[
+    {
+        "_id": {
+            "$oid": "6089a9631d68383852550255"
+        },
+        "validaciones": [
+            "domicilio"
+        ],
+        "morbilidades": [
+            "diabetes",
+            "obesidad",
+            "cardiovascular",
+            "renal",
+            "respiratoria"
+        ],
+        "tokens": [
+            "10000000",
+            "andes",
+            "paciente",
+            "validado"
+        ],
+        "fechaRegistro": "2021-04-28T18:28:49.034Z",
+        "documento": "10000000",
+        "nombre": "PACIENTE VALIDADO",
+        "apellido": "ANDES",
+        "nroTramite": "299999999999",
+        "grupo": {
+            "nombre": "factores-riesgo"
+        },
+        "sexo": "masculino",
+        "fechaNacimiento": "1991-01-18T02:00:00.000Z",
+        "localidad": {
+            "_id": "57f538a472325875a199a82d",
+            "nombre": "Neuquén"
+        },
+        "telefono": "2994545454",
+        "email": "prueba@gmail.com",
+        "cud": "",
+        "alergia": true,
+        "condicion": false,
+        "convaleciente": false,
+        "vacuna": false,
+        "plasma": false,
+        "amamantando": false,
+        "embarazada": false,
+        "profesion": "",
+        "matricula": null,
+        "establecimiento": "",
+        "relacion": "",
+        "estado": "pendiente",
+        "diaseleccionados": "",
+        "validado": true,
+        "paciente": {
+            "apellido": "ANDES",
+            "documento": "10000000",
+            "fechaNacimiento": "1991-01-18T04:00:00.000Z",
+            "id": {
+                "$oid": "586e6e8627d3107fde116cdb"
+            },
+            "nombre": "PACIENTE VALIDADO",
+            "sexo": "masculino"
+        }
+    },
+    {
+        "_id": {
+            "$oid": "6089a4a01d6838385254fed6"
+        },
+        "validaciones": [
+            "domicilio"
+        ],
+        "morbilidades": [],
+        "tokens": [
+            "20000000",
+            "PACIENTE TEMPORAL",
+            "ANDES"
+        ],
+        "fechaRegistro": "2021-04-28T18:08:30.036Z",
+        "documento": "20000000",
+        "nombre": "PACIENTE TEMPORAL",
+        "apellido": "ANDES",
+        "nroTramite": "",
+        "grupo": {
+            "nombre": "personal-salud"
+        },
+        "sexo": "femenino",
+        "fechaNacimiento": "1983-08-29T03:00:00.000Z",
+        "localidad": {
+            "_id": "57f538a472325875a199a82d",
+            "nombre": "Neuquén"
+        },
+        "telefono": "2994545454",
+        "email": "temporal@gmail.com",
+        "cud": "",
+        "alergia": false,
+        "condicion": false,
+        "convaleciente": false,
+        "vacuna": false,
+        "plasma": false,
+        "amamantando": true,
+        "embarazada": false,
+        "profesion": "",
+        "matricula": null,
+        "establecimiento": "cam",
+        "localidadEstablecimiento": {
+            "_id": "57f538a472325875a199a82d",
+            "nombre": "Neuquén"
+        },
+        "relacion": "planta",
+        "estado": "pendiente",
+        "diaseleccionados": "",
+        "validado": true,
+        "fechaValidacion": "2021-04-28T18:08:32.784Z",
+        "fechaVacunacion": "2021-03-10T12:13:10.934Z",
+        "idPrestacionVacuna": "6048b804cb59e3ffa126f32a",
+        "paciente": {
+            "apellido": "TEMPORAL",
+            "documento": "20000000",
+            "fechaNacimiento": "1983-08-29T03:00:00.000Z",
+            "id": {
+                "$oid": "5b6c4b0454853f061f97d589"
+            },
+            "nombre": "PACIENTE TEMPORAL",
+            "sexo": "femenino"
+        }
+    }
+]
