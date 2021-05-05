@@ -172,7 +172,7 @@ declare namespace Cypress {
         /**
          * Plex badge
          */
-        plexBadge(texto: string, type?: 'info' | 'success' | 'warning' | 'danger'): Chainable<Element>;
+        plexBadge(texto: string, type?: 'info' | 'success' | 'warning' | 'danger' | 'default'): Chainable<Element>;
 
         /**
          * Plex Select

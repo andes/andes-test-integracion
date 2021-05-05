@@ -1,0 +1,123 @@
+[
+    {
+        "_id": "603da3bdf00dd3d711253fa6",
+        "nombre": "mayores60",
+        "descripcion": "Mayores de 60",
+        "activo": true,
+        "validaciones": [
+            {
+                "type": "domicilio",
+                "provincia": "neuquen",
+                "mensajeError": {
+                    "titulo": "Mayores de 60",
+                    "subtitulo": "Su inscripción a la vacunación ha sido registrada",
+                    "body": "Usted se encuentra inscripto y en proceso de validación de sus datos",
+                    "status": "warning"
+                }
+            }
+        ]
+    },
+    {
+        "_id": "603e019056865e7f35afe979",
+        "nombre": "personal-salud",
+        "descripcion": "Personal de Salud",
+        "activo": true,
+        "validaciones": [
+            {
+                "type": "matriculacion",
+                "profesionesExcluidas": [
+                    "PODOLOGO",
+                    "MECANICO DENTAL"
+                ],
+                "mensajeError": {
+                    "titulo": "Personal de Salud",
+                    "subtitulo": "Su inscripción a la vacunación no ha sido posible ",
+                    "body": "Acorde a nuestros datos, usted ejerce una profesión que no se encuentra enmarcada en esta etapa de la campaña de vacunación. Si usted considera que este mensaje es erróneo, por favor envie un email a inscripcionvacuna@neuquen.gov.ar para consultar por el estado de su registro.",
+                    "status": "fail"
+                }
+            },
+            {
+                "type": "personal_salud",
+                "mensajeError": {
+                    "titulo": "Personal de Salud",
+                    "subtitulo": "Su inscripción a la vacunación no ha sido posible ",
+                    "body": "Acorde a nuestros datos, usted no se encuentra registrado en los padrones de salud. Si usted se desempeña como personal de salud y considera este mensaje erróneo, por favor envie un email a inscripcionvacuna@neuquen.gov.ar para consultar por el estado de su registro.",
+                    "status": "fail"
+                }
+            }
+        ]
+    },
+    {
+        "_id": "603e29d256865e7f35aff8a4",
+        "nombre": "discapacidad",
+        "descripcion": "Adultos mayores de 18 años con discapacidad y factores de riesgos",
+        "activo": true,
+        "mensajeDefault": {
+            "titulo": "Adultos entre 18 y 59 años con discapacidad y factores de riesgos",
+            "subtitulo": "Su inscripción para vacunación ha sido registrada",
+            "body": "Sus datos serán verificados por la Subsecretaría de Discapacidad _ Ministerio de Ciudadanía. Si necesita más información, puede llamar al 2995073858 o 2995815615",
+            "status": "warning"
+        },
+        "validaciones": []
+    },
+    {
+        "_id": "6048c7e368796d29fcd4c26b",
+        "nombre": "policia",
+        "descripcion": "Personal policial",
+        "activo": true,
+        "mensajeDefault": {
+            "titulo": "Personal policial",
+            "subtitulo": "Su inscripción para vacunación ha sido registrada",
+            "body": "Sus datos serán verificados por la Policía Provincial del Neuquén. Si desea mas información, por favor envie un email a la casilla vacunascovid19consultas@polneuquen.gob.ar",
+            "status": "warning"
+        },
+        "validaciones": []
+    },
+    {
+        "_id": "604a43cfb18dad57d8d609b1",
+        "nombre": "factores-riesgo",
+        "descripcion": "Adultos mayores entre 18 y 59 años, con factores de riesgo",
+        "activo": true,
+        "mensajeDefault": {
+            "titulo": "Adultos mayores entre 18 y 59 años, con factores de riesgo",
+            "subtitulo": "Su inscripción para vacunación ha sido registrada",
+            "body": "Usted necesita una prescripción de su médico que indique la vacunación contra COVID-19, por pertenecer al grupo con factores de riesgo asociados.  Se deberá presentar al turno de la vacunación con dicha prescripción",
+            "status": "warning"
+        },
+        "validaciones": [],
+        "morbilidades": [
+            {
+                "id": "diabetes",
+                "label": "Diabetes (insulinodependiente y no insulinodependiente)"
+            },
+            {
+                "id": "obesidad",
+                "label": "Obesidad grado 2 o mayor (índice de masa corporal -IMC- mayor a 35)"
+            },
+            {
+                "id": "cardiovascular",
+                "label": "Enfermedad cardiovascular (NO incluye la hipertensión arterial como único antecedente)"
+            },
+            {
+                "id": "renal",
+                "label": "Enfermedad renal crónica, incluidos pacientes en diálisis crónica"
+            },
+            {
+                "id": "respiratoria",
+                "label": "Enfermedad respiratoria crónica"
+            },
+            {
+                "id": "cirrosis",
+                "label": "Cirrosis"
+            },
+            {
+                "id": "retroviral",
+                "label": "Personas en seguimiento por enfermedad retroviral"
+            },
+            {
+                "id": "lista-espera",
+                "label": "Pacientes en lista de espera para trasplante y trasplantados (excepto córnea)"
+            }
+        ]
+    }
+]
