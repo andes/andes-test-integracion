@@ -233,8 +233,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         });
 
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
-        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
         cy.get('plex-item').last().click();
+        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
         cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('finalizada').click();
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
@@ -421,14 +421,13 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
-        cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
         cy.plexText('name="paciente"', '2504196');
         cy.wait('@getDerivaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
-        cy.get('plex-item plex-badge i.adi-avion').click();
-        cy.get('span').contains('Traslado');
+        cy.get('plex-badge').contains('finalizada').should('have.length', 1);
+        cy.get('plex-item').last().click({ force: true });
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 6);
     });
