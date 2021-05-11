@@ -27,6 +27,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.route('POST', '**/modules/com/derivaciones/**/historial').as('updateHistorial');
         cy.route('POST', '/api/auth/v2/organizaciones').as('selectOrg');
         cy.route('GET', '**/api/auth/organizaciones').as('getOrganizaciones');
+        cy.route('POST', '**/api/modules/descargas/reporteDerivacion').as('reporteDerivacion');
         secuencia(tokenOriginal);
     });
 
@@ -232,8 +233,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         });
 
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
-        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
         cy.get('plex-item').last().click();
+        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
         cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('finalizada').click();
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
@@ -420,15 +421,48 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
-        cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
         cy.plexText('name="paciente"', '2504196');
         cy.wait('@getDerivaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
-        cy.get('plex-item plex-badge i.adi-avion').click();
-        cy.get('span').contains('Traslado');
+        cy.get('plex-badge').contains('finalizada').should('have.length', 1);
+        cy.get('plex-item').last().click({ force: true });
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 6);
+    });
+
+    it('crear derivacion y descargar historial', () => {
+        seleccionarPaciente('2504196');
+        cy.wait('@profesionalSolicitante').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@getOrganizacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexTextArea('label="Detalle"', 'a aceptar');
+        cy.plexSelectType('name="profesionalOrigen"').clearSelect();
+        cy.plexSelectAsync('label="Profesional solicitante"', 'ALICIA PRUEBA', '@profesionalSolicitante', 0);
+        cy.plexSelectType('name="trasladoEspecial"', 'VUELO SANITARIO');
+        cy.wait('@getOrganizaciones');
+        cy.plexSelectType('name="organizacionTraslado"', 1);
+
+        cy.plexButton("Guardar").click({ force: true });
+        cy.wait('@createDerivacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.documento).to.be.eq('2504196');
+        });
+        cy.toast('success', 'Derivación guardada');
+
+        cy.login('30643636', 'asd', '5ef7ae883e3de57c0a429797').then(t => {
+            token = t;
+            cy.goto('/com', token);
+        });
+        cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
+        cy.get('plex-item').last().click();
+        cy.plexButtonIcon("printer").click();
+        cy.wait('@reporteDerivacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
     });
 });
