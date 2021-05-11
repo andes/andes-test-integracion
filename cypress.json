@@ -6,6 +6,7 @@
   "reporterOptions": {
     "configFile": "config-report.json"
   },
+  "experimentalNetworkStubbing": true,
   "chromeWebSecurity": false,
   "modifyObstructiveCode": false,
   "projectId": "xr7gft",

@@ -432,7 +432,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-panel').should('have.length', 6);
     });
 
-    it('crear derivacion y descargar historial', () => {
+    it.only('crear derivacion y descargar historial', () => {
+
+
         seleccionarPaciente('2504196');
         cy.wait('@profesionalSolicitante').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -461,6 +463,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-item').last().click();
         cy.plexButtonIcon("printer").click();
+        cy.route2('POST', '**/api/modules/descargas/reporteDerivacion', {
+            statusCode: 200
+        }).as('reporteDerivacion');
         cy.wait('@reporteDerivacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
