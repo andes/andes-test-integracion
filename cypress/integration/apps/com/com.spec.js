@@ -432,7 +432,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-panel').should('have.length', 6);
     });
 
-    it.only('crear derivacion y descargar historial', () => {
+    it('crear derivacion y descargar historial', () => {
 
 
         seleccionarPaciente('2504196');
