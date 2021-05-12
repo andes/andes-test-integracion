@@ -463,7 +463,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         });
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-item').last().click();
-        cy.plexButtonIcon("printer").click();
+        // cy.plexButtonIcon("printer").click();
         // cy.route2('POST', '**/api/modules/descargas/reporteDerivacion', {
         //     statusCode: 200
         // }).as('reporteDerivacion');
