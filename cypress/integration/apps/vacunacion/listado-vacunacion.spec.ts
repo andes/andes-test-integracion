@@ -114,7 +114,7 @@ context('Vacunacion Listado', () => {
         cy.get('tbody tr').eq(0).contains(' 10000000 ').click();
         cy.get('plex-layout-sidebar plex-title').plexIcon('pencil').click();
         cy.get('plex-layout-sidebar').plexSelect('label="Grupo"', 1).click();
-        cy.get('plex-layout-sidebar').plexSelect('label="Estado"', 2).click();
+        cy.get('plex-layout-sidebar').plexSelect('label="Estado"', 3).click();
         cy.get('plex-layout-sidebar').plexText('label="Certificado Único de Discapacidad"', '22222');
         cy.get('plex-layout-sidebar').plexSelect('name="diaseleccionados"', 1).click();
         cy.get('plex-layout-sidebar plex-title').plexButton('GUARDAR').click();
@@ -134,7 +134,7 @@ context('Vacunacion Listado', () => {
         cy.get('tbody tr').eq(0).contains(' 10000000 ').click();
         cy.get('plex-layout-sidebar plex-title').plexIcon('pencil').click();
         cy.get('plex-layout-sidebar').plexSelect('label="Grupo"', 0).click();
-        cy.get('plex-layout-sidebar').plexSelect('label="Estado"', 2).click();
+        cy.get('plex-layout-sidebar').plexSelect('label="Estado"', 3).click();
         cy.get('plex-layout-sidebar').plexText('name="establecimiento"', 'prueba');
         cy.get('plex-layout-sidebar').plexSelectType('label="Localidad del establecimiento"', 'neuquen');
         cy.get('plex-layout-sidebar').plexRadio('name="relacion"', 0);
@@ -154,7 +154,7 @@ context('Vacunacion Listado', () => {
         cy.get('tbody tr').eq(0).contains(' 10000000 ').click();
         cy.get('plex-layout-sidebar plex-title').plexIcon('pencil').click();
         cy.get('plex-layout-sidebar').plexSelect('label="Grupo"', 2).click();
-        cy.get('plex-layout-sidebar').plexSelect('label="Estado"', 2).click();
+        cy.get('plex-layout-sidebar').plexSelect('label="Estado"', 3).click();
         cy.get('plex-layout-sidebar').plexBool('name="condicion"', false).click({ force: true });
         cy.get('plex-layout-sidebar plex-title').plexButton('GUARDAR').click();
         cy.wait('@patchPaciente').then((xhr) => {
