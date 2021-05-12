@@ -172,48 +172,40 @@ context('Vacunacion Listado', () => {
         cy.get('plex-layout-sidebar plex-title').plexIcon('comment-outline').click();
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 0).click();
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('info', 'La nota ha sido guardada correctamente.');
+        cy.toast('success', 'Nota agregada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('Turno asignado');
         });
         cy.get('plex-layout-sidebar plex-title').plexIcon('comment').click();
-        cy.get('plex-layout-sidebar').plexLabel('Nota actual');
-        cy.get('plex-layout-sidebar').plexLabel('Turno asignado');
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 1).click();
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('info', 'La nota ha sido guardada correctamente.');
+        cy.toast('success', 'Nota agregada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('No quiere vacunarse');
         });
         cy.get('plex-layout-sidebar plex-title').plexIcon('comment').click();
-        cy.get('plex-layout-sidebar').plexLabel('Nota actual');
-        cy.get('plex-layout-sidebar').plexLabel('No quiere vacunarse');
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 2).click();
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('info', 'La nota ha sido guardada correctamente.');
+        cy.toast('success', 'Nota agregada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('Ya se vacunó');
         });
         cy.get('plex-layout-sidebar plex-title').plexIcon('comment').click();
-        cy.get('plex-layout-sidebar').plexLabel('Nota actual');
-        cy.get('plex-layout-sidebar').plexLabel('Ya se vacunó');
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 3).click();
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('info', 'La nota ha sido guardada correctamente.');
+        cy.toast('success', 'Nota agregada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('No contesta');
         });
         cy.get('plex-layout-sidebar plex-title').plexIcon('comment').click();
-        cy.get('plex-layout-sidebar').plexLabel('Nota actual');
-        cy.get('plex-layout-sidebar').plexLabel('No contesta');
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 4).click();
         cy.get('plex-layout-sidebar').plexTextArea('name="notaText"', 'prueba');
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('info', 'La nota ha sido guardada correctamente.');
+        cy.toast('success', 'Nota agregada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('prueba');
