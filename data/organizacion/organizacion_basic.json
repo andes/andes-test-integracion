@@ -45302,7 +45302,8 @@
 				"geoReferencia": null,
 				"activo": true
 			}
-		]
+		],
+		"matriculacion": true
 	},
 	{
 		"_id": {

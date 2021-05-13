@@ -28,6 +28,7 @@ const { seedCampania } = require('./seed-campanias');
 
 const { cleanDB, connectToDB, fetch } = require('./database');
 const { InitDatabase } = require('./database-initial');
+const { seedServices } = require('./seed-services');
 
 module.exports = (on, config) => {
 
@@ -98,6 +99,9 @@ module.exports = (on, config) => {
         },
         'database:seed:campania': (dto) => {
             return seedCampania(mongoUri, dto);
+        },
+        'database:create:services': (dto) => {
+            return seedServices(mongoUri, dto);
         },
 
     });
