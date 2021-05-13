@@ -51,7 +51,7 @@ context('mobile profesional', () => {
     });
 
 
-    it('cargar adjunto', () => {
+    it.skip('cargar adjunto', () => {
         cy.route('POST', '/api/drive**').as('store');
         cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
@@ -105,7 +105,7 @@ context('mobile profesional', () => {
         const fileName = '/archivos/cat.png';
         cy.get('[type="file"]').attachFile(fileName);
         cy.get('ion-button').get('.ion-color-success').click();
-        cy.wait('@patch-adjuntar').then((xhr) => {
+        cy.wait('@patch-adjuntar', {timeout: 15000}).then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.status).to.be.eq("ok");
         });
