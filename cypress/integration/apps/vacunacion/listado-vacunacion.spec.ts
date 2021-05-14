@@ -387,4 +387,16 @@ context('Vacunacion Listado', () => {
         });
     });
 
+    it('Cambiar paciente a fallecido', () => {
+        cy.get('tbody tr').eq(0).contains(' 10000000 ').click();
+        cy.get('plex-layout-sidebar plex-title').plexIcon('pencil').click();
+        cy.get('plex-layout-sidebar').plexSelect('name="estado"',2).click();
+        cy.get('plex-layout-sidebar').plexButton('GUARDAR').click();
+        cy.wait('@patchPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estado).to.be.eq('fallecido');
+        });
+        cy.toast('success', 'La inscripción ha sido actualizada exitosamente');
+    });
+
 })
