@@ -23,6 +23,7 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
+        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
             "conceptId": "1234",
             "term": "Enfermeria en Rehabilitación",

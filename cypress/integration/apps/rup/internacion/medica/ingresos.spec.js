@@ -38,6 +38,7 @@
             cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
             cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
             cy.route('POST', '**/api/modules/rup/internacion/sala-comun/**').as('internarPaciente');
+            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.viewport(1920, 1080);
         });
 
