@@ -108,30 +108,4 @@ context('Ficha Epidemiológica', () => {
             expect(xhr.response.body[0]._id).to.be.eq('605ddc8966231e538584ee3c');
         });
     });
-
-    it('Obtener historial de ficha', () => {
-        cy.plexText('name="buscador"', '33650500');
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].apellido).to.be.eq('EPIDEMIO');
-            expect(xhr.response.body[0].nombre).to.be.eq('PRUEBA');
-        });
-        cy.get('paciente-listado plex-item').contains("33.650.500").click();
-        cy.plexButton('Buscar Fichas').click();
-        cy.wait('@getFicha').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].paciente.documento).to.be.eq('33650500');
-            expect(xhr.response.body[0].paciente.id).to.be.eq('605ddc37b2f5356afea60a05');
-            expect(xhr.response.body[0].type.name).to.be.eq('covid19');
-            expect(xhr.response.body[0]._id).to.be.eq('605ddc8966231e538584ee3c');
-        });
-        cy.plexButtonIcon('history').click();
-        cy.wait('@getHistory').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].ficha.paciente.documento).to.be.eq('33650500');
-            expect(xhr.response.body[0].ficha.paciente.id).to.be.eq('605ddc37b2f5356afea60a05');
-            expect(xhr.response.body[0].ficha.type.name).to.be.eq('covid19');
-            expect(xhr.response.body[0].ficha._id).to.be.eq('605ddc8966231e538584ee3c');
-        })
-    });
 })

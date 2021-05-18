@@ -3,6 +3,7 @@
 context('Ficha Epidemiológica', () => {
     let validado;
     let validado2;
+    let validado3;
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
@@ -18,6 +19,11 @@ context('Ficha Epidemiológica', () => {
         }).then(p => {
             validado2 = p;
         });
+        cy.task('database:create:paciente', {
+            template: 'validado', direccion: 'Luna de cuarzo 1674'
+        }).then(p => {
+            validado3 = p;
+        });
 
     })
 
@@ -27,6 +33,8 @@ context('Ficha Epidemiológica', () => {
         cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('POST', '**api/modules/forms/forms-epidemiologia/formEpidemiologia').as('registroFicha');
         cy.route('PATCH', '**api/modules/forms/forms-epidemiologia/formEpidemiologia/?**').as('actualizarFicha');
+        cy.route('GET', '**api/modules/forms/forms-epidemiologia/formEpidemiologia?**').as('getFicha');
+        cy.route('GET', '**/api/modules/forms/forms-epidemiologia/formsHistory?**').as('getHistory')
     })
 
     it('crear nueva ficha covid19', () => {
@@ -121,5 +129,47 @@ context('Ficha Epidemiológica', () => {
             expect(xhr.status).to.be.eq(200);
         })
         cy.toast('success', 'Su ficha fue registrada correctamente');
+    });
+
+    it('crear nueva ficha covid19 y verificar historial', () => {
+        cy.plexText('name="buscador"', validado3.documento);
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].apellido).to.be.eq(validado3.apellido);
+            expect(xhr.response.body[0].nombre).to.be.eq(validado3.nombre);
+        });
+        cy.get('paciente-listado plex-item').contains(validado3.apellido).click();
+        cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
+        cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
+        cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
+        cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
+        cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
+        cy.plexSelectTypeDinamico('segunda clasificación', 'LAMP{enter}');
+        cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
+        cy.plexSelectTypeDinamico('LAMP (NeoKit)', 'Se detecta genoma de SARS-CoV-2{enter}');
+        cy.plexButton('Registrar ficha').click();
+        cy.wait('@registroFicha').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        })
+        cy.toast('success', 'Su ficha fue registrada correctamente');
+        cy.goto('/epidemiologia/buscador-ficha-epidemiologica', token);
+        cy.plexText('name="buscador"', validado3.documento);
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].apellido).to.be.eq(validado3.apellido);
+            expect(xhr.response.body[0].nombre).to.be.eq(validado3.nombre);
+        });
+        cy.get('paciente-listado plex-item').contains(validado3.apellido).click();
+        cy.plexButton('Buscar Fichas').click();
+        cy.wait('@getFicha').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexButtonIcon('history').click();
+        cy.wait('@getHistory').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].ficha.paciente.documento).to.be.eq(validado3.documento);
+            expect(xhr.response.body[0].ficha.paciente.id).to.be.eq(validado3._id);
+            expect(xhr.response.body[0].ficha.type.name).to.be.eq('covid19');
+        })
     });
 })
