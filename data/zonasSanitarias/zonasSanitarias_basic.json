@@ -1,0 +1,30 @@
+[
+    {
+        "_id" : "60538814b18dad57d8b8950b",
+        "nombre" : "ZONA I"
+    },
+    {
+        "_id" : "6053895585e8c7b08b744215",
+        "nombre" : "ZONA II"
+    },
+    {
+        "_id" : "6053895585e8c7b08b744216",
+        "nombre" : "ZONA III"
+    },
+    {
+        "_id" : "6053895585e8c7b08b744217",
+        "nombre" : "ZONA IV"
+    },
+    {
+        "_id" : "6053895585e8c7b08b744218",
+        "nombre" : "ZONA V"
+    },
+    {
+        "_id" : "6053895585e8c7b08b744219",
+        "nombre" : "ZONA METROPOLITANA"
+    },
+    {
+        "_id" : "6053895585e8c7b08b74421a",
+        "nombre" : "CASTRO RENDON"
+    }
+]
