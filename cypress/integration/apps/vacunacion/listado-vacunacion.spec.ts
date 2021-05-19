@@ -137,7 +137,6 @@ context('Vacunacion Listado', () => {
         cy.get('plex-layout-sidebar').plexSelect('label="Estado"', 3).click();
         cy.get('plex-layout-sidebar').plexText('name="establecimiento"', 'prueba');
         cy.get('plex-layout-sidebar').plexSelectType('label="Localidad del establecimiento"', 'neuquen');
-        cy.get('plex-layout-sidebar').plexRadio('name="relacion"', 0);
         cy.get('plex-layout-sidebar plex-title').plexButton('GUARDAR').click();
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -145,7 +144,6 @@ context('Vacunacion Listado', () => {
             expect(xhr.response.body.morbilidades.length).to.be.eq(0);
             expect(xhr.response.body.alergia).to.be.eq(true);
             expect(xhr.response.body.establecimiento).to.be.eq('prueba');
-            expect(xhr.response.body.relacion).to.be.eq('planta');
             expect(xhr.response.body.estado).to.be.eq('habilitado');
         });
     });
@@ -390,7 +388,7 @@ context('Vacunacion Listado', () => {
     it('Cambiar paciente a fallecido', () => {
         cy.get('tbody tr').eq(0).contains(' 10000000 ').click();
         cy.get('plex-layout-sidebar plex-title').plexIcon('pencil').click();
-        cy.get('plex-layout-sidebar').plexSelect('name="estado"',2).click();
+        cy.get('plex-layout-sidebar').plexSelect('name="estado"', 2).click();
         cy.get('plex-layout-sidebar').plexButton('GUARDAR').click();
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
