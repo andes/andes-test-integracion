@@ -33,8 +33,8 @@
             "_id": "57f538a472325875a199a82d",
             "nombre": "Neuquén"
         },
-        "telefono": "2994545454",
-        "email": "prueba@gmail.com",
+        "telefono": "29",
+        "email": "prueba@",
         "cud": "",
         "alergia": true,
         "condicion": false,
