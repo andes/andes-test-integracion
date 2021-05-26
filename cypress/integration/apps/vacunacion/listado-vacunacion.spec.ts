@@ -73,8 +73,6 @@ context('Vacunacion Listado', () => {
         });
         cy.get('plex-detail section').plexBadge('Pendiente', 'default');
         cy.get('plex-detail section').contains(' Grupo: Adultos mayores entre 18 y 59 años, con factores de riesgo ');
-        cy.get('plex-detail plex-grid').plexLabel('prueba@gmail.com');
-        cy.get('plex-detail plex-grid').plexLabel('2994545454');
         cy.get('plex-detail plex-grid').plexLabel('Neuquén');
         cy.get('plex-detail plex-grid').plexLabel('Si');
         cy.get('tbody tr').eq(1).contains(' Personal de Salud ');
@@ -102,6 +100,9 @@ context('Vacunacion Listado', () => {
     it('Cambiar paciente a inhabilitado', () => {
         cy.get('tbody tr').eq(0).contains(' 10000000 ').click();
         cy.get('plex-layout-sidebar plex-title').plexIcon('pencil').click();
+        cy.get('plex-layout-sidebar').plexButton('GUARDAR').should('have.prop', 'disabled', true);
+        cy.get('plex-layout-sidebar').plexText('name="telefono"', '{selectall}{backspace}2999999999');
+        cy.get('plex-layout-sidebar').plexText('name="email"', '{selectall}{backspace}prueba@gmail.com');
         cy.get('plex-layout-sidebar').plexSelect('label="Estado"', 1).click();
         cy.get('plex-layout-sidebar plex-title').plexButton('GUARDAR').click();
         cy.wait('@patchPaciente').then((xhr) => {
@@ -145,6 +146,7 @@ context('Vacunacion Listado', () => {
             expect(xhr.response.body.alergia).to.be.eq(true);
             expect(xhr.response.body.establecimiento).to.be.eq('prueba');
             expect(xhr.response.body.estado).to.be.eq('habilitado');
+
         });
     });
 
