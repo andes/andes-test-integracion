@@ -40,7 +40,7 @@ context('turnos', () => {
 
         cy.plexText('label="Apellido"', 'apellidoBebe12');
 
-        cy.plexText('label="Nombre"', 'nombreBebe12');
+        cy.plexText('label="Nombre"', 'nombreBebe');
 
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
 
