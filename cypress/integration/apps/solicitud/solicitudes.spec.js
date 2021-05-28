@@ -31,35 +31,45 @@ context('SOLICITUDES', () => {
 
     })
 
-    it('crear nueva regla solicitud', () => {
-
-        let prestacionDestino = 'Consulta de cirugía';
-        let orgOrigen = 'HOSPITAL DR. HORACIO HELLER';
-        let prestacionOrigen = 'consulta de medicina general';
+    it('crear nueva regla de entrada', () => {
         cy.plexButton('Reglas de entrada').click();
-
-        cy.plexSelectAsync('label="Prestación Destino"', prestacionDestino, '@conceptosTurneables', 0);
-
-        cy.plexSelectAsync('placeholder="Seleccione la organización origen"', orgOrigen, '@getOrganizaciones', 0);
-
+        cy.plexSelectAsync('name="tipoPrestacion"', 'consulta de medicina general', '@conceptosTurneables', 0);
+        cy.plexSelectAsync('name="organizacion"', 'HOSPITAL DE AREA RINCON DE LOS SAUCES', '@getOrganizaciones', 0);
         cy.plexButtonIcon('plus').click();
-
-
-        cy.plexSelectAsync('name="prestacionOrigen"', prestacionOrigen, '@conceptosTurneables', 0);
-
-
+        cy.plexSelectAsync('name="prestacionOrigen"', 'consulta de urologia', '@conceptosTurneables', 0);
         cy.plexButtonIcon('plus').eq(1).click();
-
+        cy.plexSelectAsync('name="prestacionOrigen"', 'consulta de clínica médica', '@conceptosTurneables', 0);
+        cy.plexButtonIcon('plus').eq(1).click();
         cy.plexButton('Guardar').click();
-
         cy.wait('@guardarRegla').then(xhr => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].destino.organizacion.nombre).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-            expect(xhr.response.body[0].destino.prestacion.nombre).to.be.eq(prestacionDestino.toLocaleLowerCase());
-            expect(xhr.response.body[0].origen.organizacion.nombre).to.be.eq(orgOrigen);
-            expect(xhr.response.body[0].origen.prestaciones[0].prestacion.nombre).to.be.eq(prestacionOrigen);
+            expect(xhr.response.body[1].origen.organizacion.nombre).to.be.eq('HOSPITAL DE AREA RINCON DE LOS SAUCES');
+            expect(xhr.response.body[1].origen.prestaciones[0].prestacion.term).to.be.eq('consulta de urología');
+            expect(xhr.response.body[1].origen.prestaciones[0].prestacion.conceptId).to.be.eq('2301000013109');
+            expect(xhr.response.body[1].origen.prestaciones[1].prestacion.term).to.be.eq('consulta de clínica médica');
+            expect(xhr.response.body[1].origen.prestaciones[1].prestacion.conceptId).to.be.eq('401000013105');
+
+            expect(xhr.response.body[1].destino.organizacion.nombre).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+            expect(xhr.response.body[1].destino.prestacion.term).to.be.eq('consulta de medicina general');
+            expect(xhr.response.body[1].destino.prestacion.conceptId).to.be.eq('391000013108');
         });
         cy.toast('success', 'Las reglas se guardaron correctamente');
+    });
+
+    it('Verificar prestacion destino - Reglas de entrada', () => {
+        cy.plexButton('Reglas de entrada').click();
+        cy.plexSelectAsync('name="organizacion"', 'HOSPITAL DE AREA RINCON DE LOS SAUCES', '@getOrganizaciones', 0);
+        cy.plexButtonIcon('plus').click();
+        cy.swal('confirm', 'Debe seleccionar la prestación destino');
+        cy.plexButton('Guardar').should('have.prop', 'disabled', true);
+    });
+
+    it('Verificar organización origen - Reglas de entrada', () => {
+        cy.plexButton('Reglas de entrada').click();
+        cy.plexSelectAsync('name="tipoPrestacion"', 'consulta de medicina general', '@conceptosTurneables', 0);
+        cy.plexButtonIcon('plus').click();
+        cy.swal('confirm', 'Debe seleccionar la organización de origen');
+        cy.plexButton('Guardar').should('have.prop', 'disabled', true);
     });
 
     it('crear solicitud de entrada y verificar filtros', () => {
