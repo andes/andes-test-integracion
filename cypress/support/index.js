@@ -25,6 +25,9 @@ import './mapa-camas'
 import './privacidad'
 
 const addContext = require('mochawesome/addContext');
+const moment = require('moment');
+
+Cypress.moment = moment;
 
 Cypress.on('uncaught:exception', (err) => {
     if (err.message.includes('ResizeObserver')) {
