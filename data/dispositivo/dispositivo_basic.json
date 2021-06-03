@@ -1,0 +1,34 @@
+[
+    {
+        "_id": "60b534baf1a8ecb38728c39c",
+        "nombre": "HELMET",
+        "activo": true,
+        "tipo": "oxigeno",
+        "descripcion": "Casco de oxigeno",
+        "icono": "helmet"
+    },
+    {
+        "_id": "60b534baf1a8ecb38728c39d",
+        "nombre": "ARM",
+        "activo": true,
+        "tipo": "oxigeno",
+        "descripcion": "Asistencia respiratoria mecánica",
+        "icono": "arm"
+    },
+    {
+        "_id": "60b534baf1a8ecb38728c39e",
+        "nombre": "CNAF",
+        "activo": true,
+        "tipo": "otro",
+        "descripcion": "Cánula nasal de alto flujo",
+        "icono": "cnaf"
+    },
+    {
+        "_id": "60b534baf1a8ecb38728c39f",
+        "nombre": "MR",
+        "activo": true,
+        "tipo": "oxigeno",
+        "descripcion": "Máscara de reservorio",
+        "icono": "mr"
+    }
+]

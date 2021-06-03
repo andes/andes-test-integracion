@@ -23,5 +23,6 @@
     "reglas",
     "snomed-cie10",
     "snomed-cie10-static",
-    "tipoEstablecimiento"
+    "tipoEstablecimiento",
+    "dispositivo"
 ]

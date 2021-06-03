@@ -13,6 +13,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
             cy.task('database:create:paciente', { template: 'validado', nombre: 'PACIENTE', apellido: 'COM 4', documento: 2001294 });
             cy.task('database:create:paciente', { template: 'validado', nombre: 'PACIENTE', apellido: 'COM 5', documento: 2504195 });
             cy.task('database:create:paciente', { template: 'validado', nombre: 'PACIENTE', apellido: 'COM 6', documento: 2504196 });
+            cy.task('database:create:paciente', { template: 'validado', nombre: 'PACIENTE', apellido: 'COM 7', documento: 2504200 });
         })
     });
 
@@ -27,6 +28,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.route('POST', '**/modules/com/derivaciones/**/historial').as('updateHistorial');
         cy.route('POST', '/api/auth/v2/organizaciones').as('selectOrg');
         cy.route('GET', '**/api/auth/organizaciones').as('getOrganizaciones');
+        cy.route('GET', '**/modules/dispositivo**').as('getDispositivo');
         // Lo removemos por ahora hasta encontrar la solución
         // cy.route('POST', '**/api/modules/descargas/reporteDerivacion').as('reporteDerivacion');
         secuencia(tokenOriginal);
@@ -246,6 +248,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-panel').should('have.length', 5);
     });
 
+
     it('crear derivacion, aprobarla, asignarla, rechazarla, finalizarla', () => {
         seleccionarPaciente('2504195');
         cy.wait('@profesionalSolicitante').then((xhr) => {
@@ -433,9 +436,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-panel').should('have.length', 6);
     });
 
-    it('crear derivacion y descargar historial', () => {
-
-
+    it('crear derivacion, descargar historial y cancelar', () => {
         seleccionarPaciente('2504196');
         cy.wait('@profesionalSolicitante').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -463,6 +464,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         });
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-item').last().click();
+        cy.get('plex-badge').contains('solicitada').should('have.length', 1);
+        // Pendiente para más adelante, cuando funcione en jenkins!!!
         // cy.plexButtonIcon("printer").click();
         // cy.route2('POST', '**/api/modules/descargas/reporteDerivacion', {
         //     statusCode: 200
@@ -470,5 +473,113 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         // cy.wait('@reporteDerivacion').then((xhr) => {
         //     expect(xhr.status).to.be.eq(200);
         // });
+        cy.login('30643636', 'asd', '5f68c547cbd0db303ac4aee9').then(t => {
+            token = t;
+            cy.goto('/com', token);
+        });
+        cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
+        cy.get('plex-item').last().click();
+        cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('finalizada').click();
+        cy.plexTextArea('label="Observacion"', 'derivación finalizada');
+        cy.plexButton("Guardar").click();
+        cy.toast('success');
+
     });
+
+    it('crear derivacion paciente respirado, aprobarla, asignarla, aceptarla, finalizarla', () => {
+        seleccionarPaciente('2504200');
+        cy.wait('@profesionalSolicitante').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@getOrganizacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.wait('@getDispositivo').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexTextArea('label="Detalle"', 'a aceptar');
+        cy.plexSelectType('name="profesionalOrigen"').clearSelect();
+        cy.plexSelectAsync('label="Profesional solicitante"', 'NATALIA HUENCHUMAN', '@profesionalSolicitante', 0);
+        cy.plexSelect('label="Dispositivo"', 0).click();
+        cy.plexButton("Guardar").click({ force: true });
+        cy.wait('@createDerivacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.paciente.documento).to.be.eq('2504200');
+        });
+        cy.toast('success', 'Derivación guardada');
+
+        cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click();
+        cy.plexText('label="Buscar paciente"', '2504200').click({ force: true });
+        cy.get('plex-badge').plexIcon('helmet').should('have.length', 1);
+
+        cy.login('30643636', 'asd', '5f68c547cbd0db303ac4aee9').then(t => {
+            token = t;
+            cy.goto('/com', token);
+        });
+
+        cy.plexText('label="Buscar paciente"', '2504200').click();
+        cy.get('plex-item').last().click({ force: true });
+        cy.get('plex-grid').contains('a aceptar');
+        cy.plexTextArea('label="Observacion"', 'derivación aprobada');
+        cy.plexSelect('label="Nuevo estado"', 1).click();
+        cy.plexSelect('label="Dispositivo"', 1).click();
+        cy.plexButton("Guardar").click();
+        cy.toast('success');
+        cy.plexSelectType('label="Estado"').click().get('.option').contains('HABILITADA').click();
+        cy.wait('@getDerivaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('plex-badge').plexIcon('arm').should('have.length', 1);
+        cy.get('plex-badge').contains('habilitada').should('have.length', 1);
+        cy.contains('habilitada').click();
+        cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
+        cy.get('plex-panel').should('have.length', 2);
+        cy.get('.card').contains('Pasa a habilitada por');
+        cy.get('small').contains('Natalia Huenchuman de CENTRO OPERATIVO MEDICO');
+        cy.get('plex-options div div button').contains('DERIVACIÓN').click({ force: true });
+        cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('asignada').click({ force: true });
+        cy.plexTextArea('label="Observacion"', 'derivación asignada');
+        cy.plexSelectType('label="Organización destino"').click().get('.option').contains('HOSPITAL AÑELO').click();
+        cy.plexButton("Guardar").click();
+        cy.toast('success');
+        cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
+        cy.plexSelectType('label="Estado"').click().get('.option').contains('ASIGNADA').click();
+        cy.wait('@getDerivaciones').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('plex-badge').plexIcon('arm').should('have.length', 1);
+        cy.get('plex-badge').contains('asignada').should('have.length', 1);
+
+        cy.login('30643636', 'asd', '5bae6b7b9677f95a425d9ee8').then(t => {
+            token = t;
+            cy.goto('/com', token);
+        });
+
+        cy.plexText('label="Buscar paciente"', '2504200').click();
+        cy.get('plex-item').last().click({ force: true });
+        cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('aceptada').click();
+        cy.plexTextArea('label="Observacion"', 'derivación aceptada');
+        cy.plexButton("Guardar").click();
+        cy.toast('success');
+
+        cy.login('30643636', 'asd', '5f68c547cbd0db303ac4aee9').then(t => {
+            token = t;
+            cy.goto('/com', token);
+        });
+
+        cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click();
+        cy.plexText('label="Buscar paciente"', '2504200').click();
+        cy.get('plex-item').last().click({ force: true });
+        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
+        cy.get('plex-badge').plexIcon('arm').should('have.length', 1);
+        cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('finalizada').click();
+        cy.plexTextArea('label="Observacion"', 'derivación finalizada');
+        cy.plexButton("Guardar").click();
+        cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
+        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
+        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').first().click();
+        cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
+        cy.get('plex-panel').should('have.length', 5);
+    });
+
 });
