@@ -112,6 +112,8 @@ module.exports.createCama = async (mongoUri, params) => {
                 });
             }
 
+            dtoPrestacion.estadoActual = dtoPrestacion.estados[dtoPrestacion.estados.length - 1];
+
             paciente._id = ObjectId(paciente._id);
             paciente.id = ObjectId(paciente._id);
             dtoPrestacion.paciente.id = ObjectId(paciente._id)
@@ -206,7 +208,7 @@ module.exports.createSala = async (mongoUri, params) => {
         dtoSala.organizacion._id = ObjectId(dtoSala.organizacion._id);
         dtoSala.organizacion.id = ObjectId(dtoSala.organizacion._id);
         dtoSala.nombre = params.nombre || ('SALA ' + faker.random.number({ min: 0, max: 9999 }));
-        
+
         if (params.unidadesOrganizativas) {
             const organizacionDB = await client.db().collection('organizacion');
             const organizacion = await organizacionDB.findOne({ _id: dtoSala.organizacion._id });
@@ -254,7 +256,7 @@ module.exports.createSala = async (mongoUri, params) => {
                 idSalaComun: ObjectId(dtoSala._id),
                 organizacion: dtoSala.organizacion,
                 paciente: {
-                    id : ObjectId(params.paciente._id),
+                    id: ObjectId(params.paciente._id),
                     documento: params.paciente.documento,
                     nombre: params.paciente.nombre,
                     apellido: params.paciente.apellido,
