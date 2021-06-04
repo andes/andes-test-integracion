@@ -4,6 +4,7 @@ context('Ficha Epidemiológica', () => {
     let validado;
     let validado2;
     let validado3;
+    let validado4
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
@@ -23,6 +24,11 @@ context('Ficha Epidemiológica', () => {
             template: 'validado', direccion: 'Luna de cuarzo 1674'
         }).then(p => {
             validado3 = p;
+        });
+        cy.task('database:create:paciente', {
+            template: 'validado', direccion: 'Juan B justo 1234'
+        }).then(p => {
+            validado4 = p;
         });
 
     })
@@ -100,14 +106,14 @@ context('Ficha Epidemiológica', () => {
 
     });
 
-    it('crear nueva ficha covid19 con coctatos estrechos', () => {
-        cy.plexText('name="buscador"', validado.documento);
+    it('crear nueva ficha covid19 con contactos estrechos', () => {
+        cy.plexText('name="buscador"', validado4.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].apellido).to.be.eq(validado.apellido);
-            expect(xhr.response.body[0].nombre).to.be.eq(validado.nombre);
+            expect(xhr.response.body[0].apellido).to.be.eq(validado4.apellido);
+            expect(xhr.response.body[0].nombre).to.be.eq(validado4.nombre);
         });
-        cy.get('paciente-listado plex-item').contains(validado.apellido).click();
+        cy.get('paciente-listado plex-item').contains(validado4.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
