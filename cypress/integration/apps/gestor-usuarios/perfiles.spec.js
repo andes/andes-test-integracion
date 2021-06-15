@@ -12,6 +12,7 @@ context('Perfiles de usuario', () => {
     let token;
     let perfil1;
     before(() => {
+        cy.seed();
         cy.login('30643636', 'asd', '57e9670e52df311059bc8964').then(t => {
             token = t;
         });
@@ -48,7 +49,7 @@ context('Perfiles de usuario', () => {
         cy.get('@mpiAccordion').plexBool('type="slide"', true);
         cy.buscarPermisos(2, 0).as('rupAccordion');
         cy.get('@rupAccordion').plexPanel(0).click();
-        cy.get('@rupAccordion').plexSelectAsync('name="plexSelect"', 'Consulta de medicina general', '@conceptoTurneables', 0);
+        cy.get('@rupAccordion').find('arbol-permisos-item').eq(0).plexSelectAsync('name="plexSelect"', 'Consulta de medicina general', '@conceptoTurneables', 0);
         cy.buscarPermisos(8, 0).as('internacionAccordion');
         cy.get('@internacionAccordion').within((item) => {
             cy.get('plex-bool input[type="checkbox"]').eq(1).check({
@@ -98,7 +99,7 @@ context('Perfiles de usuario', () => {
 
         cy.get('@rupAccordion').plexPanel(0).click();
 
-        cy.get('@rupAccordion').plexSelectAsync('name="plexSelect"', 'colonoscopia', '@conceptoTurneables', 0);
+        cy.get('@rupAccordion').find('arbol-permisos-item').eq(0).plexSelectAsync('name="plexSelect"', 'colonoscopia', '@conceptoTurneables', 0);
 
         cy.plexButton('Guardar').click();
         cy.wait('@savePerfil').then((xhr) => {
@@ -114,7 +115,7 @@ context('Perfiles de usuario', () => {
         cy.buscarPermisos(2, 0).as('rupAccordion');
         cy.get('@rupAccordion').plexPanel(0).click();
 
-        cy.get('@rupAccordion').plexSelectType('name="plexSelect"', 'consulta de nutrición');
+        cy.get('@rupAccordion').find('arbol-permisos-item').eq(0).plexSelectType('name="plexSelect"', 'consulta de nutrición');
 
         cy.plexButton('Cancelar').click();
         cy.wait('@perfil').then((xhr) => {
