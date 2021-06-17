@@ -1,0 +1,12 @@
+[
+    {
+        "_id": {
+            "$oid": "609c18da9916ca4289cb2634"
+        },
+        "name": "email-send-default",
+        "type": "static-client",
+        "configuration": {
+            "status": "ok"
+        }
+    }
+]
