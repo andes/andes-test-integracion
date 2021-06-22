@@ -115,7 +115,7 @@
 		},
 		"activo": true,
 		"type": "section",
-		"name": "Clasificacion y Final",
+		"name": "Tipo de confirmación y Clasificación Final",
 		"id": "clasificacionFinal",
 		"__v": 0.0
 	},
