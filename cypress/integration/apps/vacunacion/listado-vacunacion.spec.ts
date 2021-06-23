@@ -356,11 +356,6 @@ context('Vacunacion Listado', () => {
         cy.swal('confirm', 'Ya existe una inscripción activa para el paciente seleccionado');
     });
 
-    it('Verificar que no se pueda editar paciente vacunado', () => {
-        cy.get('tbody tr').eq(1).contains(' 20000000 ').click();
-        cy.get('plex-layout-sidebar plex-title').plexIcon('pencil').should("not.exist");
-    });
-
     it('Verificar cantidad de grupos pacientes entre 18 y 59 años', () => {
         cy.get('plex-layout-main plex-title').plexButton('NUEVA INSCRIPCIÓN').click();
         cy.get('plex-layout-sidebar').plexText('name="buscador"', validado5.documento);
