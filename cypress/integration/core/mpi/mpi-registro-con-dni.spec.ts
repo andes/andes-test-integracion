@@ -1,5 +1,6 @@
 context('MPI-Registro Paciente Con Dni', () => {
-    let token
+    let token;
+    let validado;
     before(() => {
         cy.seed();
         cy.cleanDB()
@@ -7,6 +8,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });
+        cy.task('database:create:paciente', { template: 'validado' }).then(p => { validado = p; });
     })
 
     beforeEach(() => {
@@ -456,6 +458,132 @@ context('MPI-Registro Paciente Con Dni', () => {
             expect(xhr.response.body.documento).to.be.eq('10000000');
             expect(xhr.response.body.nombre).to.be.eq('PACIENTE VALIDADO');
             expect(xhr.response.body.apellido).to.be.eq('ANDES');
+        });
+        cy.contains('Los datos se actualizaron correctamente');
+    });
+
+    function format(s) {
+        return s.substr(0, s.length - 6) + '.' + s.substr(-6, 3) + '.' + s.substr(-3);
+    }
+
+    it('editar lugar de nacimiento del paciente seleccionando los tres plex-bool', () => {
+        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
+        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
+
+        cy.plexText('name="buscador"', validado.documento);
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').contains(format(validado.documento));
+        cy.plexButtonIcon('pencil').click();
+
+        cy.wait('@findPacienteByID').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexTab('datos de contacto').click();
+        cy.plexBool('name="noPoseeContacto"', true);
+        cy.plexBool('name="nacioPaisActual"', true);
+        cy.plexBool('name="nacioProvActual"', true);
+        cy.plexBool('name="nacioLocActual"', true);
+
+        cy.plexButton('Guardar').click();
+        cy.wait('@patchPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.lugarNacimiento.pais.nombre).to.be.eq('Argentina');
+            expect(xhr.response.body.lugarNacimiento.provincia.nombre).to.be.eq('Neuquén');
+            expect(xhr.response.body.lugarNacimiento.localidad.nombre).to.be.eq('NEUQUEN');
+        });
+        cy.contains('Los datos se actualizaron correctamente');
+    });
+
+    it('editar lugar de nacimiento del paciente seleccionando los dos pŕimeros plex-bool', () => {
+        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
+        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
+
+        cy.plexText('name="buscador"', validado.documento);
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').contains(format(validado.documento));
+        cy.plexButtonIcon('pencil').click();
+
+        cy.wait('@findPacienteByID').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexTab('datos de contacto').click();
+        cy.plexBool('name="noPoseeContacto"', true);
+        cy.plexBool('name="nacioPaisActual"', true);
+        cy.plexBool('name="nacioProvActual"', true);
+        cy.plexSelectType('name="localidadNacimiento"', "11 De Octubre");
+
+        cy.plexButton('Guardar').click();
+        cy.wait('@patchPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.lugarNacimiento.pais.nombre).to.be.eq('Argentina');
+            expect(xhr.response.body.lugarNacimiento.provincia.nombre).to.be.eq('Neuquén');
+            expect(xhr.response.body.lugarNacimiento.localidad.nombre).to.be.eq('11 De Octubre');
+        });
+        cy.contains('Los datos se actualizaron correctamente');
+    });
+
+    it('editar lugar de nacimiento del paciente seleccionando solamente el primer plex-bool', () => {
+        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
+        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
+
+        cy.plexText('name="buscador"', validado.documento);
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').contains(format(validado.documento));
+        cy.plexButtonIcon('pencil').click();
+
+        cy.wait('@findPacienteByID').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexTab('datos de contacto').click();
+        cy.plexBool('name="noPoseeContacto"', true);
+        cy.plexBool('name="nacioPaisActual"', true);
+        cy.plexSelectType('name="provinciaNacimiento"', "Buenos Aires");
+        cy.plexText('name="nombre"', "Avellaneda");
+
+        cy.plexButton('Guardar').click();
+        cy.wait('@patchPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.lugarNacimiento.pais.nombre).to.be.eq('Argentina');
+            expect(xhr.response.body.lugarNacimiento.provincia.nombre).to.be.eq('Buenos Aires');
+            expect(xhr.response.body.lugarNacimiento.lugar).to.be.eq('Avellaneda');
+        });
+        cy.contains('Los datos se actualizaron correctamente');
+    });
+
+    it('editar lugar de nacimiento del paciente Perteneciente a otro pais', () => {
+        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
+        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
+
+        cy.plexText('name="buscador"', validado.documento);
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('paciente-listado').contains(format(validado.documento));
+        cy.plexButtonIcon('pencil').click();
+
+        cy.wait('@findPacienteByID').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexTab('datos de contacto').click();
+        cy.plexBool('name="noPoseeContacto"', true);
+        cy.plexSelectType('name="paisNacimiento"', "Alemania");;
+        cy.plexText('name="nombre"', "Hamburgo");
+
+        cy.plexButton('Guardar').click();
+        cy.wait('@patchPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.lugarNacimiento.pais.nombre).to.be.eq('Alemania');
+            expect(xhr.response.body.lugarNacimiento.lugar).to.be.eq('Hamburgo');
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
