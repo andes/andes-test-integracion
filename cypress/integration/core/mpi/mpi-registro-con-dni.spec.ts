@@ -466,7 +466,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         return s.substr(0, s.length - 6) + '.' + s.substr(-6, 3) + '.' + s.substr(-3);
     }
 
-    it('editar lugar de nacimiento del paciente seleccionando los tres plex-bool', () => {
+    it.only('editar lugar de nacimiento del paciente seleccionando los tres checkbox', () => {
         cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
         cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
         cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
@@ -495,9 +495,10 @@ context('MPI-Registro Paciente Con Dni', () => {
             expect(xhr.response.body.lugarNacimiento.localidad.nombre).to.be.eq('NEUQUEN');
         });
         cy.contains('Los datos se actualizaron correctamente');
+        cy.contains('Aceptar').click();
     });
 
-    it('editar lugar de nacimiento del paciente seleccionando los dos pŕimeros plex-bool', () => {
+    it.only('editar lugar de nacimiento del paciente seleccionando los dos primeros checkbox', () => {
         cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
         cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
         cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
@@ -516,6 +517,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="noPoseeContacto"', true);
         cy.plexBool('name="nacioPaisActual"', true);
         cy.plexBool('name="nacioProvActual"', true);
+        cy.plexBool('name="nacioLocActual"', false);
         cy.plexSelectType('name="localidadNacimiento"', "11 De Octubre");
 
         cy.plexButton('Guardar').click();
@@ -526,9 +528,10 @@ context('MPI-Registro Paciente Con Dni', () => {
             expect(xhr.response.body.lugarNacimiento.localidad.nombre).to.be.eq('11 De Octubre');
         });
         cy.contains('Los datos se actualizaron correctamente');
+        cy.contains('Aceptar').click();
     });
 
-    it('editar lugar de nacimiento del paciente seleccionando solamente el primer plex-bool', () => {
+    it.only('editar lugar de nacimiento del paciente seleccionando solamente el primer checkbox', () => {
         cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
         cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
         cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
@@ -546,6 +549,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexTab('datos de contacto').click();
         cy.plexBool('name="noPoseeContacto"', true);
         cy.plexBool('name="nacioPaisActual"', true);
+        cy.plexBool('name="nacioProvActual"', false);
         cy.plexSelectType('name="provinciaNacimiento"', "Buenos Aires");
         cy.plexText('name="nombre"', "Avellaneda");
 
@@ -557,9 +561,10 @@ context('MPI-Registro Paciente Con Dni', () => {
             expect(xhr.response.body.lugarNacimiento.lugar).to.be.eq('Avellaneda');
         });
         cy.contains('Los datos se actualizaron correctamente');
+        cy.contains('Aceptar').click();
     });
 
-    it('editar lugar de nacimiento del paciente Perteneciente a otro pais', () => {
+    it.only('editar lugar de nacimiento del paciente perteneciente a otro pais', () => {
         cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
         cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
         cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
@@ -576,7 +581,9 @@ context('MPI-Registro Paciente Con Dni', () => {
         });
         cy.plexTab('datos de contacto').click();
         cy.plexBool('name="noPoseeContacto"', true);
-        cy.plexSelectType('name="paisNacimiento"', "Alemania");;
+        cy.plexBool('name="nacioPaisActual"', false);
+        cy.plexSelectType('name="paisNacimiento"', "Alemania");
+        cy.plexText('name="nombre"').clear();
         cy.plexText('name="nombre"', "Hamburgo");
 
         cy.plexButton('Guardar').click();
@@ -586,5 +593,6 @@ context('MPI-Registro Paciente Con Dni', () => {
             expect(xhr.response.body.lugarNacimiento.lugar).to.be.eq('Hamburgo');
         });
         cy.contains('Los datos se actualizaron correctamente');
+        cy.contains('Aceptar').click();
     });
 });
