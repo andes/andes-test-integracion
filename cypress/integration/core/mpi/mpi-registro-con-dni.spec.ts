@@ -466,7 +466,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         return s.substr(0, s.length - 6) + '.' + s.substr(-6, 3) + '.' + s.substr(-3);
     }
 
-    it.only('editar lugar de nacimiento del paciente seleccionando los tres checkbox', () => {
+    it('editar lugar de nacimiento del paciente seleccionando los tres checkbox', () => {
         cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
         cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
         cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
@@ -498,7 +498,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.contains('Aceptar').click();
     });
 
-    it.only('editar lugar de nacimiento del paciente seleccionando los dos primeros checkbox', () => {
+    it('editar lugar de nacimiento del paciente seleccionando los dos primeros checkbox', () => {
         cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
         cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
         cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
@@ -531,7 +531,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.contains('Aceptar').click();
     });
 
-    it.only('editar lugar de nacimiento del paciente seleccionando solamente el primer checkbox', () => {
+    it('editar lugar de nacimiento del paciente seleccionando solamente el primer checkbox', () => {
         cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
         cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
         cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
@@ -564,7 +564,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.contains('Aceptar').click();
     });
 
-    it.only('editar lugar de nacimiento del paciente perteneciente a otro pais', () => {
+    it('editar lugar de nacimiento del paciente perteneciente a otro pais', () => {
         cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
         cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
         cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
