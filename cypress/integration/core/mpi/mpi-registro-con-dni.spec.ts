@@ -15,6 +15,10 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.goto('/apps/mpi/busqueda', token);
         cy.server();
         cy.route('POST', '**api/core-v2/mpi/pacientes**').as('guardar');
+
+        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
+        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
+        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
     });
 
     it('Validar paciente con Renaper y deshacer validación, luego volver a validar verificando datos', () => {
@@ -334,7 +338,6 @@ context('MPI-Registro Paciente Con Dni', () => {
     });
 
     it('crear paciente con similitud del 98% con uno existente temporal y seleccionarlo para guardar', () => {
-        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
 
         // definimos ambos pacientes
         cy.plexText('name="buscador"', '1232548');
@@ -413,9 +416,6 @@ context('MPI-Registro Paciente Con Dni', () => {
 
     it('editar direccion de un paciente existente y agregarle una relación', () => {
         let direccion = 'Avenida las flores 1200'
-        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
-        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
-        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
 
         cy.plexText('name="buscador"', '20000000');
         cy.wait('@getPaciente').then((xhr) => {
@@ -467,9 +467,6 @@ context('MPI-Registro Paciente Con Dni', () => {
     }
 
     it('editar lugar de nacimiento del paciente seleccionando los tres checkbox', () => {
-        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
-        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
-        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
 
         cy.plexText('name="buscador"', validado.documento);
         cy.wait('@getPaciente').then((xhr) => {
@@ -499,9 +496,6 @@ context('MPI-Registro Paciente Con Dni', () => {
     });
 
     it('editar lugar de nacimiento del paciente seleccionando los dos primeros checkbox', () => {
-        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
-        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
-        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
 
         cy.plexText('name="buscador"', validado.documento);
         cy.wait('@getPaciente').then((xhr) => {
@@ -532,9 +526,6 @@ context('MPI-Registro Paciente Con Dni', () => {
     });
 
     it('editar lugar de nacimiento del paciente seleccionando solamente el primer checkbox', () => {
-        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
-        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
-        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
 
         cy.plexText('name="buscador"', validado.documento);
         cy.wait('@getPaciente').then((xhr) => {
@@ -565,9 +556,6 @@ context('MPI-Registro Paciente Con Dni', () => {
     });
 
     it('editar lugar de nacimiento del paciente perteneciente a otro pais', () => {
-        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
-        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
-        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
 
         cy.plexText('name="buscador"', validado.documento);
         cy.wait('@getPaciente').then((xhr) => {
