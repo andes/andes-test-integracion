@@ -20,8 +20,10 @@ Cypress.Commands.add('createUsuarioByCapa', (capa) => {
     );
 });
 
-Cypress.Commands.add('deshacerInternacion', () => {
-    cy.get('plex-layout-sidebar plex-title').eq(1).plexButtonIcon('account-off').click();
+Cypress.Commands.add('deshacerInternacion', (completa = false) => {
+    const opcionDeshacer = completa ? 'Toda la internación' : 'Último movimiento';
+    cy.get('plex-layout-sidebar plex-title').eq(1).plexDropdown('tooltip="Deshacer Internacion"').click();
+    cy.contains(opcionDeshacer).click();
     cy.swal('confirm', '¿Quiere deshacer esta internación?');
 })
 
