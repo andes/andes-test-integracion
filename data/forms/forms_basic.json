@@ -982,6 +982,15 @@
                     "subfilter": false,
                     "resources": "",
                     "preload": false
+                },
+                {
+                    "key" : "parcial",
+                    "type" : "dependencia",
+                    "description" : "",
+                    "required" : false,
+                    "subfilter" : false,
+                    "resources" : "",
+                    "preload" : false
                 }
             ]
         },
