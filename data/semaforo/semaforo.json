@@ -1,0 +1,66 @@
+[
+    {
+        "_id": {
+			"$oid": "60d4b46cbefe3438d0dd4728"
+		},
+        "name": "com",
+        "options": [
+            {
+                "itemRowStyle": {
+                    "border": "#b0cfa0",
+                    "hover": "#80b266",
+                    "background": "#e9f2e5"
+                },
+                "id": 1,
+                "label": "baja",
+                "color": "#80b266",
+                "priority": 1
+            },
+            {
+                "itemRowStyle": {
+                    "border": "#d5c743",
+                    "hover": "#C6B300",
+                    "background": "#f8f5de"
+                },
+                "id": 2,
+                "label": "media",
+                "color": "#c6b300",
+                "priority": 2
+            },
+            {
+                "itemRowStyle": {
+                    "border": "#d1a67e",
+                    "hover": "#e97204",
+                    "background": "#f7e5ca"
+                },
+                "id": 3,
+                "label": "intermedia",
+                "color": "#e49b2d",
+                "priority": 3
+            },
+            {
+                "itemRowStyle": {
+                    "border": "#e4a4a4",
+                    "hover": "#B70B0B",
+                    "background": "#f8e6e6"
+                },
+                "id": 4,
+                "label": "alta",
+                "color": "#b70b0b",
+                "priority": 4
+            },
+            {
+                "itemRowStyle": {
+                    "border": "#7a6f93",
+                    "hover": "#02111C",
+                    "background": "#dddae3"
+                },
+                "id": 5,
+                "label": "especial",
+                "color": "#02111c",
+                "priority": 5
+            }
+        ],
+        "id": "60d4b46cbefe3438d0dd4728"
+    }
+]
