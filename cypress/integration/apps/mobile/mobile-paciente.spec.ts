@@ -131,8 +131,6 @@ context('mobile paciente', () => {
         });
         cy.get('ion-list').find('ion-icon').get('[name="calendar"]').should('have.length', 1);
         cy.get('ion-list').find('ion-icon').get('[name="calendar"]').click({ force: true });
-        cy.contains("Desde: 1 de octubre del 2018");
-        cy.contains("Hasta: 31 de octubre del 2030");
         cy.get('.info').contains("mas info");
         cy.get('ion-back-button').last().click({ force: true });
         cy.get('ion-back-button').eq(1).click({ force: true });
@@ -212,4 +210,4 @@ context('mobile paciente', () => {
         cy.wait('@patchTurno');
         cy.contains('No tienes ningún turno programado');
     });
-}); 
+});
