@@ -4,7 +4,9 @@ context('Ficha Epidemiológica', () => {
     let validado;
     let validado2;
     let validado3;
-    let validado4
+    let validado4;
+    let validado5;
+    
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
@@ -29,6 +31,11 @@ context('Ficha Epidemiológica', () => {
             template: 'validado', direccion: 'Juan B justo 1234'
         }).then(p => {
             validado4 = p;
+        });
+        cy.task('database:create:paciente', {
+            template: 'validado', direccion: 'calle falsa 123'
+        }).then(p => {
+            validado5 = p;
         });
 
     })
@@ -177,5 +184,31 @@ context('Ficha Epidemiológica', () => {
             expect(xhr.response.body[0].ficha.paciente.id).to.be.eq(validado3._id);
             expect(xhr.response.body[0].ficha.type.name).to.be.eq('covid19');
         })
+    });
+
+    it('carga parcial ficha covid19', () => {
+        cy.plexText('name="buscador"', validado5.documento);
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].apellido).to.be.eq(validado5.apellido);
+            expect(xhr.response.body[0].nombre).to.be.eq(validado5.nombre);
+        });
+        cy.get('paciente-listado plex-item').contains(validado5.apellido).click();
+        cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
+        cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
+        cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
+        cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
+        cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
+        cy.plexSelectTypeDinamico('segunda clasificación', 'LAMP{enter}');
+        cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
+        cy.plexSelectTypeDinamico('LAMP (NeoKit)').should('exist');
+        cy.plexBool('label="Cargar ficha parcial"', true);
+        cy.get('span').contains('La seccion no se encuentra disponible');
+        cy.get('label').contains('LAMP (NeoKit)').should('not.exist');
+        cy.plexButton('Registrar ficha').click();
+        cy.wait('@registroFicha').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        })
+        cy.toast('success', 'Su ficha fue registrada correctamente');
     });
 })
