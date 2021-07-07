@@ -125,26 +125,32 @@ context('mobile paciente', () => {
     });
 
     it('Verificar campañas', () => {
-        cy.get('[name="andes-agendas"]').click({ force: true });
-        cy.wait('@campanias').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.waitFor('[name="andes-agendas"]').then(() => {
+
+            cy.get('[name="andes-agendas"]').click({ force: true });
+            cy.wait('@campanias').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            cy.get('ion-list').find('ion-icon').get('[name="calendar"]').should('have.length', 1);
+            cy.get('ion-list').find('ion-icon').get('[name="calendar"]').click({ force: true });
+            cy.get('.info').contains("mas info");
+            cy.get('ion-back-button').last().click({ force: true });
+            cy.get('ion-back-button').eq(1).click({ force: true });
         });
-        cy.get('ion-list').find('ion-icon').get('[name="calendar"]').should('have.length', 1);
-        cy.get('ion-list').find('ion-icon').get('[name="calendar"]').click({ force: true });
-        cy.get('.info').contains("mas info");
-        cy.get('ion-back-button').last().click({ force: true });
-        cy.get('ion-back-button').eq(1).click({ force: true });
     });
 
     it('Consulta de vacunas', () => {
-        cy.get('[name="andes-vacuna"]').click();
-        cy.wait('@getVacunas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(1);
-        });
+        cy.waitFor('[name="andes-vacuna"]').then(() => {
 
-        cy.get('.andes-list').find('li').should('have.length', 1);
-        cy.get('ion-back-button').click({ force: true });
+            cy.get('[name="andes-vacuna"]').click();
+            cy.wait('@getVacunas').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body).to.have.length(1);
+            });
+
+            cy.get('.andes-list').find('li').should('have.length', 1);
+            cy.get('ion-back-button').click({ force: true });
+        });
     });
 
 
@@ -156,58 +162,60 @@ context('mobile paciente', () => {
 
         cy.wait('@getTurnosMobile');
         cy.contains('No tienes ningún turno programado');
-        cy.get('ion-back-button').click({ force: true });
+
     });
 
     it('Dacion de turno', () => {
+        cy.waitFor('[name="andes-turno"]').then(() => {
 
-        cy.route('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
-        cy.route('GET', '**/api/modules/mobileApp/turnos/agenda**').as('getAgenda');
-        cy.route('PATCH', '**api/modules/turnos/turno/**').as('patchTurno');
-        cy.route('GET', '**/agendasDisponibles**').as('agendasDisponibles1');
+            cy.route('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
+            cy.route('GET', '**/api/modules/mobileApp/turnos/agenda**').as('getAgenda');
+            cy.route('PATCH', '**api/modules/turnos/turno/**').as('patchTurno');
+            cy.route('GET', '**/agendasDisponibles**').as('agendasDisponibles1');
 
-        cy.task('database:seed:agenda', {
-            tipoPrestaciones: '598ca8375adc68e2a0c121b8',
-            estado: 'publicada',
-            organizacion: '57e9670e52df311059bc8964',
-            inicio: '3',
-            fin: '4',
-            fecha: 1,
-            tipo: 'programado'
+            cy.task('database:seed:agenda', {
+                tipoPrestaciones: '598ca8375adc68e2a0c121b8',
+                estado: 'publicada',
+                organizacion: '57e9670e52df311059bc8964',
+                inicio: '3',
+                fin: '4',
+                fecha: 1,
+                tipo: 'programado'
+            });
+
+            cy.get('.circle-container',).within($container => {
+                cy.wrap($container).find('[name="andes-turno"]').click();
+            });
+
+            cy.wait('@getTurnosMobile');
+
+            cy.get('.icono-text-container.no-item').within(() => {
+                cy.get('ion-button').click({ force: true });
+                cy.url().should('include', 'mobile/turnos/prestaciones');
+            });
+
+            cy.wait('@agendasDisponibles1').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.responseBody[0].agendas[0].estado).to.be.eq('publicada');
+                expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].conceptId).to.be.eq('391000013108');
+                expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].term).to.be.eq('consulta de medicina general');
+            });
+
+            cy.get('.andes-list').find('ion-icon').get('[name="chevron-forward-outline"]').click({ force: true });
+            cy.wait('@agendasDisponibles1');
+            cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON').click({ force: true });
+            cy.wait('@agendasDisponibles1');
+            cy.get('ion-list-header').find('ion-label').contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+            cy.get('ion-list-header').find('ion-label').contains('HUENCHUMAN NATALIA VANESA');
+            cy.get('ion-item').find('ion-button').get('[name="checkmark"]').first().click({ force: true }).then((xhr) => {
+                cy.get('ion-content').find('.titulo-prefix').contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+                cy.get('ion-content').find('.titulo-secundario').contains('consulta de medicina general');
+                cy.get('ion-content').find('.andes-list-subtitle').contains('IMPORTANTE: Si Ud. no puede concurrir al turno por favor recuerde cancelarlo a través de esta aplicación móvil, o comunicándose telefónicamente al Centro de Salud, para que otro paciente pueda tomarlo. ¡Muchas gracias!');
+                cy.get('ion-content').find('button').contains('Confirmar').click({ force: true });
+            })
+            cy.wait('@getProfile');
+            cy.wait('@patchTurno');
+            cy.contains('No tienes ningún turno programado');
         });
-
-        cy.get('.circle-container',).within($container => {
-            cy.wrap($container).find('[name="andes-turno"]').click();
-        });
-
-        cy.wait('@getTurnosMobile');
-
-        cy.get('.icono-text-container.no-item').within(() => {
-            cy.get('ion-button').click({ force: true });
-            cy.url().should('include', 'mobile/turnos/prestaciones');
-        });
-
-        cy.wait('@agendasDisponibles1').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody[0].agendas[0].estado).to.be.eq('publicada');
-            expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].conceptId).to.be.eq('391000013108');
-            expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].term).to.be.eq('consulta de medicina general');
-        });
-
-        cy.get('.andes-list').find('ion-icon').get('[name="chevron-forward-outline"]').click({ force: true });
-        cy.wait('@agendasDisponibles1');
-        cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON').click({ force: true });
-        cy.wait('@agendasDisponibles1');
-        cy.get('ion-list-header').find('ion-label').contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-        cy.get('ion-list-header').find('ion-label').contains('HUENCHUMAN NATALIA VANESA');
-        cy.get('ion-item').find('ion-button').get('[name="checkmark"]').first().click({ force: true }).then((xhr) => {
-            cy.get('ion-content').find('.titulo-prefix').contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-            cy.get('ion-content').find('.titulo-secundario').contains('consulta de medicina general');
-            cy.get('ion-content').find('.andes-list-subtitle').contains('IMPORTANTE: Si Ud. no puede concurrir al turno por favor recuerde cancelarlo a través de esta aplicación móvil, o comunicándose telefónicamente al Centro de Salud, para que otro paciente pueda tomarlo. ¡Muchas gracias!');
-            cy.get('ion-content').find('button').contains('Confirmar').click({ force: true });
-        })
-        cy.wait('@getProfile');
-        cy.wait('@patchTurno');
-        cy.contains('No tienes ningún turno programado');
     });
 });
