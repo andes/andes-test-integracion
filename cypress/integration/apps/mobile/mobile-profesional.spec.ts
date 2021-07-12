@@ -98,23 +98,24 @@ context('mobile profesional', () => {
         cy.contains('Hola Natalia');
     });
 
-    it.skip('Adjunto RUP', () => {
-        cy.get('[name="andes-vacuna"]').click();
-        cy.wait('@prestaciones-adjuntar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-        cy.url().should('include', '/mobile/profesional/adjuntar');
-        cy.wait('@prestaciones-adjuntar');
-        cy.wait(500);
+    it('Adjunto RUP', () => {
+        cy.waitFor('[name="andes-vacuna"]').then(() => {
+            cy.get('[name="andes-vacuna"]').click();
+            cy.wait('@prestaciones-adjuntar').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+            });
+            cy.url().should('include', '/mobile/profesional/adjuntar');
+            cy.wait('@prestaciones-adjuntar');
+            cy.wait(500);
 
-        // cy.get('[name="search"]').click({ force: true });
-        cy.get('[type="file"]').attachFile('archivos/cat.png');
-        cy.wait(500);
+            cy.get('[type="file"]').attachFile('archivos/cat.png');
+            cy.wait(500);
 
-        cy.get('ion-button').get('.ion-color-success').click();
-        cy.wait('@patch-adjuntar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.status).to.be.eq("ok");
+            cy.get('ion-button').get('.ion-color-success').click();
+            cy.wait('@patch-adjuntar').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body.status).to.be.eq("ok");
+            });
         });
     });
 
