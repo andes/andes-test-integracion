@@ -74,17 +74,37 @@
         "validaciones": []
     },
     {
-        "_id": "604a43cfb18dad57d8d609b1",
+        "_id": "606f309197d3c617b2fb4659",
         "nombre": "factores-riesgo",
-        "descripcion": "Adultos mayores entre 18 y 59 años, con factores de riesgo",
+        "descripcion": "Personas mayores entre 18 y 59 años, con factores de riesgo",
         "activo": true,
         "mensajeDefault": {
-            "titulo": "Adultos mayores entre 18 y 59 años, con factores de riesgo",
+            "titulo": "Personas mayores entre 18 y 59 años, con factores de riesgo",
             "subtitulo": "Su inscripción para vacunación ha sido registrada",
             "body": "Usted necesita una prescripción de su médico que indique la vacunación contra COVID-19, por pertenecer al grupo con factores de riesgo asociados.  Se deberá presentar al turno de la vacunación con dicha prescripción",
             "status": "warning"
         },
         "validaciones": [],
+        "excepciones": {
+            "any": [
+                {
+                    "all": [
+                        {
+                            "fact": "paciente",
+                            "operator": "greaterThan",
+                            "value": 45.0,
+                            "path": "$.edad"
+                        },
+                        {
+                            "fact": "paciente",
+                            "operator": "lessThan",
+                            "value": 60.0,
+                            "path": "$.edad"
+                        }
+                    ]
+                }
+            ]
+        },
         "morbilidades": [
             {
                 "id": "diabetes",
@@ -117,7 +137,93 @@
             {
                 "id": "lista-espera",
                 "label": "Pacientes en lista de espera para trasplante y trasplantados (excepto córnea)"
+            },
+            {
+                "id": "oncologico",
+                "label": "Pacientes oncológicos y ocohematológicos con diagnóstico reciente o enfermendad ACTIVA"
+            },
+            {
+                "id": "discapacidad-intelectual",
+                "label": "Persona con discapacidad intelectual y del desarrollo"
+            },
+            {
+                "id": "sindrome-down",
+                "label": "Persona con síndrome de Down"
+            },
+            {
+                "id": "quimioterapicos",
+                "label": "Pacientes que requieren o realicen tratamiento quimioterápico"
+            },
+            {
+                "id": "TB-activa",
+                "label": "Personas con TB ACTIVA (nueva o recaída), diagnosticados en los últimos 12 meses"
             }
         ]
+    },
+    {
+        "_id": "60b79349eff6d3be8796f4c1",
+        "nombre": "sin-factores-riesgo",
+        "descripcion": "Personas mayores de 25 años sin factores de riesgo",
+        "activo": true,
+        "mensajeDefault": {
+            "titulo": "Personas mayores de 25 años sin factores de riesgo",
+            "subtitulo": "Su inscripción para vacunación ha sido registrada",
+            "body": "",
+            "status": "warning"
+        },
+        "validaciones": [],
+        "excepciones": {
+            "any": [
+                {
+                    "all": [
+                        {
+                            "fact": "paciente",
+                            "operator": "greaterThan",
+                            "value": 25,
+                            "path": "$.edad"
+                        },
+                        {
+                            "fact": "paciente",
+                            "operator": "lessThan",
+                            "value": 100,
+                            "path": "$.edad"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "_id": "60d31f14654fe582fd73625f",
+        "nombre": "personas-gestantes",
+        "descripcion": "Personas gestantes mayores de 18 años",
+        "activo": true,
+        "mensajeDefault": {
+            "titulo": "Personas gestantes mayores de 18 años",
+            "subtitulo": "Deberá contar con la indicación de su médico",
+            "body": "",
+            "status": "warning"
+        },
+        "validaciones": [],
+        "excepciones": {
+            "any": [
+                {
+                    "all": [
+                        {
+                            "fact": "paciente",
+                            "operator": "greaterThan",
+                            "value": 18.0,
+                            "path": "$.edad"
+                        },
+                        {
+                            "fact": "paciente",
+                            "operator": "lessThan",
+                            "value": 60.0,
+                            "path": "$.edad"
+                        }
+                    ]
+                }
+            ]
+        }
     }
 ]
