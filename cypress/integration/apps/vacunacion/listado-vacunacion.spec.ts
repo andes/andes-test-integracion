@@ -17,7 +17,7 @@ context('Vacunacion Listado', () => {
         cy.task('database:create:paciente', { template: 'validado' }).then(p => { validado2 = p; });
         cy.task('database:create:paciente', { template: 'validado' }).then(p => { validado3 = p; });
         cy.task('database:create:paciente', { template: 'validado', fechaNacimiento: "1991-02-16T04:00:00.000Z" }).then(p => { validado4 = p; });
-        cy.task('database:create:paciente', { template: 'validado', fechaNacimiento: "1990-03-18T04:00:00.000Z" }).then(p => { validado5 = p; });
+        cy.task('database:create:paciente', { template: 'validado', fechaNacimiento: "1971-03-18T04:00:00.000Z" }).then(p => { validado5 = p; });
     })
 
     beforeEach(() => {
@@ -52,7 +52,7 @@ context('Vacunacion Listado', () => {
     });
 
     it('Verifica datos en listado y sidebar', () => {
-        cy.get('tbody tr').eq(0).contains(' Adultos mayores entre 18 y 59 .. ');
+        cy.get('tbody tr').eq(0).contains(' Personas mayores entre 18 y 59 .. ');
         cy.get('tbody tr').eq(0).contains(' 10000000 ');
         cy.get('tbody tr').eq(0).contains(' ANDES, PACIENTE VALIDADO ');
         cy.get('tbody tr').eq(0).contains(' M ');
@@ -72,7 +72,7 @@ context('Vacunacion Listado', () => {
             expect(xhr.response.body.estado).to.be.eq('validado');
         });
         cy.get('plex-detail section').plexBadge('Pendiente', 'default');
-        cy.get('plex-detail section').contains(' Grupo: Adultos mayores entre 18 y 59 años, con factores de riesgo ');
+        cy.get('plex-detail section').contains(' Grupo: Personas mayores entre 18 y 59 años, con factores de riesgo ');
         cy.get('plex-detail plex-grid').plexLabel('Neuquén');
         cy.get('plex-detail plex-grid').plexLabel('Si');
         cy.get('tbody tr').eq(1).contains(' Personal de Salud ');
@@ -275,7 +275,7 @@ context('Vacunacion Listado', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.get('plex-layout-sidebar paciente-listado').contains(format(validado3.documento)).click();
-        cy.get('plex-layout-main').plexSelect('name="grupo"', 2).click();
+        cy.get('plex-layout-main').plexSelect('name="grupo"', 3).click();
         cy.plexPhone('name="telefono"', '{selectall}{backspace}2999999999');
         cy.get('plex-layout-main').plexText('name="email"', 'prueba@gmail.com');
         cy.get('plex-layout-main').plexBool('name="convaleciente"', false).click({ force: true });
@@ -289,7 +289,7 @@ context('Vacunacion Listado', () => {
         });
     });
 
-    it('Adultos mayores de 18 años con discapacidad y factores de riesgo - nueva inscripción', () => {
+    it('Adultos mayores de 18 años con discapacidad y factores de riesgos - nueva inscripción', () => {
         cy.get('plex-layout-main plex-title').plexButton('NUEVA INSCRIPCIÓN').click();
         cy.get('plex-layout-sidebar').plexText('name="buscador"', validado4.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
@@ -312,7 +312,7 @@ context('Vacunacion Listado', () => {
         });
     });
 
-    it('Adultos mayores entre 18 y 59 años con factores de riesgo - nueva inscripción', () => {
+    it('Personas mayores entre 18 y 59 años, con factores de riesgo - nueva inscripción', () => {
         cy.get('plex-layout-main plex-title').plexButton('NUEVA INSCRIPCIÓN').click();
         cy.get('plex-layout-sidebar').plexText('name="buscador"', validado5.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
@@ -348,7 +348,7 @@ context('Vacunacion Listado', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.get('plex-layout-sidebar paciente-listado').contains(format('10000000')).click();
-        cy.get('plex-layout-main').plexSelect('name="grupo"', 2).click();
+        cy.get('plex-layout-main').plexSelect('name="grupo"', 3).click();
         cy.plexPhone('name="telefono"', '{selectall}{backspace}2999999999');
         cy.get('plex-layout-main').plexText('name="email"', 'prueba@gmail.com');
         cy.get('plex-layout-main').plexBool('name="convaleciente"', false).click({ force: true });
@@ -365,7 +365,7 @@ context('Vacunacion Listado', () => {
         cy.get('plex-layout-sidebar paciente-listado').contains(format(validado5.documento)).click();
         cy.wait('@getGrupos').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.length).to.be.eq(4);
+            expect(xhr.response.body.length).to.be.eq(6);
         });
     });
 
@@ -378,7 +378,7 @@ context('Vacunacion Listado', () => {
         cy.get('plex-layout-sidebar paciente-listado').contains(format(validado1.documento)).click();
         cy.wait('@getGrupos').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.length).to.be.eq(3);
+            expect(xhr.response.body.length).to.be.eq(5);
         });
     });
 
