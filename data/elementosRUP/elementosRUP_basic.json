@@ -14783,6 +14783,16 @@
 				"semanticTag": "procedimiento"
 			}
 		],
+		"dispatch" : [
+			{
+				"event" : "epidemiologia:prestaciones:validate",
+				"method" : "validar-prestacion"
+			},
+			{
+				"event" : "epidemiologia:prestaciones:romperValidacion",
+				"method" : "romper-validacion"
+			}
+		],
 		"busqueda_guiada": []
 	},
 	{
