@@ -531,5 +531,67 @@
             }
         ],
         "__v": 4
+    },
+    {
+        "_id" : {
+            "$oid": "606dee316b680073669bf67f"
+        },
+        "permisos" : [ 
+            "epidemiologia:?"
+        ],
+        "activo" : true,
+        "nombre" : "EPIDEMIOLOGÍA",
+        "subtitulo" : "Situación epidemiológica",
+        "descripcion" : "Información epidemiológica",
+        "color" : "#efff14",
+        "linkAcceso" : "/epidemiologia",
+        "icono" : null,
+        "orden" : 15,
+        "submodulos" : [ 
+            {
+                "activo" : true,
+                "permisos" : [ 
+                    "epidemiologia:create:?"
+                ],
+                "_id" : {
+                    "$oid": "606df1406b680073669bf9b0"
+                },
+                "nombre" : "Punto Inicio<br><b>Fichas</b>",
+                "linkAcceso" : "/epidemiologia/ficha-epidemiologica",
+                "color" : "#bfb422",
+                "icono" : "file-tree",
+                "orden" : 1
+            }, 
+            {
+                "activo" : true,
+                "permisos" : [ 
+                    "epidemiologia:update:?", 
+                    "epidemiologia:read:?"
+                ],
+                "_id" : {
+                    "$oid": "606df1406b680073669bf9b1"
+                },
+                "nombre" : "Buscador<br><b>Fichas</b>",
+                "linkAcceso" : "/epidemiologia/buscador-ficha-epidemiologica",
+                "color" : "#6d6909",
+                "icono" : "table-search",
+                "orden" : 2
+            }, 
+            {
+                "activo" : true,
+                "permisos" : [ 
+                    "epidemiologia:seguimiento:?"
+                ],
+                "_id" : {
+                    "$oid": "609e702d0fb8e228a00bb361"
+                },
+                "nombre" : "Seguimiento<br><b>de casos</b>",
+                "linkAcceso" : "/epidemiologia/seguimiento",
+                "color" : "#669933",
+                "icono" : "nodos",
+                "orden" : 3
+            }
+        ],
+        "__v" : 3
     }
 ]
