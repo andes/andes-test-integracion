@@ -70,10 +70,12 @@
             cy.plexLayoutSidebar().contains('Registros');
 
             cy.getRegistrosMedicos().should('have.length', 2);
-            cy.getRegistrosMedicos().eq(0).plexButtonIcon('eye');
-            cy.getRegistrosMedicos().eq(1).plexButton('Continuar');
 
-            cy.getRegistrosMedicos().eq(0).plexButtonIcon('eye').click();
+            cy.getRegistrosMedicos().plexButtonIcon('eye').click();
+
+            cy.getRegistrosMedicos().plexButton('Continuar');
+
+            cy.getRegistrosMedicos().plexButtonIcon('eye').click();
 
             cy.plexLayoutMain().contains('consulta con médico general');
 
