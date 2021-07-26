@@ -16,6 +16,7 @@ context('mobile paciente', () => {
         cy.server();
         cy.route('POST', '**/api/modules/mobileApp/login').as('login');
         cy.route('POST', '**/api/auth/login').as('loginProfesional');
+        cy.route('POST', '**/api/modules/mobileApp/registro').as('registro');
         cy.route('GET', '**/api/core/tm/campanias').as('campanias');
         cy.route('PUT', '**/api/modules/mobileApp/account').as('updateAccount');
         cy.route('PUT', '**/api/modules/mobileApp/paciente/**').as('updatePaciente');
@@ -217,5 +218,63 @@ context('mobile paciente', () => {
             cy.wait('@patchTurno');
             cy.contains('No tienes ningún turno programado');
         });
+    });
+
+    it('Registro - Número de trámite invalido', () => {
+        cy.goto("/mobile/login/informacion-validacion", null, null, {
+            "coords": {
+                "latitude": -38.9502334061469,
+                "longitude": -68.0569198206332
+            }
+        });
+        cy.get('[id="documento"]').type('35593546');
+        cy.get('[id="tramite"]').type('4444444445');
+        cy.get('[id="celular"]').type('299444444');
+        cy.get('[id="email"]').type('prueba@gmail.com');
+        cy.get('[id="sexo"]').click().get('.alert-radio-button').contains('Masculino').click();
+        cy.get('.alert-button').contains('Aceptar').click();
+        cy.get('.success').contains('Registrarme').click();
+        cy.wait('@registro').then((xhr) => {
+            expect(xhr.status).to.be.eq(404);
+            expect(xhr.responseBody).to.be.eq('Número de trámite inválido');
+        });
+    });
+
+    it('Registro - Existe cuenta registrada', () => {
+        cy.goto("/mobile/login/informacion-validacion", null, null, {
+            "coords": {
+                "latitude": -38.9502334061469,
+                "longitude": -68.0569198206332
+            }
+        });
+        cy.get('[id="documento"]').type('10000000');
+        cy.get('[id="tramite"]').type('299999999999');
+        cy.get('[id="celular"]').type('299444444');
+        cy.get('[id="email"]').type('prueba@gmail.com');
+        cy.get('[id="sexo"]').click().get('.alert-radio-button').contains('Masculino').click();
+        cy.get('.alert-button').contains('Aceptar').click();
+        cy.get('.success').contains('Registrarme').click();
+        cy.wait('@registro').then((xhr) => {
+            expect(xhr.status).to.be.eq(404);
+            expect(xhr.responseBody).to.be.eq('Ya existe una cuenta registrada con el email ingresado');
+        });
+    });
+
+    it('Registro - Formatos incorrectos', () => {
+        cy.goto("/mobile/login/informacion-validacion", null, null, {
+            "coords": {
+                "latitude": -38.9502334061469,
+                "longitude": -68.0569198206332
+            }
+        });
+
+        cy.get('[id="documento"]').type('10000000{selectall}{backspace}');
+        cy.contains('Debe ingresar su número de documento, sin espacios ni puntos.');
+        cy.get('[id="tramite"]').type('2{selectall}{backspace}');
+        cy.contains('Debe ingresar los 11 dígitos de su número de trámite de documento.');
+        cy.get('[id="celular"]').type('2');
+        cy.contains('Formato incorrecto. Debe ingresar su número sin prefijo 0 y sin 15.');
+        cy.get('[id="email"]').type('p');
+        cy.contains('Formato incorrecto. Debe ingresar un e-mail válido.');
     });
 });
