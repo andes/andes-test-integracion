@@ -52,3 +52,12 @@ Cypress.on('window:before:load', win => {
         throw Error(mensaje);
     })
 })
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    if (error.includes('Missing Command Error')) {
+        return;
+    }
+    throw Error(mensaje);
+  })
