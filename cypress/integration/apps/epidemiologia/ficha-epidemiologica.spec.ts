@@ -180,9 +180,9 @@ context('Ficha Epidemiológica', () => {
         cy.plexButtonIcon('history').click();
         cy.wait('@getHistory').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].ficha.paciente.documento).to.be.eq(validado3.documento);
-            expect(xhr.response.body[0].ficha.paciente.id).to.be.eq(validado3._id);
-            expect(xhr.response.body[0].ficha.type.name).to.be.eq('covid19');
+            expect(xhr.response.body[0].paciente.documento).to.be.eq(validado3.documento);
+            expect(xhr.response.body[0].paciente.id).to.be.eq(validado3._id);
+            expect(xhr.response.body[0].type.name).to.be.eq('covid19');
         })
     });
 
