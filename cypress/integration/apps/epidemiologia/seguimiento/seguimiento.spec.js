@@ -52,7 +52,7 @@ context('Seguimiento Epidemiológico', () => {
         cy.toast('success', 'Su ficha fue registrada correctamente');
 
         cy.goto('/epidemiologia/seguimiento', token);
-        cy.plexButton('Buscar').click();    
+        cy.plexButton('Buscar').click();
         cy.wait('@buscarSeguimiento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(0);
@@ -60,13 +60,11 @@ context('Seguimiento Epidemiológico', () => {
         });
         cy.plexSelectType('label="Organización"').clearSelect();
         cy.plexSelectAsync('label="Organización"', 'CENTRO DE SALUD NUEVA ESPERANZA', '@organizaciones', 0);
-
+        cy.plexText('name="documento"', validado.documento);
         cy.plexButton('Buscar').click();
         cy.wait('@buscarSeguimiento');
         cy.wait('@buscarSeguimiento').then((xhr) => {
-            cy.log(xhr)
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body.length).to.be.eq(1);
+            expect(xhr.status).to.be.eq(200);
         });
 
         cy.plexButton('Iniciar Seguimiento').click();
@@ -87,9 +85,9 @@ context('Seguimiento Epidemiológico', () => {
 
         cy.wait('@getPrestacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.length).to.be.eq(0);
         })
-
-        cy.wait(2500);
+        cy.toast('success').click();
         cy.plexButton('Validar consulta de seguimiento de paciente asociado a infección por COVID-19').click({ force: true });
         cy.get('button').contains('CONFIRMAR').click();
 
@@ -108,16 +106,17 @@ context('Seguimiento Epidemiológico', () => {
         cy.plexButton('Buscar').click();
         cy.wait('@buscarSeguimiento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.length).to.be.eq(0);
         });
 
         cy.plexSelectType('label="Estado"').clearSelect();
         cy.plexSelectType('label="Estado"', 'Seguimiento');
+        cy.plexText('name="documento"', validado.documento);
         cy.plexButton('Buscar').click();
         cy.wait('@buscarSeguimiento');
         cy.wait('@buscarSeguimiento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.length).to.be.eq(1);
+            expect(xhr.response.body[0].paciente.documento).to.be.eq(validado.documento);
+            expect(xhr.response.body[0].paciente.apellido).to.be.eq(validado.apellido);
         });
 
         cy.plexButtonIcon('pencil').click();
