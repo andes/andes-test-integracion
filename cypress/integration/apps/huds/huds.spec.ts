@@ -422,8 +422,6 @@ context('RUP - Ejecucion', () => {
             profesional: 'Natalia Huenchuman'
         }).click();
 
-        cy.get('.prestacion-offset').plexBadge('Registro Privado', 'danger');
-
         //Producto
         cy.HudsBusquedaFiltros('producto');
 
@@ -434,8 +432,6 @@ context('RUP - Ejecucion', () => {
             fecha: Cypress.moment().format('DD/MM/YYYY'),
             badge: 'activo'
         }).click();
-
-        cy.get('.prestacion-offset').plexBadge('Registro Privado', 'danger');
     })
 
     it('HUDS - Filtro ambulatorio', () => {
