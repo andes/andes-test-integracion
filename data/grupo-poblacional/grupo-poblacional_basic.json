@@ -76,12 +76,12 @@
     {
         "_id": "606f309197d3c617b2fb4659",
         "nombre": "factores-riesgo",
-        "descripcion": "Personas mayores entre 18 y 59 años, con factores de riesgo",
+        "descripcion": "Personas entre 12 y 59 años, con factores de riesgo",
         "activo": true,
         "mensajeDefault": {
-            "titulo": "Personas mayores entre 18 y 59 años, con factores de riesgo",
+            "titulo": "Personas entre 12 y 59 años, con factores de riesgo",
             "subtitulo": "Su inscripción para vacunación ha sido registrada",
-            "body": "Usted necesita una prescripción de su médico que indique la vacunación contra COVID-19, por pertenecer al grupo con factores de riesgo asociados.  Se deberá presentar al turno de la vacunación con dicha prescripción",
+            "body": "Si la persona inscripta es menor de 18 años deberá ir acompañado del adulto responsable a cargo.",
             "status": "warning"
         },
         "validaciones": [],
@@ -92,13 +92,13 @@
                         {
                             "fact": "paciente",
                             "operator": "greaterThan",
-                            "value": 45.0,
+                            "value": 12,
                             "path": "$.edad"
                         },
                         {
                             "fact": "paciente",
                             "operator": "lessThan",
-                            "value": 60.0,
+                            "value": 59,
                             "path": "$.edad"
                         }
                     ]
@@ -112,7 +112,7 @@
             },
             {
                 "id": "obesidad",
-                "label": "Obesidad grado 2 o mayor (índice de masa corporal -IMC- mayor a 35)"
+                "label": "Obesidad grado 2 o mayor (índice de masa corporal -IMC- mayor a 35) o percentilo de IMC mayor a 97"
             },
             {
                 "id": "cardiovascular",
@@ -157,16 +157,36 @@
             {
                 "id": "TB-activa",
                 "label": "Personas con TB ACTIVA (nueva o recaída), diagnosticados en los últimos 12 meses"
+            },
+            {
+                "id": "autoinmunes",
+                "label": "Personas con enfermedades aautoinmunes y/o tratamientos inmunosupresores, inmunomoduladores o biológicos"
+            },
+            {
+                "id": "lugares-larga-estancia",
+                "label": "Adolescentes que viven el lugares de larga estancia"
+            },
+            {
+                "id": "cud",
+                "label": "Personas de 12 a 17 años con carnet único de discapacidad (CUD) vigente"
+            },
+            {
+                "id": "pension-no-contributiva",
+                "label": "Personas de 12 a 17 años con pensión no contributiva con Certificado Médico Obligatorio"
+            },
+            {
+                "id": "embarazo-adolescente",
+                "label": "Personas gestantes de 12 a 17 años con indicación de riesgo/beneficio individual"
             }
         ]
     },
     {
         "_id": "60b79349eff6d3be8796f4c1",
         "nombre": "sin-factores-riesgo",
-        "descripcion": "Personas mayores de 25 años sin factores de riesgo",
+        "descripcion": "Personas mayores de 18 años sin factores de riesgo",
         "activo": true,
         "mensajeDefault": {
-            "titulo": "Personas mayores de 25 años sin factores de riesgo",
+            "titulo": "Personas mayores de 18 años sin factores de riesgo",
             "subtitulo": "Su inscripción para vacunación ha sido registrada",
             "body": "",
             "status": "warning"
@@ -179,7 +199,7 @@
                         {
                             "fact": "paciente",
                             "operator": "greaterThan",
-                            "value": 25,
+                            "value": 18,
                             "path": "$.edad"
                         },
                         {
@@ -199,7 +219,7 @@
         "descripcion": "Personas gestantes mayores de 18 años",
         "activo": true,
         "mensajeDefault": {
-            "titulo": "Personas gestantes mayores de 18 años",
+            "titulo": "Personas gestantes y/o en período de lactancia mayores de 18 años",
             "subtitulo": "Deberá contar con la indicación de su médico",
             "body": "",
             "status": "warning"
@@ -212,13 +232,13 @@
                         {
                             "fact": "paciente",
                             "operator": "greaterThan",
-                            "value": 18.0,
+                            "value": 18,
                             "path": "$.edad"
                         },
                         {
                             "fact": "paciente",
                             "operator": "lessThan",
-                            "value": 60.0,
+                            "value": 60,
                             "path": "$.edad"
                         }
                     ]
