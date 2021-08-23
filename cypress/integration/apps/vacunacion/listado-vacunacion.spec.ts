@@ -52,7 +52,7 @@ context('Vacunacion Listado', () => {
     });
 
     it('Verifica datos en listado y sidebar', () => {
-        cy.get('tbody tr').eq(0).contains(' Personas mayores entre 18 y 59 .. ');
+        cy.get('tbody tr').eq(0).contains(' Personas entre 12 y 59 años, c .. ');
         cy.get('tbody tr').eq(0).contains(' 10000000 ');
         cy.get('tbody tr').eq(0).contains(' ANDES, PACIENTE VALIDADO ');
         cy.get('tbody tr').eq(0).contains(' M ');
@@ -72,7 +72,7 @@ context('Vacunacion Listado', () => {
             expect(xhr.response.body.estado).to.be.eq('validado');
         });
         cy.get('plex-detail section').plexBadge('Pendiente', 'default');
-        cy.get('plex-detail section').contains(' Grupo: Personas mayores entre 18 y 59 años, con factores de riesgo ');
+        cy.get('plex-detail section').contains(' Grupo: Personas entre 12 y 59 años, con factores de riesgo ');
         cy.get('plex-detail plex-grid').plexLabel('Neuquén');
         cy.get('plex-detail plex-grid').plexLabel('Si');
         cy.get('tbody tr').eq(1).contains(' Personal de Salud ');
