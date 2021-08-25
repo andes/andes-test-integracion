@@ -62,5 +62,46 @@
             }
         ],
         "id": "60d4b46cbefe3438d0dd4728"
+    },
+    {
+        "_id" : {
+			"$oid": "611d056b1728352a8a5cd2ed"
+        },
+        "name" : "seguimiento-epidemiologico",
+        "options" : [ 
+            {
+                "id" : 3,
+                "label" : "baja",
+                "color" : "#80b266",
+                "priority" : 3,
+                "itemRowStyle" : {
+                    "border" : "#b0cfa0",
+                    "hover" : "#80b266",
+                    "background" : "#e9f2e5"
+                }
+            }, 
+            {
+                "id" : 6,
+                "label" : "media",
+                "color" : "#c6b300",
+                "priority" : 6,
+                "itemRowStyle" : {
+                    "border" : "#d5c743",
+                    "hover" : "#C6B300",
+                    "background" : "#f8f5de"
+                }
+            }, 
+            {
+                "id" : 10,
+                "label" : "alta",
+                "color" : "#b70b0b",
+                "priority" : 10,
+                "itemRowStyle" : {
+                    "border" : "#e4a4a4",
+                    "hover" : "#B70B0B",
+                    "background" : "#f8e6e6"
+                }
+            }
+        ]
     }
 ]
