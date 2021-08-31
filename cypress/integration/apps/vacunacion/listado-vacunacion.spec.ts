@@ -79,7 +79,6 @@ context('Vacunacion Listado', () => {
         cy.get('tbody tr').eq(1).contains(' 20000000 ');
         cy.get('tbody tr').eq(1).contains(' ANDES, PACIENTE TEMPORAL ');
         cy.get('tbody tr').eq(1).contains(' F ');
-        cy.get('tbody tr').eq(1).contains(' 37 años ');
         cy.get('tbody tr').eq(1).contains(' Neuquén ');
         cy.get('tbody tr').eq(1).contains(' 28/04/2021 ');
         cy.get('tbody tr').eq(1).plexBadge('pendiente', 'warning');
