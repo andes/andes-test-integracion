@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 
+
 context('Organizacion', () => {
     let token;
 
@@ -20,19 +21,17 @@ context('Organizacion', () => {
 
     it('Seleccionar zona sanitaria', () => {
         cy.plexText('name="nombre"', 'rendon');
+        cy.get('table tbody tr').should('have.length', 1);
+        cy.get('table tbody tr td').contains('10580352167033');
         cy.get('table tbody tr').eq(0).plexButton('Editar').click({ force: true });
 
-        cy.wait('@efector').then((xhr) => {
+        cy.wait('@localidades').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-        
-            cy.wait('@localidades').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-            
-                cy.plexSelect('name="zonasSanitarias"', 0).click();
-            
-                cy.plexButton('Guardar').click();
-                cy.swal('confirm', 'Los datos se actualizaron correctamente');
-            });
+
+            cy.plexSelect('name="zonasSanitarias"', 0).click();
+
+            cy.plexButton('Guardar').click();
+            cy.swal('confirm', 'Los datos se actualizaron correctamente');
         });
     })
 })
