@@ -20,9 +20,9 @@
         "id": {
             "$oid": "5a2fe52ac439d943662d0a4c"
         },
-        "nombre": "ELTON",
-        "apellido": "ROGER",
-        "documento": "35900029",
+        "nombre": "Prueba",
+        "apellido": "Seguimiento",
+        "documento": "2006892",
         "telefonoActual": "22",
         "direccionActual": "Irigoyen 1200",
         "sexo": "masculino",

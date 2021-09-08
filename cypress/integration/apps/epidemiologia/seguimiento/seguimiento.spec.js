@@ -8,14 +8,17 @@ context('Seguimiento Epidemiológico', () => {
         cy.login('30643636', 'asd').then(t => {
             token = t;
         });
-        cy.task('database:create:paciente', {
-            template: 'validado', direccion: 'Irigoyen 1200'
-        }).then(p => {
-            validado = p;
-        });
-
+        cy.task('database:create:paciente',
+            {
+                _id: '5a2fe52ac439d943662d0a4c',
+                template: 'validado',
+                nombre: 'Prueba',
+                apellido: 'Seguimiento',
+                documento: 2006892
+            }).then(p => {
+                validado = p;
+            });
     })
-
 
     beforeEach(() => {
         cy.server();
@@ -77,13 +80,13 @@ context('Seguimiento Epidemiológico', () => {
 
         cy.plexSelectType('label="Estado"').clearSelect();
         cy.plexSelectType('label="Estado"', 'Seguimiento');
-        cy.plexText('name="documento"', '35900029');
+        cy.plexText('name="documento"', validado.documento);
         cy.plexButton('Buscar').click();
         cy.wait('@buscarSeguimiento');
         cy.wait('@buscarSeguimiento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].paciente.documento).to.be.eq('35900029');
-            expect(xhr.response.body[0].paciente.apellido).to.be.eq('ROGER');
+            expect(xhr.response.body[0].paciente.documento).to.be.eq(validado.documento);
+            expect(xhr.response.body[0].paciente.apellido).to.be.eq(validado.apellido);
         });
 
         cy.plexButtonIcon('pencil').click();
