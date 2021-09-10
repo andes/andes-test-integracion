@@ -1,0 +1,72 @@
+{
+    "_id": {
+        "$oid": "6138b4bbb85dbc40546926cb"
+    },
+    "fechaInicio": {
+        "$date": "2021-09-08T10:03:55.982-03:00"
+    },
+    "origen": {
+        "id": "6138b4bbb85dbc40546926bb",
+        "nombre": "Ficha de epidemiología",
+        "tipo": "covid19"
+    },
+    "score": {
+        "value": 3,
+        "fecha": {
+            "$date": "2021-09-08T10:03:55.960-03:00"
+        }
+    },
+    "paciente": {
+        "id": {
+            "$oid": "5a2fe52ac439d943662d0a4c"
+        },
+        "nombre": "Prueba",
+        "apellido": "Seguimiento",
+        "documento": "2006892",
+        "telefonoActual": "22",
+        "direccionActual": "Irigoyen 1200",
+        "sexo": "masculino",
+        "foto": "",
+        "location": {
+            "coordinates": [
+                -68.0863283,
+                -38.945162
+            ],
+            "_id": "6138b4bbb85dbc40546926cc",
+            "type": "Point"
+        },
+        "fechaNacimiento": {
+            "$date": "1956-12-26T00:00:00.000-03:00"
+        }
+    },
+    "organizacionSeguimiento": {
+        "_id": {
+            "$oid": "57e9670e52df311059bc8964"
+        },
+        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
+        "id": {
+            "$oid": "57e9670e52df311059bc8964"
+        },
+        "codigoSisa": "10580352167033"
+    },
+    "llamados": [],
+    "ultimoEstado": {
+        "clave": "pendiente",
+        "valor": {
+            "$date": "2021-09-08T10:03:55.982-03:00"
+        }
+    },
+    "contactosEstrechos": [],
+    "asignaciones": [],
+    "createdAt": {
+        "$date": "2021-09-08T10:03:55.987-03:00"
+    },
+    "createdBy": {
+        "nombre": "Ejemplo",
+        "apellido": "Scheduler",
+        "organizacion": {
+            "nombre": "Ejemplo"
+        }
+    },
+    "__v": 0
+}
