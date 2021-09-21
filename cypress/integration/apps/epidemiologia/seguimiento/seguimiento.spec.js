@@ -30,6 +30,9 @@ context('Seguimiento Epidemiológico', () => {
         cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
         cy.route('GET', '**/api/modules/rup/prestaciones/**').as('getPrestacion');
         cy.route('GET', '**/api/modules/seguimiento-paciente/seguimientoPaciente?**').as('buscarSeguimiento');
+        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
+        cy.route('GET', '**/api/core/tm/organizaciones?**').as('getOrganizaciones');
+
     })
 
     it('Iniciar seguimiento epidemiologico', () => {
@@ -90,5 +93,37 @@ context('Seguimiento Epidemiológico', () => {
         });
 
         cy.plexButtonIcon('pencil').click();
-    })
+    });
+
+    it('Asignar seguimiento y organización a un profesional', () => {
+        cy.plexButton('Buscar').click();
+        cy.wait('@buscarSeguimiento').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.plexBool('name="all"', true);
+        cy.plexButton('Asignar').click();
+        cy.plexSelectAsync('name="profesional"', 'PRUEBA USUARIO', '@getProfesionales', 0);
+        cy.plexButton('Guardar').click();
+        cy.toast('success').click();
+        cy.wait('@buscarSeguimiento').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].ultimaAsignacion.profesional.documento).to.be.eq('38906735');
+        });
+        cy.plexButtonIcon('pencil').click();
+        cy.plexSelectType('label="Organización"').clearSelect();
+        cy.plexSelectAsync('label="Organización"', 'HOSPITAL DE AREA PLOTTIER', '@getOrganizaciones', 0);
+        cy.plexButton('Guardar').click();
+        cy.login('38906735', 'asd', '57f67a7ad86d9f64130a138d').then(t => {
+            token = t;
+            cy.goto('/epidemiologia/seguimiento', token);
+        });
+        cy.plexText('label="Documento"', '2006892');
+        cy.plexButton('Buscar').click();
+        cy.wait('@buscarSeguimiento').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body[0].paciente.apellido).to.be.eq('Seguimiento');
+            expect(xhr.response.body[0].paciente.documento).to.be.eq('2006892');
+
+        });
+    });
 })

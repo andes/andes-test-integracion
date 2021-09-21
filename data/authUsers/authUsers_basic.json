@@ -955,7 +955,8 @@
                     "matriculaciones:profesionales:getProfesionalFoto",
                     "matriculaciones:supervisor:aprobar",
                     "huds:visualizacionHuds",
-                    "monitoreo:*"
+                    "monitoreo:*",
+                    "epidemiologia:seguimiento:update"
                 ],
                 "_id": {
                     "$oid": "57f67a7ad86d9f64130a138d"
