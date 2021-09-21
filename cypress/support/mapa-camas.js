@@ -106,6 +106,7 @@ export const permisosUsuario = [
     'internacion:egreso',
     'internacion:movimientos',
     'internacion:censo',
+    'internacion:registros',
     'internacion:inicio',
     'internacion:descargarListado',
     'internacion:sala:create',
