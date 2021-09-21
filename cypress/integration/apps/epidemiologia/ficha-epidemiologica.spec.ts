@@ -46,6 +46,10 @@ context('Ficha Epidemiológica', () => {
         cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
         cy.route('POST', '**api/modules/forms/forms-epidemiologia/formEpidemiologia').as('registroFicha');
         cy.route('PATCH', '**api/modules/forms/forms-epidemiologia/formEpidemiologia/?**').as('actualizarFicha');
+        cy.route('GET', '**/api/modules/rup/prestaciones/**').as('getPrestacion');
+        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
+        cy.route('GET', '**/api/modules/cda/paciente/**').as('getCDA');
+        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**api/modules/forms/forms-epidemiologia/formEpidemiologia?**').as('getFicha');
         cy.route('GET', '**/api/modules/forms/forms-epidemiologia/formsHistory?**').as('getHistory')
     })
@@ -73,7 +77,7 @@ context('Ficha Epidemiológica', () => {
         cy.toast('success', 'Su ficha fue registrada correctamente');
     });
 
-    it('crear nueva ficha covid19 y editarla', () => {
+    it('crear nueva ficha covid19, registrar concepto covid positivo y editarla', () => {
         let semanaPasada = Cypress.moment().add('days', -7).format('DD/MM/YYYY');
         cy.plexText('name="buscador"', validado2.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
@@ -94,7 +98,45 @@ context('Ficha Epidemiológica', () => {
         cy.wait('@registroFicha').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         })
+ 
         cy.toast('success', 'Su ficha fue registrada correctamente');
+   
+        cy.wait('@getPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.plexButton(' Guardar consulta de seguimiento de paciente asociado a infección por COVID-19 ').click();
+
+        cy.wait('@patchPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.wait('@getPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.wait('@getPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.wait('@getCDA').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.wait('@getPaciente').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.plexButton(' Validar consulta de seguimiento de paciente asociado a infección por COVID-19 ').click();
+
+        cy.get('button').contains('CONFIRMAR').click();
+
+        cy.wait('@patchPrestacion').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+
+        cy.get('button').contains(' EPIDEMIOLOGÍA ').click();
+
         cy.plexText('name="buscador"', validado2.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
