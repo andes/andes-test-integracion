@@ -13,7 +13,8 @@ FROM nginx
 COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html
 COPY --from=build-matriculaciones /usr/src/app/dist /usr/share/nginx/html/matriculaciones
 COPY --from=build-monitoreo /usr/src/app/dist /usr/share/nginx/html/monitoreo
-COPY --from=build-mobile /usr/src/app/www /usr/share/nginx/html/mobile
+COPY --from=build-mobile /usr/src/app/platforms/browser /usr/share/nginx/html/browser
+RUN mv /usr/share/nginx/html/browser/www /usr/share/nginx/html/browser/mobile
 
 COPY nginx.conf /etc/nginx/nginx.conf
 #RUN ls /usr/share/nginx/html

@@ -8,7 +8,7 @@ context('mobile general', () => {
     });
 
     it('Versión de app móvil visible', () => {
-        cy.goto('/mobile/')
+        cy.goto('/mobile/home')
 
         cy.get('ion-menu-button').first().click();
 

@@ -30,7 +30,7 @@ context('mobile paciente', () => {
                 return false;
             }
         })
-        cy.goto("/mobile/home");
+        cy.goto("/mobile/home/");
         cy.get('.nologin').click();
         cy.get('input').first().type('pepe@gmail.com');
         cy.get('#password').first().type('pepe');
@@ -42,7 +42,7 @@ context('mobile paciente', () => {
     });
 
     it('Login de paciente existente', () => {
-        cy.goto("/mobile/home", null, null, {
+        cy.goto("/mobile/home/", null, null, {
             "coords": {
                 "latitude": -38.9502334061469,
                 "longitude": -68.0569198206332
