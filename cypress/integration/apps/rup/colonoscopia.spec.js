@@ -102,6 +102,7 @@ context('prestaciones', () => {
             });
 
             cy.toast('success');
+            cy.wait(1);
             cy.plexButton('Validar colonoscopia').click();
 
             // Popup alert
