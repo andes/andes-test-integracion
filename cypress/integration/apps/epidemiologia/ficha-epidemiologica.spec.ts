@@ -6,7 +6,7 @@ context('Ficha Epidemiológica', () => {
     let validado3;
     let validado4;
     let validado5;
-    
+
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
@@ -203,7 +203,7 @@ context('Ficha Epidemiológica', () => {
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
         cy.plexSelectTypeDinamico('LAMP (NeoKit)').should('exist');
         cy.plexBool('label="Cargar ficha parcial"', true);
-        cy.get('span').contains('La seccion no se encuentra disponible');
+        cy.get('plex-label').contains('La seccion no se encuentra disponible');
         cy.get('label').contains('LAMP (NeoKit)').should('not.exist');
         cy.plexButton('Registrar ficha').click();
         cy.wait('@registroFicha').then((xhr) => {

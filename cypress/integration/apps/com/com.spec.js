@@ -356,7 +356,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-item').last().click();
         cy.get('small').contains('VUELO SANITARIO');
-        cy.get('span').contains('Traslado');
+        cy.get('plex-label').contains('Traslado');
         cy.get('small').contains('SIEN - SISTEMA INTEGRADO DE EMERGENCIA DE NEUQUEN');
         cy.contains(' ACTUALIZAR ').click();
         cy.plexTextArea('label="Observacion"', 'vuelo sanitario no disponible');
@@ -374,7 +374,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-item').last().click();
         cy.get('small').contains('VUELO SANITARIO');
-        cy.get('span').contains('Traslado');
+        cy.get('plex-label').contains('Traslado');
 
         cy.plexSelect('label="Nuevo estado"', 1).click();
         cy.plexButton("Guardar").click();
