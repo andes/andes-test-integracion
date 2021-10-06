@@ -1,7 +1,7 @@
 version: '2'
 services:
   andes_db:  
-    image: mongo:4.0
+    image: mongo:5.0
     container_name: andes_db
     volumes:
       - vandes:/data/db

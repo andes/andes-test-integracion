@@ -2,7 +2,7 @@ version: '2'
 services:
   db:  
     container_name: andes_test_db
-    image: mongo:4.0
+    image: mongo:5.0
     ports:
         - "27066:27017"    
     volumes:
