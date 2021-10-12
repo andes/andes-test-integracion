@@ -14,6 +14,10 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
+
+const moment = require('moment');
+Cypress.moment = moment;
+
 import './commands'
 import './http'
 import './plex'
