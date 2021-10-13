@@ -161,13 +161,17 @@ context('CITAS - Revisión de Agendas', () => {
         cy.server();
         cy.route('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agendaPatch');
         cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
+        cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
+
+
         cy.goto(`/citas/gestor_agendas`, token);
 
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
 
         cy.get('table tr').eq(0).click();
         cy.plexButtonIcon('format-list-checks').click();
-
+        cy.wait('@agenda');
+        cy.wait(100);
         cy.plexButton('Agregar Paciente').click();
         cy.plexText('name="buscador"', pacienteDoc.documento);
         cy.wait('@listaPacientes').then(xhrPacientes => {

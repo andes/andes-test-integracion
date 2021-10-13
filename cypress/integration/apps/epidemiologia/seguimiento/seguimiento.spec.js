@@ -32,6 +32,8 @@ context('Seguimiento Epidemiológico', () => {
         cy.route('GET', '**/api/modules/seguimiento-paciente/seguimientoPaciente?**').as('buscarSeguimiento');
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.route('GET', '**/api/core/tm/organizaciones?**').as('getOrganizaciones');
+        cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+
 
     })
 
@@ -56,12 +58,13 @@ context('Seguimiento Epidemiológico', () => {
         cy.wait('@patchPrestacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-
+        cy.wait('@paciente');
         cy.wait('@getPrestacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(0);
         })
         cy.toast('success');
+        cy.wait('@paciente');
         cy.plexButton('Validar consulta de seguimiento de paciente asociado a infección por COVID-19').click();
         cy.get('button').contains('CONFIRMAR').click();
 

@@ -23,6 +23,7 @@ const complete = (dto) => {
 context('Webhook', () => {
     let token
     before(() => {
+        cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });
@@ -86,7 +87,13 @@ context('Webhook', () => {
         cy.wait('@busq').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
-        cy.get('table tbody tr').plexButtonIcon('trash-can').first().click();
+        cy.wait('@busq');
+        cy.wait('@busq');
+        cy.wait('@busq');
+        cy.wait('@busq');
+        cy.wait('@busq');
+
+        cy.get('table tbody tr').plexButtonIcon('trash-can').click();
 
         cy.contains('¿Desea eliminar?');
         cy.contains('CONFIRMAR').click();

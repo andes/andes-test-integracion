@@ -541,7 +541,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="noPoseeContacto"', true);
         cy.plexBool('name="nacioPaisActual"', true);
         cy.plexBool('name="nacioProvActual"', false);
-        cy.plexSelectType('name="provinciaNacimiento"', "Buenos Aires");
+        cy.plexSelectType('name="provinciaNacimiento"', { text: "Buenos Aires", clear: true });
         cy.plexText('name="nombre"', "Avellaneda");
 
         cy.plexButton('Guardar').click();
@@ -570,7 +570,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexTab('datos de contacto').click();
         cy.plexBool('name="noPoseeContacto"', true);
         cy.plexBool('name="nacioPaisActual"', false);
-        cy.plexSelectType('name="paisNacimiento"', "Alemania");
+        cy.plexSelectType('name="paisNacimiento"', { text: "Alemania", clear: true });
         cy.plexText('name="nombre"').clear();
         cy.plexText('name="nombre"', "Hamburgo");
 
