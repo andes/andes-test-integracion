@@ -155,6 +155,7 @@ context('RUP - Ejecucion', () => {
             cy.wait('@patchPrestacion');
             cy.url().should('include', '/rup/validacion/');
             cy.wait('@paciente');
+            cy.contains("Validar sesión de informes de enfermería");
             cy.plexButton("Validar sesión de informes de enfermería").click();
             cy.swal('confirm');
         });

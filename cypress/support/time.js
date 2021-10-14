@@ -1,13 +1,14 @@
+const moment = require('moment');
 
 
 export function today(format = null) {
-    return Cypress.moment().format(format || 'DD/MM/YYYY');
+    return moment().format(format || 'DD/MM/YYYY');
 };
 
 cy.today = today;
 
 export function esFinDeMes() {
-    return cy.today() === Cypress.moment().endOf('month').format('DD/MM/YYYY');
+    return cy.today() === moment().endOf('month').format('DD/MM/YYYY');
 }
 
 cy.esFinDeMes = esFinDeMes;

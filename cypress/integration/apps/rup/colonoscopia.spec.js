@@ -26,6 +26,8 @@ context('prestaciones', () => {
             cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
             cy.route('GET', '/api/modules/cda/paciente/**', []).as('cda');
             cy.route('GET', '/api/core/term/snomed/**', []).as('search');
+            cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+
             cy.plexButton('PACIENTE FUERA DE AGENDA').click();
             cy.plexSelectType('name="nombrePrestacion"', 'colonoscopia');
 
@@ -44,6 +46,7 @@ context('prestaciones', () => {
                 expect(xhr.response.body.paciente.nombre).to.be.eq(paciente.nombre);
                 expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             });
+            cy.wait('@paciente');
             // completo el procedimiento
             cy.get('plex-radio[name="binario"] input').first().click({
                 force: true
@@ -103,6 +106,7 @@ context('prestaciones', () => {
 
             cy.toast('success');
             cy.wait(1);
+            cy.wait('@paciente');
             cy.plexButton('Validar colonoscopia').click();
 
             // Popup alert

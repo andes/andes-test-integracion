@@ -29,6 +29,8 @@ context('RUP - Punto de inicio', () => {
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
         cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('pacientes');
+        cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+
 
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
@@ -50,6 +52,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.paciente.documento).to.be.eq('3399661');
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
         });
+        cy.wait('@paciente');
         cy.plexButtonIcon('chevron-up').first().click();
         cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
@@ -68,6 +71,7 @@ context('RUP - Punto de inicio', () => {
         });
 
         cy.toast('success');
+        cy.wait('@paciente');
         cy.plexButton('Validar consulta de medicina general').click();
 
         // Popup alert
@@ -97,6 +101,8 @@ context('RUP - Punto de inicio', () => {
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+        cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+
         cy.get('plex-radio[name="agendas"] input').eq(1).click({
             force: true
         });
@@ -116,8 +122,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
-
-        cy.wait(3000);
+        cy.wait('@paciente');
         cy.get('button').contains('BUSCADOR BÁSICO').click();
         cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
@@ -141,7 +146,7 @@ context('RUP - Punto de inicio', () => {
         });
 
         cy.toast('success');
-
+        cy.wait('@paciente');
         cy.plexButton('Validar consulta de medicina general').click();
 
         // Popup alert
@@ -171,6 +176,8 @@ context('RUP - Punto de inicio', () => {
         cy.route('GET', '**/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+        cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+
         cy.get('plex-radio[name="agendas"] input').eq(1).click({
             force: true
         });
@@ -190,7 +197,8 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
-        cy.wait(3000);
+        cy.wait('@paciente');
+
 
         cy.get('button').contains('BUSCADOR BÁSICO').click();
 
@@ -209,7 +217,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
-        cy.wait(1000); // da tiempo para que el boton cambie de cartel
+        cy.wait('@paciente');
         cy.plexButton('Validar consulta de medicina general').click();
         // cy.get('span').contains('Validar consulta de medicina general').first().click({
         //     force: true
@@ -226,7 +234,7 @@ context('RUP - Punto de inicio', () => {
         });
     });
 
-    it.only('Iniciar prestación fuera de agenda con nota privada', () => {
+    it('Iniciar prestación fuera de agenda con nota privada', () => {
         cy.goto('/rup', token);
 
         cy.server();
@@ -246,6 +254,8 @@ context('RUP - Punto de inicio', () => {
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+        cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+
 
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
@@ -264,7 +274,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.paciente.documento).to.be.eq('31549268');
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
         });
-        cy.wait(3000);
+        cy.wait('@paciente');
         cy.get('button').contains('BUSCADOR BÁSICO ').click();
         cy.plexText('name="searchTerm"', 'nota');
         cy.wait('@search').then((xhr) => {
@@ -287,6 +297,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[1]).to.be.eq(undefined);
         });
         cy.toast('success');
+        cy.wait('@paciente');
         cy.plexButton('Validar consulta de medicina general').click();
         cy.get('button').contains('CONFIRMAR').click();
         cy.wait('@patch').then((xhr) => {

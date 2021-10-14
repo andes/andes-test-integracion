@@ -24,7 +24,10 @@ context('RUP - Punto de inicio', () => {
         cy.route(/api\/modules\/rup\/frecuentesProfesional\?/).as('search');
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+        cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
 
+
+        cy.wait('@paciente');
         cy.RupBuscarConceptos('consulta de niño sano, recién nacido', 'SUGERIDOS');
         cy.seleccionarConcepto(0);
         cy.assertRupCard(0, { semanticTag: 'procedimiento', term: 'consulta de niño sano, recién nacido' }).then($elem => {
@@ -50,6 +53,7 @@ context('RUP - Punto de inicio', () => {
         });
 
         cy.toast('success');
+        cy.wait('@paciente');
         cy.plexButton('Validar consulta de niño sano').click();
 
         // Popup alert

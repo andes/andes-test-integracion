@@ -64,7 +64,7 @@ context('Gestor de módulos', () => {
         cy.get('.submodulos').plexText('formControlName="icono"', 'panda');
         cy.get('.submodulos').plexInt('formControlName="orden"', '1');
 
-        cy.get('.text-warning').should('not.be.visible');
+        cy.get('.text-warning').should('have.length', 0);
 
         cy.plexButton('Guardar').click();
         cy.wait('@postModulos').then((xhr) => {

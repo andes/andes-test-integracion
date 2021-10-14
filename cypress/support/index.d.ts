@@ -188,6 +188,7 @@ declare namespace Cypress {
          * Plex Select Type 
          */
         plexSelectType(label: string, texto: string): Chainable<Element>;
+        plexSelectType(label: string, data: { text: string, clear: boolean }): Chainable<Element>;
 
         /**
          * Plex Select Type Dinámico
