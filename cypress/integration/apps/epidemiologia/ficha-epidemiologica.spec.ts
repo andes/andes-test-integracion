@@ -97,10 +97,8 @@ context('Ficha Epidemiológica', () => {
         cy.plexButton('Registrar ficha').click();
         cy.wait('@registroFicha').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-        })
- 
+        });
         cy.toast('success', 'Su ficha fue registrada correctamente');
-   
         cy.wait('@getPrestacion').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -126,7 +124,7 @@ context('Ficha Epidemiológica', () => {
         cy.wait('@getPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-
+        cy.toast('success', 'Prestación guardada correctamente');
         cy.plexButton(' Validar consulta de seguimiento de paciente asociado a infección por COVID-19 ').click();
 
         cy.get('button').contains('CONFIRMAR').click();
