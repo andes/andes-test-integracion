@@ -26,7 +26,6 @@ context('Gestor de Usuarios', () => {
         cy.goto('/gestor-usuarios/usuarios', token);
         cy.server();
         cy.route('GET', '**api/modules/gestor-usuarios/usuarios?search=**').as('busquedaUsuario');
-        cy.route('GET', '**api/core/tm/profesionales?documento=**').as('seleccionUsuario');
         cy.route('GET', '**api/modules/gestor-usuarios/perfiles').as('getPerfiles');
         cy.route('PATCH', '**api/modules/gestor-usuarios/usuarios/**').as('patchUsuario');
     });
@@ -37,7 +36,6 @@ context('Gestor de Usuarios', () => {
         cy.wait('@busquedaUsuario');
 
         cy.get('table tbody td').first().contains(usuario.documento).click();
-        cy.wait('@seleccionUsuario');
         cy.plexButton('AGREGAR ORGANIZACION').click();
 
         cy.get('plex-layout-sidebar').within(() => {
@@ -48,7 +46,7 @@ context('Gestor de Usuarios', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.toast('success', 'Organizacion agregada exitosamente!');
-        cy.get('plex-layout-main').find('.plex-box').find('.list-group-item').contains(perfil.nombre).get('plex-bool input[type="checkbox"]').check({ force: true });
+        cy.get('plex-layout-main').find('.plex-box').find('.list-group-item').contains(perfil.nombre).get('plex-bool input[type="checkbox"]').first().check({ force: true });
 
         cy.get('plex-layout-sidebar').plexButton("GUARDAR").click();
         cy.wait('@patchUsuario').then((xhr) => {
@@ -67,9 +65,6 @@ context('Gestor de Usuarios', () => {
         });
 
         cy.get('table tbody td').first().contains(usuario2.documento).click();
-        cy.wait('@seleccionUsuario').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
         cy.plexButtonIcon('pencil').click();
         cy.get('plex-accordion plex-panel').contains(' Módulo Solicitudes ').click();
         cy.plexBool('label="Seleccionar todos"', true);
