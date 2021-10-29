@@ -1,0 +1,190 @@
+[
+    {
+        "_id": {
+            "$oid": "6089a9631d68383852550255"
+        },
+        "validaciones": [
+            "domicilio"
+        ],
+        "morbilidades": [
+            "diabetes",
+            "obesidad",
+            "cardiovascular",
+            "renal",
+            "respiratoria"
+        ],
+        "tokens": [
+            "10000000",
+            "andes",
+            "paciente",
+            "validado"
+        ],
+        "fechaRegistro": "2021-04-28T18:28:49.034Z",
+        "documento": "10000000",
+        "nombre": "PACIENTE VALIDADO",
+        "apellido": "ANDES",
+        "nroTramite": "299999999999",
+        "grupo": {
+            "nombre": "factores-riesgo"
+        },
+        "sexo": "femenino",
+        "fechaNacimiento": "1991-01-18T02:00:00.000Z",
+        "localidad": {
+            "_id": "57f538a472325875a199a82d",
+            "nombre": "Neuquén"
+        },
+        "telefono": "29",
+        "email": "prueba@gmail.com",
+        "cud": "",
+        "alergia": true,
+        "condicion": false,
+        "convaleciente": false,
+        "vacuna": false,
+        "plasma": false,
+        "amamantando": false,
+        "embarazada": false,
+        "profesion": "",
+        "matricula": null,
+        "establecimiento": "",
+        "relacion": "",
+        "estado": "pendiente",
+        "diaseleccionados": "",
+        "validado": true,
+        "paciente": {
+            "apellido": "ANDES",
+            "documento": "10000000",
+            "fechaNacimiento": "1991-01-18T04:00:00.000Z",
+            "id": {
+                "$oid": "586e6e8627d3107fde116cdb"
+            },
+            "nombre": "PACIENTE VALIDADO",
+            "sexo": "femenino"
+        },
+        "fecha": {
+            "$date": "2021-07-06 03:00:00.000Z"
+        },
+        "controles": [
+            {
+                "_id": "60cb3fdd59cc1e701e759857",
+                "profesional": {
+                    "id": {
+                        "$oid": "5c82a5a53c524e4c57f08cf2"
+                    },
+                    "nombre": "ALICIA",
+                    "apellido": "PRUEBA"
+                },
+                "organizacion": {
+                    "id": {
+                        "$oid": "57fcf038326e73143fb48dac"
+                    },
+                    "nombre": "HOSPITAL DR. HORACIO HELLER"
+                },
+                "fechaControl": {
+                    "$date": "2021-07-06T12:25:26.609Z"
+                },
+                "idPrestacion": "60cb3f4c59cc1e701e759803"
+            }
+        ],
+        "fechaUltimoControl": {
+            "$date": "2021-07-06T03:00:00.000Z"
+        },
+        "fechaProximoControl": {
+            "$date": "2021-07-07T03:00:00.000Z"
+        },
+        "embarazo": {
+            "conceptId": "127364007",
+            "term": "primer embarazo",
+            "fsn": "primigesta (hallazgo)",
+            "semanticTag": "hallazgo"
+        },
+        "primeriza": true,
+        "pesoPrevio": 59
+    },
+    {
+        "_id": {
+            "$oid": "6089a4a01d6838385254fed6"
+        },
+        "validaciones": [
+            "domicilio"
+        ],
+        "morbilidades": [],
+        "tokens": [
+            "20000000",
+            "PACIENTE TEMPORAL",
+            "ANDES"
+        ],
+        "fechaRegistro": "2021-04-28T18:08:30.036Z",
+        "documento": "20000000",
+        "nombre": "PACIENTE TEMPORAL",
+        "apellido": "ANDES",
+        "nroTramite": "",
+        "grupo": {
+            "nombre": "personal-salud"
+        },
+        "sexo": "femenino",
+        "fechaNacimiento": "1983-08-29T03:00:00.000Z",
+        "localidad": {
+            "_id": "57f538a472325875a199a82d",
+            "nombre": "Neuquén"
+        },
+        "telefono": "2994545454",
+        "email": "temporal@gmail.com",
+        "cud": "",
+        "alergia": false,
+        "condicion": false,
+        "convaleciente": false,
+        "vacuna": false,
+        "plasma": false,
+        "amamantando": true,
+        "embarazada": false,
+        "profesion": "",
+        "matricula": null,
+        "establecimiento": "cam",
+        "localidadEstablecimiento": {
+            "_id": "57f538a472325875a199a82d",
+            "nombre": "Neuquén"
+        },
+        "relacion": "planta",
+        "estado": "pendiente",
+        "diaseleccionados": "",
+        "validado": true,
+        "fechaValidacion": "2021-04-28T18:08:32.784Z",
+        "fechaVacunacion": "2021-03-10T12:13:10.934Z",
+        "idPrestacionVacuna": "6048b804cb59e3ffa126f32a",
+        "paciente": {
+            "apellido": "ANDES",
+            "documento": "20000000",
+            "fechaNacimiento": "1983-08-29T03:00:00.000Z",
+            "id": {
+                "$oid": "5b6c4b0454853f061f97d589"
+            },
+            "nombre": "PACIENTE TEMPORAL",
+            "sexo": "femenino"
+        },
+        "fecha": "2021-06-19 03:00:00.000Z",
+        "controles": [
+            {
+                "_id": "60c38e7efbcf0e2ad5f2d20d",
+                "fechaControl": "2019-06-11T16:23:00.000Z",
+                "idPrestacion": "60c38e0ae9c51d2a8489f2eb",
+                "organizacion": {
+                    "id": "57e9670e52df311059bc8964",
+                    "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+                },
+                "profesional": {
+                    "id": "5c82a5a53c524e4c57f08cf3",
+                    "nombre": "Maria",
+                    "apellido": "Perez"
+                }
+            }
+        ],
+        "fechaUltimoControl": "2019-06-11T03:00:00.000Z",
+        "fechaProximoControl": "2021-06-14T03:00:00.000Z",
+        "embarazo": {
+            "conceptId": "127364007",
+            "term": "primer embarazo",
+            "fsn": "primigesta (hallazgo)",
+            "semanticTag": "hallazgo"
+        }
+    }
+]
