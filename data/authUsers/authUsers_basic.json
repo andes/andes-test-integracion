@@ -76,7 +76,8 @@
                     "com:*",
                     "epidemiologia:*",
                     "formBuilder:*",
-                    "vacunacion:*"
+                    "vacunacion:*",
+                    "perinatal:*"
                 ],
                 "_id": {
                     "$oid": "57e9670e52df311059bc8964"

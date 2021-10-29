@@ -10,6 +10,7 @@ Cypress.Commands.add('seed', () => {
 const collectionList = [
     'paciente',
     'pacienteApp',
+    'carnet-perinatal',
     'agenda',
     'prestaciones',
     'internacionCamas',

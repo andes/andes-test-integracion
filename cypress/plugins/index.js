@@ -12,7 +12,7 @@
 // the project's config changing)
 
 
-const selectTestsWithGrep = require('cypress-select-tests/grep')
+const selectTestsWithGrep = require('cypress-select-tests/grep');
 
 const { seedAgenda } = require('./seed-agenda');
 const { seedNomivac } = require('./seed-nomivac');
@@ -22,6 +22,7 @@ const { seedPaciente, createPaciente } = require('./seed-paciente');
 const { createElementoRup, deleteElementoRup } = require('./seed-elementos-rup');
 const { createMaquinaEstados, createSala, createCama, createEstadosCama, factoryInternacion } = require('./seed-internacion');
 const { createPacienteApp } = require('./seed-paciente-app');
+const { createCarnetPerinatal } = require('./seed-carnet-perinatal');
 const { seedPerfil, seedUsuario } = require('./seed-gestor-usuarios');
 const { createModulo } = require('./seed-modulo');
 const { seedCampania } = require('./seed-campanias');
@@ -52,6 +53,9 @@ module.exports = (on, config) => {
         },
         'database:create:paciente-app': (params = {}) => {
             return createPacienteApp(mongoUri, params);
+        },
+        'database:create:carnet-perinatal': (params = {}) => {
+            return createCarnetPerinatal(mongoUri, params);
         },
         'database:seed:agenda': (dto) => {
             return seedAgenda(mongoUri, dto);

@@ -1,0 +1,46 @@
+{
+    "_id": "60cb3fdd59cc1e701e759856",
+    "validado": true,
+    "paciente": {
+        "apellido": "ANDES",
+        "documento": "10000000",
+        "fechaNacimiento": "1991-01-18T04:00:00.000Z",
+        "id": "586e6e8627d3107fde116cdb",
+        "nombre": "PACIENTE VALIDADO",
+        "sexo": "femenino"
+    },
+    "fecha": {
+        "$date": "2021-07-06 03:00:00.000Z"
+    },
+    "controles": [
+        {
+            "_id": "60cb3fdd59cc1e701e759857",
+            "profesional": {
+                "id": "5ddc01e43851da91beccbea1",
+                "nombre": "Celeste",
+                "apellido": "Ramos"
+            },
+            "organizacion": {
+                "id": "57fcf038326e73143fb48dac",
+                "nombre": "HOSPITAL DR. HORACIO HELLER"
+            },
+            "fechaControl": {
+                "$date": "2021-07-06T12:25:26.609Z"
+            }
+        }
+    ],
+    "fechaUltimoControl": {
+        "$date": "2021-07-06T03:00:00.000Z"
+    },
+    "fechaProximoControl": {
+        "$date": "2021-07-07T03:00:00.000Z"
+    },
+    "embarazo": {
+        "conceptId": "29399001",
+        "term": "primigesta añosa",
+        "fsn": "primigesta añosa (hallazgo)",
+        "semanticTag": "hallazgo"
+    },
+    "primeriza": true,
+    "pesoPrevio": 59
+}
