@@ -7,6 +7,29 @@ context('Perinatal Listado', () => {
     let paciente2;
     let control = [
         {
+            _id: "60cb3fdd59cc1e701e759857",
+            profesional: {
+                id: "5c82a5a53c524e4c57f08cf2",
+                nombre: "ALICIA",
+                apellido: "PRUEBA"
+            },
+            organizacion: {
+                id: "57fcf038326e73143fb48dac",
+                nombre: "HOSPITAL DR. HORACIO HELLER"
+            },
+            fechaControl: "2021-07-06T09:25:26.609-03:00",
+            idPrestacion: "60cb3f4c59cc1e701e759803"
+        }
+    ];
+    let embarazo = {
+        "conceptId": "127364007",
+        "term": "primer embarazo",
+        "fsn": "primigesta (hallazgo)",
+        "semanticTag": "hallazgo"
+    }
+
+    let control2 = [
+        {
             _id: "60f1aa7819948f5e75058752",
             fechaControl: "2021-07-16T15:47:15.893Z",
             idPrestacion: "60f1aa2e19948f5e7505872a",
@@ -21,7 +44,7 @@ context('Perinatal Listado', () => {
             }
         }
     ];
-    let embarazo = {
+    let embarazo2 = {
         conceptId: "127368005",
         term: "segundo embarazo",
         fsn: "segundo embarazo (hallazgo)",
@@ -37,13 +60,21 @@ context('Perinatal Listado', () => {
         cy.task('database:create:carnet-perinatal', {
             controles: control,
             embarazo: embarazo,
+            fecha: "2021-07-06T03:00:00.000Z",
+            fechaControl: "2021-07-06T15:47:15.893Z",
+            fechaUltimoControl: "2021-07-06T03:00:00.000Z",
+            fechaProximoControl: "2021-07-07T03:00:00.000Z",
+
+        }).then(p => { paciente = p; });
+        cy.task('database:create:carnet-perinatal', {
+            controles: control2,
+            embarazo: embarazo2,
             fecha: "2021-07-16T03:00:00.000Z",
             fechaControl: "2021-07-16T15:47:15.893Z",
             fechaUltimoControl: "2021-07-16T03:00:00.000Z",
             fechaProximoControl: "2021-09-05T03:00:00.000Z",
 
-        }).then(p => { paciente = p; });
-        cy.task('database:create:paciente', { template: 'validado' }).then(p => { paciente2 = p; });
+        }).then(p => { paciente2 = p; });
     });
 
     beforeEach(() => {
@@ -56,7 +87,6 @@ context('Perinatal Listado', () => {
         cy.goto('/perinatal', token);
         cy.wait('@listadoPerinatal').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            // listado = xhr.response.body;
         });
     })
 
