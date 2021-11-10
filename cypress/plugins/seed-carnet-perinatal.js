@@ -13,7 +13,7 @@ module.exports.createCarnetPerinatal = async (mongoUri, params) => {
         cp.controles[0].fechaControl = new Date(cp.controles[0].fechaControl);
         cp.controles[0].profesional.id = new ObjectId(cp.controles[0].profesional.id);
         cp.controles[0].organizacion.id = new ObjectId(cp.controles[0].organizacion.id);
-        cp.fecha = (params.fecha) ? new Date(params.fecha) : cp.fecha;
+        cp.fecha = (params.fecha) ? new Date(params.fecha) : new Date(cp.fecha);
         cp.fechaUltimoControl = (params.fechaUltimoControl) ? new Date(params.fechaUltimoControl) : new Date(cp.fechaUltimoControl);
         cp.fechaProximoControl = (params.fechaProximoControl) ? new Date(params.fechaProximoControl) : new Date(cp.fechaProximoControl);
         cp.embarazo = (params.embarazo) ? params.embarazo : cp.embarazo;
