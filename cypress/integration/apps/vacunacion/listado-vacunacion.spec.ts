@@ -166,12 +166,12 @@ context('Vacunacion Listado', () => {
         });
     });
 
-    it('Agregar notas a paciente', () => {
+    it.only('Agregar notas a paciente', () => {
         cy.get('tbody tr').eq(0).contains(' 10000000 ').click();
         cy.get('plex-layout-sidebar plex-title').plexButton(' Agregar nota ').click();
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 0).click();
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('success', 'Nota agregada con éxito');
+        cy.toast('success', 'Nota editada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('Turno asignado');
@@ -179,7 +179,7 @@ context('Vacunacion Listado', () => {
         cy.get('plex-layout-sidebar plex-table').plexIcon('pencil').click();
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 1).click();
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('success', 'Nota agregada con éxito');
+        cy.toast('success', 'Nota editada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('No quiere vacunarse');
@@ -187,7 +187,7 @@ context('Vacunacion Listado', () => {
         cy.get('plex-layout-sidebar plex-table').plexIcon('pencil').click();
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 2).click();
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('success', 'Nota agregada con éxito');
+        cy.toast('success', 'Nota editada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('Ya se vacunó');
@@ -195,7 +195,7 @@ context('Vacunacion Listado', () => {
         cy.get('plex-layout-sidebar plex-table').plexIcon('pencil').click();
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 3).click({ force: true });
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('success', 'Nota agregada con éxito');
+        cy.toast('success', 'Nota editada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('No contesta');
@@ -204,7 +204,7 @@ context('Vacunacion Listado', () => {
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 4).click();
         cy.get('plex-layout-sidebar').plexTextArea('name="notaText"', 'prueba');
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('success', 'Nota agregada con éxito');
+        cy.toast('success', 'Nota editada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('prueba');
@@ -214,7 +214,7 @@ context('Vacunacion Listado', () => {
         cy.toast('success', 'Nota eliminada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.nota).to.be.eq('');
+            expect(xhr.response.body.nota).to.be.eq(null);
         });
     });
 

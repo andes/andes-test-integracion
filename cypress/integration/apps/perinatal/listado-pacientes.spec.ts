@@ -153,7 +153,7 @@ context('Perinatal Listado', () => {
         cy.get('plex-layout-sidebar').plexButton(' Agregar nota ').click();
         cy.get('plex-layout-sidebar').plexTextArea('name="notaText"', 'prueba');
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('success', 'Nota agregada con éxito');
+        cy.toast('success', 'Nota editada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('prueba');
@@ -162,7 +162,7 @@ context('Perinatal Listado', () => {
         cy.get('plex-layout-sidebar plex-table').plexIcon('pencil').click();
         cy.get('plex-layout-sidebar').plexTextArea('name="notaText"', '{selectall}{backspace} Segunda prueba');
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('success', 'Nota agregada con éxito');
+        cy.toast('success', 'Nota editada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('Segunda prueba');
@@ -172,7 +172,7 @@ context('Perinatal Listado', () => {
         cy.toast('success', 'Nota eliminada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.nota).to.be.eq('');
+            expect(xhr.response.body.nota).to.be.eq(null);
         });
     });
 
