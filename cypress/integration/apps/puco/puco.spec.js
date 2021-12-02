@@ -28,7 +28,7 @@ context('PUCO', () => {
         }];
         cy.route('GET', '**/api/modules/obraSocial/puco/?dni=45687&periodo=**', respuesta).as('consulta');
 
-        cy.get('div[class="buscador"] input').first().type('45687');
+        cy.plexInt('name="searchTerm"', '45687');
 
         cy.wait('@consulta').then(xhr => {
             expect(xhr.status).to.be.eq(200);
@@ -38,7 +38,7 @@ context('PUCO', () => {
     ['validado', 'temporal'].forEach((type, i) => {
         it('verificar datos de un paciente ' + type, () => {
             cy.route('GET', '**/api/modules/obraSocial/puco/**').as('buscadorPuco');
-            cy.plexText('placeholder="Ingrese DNI"', pacientes[i].documento);
+            cy.plexInt('name="searchTerm"', pacientes[i].documento);
             cy.wait('@buscadorPuco').then(xhr => {
                 expect(xhr.status).to.be.eq(200);
             });
