@@ -69,7 +69,7 @@ context('SOLICITUDES', () => {
         cy.plexSelectAsync('name="tipoPrestacion"', 'consulta de medicina general', '@conceptosTurneables', 0);
         cy.plexButtonIcon('plus').click();
         cy.swal('confirm', 'Debe seleccionar la organización de origen');
-        cy.plexButton('Guardar').should('have.prop', 'disabled', true);
+        cy.plexButton('Guardar').should('have.prop', 'disabled', false);
     });
 
     it('crear solicitud de entrada y verificar filtros', () => {
