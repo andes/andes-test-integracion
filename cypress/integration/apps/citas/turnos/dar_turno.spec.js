@@ -128,13 +128,12 @@ context('CITAS - punto de inicio', () => {
 
             cy.get('label').contains("Paciente").parent().contains(paciente.nombre);
             cy.get('label').contains("Tipo de prestación").parent().contains('consulta con médico oftalmólogo');
-            cy.get('label').contains("Equipo de Salud").parent().contains('HUENCHUMAN');
-            cy.get('label').contains("Equipo de Salud").parent().contains('NATALIA VANESA');
-
 
             cy.plexButton('Confirmar').click();
             cy.wait('@darTurno').then((xhr) => {
-                expect(xhr.status).to.be.eq(200)
+                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.body.profesionales[0].apellido).to.be.eq('HUENCHUMAN');
+                expect(xhr.response.body.profesionales[0].nombre).to.be.eq('NATALIA VANESA');
             });
         });
 
@@ -166,7 +165,7 @@ context('CITAS - punto de inicio', () => {
             cy.wait('@cargaAgendas');
             cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
             cy.wait('@seleccionAgenda')
-            cy.plexButton('No se asigna turno').click();
+            cy.plexButton('Cancelar').click();
             cy.wait('@listaEspera').then((xhr) => {
                 expect(xhr.response.body).to.have.property('organizacion');
             });

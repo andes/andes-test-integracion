@@ -59,7 +59,7 @@ context('TOP: nuevo turno', () => {
 
         cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
 
-        cy.plexButton(' No se asigna turno ').click();
+        cy.plexButton('Cancelar').click();
         cy.wait('@listaEspera').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.profesional.nombre).to.be.eq('MARIA');

@@ -216,12 +216,12 @@ context('turnos', () => {
 
         cy.wait('@getCarpetas');
 
-        cy.plexSelectAsync('placeholder="Tipos de Prestación"', 'consulta con médico general', '@conceptoTurneables', 0);
+        cy.plexSelectAsync('label="Tipos de Prestación"', 'consulta con médico general', '@conceptoTurneables', 0);
 
 
         cy.wait('@getAgendas');
 
-        cy.plexSelectAsync('placeholder="Equipo de Salud"', 'CORTES JAZMIN', '@getProfesional', 0);
+        cy.plexSelectAsync('label="Equipo de Salud"', 'CORTES JAZMIN', '@getProfesional', 0);
 
         cy.wait('@getAgendas').then(() => {
             cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
