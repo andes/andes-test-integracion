@@ -100,7 +100,7 @@ context('Perinatal Listado', () => {
 
     it('Paciente con control de embarazo no vencido', () => {
         cy.plexButtonIcon('bell').click();
-        cy.get('plex-help').should('length', 1);
+        cy.get('plex-list plex-item').should('length', 1);
         cy.plexButtonIcon('close').click();
     })
 
