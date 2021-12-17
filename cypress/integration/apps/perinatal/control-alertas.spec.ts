@@ -99,9 +99,8 @@ context('Perinatal Listado', () => {
     });
 
     it('Paciente con control de embarazo no vencido', () => {
-        cy.plexButtonIcon('bell').click();
-        cy.get('plex-list plex-item').should('length', 1);
-        cy.plexButtonIcon('close').click();
+        let fecha = Cypress.moment().add('days', 1).format('DD/MM/YYYY');
+        cy.get('tbody tr').eq(1).contains(fecha);
     })
 
 })
