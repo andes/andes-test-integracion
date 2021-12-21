@@ -96,6 +96,16 @@ context('Perinatal Listado', () => {
         cy.get('table tbody tr').should('length', 1);
     });
 
+    it('Filtro - Fecha de cita', () => {
+        cy.plexDatetime('name="fechaCita"', '07/07/2021');
+        cy.get('table tbody tr').should('length', 1);
+    });
+
+    it('Filtro - Ultimo control', () => {
+        cy.plexDatetime('name="fechaControl"', '06/07/2021');
+        cy.get('table tbody tr').should('length', 1);
+    });
+
     it('Filtro - Buscar paciente', () => {
         cy.plexText('name="paciente"', '10000000');
         cy.get('table tbody tr').should('length', 2);
@@ -153,7 +163,7 @@ context('Perinatal Listado', () => {
         cy.get('plex-layout-sidebar').plexButton(' Agregar nota ').click();
         cy.get('plex-layout-sidebar').plexTextArea('name="notaText"', 'prueba');
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
-        cy.toast('success', 'Nota editada con éxito');
+        cy.toast('success', 'Nota agregada con éxito');
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.nota).to.be.eq('prueba');
