@@ -135,7 +135,6 @@ describe('CITAS - Gestor de Agendas', () => {
         });
         cy.get('table tbody tr').first().click();
         cy.get('botones-agenda').plexButtonIcon('pencil');
-        cy.get('botones-agenda').plexButtonIcon('arrow-up-bold-circle-outline');
         cy.get('botones-agenda').plexButtonIcon('arrow-up-bold-circle');
         cy.get('botones-agenda').plexButtonIcon('delete');
         cy.get('botones-agenda').plexButtonIcon('content-copy');
