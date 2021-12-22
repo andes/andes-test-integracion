@@ -57,10 +57,10 @@ context('CITAS - Revisión de Agendas', () => {
 
     it('Comprueba datos de la agenda', () => {
         cy.plexButtonIcon('chevron-down').click();
-        cy.get('plex-layout-sidebar header > fieldset > div > div:nth-child(2) > div').contains(/[A-Z]{3}\. [0-9]{2}\/[0-9]{2}\/[0-9]{4}, [0-9]{2}:[0-9]{2} a [0-9]{2}:[0-9]{2} hs/).should('not.be.empty');
-        cy.get('plex-layout-sidebar header > fieldset > div > div:nth-child(3) > div div').should('not.be.empty');
-        cy.get('plex-layout-sidebar header > fieldset > div > div:nth-child(4) > div div').should('not.be.empty');
-        cy.get('plex-layout-sidebar header > fieldset > div > div:nth-child(5) > div span').should('not.be.empty');
+        cy.get('plex-layout-main header > div').contains(/[A-Z]{3}\. [0-9]{2}\/[0-9]{2}\/[0-9]{4}, [0-9]{2}:[0-9]{2} a [0-9]{2}:[0-9]{2} hs/).should('not.be.empty');
+        cy.get('plex-layout-main header > div').should('not.be.empty');
+        cy.get('plex-layout-main header > div').should('not.be.empty');
+        cy.get('plex-layout-main header > div').should('not.be.empty');
         cy.plexButtonIcon('chevron-up').click();
     });
 
@@ -76,15 +76,13 @@ context('CITAS - Revisión de Agendas', () => {
 
         cy.wait('@diagnosticos');
 
-        cy.get('tr td').contains('C11.0').click();
-
+        cy.get('tr td').contains('C11.0').click();          
         cy.plexButtonIcon('delete').click();
-
     });
 
 
     it('Asignar asistencia a todos los turnos, mismo paciente', () => {
-        let listaTurnos = cy.get('plex-layout-sidebar > .plex-box > .plex-box-content table:first-child tr');
+        let listaTurnos = cy.get('plex-layout-main > div > div > table > tbody > tr');
 
         listaTurnos.each(($el, index, $list) => {
             if (index > 0) {
@@ -94,9 +92,5 @@ context('CITAS - Revisión de Agendas', () => {
                 cy.get('.simple-notification').click();
             }
         });
-
     });
-
-
-
 })
