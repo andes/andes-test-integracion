@@ -117,11 +117,13 @@ context('mobile paciente', () => {
     });
 
     it('Verificar historial de turnos', () => {
-        cy.contains('Mi historial de turnos').click({ force: true });
-        cy.contains('consulta de medicina general');
-        cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-        cy.contains('HUENCHUMAN, NATALIA VANESA');
-        cy.get('ion-back-button').click({ force: true });
+        cy.waitFor('[name="andes-turno"]').then(() => {
+            cy.get('[name="andes-turno"]').click({ force: true });
+            cy.contains('consulta de medicina general');
+            cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+            cy.contains('HUENCHUMAN, NATALIA VANESA');
+            cy.get('ion-back-button').click({ force: true });
+        });
     });
 
     it('Verificar campañas', () => {
