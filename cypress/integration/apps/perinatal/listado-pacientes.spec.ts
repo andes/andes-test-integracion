@@ -131,7 +131,7 @@ context('Perinatal Listado', () => {
         cy.get('tbody tr').eq(0).contains('06/07/2021');
         cy.get('tbody tr').eq(0).contains('ANDES, PACIENTE VALIDADO');
         cy.get('tbody tr').eq(0).contains('10000000');
-        cy.get('tbody tr').eq(0).contains('30 años');
+        cy.get('tbody tr').eq(0).contains('31 años');
         cy.get('tbody tr').eq(0).contains('AUSENTE');
         cy.get('tbody tr').eq(0).contains('07/07/2021');
         cy.get('tbody tr').eq(0).contains('06/07/2021');
