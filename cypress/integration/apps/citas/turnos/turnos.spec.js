@@ -203,8 +203,6 @@ context('turnos', () => {
         cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
         cy.route('GET', '**/api/core/tm/conceptos-turneables**').as('conceptoTurneables');
 
-
-        // cy.get('paciente-buscar input').first().type('36425896');
         cy.plexText('name="buscador"', validado1.documento);
 
         cy.wait('@consultaPaciente').then(xhr => {
@@ -227,7 +225,7 @@ context('turnos', () => {
             cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
         });
 
-        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+        cy.get('plex-card').eq(0).click();
 
         cy.plexButton('Confirmar').click();
 

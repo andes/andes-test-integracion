@@ -355,7 +355,7 @@ context('punto de inicio', () => {
                 expect(xhr.status).to.be.eq(200);
             });
 
-            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+            cy.get('plex-card').eq(i).click();
             cy.plexButton('Confirmar').click();
             cy.wait('@getAgendas').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);

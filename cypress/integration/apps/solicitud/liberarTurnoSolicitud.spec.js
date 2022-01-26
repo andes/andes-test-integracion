@@ -8,7 +8,7 @@ function seleccionarPaciente(dni) {
 }
 
 describe('TOP: Liberar turno', () => {
-    let token, dni;
+    let token, dni, pacientes;
     const pasadoManiana = Cypress.moment().add(2, 'days');
 
     before(() => {
@@ -23,9 +23,9 @@ describe('TOP: Liberar turno', () => {
         });
         cy.login('30643636', 'asd').then(t => {
             token = t;
-            cy.createPaciente('apps/solicitud/paciente-nueva-solicitud', token);
-            dni = "2006890";
         });
+
+        cy.task('database:seed:paciente').then(p => { pacientes = p; })
     })
 
     beforeEach(() => {
@@ -49,7 +49,7 @@ describe('TOP: Liberar turno', () => {
         let idPrestacion;
 
         // <! -- CREAR SOLICITUD
-        seleccionarPaciente(dni);
+        seleccionarPaciente(pacientes[0].documento);
 
         cy.plexDatetime('label="Fecha de solicitud"', cy.today());
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de medicina general', '@tipoPrestacion', 0);
@@ -65,7 +65,7 @@ describe('TOP: Liberar turno', () => {
         cy.plexButton('Guardar').click({ force: true });
         cy.wait('@createSolicitud').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq(dni);
+            expect(xhr.response.body.paciente.documento).to.be.eq(pacientes[0].documento);
             expect(xhr.response.body.solicitud.tipoPrestacionOrigen.conceptId).to.be.eq(idPrestacion);
             expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
@@ -107,7 +107,8 @@ describe('TOP: Liberar turno', () => {
             });
         }
         cy.get('div[class="dia"]').contains(pasadoManiana.format('D')).click({ force: true });
-        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
+        // cy.get('plex-layout-sidebar dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
+        cy.get('plex-card').eq(1).click();
         cy.plexButton("Confirmar").click({ force: true });
         cy.wait('@patchSolicitud').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -128,7 +129,7 @@ describe('TOP: Liberar turno', () => {
             expect(xhr.response.body[0].profesionales[0].nombre).to.be.eq('Natalia');
         });
         cy.wait(2000);
-        cy.get('table tbody td').contains('DNI 2006890').click({ force: true });
+        cy.get('table tbody td').contains('DNI ' + pacientes[0].documento).click({ force: true });
         cy.plexButtonIcon('account-off').click({ force: true });
         cy.plexButton('Liberar').click();
         cy.goto('/solicitudes', token);
