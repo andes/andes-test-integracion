@@ -144,7 +144,6 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.request.body.prestaciones).to.have.length(1);
         });
-        cy.plexButton("Descargas pendientes").click();
         cy.wait('@pendientes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body[0].user.usuario.apellido).to.be.eq('Huenchuman');
@@ -171,7 +170,6 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.request.body.prestaciones).to.have.length(1);
         });
-        cy.plexButton("Descargas pendientes").click();
         cy.wait('@pendientes').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body[0].user.usuario.apellido).to.be.eq('Huenchuman');
