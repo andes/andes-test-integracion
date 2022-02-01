@@ -92,7 +92,7 @@ context('Planificacion Agendas', () => {
         cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
         cy.route('GET', '**/api/modules/turnero/pantalla**').as('pantallas');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('edicionAgenda');
-        cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
+        cy.route('POST', '**/api/modules/turnos/agenda/clonar/**').as('clonar');
     });
 
 

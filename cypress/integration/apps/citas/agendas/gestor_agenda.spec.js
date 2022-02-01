@@ -25,7 +25,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda2');
         cy.route('PUT', '**/api/modules/turnos/turno/**').as('putAgenda');
         cy.route('PUT', '**/api/modules/turnos/agenda/**').as('putAgenda2');
-        cy.route('POST', '**/api/modules/turnos/agenda/clonar**').as('clonar');
+        cy.route('POST', '**/api/modules/turnos/agenda/clonar/**').as('clonar');
         cy.route('POST', '**/api/modules/turnos/agenda**').as('postAgenda');
 
         cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
