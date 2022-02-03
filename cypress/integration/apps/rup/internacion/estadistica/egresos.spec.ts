@@ -1,5 +1,3 @@
-const moment = require('moment');
-
 describe('Capa Estadistica - Egresos', () => {
     let token;
     let pacientes;
@@ -10,8 +8,8 @@ describe('Capa Estadistica - Egresos', () => {
             pacientes = pacientesCreados;
             cy.factoryInternacion({
                 configCamas: [
-                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: moment('2020-01-10').toDate() },
-                    { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso: moment().toDate() }]
+                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment('2020-01-10').toDate() },
+                    { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: Cypress.moment().subtract(5, 'hour').toDate(), fechaEgreso: Cypress.moment().toDate() }]
             }).then(camasCreadas => {
                 return cy.goto('/mapa-camas', token);
             });
@@ -63,6 +61,7 @@ describe('Capa Estadistica - Egresos', () => {
         }]).as('getDiagnostico');
         cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
+        cy.route('GET', '**/api/modules/rup/internacion/camas/historial?**').as('getHistorial');
         cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
         cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.viewport(1920, 1080);
@@ -85,18 +84,19 @@ describe('Capa Estadistica - Egresos', () => {
         cy.wait('@patchPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.wait('@patchCamas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+        cy.wait('@getHistorial');
+        // cy.wait('@patchCamas').then((xhr) => {
+        //     expect(xhr.status).to.be.eq(200);
+        // });
 
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
     });
 
     it('Editar egreso', () => {
         cy.get('plex-badge span plex-datetime div div span button').click()
-        const day = (moment().date() < 10) ? '0' + moment().date() : '' + moment().date();
-        const hour = (moment().hour() - 1);
-        const minute = '' + moment().minute() - 1;
+        const day = (Cypress.moment().date() < 10) ? '0' + Cypress.moment().date() : '' + Cypress.moment().date();
+        const hour = (Cypress.moment().hour() - 1);
+        const minute = '' + Cypress.moment().minute() - 1;
         cy.get('a').contains(day).click();
         cy.get('text').contains(hour).click();
         cy.get(`circle[id='m-${minute}']`).click({ force: true });
