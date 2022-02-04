@@ -85,10 +85,7 @@ describe('Capa Estadistica - Egresos', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.wait('@getHistorial');
-        // cy.wait('@patchCamas').then((xhr) => {
-        //     expect(xhr.status).to.be.eq(200);
-        // });
-
+        
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
     });
 

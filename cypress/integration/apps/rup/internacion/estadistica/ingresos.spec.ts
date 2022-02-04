@@ -43,8 +43,6 @@ describe('Capa Estadistica - Ingresos', () => {
             "codigo": "132"
         }]).as('getOcupacion')
 
-        // cy.route('GET', '**/api/modules/rup/internacion/camas?**', true).as('getCamas');
-        // cy.route('GET', '**/api/modules/rup/internacion/camas/**', true).as('getCamas2');
         cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
         cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.viewport(1920, 1080);
@@ -59,15 +57,8 @@ describe('Capa Estadistica - Ingresos', () => {
             expect(xhr.responseBody.length).to.be.gte(1);
         });
 
-
         cy.get('paciente-listado plex-item').contains(pacientes[0].nombre).click();
         cy.swal('confirm', 'Paciente ya internado');
-
-        // cy.wait('@getPaciente').then((xhr) => {
-        //     expect(xhr.status).to.be.eq(200);
-        // });
-
-        // cy.plexButtonIcon('arrow-left').click();
 
         cy.plexText('name="buscador"').clear();
         cy.plexText('name="buscador"', pacientes[1].nombre);
@@ -103,7 +94,7 @@ describe('Capa Estadistica - Ingresos', () => {
     });
 
     it('Editar ingreso', () => {
-        cy.get('table tr').contains(pacientes[0].nombre).first().click();
+        cy.get('table tbody tr td').contains(pacientes[0].nombre).first().click();
 
         cy.get('plex-tabs ul li').eq(1).click();
         cy.get('plex-title[titulo="INGRESO"] div').eq(2);

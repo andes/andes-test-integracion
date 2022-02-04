@@ -1,0 +1,18 @@
+{
+    "ambito": "internacion",
+    "fechaIngreso": "2022-01-04T17:14:00.000Z",
+    "paciente": {
+        "_id": "5e3d9e384cc64e5543f0d80f",
+        "nombre": "PACIENTE",
+        "apellido": "RUP",
+        "documento": "3399661",
+        "sexo": "femenino",
+        "fechaNacimiento": "1987-01-01T03:00:00.000Z"
+    },
+    "organizacion": {
+        "_id": "57e9670e52df311059bc8964",
+        "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+    },
+    "ingreso": null,
+    "registros": []
+}
