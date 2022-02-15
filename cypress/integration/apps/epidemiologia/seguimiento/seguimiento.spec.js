@@ -10,11 +10,11 @@ context('Seguimiento Epidemiológico', () => {
         });
         cy.task('database:create:paciente',
             {
-                _id: '5a2fe52ac439d943662d0a4c',
+                _id: '605ddc37b2f5356afea60a05',
                 template: 'validado',
-                nombre: 'Prueba',
-                apellido: 'Seguimiento',
-                documento: 2006892
+                nombre: 'PRUEBA',
+                apellido: 'EPIDEMIO',
+                documento: 33650500
             }).then(p => {
                 validado = p;
             });
@@ -120,12 +120,12 @@ context('Seguimiento Epidemiológico', () => {
             token = t;
             cy.goto('/epidemiologia/seguimiento', token);
         });
-        cy.plexText('label="Documento"', '2006892');
+        cy.plexText('label="Documento"', '33650509');
         cy.plexButton('Buscar').click();
         cy.wait('@buscarSeguimiento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].paciente.apellido).to.be.eq('Seguimiento');
-            expect(xhr.response.body[0].paciente.documento).to.be.eq('2006892');
+            expect(xhr.response.body[0].paciente.apellido).to.be.eq('EPIDEMIO');
+            expect(xhr.response.body[0].paciente.documento).to.be.eq('33650500');
 
         });
     });
