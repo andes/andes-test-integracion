@@ -18,11 +18,11 @@
     },
     "paciente": {
         "id": {
-            "$oid": "5a2fe52ac439d943662d0a4c"
+            "$oid": "605ddc37b2f5356afea60a05"
         },
-        "nombre": "Prueba",
-        "apellido": "Seguimiento",
-        "documento": "2006892",
+        "nombre": "PRUEBA",
+        "apellido": "EPIDEMIO",
+        "documento": "33650500",
         "telefonoActual": "22",
         "direccionActual": "Irigoyen 1200",
         "sexo": "masculino",
