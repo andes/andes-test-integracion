@@ -1,0 +1,151 @@
+{
+    "paciente": {
+        "id": {
+            "$oid": "5a2fe52ac439d943662d0a6f"
+        },
+        "nombre": "Paciente",
+        "apellido": "Vacuna",
+        "documento": "10522442",
+        "fechaNacimiento": "1989-12-28T23:00:00.000-03:00",
+        "fechaFallecimiento": null,
+        "estado": "validado",
+        "sexo": "masculino",
+        "email": "richardpalacios2989@gmail.com",
+        "telefono": "2995318371",
+        "localidad": {
+            "id": {
+                "$oid": "57f538a472325875a199a82d"
+            },
+            "nombre": "Neuquén"
+        },
+        "zona": {
+            "id": {
+                "$oid": "6053895585e8c7b08b744219"
+            },
+            "nombre": "ZONA METROPOLITANA"
+        },
+        "areaPrograma": {
+            "id": {
+                "$oid": "60d64ac39eba4c0754321cd5"
+            },
+            "nombre": "Neuquen"
+        }
+    },
+    "aplicaciones": [
+        {
+            "organizacion": {
+                "localidad": {
+                    "id": {
+                        "$oid": "57f538a472325875a199a82d"
+                    },
+                    "nombre": "Neuquén"
+                },
+                "zona": {
+                    "id": {
+                        "$oid": "6053895585e8c7b08b744219"
+                    },
+                    "nombre": "ZONA METROPOLITANA"
+                },
+                "areaPrograma": {
+                    "id": {
+                        "$oid": "60d64ac39eba4c0754321cd5"
+                    },
+                    "nombre": "Neuquen"
+                },
+                "id": {
+                    "$oid": "6019acb745d5b87cb5222c66"
+                },
+                "nombre": "VACUNATORIO DE CAMPAÑA COLEGIO DON BOSCO - NQN"
+            },
+            "_id": {
+                "$oid": "612fd3575f47358352cd8009"
+            },
+            "idPrestacion": {
+                "$oid": "60f879cfdcbd4eb2f04dbfc2"
+            },
+            "edad": 31,
+            "rango": "30 a 34 Años",
+            "fechaAplicacion": "2021-07-21T16:47:26.993-03:00",
+            "vacuna": {
+                "id": {
+                    "$oid": "603e902fb18dad57d870b8cb"
+                },
+                "nombre": "Sinopharm Vacuna SARSCOV 2",
+                "codigo": "200"
+            },
+            "dosis": {
+                "orden": 1,
+                "nombre": "1ra Dosis",
+                "codigo": "2028"
+            },
+            "esquema": {
+                "nombre": "Personas de 18 a 39 SIN factor de riesgo",
+                "codigo": "517"
+            },
+            "condicion": {
+                "nombre": "De 18 a 39 años SIN Factores de Riesgo",
+                "codigo": "44"
+            },
+            "lote": "202106B1346"
+        },
+        {
+            "organizacion": {
+                "localidad": {
+                    "id": {
+                        "$oid": "57f538a472325875a199a82d"
+                    },
+                    "nombre": "Neuquén"
+                },
+                "zona": {
+                    "id": {
+                        "$oid": "6053895585e8c7b08b744219"
+                    },
+                    "nombre": "ZONA METROPOLITANA"
+                },
+                "areaPrograma": {
+                    "id": {
+                        "$oid": "60d64ac39eba4c0754321cd5"
+                    },
+                    "nombre": "Neuquen"
+                },
+                "id": {
+                    "$oid": "6019acb745d5b87cb5222c66"
+                },
+                "nombre": "VACUNATORIO DE CAMPAÑA COLEGIO DON BOSCO - NQN"
+            },
+            "_id": {
+                "$oid": "612fd3575f47358352cd800a"
+            },
+            "idPrestacion": {
+                "$oid": "612fd3465f47358352cd7197"
+            },
+            "edad": 31,
+            "rango": "30 a 34 Años",
+            "fechaAplicacion": "2021-09-01T16:23:48.271-03:00",
+            "vacuna": {
+                "id": {
+                    "$oid": "603e902fb18dad57d870b8cb"
+                },
+                "nombre": "Sinopharm Vacuna SARSCOV 2",
+                "codigo": "200"
+            },
+            "dosis": {
+                "orden": 2,
+                "nombre": "2da Dosis",
+                "codigo": "2031"
+            },
+            "esquema": {
+                "nombre": "Personas de 18 a 39 SIN factor de riesgo",
+                "codigo": "517"
+            },
+            "condicion": {
+                "nombre": "De 18 a 39 años SIN Factores de Riesgo",
+                "codigo": "44"
+            },
+            "lote": "202107B1978"
+        }
+    ],
+    "cantDosis": 2,
+    "inscripto": true,
+    "__v": 1
+}
