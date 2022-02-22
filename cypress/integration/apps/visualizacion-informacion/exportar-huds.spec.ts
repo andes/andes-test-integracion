@@ -69,7 +69,7 @@ context('Exportar HUDS', () => {
             expect(xhr.response.body[0].user.usuario.nombre).to.be.eq("Natalia");
             expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
         })
-        cy.get('plex-list').find('plex-item').contains(pacienteValidado.nombre);
+        cy.get('plex-table').find('td').contains(pacienteValidado.nombre);
     });
 
     it('Seleccionar un paciente y solicitar exportar huds completa', () => {
@@ -96,7 +96,7 @@ context('Exportar HUDS', () => {
             expect(xhr.response.body[0].user.usuario.nombre).to.be.eq("Natalia");
             expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
         })
-        cy.get('plex-list').find('plex-item').contains(pacienteHudsCompleta.nombre);
+        cy.get('plex-table').find('td').contains(pacienteHudsCompleta.nombre);
     });
 
     it('Seleccionar un paciente y solicitar exportar huds entre dos fechas y con una prestación', () => {
@@ -127,6 +127,6 @@ context('Exportar HUDS', () => {
             expect(xhr.response.body[0].user.usuario.nombre).to.be.eq("Natalia");
             expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
         })
-        cy.get('plex-list').find('plex-item').contains(pacienteConPrestacion.nombre);
+        cy.get('plex-table').find('td').contains(pacienteConPrestacion.nombre);
     });
 })

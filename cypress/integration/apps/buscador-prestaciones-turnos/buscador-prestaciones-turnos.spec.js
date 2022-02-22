@@ -150,7 +150,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             expect(xhr.response.body[0].user.usuario.nombre).to.be.eq('Natalia');
             expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
         });
-        cy.get('plex-list').find('plex-item').contains(hoy);
+        cy.get('plex-table').find('td').contains(hoy);
     });
     it('Exportar una prestacion de las filtradas entre dos fechas', () => {
         let hoy = Cypress.moment().format('DD/MM/YYYY');
@@ -176,6 +176,6 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             expect(xhr.response.body[0].user.usuario.nombre).to.be.eq('Natalia');
             expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
         });
-        cy.get('plex-list').find('plex-item').contains(hoy);
+        cy.get('plex-table').find('td').contains(hoy);
     });
 });
