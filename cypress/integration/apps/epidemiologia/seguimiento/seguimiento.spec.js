@@ -86,6 +86,7 @@ context('Seguimiento Epidemiológico', () => {
 
         cy.plexSelectType('label="Estado"').clearSelect();
         cy.plexSelectType('label="Estado"', 'Seguimiento');
+        cy.plexButtonIcon('chevron-down').click();
         cy.plexText('name="documento"', validado.documento);
         cy.plexButton('Buscar').click();
         cy.wait('@buscarSeguimiento');
@@ -99,10 +100,7 @@ context('Seguimiento Epidemiológico', () => {
     });
 
     it('Asignar seguimiento y organización a un profesional', () => {
-        cy.plexButton('Buscar').click();
-        cy.wait('@buscarSeguimiento').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
+        cy.wait(300); // Espera el restore de los filtros
         cy.plexBool('name="all"', true);
         cy.plexButton('Asignar').click();
         cy.plexSelectAsync('name="profesional"', 'PRUEBA USUARIO', '@getProfesionales', 0);
@@ -120,8 +118,6 @@ context('Seguimiento Epidemiológico', () => {
             token = t;
             cy.goto('/epidemiologia/seguimiento', token);
         });
-        cy.plexText('label="Documento"', '33650509');
-        cy.plexButton('Buscar').click();
         cy.wait('@buscarSeguimiento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body[0].paciente.apellido).to.be.eq('EPIDEMIO');

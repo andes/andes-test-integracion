@@ -1,8 +1,8 @@
 [
     {
         "_id": {
-			"$oid": "60d4b46cbefe3438d0dd4728"
-		},
+            "$oid": "60d4b46cbefe3438d0dd4728"
+        },
         "name": "com",
         "options": [
             {
@@ -64,42 +64,60 @@
         "id": "60d4b46cbefe3438d0dd4728"
     },
     {
-        "_id" : {
-			"$oid": "611d056b1728352a8a5cd2ed"
+        "_id": {
+            "$oid": "611d056b1728352a8a5cd2ed"
         },
-        "name" : "seguimiento-epidemiologico",
-        "options" : [ 
+        "name": "seguimiento-epidemiologico",
+        "options": [
             {
-                "id" : 3,
-                "label" : "baja",
-                "color" : "#80b266",
-                "priority" : 3,
-                "itemRowStyle" : {
-                    "border" : "#b0cfa0",
-                    "hover" : "#80b266",
-                    "background" : "#e9f2e5"
+                "id": 1,
+                "label": "BAJO",
+                "color": "#80b266",
+                "value": 1,
+                "min": 0,
+                "max": 2,
+                "itemRowStyle": {
+                    "border": "#b0cfa0",
+                    "hover": "#80b266",
+                    "background": "#e9f2e5"
                 }
-            }, 
+            },
             {
-                "id" : 6,
-                "label" : "media",
-                "color" : "#c6b300",
-                "priority" : 6,
-                "itemRowStyle" : {
-                    "border" : "#d5c743",
-                    "hover" : "#C6B300",
-                    "background" : "#f8f5de"
+                "id": 2,
+                "label": "MODERADO",
+                "color": "#c6b300",
+                "value": 3,
+                "min": 3,
+                "max": 4,
+                "itemRowStyle": {
+                    "border": "#d5c743",
+                    "hover": "#C6B300",
+                    "background": "#f8f5de"
                 }
-            }, 
+            },
             {
-                "id" : 10,
-                "label" : "alta",
-                "color" : "#b70b0b",
-                "priority" : 10,
-                "itemRowStyle" : {
-                    "border" : "#e4a4a4",
-                    "hover" : "#B70B0B",
-                    "background" : "#f8e6e6"
+                "id": 3,
+                "label": "ALTO RIESGO",
+                "color": "#b70b0b",
+                "value": 6,
+                "min": 5,
+                "max": 7,
+                "itemRowStyle": {
+                    "border": "#e4a4a4",
+                    "hover": "#B70B0B",
+                    "background": "#f8e6e6"
+                }
+            },
+            {
+                "id": 5,
+                "label": "MUY ALTO RIESGO",
+                "color": "#02111c",
+                "value": 8,
+                "min": 8,
+                "itemRowStyle": {
+                    "border": "#7a6f93",
+                    "hover": "#02111C",
+                    "background": "#dddae3"
                 }
             }
         ]
