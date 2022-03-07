@@ -100,7 +100,9 @@ context('Seguimiento Epidemiológico', () => {
     });
 
     it('Asignar seguimiento y organización a un profesional', () => {
-        cy.wait(300); // Espera el restore de los filtros
+        cy.plexSelectType('label="Prioridad"', 'MODERADO');
+        cy.plexButton('Buscar').click();
+        cy.wait('@buscarSeguimiento');
         cy.plexBool('name="all"', true);
         cy.plexButton('Asignar').click();
         cy.plexSelectAsync('name="profesional"', 'PRUEBA USUARIO', '@getProfesionales', 0);
@@ -108,7 +110,6 @@ context('Seguimiento Epidemiológico', () => {
         cy.toast('success').click();
         cy.wait('@buscarSeguimiento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].ultimaAsignacion.profesional.documento).to.be.eq('38906735');
         });
         cy.plexButtonIcon('pencil').click();
         cy.plexSelectType('label="Organización"').clearSelect();
