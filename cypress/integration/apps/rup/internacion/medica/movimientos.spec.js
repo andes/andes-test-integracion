@@ -41,7 +41,8 @@ const moment = require('moment');
                 expect(xhr.status).to.be.eq(200);
             });
 
-            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('menos').click();
+            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
+            cy.get('plex-layout-sidebar').plexButtonIcon('menos').click();
             cy.plexButton('Pase de unidad organizativa').click();
 
             cy.plexSelectType('label="Cama"', 'CAMA');

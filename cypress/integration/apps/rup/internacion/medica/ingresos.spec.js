@@ -44,8 +44,8 @@
 
         it('Ingreso simplificado cambiando paciente', () => {
             cy.get('table tr').contains(camas[0].cama.nombre).first().click();
-            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('plus').click();
-
+            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
+            cy.get('plex-layout-sidebar').plexButtonIcon('plus').click();
             cy.plexText('name="buscador"', pacientes[0].nombre);
             cy.wait('@busquedaPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
@@ -89,8 +89,8 @@
 
         it('Ingreso a sala comun', () => {
             cy.get('table tr').contains(salas[0].nombre).first().click();
-            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('plus').click();
-
+            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
+            cy.get('plex-layout-sidebar').plexButtonIcon('plus').click();
             cy.plexText('name="buscador"').clear();
             cy.plexText('name="buscador"', pacientes[0].nombre);
             cy.wait('@busquedaPaciente').then((xhr) => {

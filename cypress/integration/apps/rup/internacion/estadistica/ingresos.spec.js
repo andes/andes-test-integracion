@@ -106,7 +106,8 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.get('table tr').contains(pacientes[0].nombre).first().click();
 
         cy.get('plex-tabs ul li').eq(1).click();
-        cy.get('plex-title[titulo="INGRESO"] div').eq(2).plexButtonIcon('pencil').click();
+        cy.get('plex-title[titulo="INGRESO"] div').eq(2);
+        cy.get('plex-layout-sidebar').plexButtonIcon('pencil').click();
 
         cy.plexSelect('name="origen"').clearSelect();
         cy.plexSelectType('name="origen"', 'Emergencia');
