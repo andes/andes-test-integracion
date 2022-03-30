@@ -123,11 +123,8 @@ context('CITAS - punto de inicio', () => {
             cy.wait('@seleccionAgenda').then((xhr) => {
                 expect(xhr.status).to.be.eq(200)
             });
-            cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
 
-
-            cy.get('label').contains("Paciente").parent().contains(paciente.nombre);
-            cy.get('label').contains("Tipo de prestación").parent().contains('consulta con médico oftalmólogo');
+            cy.get('plex-card').eq(i).click();
 
             cy.plexButton('Confirmar').click();
             cy.wait('@darTurno').then((xhr) => {
@@ -148,7 +145,6 @@ context('CITAS - punto de inicio', () => {
                 expect(xhr.status).to.be.eq(200)
             });
             cy.plexButton('Dar Turno').click();
-            cy.plexButton('Confirmar').click();
             // Confirmo que se dio el turno desde la API
             cy.wait('@darTurno').then((xhr) => {
                 expect(xhr.status).to.be.eq(200)
@@ -205,7 +201,8 @@ context('CITAS - punto de inicio', () => {
         cy.wait('@seleccionAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
-        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click();
+        cy.get('plex-card').eq(3).click();
+
         cy.plexButton('Confirmar').click();
         cy.wait('@cargaAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);

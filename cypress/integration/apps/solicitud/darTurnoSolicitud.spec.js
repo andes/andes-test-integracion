@@ -57,8 +57,7 @@ context('TOP: nuevo turno', () => {
             cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
         });
 
-        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
-
+        cy.get('plex-card').eq(0).click();
         cy.plexButton('Cancelar').click();
         cy.wait('@listaEspera').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -103,7 +102,7 @@ context('TOP: nuevo turno', () => {
             cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
         });
 
-        cy.get('dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
+        cy.get('plex-card').eq(0).click();
         cy.plexButton('Confirmar').click();
         cy.wait('@confirmarTurno').then(xhr => {
             expect(xhr.status).to.be.eq(200);
