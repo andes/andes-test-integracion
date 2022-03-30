@@ -37,7 +37,8 @@ const moment = require('moment');
         it('Egreso simplificado', () => {
             cy.getCama(pacientes[0].apellido).click();
             // cy.get('table tr').contains(camas[0].cama.nombre).first().click();
-            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('menos').click();
+            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
+            cy.get('plex-layout-sidebar').plexButtonIcon('menos').click();
             cy.plexButton('Egresar paciente').click();
 
             cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
@@ -52,7 +53,8 @@ const moment = require('moment');
 
         it('Egreso en Sala Comun', () => {
             cy.getCama(pacientes[0].apellido).click();
-            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2).plexButtonIcon('menos').click();
+            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
+            cy.get('plex-layout-sidebar').plexButtonIcon('menos').click();
             cy.plexButton('Egresar paciente').click();
 
             cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
