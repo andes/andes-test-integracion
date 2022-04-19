@@ -58,7 +58,7 @@ context('TOP: nuevo turno', () => {
         });
 
         cy.get('plex-card').eq(0).click();
-        cy.plexButton('Cancelar').click();
+        cy.plexButton('Demanda Rechazada').click();
         cy.wait('@listaEspera').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.profesional.nombre).to.be.eq('MARIA');

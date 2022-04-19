@@ -161,7 +161,7 @@ context('CITAS - punto de inicio', () => {
             cy.wait('@cargaAgendas');
             cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
             cy.wait('@seleccionAgenda')
-            cy.plexButton('Cancelar').click();
+            cy.plexButton('Demanda Rechazada').click();
             cy.wait('@listaEspera').then((xhr) => {
                 expect(xhr.response.body).to.have.property('organizacion');
             });
