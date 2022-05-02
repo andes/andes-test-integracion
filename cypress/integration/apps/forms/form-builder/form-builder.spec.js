@@ -36,7 +36,7 @@ context('Ficha Epidemiológica', () => {
 
 
     it('crear nuevo formulario', () => {
-        
+
         cy.plexButton('Nuevo formulario').click();
         cy.plexText('name="nombre"', form.name);
         cy.plexText('name="tipo"', form.type);
@@ -46,23 +46,23 @@ context('Ficha Epidemiológica', () => {
         for (let s of form.sections) {
             for (let e of s.fields) {
                 cy.plexButton('AGREGAR CAMPO').click();
-                let lastRow = () => cy.get('div[class="form-item border-blue"]').last();
-                lastRow().plexText('label="Clave"', e.key);
+                let lastRow = () => cy.get('plex-list').find('plex-item').last();
                 lastRow().plexText('label="Nombre"', e.label);
                 lastRow().plexSelectType('label="Tipo de campo"', tiposList.find(t => t.id === e.type).nombre);
                 lastRow().plexText('label="Descripción"', e.description);
                 lastRow().plexSelectType('label=Sección', formResources.find(t => t.id === s.id).name);
 
-                if(e.type === 'select') {
+                if (e.type === 'select') {
                     lastRow().plexSelectType('label="Tipo de recurso"', formResources.find(t => t.id === e.resources).name);
-                } else if(e.type === 'int') {
+                } else if (e.type === 'int') {
                     lastRow().plexInt('label="Mínimo"', parseInt(e.min));
                     lastRow().plexInt('label="Máximo"', parseInt(e.max));
-                } else if(e.type === 'snomed') {
+                } else if (e.type === 'snomed') {
                     lastRow().plexText('label="Snomed Code / Query"', e.snomedCodeOrQuery);
                 }
 
-                lastRow().plexBool('label="Requerido"', e.required);
+                lastRow().plexButton('Configuración').click();
+                cy.plexBool('label="Campo Obligatorio"', e.required);
 
                 i++;
             }
@@ -73,9 +73,9 @@ context('Ficha Epidemiológica', () => {
             const compare = (o1, o2) => {
                 Object.keys(o1).forEach(k => {
                     if (o1[k] === Object(o1[k])) {
-                        compare(o1[k],o2[k])
+                        compare(o1[k], o2[k])
                     } else {
-                        expect(o1[k]).to.be.eq(o2[k]) 
+                        expect(o1[k]).to.be.eq(o2[k])
                     }
                 })
             }

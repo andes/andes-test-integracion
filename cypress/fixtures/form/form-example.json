@@ -19,7 +19,7 @@
                     "resources": "organizaciones"
                 },
                 {
-                    "key": "intkey",
+                    "key": "intlabel",
                     "label": "Int label",
                     "type": "int",
                     "description": "Int description",
@@ -31,7 +31,7 @@
                     "max": 100
                 },
                 {
-                    "key": "snomedkey",
+                    "key": "snomedlabel",
                     "label": "Snomed label",
                     "type": "snomed",
                     "description": "Snomed description",
@@ -61,7 +61,6 @@
                     "preload": false,
                     "resources": "provincias"
                 }
-     
             ]
         }
     ],
