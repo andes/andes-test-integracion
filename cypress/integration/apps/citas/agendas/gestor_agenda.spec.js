@@ -44,12 +44,16 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body[0].bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b9');
         });
 
-        cy.get('table tbody div').contains('HUENCHUMAN').click();
-        cy.plexButtonIcon('pencil').click();
-        cy.wait(500); // Agregado de forma forzada para que el test funcione correctamente
-        cy.plexSelect('label="Equipo de Salud"').find('.remove-button').click();
-        cy.plexSelectAsync('label="Equipo de Salud"', 'prueba alicia', '@getProfesional', 0);
-        cy.plexSelectAsync('label="Espacio Físico"', 'Huemul Consultorio 3 PB', '@getEspacioFisico', 0);
+        cy.get('table tbody td').contains('HUENCHUMAN').click();
+        cy.get('table tbody tr').plexButtonIcon('pencil').first().click();
+        cy.wait(500)
+        cy.wait('@findAgenda').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('plex-layout-sidebar').plexSelect('label="Equipo de Salud"').find('.remove-button').click();
+        cy.get('plex-layout-sidebar').plexSelectAsync('label="Equipo de Salud"', 'prueba alicia', '@getProfesional', 0);
+        cy.get('plex-layout-sidebar').plexSelectAsync('label="Espacio Físico"', 'Huemul Consultorio 3 PB', '@getEspacioFisico', 0);
+
 
         cy.plexButton('Guardar').click();
         cy.wait('@patchAgenda2').then((xhr) => {
@@ -65,16 +69,17 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('.nombres-profesionales').contains('PRUEBA');
-        cy.get('table tbody tr td').contains('Huemul Consultorio 3 PB (Huemul)');
+        cy.get('table tbody tr td').plexLabel('PRUEBA, ALICIA');
     })
 
     it('editar agenda en planificación', () => {
         cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
+        cy.plexSelectType('label="Estado"', 'en planificación');
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('table tbody td').contains('En planificación').click();
+        cy.get('table tbody td').contains('HUENCHUMAN').click();
+        cy.get('table tbody tr').plexButtonIcon('pencil').first().click({ force: true });
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('planificacion');
@@ -83,7 +88,6 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b9');
 
         });
-        cy.plexButtonIcon('pencil').click();
 
         const manana = Cypress.moment().add(1, 'days').format('DD/MM/YYYY');
 
@@ -115,8 +119,8 @@ describe('CITAS - Planificar Agendas', () => {
 
         cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + manana);
 
-        cy.get('.nombres-profesionales').contains('PRUEBA');
-        cy.get('.tipo-prestacion').contains('Consulta de ortopedia');
+        cy.get('table tbody tr td').plexLabel('PRUEBA, ALICIA');
+        cy.get('table tbody tr td').plexLabel('Consulta de ortopedia');
     })
 
     it('suspender agenda disponible sin turnos', () => {
@@ -125,7 +129,8 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.get('table tbody td').contains('oxigenoterapia domiciliaria').click();
+        cy.get('table tbody td').plexLabel('oxigenoterapia domiciliaria').click();
+
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('disponible');
@@ -135,20 +140,20 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.bloques[0].accesoDirectoDelDia).to.be.eq(4);
             expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(4);
         });
-        cy.plexButtonIcon('stop').click();
+        cy.get('table tbody tr').plexButtonIcon('stop').first().click({ force: true });
         cy.plexButton('Confirmar').click();
         cy.wait('@patchAgenda2').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('suspendida');
         });
-        cy.get('table tbody td').contains('oxigenoterapia domiciliaria').click();
-        cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
+        cy.get('plex-layout-main table tbody td').plexLabel('oxigenoterapia domiciliaria').click();
+        cy.get('table tbody td').plexBadge('Suspendida');
     })
 
     it('suspender agenda disponible con turno', () => {
 
         cy.wait('@getAgendas');
-        cy.get('table tbody td').contains('examen pediátrico').click();
+        cy.get('table tbody td').plexLabel('examen pediátrico').click();
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('publicada');
@@ -160,7 +165,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.bloques[0].turnos[0].estado).to.be.eq('asignado');
             expect(xhr.response.body.bloques[0].turnos[0].paciente.id).to.be.eq('586e6e8627d3107fde116cdb');
         });
-        cy.plexButtonIcon('stop').click();
+        cy.get('table tbody tr').plexButtonIcon('stop').first().click({ force: true });
         cy.plexButton('Confirmar').click();
         cy.wait('@patchAgenda2').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -169,8 +174,8 @@ describe('CITAS - Planificar Agendas', () => {
         cy.toast('success', 'La agenda cambió el estado a Suspendida');
         cy.get('table tbody td').contains('examen pediátrico').click();
         cy.wait('@findAgenda');
-        cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
-        cy.plexButtonIcon('sync-alert').click();
+        cy.get('table tbody td').plexBadge('Suspendida');
+        cy.get('table tbody tr').plexButtonIcon('sync-alert').click();
         cy.wait('@findAgenda');
         cy.get('tbody').find('td').first().click({ force: true });
         cy.wait('@getCandidatas');
@@ -180,7 +185,7 @@ describe('CITAS - Planificar Agendas', () => {
 
     it('suspender agenda disponible con turno y reasignarlo', () => {
         cy.wait('@getAgendas');
-        cy.get('table tbody td').contains('servicio de neumonología').click();
+        cy.get('table tbody td').plexLabel('servicio de neumonología').click();
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('publicada');
@@ -192,7 +197,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.bloques[0].turnos[0].estado).to.be.eq('asignado');
             expect(xhr.response.body.bloques[0].turnos[0].paciente.id).to.be.eq('586e6e8627d3107fde116cdb');
         });
-        cy.plexButtonIcon('stop').click();
+        cy.get('table tbody tr').plexButtonIcon('stop').first().click({ force: true });
         cy.plexButton('Confirmar').click();
         cy.wait('@patchAgenda2').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -200,7 +205,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.bloques[0].turnos[0].motivoSuspension).to.be.eq('agendaSuspendida');
         });
         cy.toast('success', 'La agenda cambió el estado a Suspendida');
-        cy.get('table tbody td').contains('servicio de neumonología').click();
+        cy.get('table tbody td').plexLabel('servicio de neumonología').click();
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('suspendida');
@@ -213,8 +218,10 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.bloques[0].turnos[0].motivoSuspension).to.be.eq('agendaSuspendida');
             expect(xhr.response.body.bloques[0].turnos[0].paciente.id).to.be.eq('586e6e8627d3107fde116cdb');
         });
-        cy.get('.bloques-y-turnos .badge-danger').contains('Suspendida');
-        cy.plexButtonIcon('sync-alert').click();
+
+        cy.plexSelectType('name="prestaciones"', 'servicio de neumonología');
+        cy.get('table tbody td').plexBadge('Suspendida');
+        cy.get('table tbody tr').plexButtonIcon('sync-alert').click();
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('suspendida');
@@ -286,7 +293,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.bloques[0].turnos[1].estado).to.be.eq('disponible');
         });
         cy.get('.lista-turnos').contains('Disponible').click();
-        cy.get('plex-box').eq(1).plexButtonIcon('stop').click();
+        cy.get('plex-layout-sidebar').plexButtonIcon('stop').click();
         cy.plexButton('Confirmar').click();
         cy.toast('alert', 'El turno seleccionado fue suspendido');
         cy.wait('@patchAgenda2').then((xhr) => {
@@ -317,8 +324,9 @@ describe('CITAS - Planificar Agendas', () => {
     })
 
     it('editar agenda dinamica con institucion', () => {
+        cy.route('GET', '**/api/modules/turnos/espacioFisico**').as('getEspacioFisico');
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
-        cy.plexButton("Crear una nueva agenda").click();
+        cy.plexButton("Crear nueva agenda").click();
         cy.plexDatetime('name="modelo.fecha"', cy.today());
         cy.plexDatetime('name="modelo.horaInicio"', "08:00");
         cy.plexDatetime('name="modelo.horaFin"', "16:00");
@@ -328,22 +336,25 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
         cy.plexButton("Guardar").click();
         cy.toast('success');
-        cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click();
-        cy.plexButtonIcon('pencil').click();
+        cy.plexButtonIcon('chevron-down').click();
+        cy.plexSelectAsync('label="Espacio Físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
+        cy.get('table tbody td').plexLabel('consulta de medicina general').click();
+        cy.wait('@findAgenda').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+        });
+        cy.get('table tbody tr').plexButtonIcon('pencil').first().click({ force: true });
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexSelect('label="Espacio Físico"').click();
-        cy.plexSelect('label="Espacio Físico"').find('.remove-button').click();
-        cy.plexSelectAsync('label="Espacio Físico"', 'CE.M.O.E. SAN JOSE OBRERO', '@institucion', 0);
+        cy.get('plex-layout-sidebar').plexBool('name="espacioFisicoPropios"', true).click({ force: true });
+        cy.get('plex-layout-sidebar').plexSelectAsync('label="Espacio Físico"', 'Huemul Consultorio 3 PB', '@getEspacioFisico', 0);
         cy.plexButton("Guardar").click();
         cy.toast('success');
-        cy.get('table tbody td').contains('CE.M.O.E. SAN JOSE OBRERO');
     })
 
     it('clonar agenda con una institucion asignada', () => {
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
-        cy.plexButton("Crear una nueva agenda").click();
+        cy.plexButton("Crear nueva agenda").click();
         cy.plexDatetime('name="modelo.fecha"', cy.today());
         cy.plexDatetime('name="modelo.horaInicio"', "08:00");
         cy.plexDatetime('name="modelo.horaFin"', "16:00");
@@ -358,13 +369,15 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
         });
         cy.toast('success', 'La agenda se guardó correctamente');
-        cy.get('table tbody td').contains('ESCUELA PRIMARIA 300').click({ force: true });
+        cy.plexButtonIcon('chevron-down').click();
+        cy.plexSelectAsync('label="Espacio Físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
+        cy.get('table tbody td').plexLabel('consulta de medicina general').first().click();
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.otroEspacioFisico.nombre).to.be.eq('ESCUELA PRIMARIA 300');
             expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
         });
-        cy.plexButtonIcon("content-copy").click();
+        cy.plexButtonIcon("content-copy").first().click();
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -396,6 +409,8 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
             expect(xhr.response.body.profesionales[0].id).to.be.eq('58f74fd3d03019f919e9fff2');
         });
+        cy.plexButtonIcon('chevron-down').click();
+        cy.plexSelectAsync('name="profesionales"', 'CORTES JAZMIN', '@getProfesionales', 0);
         cy.plexButtonIcon('stop').click();
         cy.plexButton('Confirmar').click();
         cy.wait('@patchAgenda2').then((xhr) => {

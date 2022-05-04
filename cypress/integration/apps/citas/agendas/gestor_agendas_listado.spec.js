@@ -124,7 +124,7 @@ describe('CITAS - Gestor de Agendas', () => {
         cy.get('div.bloques-y-turnos').get('label').contains('Espacio físico');
     });
 
-    it('Visualizar botonera de acciones para agenda planificada', () => {
+    it('Visualizar botonera de acciones disponibles para agenda planificada', () => {
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -134,13 +134,13 @@ describe('CITAS - Gestor de Agendas', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.get('table tbody tr').first().click();
-        cy.get('botones-agenda').plexButtonIcon('pencil');
-        cy.get('botones-agenda').plexButtonIcon('arrow-up-bold-circle');
-        cy.get('botones-agenda').plexButtonIcon('delete');
-        cy.get('botones-agenda').plexButtonIcon('content-copy');
-        cy.get('botones-agenda').plexButtonIcon('comment-outline');
-        cy.get('botones-agenda').plexButtonIcon('printer');
-        cy.get('botones-agenda').plexButtonIcon('folder-account');
+        cy.get('.plex-title').plexButtonIcon('arrow-up-bold-circle');
+        cy.get('.plex-title').plexButtonIcon('folder-account');
+        cy.get('.plex-title').plexButtonIcon('comment-outline');
+        cy.get('.plex-title').plexButtonIcon('printer');
+        cy.get('.plex-title').plexButtonIcon('delete');
+        cy.get('table tbody td').plexButtonIcon('pencil');
+        cy.get('table tbody td').plexButtonIcon('content-copy');
     });
 
     it('Visualizar detalle de la configuración inicial del bloque', () => {
