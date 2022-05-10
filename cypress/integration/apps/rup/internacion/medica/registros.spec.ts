@@ -81,7 +81,9 @@
 
             cy.plexLayoutMain().find('plex-title').plexButtonIcon('close').click();
 
-            cy.plexLayoutMain().contains('Mapa de Camas');
+            let fecha = Cypress.moment().format('DD/MM/yyyy HH:mm');
+
+            cy.plexLayoutMain().contains("Mapa de camas - "+fecha);
 
         });
     });
