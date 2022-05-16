@@ -75,8 +75,8 @@ describe('Capa Estadistica - Egresos', () => {
 
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
         cy.plexSelectAsync('label="Diagnostico Principal al egreso"', 'Neumo', '@getDiagnostico', 0);
-        cy.plexSelectAsync('label="Otro Diagnóstico"', 'Otros trastornos', '@getDiagnostico', 0);
-        cy.plexSelectAsync('label="Otras circunstancias"', 'Mutismo', '@getDiagnostico', 0);
+        cy.plexSelectAsync('label="Otros Diagnósticos"', 'Otros trastornos', '@getDiagnostico', 0);
+        cy.plexSelectAsync('label="Otras circunstancias que prolongan la internación"', 'Mutismo', '@getDiagnostico', 0);
         cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha y hora de egreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
 
