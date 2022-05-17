@@ -78,7 +78,10 @@
 		"fsn": "consulta para cuidados paliativos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "713281006",
-		"term": "consulta para cuidados paliativos"
+		"term": "consulta para cuidados paliativos",
+		"ambito" : [ 
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -87,7 +90,10 @@
 		"fsn": "consulta para cuidados paliativos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "713281006",
-		"term": "consulta para cuidados paliativos (procedimiento)"
+		"term": "consulta para cuidados paliativos (procedimiento)",
+		"ambito" : [ 
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1197,7 +1203,10 @@
 		"conceptId": "321000013106",
 		"term": "consulta de cirugía general",
 		"fsn": "consulta de cirugía general",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+		"ambito" : [ 
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1359,7 +1368,10 @@
 		"conceptId": "391000013108",
 		"term": "consulta de medicina general",
 		"fsn": "consulta de medicina general",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+		"ambito" : [ 
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1395,7 +1407,10 @@
 		"conceptId": "401000013105",
 		"term": "consulta de clínica médica",
 		"fsn": "consulta de clínica médica",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+		"ambito" : [ 
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1944,7 +1959,10 @@
 		"conceptId": "651000013106",
 		"term": "consulta de ortopedia (procedimiento)",
 		"fsn": "consulta de ortopedia (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+		"ambito" : [ 
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1953,7 +1971,10 @@
 		"conceptId": "651000013106",
 		"term": "consulta de ortopedia",
 		"fsn": "consulta de ortopedia",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+		"ambito" : [ 
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3078,7 +3099,10 @@
 		"fsn": "Consulta de ortopedia (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "651000013106",
-		"term": "Consulta de ortopedia"
+		"term": "Consulta de ortopedia",
+		"ambito" : [ 
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3417,7 +3441,10 @@
 			"tipoPrestacionTituloOverride": true,
 			"registroTituloOverride": "Colonoscopia",
 			"motivoPrincipalDeConsultaOverride": true
-		}
+		},
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3533,7 +3560,10 @@
 		"semanticTag": "procedimiento",
 		"conceptId": "389067005",
 		"term": "actividades con la comunidad",
-		"noNominalizada": true
+		"noNominalizada": true,
+		"ambito" : [ 
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
