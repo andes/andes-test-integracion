@@ -92,8 +92,8 @@ context('Seguimiento Epidemiológico', () => {
         cy.wait('@buscarSeguimiento');
         cy.wait('@buscarSeguimiento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].paciente.documento).to.be.eq(validado.documento);
-            expect(xhr.response.body[0].paciente.apellido).to.be.eq(validado.apellido);
+            expect(xhr.response.body.data[0].paciente.documento).to.be.eq(validado.documento);
+            expect(xhr.response.body.data[0].paciente.apellido).to.be.eq(validado.apellido);
         });
 
         cy.plexButtonIcon('pencil').click();
@@ -121,8 +121,8 @@ context('Seguimiento Epidemiológico', () => {
         });
         cy.wait('@buscarSeguimiento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].paciente.apellido).to.be.eq('EPIDEMIO');
-            expect(xhr.response.body[0].paciente.documento).to.be.eq('33650500');
+            expect(xhr.response.body.data[0].paciente.apellido).to.be.eq('EPIDEMIO');
+            expect(xhr.response.body.data[0].paciente.documento).to.be.eq('33650500');
 
         });
     });
