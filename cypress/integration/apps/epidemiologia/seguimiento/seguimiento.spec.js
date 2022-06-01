@@ -107,11 +107,11 @@ context('Seguimiento Epidemiológico', () => {
         cy.plexButton('Asignar').click();
         cy.plexSelectAsync('name="profesional"', 'PRUEBA USUARIO', '@getProfesionales', 0);
         cy.plexButton('Guardar').click();
-        cy.toast('success').click();
+        cy.toast('success').click({force: true});
         cy.wait('@buscarSeguimiento').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
+            cy.plexButtonIcon('pencil').click();
         });
-        cy.plexButtonIcon('pencil').click();
         cy.plexSelectType('label="Organización"').clearSelect();
         cy.plexSelectAsync('label="Organización"', 'HOSPITAL DE AREA PLOTTIER', '@getOrganizaciones', 0);
         cy.plexButton('Guardar').click();
