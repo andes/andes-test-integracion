@@ -123,7 +123,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
         cy.wait('@paciente');
-        cy.get('button').contains('BUSCADOR BÁSICO').click();
+        cy.get('rup-buscador').find('button').contains('BUSCADOR BÁSICO').click();
         cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
 
@@ -200,7 +200,7 @@ context('RUP - Punto de inicio', () => {
         cy.wait('@paciente');
 
 
-        cy.get('button').contains('BUSCADOR BÁSICO').click();
+        cy.get('rup-buscador').find('button').contains('BUSCADOR BÁSICO').click();
 
         cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
@@ -275,7 +275,7 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
         });
         cy.wait('@paciente');
-        cy.get('button').contains('BUSCADOR BÁSICO ').click();
+        cy.get('rup-buscador').find('button').contains('BUSCADOR BÁSICO').click();
         cy.plexText('name="searchTerm"', 'nota');
         cy.wait('@search').then((xhr) => {
             cy.plexButtonIcon('plus').click();
