@@ -67,4 +67,35 @@ context('MPI-Registro Paciente Extranjero', () => {
         cy.contains('Los datos se actualizaron correctamente');
         cy.get('button').contains('Aceptar').click();
     });
+
+    it('verificar la carga de paciente con los datos Tipo de identificacion y Numero de identificacion y verificar que persistan', () => {
+        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroExtranjero');
+        cy.plexText('label="Apellido"', 'TEST');
+        cy.plexText('label="Nombre"', 'EXTRANJERO');
+        cy.plexSelectType('label="Seleccione sexo"', 'masculino');
+        cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
+        cy.plexSelectType('label="Tipo de identificación"', 'pasaporte');
+        cy.plexText('label="Número de identificación"', '123456789');
+        cy.contains('datos de contacto').click()
+        cy.plexBool('label="Sin datos de contacto"', true);
+        cy.plexBool('name="viveProvActual"', true);
+        cy.plexBool('name="viveLocActual"', true);
+        cy.plexButton('Guardar').click();
+        cy.wait('@registroExtranjero').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.body.estado).to.be.eq("temporal");
+            expect(xhr.response.body.apellido).to.be.eq("TEST");
+            expect(xhr.response.body.nombre).to.be.eq("EXTRANJERO");
+        });
+        cy.contains('Los datos se actualizaron correctamente');
+        cy.get('button').contains('Aceptar').click();
+        cy.plexText('name="buscador"', '123456789');
+        cy.plexButtonIcon('pencil').click();
+        cy.contains('TEST');
+        cy.contains('EXTRANJERO');
+        cy.contains('Masculino');
+        cy.contains('02/10/2019');
+        cy.contains('Pasaporte');
+        cy.contains('123456789');
+    })
 });
