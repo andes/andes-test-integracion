@@ -84,7 +84,7 @@ context('Planificacion Agendas', () => {
     beforeEach(() => {
         cy.server();
         cy.goto('/citas/gestor_agendas', token);
-        cy.plexButton("Crear una nueva agenda").click();
+        cy.plexButton("Crear nueva agenda").click();
         cy.route('POST', '**/api/modules/turnos/agenda**').as('create');
         cy.route('GET', '**/api/modules/turnos/espacioFisico**').as('espacios');
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
@@ -570,43 +570,6 @@ context('Planificacion Agendas', () => {
         cy.contains('El valor debe ser mayor a 1');
     });
 
-    // it.skip('Guardar agenda con bloques vacíos', () => {
-    //     complete({
-    //         fecha: cy.today(),
-    //         horaInicio: "10:00",
-    //         horaFin: "12:00"
-    //     });
-
-    //     cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general' );
-
-    //     cy.plexDatetime('label="Hora Inicio"', { clear: true });
-    //     cy.plexDatetime('label="Hora Fin"', { clear: true });
-
-    //     complete({
-    //         bloque: {
-    //             horaInicio: "10:00",
-    //             horaFin: "11:00",
-    //             cantidadTurnos: 7,
-    //             accesoDirectoDelDia: 7,
-    //         },
-    //     });
-
-    //     cy.wait(1000);
-
-    //     cy.plexButtonIcon('plus').click();
-
-    //     complete({
-    //         bloque: {
-    //             horaInicio: "11:00",
-    //             horaFin: "12:00",
-    //         }
-    //     });
-
-    //     cy.get('div[class="list-group-item justify-content-between hover"]').eq(0).click()
-
-    //     cy.contains('Existen bloques incompletos');
-    // });
-
     it('crear agenda dinamica en una institucion', () => {
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
         cy.plexDatetime('name="modelo.fecha"', cy.today());
@@ -642,8 +605,7 @@ context('Planificacion Agendas', () => {
         cy.toast('success', 'La agenda cambió el estado a disponible');
         cy.wait('@agendas');
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + ayer.format('DD/MM/YYYY'));
-        cy.get('table tbody td').contains('actividades con la comunidad').click();
-        cy.plexButtonIcon('content-copy').click();
+        cy.get('table tbody tr').plexButtonIcon('content-copy').first().click();
 
         cy.wait('@agendas');
 

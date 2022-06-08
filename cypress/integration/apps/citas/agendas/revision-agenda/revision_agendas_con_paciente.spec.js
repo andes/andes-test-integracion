@@ -168,7 +168,7 @@ context('CITAS - Revisión de Agendas', () => {
 
         cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
 
-        cy.get('table tr').eq(0).click();
+        cy.get('table tbody tr').plexLabel('consulta con médico oftalmólogo').click();
         cy.plexButtonIcon('format-list-checks').click();
         cy.wait('@agenda');
         cy.wait(100);
