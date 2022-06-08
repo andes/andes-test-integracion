@@ -76,8 +76,6 @@
             cy.wait('@getCamas');
 
             cy.plexSelectType('label="Cama"', 'CAMA');
-
-
             cy.plexButtonIcon('check').click();
 
             cy.wait('@patchCamas').then((xhr) => {
@@ -103,8 +101,7 @@
             cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
             cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
             cy.wait('@getCamas');
-
-            cy.plexSelectType('label="Cama"', 'Sala');
+            cy.plexSelectType('label="Cama"', 'SALA');
 
             cy.plexButtonIcon('check').click();
 

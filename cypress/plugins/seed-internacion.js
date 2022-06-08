@@ -72,37 +72,51 @@ module.exports.createCama = async (mongoUri, params) => {
             });
         }
 
-        // dtoCama.equipamiento = params.equipamiento || dtoCama.equipamiento;
         dtoCama._id = new ObjectId();
         await camaDB.insertOne(dtoCama);
 
         let paciente = null;
         let dtoPrestacion = {};
-        const fechaEgreso = params.fechaEgreso || null;
-        // PRESTACION
+        let dtoResumen = {};
+        const fechaIngreso = params.fechaIngreso ? moment(params.fechaIngreso).toDate() : moment().startOf('hour').toDate();
+        const fechaEgreso = params.fechaEgreso ? moment(params.fechaEgreso).toDate() : null;
+       
+        // PRESTACION / RESUMEN
         if (params.estado === 'ocupada') {
             const prestacionesDB = await client.db().collection('prestaciones');
-            dtoPrestacion = require('./data/prestacion/prestacion-internacion');
+            const linkPrestacion = params.vincularInformePrestacion ? './data/prestacion/informe-estadistica-v2' : './data/prestacion/prestacion-internacion';
+            dtoPrestacion = require(linkPrestacion);
             dtoPrestacion = JSON.parse(JSON.stringify(dtoPrestacion));
             dtoPrestacion._id = new ObjectId();
             dtoPrestacion.solicitud.organizacion.id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoPrestacion.solicitud.organizacion.id);
             dtoPrestacion.ejecucion.organizacion.id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoPrestacion.ejecucion.organizacion.id);
-            dtoPrestacion.ejecucion.fecha = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
-            dtoPrestacion.ejecucion.registros[0].valor.informeIngreso.fechaIngreso = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
+            dtoPrestacion.ejecucion.fecha = fechaIngreso;
+            dtoPrestacion.ejecucion.registros[0].valor.informeIngreso.fechaIngreso = fechaIngreso;
+
+            const resumenDB = await client.db().collection('internacionPacienteResumen');
+            dtoResumen = require('./data/internacion/resumen-internacion');
+            dtoResumen = JSON.parse(JSON.stringify(dtoResumen));
+            dtoResumen.fechaIngreso = fechaIngreso;
+            dtoResumen.idPrestacion = params.vincularInformePrestacion ? dtoPrestacion._id : undefined;
 
             if (params.paciente) {
                 const pacientesDB = await client.db().collection('paciente');
                 paciente = await pacientesDB.findOne({ documento: params.paciente.documento });
+                dtoPrestacion.paciente = paciente;
+                dtoResumen.paciente = paciente;
             } else {
-                paciente = dtoPrestacion.paciente;
+                paciente = dtoPrestacion.paciente || dtoResumen.paciente;
             }
+            paciente._id = ObjectId(paciente._id);
+            paciente.id = ObjectId(paciente._id);
 
             if (fechaEgreso && moment(fechaEgreso).isAfter(params.fechaIngreso)) {
                 dtoPrestacion.ejecucion.registros.push(prestacionEgreso);
                 dtoPrestacion.ejecucion.registros[1].valor.InformeEgreso.fechaEgreso = fechaEgreso;
                 dtoPrestacion.ejecucion.registros[1].valor.InformeEgreso.diasDeEstada = moment(fechaEgreso).diff(moment(params.fechaIngreso), 'days');
+                dtoResumen.fechaEgreso = fechaEgreso;
             }
-
+            const insertPromises = [];
             if (params.validada) {
                 dtoPrestacion.estados.push({
                     "idOrigenModifica": null,
@@ -111,56 +125,58 @@ module.exports.createCama = async (mongoUri, params) => {
                     "tipo": "validada",
                 });
             }
-
             dtoPrestacion.estadoActual = dtoPrestacion.estados[dtoPrestacion.estados.length - 1];
-
-            paciente._id = ObjectId(paciente._id);
-            paciente.id = ObjectId(paciente._id);
             dtoPrestacion.paciente.id = ObjectId(paciente._id)
-            await prestacionesDB.insertOne(dtoPrestacion);
+            insertPromises.push(prestacionesDB.insertOne(dtoPrestacion));
+            
+            dtoResumen.paciente.id = ObjectId(paciente._id)
+            insertPromises.push(resumenDB.insertOne(dtoResumen))
+            
+            [dtoPrestacion, dtoResumen] = await Promise.all(insertPromises);
         }
 
         // ESTADOS DE CAMA
         const camaEstadosDB = await client.db().collection('internacionCamaEstados');
-        let dtoEstadistica = require('./data/internacion/cama-estado');
+        let dtoEstadoDefault = require('./data/internacion/cama-estado');
 
-        dtoEstadistica = JSON.parse(JSON.stringify(dtoEstadistica));
-        dtoEstadistica.idCama = ObjectId(dtoCama._id);
-        dtoEstadistica.idOrganizacion = ObjectId(dtoCama.organizacion._id);
+        dtoEstadoDefault = JSON.parse(JSON.stringify(dtoEstadoDefault));
+        dtoEstadoDefault.idCama = ObjectId(dtoCama._id);
+        dtoEstadoDefault.idOrganizacion = ObjectId(dtoCama.organizacion._id);
 
-        const index = dtoEstadistica.estados.length - 1;
-        const unidadOrg = dtoEstadistica.estados[index].unidadOrganizativa;
-        const especialidades = dtoEstadistica.estados[index].especialidades;
-        dtoEstadistica.estados[index].estado = params.estado;
-        dtoEstadistica.estados[index].extras = params.extras;
-        dtoEstadistica.estados[index].paciente = paciente;
-        dtoEstadistica.estados[index].unidadOrganizativa = dtoCama.unidadOrganizativaOriginal || unidadOrg;
-        dtoEstadistica.estados[index].especialidades = dtoCama.especialidades || especialidades;
-        dtoEstadistica.estados[index].idInternacion = dtoPrestacion._id || null;
-        dtoEstadistica.estados[index].esCensable = (params.esCensable !== undefined) ? params.esCensable : true;
-        dtoEstadistica.estados[index].esMovimiento = true;
-        dtoEstadistica.estados[index].fecha = moment(params.fechaIngreso).toDate() || moment().startOf('hour').toDate();
-        dtoEstadistica.estados[index].equipamiento = params.equipamiento || dtoCama.equipamiento;
+        const index = dtoEstadoDefault.estados.length - 1;
+        const unidadOrg = dtoEstadoDefault.estados[index].unidadOrganizativa;
+        const especialidades = dtoEstadoDefault.estados[index].especialidades;
+        dtoEstadoDefault.estados[index].estado = params.estado;
+        dtoEstadoDefault.estados[index].extras = params.extras;
+        dtoEstadoDefault.estados[index].paciente = paciente;
+        dtoEstadoDefault.estados[index].unidadOrganizativa = dtoCama.unidadOrganizativaOriginal || unidadOrg;
+        dtoEstadoDefault.estados[index].especialidades = dtoCama.especialidades || especialidades;
+        dtoEstadoDefault.estados[index].idInternacion = params.usaEstadisticaV2 ? dtoResumen._id : dtoPrestacion._id
+        dtoEstadoDefault.estados[index].esCensable = (params.esCensable !== undefined) ? params.esCensable : true;
+        dtoEstadoDefault.estados[index].esMovimiento = true;
+        dtoEstadoDefault.estados[index].fecha = fechaIngreso;
+        dtoEstadoDefault.estados[index].fechaIngreso = params.fechaIngreso ? fechaIngreso : null;
+        dtoEstadoDefault.estados[index].equipamiento = params.equipamiento || dtoCama.equipamiento;
 
         if (paciente) {
-            dtoEstadistica.estados.unshift({
+            dtoEstadoDefault.estados.unshift({
                 estado: 'disponible',
-                fecha: moment(dtoEstadistica.estados[index].fecha).subtract(2, 'hours').toDate(),
+                fecha: moment(dtoEstadoDefault.estados[index].fecha).subtract(2, 'hours').toDate(),
                 esMovimiento: true,
                 paciente: null,
                 unidadOrganizativa: dtoCama.unidadOrganizativaOriginal || unidadOrg,
                 especialidades: especialidades,
                 idInternacion: null,
                 esCensable: (params.esCensable !== undefined) ? params.esCensable : true,
-                equipamiento: dtoCama.equipamiento || dtoEstadistica.estados[index].equipamiento
+                equipamiento: dtoCama.equipamiento || dtoEstadoDefault.estados[index].equipamiento
             });
         }
 
-        dtoEstadistica.start = moment(params.fechaIngreso).startOf('month').toDate() || moment().startOf('month').toDate();
-        dtoEstadistica.end = moment(params.fechaIngreso).endOf('month').toDate() || moment().endOf('month').toDate();
+        dtoEstadoDefault.start = moment(params.fechaIngreso).startOf('month').toDate() || moment().startOf('month').toDate();
+        dtoEstadoDefault.end = moment(params.fechaIngreso).endOf('month').toDate() || moment().endOf('month').toDate();
 
         if (fechaEgreso && moment(fechaEgreso).isAfter(params.fechaIngreso)) {
-            dtoEstadistica.estados.push({
+            dtoEstadoDefault.estados.push({
                 estado: 'disponible',
                 fecha: moment(fechaEgreso).toDate(),
                 esMovimiento: true,
@@ -169,26 +185,31 @@ module.exports.createCama = async (mongoUri, params) => {
                 especialidades: especialidades,
                 idInternacion: null,
                 esCensable: (params.esCensable !== undefined) ? params.esCensable : true,
-                equipamiento: dtoCama.equipamiento || dtoEstadistica.estados[index].equipamiento
+                equipamiento: dtoCama.equipamiento || dtoEstadoDefault.estados[index].equipamiento
             });
         }
 
-        let dtoMedica = Object.create(dtoEstadistica);
+        let dtoEstadistica = Object.create(dtoEstadoDefault);
+        dtoEstadistica.capa = 'estadistica'; // estadistica-v2 usa capa medica
+
+        let dtoMedica = Object.create(dtoEstadoDefault);
         dtoMedica.capa = 'medica';
 
-        let dtoEnfermeria = Object.create(dtoEstadistica);
+        let dtoEnfermeria = Object.create(dtoEstadoDefault);
         dtoEnfermeria.capa = 'enfermeria';
 
-        dtoEstadistica._id = new ObjectId();
         dtoMedica._id = new ObjectId();
         dtoEnfermeria._id = new ObjectId();
-
-        await camaEstadosDB.insertOne(dtoEstadistica);
+        
+        if(!params.usaEstadisticaV2){
+            dtoEstadistica._id = new ObjectId();
+            await camaEstadosDB.insertOne(dtoEstadistica);
+        }
         await camaEstadosDB.insertOne(dtoMedica);
         await camaEstadosDB.insertOne(dtoEnfermeria);
 
-        dtoEstadistica['cama'] = dtoCama;
-        return dtoEstadistica;
+        dtoEstadoDefault['cama'] = dtoCama;
+        return dtoEstadoDefault;
     } catch (e) {
         console.log('error: ', e)
         return e;

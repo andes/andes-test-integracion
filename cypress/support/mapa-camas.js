@@ -11,11 +11,18 @@ Cypress.Commands.add('getRegistrosMedicos', () => {
 })
 
 Cypress.Commands.add('createUsuarioByCapa', (capa) => {
+    let arrayPermisos = [...permisosUsuario];
+    if(typeof capa === 'string') {
+        arrayPermisos.push(`internacion:rol:${capa}`);
+    } else {
+        // array de capas
+        capa.map(c => arrayPermisos.push(`internacion:rol:${c}`));
+    }
     return cy.task(
         'database:create:usuario',
         {
             organizacion: '57e9670e52df311059bc8964',
-            permisos: [...permisosUsuario, `internacion:rol:${capa}`]
+            permisos: arrayPermisos
         }
     );
 });
@@ -42,6 +49,7 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'medica' });
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica' });
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria' });
+    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica-v2' });
 
     if (params.sala) {
         return crearSalas(params);
@@ -68,7 +76,8 @@ function crearCamas(params) {
                 fechaEgreso: elemento.fechaEgreso,
                 validada: elemento.validada,
                 extras: elemento.extras,
-
+                usaEstadisticaV2: params.usaEstadisticaV2,
+                vincularInformePrestacion: params.vincularInformePrestacion
             });
         }
     }

@@ -27,6 +27,7 @@ const moment = require('moment');
         beforeEach(() => {
             cy.server();
             cy.route('GET', '**/api/modules/rup/internacion/camas/historial?**').as('getHistorial');
+            cy.route('GET', '**api/modules/rup/internacion/medica/**').as('getHistorial2');
             cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
             cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
             cy.route('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('egresoSalaComun');
@@ -36,7 +37,6 @@ const moment = require('moment');
 
         it('Egreso simplificado', () => {
             cy.getCama(pacientes[0].apellido).click();
-            // cy.get('table tr').contains(camas[0].cama.nombre).first().click();
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexButtonIcon('menos').click();
             cy.plexButton('Egresar paciente').click();

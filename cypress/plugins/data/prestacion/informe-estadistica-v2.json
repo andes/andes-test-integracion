@@ -1,0 +1,128 @@
+{
+    "solicitud": {
+        "tipoPrestacion": {
+            "fsn": "admisión hospitalaria (procedimiento)",
+            "semanticTag": "procedimiento",
+            "conceptId": "32485007",
+            "term": "internación"
+        },
+        "organizacion": {
+            "id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+        },
+        "profesional": {
+            "id": "5c82a5a53c524e4c57f08cf2",
+            "nombre": "ALICIA",
+            "apellido": "PRUEBA",
+            "documento": "1711999"
+        },
+        "ambitoOrigen": "internacion",
+        "fecha": "2022-02-08T16:27:00.000Z",
+        "turno": null,
+        "registros": [],
+        "historial": []
+    },
+    "ejecucion": {
+        "organizacion": {
+            "id": "57e9670e52df311059bc8964",
+            "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"
+        },
+        "fecha": "2022-02-08T16:27:00.000Z",
+        "registros": [
+            {
+                "privacy": {
+                    "scope": "public"
+                },
+                "_id": "62029ac522e6ce2679d379e6",
+                "destacado": false,
+                "esSolicitud": false,
+                "esDiagnosticoPrincipal": false,
+                "relacionadoCon": [],
+                "elementoRUP": null,
+                "nombre": "documento de solicitud de admisión",
+                "concepto": {
+                    "fsn": "documento de solicitud de admisión (elemento de registro)",
+                    "semanticTag": "elemento de registro",
+                    "conceptId": "721915006",
+                    "term": "documento de solicitud de admisión"
+                },
+                "valor": {
+                    "informeIngreso": {
+                        "fechaIngreso": "2022-02-08T16:30:00.000Z",
+                        "horaNacimiento": "2022-02-08T16:30:34.343Z",
+                        "edadAlIngreso": "65 año/s",
+                        "origen": "Emergencia",
+                        "ocupacionHabitual": {
+                            "_id": "5c793679af78f1fa5d0a8e1e",
+                            "id": "5c793679af78f1fa5d0a8e1e",
+                            "nombre": "Abogado",
+                            "codigo": "131"
+                        },
+                        "situacionLaboral": "No trabaja y busca trabajo",
+                        "nivelInstruccion": "Ninguno",
+                        "especialidades": [
+                            {
+                                "refsetIds": [],
+                                "conceptId": "394649004",
+                                "term": "medicina nuclear - especialidad",
+                                "fsn": "medicina nuclear - especialidad (calificador)",
+                                "semanticTag": "calificador"
+                            }
+                        ],
+                        "asociado": "Ninguno",
+                        "obraSocial": null,
+                        "nroCarpeta": null,
+                        "motivo": "Estornudo",
+                        "organizacionOrigen": null,
+                        "profesional": {
+                            "_id": "5c82a5a53c524e4c57f08cf2",
+                            "documento": "1711999",
+                            "apellido": "PRUEBA",
+                            "nombre": "ALICIA",
+                            "nombreCompleto": "PRUEBA, ALICIA",
+                            "id": "5c82a5a53c524e4c57f08cf2"
+                        },
+                        "PaseAunidadOrganizativa": null
+                    }
+                },
+                "registros": [],
+                "hasSections": false,
+                "isSection": false,
+                "noIndex": false
+            }
+        ]
+    },
+    "noNominalizada": false,
+    "paciente": {
+        "documento": "10000000",
+        "nombre": "PACIENTE VALIDADO",
+        "apellido": "ANDES",
+        "sexo": "masculino",
+        "fechaNacimiento": "1956-12-26T03:00:00.000Z",
+        "id": "586e6e8627d3107fde116cdb"
+    },
+    "estados": [
+        {
+            "idOrigenModifica": null,
+            "motivoRechazo": null,
+            "observaciones": null,
+            "_id": "62029ac522e6ce2679d379e7",
+            "tipo": "ejecucion"
+        }
+    ],
+    "unidadOrganizativa": {
+        "fsn": "departamento de rayos X (medio ambiente)",
+        "term": "departamento de rayos X",
+        "conceptId": "225747005",
+        "semanticTag": "medio ambiente"
+    },
+    "metadata": [],
+    "inicio": "internacion",
+    "estadoActual": {
+        "idOrigenModifica": null,
+        "motivoRechazo": null,
+        "observaciones": null,
+        "_id": "62029ac522e6ce2679d379e7",
+        "tipo": "ejecucion"
+    }
+}

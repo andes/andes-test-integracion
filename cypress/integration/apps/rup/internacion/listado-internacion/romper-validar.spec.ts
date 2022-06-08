@@ -1,8 +1,8 @@
-const moment = require('moment');
 
 describe('Capa Estadistica - listado internacion', () => {
     let token;
     let pacientes;
+
     before(() => {
         cy.seed();
         cy.loginCapa('estadistica').then(([user, t, pacientesCreados]) => {
@@ -10,14 +10,15 @@ describe('Capa Estadistica - listado internacion', () => {
             pacientes = pacientesCreados;
             cy.factoryInternacion({
                 configCamas: [
-                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate(), fechaEgreso: moment().toDate() },
-                    { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso: moment().toDate(), validada: true }
+                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate(), fechaEgreso: Cypress.moment().toDate() },
+                    { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: Cypress.moment().subtract(5, 'hour').toDate(), fechaEgreso: Cypress.moment().toDate(), validada: true }
                 ]
-            }).then(camasCreadas => {
-                return cy.goto('/mapa-camas/listado-internacion', token);
+            }).then(() => {
+                return cy.goto('/mapa-camas/listado-internacion/estadistica', token);
             });
         });
     });
+
     beforeEach(() => {
         cy.server();
         cy.route('GET', '**/api/core/term/cie10?**', [{
@@ -61,6 +62,7 @@ describe('Capa Estadistica - listado internacion', () => {
             "descripcion": "05.Trastornos mentales y del comportamiento (F00-F99)",
             "c2": false
         }]).as('getDiagnostico');
+
         cy.route('GET', '**/api/core-v2/mpi/pacientes/**', true).as('getPaciente');
         cy.route('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
         cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');

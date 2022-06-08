@@ -56,7 +56,7 @@
             cy.plexOptions('REGISTROS').click();
             cy.modalPrivacidad(true);
 
-            cy.plexLayoutSidebar().contains('Movimientos de Internación');
+            cy.plexLayoutSidebar().contains('MOVIMIENTOS');
 
             cy.plexOptions('REGISTROS').click();
             cy.modalPrivacidad('Procesos de Auditoría');

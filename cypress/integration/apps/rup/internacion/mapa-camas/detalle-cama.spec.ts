@@ -162,7 +162,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
             expect(xhr.status).to.be.eq(200);
         })
 
-        cy.swal('confirm', 'Se deshizo la internacion');
+        cy.swal('confirm', 'Se deshizo la internación');
     });
 });
 

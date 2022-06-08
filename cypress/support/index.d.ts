@@ -122,7 +122,8 @@ declare namespace Cypress {
          * Mapa de camas Helper para crear los usuarios según cama
          * Devuelve un array con el usuario, el token y los pacientes creados
          */
-        loginCapa(capa: string): Chainable<[any, string, any[]]>
+        loginCapa(capa: string | string[]): Chainable<[any, string, any[]]>
+
 
         /**
          * crea camas en el modulo de mapas de cama
