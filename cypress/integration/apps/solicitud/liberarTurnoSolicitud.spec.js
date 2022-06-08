@@ -131,7 +131,7 @@ describe('TOP: Liberar turno', () => {
         cy.wait(2000);
         cy.get('table tbody td').contains('DNI ' + pacientes[0].documento).click({ force: true });
         cy.plexButtonIcon('account-off').click({ force: true });
-        cy.plexButton('Liberar').click();
+        cy.plexButtonIcon('check').click();
         cy.goto('/solicitudes', token);
 
         cy.get('span.badge-info').contains('pendiente');
