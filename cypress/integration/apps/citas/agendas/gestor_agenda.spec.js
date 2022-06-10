@@ -219,9 +219,9 @@ describe('CITAS - Planificar Agendas', () => {
             expect(xhr.response.body.bloques[0].turnos[0].paciente.id).to.be.eq('586e6e8627d3107fde116cdb');
         });
 
-        cy.plexSelectType('name="prestaciones"', 'servicio de neumonología');
+        cy.plexSelectType('name="prestaciones"', 'servicio de neumonología').click();
         cy.get('table tbody td').plexBadge('Suspendida');
-        cy.get('table tbody tr').plexButtonIcon('sync-alert').click();
+        cy.get('table tbody tr').plexButtonIcon('sync-alert').first().click({ force: true });
         cy.wait('@findAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq('suspendida');
@@ -266,8 +266,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexButton('Gestor de Agendas').click();
 
         cy.wait('@getAgendas');
-
-        cy.get('table tbody td div').contains('servicio de neumonología').click();
+        cy.get('table tbody td').contains('servicio de neumonología').first().click({ force: true });
         cy.get('.lista-turnos .badge-info').contains('Reasignado');
     })
 
@@ -326,7 +325,7 @@ describe('CITAS - Planificar Agendas', () => {
     it('editar agenda dinamica con institucion', () => {
         cy.route('GET', '**/api/modules/turnos/espacioFisico**').as('getEspacioFisico');
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
-        cy.plexButton("Crear nueva agenda").click();
+        cy.plexButton("Crear agenda").click();
         cy.plexDatetime('name="modelo.fecha"', cy.today());
         cy.plexDatetime('name="modelo.horaInicio"', "08:00");
         cy.plexDatetime('name="modelo.horaFin"', "16:00");
@@ -354,7 +353,7 @@ describe('CITAS - Planificar Agendas', () => {
 
     it('clonar agenda con una institucion asignada', () => {
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
-        cy.plexButton("Crear nueva agenda").click();
+        cy.plexButton("Crear agenda").click();
         cy.plexDatetime('name="modelo.fecha"', cy.today());
         cy.plexDatetime('name="modelo.horaInicio"', "08:00");
         cy.plexDatetime('name="modelo.horaFin"', "16:00");
