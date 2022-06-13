@@ -84,7 +84,7 @@ context('Planificacion Agendas', () => {
     beforeEach(() => {
         cy.server();
         cy.goto('/citas/gestor_agendas', token);
-        cy.plexButton("Crear nueva agenda").click();
+        cy.plexButton("Crear agenda").click();
         cy.route('POST', '**/api/modules/turnos/agenda**').as('create');
         cy.route('GET', '**/api/modules/turnos/espacioFisico**').as('espacios');
         cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
