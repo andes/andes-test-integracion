@@ -91,7 +91,8 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.wait('@getCamas');
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
         cy.plexTab('INTERNACION').click()
-        cy.get('plex-title[titulo="INGRESO"] div').eq(2).plexButtonIcon('pencil').click();
+        cy.get('plex-title[titulo="INGRESO"] div').eq(2);
+        cy.get('plex-layout-sidebar').plexButtonIcon('pencil').click();
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: nuevaFecha, skipEnter: true });
         cy.plexButtonIcon('check').click();
