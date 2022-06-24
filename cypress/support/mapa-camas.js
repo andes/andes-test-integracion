@@ -12,16 +12,23 @@ Cypress.Commands.add('getRegistrosMedicos', () => {
 
 Cypress.Commands.add('createUsuarioByCapa', (capa) => {
     let arrayPermisos = [...permisosUsuario];
+    let usaEstadisticaV2 = false;
     if(typeof capa === 'string') {
         arrayPermisos.push(`internacion:rol:${capa}`);
     } else {
         // array de capas
-        capa.map(c => arrayPermisos.push(`internacion:rol:${c}`));
+        capa.map(c => {
+            if(!usaEstadisticaV2) {
+                usaEstadisticaV2 = c === 'estadistica-v2';
+            }
+            arrayPermisos.push(`internacion:rol:${c}`);
+    });
     }
     return cy.task(
         'database:create:usuario',
         {
-            organizacion: '57e9670e52df311059bc8964',
+            // si usa capas unificadas damos permiso para efector hospital senillosa (castro no implementa capas unificadas)
+            organizacion: usaEstadisticaV2 ? '57fcf037326e73143fb48bd1' : '57e9670e52df311059bc8964',
             permisos: arrayPermisos
         }
     );
@@ -46,10 +53,13 @@ Cypress.Commands.add('loginCapa', (capa) => {
 
 Cypress.Commands.add('factoryInternacion', (params = {}) => {
     const maquinaEstados = { ...params.maquinaEstados } || {};
-    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'medica' });
-    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica' });
-    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria' });
-    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica-v2' });
+    if(params.usaEstadisticaV2){
+        cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica-v2', organizacion: params.organizacion._id });
+    }else{
+        cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica'});
+    }
+    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'medica'});
+    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria'});
 
     if (params.sala) {
         return crearSalas(params);
@@ -64,7 +74,6 @@ function crearCamas(params) {
         const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
         for (let i = 0; i < count; i++) {
             const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
-
             camas.push({
                 estado: elemento.estado,
                 unidadOrganizativa: elemento.unidadOrganizativa,
@@ -77,7 +86,8 @@ function crearCamas(params) {
                 validada: elemento.validada,
                 extras: elemento.extras,
                 usaEstadisticaV2: params.usaEstadisticaV2,
-                vincularInformePrestacion: params.vincularInformePrestacion
+                vincularInformePrestacion: params.vincularInformePrestacion,
+                organizacion: params.organizacion
             });
         }
     }
