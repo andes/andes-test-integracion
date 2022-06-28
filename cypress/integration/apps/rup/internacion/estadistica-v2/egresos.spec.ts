@@ -69,7 +69,7 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.viewport(1920, 1080);
     });
 
-    it('Egreso de paciente desde listadado de internación', () => {
+    it.skip('Egreso de paciente desde listadado de internación', () => {
         const fechaEgreso = Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm');
 
         cy.goto('/mapa-camas/listado-internacion-unificado/estadistica-v2', token);
@@ -78,7 +78,7 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.get('table tbody tr td').contains(pacientes[0].nombre).first().click();
         cy.wait('@getPaciente');
         cy.wait('@getResumen');
-        
+
         cy.get('button').contains('EGRESO').click();
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
         cy.plexSelectAsync('label="Diagnostico Principal al egreso"', 'Neumo', '@getDiagnostico', 0);
@@ -86,10 +86,10 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.plexSelectAsync('label="Otras circunstancias"', 'Mutismo', '@getDiagnostico', 0);
         cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha y hora de egreso"', { text: fechaEgreso, skipEnter: true });
-        
+
         cy.plexButtonIcon('check').click();
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
-        
+
         cy.wait('@patchCamas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });

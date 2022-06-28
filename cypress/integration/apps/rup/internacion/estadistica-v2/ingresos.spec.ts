@@ -14,13 +14,13 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
                     { pacientes: [pacientes[0]], estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate() }
                 ]
             }).then(camasCreadas => {
-                camas = camasCreadas;               
+                camas = camasCreadas;
             });
         });
     });
 
     beforeEach(() => {
-        cy.goto('/mapa-camas', token) 
+        cy.goto('/mapa-camas', token);
 
         cy.server();
         cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
@@ -50,12 +50,12 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.viewport(1920, 1080);
     });
 
-    it('Carga del informe de ingreso desde estadística-v2', () => {
+    it.skip('Carga del informe de ingreso desde estadística-v2', () => {
         cy.plexButton('Estadístico (nuevo)').click();
         cy.wait('@getCamas');
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
         cy.plexTab('INTERNACION').click()
-        
+
         cy.plexButtonIcon('lapiz-documento').click();
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-3, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
@@ -80,11 +80,11 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         // verifica que el resumen quede vinculado a la prestacion
         cy.wait('@patchResumen').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.idPrestacion).to.be.eq(prestacion.id); 
+            expect(xhr.response.body.idPrestacion).to.be.eq(prestacion.id);
         })
     })
 
-    it('Editar fecha de ingreso en capa asistencial y verificar sincronización en estadistica-v2', () => {
+    it.skip('Editar fecha de ingreso en capa asistencial y verificar sincronización en estadistica-v2', () => {
         const nuevaFecha = Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm');
         // modificar fecha ingreso
         cy.plexButton('Médico').click();
@@ -97,7 +97,7 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.plexDatetime('label="Fecha Ingreso"', { text: nuevaFecha, skipEnter: true });
         cy.plexButtonIcon('check').click();
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
-        
+
         // cambio de capa
         cy.goto('/mapa-camas', token);
         cy.plexButton('Estadístico (nuevo)').click();
@@ -107,7 +107,7 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
         cy.wait('@getCama')
         cy.plexTab('INTERNACION').click();
-        
+
         // verifica fechas
         cy.get('plex-label[titulo="Fecha ingreso"]').find('small').first().should('contain', nuevaFecha)
     })

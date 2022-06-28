@@ -5,6 +5,7 @@
         let pacientes;
         let camas;
         let salas;
+        let posPaciente = (capa === 'medica') ? 0 : 2;
         before(() => {
             cy.seed();
 
@@ -46,13 +47,13 @@
             cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexButtonIcon('plus').click();
-            cy.plexText('name="buscador"', pacientes[0].nombre);
+            cy.plexText('name="buscador"', pacientes[posPaciente].nombre);
             cy.wait('@busquedaPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.responseBody.length).to.be.gte(1);
             });
 
-            cy.get('paciente-listado plex-item').contains(pacientes[0].nombre).click();
+            cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click();
             cy.wait('@getPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
             });
@@ -60,13 +61,13 @@
             cy.plexButtonIcon('arrow-left').click();
 
             cy.plexText('name="buscador"').clear();
-            cy.plexText('name="buscador"', pacientes[1].nombre);
+            cy.plexText('name="buscador"', pacientes[posPaciente + 1].nombre);
             cy.wait('@busquedaPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.responseBody.length).to.be.gte(1);
             });
 
-            cy.get('paciente-listado plex-item').contains(pacientes[1].nombre).click();
+            cy.get('paciente-listado plex-item').contains(pacientes[posPaciente + 1].nombre).click();
             cy.wait('@getPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
             });
@@ -90,13 +91,13 @@
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexButtonIcon('plus').click();
             cy.plexText('name="buscador"').clear();
-            cy.plexText('name="buscador"', pacientes[0].nombre);
+            cy.plexText('name="buscador"', pacientes[posPaciente].nombre);
             cy.wait('@busquedaPaciente').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
                 expect(xhr.responseBody.length).to.be.gte(1);
             });
 
-            cy.get('paciente-listado plex-item').contains(pacientes[0].nombre).click();
+            cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click();
 
             cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
             cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });

@@ -13,16 +13,16 @@ Cypress.Commands.add('getRegistrosMedicos', () => {
 Cypress.Commands.add('createUsuarioByCapa', (capa) => {
     let arrayPermisos = [...permisosUsuario];
     let usaEstadisticaV2 = false;
-    if(typeof capa === 'string') {
+    if (typeof capa === 'string') {
         arrayPermisos.push(`internacion:rol:${capa}`);
     } else {
         // array de capas
         capa.map(c => {
-            if(!usaEstadisticaV2) {
+            if (!usaEstadisticaV2) {
                 usaEstadisticaV2 = c === 'estadistica-v2';
             }
             arrayPermisos.push(`internacion:rol:${c}`);
-    });
+        });
     }
     return cy.task(
         'database:create:usuario',
@@ -53,13 +53,13 @@ Cypress.Commands.add('loginCapa', (capa) => {
 
 Cypress.Commands.add('factoryInternacion', (params = {}) => {
     const maquinaEstados = { ...params.maquinaEstados } || {};
-    if(params.usaEstadisticaV2){
-        cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica-v2', organizacion: params.organizacion._id });
-    }else{
-        cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica'});
+    if (params.usaEstadisticaV2) {
+        cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica-v2' });
+    } else {
+        cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica' });
     }
-    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'medica'});
-    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria'});
+    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'medica' });
+    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria' });
 
     if (params.sala) {
         return crearSalas(params);
