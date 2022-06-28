@@ -2,7 +2,7 @@ const mongo = require('mongodb');
 
 const client = {};
 
-module.exports.ObjectId = mongo.ObjectID;
+module.exports.ObjectId = mongo.ObjectId;
 
 module.exports.encapsulateArray = function (item) {
     return Array.isArray(item) ? item : [item];

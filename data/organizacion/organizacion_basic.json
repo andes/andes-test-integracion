@@ -4145,6 +4145,7 @@
 			"$oid": "57fcf037326e73143fb48bd1"
 		},
 		"nombre": "HOSPITAL DE AREA SENILLOSA",
+		"usaEstadisticaV2": true,
 		"contacto": [],
 		"direccion": {
 			"_id": {
@@ -4220,6 +4221,64 @@
 				"$oid": "57d19efc69fe79a598e62801"
 			}
 		},
+		"unidadesOrganizativas": [
+			{
+				"refsetIds": [],
+				"_id": "5b294d1008357438f45b5974",
+				"fsn": "departamento de anestesia (medio ambiente)",
+				"term": "departamento de anestesia",
+				"conceptId": "309901009",
+				"semanticTag": "medio ambiente"
+			},
+			{
+				"refsetIds": [],
+				"_id": "5b294d1008357438f45b5973",
+				"fsn": "departamento de oftalmología (medio ambiente)",
+				"term": "departamento de oftalmología",
+				"conceptId": "309988001",
+				"semanticTag": "medio ambiente"
+			},
+			{
+				"refsetIds": [],
+				"_id": "5b294d1008357438f45b5972",
+				"fsn": "departamento de pediatría (medio ambiente)",
+				"term": "departamento de pediatría",
+				"conceptId": "309945009",
+				"semanticTag": "medio ambiente"
+			},
+			{
+				"refsetIds": [],
+				"_id": "5b294d1008357438f45b5971",
+				"fsn": "servicio de cirugía de traumatismos (medio ambiente)",
+				"term": "servicio de cirugía de traumatismos",
+				"conceptId": "309994009",
+				"semanticTag": "medio ambiente"
+			},
+			{
+				"refsetIds": [],
+				"_id": "5b294d1008357438f45b5970",
+				"fsn": "servicio hospitalario (medio ambiente)",
+				"term": "servicio hospitalario",
+				"conceptId": "284548004",
+				"semanticTag": "medio ambiente"
+			},
+			{
+				"refsetIds": [],
+				"_id": "5b294d1008357438f45b596f",
+				"fsn": "servicio médico (medio ambiente)",
+				"term": "servicio médico",
+				"conceptId": "309912009",
+				"semanticTag": "medio ambiente"
+			},
+			{
+				"refsetIds": [],
+				"_id": "5e8b4213b2ce3c28662a966f",
+				"conceptId": "3161000013100",
+				"term": "servicio de clínica médica",
+				"fsn": "servicio de clínica médica (medio ambiente)",
+				"semanticTag": "medio ambiente"
+			}
+		],
 		"nivelComplejidad": 3,
 		"edificio": [],
 		"activo": true

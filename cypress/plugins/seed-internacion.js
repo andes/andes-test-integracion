@@ -11,7 +11,7 @@ module.exports.createMaquinaEstados = async (mongoUri, params) => {
         let dto = require('./data/internacion/maquina-estados-default');
         dto = JSON.parse(JSON.stringify(dto));
 
-        dto.organizacion = params.organizacion || ObjectId(dto.organizacion);
+        dto.organizacion = params.organizacion ? ObjectId(params.organizacion) : ObjectId(dto.organizacion);
         dto.ambito = params.ambito || dto.ambito;
         dto.capa = params.capa || dto.capa;
 
@@ -80,7 +80,7 @@ module.exports.createCama = async (mongoUri, params) => {
         let dtoResumen = {};
         const fechaIngreso = params.fechaIngreso ? moment(params.fechaIngreso).toDate() : moment().startOf('hour').toDate();
         const fechaEgreso = params.fechaEgreso ? moment(params.fechaEgreso).toDate() : null;
-       
+
         // PRESTACION / RESUMEN
         if (params.estado === 'ocupada') {
             const prestacionesDB = await client.db().collection('prestaciones');
@@ -88,6 +88,8 @@ module.exports.createCama = async (mongoUri, params) => {
             dtoPrestacion = require(linkPrestacion);
             dtoPrestacion = JSON.parse(JSON.stringify(dtoPrestacion));
             dtoPrestacion._id = new ObjectId();
+            dtoPrestacion.solicitud.organizacion = dtoCama.organizacion || dtoPrestacion.solicitud.organizacion;
+            dtoPrestacion.ejecucion.organizacion = dtoCama.organizacion || dtoPrestacion.ejecucion.organizacion;
             dtoPrestacion.solicitud.organizacion.id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoPrestacion.solicitud.organizacion.id);
             dtoPrestacion.ejecucion.organizacion.id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoPrestacion.ejecucion.organizacion.id);
             dtoPrestacion.ejecucion.fecha = fechaIngreso;
@@ -98,6 +100,8 @@ module.exports.createCama = async (mongoUri, params) => {
             dtoResumen = JSON.parse(JSON.stringify(dtoResumen));
             dtoResumen.fechaIngreso = fechaIngreso;
             dtoResumen.idPrestacion = params.vincularInformePrestacion ? dtoPrestacion._id : undefined;
+            dtoResumen.organizacion = dtoCama.organizacion || dtoResumen.organizacion;
+            dtoResumen.organizacion._id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoResumen.organizacion._id);
 
             if (params.paciente) {
                 const pacientesDB = await client.db().collection('paciente');
@@ -128,10 +132,10 @@ module.exports.createCama = async (mongoUri, params) => {
             dtoPrestacion.estadoActual = dtoPrestacion.estados[dtoPrestacion.estados.length - 1];
             dtoPrestacion.paciente.id = ObjectId(paciente._id)
             insertPromises.push(prestacionesDB.insertOne(dtoPrestacion));
-            
+
             dtoResumen.paciente.id = ObjectId(paciente._id)
             insertPromises.push(resumenDB.insertOne(dtoResumen))
-            
+
             [dtoPrestacion, dtoResumen] = await Promise.all(insertPromises);
         }
 
@@ -200,8 +204,8 @@ module.exports.createCama = async (mongoUri, params) => {
 
         dtoMedica._id = new ObjectId();
         dtoEnfermeria._id = new ObjectId();
-        
-        if(!params.usaEstadisticaV2){
+
+        if (!params.usaEstadisticaV2) {
             dtoEstadistica._id = new ObjectId();
             await camaEstadosDB.insertOne(dtoEstadistica);
         }
