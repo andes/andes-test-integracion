@@ -24,21 +24,17 @@ context('RUP - Punto de inicio', () => {
         });
         // Stub
         cy.route('GET', /api\/core\/term\/snomed\?/, fixtures).as('search');
-        // api/modules/rup/prestaciones/huds
         cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
         cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
         cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('pacientes');
         cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
 
-
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
 
         cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
 
-
-        // cy.get('plex-text input').first().type('3399661');
         cy.plexText('name="buscador"', '3399661');
         cy.wait('@pacientes');
         cy.get('paciente-listado plex-item').contains(formatDocumento('3399661')).click();
@@ -72,6 +68,7 @@ context('RUP - Punto de inicio', () => {
 
         cy.toast('success');
         cy.wait('@paciente');
+        cy.wait(1000);
         cy.plexButton('Validar consulta de medicina general').click();
 
         // Popup alert
@@ -126,12 +123,7 @@ context('RUP - Punto de inicio', () => {
         cy.get('rup-buscador').find('button').contains('BUSCADOR BÁSICO').click();
         cy.plexText('name="searchTerm"', 'fiebre');
         cy.wait('@search').then((xhr) => {
-
-            // No es plex-button
             cy.plexButtonIcon('plus').click();
-
-            // Implementar escribir en plex-text con rich text (quill editor)
-            // cy.plexTextArea('name="evolucion"', 'test registro');
         });
 
         cy.plexButton('Guardar consulta de medicina general').click();
@@ -217,11 +209,10 @@ context('RUP - Punto de inicio', () => {
             expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
             expect(xhr.response.body.estados[1]).to.be.undefined;
         });
+
+        cy.toast('success');
         cy.wait('@paciente');
         cy.plexButton('Validar consulta de medicina general').click();
-        // cy.get('span').contains('Validar consulta de medicina general').first().click({
-        //     force: true
-        // });
         cy.get('button').contains('CONFIRMAR').click();
 
         cy.wait('@patch').then((xhr) => {
@@ -298,6 +289,7 @@ context('RUP - Punto de inicio', () => {
         });
         cy.toast('success');
         cy.wait('@paciente');
+        cy.wait(1000);
         cy.plexButton('Validar consulta de medicina general').click();
         cy.get('button').contains('CONFIRMAR').click();
         cy.wait('@patch').then((xhr) => {
