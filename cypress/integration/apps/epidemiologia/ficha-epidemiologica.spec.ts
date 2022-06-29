@@ -144,7 +144,6 @@ context('Ficha Epidemiológica', () => {
         cy.get('paciente-listado plex-item').contains(validado2.apellido).click();
         cy.plexButtonIcon('pencil').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}200');
-        cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', '{selectall}{backspace}' + semanaPasada);
         cy.plexButton('Registrar ficha').click();
         cy.wait('@actualizarFicha').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
