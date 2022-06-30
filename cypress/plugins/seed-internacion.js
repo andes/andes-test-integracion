@@ -41,7 +41,6 @@ module.exports.createCama = async (mongoUri, params) => {
 
         let dtoCama = require('./data/internacion/cama-default');
         dtoCama = JSON.parse(JSON.stringify(dtoCama));
-
         dtoCama.organizacion = params.organizacion || dtoCama.organizacion;
         dtoCama.organizacion._id = ObjectId(dtoCama.organizacion._id);
         dtoCama.nombre = params.nombre || ('CAMA ' + faker.random.number({ min: 0, max: 9999 }));
@@ -88,6 +87,9 @@ module.exports.createCama = async (mongoUri, params) => {
             dtoPrestacion = require(linkPrestacion);
             dtoPrestacion = JSON.parse(JSON.stringify(dtoPrestacion));
             dtoPrestacion._id = new ObjectId();
+            if (params.unidadOrganizativa){
+                dtoPrestacion.unidadOrganizativa = dtoCama.unidadOrganizativaOriginal;
+            }
             dtoPrestacion.solicitud.organizacion = dtoCama.organizacion || dtoPrestacion.solicitud.organizacion;
             dtoPrestacion.ejecucion.organizacion = dtoCama.organizacion || dtoPrestacion.ejecucion.organizacion;
             dtoPrestacion.solicitud.organizacion.id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoPrestacion.solicitud.organizacion.id);
@@ -99,6 +101,7 @@ module.exports.createCama = async (mongoUri, params) => {
             dtoResumen = require('./data/internacion/resumen-internacion');
             dtoResumen = JSON.parse(JSON.stringify(dtoResumen));
             dtoResumen.fechaIngreso = fechaIngreso;
+            
             dtoResumen.idPrestacion = params.vincularInformePrestacion ? dtoPrestacion._id : undefined;
             dtoResumen.organizacion = dtoCama.organizacion || dtoResumen.organizacion;
             dtoResumen.organizacion._id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoResumen.organizacion._id);
