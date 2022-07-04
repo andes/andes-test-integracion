@@ -2,7 +2,6 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
     let token;
     let pacientes;
     let camas;
-    let prestacion;
     before(() => {
         cy.seed();
         cy.loginCapa(['estadistica-v2', 'medica']).then(([user, t, pacientesCreados]) => {
@@ -10,11 +9,13 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
             pacientes = pacientesCreados;
             cy.factoryInternacion({
                 usaEstadisticaV2: true, // forzamos para crear el estado estadistica-v2,
+                vincularInformePrestacion: true,    // vinculamos el resumen con la prestación (informe)
+                organizacion: user.organizaciones[0],
                 configCamas: [
                     { pacientes: [pacientes[0]], estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate() }
                 ]
             }).then(camasCreadas => {
-                camas = camasCreadas;
+                camas = camasCreadas;              
             });
         });
     });
@@ -50,47 +51,44 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.viewport(1920, 1080);
     });
 
-    it.skip('Carga del informe de ingreso desde estadística-v2', () => {
+    it('Carga del informe de ingreso desde estadística-v2', () => {
         cy.plexButton('Estadístico (nuevo)').click();
         cy.wait('@getCamas');
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
         cy.plexTab('INTERNACION').click()
-
-        cy.plexButtonIcon('lapiz-documento').click();
+        
+        cy.get('plex-layout-sidebar plex-title').plexIcon('pencil').click();
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-3, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
+        cy.plexSelect('name="profesional"').clearSelect();
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
+        cy.plexText('name="motivo"').clear();
         cy.plexText('name="motivo"', 'Estornudo');
         cy.plexSelectType('label="Cobertura"', 'Ninguno');
         cy.plexSelectType('name="situacionLaboral"', 'No trabaja y no busca trabajo');
+        cy.plexSelect('name="ocupacionHabitual"').clearSelect();
         cy.plexSelectAsync('name="ocupacionHabitual"', 'Abog', '@getOcupacion', 0);
         cy.plexSelectType('name="nivelInstruccion"', 'Ninguno');
-        cy.plexSelectType('label="Cama"').click().get('.option').contains('CAMA').click()
 
         cy.plexButtonIcon('check').click();
 
         cy.wait('@patchCamas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.wait('@postPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            prestacion = xhr.response.body;
-        })
-        // verifica que el resumen quede vinculado a la prestacion
+
         cy.wait('@patchResumen').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.idPrestacion).to.be.eq(prestacion.id);
         })
     })
 
-    it.skip('Editar fecha de ingreso en capa asistencial y verificar sincronización en estadistica-v2', () => {
+    it('Editar fecha de ingreso en capa asistencial y verificar sincronización en estadistica-v2', () => {
         const nuevaFecha = Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm');
         // modificar fecha ingreso
         cy.plexButton('Médico').click();
         cy.wait('@getCamas');
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
-        cy.plexTab('INTERNACION').click()
+        cy.plexTab('INTERNACION').click();
         cy.get('plex-title[titulo="INGRESO"] div').eq(2);
         cy.get('plex-layout-sidebar').plexButtonIcon('pencil').click();
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
