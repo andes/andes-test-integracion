@@ -13,6 +13,7 @@
   "viewportWidth": 1280,
   "viewportHeight": 720,
   "requestTimeout": 10000,
+  "responseTimeout":100000,
   "retries": {
     "runMode": 3,
     "openMode": 0
