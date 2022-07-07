@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 context('Pagina de login', () => {
     before(() => {
         cy.seed();
@@ -8,12 +6,11 @@ context('Pagina de login', () => {
 
     beforeEach(() => {
         cy.goto('/');
-        cy.server();
-        cy.route('POST', '**/api/auth/login').as('login');
-        cy.route('GET', '**/api/auth/organizaciones').as('organizaciones');
-        cy.route('POST', '**/api/core/tm/disclaimer').as('disclaimer');
-        cy.route('GET', '**/api/core/tm/disclaimer').as('disclaimers');
-        cy.route('POST', '/api/auth/v2/organizaciones').as('selectOrg');
+        cy.intercept('POST', '**/api/auth/login').as('login');
+        cy.intercept('GET', '**/api/auth/organizaciones').as('organizaciones');
+        cy.intercept('POST', '**/api/core/tm/disclaimer').as('disclaimer');
+        cy.intercept('GET', '**/api/core/tm/disclaimer').as('disclaimers');
+        cy.intercept('POST', '/api/auth/v2/organizaciones').as('selectOrg');
         cy.visit('/', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear();
@@ -38,14 +35,14 @@ context('Pagina de login', () => {
             cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
             cy.plexText('name="password"', 'anypasswordfornow').should('have.value', 'anypasswordfornow');
             cy.plexButton('Iniciar sesión').click();
-            cy.wait('@login').then((xhr) => {
-                expect(xhr.status).to.be.eq(200)
+            cy.wait('@login').then(({response}) => {
+                expect(response.statusCode).to.eq(200)
             });
             cy.wait('@organizaciones');
             cy.get('ul.list-group li').eq(1).click();
-            cy.wait('@selectOrg').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
+            cy.wait('@selectOrg').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(typeof response.body.token === 'string').to.be.eq(true);
             });
             cy.contains("Versión 1.1.0");
             cy.get('.btn-success').contains('ACEPTO').click();
@@ -53,8 +50,8 @@ context('Pagina de login', () => {
             cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
             cy.plexText('name="password"', 'anypasswordfornow').should('have.value', 'anypasswordfornow');
             cy.plexButton('Iniciar sesión').click();
-            cy.wait('@login').then((xhr) => {
-                expect(xhr.status).to.be.eq(200)
+            cy.wait('@login').then(({response}) => {
+                expect(response.statusCode).to.eq(200)
             });
             cy.request({
                 method: 'PATCH',
@@ -82,15 +79,15 @@ context('Pagina de login', () => {
             cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
             cy.plexText('name="password"', 'anypasswordfornow').should('have.value', 'anypasswordfornow');
             cy.plexButton('Iniciar sesión').click();
-            cy.wait('@login').then((xhr) => {
-                expect(xhr.status).to.be.eq(200)
+            cy.wait('@login').then(({response}) => {
+                expect(response.statusCode).to.be.eq(200)
             });
             cy.wait('@organizaciones');
             cy.get('ul.list-group li').eq(1).click();
 
-            cy.wait('@selectOrg').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
+            cy.wait('@selectOrg').then(({response}) => {
+                expect(response.statusCode).to.be.eq(200);
+                expect(typeof response.body.token === 'string').to.be.eq(true);
             });
             cy.contains("Versión 1.2.0");
             cy.plexButton('NO ACEPTO').click();
@@ -119,15 +116,15 @@ context('Pagina de login', () => {
         cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
         cy.plexText('name="password"', 'anypasswordfornow').should('have.value', 'anypasswordfornow');
         cy.plexButton('Iniciar sesión').click();
-        cy.wait('@login').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@login').then(({response}) => {
+            expect(response.statusCode).to.eq(200)
         });
         cy.wait('@organizaciones');
         cy.get('ul.list-group li').eq(1).click();
 
-        cy.wait('@selectOrg').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
+        cy.wait('@selectOrg').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(typeof response.body.token === 'string').to.be.eq(true);
         });
         cy.contains("Versión 1.3.0");
         cy.get('.btn-success').contains('ACEPTO').click();
@@ -136,8 +133,8 @@ context('Pagina de login', () => {
         cy.plexInt('name="usuario"').type('38906735').should('have.value', '38906735');
         cy.plexText('name="password"', 'anypasswordfornow').should('have.value', 'anypasswordfornow');
         cy.plexButton('Iniciar sesión').click();
-        cy.wait('@login').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@login').then(({response}) => {
+            expect(response.statusCode).to.eq(200)
         });
         cy.wait('@organizaciones');
     })
@@ -147,8 +144,8 @@ context('Pagina de login', () => {
         cy.plexInt('name="usuario"').type('10000001');
         cy.plexText('name="password"', 'anypasswordfornow');
         cy.plexButton('Iniciar sesión').click();
-        cy.wait('@login').then((xhr) => {
-            expect(xhr.status).to.be.eq(403)
+        cy.wait('@login').then(({response}) => {
+            expect(response.statusCode).to.eq(403)
         });
     });
 
@@ -156,9 +153,9 @@ context('Pagina de login', () => {
         cy.plexInt('name="usuario"').type('33650509');
         cy.plexText('name="password"', 'asd');
         cy.plexButton('Iniciar sesión').click();
-        cy.wait('@organizaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(0);
+        cy.wait('@organizaciones').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body).to.have.length(0);
         });
         cy.get('plex-label').contains('Usted no tiene permisos para acceder a ninguna organización.');
 
