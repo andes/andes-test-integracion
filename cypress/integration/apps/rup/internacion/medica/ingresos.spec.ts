@@ -32,14 +32,13 @@
         });
 
         beforeEach(() => {
-            cy.server();
-            cy.route('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
-            cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
-            cy.route('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
-            cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
-            cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
-            cy.route('POST', '**/api/modules/rup/internacion/sala-comun/**').as('internarPaciente');
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
+            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+            cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
+            cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
+            cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+            cy.intercept('POST', '**/api/modules/rup/internacion/sala-comun/**').as('internarPaciente');
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.viewport(1920, 1080);
         });
 
@@ -48,28 +47,28 @@
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexButtonIcon('plus').click();
             cy.plexText('name="buscador"', pacientes[posPaciente].nombre);
-            cy.wait('@busquedaPaciente').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.responseBody.length).to.be.gte(1);
+            cy.wait('@busquedaPaciente').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(response.body.length).to.be.gte(1);
             });
 
             cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click();
-            cy.wait('@getPaciente').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@getPaciente').then(({response}) => {
+                expect(response.statusCode).to.be.eq(200);
             });
 
             cy.plexButtonIcon('arrow-left').click();
 
             cy.plexText('name="buscador"').clear();
             cy.plexText('name="buscador"', pacientes[posPaciente + 1].nombre);
-            cy.wait('@busquedaPaciente').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.responseBody.length).to.be.gte(1);
+            cy.wait('@busquedaPaciente').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(response.body.length).to.be.gte(1);
             });
 
             cy.get('paciente-listado plex-item').contains(pacientes[posPaciente + 1].nombre).click();
-            cy.wait('@getPaciente').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@getPaciente').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
             });
 
             cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
@@ -79,22 +78,22 @@
             cy.plexSelectType('label="Cama"', 'CAMA');
             cy.plexButtonIcon('check').click();
 
-            cy.wait('@patchCamas').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@patchCamas').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
             });
 
             cy.swal('confirm', 'Paciente internado');
         });
 
         it('Ingreso a sala comun', () => {
-            cy.get('table tr').contains(salas[0].nombre).first().click();
+            cy.get('table tr').contains(salas[0].nombre).first().click(), {force: true};
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexButtonIcon('plus').click();
             cy.plexText('name="buscador"').clear();
             cy.plexText('name="buscador"', pacientes[posPaciente].nombre);
-            cy.wait('@busquedaPaciente').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.responseBody.length).to.be.gte(1);
+            cy.wait('@busquedaPaciente').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(response.body.length).to.be.gte(1);
             });
 
             cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click();
@@ -106,8 +105,8 @@
 
             cy.plexButtonIcon('check').click();
 
-            cy.wait('@internarPaciente').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@internarPaciente').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
             });
 
             cy.swal('confirm', 'Paciente internado');
