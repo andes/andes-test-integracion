@@ -26,8 +26,12 @@ context('Seguimiento Epidemiológico', () => {
         cy.intercept('POST', '**api/modules/forms/forms-epidemiologia/formEpidemiologia').as('registroFicha');
         cy.intercept('POST', '**/api/modules/rup/prestaciones').as('postPrestacion');
         cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
-        cy.intercept('GET', '**/api/modules/rup/prestaciones/**').as('getPrestacion');
-        cy.intercept('GET', '**/api/modules/seguimiento-paciente/seguimientoPaciente?**').as('buscarSeguimiento');
+        cy.intercept('GET', '**/api/modules/rup/prestaciones/**', req => {
+            delete req.headers['if-none-match']
+        }).as('getPrestacion');
+        cy.intercept('GET', '**/api/modules/seguimiento-paciente/seguimientoPaciente?**', req => {
+            delete req.headers['if-none-match']
+        }).as('buscarSeguimiento');
         cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.intercept('GET', '**/api/core/tm/organizaciones?**').as('getOrganizaciones');
         cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
@@ -87,7 +91,6 @@ context('Seguimiento Epidemiológico', () => {
         cy.plexButtonIcon('chevron-down').click();
         cy.plexText('name="documento"', validado.documento);
         cy.plexButton('Buscar').click();
-        cy.wait('@buscarSeguimiento');
         cy.wait('@buscarSeguimiento').then(({response}) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.data[0].paciente.documento).to.be.eq(validado.documento);
