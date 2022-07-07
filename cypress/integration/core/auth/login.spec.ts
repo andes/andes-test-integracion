@@ -6,7 +6,9 @@ context('Pagina de login', () => {
 
     beforeEach(() => {
         cy.goto('/');
-        cy.intercept('POST', '**/api/auth/login').as('login');
+        cy.intercept('POST', '**/api/auth/login' ,req => {
+            delete req.headers['if-none-match']
+        }).as('login');
         cy.intercept('GET', '**/api/auth/organizaciones').as('organizaciones');
         cy.intercept('POST', '**/api/core/tm/disclaimer').as('disclaimer');
         cy.intercept('GET', '**/api/core/tm/disclaimer').as('disclaimers');
@@ -134,7 +136,7 @@ context('Pagina de login', () => {
         cy.plexText('name="password"', 'anypasswordfornow').should('have.value', 'anypasswordfornow');
         cy.plexButton('Iniciar sesión').click();
         cy.wait('@login').then(({response}) => {
-            expect(response.statusCode).to.eq(200)
+            expect(response.statusCode).to.be.eq(200)
         });
         cy.wait('@organizaciones');
     })
@@ -145,7 +147,7 @@ context('Pagina de login', () => {
         cy.plexText('name="password"', 'anypasswordfornow');
         cy.plexButton('Iniciar sesión').click();
         cy.wait('@login').then(({response}) => {
-            expect(response.statusCode).to.eq(403)
+            expect(response.statusCode).to.be.eq(403)
         });
     });
 
