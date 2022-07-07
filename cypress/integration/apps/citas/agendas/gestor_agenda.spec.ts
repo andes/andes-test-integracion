@@ -185,7 +185,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.contains(' No hay agendas que contengan turnos que coincidan');
     })
 
-    it('suspender agenda disponible con turno y reasignarlo', () => {
+    it.only('suspender agenda disponible con turno y reasignarlo', () => {
         cy.wait('@getAgendas');
         cy.get('table tbody td').plexLabel('servicio de neumonología').click();
         cy.wait('@findAgenda').then(({response}) => {
@@ -268,7 +268,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexButton('Gestor de Agendas').click();
 
         cy.wait('@getAgendas');
-        cy.get('table tbody td').contains('servicio de neumonología').first().click({ force: true });
+        cy.get('table tbody tr td').contains('servicio de neumonología').first().click(),{ force: true };
         cy.get('.lista-turnos .badge-info').contains('Reasignado');
     })
 
