@@ -1,5 +1,8 @@
 version: '2'
 services:
+  cypress:
+    image: "cypress/included:4.4.0"
+    command: ["--browser", "chrome"]
   db:  
     image: mongo:5.0
   nginx:  
