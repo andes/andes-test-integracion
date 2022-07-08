@@ -71,7 +71,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@getAgendas').then(({response}) => {
             expect(response.statusCode).to.eq(200);
         });
-        cy.get('table tbody tr td').plexLabel('PRUEBA, ALICIA');
+        cy.get('section.d-flex').contains('PRUEBA, ALICIA');
     })
 
     it('editar agenda en planificación', () => {
@@ -121,8 +121,9 @@ describe('CITAS - Planificar Agendas', () => {
 
         cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + manana);
 
-        cy.get('table tbody tr td').plexLabel('PRUEBA, ALICIA');
-        cy.get('table tbody tr td').plexLabel('Consulta de ortopedia');
+        cy.get('section.d-flex').contains('PRUEBA, ALICIA');
+        cy.get('section.d-flex').contains('Consulta de ortopedia');
+        
     })
 
     it('suspender agenda disponible sin turnos', () => {
@@ -185,7 +186,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.contains(' No hay agendas que contengan turnos que coincidan');
     })
 
-    it.only('suspender agenda disponible con turno y reasignarlo', () => {
+    it('suspender agenda disponible con turno y reasignarlo', () => {
         cy.wait('@getAgendas');
         cy.get('table tbody td').plexLabel('servicio de neumonología').click();
         cy.wait('@findAgenda').then(({response}) => {
@@ -268,7 +269,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexButton('Gestor de Agendas').click();
 
         cy.wait('@getAgendas');
-        cy.get('table tbody tr td').contains('servicio de neumonología').first().click(),{ force: true };
+        cy.get('section.d-flex').contains('servicio de neumonología').first().click(),{ force: true };
         cy.get('.lista-turnos .badge-info').contains('Reasignado');
     })
 
