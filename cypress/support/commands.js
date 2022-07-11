@@ -29,20 +29,14 @@ import 'cypress-file-upload';
 Cypress.Commands.add("login", (usuario, password, id) => {
     let token;
     return cy.request({
-        retryOnNetworkFailure: true,
         retryOnStatusCodeFailure: true,
         method:'POST', 
-        url: Cypress.env('API_SERVER') + '/api/auth/login', 
-        headers: {
-            Accept: "application/json, text/plain, */*",
-            "User-Agent": "axios/0.18.0"
-        },
+        url: Cypress.env('API_SERVER') + '/api/auth/login',
         usuario,
         password
     }).then((response) => {
         token = response.body.token;
         return response = cy.request({
-            retryOnNetworkFailure: true,
             retryOnStatusCodeFailure: true,
             url: Cypress.env('API_SERVER') + '/api/auth/organizaciones',
             method: 'GET',
@@ -53,7 +47,6 @@ Cypress.Commands.add("login", (usuario, password, id) => {
             //Si no se especifica id de organizacion, por defecto se usa el id del HPN
             const defaultId = '57e9670e52df311059bc8964';
             return response = cy.request({
-                retryOnNetworkFailure: true,
                 retryOnStatusCodeFailure: true,
                 url: Cypress.env('API_SERVER') + '/api/auth/v2/organizaciones',
                 method: 'POST',
