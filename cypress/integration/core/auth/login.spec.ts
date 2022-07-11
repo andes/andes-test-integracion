@@ -23,7 +23,6 @@ context('Pagina de login', () => {
     it('Login de usuario con disclaimer', () => {
         cy.request({
             method: 'POST',
-            failOnStatusCode:false,
             url: Cypress.env('API_SERVER') + '/api/core/tm/disclaimer',
             body:
             {
@@ -56,7 +55,6 @@ context('Pagina de login', () => {
             });
             cy.request({
                 method: 'PATCH',
-                failOnStatusCode:false,
                 url: Cypress.env('API_SERVER') + '/api/core/tm/disclaimer/' + disclaimer.id,
                 body: {
                     "activo": false
@@ -69,7 +67,6 @@ context('Pagina de login', () => {
     it('Login de usuario rechazando disclaimer', () => {
         cy.request({
             method: 'POST',
-            failOnStatusCode:false,
             url: Cypress.env('API_SERVER') + '/api/core/tm/disclaimer',
             body:
             {

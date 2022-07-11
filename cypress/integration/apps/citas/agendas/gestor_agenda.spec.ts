@@ -155,7 +155,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.get('table tbody td').plexBadge('Suspendida');
     })
 
-    it.only('suspender agenda disponible con turno', () => {
+    it('suspender agenda disponible con turno', () => {
 
         cy.wait('@getAgendas');
         cy.get('table tbody td').plexLabel('examen pediátrico').click();

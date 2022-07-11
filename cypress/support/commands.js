@@ -29,14 +29,17 @@ import 'cypress-file-upload';
 Cypress.Commands.add("login", (usuario, password, id) => {
     let token;
     return cy.request({
+        retryOnStatusCodeFailure: true,
+        retryOnNetworkFailure: true,
         method:'POST', 
-        failOnStatusCode: false,
         url: Cypress.env('API_SERVER') + '/api/auth/login', 
         usuario,
         password
     }).then((response) => {
         token = response.body.token;
         return response = cy.request({
+            retryOnStatusCodeFailure: true,
+            retryOnNetworkFailure: true,
             url: Cypress.env('API_SERVER') + '/api/auth/organizaciones',
             method: 'GET',
             headers: {
@@ -46,6 +49,8 @@ Cypress.Commands.add("login", (usuario, password, id) => {
             //Si no se especifica id de organizacion, por defecto se usa el id del HPN
             const defaultId = '57e9670e52df311059bc8964';
             return response = cy.request({
+                retryOnStatusCodeFailure: true,
+                retryOnNetworkFailure: true,
                 url: Cypress.env('API_SERVER') + '/api/auth/v2/organizaciones',
                 method: 'POST',
                 headers: {
@@ -63,8 +68,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
 
 Cypress.Commands.add('goto', (url, token, hudsToken, location) => {
     if (token) {
-        cy.server();
-        cy.route('GET', '**/api/auth/sesion**').as('sesion');
+        cy.intercept('GET', '**/api/auth/sesion**').as('sesion');
     }
     cy.visit(url, {
         onBeforeLoad: (win) => {
@@ -94,8 +98,7 @@ Cypress.Commands.add('goto', (url, token, hudsToken, location) => {
 Cypress.Commands.add('buscarPaciente', (pacienteDoc, cambiarPaciente = true) => {
     cy.plexButton("Buscar Paciente").click();
     cy.plexText('name="buscador"', pacienteDoc);
-    cy.server();
-    cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
+    cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
     cy.wait('@listaPacientes');
     const documento = pacienteDoc.substr(0, pacienteDoc.length - 6) + '.' + pacienteDoc.substr(-6, 3) + '.' + pacienteDoc.substr(-3);
     cy.get('plex-item').contains(documento).click();
