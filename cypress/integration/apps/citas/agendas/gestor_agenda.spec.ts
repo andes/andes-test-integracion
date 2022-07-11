@@ -23,7 +23,9 @@ describe('CITAS - Planificar Agendas', () => {
         cy.intercept('GET', '**/api/modules/turnos/agenda/**', req => {
             delete req.headers['if-none-match']
         }).as('findAgenda');
-        cy.intercept('GET', '**/api/modules/turnos/agenda/candidatas?**').as('getCandidatas');
+        cy.intercept('GET', '**/api/modules/turnos/agenda/candidatas?**' , req => {
+            delete req.headers['if-none-match']
+        }).as('getCandidatas');
         cy.intercept('PATCH', '**/api/modules/turnos/turno/**').as('patchAgenda');
         cy.intercept('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda2');
         cy.intercept('PUT', '**/api/modules/turnos/turno/**').as('putAgenda');
@@ -153,7 +155,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.get('table tbody td').plexBadge('Suspendida');
     })
 
-    it('suspender agenda disponible con turno', () => {
+    it.only('suspender agenda disponible con turno', () => {
 
         cy.wait('@getAgendas');
         cy.get('table tbody td').plexLabel('examen pediátrico').click();
@@ -179,10 +181,12 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@findAgenda');
         cy.get('table tbody td').plexBadge('Suspendida');
         cy.get('table tbody tr').plexButtonIcon('sync-alert').click();
+        cy.intercept('GET', '**/api/modules/turnos/agenda/**', req => {
+            delete req.headers['if-none-match']
+        }).as('findAgenda');
         cy.wait('@findAgenda');
         cy.get('tbody').find('td').first().click({ force: true });
         cy.wait('@getCandidatas');
-
         cy.contains(' No hay agendas que contengan turnos que coincidan');
     })
 
