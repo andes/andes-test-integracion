@@ -28,9 +28,7 @@ import 'cypress-file-upload';
 
 Cypress.Commands.add("login", (usuario, password, id) => {
     let token;
-    return cy.request({
-        method:'POST', 
-        url: Cypress.env('API_SERVER') + '/api/auth/login',
+    return cy.request('POST', Cypress.env('API_SERVER') + '/api/auth/login', {
         usuario,
         password
     }).then((response) => {
@@ -62,7 +60,8 @@ Cypress.Commands.add("login", (usuario, password, id) => {
 
 Cypress.Commands.add('goto', (url, token, hudsToken, location) => {
     if (token) {
-        cy.intercept('GET', '**/api/auth/sesion**').as('sesion');
+        cy.server();
+        cy.route('GET', '**/api/auth/sesion**').as('sesion');
     }
     cy.visit(url, {
         onBeforeLoad: (win) => {
@@ -92,7 +91,8 @@ Cypress.Commands.add('goto', (url, token, hudsToken, location) => {
 Cypress.Commands.add('buscarPaciente', (pacienteDoc, cambiarPaciente = true) => {
     cy.plexButton("Buscar Paciente").click();
     cy.plexText('name="buscador"', pacienteDoc);
-    cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
+    cy.server();
+    cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
     cy.wait('@listaPacientes');
     const documento = pacienteDoc.substr(0, pacienteDoc.length - 6) + '.' + pacienteDoc.substr(-6, 3) + '.' + pacienteDoc.substr(-3);
     cy.get('plex-item').contains(documento).click();
