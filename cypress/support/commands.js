@@ -28,7 +28,10 @@ import 'cypress-file-upload';
 
 Cypress.Commands.add("login", (usuario, password, id) => {
     let token;
-    return cy.request('POST', Cypress.env('API_SERVER') + '/api/auth/login', {
+    return cy.request({
+        method:'POST', 
+        failOnStatusCode: false,
+        url: Cypress.env('API_SERVER') + '/api/auth/login', 
         usuario,
         password
     }).then((response) => {
