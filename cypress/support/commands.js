@@ -31,6 +31,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
     return cy.request({
         retryOnStatusCodeFailure: true,
         retryOnNetworkFailure: true,
+        failOnStatusCode: false,
         method:'POST', 
         url: Cypress.env('API_SERVER') + '/api/auth/login', 
         usuario,
@@ -51,6 +52,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
             return response = cy.request({
                 retryOnStatusCodeFailure: true,
                 retryOnNetworkFailure: true,
+                failOnStatusCode: false,
                 url: Cypress.env('API_SERVER') + '/api/auth/v2/organizaciones',
                 method: 'POST',
                 headers: {
