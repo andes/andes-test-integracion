@@ -33,7 +33,9 @@
 
         beforeEach(() => {
             cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
-            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**' , req => {
+                delete req.headers['if-none-match']
+            }).as('getPaciente');
             cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
             cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
@@ -52,7 +54,7 @@
                 expect(response.body.length).to.be.gte(1);
             });
 
-            cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click();
+            cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click({force: true});
             cy.wait('@getPaciente').then(({response}) => {
                 expect(response.statusCode).to.be.eq(200);
             });
@@ -88,7 +90,7 @@
         it('Ingreso a sala comun', () => {
             cy.get('table tr').contains(salas[0].nombre).first().click({force: true});
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
-            cy.get('plex-layout-sidebar').plexButtonIcon('plus').click();
+            cy.get('plex-layout-sidebar').plexButtonIcon('plus').click({force: true});
             cy.plexText('name="buscador"').clear();
             cy.plexText('name="buscador"', pacientes[posPaciente].nombre);
             cy.wait('@busquedaPaciente').then(({response}) => {
