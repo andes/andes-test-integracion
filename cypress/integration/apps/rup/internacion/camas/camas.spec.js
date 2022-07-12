@@ -86,7 +86,7 @@ describe('ABM Camas', () => {
         cy.swal('confirm', 'La cama fue guardada');
     });
 
-    it('Editar Cama', () => {
+    it.only('Editar Cama', () => {
         cy.getCama(camas[0].cama.nombre).click();
         cy.get('[label="CAMA"] > plex-title > .plex-title > .title-content').plexButtonIcon('pencil').click();
 
