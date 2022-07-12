@@ -34,9 +34,7 @@ function getStubs() {
     }]).as('expEquipamiento');
 
     cy.route('POST', '**/api/modules/rup/internacion/camas**').as('createCama')
-    cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**', req => {
-        delete req.headers['if-none-match']
-    }).as('editCama')
+    cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('editCama')
 }
 
 describe('ABM Camas', () => {
@@ -88,7 +86,7 @@ describe('ABM Camas', () => {
         cy.swal('confirm', 'La cama fue guardada');
     });
 
-    it.only('Editar Cama', () => {
+    it('Editar Cama', () => {
         cy.getCama(camas[0].cama.nombre).click();
         cy.get('[label="CAMA"] > plex-title > .plex-title > .title-content').plexButtonIcon('pencil').click();
 
@@ -103,11 +101,11 @@ describe('ABM Camas', () => {
         cy.plexSelectType('label="Ubicación"', 'edific');
         cy.plexSelectType('label="Unidad organizativa"').clearSelect();
         cy.plexSelectType('label="Unidad organizativa"', 'servicio');
-        cy.wait(4000)
+
         cy.plexButton('GUARDAR').click();
-        cy.wait('@editCama').then(({response}) => {
-            const cama = response.body;
-            expect(response.statusCode).to.eq(200);
+        cy.wait('@editCama').then((xhr) => {
+            const cama = xhr.response.body;
+            expect(xhr.status).to.be.eq(200);
             expect(cama.nombre).to.be.eq('Cama 888');
             expect(cama.sectores[0].nombre).to.be.eq('edificio este');
             expect(cama.tipoCama.term).to.be.eq('Cama');
@@ -123,8 +121,8 @@ describe('ABM Camas', () => {
         cy.plexButton('INACTIVAR CAMA').click();
         cy.get('button').contains('CONFIRMAR').click();
 
-        cy.wait('@editCama').then(({response}) => {
-            expect(response.statusCode).to.eq(200);
+        cy.wait('@editCama').then((xhr) => {
+            expect(xhr.status).to.be.eq(200);
         });;
 
         cy.wait(200)
