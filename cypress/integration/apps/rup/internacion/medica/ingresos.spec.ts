@@ -43,7 +43,7 @@
         });
 
         it('Ingreso simplificado cambiando paciente', () => {
-            cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
+            cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click({force: true});
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexButtonIcon('plus').click();
             cy.plexText('name="buscador"', pacientes[posPaciente].nombre);
@@ -86,7 +86,7 @@
         });
 
         it('Ingreso a sala comun', () => {
-            cy.get('table tr').contains(salas[0].nombre).first().click(), {force: true};
+            cy.get('table tr').contains(salas[0].nombre).first().click({force: true});
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexButtonIcon('plus').click();
             cy.plexText('name="buscador"').clear();
