@@ -66,7 +66,7 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.get('plex-select[label="Tipo"]').last().click().contains('Teléfono Fijo').click();
         cy.plexPhone('label="Número"').last().type('2994785215');
         cy.plexButtonIcon('plus').click();
-        cy.get('plex-select[label="Tipo"]').last().click().contains('Email').click(), {force: true};
+        cy.get('plex-select[label="Tipo"]').last().click().contains('Email').click({force: true});
         cy.plexText('label="Dirección"').type('mail@mail.com');
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
