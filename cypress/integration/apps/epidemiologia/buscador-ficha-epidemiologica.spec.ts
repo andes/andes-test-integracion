@@ -98,7 +98,7 @@ context('Ficha Epidemiológica', () => {
 
     it('Buscar ficha sin registro en SISA', () => {
         cy.plexButtonIcon('chevron-down').click();
-        cy.plexSelectType('label="Registrado en SISA"', 'Sin Registro SISA').click(), {force: true}
+        cy.plexSelectType('label="Registrado en SISA"', 'Sin Registro SISA').click({force: true})
         cy.plexButton('Buscar Fichas').click();
         cy.wait('@getFicha').then(({response}) => {
             expect(response.statusCode).to.eq(200);
