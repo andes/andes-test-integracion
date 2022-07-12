@@ -86,14 +86,14 @@ describe('ABM Camas', () => {
         cy.swal('confirm', 'La cama fue guardada');
     });
 
-    it.only('Editar Cama', () => {
+    it('Editar Cama', () => {
         cy.getCama(camas[0].cama.nombre).click();
         cy.get('[label="CAMA"] > plex-title > .plex-title > .title-content').plexButtonIcon('pencil').click();
 
         cy.plexText('label="Nombre"').clear();
         cy.plexText('label="Nombre"', 'Cama 888');
         cy.plexSelectAsync('label="Tipo de cama"', 'Cam', '@expTipoDeCama', 0);
-        cy.plexSelectAsync('label="Especialidad/es"', 'Enf', '@expEspecialidad', 0);
+        //cy.plexSelectAsync('label="Especialidad/es"', 'Enf', '@expEspecialidad', 0);
         cy.plexSelectAsync('label="Equipamiento"', 'ap', '@expEquipamiento', 0);
         cy.plexSelectType('label="Genero"').clearSelect();
         cy.plexSelectAsync('label="Genero"', 'Fem', '@expGenero', 0);
