@@ -182,7 +182,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.get('table tbody td').plexBadge('Suspendida');
         cy.get('table tbody tr').plexButtonIcon('sync-alert').click();
         cy.wait('@findAgenda');
-        cy.get('tbody td').first().click({ force: true });
+        cy.get('table tbody td').first().click({ force: true });
         cy.wait('@getCandidatas');
         cy.contains(' No hay agendas que contengan turnos que coincidan');
     })

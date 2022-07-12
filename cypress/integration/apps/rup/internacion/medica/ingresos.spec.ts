@@ -69,6 +69,9 @@
             });
 
             cy.get('paciente-listado plex-item').contains(pacientes[posPaciente + 1].nombre).click();
+            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**' , req => {
+                delete req.headers['if-none-match']
+            }).as('getPaciente');
             cy.wait('@getPaciente').then(({response}) => {
                 expect(response.statusCode).to.eq(200);
             });
@@ -98,7 +101,7 @@
                 expect(response.body.length).to.be.gte(1);
             });
 
-            cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click();
+            cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click({force: true});
 
             cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
             cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
