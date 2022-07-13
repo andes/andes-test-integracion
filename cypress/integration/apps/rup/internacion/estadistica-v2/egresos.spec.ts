@@ -19,14 +19,13 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
     });
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/modules/rup/internacion/prestaciones?**').as('getPrestaciones');
-        cy.route('GET', '**/api/modules/rup/internacion/internacion-resumen?**').as('getResumen');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
-        cy.route('PATCH', '**/api/modules/rup/internacion/internacion-resumen/**').as('patchResumen');
-        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
-        cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
-        cy.route('GET', '**/api/core/term/cie10?**', [{
+        cy.intercept('GET', '**/api/modules/rup/internacion/prestaciones?**').as('getPrestaciones');
+        cy.intercept('GET', '**/api/modules/rup/internacion/internacion-resumen?**').as('getResumen');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('PATCH', '**/api/modules/rup/internacion/internacion-resumen/**').as('patchResumen');
+        cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
+        cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+        cy.intercept('GET', '**/api/core/term/cie10?**', [{
             id: '59bbf1ed53916746547cbdba',
             idCie10: 1187.0,
             idNew: 3568.0,
@@ -70,12 +69,12 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.viewport(1920, 1080);
     });
 
-    it.skip('Egreso de paciente desde listadado de internación', () => {
+    it('Egreso de paciente desde listadado de internación', () => {
         const fechaEgreso = Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm');
 
         cy.goto('/mapa-camas/listado-internacion-unificado/estadistica-v2', token);
         cy.url().should('include', 'listado-internacion-unificado');
-        cy.wait('@getPrestaciones');
+        //cy.wait('@getPrestaciones');
         cy.get('table tbody tr td').contains(pacientes[0].nombre).first().click();
         cy.wait('@getPaciente');
         cy.wait('@getResumen');
@@ -83,26 +82,26 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.get('button').contains('EGRESO').click();
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
         cy.plexSelectAsync('label="Diagnostico Principal al egreso"', 'Neumo', '@getDiagnostico', 0);
-        cy.plexSelectAsync('label="Otro Diagnóstico"', 'Otros trastornos', '@getDiagnostico', 0);
-        cy.plexSelectAsync('label="Otras circunstancias"', 'Mutismo', '@getDiagnostico', 0);
+        cy.plexSelectAsync('label="Otros Diagnósticos"', 'Otros trastornos', '@getDiagnostico', 0);
+        cy.plexSelectAsync('label="Otras circunstancias que prolongan la internación"', 'Mutismo', '@getDiagnostico', 0);
         cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha y hora de egreso"', { text: fechaEgreso, skipEnter: true });
 
         cy.plexButtonIcon('check').click();
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
 
-        cy.wait('@patchCamas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@patchCamas').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
         // verificamos sincronización entre resumen y prestación
-        cy.wait('@patchResumen').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(Cypress.moment(xhr.response.body.fechaEgreso).format('DD/MM/YYYY HH:mm')).to.be.eq((fechaEgreso))
+        cy.wait('@patchResumen').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(Cypress.moment(response.body.fechaEgreso).format('DD/MM/YYYY HH:mm')).to.be.eq((fechaEgreso))
         });
-        cy.wait('@patchPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.ejecucion.registros).have.length(2);
-            const fechaEgresoPrestacion = Cypress.moment(xhr.response.body.ejecucion.registros[1].valor.InformeEgreso.fechaEgreso).format('DD/MM/YYYY HH:mm');
+        cy.wait('@patchPrestacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.ejecucion.registros).have.length(2);
+            const fechaEgresoPrestacion = Cypress.moment(response.body.ejecucion.registros[1].valor.InformeEgreso.fechaEgreso).format('DD/MM/YYYY HH:mm');
             expect(fechaEgresoPrestacion).to.be.eq(fechaEgreso);
         });
     })

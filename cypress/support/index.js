@@ -50,9 +50,9 @@ Cypress.on('test:after:run', (test, runnable) => {
 
 Cypress.on('window:before:load', win => {
     cy.stub(win.console, 'error', (error, mensaje) => {
-        if (error.includes('cordova_not_available')) {
-            return;
+        if (error.toString().includes('cordova_not_available')) {
+           return;
         }
-        throw Error(mensaje);
+        throw mensaje;
     })
 })

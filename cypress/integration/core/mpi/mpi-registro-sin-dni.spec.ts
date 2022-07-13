@@ -14,8 +14,13 @@ context('MPI-Registro Paciente Sin DNI', () => {
     })
 
     beforeEach(() => {
+        cy.intercept('POST', '**api/core-v2/mpi/pacientes**', req => {
+            delete req.headers['if-none-match']
+        }).as('registroSinDni');
+        cy.intercept('GET', '**api/core-v2/mpi/pacientes?**', req => {
+            delete req.headers['if-none-match']
+        }).as('busquedaRelacion');
         cy.goto('/apps/mpi/paciente/sin-dni/mpi', token);
-        cy.server();
     });
 
     it('verificar campos obligatorios de datos basicos de paciente', () => {
@@ -31,7 +36,6 @@ context('MPI-Registro Paciente Sin DNI', () => {
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y sin contacto', () => {
-        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
@@ -41,17 +45,16 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.wait('@registroSinDni').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.estado).to.be.eq("temporal");
-            expect(xhr.response.body.apellido).to.be.eq("TEST");
-            expect(xhr.response.body.nombre).to.be.eq("SIN DNI");
+        cy.wait('@registroSinDni').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.estado).to.be.eq("temporal");
+            expect(response.body.apellido).to.be.eq("TEST");
+            expect(response.body.nombre).to.be.eq("SIN DNI");
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos contactos', () => {
-        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
@@ -63,65 +66,61 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.get('plex-select[label="Tipo"]').last().click().contains('Teléfono Fijo').click();
         cy.plexPhone('label="Número"').last().type('2994785215');
         cy.plexButtonIcon('plus').click();
-        cy.get('plex-select[label="Tipo"]').last().click().contains('Email').click();
+        cy.get('plex-select[label="Tipo"]').last().click().contains('Email').click({force: true});
         cy.plexText('label="Dirección"').type('mail@mail.com');
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.wait('@registroSinDni').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.estado).to.be.eq("temporal");
-            expect(xhr.response.body.apellido).to.be.eq("TEST");
-            expect(xhr.response.body.nombre).to.be.eq("SIN DNI");
+        cy.wait('@registroSinDni').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.estado).to.be.eq("temporal");
+            expect(response.body.apellido).to.be.eq("TEST");
+            expect(response.body.nombre).to.be.eq("SIN DNI");
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
 
     it('buscar en la pestaña relaciones un paciente por dni que no exista y verificar mensaje', () => {
         cy.plexTab('Relaciones').click();
-        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', '000000001');
-        cy.wait('@busquedaRelacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(0);
+        cy.wait('@busquedaRelacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body).to.have.length(0);
         });
         cy.contains(' No se encontró ningún paciente..');
     });
 
     it('buscar en la pestaña relaciones un paciente por dni que exista y verificar mensaje', () => {
         cy.plexTab('Relaciones').click();
-        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', paciente.documento);
-        cy.wait('@busquedaRelacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(1);
-            expect(xhr.response.body[0]).to.have.property('documento', paciente.documento)
+        cy.wait('@busquedaRelacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body).to.have.length(1);
+            expect(response.body[0]).to.have.property('documento', paciente.documento)
         });
     });
 
     it('buscar en la pestaña relaciones un paciente por nombre/apellido que exista y verificar mensaje', () => {
         cy.plexTab('Relaciones').click();
-        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', paciente.nombre);
-        cy.wait('@busquedaRelacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(1);
-            expect(xhr.response.body[0]).to.have.property('apellido', paciente.apellido)
+        cy.wait('@busquedaRelacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body).to.have.length(1);
+            expect(response.body[0]).to.have.property('apellido', paciente.apellido)
         });
         cy.plexText('name="buscador"', ' ' + paciente.apellido);
-        cy.wait('@busquedaRelacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(1);
-            expect(xhr.response.body[0]).to.have.property('nombre', paciente.nombre)
+        cy.wait('@busquedaRelacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body).to.have.length(1);
+            expect(response.body[0]).to.have.property('nombre', paciente.nombre)
         });
     });
 
     it('buscar en la pestaña relaciones scan de progenitor y verificar datos básicos ingresados', () => {
         cy.plexTab('Relaciones').click();
-        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', '00535248130@ANDES@PACIENTE VALIDADO@M@10000000@B@26/12/1956@14/02/2018@200');
-        cy.wait('@busquedaRelacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@busquedaRelacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
             cy.get('paciente-listado').contains(format(paciente.documento));
             cy.get('paciente-listado').contains(paciente.nombre);
             cy.get('paciente-listado').contains(paciente.apellido);
@@ -130,17 +129,15 @@ context('MPI-Registro Paciente Sin DNI', () => {
 
     it('buscar en la pestaña relaciones un paciente por nombre/apellido que no exista y verificar mensaje', () => {
         cy.plexTab('Relaciones').click();
-        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaRelacion');
         cy.plexText('name="buscador"', 'INEXISTENTE');
-        cy.wait('@busquedaRelacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(0);
+        cy.wait('@busquedaRelacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body).to.have.length(0);
         });
         cy.contains(' No se encontró ningún paciente..');
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y una nota', () => {
-        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroSinDni');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
@@ -156,12 +153,11 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.plexButtonIcon('plus').click();
         cy.get('plex-item').contains('Nueva nota');
         cy.get('plex-item').contains('Esta es una nueva nota');
-
         cy.plexButton('Guardar').click();
-        cy.wait('@registroSinDni').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.estado).to.be.eq("temporal");
-            expect(xhr.response.body.notas).to.have.length(1);
+        cy.wait('@registroSinDni').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.estado).to.be.eq("temporal");
+            expect(response.body.notas).to.have.length(1);
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
