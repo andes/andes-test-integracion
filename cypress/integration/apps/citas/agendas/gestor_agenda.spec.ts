@@ -423,6 +423,6 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.profesionales[0].id).to.be.eq('58f74fd3d03019f919e9fff2');
 
         });
-        cy.get('.badge').contains('Suspendida');
+        cy.get('plex-badge').contains('Suspendida');
     })
 })
