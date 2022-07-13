@@ -32,10 +32,9 @@
         });
 
         beforeEach(() => {
+            cy.server()
             cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
-            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**' , req => {
-                delete req.headers['if-none-match']
-            }).as('getPaciente');
+            cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
             cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
             cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
@@ -55,8 +54,8 @@
             });
 
             cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click({force: true});
-            cy.wait('@getPaciente').then(({response}) => {
-                expect(response.statusCode).to.be.eq(200);
+            cy.wait('@getPaciente').then((xhr) => {
+                expect(xhr.status).to.be.eq(200);
             });
 
             cy.plexButtonIcon('arrow-left').click();
@@ -69,11 +68,8 @@
             });
 
             cy.get('paciente-listado plex-item').contains(pacientes[posPaciente + 1].nombre).click();
-            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**' , req => {
-                delete req.headers['if-none-match']
-            }).as('getPaciente');
-            cy.wait('@getPaciente').then(({response}) => {
-                expect(response.statusCode).to.eq(200);
+            cy.wait('@getPaciente').then((xhr) => {
+                expect(xhr.status).to.eq(200);
             });
 
             cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
