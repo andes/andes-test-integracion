@@ -48,7 +48,7 @@ const moment = require('moment');
             cy.plexButtonIcon('check').click();
 
             cy.wait('@patchCamas')
-            cy.toast('success', 'Prestacion guardada correctamente');
+            cy.toast('success', 'Egreso guardado correctamente');
         });
 
         it('Egreso en Sala Comun', () => {
@@ -66,7 +66,7 @@ const moment = require('moment');
             cy.wait('@egresoSalaComun').then((xhr) => {
                 expect(xhr.status).to.be.eq(200);
             });
-            cy.toast('success', 'Prestacion guardada correctamente');
+            cy.toast('success', 'Egreso guardado correctamente');
             cy.getCama().should('have.length', 2);
         });
     });
