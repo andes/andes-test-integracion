@@ -18,17 +18,30 @@ context('CENTRO OPERATIVO MÉDICO', () => {
     });
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('searchPaciente');
-        cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
-        cy.route('GET', '**/modules/com/derivaciones**').as('getDerivaciones');
-        cy.route('GET', '**/api/core/tm/organizaciones?esCOM=true').as('getOrganizacion');
-        cy.route('POST', '**/modules/com/derivaciones**').as('createDerivacion');
-        cy.route('PATCH', '**/modules/com/derivaciones/**').as('editDerivacion');
-        cy.route('POST', '**/modules/com/derivaciones/**/historial').as('updateHistorial');
-        cy.route('POST', '/api/auth/v2/organizaciones').as('selectOrg');
-        cy.route('GET', '**/api/auth/organizaciones').as('getOrganizaciones');
-        cy.route('GET', '**/modules/dispositivo**').as('getDispositivo');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes**' , req => {
+            delete req.headers['if-none-match']
+        }).as('searchPaciente');
+        cy.intercept('GET', '**/core/tm/profesionales**' , req => {
+            delete req.headers['if-none-match']
+        }).as('profesionalSolicitante');
+        cy.intercept('GET', '**/modules/com/derivaciones**' , req => {
+            delete req.headers['if-none-match']
+        }).as('getDerivaciones');
+        cy.intercept('GET', '**/api/core/tm/organizaciones?esCOM=true' , req => {
+            delete req.headers['if-none-match']
+        }).as('getOrganizacion');
+        cy.intercept('POST', '**/modules/com/derivaciones**' , req => {
+            delete req.headers['if-none-match']
+        }).as('createDerivacion');
+        cy.intercept('PATCH', '**/modules/com/derivaciones/**').as('editDerivacion');
+        cy.intercept('POST', '**/modules/com/derivaciones/**/historial').as('updateHistorial');
+        cy.intercept('POST', '/api/auth/v2/organizaciones').as('selectOrg');
+        cy.intercept('GET', '**/api/auth/organizaciones' , req => {
+            delete req.headers['if-none-match']
+        }).as('getOrganizaciones');
+        cy.intercept('GET', '**/modules/dispositivo**' , req => {
+            delete req.headers['if-none-match']
+        }).as('getDispositivo');
         // Lo removemos por ahora hasta encontrar la solución
         // cy.route('POST', '**/api/modules/descargas/reporteDerivacion').as('reporteDerivacion');
         secuencia(tokenOriginal);
@@ -43,8 +56,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     function secuencia(token) {
         cy.goto('/com', token);
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexButton("Nueva derivación").click();
     }
@@ -52,16 +65,16 @@ context('CENTRO OPERATIVO MÉDICO', () => {
     it('crear nueva derivacion y denegarla en el COM', () => {
         cy.plexButton('Nueva derivación').click({ force: true });
         seleccionarPaciente('2006891');
-        cy.wait('@profesionalSolicitante').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@profesionalSolicitante').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
         cy.plexTextArea('label="Detalle"', 'a rechazar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexButton("Guardar").click({ force: true });
-        cy.wait('@createDerivacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2006891');
+        cy.wait('@createDerivacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2006891');
         });
         cy.toast('success', 'Derivación guardada');
 
@@ -93,18 +106,18 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'TEST PRUEBA', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
-        cy.wait('@createDerivacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2006712');
+        cy.wait('@createDerivacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2006712');
         });
         cy.toast('success', 'Derivación guardada');
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
         cy.get('plex-label').contains('Solicitante: PRUEBA, TEST').should('have.length', 1);
         cy.contains('CANCELAR').click();
         cy.swal('confirm');
-        cy.wait('@editDerivacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.cancelada).to.be.eq(true);
+        cy.wait('@editDerivacion').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.cancelada).to.be.eq(true);
         });
         cy.toast('success', 'Derivación cancelada');
         cy.contains('Solicitante: PRUEBA, TEST').should('not.exist');
@@ -116,9 +129,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'TEST PRUEBA', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
-        cy.wait('@createDerivacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2111893');
+        cy.wait('@createDerivacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2111893');
         });
         cy.toast('success', 'Derivación guardada');
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
@@ -127,12 +140,12 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.contains(' ACTUALIZAR ').click();
         cy.plexTextArea('label="Observacion"', 'nueva nota');
         cy.plexButton("Guardar").click();
-        cy.wait('@updateHistorial').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2111893');
+        cy.wait('@updateHistorial').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2111893');
         });
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-tabs').contains('DERIVACIONES ENTRANTES').click({ force: true });
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
@@ -151,9 +164,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexButton("Guardar").click({ force: true });
-        cy.wait('@createDerivacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2001294');
+        cy.wait('@createDerivacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2001294');
         });
         cy.toast('success', 'Derivación guardada');
         cy.plexButton('Nueva derivación').click({ force: true });
@@ -167,19 +180,19 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear derivacion, aprobarla, asignarla, aceptarla, finalizarla', () => {
         seleccionarPaciente('2504195');
-        cy.wait('@profesionalSolicitante').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@profesionalSolicitante').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.wait('@getOrganizacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getOrganizacion').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTextArea('label="Detalle"', 'a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'NATALIA HUENCHUMAN', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
-        cy.wait('@createDerivacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2504195');
+        cy.wait('@createDerivacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2504195');
         });
         cy.toast('success', 'Derivación guardada');
 
@@ -196,8 +209,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.toast('success');
         cy.plexSelectType('label="Estado"').click().get('.option').contains('HABILITADA').click();
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').contains('habilitada').should('have.length', 1);
         cy.contains('habilitada').click();
@@ -214,8 +227,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.toast('success');
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
         cy.plexSelectType('label="Estado"').click().get('.option').contains('ASIGNADA').click();
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').contains('asignada').should('have.length', 1);
         cy.login('30643636', 'asd', '5bae6b7b9677f95a425d9ee8').then(t => {
@@ -251,19 +264,19 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear derivacion, aprobarla, asignarla, rechazarla, finalizarla', () => {
         seleccionarPaciente('2504195');
-        cy.wait('@profesionalSolicitante').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@profesionalSolicitante').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.wait('@getOrganizacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getOrganizacion').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTextArea('label="Detalle"', 'a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'ALICIA PRUEBA', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
-        cy.wait('@createDerivacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2504195');
+        cy.wait('@createDerivacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2504195');
         });
         cy.toast('success', 'Derivación guardada');
         cy.login('30643636', 'asd', '5f68c547cbd0db303ac4aee9').then(t => {
@@ -278,8 +291,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.toast('success');
         cy.plexSelectType('label="Estado"').click().get('.option').contains('HABILITADA').click();
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').contains('habilitada').should('have.length', 1);
         cy.contains('habilitada').click();
@@ -296,8 +309,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.toast('success');
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
         cy.plexSelectType('label="Estado"').click().get('.option').contains('ASIGNADA').click();
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').contains('asignada').should('have.length', 1);
         cy.login('30643636', 'asd', '5bae6b7b9677f95a425d9ee8').then(t => {
@@ -329,11 +342,11 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear derivacion traslado especial', () => {
         seleccionarPaciente('2504196');
-        cy.wait('@profesionalSolicitante').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@profesionalSolicitante').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.wait('@getOrganizacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getOrganizacion').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTextArea('label="Detalle"', 'a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
@@ -343,9 +356,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexSelectType('name="organizacionTraslado"', 1);
 
         cy.plexButton("Guardar").click({ force: true });
-        cy.wait('@createDerivacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2504196');
+        cy.wait('@createDerivacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2504196');
         });
         cy.toast('success', 'Derivación guardada');
 
@@ -361,9 +374,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.contains(' ACTUALIZAR ').click();
         cy.plexTextArea('label="Observacion"', 'vuelo sanitario no disponible');
         cy.plexButton("Guardar").click();
-        cy.wait('@updateHistorial').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2504196');
+        cy.wait('@updateHistorial').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2504196');
         });
 
         cy.login('30643636', 'asd', '5f68c547cbd0db303ac4aee9').then(t => {
@@ -380,8 +393,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.toast('success');
         cy.plexSelectType('label="Estado"').click().get('.option').contains('HABILITADA').click();
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').contains('habilitada').should('have.length', 1);
         cy.contains('habilitada').click({ force: true });
@@ -400,8 +413,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.toast('success');
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
         cy.plexSelectType('label="Estado"').click().get('.option').contains('ASIGNADA').click();
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').contains('asignada').should('have.length', 1);
         cy.login('30643636', 'asd', '5bae6b7b9677f95a425d9ee8').then(t => {
@@ -426,8 +439,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
         cy.plexText('name="paciente"', '2504196');
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-badge').contains('finalizada').should('have.length', 1);
@@ -438,11 +451,11 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear derivacion, descargar historial y cancelar', () => {
         seleccionarPaciente('2504196');
-        cy.wait('@profesionalSolicitante').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@profesionalSolicitante').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.wait('@getOrganizacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getOrganizacion').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTextArea('label="Detalle"', 'a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
@@ -452,9 +465,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexSelectType('name="organizacionTraslado"', 1);
 
         cy.plexButton("Guardar").click({ force: true });
-        cy.wait('@createDerivacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2504196');
+        cy.wait('@createDerivacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2504196');
         });
         cy.toast('success', 'Derivación guardada');
 
@@ -488,23 +501,23 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear derivacion paciente respirado, aprobarla, asignarla, aceptarla, finalizarla', () => {
         seleccionarPaciente('2504200');
-        cy.wait('@profesionalSolicitante').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@profesionalSolicitante').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.wait('@getOrganizacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getOrganizacion').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.wait('@getDispositivo').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDispositivo').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTextArea('label="Detalle"', 'a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'NATALIA HUENCHUMAN', '@profesionalSolicitante', 0);
         cy.plexSelect('label="Dispositivo"', 0).click();
         cy.plexButton("Guardar").click({ force: true });
-        cy.wait('@createDerivacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq('2504200');
+        cy.wait('@createDerivacion').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.paciente.documento).to.be.eq('2504200');
         });
         cy.toast('success', 'Derivación guardada');
 
@@ -526,8 +539,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.toast('success');
         cy.plexSelectType('label="Estado"').click().get('.option').contains('HABILITADA').click();
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').plexIcon('arm').should('have.length', 1);
         cy.get('plex-badge').contains('habilitada').should('have.length', 1);
@@ -544,8 +557,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.toast('success');
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
         cy.plexSelectType('label="Estado"').click().get('.option').contains('ASIGNADA').click();
-        cy.wait('@getDerivaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getDerivaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').plexIcon('arm').should('have.length', 1);
         cy.get('plex-badge').contains('asignada').should('have.length', 1);
