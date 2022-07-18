@@ -178,7 +178,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.toast('error', 'Ya existe una derivación en curso para el paciente seleccionado');
     });
 
-    it('crear derivacion, aprobarla, asignarla, aceptarla, finalizarla', () => {
+    it.only('crear derivacion, aprobarla, asignarla, aceptarla, finalizarla', () => {
         seleccionarPaciente('2504195');
         cy.wait('@profesionalSolicitante').then(({response}) => {
             expect(response.statusCode).to.be.eq(200);
@@ -255,8 +255,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
-        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
-        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').first().click();
+        cy.get(':nth-child(2)>.plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
+        cy.get(':nth-child(2)>.plex-label').contains('Solicitante: Huenchuman, Natalia').first().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 5);
     });
