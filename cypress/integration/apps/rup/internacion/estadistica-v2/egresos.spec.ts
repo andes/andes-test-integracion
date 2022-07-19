@@ -80,11 +80,12 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
 
         cy.get('button').contains('EGRESO').click();
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
+        cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de egreso"', { text: fechaEgreso, skipEnter: true });
         cy.plexSelectAsync('label="Diagnostico Principal al egreso"', 'Neumo', '@getDiagnostico', 0);
         cy.plexSelectAsync('label="Otros Diagnósticos"', 'Otros trastornos', '@getDiagnostico', 0);
         cy.plexSelectAsync('label="Otras circunstancias que prolongan la internación"', 'Mutismo', '@getDiagnostico', 0);
-        cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha y hora de egreso"', { text: fechaEgreso, skipEnter: true });
+
 
         cy.plexButtonIcon('check').click();
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
