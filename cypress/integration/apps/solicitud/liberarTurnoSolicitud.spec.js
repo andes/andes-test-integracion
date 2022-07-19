@@ -72,7 +72,7 @@ describe('TOP: Liberar turno', () => {
         cy.toast('success');
         cy.wait('@getSolicitudes');
 
-        cy.get('[icon="lock-alert"]').click({ force: true });
+        cy.get('[icon="lock-alert"] > .btn').click({ force: true });
         cy.wait('@file-token').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
