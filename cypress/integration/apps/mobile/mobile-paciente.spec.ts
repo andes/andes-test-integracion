@@ -13,14 +13,13 @@ context('mobile paciente', () => {
     })
 
     beforeEach(() => {
-        cy.server();
-        cy.route('POST', '**/api/modules/mobileApp/login').as('login');
-        cy.route('POST', '**/api/auth/login').as('loginProfesional');
-        cy.route('GET', '**/api/core/tm/campanias').as('campanias');
-        cy.route('PUT', '**/api/modules/mobileApp/account').as('updateAccount');
-        cy.route('PUT', '**/api/modules/mobileApp/paciente/**').as('updatePaciente');
-        cy.route('GET', '**/api/modules/mobileApp/paciente/**').as('getProfile');
-        cy.route('GET', '**/api/modules/vacunas/**').as('getVacunas');
+        cy.intercept('POST', '**/api/modules/mobileApp/login').as('login');
+        cy.intercept('POST', '**/api/auth/login').as('loginProfesional');
+        cy.intercept('GET', '**/api/core/tm/campanias').as('campanias');
+        cy.intercept('PUT', '**/api/modules/mobileApp/account').as('updateAccount');
+        cy.intercept('PUT', '**/api/modules/mobileApp/paciente/**').as('updatePaciente');
+        cy.intercept('GET', '**/api/modules/mobileApp/paciente/**').as('getProfile');
+        cy.intercept('GET', '**/api/modules/vacunas/**').as('getVacunas');
         cy.viewport(550, 750);
     });
 
@@ -31,13 +30,14 @@ context('mobile paciente', () => {
             }
         })
         cy.goto("/mobile/home");
+        cy.wait(1000)
         cy.get('.nologin').click();
         cy.get('input').first().type('pepe@gmail.com');
         cy.get('#password').first().type('pepe');
         cy.get('.success').click();
-        cy.wait('@login').then((xhr) => {
-            expect(xhr.status).to.be.eq(422);
-            expect(typeof xhr.responseBody.token === 'string').to.be.eq(false);
+        cy.wait('@login').then(({response}) => {
+            expect(response.statusCode).to.eq(422);
+            expect(typeof response.body.token === 'string').to.be.eq(false);
         });
     });
 
@@ -52,9 +52,9 @@ context('mobile paciente', () => {
         cy.get('input').first().type('pacientevalidado@gmail.com');
         cy.get('#password').first().type('martin');
         cy.get('.success').click();
-        cy.wait('@login').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
+        cy.wait('@login').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(typeof response.body.token === 'string').to.be.eq(true);
         });
         cy.contains('Hola ' + paciente.nombre);
     });
@@ -70,28 +70,28 @@ context('mobile paciente', () => {
 
     it('Modificacion de datos de acceso', () => {
         cy.contains('Configurar cuenta').click({ force: true });
-        cy.get('input').first().clear();
-        cy.get('input').first().type('2944575757');
-        cy.get('.success').click();
-        cy.wait('@updateAccount').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.get('input').first().clear({ force: true }).type('2944575757', {force: true});
+        //cy.get('input').first().type('2944575757');
+        cy.get('.success').click({force: true});
+        cy.wait('@updateAccount').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
         cy.get('ion-menu-button').first().click({ force: true });
         cy.contains('Configurar cuenta').click({ force: true });
-        cy.focused().click();
+        cy.focused().click({ force: true });
         cy.get('[placeholder="Teléfono"]').should('have.value', '2944575757');
         cy.get('[placeholder="Correo Electrónico"]').should('have.value', 'pacientevalidado@gmail.com');
     });
 
     it('Cambiar contraseña', () => {
         cy.contains('Configurar cuenta').click({ force: true });
-        cy.get('.danger').click();
+        cy.get('.danger').click({ multiple: true });
         cy.get('[placeholder="Contraseña actual"]').type('martin');
         cy.get('[placeholder="Nueva contraseña"]').type('martin123');
         cy.get('[placeholder="Repita contraseña"]').type('martin123');
         cy.get('.success').contains('Actualizar').click();
-        cy.wait('@updateAccount').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@updateAccount').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
 
     });
@@ -99,8 +99,8 @@ context('mobile paciente', () => {
     it('Modificación de email', () => {
         cy.contains('Datos Personales').parent().click({ force: true });
         cy.get('ion-content').eq(2).click(500, 500, { force: true })
-        cy.wait('@getProfile').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getProfile').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
 
         cy.wait(500);
@@ -110,8 +110,8 @@ context('mobile paciente', () => {
         cy.get('ion-input[name="email"] input').first().type('nuevoemail@gmail.com', { force: true });
         cy.get('ion-button').click({ force: true });
 
-        cy.wait('@updatePaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@updatePaciente').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
         cy.get('ion-back-button').click({ force: true });
     });
@@ -130,8 +130,8 @@ context('mobile paciente', () => {
         cy.waitFor('[name="andes-agendas"]').then(() => {
 
             cy.get('[name="andes-agendas"]').click({ force: true });
-            cy.wait('@campanias').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@campanias').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
             });
             cy.get('ion-list').find('ion-icon').get('[name="calendar"]').should('have.length', 1);
             cy.get('ion-list').find('ion-icon').get('[name="calendar"]').click({ force: true });
@@ -145,9 +145,9 @@ context('mobile paciente', () => {
         cy.waitFor('[name="andes-vacuna"]').then(() => {
 
             cy.get('[name="andes-vacuna"]').click();
-            cy.wait('@getVacunas').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(1);
+            cy.wait('@getVacunas').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(response.body).to.have.length(1);
             });
 
             cy.get('.andes-list').find('li').should('have.length', 1);
@@ -157,7 +157,7 @@ context('mobile paciente', () => {
 
 
     it('No hay turnos programados', () => {
-        cy.route('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
+        cy.intercept('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
         cy.get('.circle-container',).within($container => {
             cy.wrap($container).find('[name="andes-turno"]').click();
         });
@@ -170,10 +170,10 @@ context('mobile paciente', () => {
     it('Dacion de turno', () => {
         cy.waitFor('[name="andes-turno"]').then(() => {
 
-            cy.route('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
-            cy.route('GET', '**/api/modules/mobileApp/turnos/agenda**').as('getAgenda');
-            cy.route('PATCH', '**api/modules/turnos/turno/**').as('patchTurno');
-            cy.route('GET', '**/agendasDisponibles**').as('agendasDisponibles1');
+            cy.intercept('GET', '**/api/modules/mobileApp/turnos?**').as('getTurnosMobile');
+            cy.intercept('GET', '**/api/modules/mobileApp/turnos/agenda**').as('getAgenda');
+            cy.intercept('PATCH', '**api/modules/turnos/turno/**').as('patchTurno');
+            cy.intercept('GET', '**/agendasDisponibles**').as('agendasDisponibles1');
 
             cy.task('database:seed:agenda', {
                 tipoPrestaciones: '598ca8375adc68e2a0c121b8',
@@ -196,11 +196,11 @@ context('mobile paciente', () => {
                 cy.url().should('include', 'mobile/turnos/prestaciones');
             });
 
-            cy.wait('@agendasDisponibles1').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.responseBody[0].agendas[0].estado).to.be.eq('publicada');
-                expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].conceptId).to.be.eq('391000013108');
-                expect(xhr.responseBody[0].agendas[0].tipoPrestaciones[0].term).to.be.eq('consulta de medicina general');
+            cy.wait('@agendasDisponibles1').then(({response}) => {
+                expect(response.statusCode).to.be.eq(200);
+                expect(response.body[0].agendas[0].estado).to.be.eq('publicada');
+                expect(response.body[0].agendas[0].tipoPrestaciones[0].conceptId).to.be.eq('391000013108');
+                expect(response.body[0].agendas[0].tipoPrestaciones[0].term).to.be.eq('consulta de medicina general');
             });
 
             cy.get('.andes-list').find('ion-icon').get('[name="chevron-forward-outline"]').click({ force: true });
