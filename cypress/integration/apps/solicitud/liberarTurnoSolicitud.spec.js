@@ -42,9 +42,11 @@ describe('TOP: Liberar turno', () => {
 
         cy.goto('/solicitudes', token);
         cy.plexButton("Nueva Solicitud").click();
+        
     });
 
     it('controlar estado de turno de solicitud liberado', () => {
+        cy.viewport(1920, 1080);
 
         let idPrestacion;
 
