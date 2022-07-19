@@ -31,19 +31,23 @@
             });
         });
 
-        beforeEach(() => {
-            cy.server()
-            cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
-            cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
-            cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
-            cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
+        it('Ingreso simplificado cambiando paciente e ingreso a sala comun', () => {
+            cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**' , req => {
+                delete req.headers['if-none-match']
+            }).as('busquedaPaciente');
+            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**' , req => {
+                delete req.headers['if-none-match']
+            }).as('getPaciente');
+            cy.intercept('GET', '**/api/auth/organizaciones**' , req => {
+                delete req.headers['if-none-match']
+            }).as('getOrganizaciones');
+            cy.intercept('GET', '**/api/modules/rup/internacion/camas?**' , req => {
+                delete req.headers['if-none-match']
+            }).as('getCamas');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
             cy.intercept('POST', '**/api/modules/rup/internacion/sala-comun/**').as('internarPaciente');
             cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.viewport(1920, 1080);
-        });
-
-        it('Ingreso simplificado cambiando paciente', () => {
             cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click({force: true});
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexButtonIcon('plus').click();
@@ -54,8 +58,8 @@
             });
 
             cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click({force: true});
-            cy.wait('@getPaciente').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@getPaciente').then(({response}) => {
+                expect(response.statusCode).to.be.eq(200);
             });
 
             cy.plexButtonIcon('arrow-left').click();
@@ -68,8 +72,8 @@
             });
 
             cy.get('paciente-listado plex-item').contains(pacientes[posPaciente + 1].nombre).click();
-            cy.wait('@getPaciente').then((xhr) => {
-                expect(xhr.status).to.eq(200);
+            cy.wait('@getPaciente').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
             });
 
             cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
@@ -84,9 +88,25 @@
             });
 
             cy.swal('confirm', 'Paciente internado');
-        });
+            
+            /////////// CAMBIOS PRUEBA
 
-        it('Ingreso a sala comun', () => {
+            cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**' , req => {
+                delete req.headers['if-none-match']
+            }).as('busquedaPaciente');
+            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**' , req => {
+                delete req.headers['if-none-match']
+            }).as('getPaciente');
+            cy.intercept('GET', '**/api/auth/organizaciones**' , req => {
+                delete req.headers['if-none-match']
+            }).as('getOrganizaciones');
+            cy.intercept('GET', '**/api/modules/rup/internacion/camas?**' , req => {
+                delete req.headers['if-none-match']
+            }).as('getCamas');
+            cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+            cy.intercept('POST', '**/api/modules/rup/internacion/sala-comun/**').as('internarPaciente');
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.viewport(1920, 1080);
             cy.get('table tr').contains(salas[0].nombre).first().click({force: true});
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexButtonIcon('plus').click({force: true});
@@ -111,6 +131,8 @@
             });
 
             cy.swal('confirm', 'Paciente internado');
+
         });
+        
     });
 });
