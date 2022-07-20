@@ -33,7 +33,7 @@
   "homepage": "https://github.com/andes/andes-test-integracion#readme",
   "devDependencies": {
     "@angular/cli": "^8.3.8",
-    "cypress": "^10.0.0",
+    "cypress": "^8.6.0",
     "cypress-file-upload": "^5.0.7",
     "cypress-select-tests": "^1.5.7",
     "mocha": "^4.1.0",
