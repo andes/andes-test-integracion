@@ -117,11 +117,11 @@ describe('CITAS - Gestor de Agendas', () => {
         cy.wait('@getAgendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.get('div.bloques-y-turnos').plexButtonIcon('information-variant').click();
-        cy.get('div.bloques-y-turnos').get('label').contains('Fecha');
-        cy.get('div.bloques-y-turnos').get('label').contains('Tipos de prestación');
-        cy.get('div.bloques-y-turnos').get('label').contains('Equipo de Salud');
-        cy.get('div.bloques-y-turnos').get('label').contains('Espacio físico');
+        cy.get('plex-layout-sidebar').plexButtonIcon('information-variant').click();
+        cy.get('plex-layout-sidebar').get('label').contains('Fecha');
+        cy.get('plex-layout-sidebar').get('label').contains('Tipos de prestación');
+        cy.get('plex-layout-sidebar').get('label').contains('Equipo de Salud');
+        cy.get('plex-layout-sidebar').get('label').contains('Espacio físico');
     });
 
     it('Visualizar botonera de acciones disponibles para agenda planificada', () => {
@@ -152,17 +152,17 @@ describe('CITAS - Gestor de Agendas', () => {
         cy.get('table tbody tr').first().click();
         cy.get("span").contains("En planificación")
 
-        cy.get('div.lista-turnos').plexButtonIcon('cog').click();
-        cy.get('div.bloques-y-turnos').get('plex-help').contains('Configuración inicial del bloque');
-        cy.get('div.bloques-y-turnos').get('plex-help').contains('4');
-        cy.get('div.bloques-y-turnos').get('plex-help').contains('Turnos del día');
-        cy.get('div.bloques-y-turnos').get('plex-help').contains('0');
-        cy.get('div.bloques-y-turnos').get('plex-help').contains('Turnos programados');
-        cy.get('div.bloques-y-turnos').get('plex-help').contains('0');
-        cy.get('div.bloques-y-turnos').get('plex-help').contains('Turnos profesional');
-        cy.get('div.bloques-y-turnos').get('plex-help').contains('0');
-        cy.get('div.bloques-y-turnos').get('plex-help').contains('Turnos con llave');
+        cy.get('plex-layout-sidebar').plexButtonIcon('cog').click();
+        cy.get('plex-layout-sidebar').get('plex-help').contains('Configuración inicial del bloque');
+        cy.get('plex-layout-sidebar').get('plex-help').contains('4');
+        cy.get('plex-layout-sidebar').get('plex-help').contains('Turnos del día');
+        cy.get('plex-layout-sidebar').get('plex-help').contains('0');
+        cy.get('plex-layout-sidebar').get('plex-help').contains('Turnos programados');
+        cy.get('plex-layout-sidebar').get('plex-help').contains('0');
+        cy.get('plex-layout-sidebar').get('plex-help').contains('Turnos profesional');
+        cy.get('plex-layout-sidebar').get('plex-help').contains('0');
+        cy.get('plex-layout-sidebar').get('plex-help').contains('Turnos con llave');
 
-        cy.get('table.table-striped tbody tr').eq(1).should('length', 1);
+        cy.get('table tbody tr').eq(1).should('length', 1);
     });
 })

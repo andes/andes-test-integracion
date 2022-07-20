@@ -158,7 +158,7 @@ describe('CITAS - Planificar Agendas', () => {
     it('suspender agenda disponible con turno', () => {
 
         cy.wait('@getAgendas');
-        cy.get('plex-layout-main table tbody td').plexLabel('examen pediátrico').click();
+        cy.get('table tbody td').plexLabel('examen pediátrico').click();
         cy.wait('@findAgenda').then(({response}) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.estado).to.be.eq('publicada');
@@ -176,7 +176,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.estado).to.be.eq('suspendida');
         });
-        cy.toast('success', 'La agenda cambió el estado a Suspendida');
+        cy.toast('success', 'La agenda cambió el estado a Suspendida').click();
         cy.get('table tbody td').contains('examen pediátrico').click();
         cy.wait('@findAgenda');
         cy.get('table tbody td').plexBadge('Suspendida');
@@ -209,7 +209,6 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.bloques[0].turnos[0].motivoSuspension).to.be.eq('agendaSuspendida');
         });
         cy.toast('success', 'La agenda cambió el estado a Suspendida');
-        cy.get('table tbody td').plexLabel('servicio de neumonología').click();
         cy.wait('@findAgenda').then(({response}) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.estado).to.be.eq('suspendida');
@@ -270,8 +269,8 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexButton('Gestor de Agendas').click();
 
         cy.wait('@getAgendas');
-        cy.get('section.d-flex').contains('servicio de neumonología').first().click(),{ force: true };
-        cy.get('.lista-turnos .badge-info').contains('Reasignado');
+        cy.get('table tbody td div').contains('servicio de neumonología').click();
+        cy.plexBadge('Reasignado');
     })
 
     it('suspender turno de agenda publicada', () => {
@@ -295,9 +294,9 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.bloques[0].restantesDelDia).to.be.eq(3);
             expect(response.body.bloques[0].turnos[1].estado).to.be.eq('disponible');
         });
-        cy.get('.lista-turnos').contains('Disponible').click();
-        cy.get('plex-layout-sidebar').plexButtonIcon('stop').click();
-        cy.plexButton('Confirmar').click();
+        cy.get('plex-layout-sidebar table tbody td div').contains('Disponible').click({ force: true });
+        cy.get('plex-layout-sidebar').plexButtonIcon('stop').click({ force: true });
+        cy.get('plex-layout-sidebar plex-help').plexButtonIcon('check').click({ force: true });
         cy.toast('alert', 'El turno seleccionado fue suspendido');
         cy.wait('@patchAgenda2').then(({response}) => {
             expect(response.statusCode).to.eq(200);
@@ -322,7 +321,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.bloques[0].turnos[2].estado).to.be.eq('disponible');
         });
         cy.wait('@getAgendas');
-        cy.get('.lista-turnos').contains('Turno suspendido (sin paciente)');
+        cy.get('plex-layout-sidebar table tbody td div').contains('suspendido(sin paciente)');
 
     })
 

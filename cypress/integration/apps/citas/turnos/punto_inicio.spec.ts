@@ -169,7 +169,7 @@ context('punto de inicio', () => {
 
     });
 
-    it('liberar turno', () => {
+    it('Liberar turno', () => {
         cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.route('GET', '**/api/modules/turnos/agenda/**').as('getTurnosAgenda');
         cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
@@ -184,8 +184,6 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-
-
         cy.get('plex-tabs').contains('Turnos').click({ force: true });
         cy.wait(1000)
 
@@ -196,16 +194,13 @@ context('punto de inicio', () => {
             expect(xhr.status).to.be.eq(200);
         });
 
-        cy.plexButton("Liberar").click();
+        cy.plexButtonIcon("check").click();
 
         cy.toast('success', 'El turno seleccionado fue liberado');
 
         cy.wait('@patchAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-
-
-
     });
 
     it('Historial', () => {
