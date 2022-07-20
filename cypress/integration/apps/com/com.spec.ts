@@ -178,7 +178,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.toast('error', 'Ya existe una derivación en curso para el paciente seleccionado');
     });
 
-    it.only('crear derivacion, aprobarla, asignarla, aceptarla, finalizarla', () => {
+    it('crear derivacion, aprobarla, asignarla, aceptarla, finalizarla', () => {
         seleccionarPaciente('2504195');
         cy.wait('@profesionalSolicitante').then(({response}) => {
             expect(response.statusCode).to.be.eq(200);
