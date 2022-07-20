@@ -8,6 +8,7 @@
   },
   "experimentalNetworkStubbing": true,
   "chromeWebSecurity": false,
+  "experimentalSessionAndOrigin": true,
   "modifyObstructiveCode": false,
   "projectId": "xr7gft",
   "viewportWidth": 1280,
