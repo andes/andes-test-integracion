@@ -29,7 +29,6 @@
             });
         });
         beforeEach(() => {
-            cy.server()
             cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**' , req => {
                 delete req.headers['if-none-match']
             }).as('busquedaPaciente');
