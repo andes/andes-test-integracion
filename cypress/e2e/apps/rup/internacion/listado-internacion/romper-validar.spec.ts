@@ -20,8 +20,7 @@ describe('Capa Estadistica - listado internacion', () => {
     });
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/core/term/cie10?**', [{
+        cy.intercept('GET', '**/api/core/term/cie10?**', [{
             id: '59bbf1ed53916746547cbdba',
             idCie10: 1187.0,
             idNew: 3568.0,
@@ -63,9 +62,9 @@ describe('Capa Estadistica - listado internacion', () => {
             "c2": false
         }]).as('getDiagnostico');
 
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**', true).as('getPaciente');
-        cy.route('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
-        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
+        cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
         cy.viewport(1920, 1080);
     });
 
@@ -73,19 +72,20 @@ describe('Capa Estadistica - listado internacion', () => {
         cy.get('table tbody tr').eq(0).click({ force: true });
         cy.plexButton("VALIDAR").click();
         cy.swal('confirm', 'Confirmar validación');
-        cy.wait('@patchPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.estados[xhr.response.body.estados.length - 1].tipo).to.be.eq('validada');
+        cy.wait('@patchPrestaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.estados[response.body.estados.length - 1].tipo).to.be.eq('validada');
         });
     });
 
     it('Romper internacion', () => {
+        cy.goto('/mapa-camas/listado-internacion/estadistica', token);
         cy.get('table tbody tr').eq(1).click({ force: true });
         cy.plexButton("ROMPER VALIDACION").click();
         cy.swal('confirm', 'Romper validación');
-        cy.wait('@patchPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.estados[xhr.response.body.estados.length - 1].tipo).to.be.eq('ejecucion');
+        cy.wait('@patchPrestaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.estados[response.body.estados.length - 1].tipo).to.be.eq('ejecucion');
         });
     });
 });
