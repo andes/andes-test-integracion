@@ -583,14 +583,14 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click();
         cy.plexText('label="Buscar paciente"', '2504200').click();
         cy.get('plex-item').last().click({ force: true });
-        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
+        cy.get('plex-list > .size-lg').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
         cy.get('plex-badge').plexIcon('arm').should('have.length', 1);
         cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('finalizada').click();
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
-        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
-        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').first().click();
+        cy.get('plex-list > .size-xl').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
+        cy.get('plex-list > .size-xl').contains('Solicitante: Huenchuman, Natalia').first().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 5);
     });
