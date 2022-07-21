@@ -61,7 +61,7 @@ describe('Filtros de Mapa Camas', () => {
     });
 
     beforeEach(() => {
-        cy.server();
+        cy.goto('/mapa-camas', token);
         cy.viewport(1920, 1080);
     });
 

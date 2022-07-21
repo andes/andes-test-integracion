@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 context('RUP - Punto de inicio', () => {
 
     let token;
@@ -18,14 +16,13 @@ context('RUP - Punto de inicio', () => {
     describe('listado de agendas y prestaciones', () => {
 
         beforeEach(() => {
-            cy.server();
-            cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
-            cy.route('POST', '**/api/modules/rup/prestaciones**').as('crearPrestacion');
-            cy.route('GET', '**/api/modules/rup/prestaciones**').as('prestaciones');
-            cy.route('GET', '**/api/modules/turnero/pantalla**').as('turnero');
-            cy.route('GET', '**/api/modules/rup/elementosRUP**').as('elementosRUP');
-            cy.route('GET', '**api/modules/cde/paciente**').as('paciente');
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '**/api/modules/turnos/agenda**').as('agendas');
+            cy.intercept('POST', '**/api/modules/rup/prestaciones**').as('crearPrestacion');
+            cy.intercept('GET', '**/api/modules/rup/prestaciones**').as('prestaciones');
+            cy.intercept('GET', '**/api/modules/turnero/pantalla**').as('turnero');
+            cy.intercept('GET', '**/api/modules/rup/elementosRUP**').as('elementosRUP');
+            cy.intercept('GET', '**api/modules/cde/paciente**').as('paciente');
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         });
 
         it('visualiza agendas sin turnos', () => {
@@ -42,6 +39,7 @@ context('RUP - Punto de inicio', () => {
             cy.get('plex-radio[name="agendas"] input').eq(1).click({
                 force: true
             });
+            cy.wait('@prestaciones')
             cy.get('tbody tr').contains('PEREZ, MARIA').click();
         });
 
