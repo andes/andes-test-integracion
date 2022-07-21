@@ -34,6 +34,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.intercept('POST', '**/api/modules/turnos/agenda**').as('postAgenda');
         cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.goto('/citas/gestor_agendas', token);
+        cy.viewport(1920, 1080);
     })
 
     it('editar agenda publicada', () => {
