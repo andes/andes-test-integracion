@@ -12,7 +12,7 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
                 vincularInformePrestacion: true,    // vinculamos el resumen con la prestación (informe)
                 organizacion: user.organizaciones[0],
                 configCamas: [
-                    { pacientes: [pacientes[0]], estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate(), unidadOrganizativa: "3191000013108" }
+                    { pacientes: [pacientes[2]], estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate(), unidadOrganizativa: "3191000013108" }
                 ]
             });
         });
@@ -74,7 +74,8 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
 
         cy.goto('/mapa-camas/listado-internacion-unificado/estadistica-v2', token);
         cy.url().should('include', 'listado-internacion-unificado');
-        cy.get('table tbody tr td').contains(pacientes[0].nombre).first().click();
+        //cy.wait('@getPrestaciones');
+        cy.get('table tbody tr td').contains(pacientes[2].nombre).first().click();
         cy.wait('@getPaciente');
         cy.wait('@getResumen');
 

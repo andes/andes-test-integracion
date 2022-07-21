@@ -12,7 +12,7 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
                 vincularInformePrestacion: true,    // vinculamos el resumen con la prestación (informe)
                 organizacion: user.organizaciones[0],
                 configCamas: [
-                    { pacientes: [pacientes[0]], estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate() }
+                    { pacientes: [pacientes[2]], estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate() }
                 ]
             }).then(camasCreadas => {
                 camas = camasCreadas;              
