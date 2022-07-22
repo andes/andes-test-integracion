@@ -271,6 +271,7 @@ describe('CITAS - Planificar Agendas', () => {
 
         cy.wait('@getAgendas');
         cy.get('table tbody td div').contains('servicio de neumonología').click();
+        cy.wait(1000)
         cy.plexBadge('Reasignado');
     })
 

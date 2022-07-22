@@ -114,9 +114,9 @@ function crearSalas(params) {
 export const permisosUsuario = [
     'turnos:*',
     'mpi:*',
-    'internacion:bed:create',
-    'internacion:bed:edit',
-    'internacion:bed:baja',
+    'internacion:cama:create',
+    'internacion:cama:edit',
+    'internacion:cama:baja',
     'internacion:mapaDeCamas',
     'internacion:ingreso',
     'internacion:egreso',
