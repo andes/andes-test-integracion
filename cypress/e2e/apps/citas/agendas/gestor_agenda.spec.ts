@@ -74,6 +74,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@getAgendas').then(({response}) => {
             expect(response.statusCode).to.eq(200);
         });
+        cy.wait(2000)
         cy.get('section.d-flex').contains('PRUEBA, ALICIA');
     })
 
