@@ -74,7 +74,6 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
 
         cy.goto('/mapa-camas/listado-internacion-unificado/estadistica-v2', token);
         cy.url().should('include', 'listado-internacion-unificado');
-        //cy.wait('@getPrestaciones');
         cy.get('table tbody tr td').contains(pacientes[0].nombre).first().click();
         cy.wait('@getPaciente');
         cy.wait('@getResumen');
@@ -90,19 +89,20 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.plexButtonIcon('check').click();
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
 
-        cy.wait('@patchCamas').then(({response}) => {
+        cy.wait('@patchCamas').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
         // verificamos sincronización entre resumen y prestación
-        cy.wait('@patchResumen').then(({response}) => {
+        cy.wait('@patchResumen').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(Cypress.moment(response.body.fechaEgreso).format('DD/MM/YYYY HH:mm')).to.be.eq((fechaEgreso))
         });
-        cy.wait('@patchPrestacion').then(({response}) => {
+        cy.wait('@patchPrestacion').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.ejecucion.registros).have.length(2);
             const fechaEgresoPrestacion = Cypress.moment(response.body.ejecucion.registros[1].valor.InformeEgreso.fechaEgreso).format('DD/MM/YYYY HH:mm');
             expect(fechaEgresoPrestacion).to.be.eq(fechaEgreso);
         });
+        cy.toast('success', 'Egreso guardado correctamente')
     })
 })
