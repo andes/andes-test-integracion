@@ -44,9 +44,9 @@ Cypress.Commands.add('loginCapa', (capa) => {
                 // Creo un paciente aparte para que cada capa use distintos pacientes
                 return  cy.task('database:create:paciente', {
                     template: 'validado',
-                    nombre: 'Paciente',
-                    apellido: 'Medica',
-                    documento: '456789123'
+                    nombre: capa==='medica' ? 'Paciente Medica': 'Paciente Enfermeria',
+                    apellido: capa==='medica' ? 'Medica': 'Enfermeria',
+                    documento: capa==='medica' ? '12345678': '87654321',
                 }).then(patient=>{
                     pacientes.push(patient);
                     return [user, token, pacientes];
