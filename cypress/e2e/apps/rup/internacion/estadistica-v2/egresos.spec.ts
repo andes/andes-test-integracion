@@ -80,6 +80,8 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.wait('@getResumen');
 
         cy.get('button').contains('EGRESO').click();
+        cy.get('button').contains('MOVIMIENTOS').click();
+        cy.get('button').contains('EGRESO').click();
         cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha y hora de egreso"', { text: fechaEgreso, skipEnter: true });
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
