@@ -2,15 +2,18 @@
 
 const complete = (dto) => {
     if (dto.fecha) {
-        cy.plexDatetime('label="Fecha"', dto.fecha);
+        cy.plexDatetime('label="Fecha"', { clear: true, skipEnter: true });
+        cy.plexDatetime('label="Fecha"', { text: dto.fecha, skipEnter: true });
     }
 
     if (dto.horaInicio) {
-        cy.plexDatetime('label="Inicio"', dto.horaInicio);
+        cy.plexDatetime('label="Inicio"', { clear: true, skipEnter: true });
+        cy.plexDatetime('label="Inicio"', { text: dto.horaInicio, skipEnter: true });
     }
 
     if (dto.horaFin) {
-        cy.plexDatetime('label="Fin"', dto.horaFin);
+        cy.plexDatetime('label="Fin"', { clear: true, skipEnter: true });
+        cy.plexDatetime('label="Fin"', { text: dto.horaFin, skipEnter: true });
     }
 
     if (dto.descripcion) {
@@ -95,11 +98,6 @@ context('Planificacion Agendas', () => {
         cy.route('POST', '**/api/modules/turnos/agenda/clonar/**').as('clonar');
     });
 
-
-
-    /**
-     * QUEDA PENDIENTE UN TEMA CON EL PLEX-SELECT
-     */
     it('Guardar agenda del día con un solo bloque', () => {
         complete({
             fecha: cy.today(),
@@ -108,7 +106,7 @@ context('Planificacion Agendas', () => {
         });
 
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
-        cy.plexSelectAsync('label="Equipo de Salud"', 'CORTES JAZMIN', '@profesionales', 0);
+        cy.plexSelectAsync('label="Equipo de Salud"', 'JAZMIN', '@profesionales', 0);
 
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
@@ -313,7 +311,7 @@ context('Planificacion Agendas', () => {
         cy.contains('La agenda se guardó correctamente');
     });
 
-    it('crear agenda con turnos programados y turnos mobile', () => {
+    it('Crear agenda con turnos programados y turnos mobile', () => {
 
         complete({
             fecha: Cypress.moment().add(1, 'days').format('DD/MM/YYYY'),
@@ -463,11 +461,8 @@ context('Planificacion Agendas', () => {
             },
         });
 
-        cy.wait(1000);
-        cy.plexButtonIcon('plus').click();
-        cy.wait(1000);
-        cy.get('div[class="col-7 h-100"]').find('plex-box').find('div[class="row"]')
-            .find('div[class="col-6"]').eq(5).find('plex-bool').eq(1).click()
+        cy.get('plex-layout-main').plexButtonIcon('plus').click();
+        cy.get('plex-layout-main plex-list').find('plex-item').contains('10:00')
 
         complete({
             bloque: {
@@ -478,8 +473,9 @@ context('Planificacion Agendas', () => {
             }
         });
 
-        cy.plexButton("Guardar").click();
+        cy.get('plex-layout-sidebar').find('plex-grid').find('plex-bool').eq(1).click();
 
+        cy.plexButton("Guardar").click();
 
         cy.wait('@create').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
@@ -570,11 +566,13 @@ context('Planificacion Agendas', () => {
         cy.contains('El valor debe ser mayor a 1');
     });
 
-    it('crear agenda dinamica en una institucion', () => {
+    it('Crear agenda dinamica en una institucion', () => {
         cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
-        cy.plexDatetime('name="modelo.fecha"', cy.today());
-        cy.plexDatetime('name="modelo.horaInicio"', "08:00");
-        cy.plexDatetime('name="modelo.horaFin"', "16:00");
+        complete({
+            fecha: cy.today(),
+            horaInicio: "08:00",
+            horaFin: "16:00",
+        });
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
         cy.plexBool('label="Dinámica"', true);
         cy.plexBool('name="espacioFisicoPropios"', false);
