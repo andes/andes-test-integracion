@@ -123,13 +123,13 @@ context('RUP - Punto de inicio', () => {
             if (typeAgenda !== 'no-nominalizada') {
                 it('Anular inicio de prestación', () => {
                     cy.goto('/rup', token);
-                    cy.wait('@agendas');
-                    cy.wait('@prestaciones');
-
-                    cy.get('table').first().as('tablaAgendas');
-
-                    cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
-
+                    cy.wait('@agendas').then((xhr) => {
+                        expect(xhr.status).to.be.eq(200);
+                    });
+                    cy.wait('@prestaciones').then((xhr) => {
+                        expect(xhr.status).to.be.eq(200);
+                    });
+                    cy.get ('table tbody tr').eq(agendaIndex).click();
                     cy.plexButton('INICIAR PRESTACIÓN').click();
                     cy.swal('confirm');
                     cy.wait('@crearPrestacion');
@@ -198,7 +198,7 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@prestaciones');
 
                     cy.get('table').first().as('tablaAgendas');
-                    cy.get('@tablaAgendas').find('tbody tr').eq(1).click();
+                    cy.get('@tablaAgendas').find('tbody tr').eq(1).click({force:true});
                     cy.plexButton('CONTINUAR REGISTRO').click();
 
 
