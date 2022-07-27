@@ -16,6 +16,7 @@
 // Import commands.js using ES2015 syntax:
 
 const moment = require('moment');
+const resizeObserverLoopErrRe = /^[^(ResizeObserver loop limit exceeded)]/;
 Cypress.moment = moment;
 
 import './commands'
@@ -48,6 +49,12 @@ Cypress.on('test:after:run', (test, runnable) => {
     }
 })
 
+Cypress.on('uncaught:exception', (err) => {
+    if (resizeObserverLoopErrRe.test(err.message)) {
+        return false
+    }
+})
+
 Cypress.on('window:before:load', win => {
     cy.stub(win.console, 'error', (error, mensaje) => {
         if (error.toString().includes('cordova_not_available')) {
@@ -55,4 +62,6 @@ Cypress.on('window:before:load', win => {
         }
         throw mensaje;
     })
+
+    
 })

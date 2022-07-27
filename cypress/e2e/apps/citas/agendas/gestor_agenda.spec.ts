@@ -34,6 +34,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.intercept('POST', '**/api/modules/turnos/agenda**').as('postAgenda');
         cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.goto('/citas/gestor_agendas', token);
+        cy.viewport(1920, 1080);
     })
 
     it('editar agenda publicada', () => {
@@ -73,6 +74,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@getAgendas').then(({response}) => {
             expect(response.statusCode).to.eq(200);
         });
+        cy.wait(2000)
         cy.get('section.d-flex').contains('PRUEBA, ALICIA');
     })
 
@@ -270,6 +272,7 @@ describe('CITAS - Planificar Agendas', () => {
 
         cy.wait('@getAgendas');
         cy.get('table tbody td div').contains('servicio de neumonología').click();
+        cy.wait(1000)
         cy.plexBadge('Reasignado');
     })
 

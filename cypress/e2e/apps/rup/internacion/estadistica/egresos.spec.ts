@@ -17,8 +17,7 @@ describe('Capa Estadistica - Egresos', () => {
     });
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/core/term/cie10?**', [{
+        cy.intercept('GET', '**/api/core/term/cie10?**', [{
             id: '59bbf1ed53916746547cbdba',
             idCie10: 1187.0,
             idNew: 3568.0,
@@ -59,11 +58,11 @@ describe('Capa Estadistica - Egresos', () => {
             "descripcion": "05.Trastornos mentales y del comportamiento (F00-F99)",
             "c2": false
         }]).as('getDiagnostico');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
-        cy.route('GET', '**/api/modules/rup/internacion/camas/historial?**').as('getHistorial');
-        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
-        cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
+        cy.intercept('GET', '**/api/modules/rup/internacion/camas/historial?**').as('getHistorial');
+        cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
+        cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.viewport(1920, 1080);
     });
 
@@ -81,8 +80,8 @@ describe('Capa Estadistica - Egresos', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@patchPrestaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.wait('@getHistorial');
         
@@ -90,6 +89,7 @@ describe('Capa Estadistica - Egresos', () => {
     });
 
     it('Editar egreso', () => {
+        cy.goto('/mapa-camas', token);
         cy.get('plex-badge span plex-datetime div div span button').click()
         const day = (Cypress.moment().date() < 10) ? '0' + Cypress.moment().date() : '' + Cypress.moment().date();
         const hour = (Cypress.moment().hour() - 1);
@@ -107,8 +107,8 @@ describe('Capa Estadistica - Egresos', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@patchPrestaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
 
         cy.swal('confirm', 'Los datos se actualizaron correctamente');

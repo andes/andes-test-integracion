@@ -25,12 +25,11 @@ const moment = require('moment');
         });
 
         beforeEach(() => {
-            cy.server();
-            cy.route('GET', '**/api/modules/rup/internacion/camas/historial?**').as('getHistorial');
-            cy.route('GET', '**api/modules/rup/internacion/medica/**').as('getHistorial2');
-            cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
-            cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
-            cy.route('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('egresoSalaComun');
+            cy.intercept('GET', '**/api/modules/rup/internacion/camas/historial?**').as('getHistorial');
+            cy.intercept('GET', '**api/modules/rup/internacion/medica/**').as('getHistorial2');
+            cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
+            cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+            cy.intercept('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('egresoSalaComun');
 
             cy.viewport(1920, 1080);
         });
@@ -52,6 +51,7 @@ const moment = require('moment');
         });
 
         it('Egreso en Sala Comun', () => {
+            cy.goto('/mapa-camas', token);
             cy.getCama(pacientes[0].apellido).click();
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexButtonIcon('menos').click();
@@ -63,8 +63,8 @@ const moment = require('moment');
 
             cy.plexButtonIcon('check').click();
 
-            cy.wait('@egresoSalaComun').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@egresoSalaComun').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
             });
             cy.toast('success', 'Egreso guardado correctamente');
             cy.getCama().should('have.length', 2);

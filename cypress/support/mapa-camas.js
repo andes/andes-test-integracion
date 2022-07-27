@@ -5,11 +5,9 @@ Cypress.Commands.add('getCama', (name) => {
         return cy.get('plex-layout-main table tbody tr');
     }
 });
-
 Cypress.Commands.add('getRegistrosMedicos', () => {
     cy.get('plex-layout-sidebar table tbody tr ');
 })
-
 Cypress.Commands.add('createUsuarioByCapa', (capa) => {
     let arrayPermisos = [...permisosUsuario];
     let usaEstadisticaV2 = false;
@@ -33,24 +31,30 @@ Cypress.Commands.add('createUsuarioByCapa', (capa) => {
         }
     );
 });
-
 Cypress.Commands.add('deshacerInternacion', (completa = false) => {
     const opcionDeshacer = completa ? 'Toda la internación' : 'Último movimiento';
     cy.get('plex-layout-sidebar plex-title').eq(1).plexDropdown('tooltip="Deshacer Internacion"').click();
     cy.contains(opcionDeshacer).click();
     cy.swal('confirm', '¿Quiere deshacer esta internación?');
 })
-
 Cypress.Commands.add('loginCapa', (capa) => {
     return cy.createUsuarioByCapa(capa).then((user) => {
         return cy.login(user.usuario, user.password, user.organizaciones[0]._id).then((token) => {
             return cy.task('database:seed:paciente').then(pacientes => {
-                return [user, token, pacientes];
+                // Creo un paciente aparte para que cada capa use distintos pacientes
+                return  cy.task('database:create:paciente', {
+                    template: 'validado',
+                    nombre: capa==='medica' ? 'Paciente Medica': 'Paciente Enfermeria',
+                    apellido: capa==='medica' ? 'Medica': 'Enfermeria',
+                    documento: capa==='medica' ? '12345678': '87654321',
+                }).then(patient=>{
+                    pacientes.push(patient);
+                    return [user, token, pacientes];
+                });
             });
         })
     })
 });
-
 Cypress.Commands.add('factoryInternacion', (params = {}) => {
     const maquinaEstados = { ...params.maquinaEstados } || {};
     let organizacion = params.organizacion ? params.organizacion._id : null;
@@ -58,14 +62,12 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica', organizacion});
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'medica', organizacion});
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria', organizacion});
-
     if (params.sala) {
         return crearSalas(params);
     } else {
         return crearCamas(params);
     }
 });
-
 function crearCamas(params) {
     const camas = [];
     for (const elemento of params.configCamas) {
@@ -91,14 +93,12 @@ function crearCamas(params) {
     }
     return cy.taskN('database:create:cama', camas);
 }
-
 function crearSalas(params) {
     const salas = [];
     for (const elemento of params.config) {
         const count = (elemento.pacientes) ? elemento.pacientes.length : (elemento.count || 1);
         for (let i = 0; i < count; i++) {
             const paciente = (elemento.pacientes) ? elemento.pacientes[i] : null;
-
             salas.push({
                 estado: elemento.estado,
                 unidadesOrganizativas: elemento.unidadesOrganizativas,
@@ -111,7 +111,6 @@ function crearSalas(params) {
     }
     return cy.taskN('database:create:sala', salas);
 }
-
 export const permisosUsuario = [
     'turnos:*',
     'mpi:*',
@@ -139,4 +138,3 @@ export const permisosUsuario = [
     'usuarios:*',
     'reportes:*',
 ];
-

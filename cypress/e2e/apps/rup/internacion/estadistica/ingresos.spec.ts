@@ -18,12 +18,12 @@ describe('Capa Estadistica - Ingresos', () => {
     });
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
-        cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
-        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+        cy.server()
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
+        cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
+        cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.route('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
             "conceptId": "1234",
             "term": "Enfermeria en Rehabilitación",
@@ -43,18 +43,18 @@ describe('Capa Estadistica - Ingresos', () => {
             "codigo": "132"
         }]).as('getOcupacion')
 
-        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
-        cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+        cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
+        cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.viewport(1920, 1080);
     });
 
     it('Ingreso completo cambiando paciente', () => {
-        cy.get('table tr').plexButtonIcon('plus').click();
+        cy.get('*[class="adi adi-plus ii-light sm"]').click({force:true});
 
         cy.plexText('name="buscador"', pacientes[0].nombre);
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody.length).to.be.gte(1);
+        cy.wait('@busquedaPaciente').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.length).to.be.gte(1);
         });
 
         cy.get('paciente-listado plex-item').contains(pacientes[0].nombre).click();
@@ -62,14 +62,14 @@ describe('Capa Estadistica - Ingresos', () => {
 
         cy.plexText('name="buscador"').clear();
         cy.plexText('name="buscador"', pacientes[1].nombre);
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody.length).to.be.gte(1);
+        cy.wait('@busquedaPaciente').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.length).to.be.gte(1);
         });
 
         cy.get('paciente-listado plex-item').contains(pacientes[1].nombre).click();
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getPaciente').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
 
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
@@ -86,14 +86,15 @@ describe('Capa Estadistica - Ingresos', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchCamas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@patchCamas').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
 
         cy.swal('confirm', 'Paciente internado');
     });
 
     it('Editar ingreso', () => {
+        cy.goto('/mapa-camas', token);
         cy.get('table tbody tr td').contains(pacientes[0].nombre).first().click();
 
         cy.get('plex-tabs ul li').eq(1).click();
@@ -114,8 +115,8 @@ describe('Capa Estadistica - Ingresos', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@patchPrestaciones').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
 
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
