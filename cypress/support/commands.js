@@ -32,11 +32,12 @@ Cypress.Commands.add("login", (usuario, password, id) => {
         method: 'POST',
         url: Cypress.env('API_SERVER') + '/api/auth/login',
         headers: {
-            'Connection': "close"
+            'Connection': "keep-alive",
+            'Keep-Alive': 'timeout=5, max=1000'
         },
         body:{
         usuario,
-        password
+        password,
         }
     }).then((response) => {
         token = response.body.token;
