@@ -33,6 +33,8 @@ describe('CITAS - Planificar Agendas', () => {
         cy.intercept('POST', '**/api/modules/turnos/agenda/clonar/**').as('clonar');
         cy.intercept('POST', '**/api/modules/turnos/agenda**').as('postAgenda');
         cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
+        cy.intercept('GET', '**/api/modules/turnos/espacioFisico**').as('getEspacioFisico');
+        cy.intercept('GET', '**/api/modules/turnos/institucion**').as('institucion');
         cy.goto('/citas/gestor_agendas', token);
         cy.viewport(1920, 1080);
     })
@@ -84,7 +86,15 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@getAgendas').then(({response}) => {
             expect(response.statusCode).to.eq(200);
         });
-        cy.get('table tbody td').contains('HUENCHUMAN').click();
+        cy.get('table tbody tr td').first().click();
+        cy.wait('@findAgenda').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.estado).to.be.eq('planificacion');
+            expect(response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
+            expect(response.body.profesionales[0].id).to.be.eq('5d02602588c4d1772a8a17f8');
+            expect(response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b9');
+
+        });
         cy.get('table tbody tr').plexButtonIcon('pencil').first().click({ force: true });
         cy.wait('@findAgenda').then(({response}) => {
             expect(response.statusCode).to.eq(200);
@@ -97,7 +107,7 @@ describe('CITAS - Planificar Agendas', () => {
 
         const manana = Cypress.moment().add(1, 'days').format('DD/MM/YYYY');
 
-        cy.plexDatetime('label="Fecha"', '{selectall}{backspace}' + manana);
+        cy.plexDateTimeDinamico('Fecha', '{selectall}{backspace}' + manana);
         cy.wait('@getAgendas').then(({response}) => {
             expect(response.statusCode).to.eq(200);
         });
@@ -329,12 +339,11 @@ describe('CITAS - Planificar Agendas', () => {
     })
 
     it('editar agenda dinamica con institucion', () => {
-        cy.intercept('GET', '**/api/modules/turnos/espacioFisico**').as('getEspacioFisico');
-        cy.intercept('GET', '**/api/modules/turnos/institucion**').as('institucion');
-        cy.plexButton("Crear agenda").click();
-        cy.plexDatetime('name="modelo.fecha"', cy.today());
-        cy.plexDatetime('name="modelo.horaInicio"', "08:00");
-        cy.plexDatetime('name="modelo.horaFin"', "16:00");
+    
+        cy.plexButton("Crear agenda").click({force:true});
+        cy.plexDateTimeDinamico('Fecha', cy.today());
+        cy.plexDateTimeDinamico('Inicio', "08:00");
+        cy.plexDateTimeDinamico('Fin', "16:00");
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
         cy.plexBool('label="Dinámica"', true);
         cy.plexBool('name="espacioFisicoPropios"', false);
@@ -358,11 +367,10 @@ describe('CITAS - Planificar Agendas', () => {
     })
 
     it('clonar agenda con una institucion asignada', () => {
-        cy.intercept('GET', '**/api/modules/turnos/institucion**').as('institucion');
         cy.plexButton("Crear agenda").click();
-        cy.plexDatetime('name="modelo.fecha"', cy.today());
-        cy.plexDatetime('name="modelo.horaInicio"', "08:00");
-        cy.plexDatetime('name="modelo.horaFin"', "16:00");
+        cy.plexDateTimeDinamico('Fecha', cy.today());
+        cy.plexDateTimeDinamico('Inicio', "08:00");
+        cy.plexDateTimeDinamico('Fin', "16:00");
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
         cy.plexBool('label="Dinámica"', true);
         cy.plexBool('name="espacioFisicoPropios"', false);
