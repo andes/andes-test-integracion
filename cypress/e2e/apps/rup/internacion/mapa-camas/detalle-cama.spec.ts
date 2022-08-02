@@ -58,10 +58,9 @@ describe('Mapa Camas - Detalle de Cama', () => {
         cy.wait('@getCama').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-
         // VERIF. NOMBRE
         cy.get('plex-detail section div').eq(1).find('div').should(($div) => {
-            expect($div.get(0).innerText).to.equal(cama.cama.nombre);
+            expect($div.get(3).innerText).to.equal(cama.cama.nombre);
         });
 
         // VERIF. ESTADO
@@ -125,12 +124,12 @@ describe('Mapa Camas - Detalle de Cama', () => {
 
         // VERIF. NOMBRE - APELLIDO PACIENTE
         cy.get('plex-detail').eq(1).find('section').find('div').eq(1).find('div').should(($div) => {
-            expect($div.get(0).innerText).to.equal(`${paciente.apellido}, ${paciente.nombre}`);
+            expect($div.get(1).innerText).to.equal(`${paciente.apellido}, ${paciente.nombre}`);
         });
 
         // VERIF. DOCUMENTO
-        cy.get('plex-detail').eq(1).find('section').find('div').eq(1).find('div').eq(1).should(($div) => {
-            expect($div.get(0).innerText.split('.').join("").trim()).to.equal(paciente.documento);
+        cy.get('plex-detail').eq(1).find('section').find('div').eq(1).find('div').should(($div) => {
+            expect($div.get(2).innerText.split('.').join("").trim()).to.equal(paciente.documento);
         });
 
         // VERIF. SEXO
