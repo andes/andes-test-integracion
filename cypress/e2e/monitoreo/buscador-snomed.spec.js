@@ -1,20 +1,3 @@
-const retryableBefore5 = (fn) => {
-    let shouldRun = true;
-    beforeEach(() => {
-      if (!shouldRun) return;
-      shouldRun = false;
-      fn();
-    });
-
-    Cypress.on('test:after:run', (result) => {
-      if (result.state === 'failed') {
-        if (result.currentRetry < result.retries) {
-          shouldRun = true;
-        }
-      }
-    });
-  };
-
 context('Buscador de conceptos SNOMED', () => {
     let token;
     const conceptAutocitacion = [
@@ -27,7 +10,7 @@ context('Buscador de conceptos SNOMED', () => {
         }
     ];
 
-    retryableBefore5(() => {
+    before(() => {
         cy.login('38906735', 'asd').then(t => {
             token = t;
         });

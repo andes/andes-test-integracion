@@ -1,20 +1,5 @@
-const retryableBefore1 = (fn) => {
-    let shouldRun = true;
-    beforeEach(() => {
-      if (!shouldRun) return;
-      shouldRun = false;
-      fn();
-    });
+/// <reference types="Cypress" />
 
-    Cypress.on('test:after:run', (result) => {
-      if (result.state === 'failed') {
-        if (result.currentRetry < result.retries) {
-          shouldRun = true;
-        }
-      }
-    });
-  };
-  
 context('auditoria', () => {
     let token;
     let validado1;
@@ -24,7 +9,7 @@ context('auditoria', () => {
     let sinDocumento1;
     let sinDocumento2;
 
-    retryableBefore1(() => {
+    before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;

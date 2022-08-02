@@ -1,22 +1,5 @@
 /// <reference types="Cypress" />
 
-const retryableBefore4 = (fn) => {
-    let shouldRun = true;
-    beforeEach(() => {
-      if (!shouldRun) return;
-      shouldRun = false;
-      fn();
-    });
-
-    Cypress.on('test:after:run', (result) => {
-      if (result.state === 'failed') {
-        if (result.currentRetry < result.retries) {
-          shouldRun = true;
-        }
-      }
-    });
-  };
-
 context('Registro novedades', () => {
     let token;
     let modulo = {
@@ -31,7 +14,7 @@ context('Registro novedades', () => {
         ]
     }
 
-    retryableBefore4(() => {
+    before(() => {
         cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
