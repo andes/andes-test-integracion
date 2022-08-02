@@ -2,11 +2,28 @@
 let formResources = require('../../../../../data/formResources/formResources.json');
 formResources = JSON.parse(JSON.stringify(formResources));
 
+const retryableBefore3 = (fn) => {
+    let shouldRun = true;
+    beforeEach(() => {
+      if (!shouldRun) return;
+      shouldRun = false;
+      fn();
+    });
+
+    Cypress.on('test:after:run', (result) => {
+      if (result.state === 'failed') {
+        if (result.currentRetry < result.retries) {
+          shouldRun = true;
+        }
+      }
+    });
+  };
+
 context('Ficha Epidemiológica', () => {
     let token;
     let form;
 
-    before(() => {
+    retryableBefore3(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
