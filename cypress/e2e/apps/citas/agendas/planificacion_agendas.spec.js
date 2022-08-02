@@ -613,7 +613,6 @@ context('Planificacion Agendas', () => {
         }
 
         cy.get('table').contains(hoy.format('D')).click({ force: true });
-        cy.get('table').contains(hoy.format('D')).click({ force: true });
         cy.plexButton("Clonar Agenda").click();
         cy.swal('confirm');
         cy.wait('@clonar');
