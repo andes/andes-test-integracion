@@ -27,13 +27,16 @@ context('Creacion de usuarios para profesionales', () => {
             }
         });
         cy.route('POST', '**/api/core/tm/profesionales/validar').as('pacienteValidado');
+        cy.plexText('name="nombre"', 'MARIA');
+        cy.plexText('name="apellido"', 'PEREZ');
         cy.plexText('name="documento"', '4466777');
         cy.plexSelectType('label="Seleccione sexo"', 'femenino');
+        cy.plexDatetime('name="fechaNacimiento"', "01/01/1990");
         cy.plexButton("VALIDAR").click();
         cy.wait('@pacienteValidado').then((xhr) => {
             expect(xhr.response.body.profesional.documento).to.be.eq('4466777');
             expect(xhr.response.body.profesional.apellido).to.be.eq('PEREZ');
-            expect(xhr.response.body.profesional.sexo).to.be.eq('Femenino');
+            expect(xhr.response.body.profesional.sexo).to.be.eq('femenino');
         });
         cy.plexText('name="email"', 'prueba@gmail.com');
 
