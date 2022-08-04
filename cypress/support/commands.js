@@ -28,7 +28,19 @@ import 'cypress-file-upload';
 
 Cypress.Commands.add("login", (usuario, password, id) => {
     let token;
+    
     return cy.request({
+        method: 'GET',
+        url: Cypress.env('API_SERVER') + '/api/core/status',
+    }).then(
+        (response) => {
+            cy.log(JSON.stringify(response))
+            expect(response.body.API).to.be.eq('OK')
+            expect(response.body.DB).to.be.eq('OK')
+            expect(response.body.PUCO).to.be.eq('OK')
+        })
+    .then(() => {
+        cy.request({
         method: 'POST',
         url: Cypress.env('API_SERVER') + '/api/auth/login',
         body:{
@@ -60,6 +72,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
             });
         });
     });
+});
 });
 
 Cypress.Commands.add('goto', (url, token, hudsToken, location) => {
