@@ -1,19 +1,11 @@
-version: '2.1'
+version: '2'
 services:
   db:  
     image: mongo:5.0
-    healthcheck:
-        test: ["CMD","mongo", "--eval", "db.adminCommand('ping')"]
-        interval: 10s
-        timeout: 10s
-        retries: 5
   nginx:  
     ipc: host 
     image: "andesnqn/nginx:${APP}"
   api:
-    depends_on:
-      db:
-        condition: service_healthy
     ipc: host  
     image: "andesnqn/api:${API}"
     entrypoint: ["node", "index.js"]
