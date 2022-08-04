@@ -6,6 +6,8 @@ services:
     ipc: host 
     image: "andesnqn/nginx:${APP}"
   api:
+    depends_on:
+      - db
     ipc: host  
     image: "andesnqn/api:${API}"
     entrypoint: ["node", "index.js"]
