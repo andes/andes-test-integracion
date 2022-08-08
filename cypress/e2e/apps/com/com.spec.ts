@@ -335,8 +335,8 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
         cy.wait('@getDerivaciones')
-        cy.get(':nth-child(3) > .item > .item-row > .item-list > :nth-child(2) > .plex-label > .d-flex > small').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
-        cy.get(':nth-child(3) > .item > .item-row > .item-list > :nth-child(2) > .plex-label > .d-flex > small').contains('Solicitante: PRUEBA, ALICIA').first().click();
+        cy.get('.d-flex > small').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
+        cy.get('.d-flex > small').contains('Solicitante: PRUEBA, ALICIA').first().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 5);
     });
