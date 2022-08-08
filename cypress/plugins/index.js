@@ -12,8 +12,6 @@
 // the project's config changing)
 
 
-const selectTestsWithGrep = require('cypress-select-tests/grep');
-
 const { seedAgenda } = require('./seed-agenda');
 const { seedNomivac } = require('./seed-nomivac');
 const { seedPrestacion } = require('./seed-prestaciones');
