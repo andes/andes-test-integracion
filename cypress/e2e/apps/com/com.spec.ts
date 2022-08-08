@@ -334,6 +334,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
+        cy.wait('@getDerivaciones')
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').first().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
