@@ -1,5 +1,4 @@
 Cypress.Commands.add('seed', () => {
-    cy.log('----------------------------------')
     const develop = Cypress.env('ENVIRONMENT') === 'develop';
     if (develop) {
         cy.task('database:initial');
