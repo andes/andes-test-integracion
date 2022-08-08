@@ -62,9 +62,9 @@ context('Indicaciones', () => {
             expect(response.statusCode).to.eq(200)
         });
         cy.get('[label="INDICACIONES"]').click({force:true})
-        cy.wait('@getResumen').then(({response}) => {
-            expect(response.statusCode).to.eq(200)
-        });
+        //cy.wait('@getResumen').then(({response}) => {
+           // expect(response.statusCode).to.eq(200)
+        //});
     });
 
    
