@@ -32,8 +32,6 @@ const { createElementosRequeridos } = require('./seed-elementos-rup-requeridos')
 
 module.exports = (on, config) => {
 
-    on('file:preprocessor', selectTestsWithGrep(config))
-
     const mongoUri = config.env.MONGO_URI || 'mongodb://localhost:27066/andes';
 
     on('task', {
