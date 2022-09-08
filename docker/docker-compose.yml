@@ -2,6 +2,8 @@ version: '2'
 services:
   db:  
     image: mongo:5.0
+    ports:
+      - 27017:27017
   nginx:  
     ipc: host 
     image: "andesnqn/nginx:${APP}"
