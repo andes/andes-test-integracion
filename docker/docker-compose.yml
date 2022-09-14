@@ -10,7 +10,7 @@ services:
     image: "andesnqn/nginx:${APP}"
   api:
     ipc: host  
-    image: "andesnqn/api:${API}"
+    image: "docker-registry.andes.gob.ar:30443/andesnqn/api:${API}"
     entrypoint: ["/wait-for-it.sh", "db:27017", "--", "node", "index.js"]
     environment:
       APP_KEY: "5gCYFZPp3dfA2m5UNElVkgRLFcFnlele"
