@@ -1,4 +1,4 @@
-import '../e2e/apps/rup/punto-inicio/punto-inicio-sidebar.spec.js'
+import '../e2e/apps/rup/punto-inicio/punto-inicio-sidebar.spec.ts'
 import '../e2e/apps/citas/agendas/gestor_agenda.spec.ts'
 import '../e2e/apps/citas/turnos/punto_inicio.spec.ts'
 import '../e2e/apps/rup/internacion/medica/ingresos.spec.ts'
