@@ -16,6 +16,7 @@ const collectionList = [
     'internacionCamas',
     'internacionCamaEstados',
     'internacionEstados',
+    'internacionPacienteResumen',
     'internacionCenso',
     'internacionSalaComun',
     'internacionSalaComunMovimientos',
