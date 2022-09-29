@@ -25,6 +25,7 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.intercept('PATCH', '**/api/modules/rup/internacion/internacion-resumen/**').as('patchResumen');
         cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+        cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
         cy.intercept('GET', '**/api/core/term/cie10?**', [{
             id: '59bbf1ed53916746547cbdba',
             idCie10: 1187.0,
@@ -93,7 +94,7 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.plexButtonIcon('check').click();
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
 
-        cy.wait('@patchCamas').then(({ response }) => {
+        cy.wait('@patchCamaEstados').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
         // verificamos sincronización entre resumen y prestación

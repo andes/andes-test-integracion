@@ -62,7 +62,7 @@ describe('Capa Estadistica - Egresos', () => {
         cy.intercept('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
         cy.intercept('GET', '**/api/modules/rup/internacion/camas/historial?**').as('getHistorial');
         cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
-        cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+        cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
         cy.viewport(1920, 1080);
     });
 
