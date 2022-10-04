@@ -31,7 +31,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.js')(on, config)
     },
-    experimentalSessionAndOrigin: false,
+    experimentalSessionAndOrigin: true,
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
   },
 })
