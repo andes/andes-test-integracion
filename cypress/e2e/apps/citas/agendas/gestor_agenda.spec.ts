@@ -188,7 +188,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.estado).to.be.eq('suspendida');
         });
-        cy.toast('success', 'La agenda cambió el estado a Suspendida').click();
+        cy.toast('success', 'La agenda cambió el estado a Suspendida');
         cy.get('table tbody td').contains('examen pediátrico').click();
         cy.wait('@findAgenda');
         cy.get('table tbody td').plexBadge('Suspendida');
