@@ -189,6 +189,9 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.estado).to.be.eq('suspendida');
         });
         cy.toast('success', 'La agenda cambió el estado a Suspendida').click();
+    })  
+
+    it('chequear agenda disponible con turno suspendida', () => {
         cy.get('table tbody td').contains('examen pediátrico').click();
         cy.wait('@findAgenda');
         cy.get('table tbody td').plexBadge('Suspendida');
@@ -197,7 +200,10 @@ describe('CITAS - Planificar Agendas', () => {
         cy.get('table tbody td').first().click({ force: true });
         cy.wait('@getCandidatas');
         cy.contains(' No hay agendas que contengan turnos que coincidan');
-    })
+
+    })  
+
+    
 
     it('suspender agenda disponible con turno y reasignarlo', () => {
         cy.wait('@getAgendas');
