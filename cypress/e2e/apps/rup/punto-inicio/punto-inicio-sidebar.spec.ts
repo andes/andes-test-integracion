@@ -335,6 +335,7 @@ context('RUP - Punto de inicio', () => {
                     const body = xhr.response.body;
                     idPrestacion = body.id;
                     cy.url().should('include', '/rup/ejecucion/' + idPrestacion);
+                    cy.wait(3000)
                     cy.intercept('GET', '**/api/modules/rup/prestaciones/' + idPrestacion , req => {
                         delete req.headers['if-none-match']
                     }).as('findPrestacion');
