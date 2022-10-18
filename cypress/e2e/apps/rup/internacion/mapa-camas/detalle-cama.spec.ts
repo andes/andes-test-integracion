@@ -147,9 +147,9 @@ describe('Mapa Camas - Detalle de Cama', () => {
         cy.wait('@getCamas').then(({response}) => {
             expect(response.statusCode).to.be.eq(200);
         });
-
+        
         cy.getCama(cama.cama.nombre).click();
-
+        
         cy.deshacerInternacion();
 
         cy.wait('@deshacer').then(({response}) => {
@@ -160,7 +160,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
             expect(response.statusCode).to.be.eq(200);
         })
 
-        cy.swal('confirm', 'Se deshizo la internación');
+        cy.swal('confirm');
     });
 });
 

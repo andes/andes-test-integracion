@@ -57,7 +57,7 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
         cy.plexTab('INTERNACION').click()
         
-        cy.get('plex-layout-sidebar plex-title').plexIcon('pencil').click();
+        cy.get('plex-layout-sidebar plex-title plex-button[icon="pencil"]').click({force: true});
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-3, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
@@ -90,7 +90,8 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
         cy.plexTab('INTERNACION').click();
         cy.get('plex-title[titulo="INGRESO"] div').eq(2);
-        cy.get('plex-layout-sidebar').plexButtonIcon('pencil').click();
+        cy.wait(100)
+        cy.get('plex-layout-sidebar plex-title plex-button[icon="pencil"]').click({ force: true });
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: nuevaFecha, skipEnter: true });
         cy.plexButtonIcon('check').click();
