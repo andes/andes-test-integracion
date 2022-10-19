@@ -255,8 +255,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
-        cy.get(':nth-child(2)>.plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
-        cy.get(':nth-child(2)>.plex-label').contains('Solicitante: Huenchuman, Natalia').first().click();
+        cy.wait(1000);
+        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').should('have.length', 1);
+        cy.get('plex-label').contains('Solicitante: Huenchuman, Natalia').first().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 5);
     });
@@ -334,6 +335,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
+        cy.wait(1000); 
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
         cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').first().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
