@@ -33,7 +33,7 @@
   "homepage": "https://github.com/andes/andes-test-integracion#readme",
   "devDependencies": {
     "@angular/cli": "^8.3.8",
-    "@deploysentinel/cypress-debugger": "^0.5.2",
+    "@deploysentinel/cypress-debugger": "^0.5.3",
     "cypress": "^10.0.0",
     "cypress-file-upload": "^5.0.7",
     "mocha": "^5.0.0",
