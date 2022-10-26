@@ -19,6 +19,7 @@ const moment = require('moment');
 const resizeObserverLoopErrRe = /^[^(ResizeObserver loop limit exceeded)]/;
 Cypress.moment = moment;
 
+import '@deploysentinel/cypress-debugger/support';
 import './commands'
 import './http'
 import './plex'
