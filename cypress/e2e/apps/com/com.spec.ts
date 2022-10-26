@@ -339,6 +339,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.toast('success');
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
+        // cy.wait('@getDerivaciones')
         cy.wait('@getDerivaciones').then(({response}) => {
             expect(response.statusCode).to.be.eq(200);
         });
