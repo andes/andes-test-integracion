@@ -37,30 +37,29 @@ describe('Mapa Camas - Detalle de Cama', () => {
     });
 
     beforeEach(() => {
-        cy.server();
         cy.viewport(1920, 1080);
-        cy.route('GET', '**/api/auth/organizaciones**', true).as('getOrganizaciones');
-        cy.route('GET', '**/api/modules/rup/internacion/camas/**').as('getCama');
-        cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**', paciente).as('getPaciente');
-        cy.route('PATCH', '**/api/modules/rup/internacion/deshacer').as('deshacer');
-        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('anularPrestacion');
+        cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
+        cy.intercept('GET', '**/api/modules/rup/internacion/camas/**').as('getCama');
+        cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**', paciente).as('getPaciente');
+        cy.intercept('PATCH', '**/api/modules/rup/internacion/deshacer').as('deshacer');
+        cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('anularPrestacion');
     });
 
     it('Verificar datos de cama', () => {
         cy.goto('/mapa-camas', token);
-        cy.wait('@getCamas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getCamas').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
 
         cy.get('table tr').eq(1).find('td').eq(1).contains('ANDES').click();
 
-        cy.wait('@getCama').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getCama').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         // VERIF. NOMBRE
-        cy.get('plex-detail section div').eq(1).find('div').should(($div) => {
-            expect($div.get(3).innerText).to.equal(cama.cama.nombre);
+        cy.get('plex-detail section div.contenedor-textos > div').eq(1).find('div').should(($div) => {
+            expect($div.contents().eq(cama.cama.nombre));
         });
 
         // VERIF. ESTADO
@@ -123,13 +122,13 @@ describe('Mapa Camas - Detalle de Cama', () => {
         });
 
         // VERIF. NOMBRE - APELLIDO PACIENTE
-        cy.get('plex-detail').eq(1).find('section').find('div').eq(1).find('div').should(($div) => {
-            expect($div.get(1).innerText).to.equal(`${paciente.apellido}, ${paciente.nombre}`);
+        cy.get('plex-detail section div.contenedor-textos > div').eq(0).find('div').should(($div) => {
+            expect($div.contents().eq(`${paciente.apellido}, ${paciente.nombre}`));
         });
 
         // VERIF. DOCUMENTO
-        cy.get('plex-detail').eq(1).find('section').find('div').eq(1).find('div').should(($div) => {
-            expect($div.get(2).innerText.split('.').join("").trim()).to.equal(paciente.documento);
+        cy.get('plex-detail section div.contenedor-textos > div').eq(1).find('div').should(($div) => {
+            expect($div.contents().eq(paciente.documento));
         });
 
         // VERIF. SEXO
@@ -145,23 +144,23 @@ describe('Mapa Camas - Detalle de Cama', () => {
 
     it('Deshacer internacion', () => {
         cy.goto('/mapa-camas', token);
-        cy.wait('@getCamas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getCamas').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-
+        
         cy.getCama(cama.cama.nombre).click();
-
+        
         cy.deshacerInternacion();
 
-        cy.wait('@deshacer').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@deshacer').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.wait('@anularPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@anularPrestacion').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         })
 
-        cy.swal('confirm', 'Se deshizo la internación');
+        cy.swal('confirm');
     });
 });
 

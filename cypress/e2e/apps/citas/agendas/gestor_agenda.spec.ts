@@ -169,7 +169,9 @@ describe('CITAS - Planificar Agendas', () => {
 
     it('suspender agenda disponible con turno', () => {
 
-        cy.wait('@getAgendas');
+        cy.wait('@getAgendas').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);
+        });
         cy.get('table tbody td').plexLabel('examen pediátrico').click();
         cy.wait('@findAgenda').then(({response}) => {
             expect(response.statusCode).to.eq(200);
@@ -196,9 +198,13 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@findAgenda');
         cy.get('table tbody td').plexBadge('Suspendida');
         cy.get('table tbody tr').plexButtonIcon('sync-alert').click();
-        cy.wait('@findAgenda');
+        cy.wait('@findAgenda').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);
+        });
         cy.get('table tbody td').first().click({ force: true });
-        cy.wait('@getCandidatas');
+        cy.wait('@getCandidatas').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);
+        });
         cy.contains(' No hay agendas que contengan turnos que coincidan');
 
     })  

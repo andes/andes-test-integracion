@@ -91,7 +91,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.toast('success');
         cy.get('plex-badge').contains('inhabilitada').should('have.length', 1);
-        cy.contains('inhabilitada').click();
+        cy.get('plex-list').contains('inhabilitada').click();
 
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 2);
@@ -113,14 +113,14 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.toast('success', 'Derivación guardada');
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
         cy.get('plex-label').contains('Solicitante: PRUEBA, TEST').should('have.length', 1);
-        cy.contains('CANCELAR').click();
+        cy.get('plex-list').contains('CANCELAR').click();
         cy.swal('confirm');
         cy.wait('@editDerivacion').then(({response}) => {
             expect(response.statusCode).to.be.eq(200);
             expect(response.body.cancelada).to.be.eq(true);
         });
         cy.toast('success', 'Derivación cancelada');
-        cy.contains('Solicitante: PRUEBA, TEST').should('not.exist');
+        cy.get('plex-list').contains('Solicitante: PRUEBA, TEST').should('not.exist');
     });
 
     it('crear nueva derivacion y sumar nota', () => {
@@ -137,7 +137,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
         cy.plexSelectType('label="Estado"').click().get('.option').contains('SOLICITADA').click();
         cy.get('plex-label').contains('Solicitante: PRUEBA, TEST').should('have.length', 1);
-        cy.contains(' ACTUALIZAR ').click();
+        cy.get('plex-list').contains(' ACTUALIZAR ').click();
         cy.plexTextArea('label="Observacion"', 'nueva nota');
         cy.plexButton("Guardar").click();
         cy.wait('@updateHistorial').then(({response}) => {
@@ -149,7 +149,11 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         });
         cy.get('plex-tabs').contains('DERIVACIONES ENTRANTES').click({ force: true });
         cy.get('plex-tabs').contains('DERIVACIONES SOLICITADAS').click({ force: true });
-        cy.contains('solicitada').click({ force: true });
+        cy.plexSelectType('label="Estado"').click().get('.option').contains('SOLICITADA').click();
+        cy.wait('@getDerivaciones').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+        });
+        cy.get('plex-list').contains('solicitada').click({ force: true });
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 2);
         cy.get('.card').contains('Actualizado por');
@@ -213,7 +217,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
             expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').contains('habilitada').should('have.length', 1);
-        cy.contains('habilitada').click();
+        cy.get('plex-list').contains('habilitada').click();
         cy.get('plex-item').last().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 2);
@@ -295,7 +299,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
             expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').contains('habilitada').should('have.length', 1);
-        cy.contains('habilitada').click();
+        cy.get('plex-list').contains('habilitada').click();
         cy.get('plex-item').last().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 2);
@@ -333,6 +337,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexSelectType('label="Nuevo estado"').click().get('.option').contains('finalizada').click();
         cy.plexTextArea('label="Observacion"', 'derivación finalizada');
         cy.plexButton("Guardar").click();
+        cy.toast('success');
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
         cy.wait('@getDerivaciones')
         cy.get('.d-flex > small').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
@@ -372,7 +377,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.get('small').contains('VUELO SANITARIO');
         cy.get('plex-label').contains('Traslado');
         cy.get('small').contains('SIEN - SISTEMA INTEGRADO DE EMERGENCIA DE NEUQUEN');
-        cy.contains(' ACTUALIZAR ').click();
+        cy.get('plex-list').contains(' ACTUALIZAR ').click();
         cy.plexTextArea('label="Observacion"', 'vuelo sanitario no disponible');
         cy.plexButton("Guardar").click();
         cy.wait('@updateHistorial').then(({response}) => {
@@ -398,7 +403,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
             expect(response.statusCode).to.be.eq(200);
         });
         cy.get('plex-badge').contains('habilitada').should('have.length', 1);
-        cy.contains('habilitada').click({ force: true });
+        cy.get('plex-list').contains('habilitada').click({ force: true });
         cy.get('plex-item').last().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 3);
@@ -545,7 +550,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         });
         cy.get('plex-badge').plexIcon('arm').should('have.length', 1);
         cy.get('plex-badge').contains('habilitada').should('have.length', 1);
-        cy.contains('habilitada').click();
+        cy.get('plex-list').contains('habilitada').click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 2);
         cy.get('.card').contains('Pasa a habilitada por');

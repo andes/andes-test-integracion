@@ -25,11 +25,11 @@ const moment = require('moment');
         });
 
         beforeEach(() => {
-            cy.server();
-            cy.route('GET', `**/api/modules/rup/internacion/${capa}/**`).as('getHistorial');
-            cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
-            cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
-            cy.route('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('egresoSalaComun');
+            cy.intercept('GET', `**/api/modules/rup/internacion/${capa}/**`).as('getHistorial');
+            cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
+            cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+            cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
+            cy.intercept('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('egresoSalaComun');
 
             cy.viewport(1920, 1080);
         });
@@ -37,8 +37,8 @@ const moment = require('moment');
         it('Movimiento Sala -> Cama', () => {
             cy.getCama(pacientes[0].apellido).click();
 
-            cy.wait('@getHistorial').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@getHistorial').then(({response}) => {
+                expect(response.statusCode).to.be.eq(200);
             });
 
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
@@ -49,12 +49,12 @@ const moment = require('moment');
 
             cy.plexButtonIcon('check').click();
 
-            cy.wait('@egresoSalaComun').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@egresoSalaComun').then(({response}) => {
+                expect(response.statusCode).to.be.eq(200);
             });
 
-            cy.wait('@patchCamas').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@patchCamaEstados').then(({response}) => {
+                expect(response.statusCode).to.be.eq(200);
             });
 
             cy.swal('confirm', 'Pase de unidad organizativa exitoso');

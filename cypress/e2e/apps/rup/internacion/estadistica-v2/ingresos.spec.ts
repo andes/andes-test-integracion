@@ -24,12 +24,12 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.goto('/mapa-camas', token);
 
         cy.server();
-        cy.route('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
-        cy.route('GET', '**/api/modules/rup/internacion/camas/**').as('getCama');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
-        cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
-        cy.route('PATCH', '**/api/modules/rup/internacion/internacion-resumen/**').as('patchResumen');
-        cy.route('POST', '**/api/modules/rup/prestaciones**').as('postPrestacion');
+        cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
+        cy.intercept('GET', '**/api/modules/rup/internacion/camas/**').as('getCama');
+        cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
+        cy.intercept('PATCH', '**/api/modules/rup/internacion/changeTime/**').as('patchCamaEstados');
+        cy.intercept('PATCH', '**/api/modules/rup/internacion/internacion-resumen/**').as('patchResumen');
+        cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
         cy.route('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
             "conceptId": "1234",
             "term": "Enfermeria en Rehabilitación",
@@ -57,7 +57,7 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
         cy.plexTab('INTERNACION').click()
         
-        cy.get('plex-layout-sidebar plex-title').plexIcon('pencil').click();
+        cy.get('plex-layout-sidebar plex-title plex-button[icon="pencil"]').click({force: true});
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-3, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
@@ -73,12 +73,12 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchCamas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@patchPrestacion').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.wait('@patchResumen').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@patchResumen').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         })
     })
 
@@ -90,7 +90,8 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
         cy.plexTab('INTERNACION').click();
         cy.get('plex-title[titulo="INGRESO"] div').eq(2);
-        cy.get('plex-layout-sidebar').plexButtonIcon('pencil').click();
+        cy.wait(100)
+        cy.get('plex-layout-sidebar plex-title plex-button[icon="pencil"]').click({ force: true });
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: nuevaFecha, skipEnter: true });
         cy.plexButtonIcon('check').click();

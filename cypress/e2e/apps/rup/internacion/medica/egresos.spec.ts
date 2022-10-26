@@ -29,6 +29,7 @@ const moment = require('moment');
             cy.intercept('GET', '**api/modules/rup/internacion/medica/**').as('getHistorial2');
             cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+            cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('egresoSalaComun');
 
             cy.viewport(1920, 1080);
@@ -46,7 +47,7 @@ const moment = require('moment');
 
             cy.plexButtonIcon('check').click();
 
-            cy.wait('@patchCamas')
+            cy.wait('@patchCamaEstados')
             cy.toast('success', 'Egreso guardado correctamente');
         });
 

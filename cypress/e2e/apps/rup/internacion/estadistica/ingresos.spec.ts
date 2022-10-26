@@ -18,7 +18,7 @@ describe('Capa Estadistica - Ingresos', () => {
     });
 
     beforeEach(() => {
-        cy.server()
+        cy.server();
         cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
         cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
@@ -45,6 +45,7 @@ describe('Capa Estadistica - Ingresos', () => {
 
         cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+        cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
         cy.viewport(1920, 1080);
     });
 
@@ -86,7 +87,7 @@ describe('Capa Estadistica - Ingresos', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchCamas').then(({response}) => {
+        cy.wait('@patchCamaEstados').then(({response}) => {
             expect(response.statusCode).to.eq(200);
         });
 

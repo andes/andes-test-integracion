@@ -38,6 +38,7 @@
             cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
             cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
+            cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
             cy.intercept('POST', '**/api/modules/rup/internacion/sala-comun/**').as('internarPaciente');
             cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.viewport(1920, 1080);
@@ -62,7 +63,7 @@
             cy.wait('@getCamas');
             cy.plexSelectType('label="Cama"', 'CAMA');
             cy.plexButtonIcon('check').click();
-            cy.wait('@patchCamas').then(({response}) => {
+            cy.wait('@patchCamaEstados').then(({response}) => {
                 expect(response.statusCode).to.eq(200);
             });
             cy.swal('confirm', 'Paciente internado');

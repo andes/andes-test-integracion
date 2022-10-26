@@ -1,7 +1,5 @@
-const moment = require('moment');
-
 function getStubs() {
-    cy.route('**/internacion**/**').as('backToMapa');
+    cy.intercept('**/internacion**/**').as('backToMapa');
 
     cy.route('GET', '/api/core/term/snomed/expression?expression=^2051000013106**', [{
         "conceptId": "12345",
@@ -33,8 +31,9 @@ function getStubs() {
         "semanticTag": "objeto físico"
     }]).as('expEquipamiento');
 
-    cy.route('POST', '**/api/modules/rup/internacion/camas**').as('createCama')
-    cy.route('PATCH', '**/api/modules/rup/internacion/camas/**').as('editCama')
+    cy.intercept('POST', '**/api/modules/rup/internacion/camas**').as('createCama')
+    cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('editCama')
+    cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('editCamaEstados')
 }
 
 describe('ABM Camas', () => {
@@ -54,7 +53,6 @@ describe('ABM Camas', () => {
 
     beforeEach(() => {
         cy.server();
-
         getStubs();
 
         cy.viewport(1920, 1080);
@@ -64,8 +62,8 @@ describe('ABM Camas', () => {
 
     it('Alta Cama', () => {
         cy.plexDropdown('label="NUEVO RECURSO"', "CAMA");
-
         cy.plexText('label="Nombre"', 'Cama 666');
+        cy.plexDatetime('name="fechaDisponible"', { text: cy.today(), skipEnter: true });
         cy.plexSelectAsync('label="Tipo de cama"', 'Cam', '@expTipoDeCama', 0);
         cy.plexSelectAsync('label="Equipamiento"', 'sis', '@expEquipamiento', 0);
         cy.plexSelectAsync('label="Especialidad/es"', 'Enf', '@expEspecialidad', 0);
@@ -74,9 +72,9 @@ describe('ABM Camas', () => {
         cy.plexSelectType('label="Ubicación"', 'habi1');
 
         cy.plexButton('GUARDAR').click();
-        cy.wait('@createCama').then((xhr) => {
-            const cama = xhr.response.body;
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@createCama').then(({response}) => {
+            const cama = response.body;
+            expect(response.statusCode).to.be.eq(200);
             expect(cama.nombre).to.be.eq('Cama 666');
             expect(cama.unidadOrganizativaOriginal.term).to.be.eq('servicio médico');
             expect(cama.sectores[0].nombre).to.be.eq('habi1');
@@ -91,9 +89,8 @@ describe('ABM Camas', () => {
         cy.get('[label="CAMA"] > plex-title > .plex-title > .title-content').plexButtonIcon('pencil').click();
 
         cy.plexText('label="Nombre"').clear();
-        cy.plexText('label="Nombre"', 'Cama 888');
+        cy.plexText('label="Nombre"', '{selectall}{backspace}' + 'Cama 888');
         cy.plexSelectAsync('label="Tipo de cama"', 'Cam', '@expTipoDeCama', 0);
-        //cy.plexSelectAsync('label="Especialidad/es"', 'Enf', '@expEspecialidad', 0);
         cy.plexSelectAsync('label="Equipamiento"', 'ap', '@expEquipamiento', 0);
         cy.plexSelectType('label="Genero"').clearSelect();
         cy.plexSelectAsync('label="Genero"', 'Fem', '@expGenero', 0);
@@ -103,9 +100,9 @@ describe('ABM Camas', () => {
         cy.plexSelectType('label="Unidad organizativa"', 'servicio');
 
         cy.plexButton('GUARDAR').click();
-        cy.wait('@editCama').then((xhr) => {
-            const cama = xhr.response.body;
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@editCama').then(({response}) => {
+            const cama = response.body;
+            expect(response.statusCode).to.be.eq(200);
             expect(cama.nombre).to.be.eq('Cama 888');
             expect(cama.sectores[0].nombre).to.be.eq('edificio este');
             expect(cama.tipoCama.term).to.be.eq('Cama');
@@ -121,8 +118,8 @@ describe('ABM Camas', () => {
         cy.plexButton('INACTIVAR CAMA').click();
         cy.get('button').contains('CONFIRMAR').click();
 
-        cy.wait('@editCama').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@editCamaEstados').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
         });;
 
         cy.wait(200)
