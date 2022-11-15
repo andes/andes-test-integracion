@@ -45,8 +45,7 @@
         });
 
         beforeEach(() => {
-            cy.server();
-            cy.route('POST', '/api/modules/huds/accesos/token').as('acceso');
+            cy.intercept('POST', '/api/modules/huds/accesos/token').as('acceso');
             cy.viewport(1920, 1080);
         });
 
@@ -68,23 +67,15 @@
             })
 
             cy.plexLayoutSidebar().contains('Registros');
-
             cy.getRegistrosMedicos().should('have.length', 2);
-
             cy.getRegistrosMedicos().plexButtonIcon('eye').click();
-
             cy.getRegistrosMedicos().plexButton('Continuar');
-
             cy.getRegistrosMedicos().plexButtonIcon('eye').click();
-
             cy.plexLayoutMain().contains('consulta con médico general');
-
             cy.plexLayoutMain().find('plex-title').plexButtonIcon('close').click();
-
+            
             let fecha = Cypress.moment().format('DD/MM/yyyy HH:mm');
-
             cy.plexLayoutMain().contains("Mapa de camas - "+fecha);
-
         });
     });
 });
