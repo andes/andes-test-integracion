@@ -100,8 +100,8 @@ module.exports.createCama = async (mongoUri, params) => {
             const resumenDB = await client.db().collection('internacionPacienteResumen');
             dtoResumen = require('./data/internacion/resumen-internacion');
             dtoResumen = JSON.parse(JSON.stringify(dtoResumen));
+            dtoResumen._id = new ObjectId();
             dtoResumen.fechaIngreso = fechaIngreso;
-            
             dtoResumen.idPrestacion = params.vincularInformePrestacion ? dtoPrestacion._id : undefined;
             dtoResumen.organizacion = dtoCama.organizacion || dtoResumen.organizacion;
             dtoResumen.organizacion._id = ObjectId(dtoCama.organizacion._id) || ObjectId(dtoResumen.organizacion._id);
@@ -158,7 +158,6 @@ module.exports.createCama = async (mongoUri, params) => {
         dtoEstadoDefault.estados[index].paciente = paciente;
         dtoEstadoDefault.estados[index].unidadOrganizativa = dtoCama.unidadOrganizativaOriginal || unidadOrg;
         dtoEstadoDefault.estados[index].especialidades = dtoCama.especialidades || especialidades;
-        dtoEstadoDefault.estados[index].idInternacion = params.usaEstadisticaV2 ? dtoResumen._id : dtoPrestacion._id
         dtoEstadoDefault.estados[index].esCensable = (params.esCensable !== undefined) ? params.esCensable : true;
         dtoEstadoDefault.estados[index].esMovimiento = true;
         dtoEstadoDefault.estados[index].fecha = fechaIngreso;
@@ -196,24 +195,23 @@ module.exports.createCama = async (mongoUri, params) => {
             });
         }
 
-        let dtoEstadistica = Object.create(dtoEstadoDefault);
-        dtoEstadistica.capa = 'estadistica'; // estadistica-v2 usa capa medica
-
-        let dtoMedica = Object.create(dtoEstadoDefault);
-        dtoMedica.capa = 'medica';
-
-        let dtoEnfermeria = Object.create(dtoEstadoDefault);
-        dtoEnfermeria.capa = 'enfermeria';
-
-        dtoMedica._id = new ObjectId();
-        dtoEnfermeria._id = new ObjectId();
-
         if (!params.usaEstadisticaV2) {
+            let dtoEstadistica = Object.create(dtoEstadoDefault);
             dtoEstadistica._id = new ObjectId();
+            dtoEstadistica.capa = 'estadistica'; // estadistica-v2 usa capa medica
+            if (paciente) {
+                dtoEstadistica.estados[index + 1].idInternacion = dtoPrestacion._id;
+            }
             await camaEstadosDB.insertOne(dtoEstadistica);
         }
+        
+        let dtoMedica = Object.create(dtoEstadoDefault);
+        dtoMedica._id = new ObjectId();
+        dtoMedica.capa = 'medica';
+        if (paciente) {
+            dtoMedica.estados[index + 1].idInternacion = dtoResumen._id;
+        }
         await camaEstadosDB.insertOne(dtoMedica);
-        await camaEstadosDB.insertOne(dtoEnfermeria);
 
         dtoEstadoDefault['cama'] = dtoCama;
         return dtoEstadoDefault;
