@@ -103,7 +103,7 @@ context('Conceptos Turneables', () => {
         cy.contains('Aceptar').click();
     });
 
-    it('Eliminar un concepto turneable', () => {
+    it.skip('Eliminar un concepto turneable', () => {
         cy.route('DELETE', '**api/core/tm/conceptos-turneables/**').as('delete');
 
         complete({
