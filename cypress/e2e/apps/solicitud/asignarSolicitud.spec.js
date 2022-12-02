@@ -27,7 +27,7 @@ context(' ASIGNAR SOLICITUD', () => {
 
     it('asignar', () => {
         cy.server();
-        cy.plexButtonIcon('lock-alert').first().click();
+        cy.get('plex-dropDown').click().get('a').contains('Auditar').click();
         cy.plexButton('Asignar').click();
         cy.get('textarea').last().type('Una observacion asignar', { force: true });
         cy.plexSelectAsync('label="Profesional"', 'CORTES JAZMIN', '@getProfesional', '58f74fd3d03019f919e9fff2');

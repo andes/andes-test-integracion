@@ -21,7 +21,7 @@ context('RESPONDER SOLICITUD', () => {
 
     it('responder', () => {
         cy.server();
-        cy.plexButtonIcon('lock-alert').first().click();
+        cy.get('plex-dropDown').click().get('a').contains('Auditar').click();
         cy.plexButton('Responder').click();
         cy.get('textarea').last().type('No se acepta por ...', { force: true });
         cy.plexButton('Confirmar').click();

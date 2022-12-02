@@ -53,7 +53,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
             expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.toast('success', 'Solicitud guardada');
-        cy.get('plex-item').contains('CORTES, JAZMIN').click();
+        cy.get('table tbody tr').contains('CORTES, JAZMIN').click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('historial-solicitud').contains('Creada por Natalia Huenchuman');
     });
@@ -98,7 +98,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
-        cy.get('plex-item').contains('Huenchuman, Natalia').click();
+        cy.get('table tbody tr').contains('Huenchuman, Natalia').click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('historial-solicitud').contains('Creada por Natalia Huenchuman');
     });

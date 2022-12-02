@@ -32,7 +32,7 @@ context(' REFERIR SOLICITUD', () => {
 
     it('referir', () => {
         cy.server();
-        cy.plexButtonIcon('lock-alert').first().click();
+        cy.get('plex-dropDown').click().get('a').contains('Auditar').click();
         cy.plexButton('Referir').click();
         cy.get('textarea').last().type('Una observacion referir', { force: true });
         cy.plexSelect('label="Organización destino"', 0).click();
@@ -47,7 +47,7 @@ context(' REFERIR SOLICITUD', () => {
             expect(xhr.response.body.solicitud.historial[i].descripcion).to.be.eq('Referida');
         });
         cy.get('plex-badge').contains('auditoria');
-        cy.plexButtonIcon('lock-alert');
+        cy.get('plex-dropDown').click().get('a').contains('Auditar');
     })
 
 })

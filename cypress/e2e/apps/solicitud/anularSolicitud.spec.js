@@ -24,7 +24,7 @@ context('ANULAR SOLICITUD', () => {
     });
 
     it('anular', () => {
-        cy.plexButtonIcon('delete').click();
+        cy.get('plex-dropDown').click().get('a').contains('Anular').click();
         cy.get('textarea').last().type('Una observacion anular', { force: true });
         cy.plexButton('Confirmar').click();
         cy.wait('@anularSolicitud').then((xhr) => {

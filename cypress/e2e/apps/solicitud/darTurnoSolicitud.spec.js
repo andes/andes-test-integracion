@@ -39,9 +39,8 @@ context('TOP: nuevo turno', () => {
             expect(xhr.response.body[0].solicitud.tipoPrestacion.id).to.be.eq('59ee2d9bf00c415246fd3d6b');
             expect(xhr.response.body[0].solicitud.tipoPrestacion.term).to.be.eq('Consulta de clínica médica');
         });
-        cy.get('plex-item').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
-        cy.plexButtonIcon('calendar-plus').click();
-
+        cy.get('table tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
+        cy.get('plex-dropDown').click().get('a').contains('Dar Turno').click();
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
@@ -64,7 +63,7 @@ context('TOP: nuevo turno', () => {
             expect(xhr.response.body.profesional.nombre).to.be.eq('MARIA');
             expect(xhr.response.body.profesional.apellido).to.be.eq('PEREZ');
         })
-        cy.get('plex-item').should('contain', 'pendiente').and('contain', 'PEREZ, MARIA');
+        cy.get('table tbody td').should('contain', 'pendiente').and('contain', 'PEREZ, MARIA');
     });
 
 
@@ -82,8 +81,8 @@ context('TOP: nuevo turno', () => {
             expect(xhr.response.body[0].solicitud.tipoPrestacion.id).to.be.eq('59ee2d9bf00c415246fd3d6b');
             expect(xhr.response.body[0].solicitud.tipoPrestacion.term).to.be.eq('Consulta de clínica médica');
         });
-        cy.get('plex-item').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
-        cy.plexButtonIcon('calendar-plus').click();
+        cy.get('table tbody td').should('contain', 'AUTOCITADO').and('contain', 'PEREZ, MARIA');
+        cy.get('plex-dropDown').click().get('a').contains('Dar Turno').click();
 
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -113,7 +112,7 @@ context('TOP: nuevo turno', () => {
         cy.plexButtonIcon('chevron-down').click();
         cy.plexSelectType('label="Estado"').clearSelect();
         cy.plexSelectType('label="Estado"', 'turno dado');
-        cy.get('plex-item').contains('PEREZ, MARIA').click();
+        cy.get('table tbody td').contains('PEREZ, MARIA').click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('historial-solicitud').contains('Turno asignado por Natalia Huenchuman');
     });

@@ -74,7 +74,7 @@ describe('TOP: Liberar turno', () => {
         cy.toast('success');
         cy.wait('@getSolicitudes');
 
-        cy.get('[icon="lock-alert"] > .btn').click({ force: true });
+        cy.get('plex-dropDown').click().get('a').contains('Auditar').click();
         cy.wait('@file-token').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
@@ -92,9 +92,7 @@ describe('TOP: Liberar turno', () => {
         // CREAR SOLICITUD -->
 
         // <!-- ASIGNAR TURNO
-        cy.plexButtonIcon('calendar-plus').click();
-        // cy.get('i.adi-calendar-plus').click({ force: true });
-
+        cy.get('plex-dropDown').click().get('a').contains('Dar Turno').click();
         cy.wait('@getAgenda').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
         });
@@ -109,7 +107,6 @@ describe('TOP: Liberar turno', () => {
             });
         }
         cy.get('div[class="dia"]').contains(pasadoManiana.format('D')).click({ force: true });
-        // cy.get('plex-layout-sidebar dar-turnos div[class="text-center hover p-2 mb-3 outline-dashed-default"]').first().click({ force: true });
         cy.get('plex-card').eq(1).click();
         cy.plexButton("Confirmar").click({ force: true });
         cy.wait('@patchSolicitud').then((xhr) => {
@@ -137,7 +134,7 @@ describe('TOP: Liberar turno', () => {
         cy.goto('/solicitudes', token);
 
         cy.get('span.badge-info').contains('pendiente');
-        cy.get('plex-item').contains('Huenchuman, Natalia').click();
+        cy.get('table tbody td').contains('Huenchuman, Natalia').click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('historial-solicitud .item-list').should('length', 4);
         cy.get('historial-solicitud').contains('Turno liberado por Natalia Huenchuman');
