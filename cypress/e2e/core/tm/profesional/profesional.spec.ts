@@ -52,11 +52,11 @@ context('TM Profesional', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.apellido).to.be.eq('Ramirez');
-            expect(xhr.response.body.nombre).to.be.eq('Pedro');
-            expect(xhr.response.body.documento).to.be.eq('11111111');
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.apellido).to.be.eq('Ramirez');
+            expect(response.body.nombre).to.be.eq('Pedro');
+            expect(response.body.documento).to.be.eq('11111111');
         });
 
         cy.swal('confirm', '¡El profesional se creó con éxito!');
@@ -71,10 +71,10 @@ context('TM Profesional', () => {
         cy.plexSelectType('label="Sexo"', 'masculino');
 
         cy.get('plex-layout-sidebar').plexButton(" Validar Renaper ").click();
-        cy.wait('@renaper').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.apellido).to.be.eq('TEST');
-            expect(xhr.response.body.nombre).to.be.eq('PROFESIONAL');
+        cy.wait('@renaper').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.apellido).to.be.eq('TEST');
+            expect(response.body.nombre).to.be.eq('PROFESIONAL');
         });
 
         check({
@@ -90,11 +90,11 @@ context('TM Profesional', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.apellido).to.be.eq('TEST');
-            expect(xhr.response.body.nombre).to.be.eq('PROFESIONAL');
-            expect(xhr.response.body.documento).to.be.eq('26487951');
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.apellido).to.be.eq('TEST');
+            expect(response.body.nombre).to.be.eq('PROFESIONAL');
+            expect(response.body.documento).to.be.eq('26487951');
 
         });
 
@@ -112,9 +112,9 @@ context('TM Profesional', () => {
         cy.plexSelectType('label="Sexo"', 'femenino');
 
         cy.get('plex-layout-sidebar').plexButton(" Validar Renaper ").click();
-        cy.wait('@renaperError').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.property('message', 'ciudadano no encontrado');
+        cy.wait('@renaperError').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body).to.have.property('message', 'ciudadano no encontrado');
         });
 
         cy.swal('confirm', 'El profesional no se encontró en RENAPER');
@@ -136,12 +136,12 @@ context('TM Profesional', () => {
 
         cy.plexButton('Guardar').click();
 
-        cy.wait('@get').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(1);
-            expect(xhr.response.body[0].nombre).to.be.eq('ALICIA BEATRIZ');
-            expect(xhr.response.body[0].apellido).to.be.eq('ESPOSITO');
-            expect(xhr.response.body[0].documento).to.be.eq('4163782');
+        cy.wait('@get').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body).to.have.length(1);
+            expect(response.body[0].nombre).to.be.eq('ALICIA BEATRIZ');
+            expect(response.body[0].apellido).to.be.eq('ESPOSITO');
+            expect(response.body[0].documento).to.be.eq('4163782');
         });
         cy.swal('confirm', 'El profesional que está cargando ya existe en el sistema');
     });
@@ -177,7 +177,7 @@ context('TM Profesional', () => {
         cy.get('plex-layout-sidebar').should('contain', 'PRUEBA, ALICIA');
         cy.get('plex-layout-sidebar').should('contain', '1711999');
         cy.plexBadge('No Matriculado');
-        cy.get('plex-layout-sidebar').should('contain', 'Femenino');
+        cy.get('plex-layout-sidebar').should('contain', 'femenino');
         cy.get('plex-layout-sidebar').should('contain', '1217429393');
     });
 

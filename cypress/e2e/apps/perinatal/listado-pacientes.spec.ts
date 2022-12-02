@@ -77,15 +77,16 @@ context('Perinatal Listado', () => {
     });
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
-        cy.route('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
-        cy.route('GET', '**/api/modules/perinatal/carnet-perinatal**').as('listadoPerinatal');
-        cy.route('PATCH', '**/api/modules/perinatal/carnet-perinatal/**').as('patchPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
+        cy.intercept('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
+        cy.intercept('GET', '**/api/modules/perinatal/carnet-perinatal**', req => {
+            delete req.headers['if-none-match'] // evita que responda con datos de caché (statusCode 304)
+        }).as('listadoPerinatal');
+        cy.intercept('PATCH', '**/api/modules/perinatal/carnet-perinatal/**').as('patchPaciente');
         cy.goto('/perinatal', token);
-        cy.wait('@listadoPerinatal').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@listadoPerinatal').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
     })
 
@@ -134,13 +135,13 @@ context('Perinatal Listado', () => {
         cy.get('tbody tr').eq(0).contains('07/07/2021');
         cy.get('tbody tr').eq(0).contains('06/07/2021');
         cy.get('tbody tr').eq(0).contains('10000000').click();
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.apellido).to.be.eq('ANDES');
-            expect(xhr.response.body.nombre).to.be.eq('PACIENTE VALIDADO');
-            expect(xhr.response.body.nombreCompleto).to.be.eq('PACIENTE VALIDADO ANDES');
-            expect(xhr.response.body.documento).to.be.eq('10000000');
-            expect(xhr.response.body.estado).to.be.eq('validado');
+        cy.wait('@getPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.apellido).to.be.eq('ANDES');
+            expect(response.body.nombre).to.be.eq('PACIENTE VALIDADO');
+            expect(response.body.nombreCompleto).to.be.eq('ANDES, PACIENTE VALIDADO');
+            expect(response.body.documento).to.be.eq('10000000');
+            expect(response.body.estado).to.be.eq('validado');
         });
     });
 
@@ -162,25 +163,25 @@ context('Perinatal Listado', () => {
         cy.get('plex-layout-sidebar').plexTextArea('name="notaText"', 'prueba');
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
         cy.toast('success', 'Nota agregada con éxito');
-        cy.wait('@patchPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.nota).to.be.eq('prueba');
+        cy.wait('@patchPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.nota).to.be.eq('prueba');
         });
 
         cy.get('plex-layout-sidebar plex-table').plexIcon('pencil').click();
         cy.get('plex-layout-sidebar').plexTextArea('name="notaText"', '{selectall}{backspace} Segunda prueba');
         cy.get('plex-layout-sidebar').plexButton('Guardar').click();
         cy.toast('success', 'Nota editada con éxito');
-        cy.wait('@patchPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.nota).to.be.eq('Segunda prueba');
+        cy.wait('@patchPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.nota).to.be.eq('Segunda prueba');
         });
 
         cy.get('plex-layout-sidebar plex-table').plexIcon('cesto').click();
         cy.toast('success', 'Nota eliminada con éxito');
-        cy.wait('@patchPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.nota).to.be.eq(null);
+        cy.wait('@patchPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.nota).to.be.eq(null);
         });
     });
 

@@ -13,15 +13,14 @@ context('CITAS - punto de inicio', () => {
     });
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/citas/punto-inicio', token);
-        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**/api/core/tm/conceptos-turneables').as('conceptoTurneables');
-        cy.route('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
-        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
-        cy.route('GET', '**/api/modules/turnos/agenda/**').as('seleccionAgenda');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
+        cy.intercept('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
+        cy.intercept('GET', '**api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**/api/core/tm/conceptos-turneables').as('conceptoTurneables');
+        cy.intercept('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
+        cy.intercept('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
+        cy.intercept('GET', '**/api/modules/turnos/agenda/**').as('seleccionAgenda');
+        cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
     })
 
 
@@ -153,7 +152,7 @@ context('CITAS - punto de inicio', () => {
 
         // Test para verificar que al no asignar el turno, guarde la organizacion
         it('rechazar turno', () => {
-            cy.route('POST', '**/api/modules/turnos/listaEspera**').as('listaEspera');
+            cy.intercept('POST', '**/api/modules/turnos/listaEspera**').as('listaEspera');
             const paciente = pacientes[i];
             darTurno(paciente);
 
@@ -215,7 +214,7 @@ context('CITAS - punto de inicio', () => {
 });
 
 function darTurno(paciente) {
-    cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('darTurnoPaciente');
+    cy.intercept('GET', '**api/core-v2/mpi/pacientes/**').as('darTurnoPaciente');
     // definimos el campo a buscar en el listado puede contener un documento con puntos o el nombre de paciente
     const searchList = (paciente.documento) ? paciente.documento.substr(0, paciente.documento.length - 6) + '.' +
         paciente.documento.substr(-6, 3) + '.' + paciente.documento.substr(-3) : paciente.nombre
