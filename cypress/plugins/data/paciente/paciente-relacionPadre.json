@@ -1,0 +1,69 @@
+{
+    "_id" : "607070907846773dafa5a97d",
+    "claveBlocking" : [ 
+        "IVRRRMR", 
+        "IVRRLP", 
+        "RMR", 
+        "1950953969", 
+        "1950953"
+    ],
+    "entidadesValidadoras" : [],
+    "tokens" : [ 
+        "ramiro", 
+        "ibarrola", 
+        "peralta"
+    ],
+    "documento_fuzzy" : [ 
+        ""
+    ],
+    "nombre" : "RAMIRO",
+    "apellido" : "IBARROLA PERALTA",
+    "estado" : "temporal",
+    "documento" : "",
+    "certificadoRenaper" : "9421",
+    "fechaNacimiento" : "2021-04-09T00:00:00.000-03:00",
+    "sexo" : "masculino",
+    "genero" : "masculino",
+    "contacto" : [],
+    "direccion" : [],
+    "activo" : true,
+    "identificadores" : [],
+    "relaciones" : [ 
+        {
+            "_id" : "607070907846773dafa5a987",
+            "relacion" : {
+                "_id" : "59247be21ebf0273353b23bf",
+                "nombre" : "progenitor/a",
+                "opuesto" : "hijo/a"
+            },
+            "referencia" : "586e6e9327d3107fde165b44",
+            "nombre" : "MARIBEL",
+            "apellido" : "PERALTA",
+            "documento" : "30001954",
+            "numeroIdentificacion" : null,
+            "fechaFallecimiento" : null,
+            "fechaNacimiento" : "1983-05-02T00:00:00.000-03:00",
+            "activo" : true
+        }
+    ],
+    "financiador" : [],
+    "carpetaEfectores" : [],
+    "notas" : [],
+    "documentos" : [],
+    "createdAt" : "2021-04-09T12:19:44.304-03:00",
+    "createdBy" : {
+        "nombre" : "Andes",
+        "apellido" : "Scheduler",
+        "organizacion" : {
+            "nombre" : "Andes"
+        }
+    },
+    "updatedAt" : "2022-04-06T15:03:59.061-03:00",
+    "updatedBy" : {
+        "nombre" : "Andes",
+        "apellido" : "Scheduler",
+        "organizacion" : {
+            "nombre" : "Andes"
+        }
+    }
+}

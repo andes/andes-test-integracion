@@ -101,7 +101,7 @@ module.exports.seedPaciente = async (mongoUri, types) => {
     try {
         const client = await connectToDB(mongoUri);
         const PacienteDB = await client.db().collection('paciente');
-        types = types || ['validado', 'temporal', 'sin-documento', 'extranjero'];
+        types = types || ['validado', 'temporal', 'sin-documento', 'extranjero', 'relacionHijo', 'relacionPadre'];
         const pacientes = encapsulateArray(types).map(async (type) => {
             let dto = require('./data/paciente/paciente-' + type);
             dto = JSON.parse(JSON.stringify(dto));
