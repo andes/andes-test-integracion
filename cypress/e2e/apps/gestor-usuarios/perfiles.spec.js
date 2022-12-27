@@ -20,7 +20,7 @@ context('Perfiles de usuario', () => {
 
     beforeEach(() => {
         cy.seed();
-        cy.task('database:create:perfil', { permisos: ['rup:tipoPrestacion:598ca8375adc68e2a0c121b8'] }).then(p => {
+        cy.task('database:create:perfil', { permisos: ['rup:tipoPrestacion:391000013108'] }).then(p => {
             perfil1 = p;
         });
         cy.goto('/gestor-usuarios/usuarios', token);
@@ -104,7 +104,7 @@ context('Perfiles de usuario', () => {
         cy.plexButton('Guardar').click();
         cy.wait('@savePerfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.permisos).to.include('rup:tipoPrestacion:5a26e113291f463c1b982d98');
+            expect(xhr.response.body.permisos).to.include('rup:tipoPrestacion:73761001');
         });
         cy.toast('success', 'El perfil se ha guardado satisfactoriamente!');
     });
@@ -120,7 +120,7 @@ context('Perfiles de usuario', () => {
         cy.plexButton('Cancelar').click();
         cy.wait('@perfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].permisos).not.include('rup:tipoPrestacion:59ee2d9bf00c415246fd3d90');
+            expect(xhr.response.body[0].permisos).not.include('rup:tipoPrestacion:751000013101');
         });
     });
 });
