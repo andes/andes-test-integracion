@@ -6,7 +6,10 @@
 		"fsn": "cribado para papilomavirus humano (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "700152009",
-		"term": "pesquisa para papilomavirus humano"
+		"term": "pesquisa para papilomavirus humano",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -15,7 +18,10 @@
 		"fsn": "cribado para papilomavirus humano (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "700152009",
-		"term": "cribado para papilomavirus humano (procedimiento)"
+		"term": "cribado para papilomavirus humano (procedimiento)",
+		"ambito": [
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -24,7 +30,10 @@
 		"fsn": "cribado para papilomavirus humano (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "700152009",
-		"term": "screening para papilomavirus humano"
+		"term": "screening para papilomavirus humano",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -33,7 +42,10 @@
 		"fsn": "cribado para papilomavirus humano (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "700152009",
-		"term": "detección selectiva para papilomavirus humano"
+		"term": "detección selectiva para papilomavirus humano",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -42,7 +54,10 @@
 		"fsn": "cribado para papilomavirus humano (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "700152009",
-		"term": "cribado para papilomavirus humano"
+		"term": "cribado para papilomavirus humano",
+		"ambito": [
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -51,7 +66,10 @@
 		"fsn": "cribado para papilomavirus humano (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "700152009",
-		"term": "tamizado para papilomavirus humano"
+		"term": "tamizado para papilomavirus humano",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -60,7 +78,10 @@
 		"fsn": "educación en el cuidado de la diabetes (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "385805005",
-		"term": "educación en el cuidado de la diabetes"
+		"term": "educación en el cuidado de la diabetes",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -69,7 +90,10 @@
 		"fsn": "educación en el cuidado de la diabetes (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "385805005",
-		"term": "educación en el cuidado de la diabetes (procedimiento)"
+		"term": "educación en el cuidado de la diabetes (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -79,8 +103,9 @@
 		"semanticTag": "procedimiento",
 		"conceptId": "713281006",
 		"term": "consulta para cuidados paliativos",
-		"ambito" : [ 
-			"ambulatorio"
+		"ambito": [
+			"ambulatorio",
+			"internacion"
 		]
 	},
 	{
@@ -91,8 +116,9 @@
 		"semanticTag": "procedimiento",
 		"conceptId": "713281006",
 		"term": "consulta para cuidados paliativos (procedimiento)",
-		"ambito" : [ 
-			"ambulatorio"
+		"ambito": [
+			"ambulatorio",
+			"internacion"
 		]
 	},
 	{
@@ -102,7 +128,10 @@
 		"fsn": "educación en cuidados del niño (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "408991007",
-		"term": "educación en cuidados del niño"
+		"term": "educación en cuidados del niño",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -111,7 +140,10 @@
 		"fsn": "educación en cuidados del niño (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "408991007",
-		"term": "educación en cuidados del niño (procedimiento)"
+		"term": "educación en cuidados del niño (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -120,7 +152,10 @@
 		"fsn": "educación en cuidados del niño (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "408991007",
-		"term": "enseñanza de puericultura"
+		"term": "enseñanza de puericultura",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -129,7 +164,10 @@
 		"fsn": "manejo de la atención de accidente cerebrovascular (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "80051000119107",
-		"term": "manejo de la atención de accidente cerebrovascular"
+		"term": "manejo de la atención de accidente cerebrovascular",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -138,7 +176,10 @@
 		"fsn": "manejo de la atención de accidente cerebrovascular (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "80051000119107",
-		"term": "manejo de la atención de accidente cerebrovascular (procedimiento)"
+		"term": "manejo de la atención de accidente cerebrovascular (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -147,7 +188,10 @@
 		"fsn": "manejo de los cuidados del adolescente (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "409000006",
-		"term": "manejo de los cuidados del adolescente (procedimiento)"
+		"term": "manejo de los cuidados del adolescente (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -156,7 +200,10 @@
 		"fsn": "manejo de los cuidados del adolescente (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "409000006",
-		"term": "manejo de los cuidados del adolescente"
+		"term": "manejo de los cuidados del adolescente",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -165,7 +212,10 @@
 		"fsn": "examen ginecológico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "83607001",
-		"term": "examen ginecológico"
+		"term": "examen ginecológico",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -174,7 +224,10 @@
 		"fsn": "examen ginecológico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "83607001",
-		"term": "examen ginecológico (procedimiento)"
+		"term": "examen ginecológico (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -183,7 +236,10 @@
 		"fsn": "evaluación prequirúrgica de riesgo anestésico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "83874006",
-		"term": "evaluación prequirúrgica, anestesia"
+		"term": "evaluación prequirúrgica, anestesia",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -192,7 +248,10 @@
 		"fsn": "evaluación prequirúrgica de riesgo anestésico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "83874006",
-		"term": "evaluación prequirúrgica del riesgo anestésico"
+		"term": "evaluación prequirúrgica del riesgo anestésico",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -201,7 +260,10 @@
 		"fsn": "evaluación prequirúrgica de riesgo anestésico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "83874006",
-		"term": "evaluación prequirúrgica de riesgo anestésico (procedimiento)"
+		"term": "evaluación prequirúrgica de riesgo anestésico (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -210,7 +272,10 @@
 		"fsn": "evaluación prequirúrgica de riesgo anestésico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "83874006",
-		"term": "evaluación prequirúrgica de riesgo anestésico"
+		"term": "evaluación prequirúrgica de riesgo anestésico",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -219,7 +284,10 @@
 		"fsn": "servicio de genética (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310048009",
-		"term": "servicio de genética"
+		"term": "servicio de genética",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -228,7 +296,10 @@
 		"fsn": "servicio de genética (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310048009",
-		"term": "servicio de genética (procedimiento)"
+		"term": "servicio de genética (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -237,7 +308,10 @@
 		"fsn": "servicio de nefrología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310056007",
-		"term": "servicio de nefrología (procedimiento)"
+		"term": "servicio de nefrología (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -246,7 +320,10 @@
 		"fsn": "servicio de nefrología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310056007",
-		"term": "servicio de nefrología"
+		"term": "servicio de nefrología",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -255,7 +332,10 @@
 		"fsn": "servicio de infectología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310054005",
-		"term": "servicio de infectología"
+		"term": "servicio de infectología",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -264,7 +344,10 @@
 		"fsn": "servicio de infectología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310054005",
-		"term": "servicio de infectología (procedimiento)"
+		"term": "servicio de infectología (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -273,7 +356,10 @@
 		"fsn": "servicio de reumatología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310059000",
-		"term": "servicio de reumatología"
+		"term": "servicio de reumatología",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -282,7 +368,10 @@
 		"fsn": "servicio de reumatología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310059000",
-		"term": "servicio de reumatología (procedimiento)"
+		"term": "servicio de reumatología (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -291,7 +380,10 @@
 		"fsn": "servicio de neurología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310057003",
-		"term": "servicio de neurología"
+		"term": "servicio de neurología",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -300,7 +392,10 @@
 		"fsn": "servicio de neurología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310057003",
-		"term": "servicio de neurología (procedimiento)"
+		"term": "servicio de neurología (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -309,7 +404,10 @@
 		"fsn": "servicio de neumonología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310037002",
-		"term": "servicio de neumonología (procedimiento)"
+		"term": "servicio de neumonología (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -318,7 +416,10 @@
 		"fsn": "servicio de neumonología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310037002",
-		"term": "servicio de neumonología"
+		"term": "servicio de neumonología",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -327,7 +428,10 @@
 		"fsn": "servicio de alergia clínica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310035005",
-		"term": "servicio de alergia clínica (procedimiento)"
+		"term": "servicio de alergia clínica (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -336,7 +440,10 @@
 		"fsn": "servicio de alergia clínica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "310035005",
-		"term": "servicio de alergia clínica"
+		"term": "servicio de alergia clínica",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -345,7 +452,10 @@
 		"fsn": "consulta por dolor crónico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "420454001",
-		"term": "consulta por dolor crónico (procedimiento)"
+		"term": "consulta por dolor crónico (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -354,7 +464,10 @@
 		"fsn": "consulta por dolor crónico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "420454001",
-		"term": "consulta por dolor crónico"
+		"term": "consulta por dolor crónico",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -363,7 +476,10 @@
 		"fsn": "procedimiento Y/O servicio odontológico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "108306002",
-		"term": "procedimiento Y/O servicio odontológico"
+		"term": "procedimiento Y/O servicio odontológico",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -372,7 +488,10 @@
 		"fsn": "procedimiento Y/O servicio odontológico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "108306002",
-		"term": "procedimiento Y/O servicio dental"
+		"term": "procedimiento Y/O servicio dental",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -381,7 +500,10 @@
 		"fsn": "procedimiento Y/O servicio odontológico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "108306002",
-		"term": "procedimiento Y/O servicio odontológico (procedimiento)"
+		"term": "procedimiento Y/O servicio odontológico (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -390,7 +512,10 @@
 		"fsn": "obtención de historia clínica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "84100007",
-		"term": "anamnesis"
+		"term": "anamnesis",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -399,7 +524,10 @@
 		"fsn": "obtención de historia clínica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "84100007",
-		"term": "entrevista clínica"
+		"term": "entrevista clínica",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -408,7 +536,10 @@
 		"fsn": "obtención de historia clínica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "84100007",
-		"term": "obtención de historia clínica"
+		"term": "obtención de historia clínica",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -417,7 +548,10 @@
 		"fsn": "obtención de historia clínica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "84100007",
-		"term": "obtención de historia clínica (procedimiento)"
+		"term": "obtención de historia clínica (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -426,7 +560,10 @@
 		"fsn": "oxigenoterapia domiciliaria (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "426990007",
-		"term": "oxigenoterapia domiciliaria"
+		"term": "oxigenoterapia domiciliaria",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -435,7 +572,10 @@
 		"fsn": "oxigenoterapia domiciliaria (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "426990007",
-		"term": "oxigenoterapia domiciliaria (procedimiento)"
+		"term": "oxigenoterapia domiciliaria (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -444,7 +584,10 @@
 		"fsn": "examen pediátrico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "243788004",
-		"term": "examen pediátrico (procedimiento)"
+		"term": "examen pediátrico (procedimiento)",
+	"ambito": [
+		"ambulatorio"
+	]
 	},
 	{
 		"_id": {
@@ -453,7 +596,10 @@
 		"fsn": "examen pediátrico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "243788004",
-		"term": "examen pediátrico"
+		"term": "examen pediátrico",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -462,7 +608,10 @@
 		"fsn": "examen y evaluación cardiovascular (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "43038000",
-		"term": "examen y evaluación cardiovascular"
+		"term": "examen y evaluación cardiovascular",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -471,7 +620,10 @@
 		"fsn": "examen y evaluación cardiovascular (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "43038000",
-		"term": "examen y evaluación cardiovascular (procedimiento)"
+		"term": "examen y evaluación cardiovascular (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -480,7 +632,10 @@
 		"fsn": "revisión de medicación para epilepsia (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "401062003",
-		"term": "revisión de medicación para epilepsia"
+		"term": "revisión de medicación para epilepsia",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -489,7 +644,10 @@
 		"fsn": "revisión de medicación para epilepsia (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "401062003",
-		"term": "revisión de medicación para epilepsia (procedimiento)"
+		"term": "revisión de medicación para epilepsia (procedimiento)",
+		"ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -498,7 +656,10 @@
 		"fsn": "exploración y evaluación oftálmica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "36228007",
-		"term": "exploración y evaluación oftálmica"
+		"term": "exploración y evaluación oftálmica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -507,7 +668,10 @@
 		"fsn": "exploración y evaluación oftálmica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "36228007",
-		"term": "examen del ojo"
+		"term": "examen del ojo",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -516,7 +680,10 @@
 		"fsn": "exploración y evaluación oftálmica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "36228007",
-		"term": "examen oftalmológico"
+		"term": "examen oftalmológico",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -525,7 +692,10 @@
 		"fsn": "exploración y evaluación oftálmica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "36228007",
-		"term": "examen ocular"
+		"term": "examen ocular",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -534,7 +704,10 @@
 		"fsn": "exploración y evaluación oftálmica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "36228007",
-		"term": "exploración y evaluación oftálmica (procedimiento)"
+		"term": "exploración y evaluación oftálmica (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -543,7 +716,10 @@
 		"fsn": "consulta general e informe de radioterapia (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "65263004",
-		"term": "consulta general e informe de radioterapia"
+		"term": "consulta general e informe de radioterapia",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -552,7 +728,10 @@
 		"fsn": "consulta general e informe de radioterapia (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "65263004",
-		"term": "consulta general e informe de terapia radiante"
+		"term": "consulta general e informe de terapia radiante",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -561,7 +740,10 @@
 		"fsn": "consulta general e informe de radioterapia (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "65263004",
-		"term": "terapia radiante, consulta e informe"
+		"term": "terapia radiante, consulta e informe",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -570,7 +752,10 @@
 		"fsn": "consulta general e informe de radioterapia (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "65263004",
-		"term": "consulta general e informe de radioterapia (procedimiento)"
+		"term": "consulta general e informe de radioterapia (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -579,7 +764,10 @@
 		"fsn": "cribado para la detección de glaucoma (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "171215009",
-		"term": "detección selectiva de glaucoma"
+		"term": "detección selectiva de glaucoma",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -588,7 +776,10 @@
 		"fsn": "cribado para la detección de glaucoma (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "171215009",
-		"term": "cribado para la detección de glaucoma"
+		"term": "cribado para la detección de glaucoma",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -597,7 +788,10 @@
 		"fsn": "cribado para la detección de glaucoma (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "171215009",
-		"term": "cribado para glaucoma"
+		"term": "cribado para glaucoma",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -606,7 +800,10 @@
 		"fsn": "cribado para la detección de glaucoma (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "171215009",
-		"term": "rastreo para glaucoma"
+		"term": "rastreo para glaucoma",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -615,7 +812,10 @@
 		"fsn": "cribado para la detección de glaucoma (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "171215009",
-		"term": "screening para glaucoma"
+		"term": "screening para glaucoma",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -624,7 +824,10 @@
 		"fsn": "cribado para la detección de glaucoma (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "171215009",
-		"term": "tamizaje para glaucoma"
+		"term": "tamizaje para glaucoma",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -633,7 +836,10 @@
 		"fsn": "cribado para la detección de glaucoma (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "171215009",
-		"term": "pesquisa para glaucoma"
+		"term": "pesquisa para glaucoma",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -642,7 +848,10 @@
 		"fsn": "cribado para la detección de glaucoma (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "171215009",
-		"term": "cribado para la detección de glaucoma (procedimiento)"
+		"term": "cribado para la detección de glaucoma (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -651,7 +860,10 @@
 		"fsn": "cribado para la detección de glaucoma (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "171215009",
-		"term": "cribaje para glaucoma"
+		"term": "cribaje para glaucoma",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -660,7 +872,10 @@
 		"fsn": "consulta e informe dermatológicos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "73007006",
-		"term": "consulta e informe dermatológicos"
+		"term": "consulta e informe dermatológicos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -669,7 +884,10 @@
 		"fsn": "consulta e informe dermatológicos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "73007006",
-		"term": "consulta e informe dermatológicos (procedimiento)"
+		"term": "consulta e informe dermatológicos (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -678,7 +896,10 @@
 		"fsn": "examen relacionado con el embarazo (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "312891008",
-		"term": "examen relacionado con el embarazo"
+		"term": "examen relacionado con el embarazo",
+        "ambito": [
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -687,7 +908,10 @@
 		"fsn": "examen relacionado con el embarazo (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "312891008",
-		"term": "examen relacionado con el embarazo (procedimiento)"
+		"term": "examen relacionado con el embarazo (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -696,7 +920,10 @@
 		"fsn": "controles del desarrollo infantil (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "281010000",
-		"term": "controles del desarrollo infantil (procedimiento)"
+		"term": "controles del desarrollo infantil (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -705,7 +932,10 @@
 		"fsn": "controles del desarrollo infantil (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "281010000",
-		"term": "controles del desarrollo infantil"
+		"term": "controles del desarrollo infantil",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -714,7 +944,10 @@
 		"fsn": "evaluación de salud mental (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "391281002",
-		"term": "evaluación de salud mental"
+		"term": "evaluación de salud mental",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -723,7 +956,10 @@
 		"fsn": "evaluación de salud mental (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "391281002",
-		"term": "evaluación de salud mental (procedimiento)"
+		"term": "evaluación de salud mental (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -732,7 +968,10 @@
 		"fsn": "examen de garganta, nariz y oído (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "113028003",
-		"term": "examen de garganta, nariz y oído"
+		"term": "examen de garganta, nariz y oído",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -741,7 +980,10 @@
 		"fsn": "examen de garganta, nariz y oído (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "113028003",
-		"term": "examen ORL"
+		"term": "examen ORL",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -750,7 +992,10 @@
 		"fsn": "examen de garganta, nariz y oído (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "113028003",
-		"term": "examen otorrinolaringológico"
+		"term": "examen otorrinolaringológico",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -759,7 +1004,10 @@
 		"fsn": "examen de garganta, nariz y oído (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "113028003",
-		"term": "examen de garganta, nariz y oído (procedimiento)"
+		"term": "examen de garganta, nariz y oído (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -768,7 +1016,10 @@
 		"fsn": "evaluación del receptor después del trasplante renal (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "428645009",
-		"term": "evaluación del receptor luego de trasplante renal"
+		"term": "evaluación del receptor luego de trasplante renal",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -777,7 +1028,10 @@
 		"fsn": "evaluación del receptor después del trasplante renal (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "428645009",
-		"term": "evaluación del receptor después del trasplante renal"
+		"term": "evaluación del receptor después del trasplante renal",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -786,7 +1040,10 @@
 		"fsn": "evaluación del receptor después del trasplante renal (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "428645009",
-		"term": "evaluación del receptor después del trasplante renal (procedimiento)"
+		"term": "evaluación del receptor después del trasplante renal (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -795,7 +1052,10 @@
 		"fsn": "consulta de niño sano (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "410620009",
-		"term": "consulta de niño sano (procedimiento)"
+		"term": "consulta de niño sano (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -807,6 +1067,9 @@
 		"term": "consulta de niño sano",
 		"refsetIds": [
 			"900000000000497000"
+		],
+        "ambito": [
+			"ambulatorio"
 		]
 	},
 	{
@@ -816,7 +1079,10 @@
 		"fsn": "manejo de tratamiento fonoaudiológico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "410163008",
-		"term": "manejo de tratamiento fonoaudiológico (procedimiento)"
+		"term": "manejo de tratamiento fonoaudiológico (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -825,7 +1091,10 @@
 		"fsn": "manejo de tratamiento fonoaudiológico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "410163008",
-		"term": "manejo de tratamiento fonoaudiológico"
+		"term": "manejo de tratamiento fonoaudiológico",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -834,7 +1103,10 @@
 		"fsn": "manejo de tratamiento fonoaudiológico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "410163008",
-		"term": "manejo de tratamiento logopédico"
+		"term": "manejo de tratamiento logopédico",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -843,7 +1115,10 @@
 		"fsn": "evaluación de régimen nutricional (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "410173005",
-		"term": "evaluación de régimen nutricional"
+		"term": "evaluación de régimen nutricional",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -852,7 +1127,10 @@
 		"fsn": "evaluación de régimen nutricional (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "410173005",
-		"term": "evaluación de régimen nutricional (procedimiento)"
+		"term": "evaluación de régimen nutricional (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -861,7 +1139,10 @@
 		"fsn": "educación sobre cuidado de ostomía (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "410091003",
-		"term": "educación sobre cuidado de ostomía"
+		"term": "educación sobre cuidado de ostomía",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -870,7 +1151,10 @@
 		"fsn": "educación sobre cuidado de ostomía (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "410091003",
-		"term": "educación sobre cuidado de ostomía (procedimiento)"
+		"term": "educación sobre cuidado de ostomía (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -879,7 +1163,10 @@
 		"conceptId": "268565007",
 		"term": "Exámen médico del adulto",
 		"fsn": "examen médico del adulto (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -888,7 +1175,10 @@
 		"conceptId": "410620009",
 		"term": "consulta de niño sano (procedimiento)",
 		"fsn": "consulta de niño sano (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -897,7 +1187,10 @@
 		"conceptId": "243788004",
 		"term": "examen pediátrico (procedimiento)",
 		"fsn": "examen pediátrico (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -906,7 +1199,10 @@
 		"conceptId": "168537006",
 		"term": "radiografía simple (procedimiento)",
 		"fsn": "radiografía simple (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -915,7 +1211,10 @@
 		"conceptId": "310036006",
 		"term": "servicio de cardiología (procedimiento)",
 		"fsn": "servicio de cardiología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -924,7 +1223,10 @@
 		"conceptId": "310057003",
 		"term": "servicio de neurología (procedimiento)",
 		"fsn": "servicio de neurología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -933,7 +1235,10 @@
 		"conceptId": "185349003",
 		"term": "consulta por control de salud (procedimiento)",
 		"fsn": "consulta por control de salud (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -942,7 +1247,11 @@
 		"conceptId": "251000013108",
 		"term": "consulta de endocrinología (procedimiento)",
 		"fsn": "consulta de endocrinología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -951,7 +1260,11 @@
 		"conceptId": "251000013108",
 		"term": "consulta de endocrinología",
 		"fsn": "consulta de endocrinología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -960,7 +1273,11 @@
 		"conceptId": "251000013108",
 		"term": "consulta con especialista en glándulas endócrinas",
 		"fsn": "consulta con especialista en glándulas endócrinas",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -969,7 +1286,11 @@
 		"conceptId": "251000013108",
 		"term": "consulta con especialista en sistema endócrino",
 		"fsn": "consulta con especialista en sistema endócrino",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -978,7 +1299,11 @@
 		"conceptId": "261000013105",
 		"term": "consulta con especialista en aparato digestivo",
 		"fsn": "consulta con especialista en aparato digestivo",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -987,7 +1312,11 @@
 		"conceptId": "261000013105",
 		"term": "consulta de gastroenterología (procedimiento)",
 		"fsn": "consulta de gastroenterología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -996,7 +1325,11 @@
 		"conceptId": "261000013105",
 		"term": "consulta de gastroenterología",
 		"fsn": "consulta de gastroenterología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1005,7 +1338,10 @@
 		"conceptId": "271000013103",
 		"term": "consulta de neumonología (procedimiento)",
 		"fsn": "consulta de neumonología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1014,7 +1350,11 @@
 		"conceptId": "271000013103",
 		"term": "consulta de neumonología",
 		"fsn": "consulta de neumonología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1023,7 +1363,10 @@
 		"conceptId": "271000013103",
 		"term": "consulta con especialista del aparato respiratorio",
 		"fsn": "consulta con especialista del aparato respiratorio",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1032,7 +1375,10 @@
 		"conceptId": "281000013100",
 		"term": "consulta de endocrinología para pacientes transgénero (procedimiento)",
 		"fsn": "consulta de endocrinología para pacientes transgénero (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1041,7 +1387,10 @@
 		"conceptId": "281000013100",
 		"term": "consulta de endocrinología para pacientes transgénero",
 		"fsn": "consulta de endocrinología para pacientes transgénero",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1050,7 +1399,10 @@
 		"conceptId": "401062003",
 		"term": "consulta de recetas de antiepilépticos",
 		"fsn": "consulta de recetas de antiepilépticos",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1059,7 +1411,10 @@
 		"conceptId": "401062003",
 		"term": "consulta de recetas de antiepilépticos (procedimiento)",
 		"fsn": "consulta de recetas de antiepilépticos (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1068,7 +1423,11 @@
 		"conceptId": "291000013102",
 		"term": "consulta de cardiología (procedimiento)",
 		"fsn": "consulta de cardiología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1077,7 +1436,11 @@
 		"conceptId": "291000013102",
 		"term": "consulta de cardiología",
 		"fsn": "consulta de cardiología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1086,7 +1449,11 @@
 		"conceptId": "291000013102",
 		"term": "consulta con cardiólogo",
 		"fsn": "consulta con cardiólogo",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1095,7 +1462,11 @@
 		"conceptId": "291000013102",
 		"term": "consultorio de cardiología",
 		"fsn": "consultorio de cardiología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1104,7 +1475,10 @@
 		"conceptId": "83874006",
 		"term": "consulta prequirúrgica de anestesiología",
 		"fsn": "consulta prequirúrgica de anestesiología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1113,7 +1487,10 @@
 		"conceptId": "83874006",
 		"term": "consulta prequirúrgica de anestesiología (procedimiento)",
 		"fsn": "consulta prequirúrgica de anestesiología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1122,7 +1499,10 @@
 		"conceptId": "301000013101",
 		"term": "consulta de tabaquismo (procedimiento)",
 		"fsn": "consulta de tabaquismo (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1131,7 +1511,10 @@
 		"conceptId": "301000013101",
 		"term": "consulta de tabaquismo",
 		"fsn": "consulta de tabaquismo",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1140,7 +1523,10 @@
 		"conceptId": "301000013101",
 		"term": "consulta para dejar de fumar",
 		"fsn": "consulta para dejar de fumar",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1149,7 +1535,11 @@
 		"conceptId": "311000013103",
 		"term": "consulta de cirugía (procedimiento)",
 		"fsn": "consulta de cirugía (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1158,7 +1548,11 @@
 		"conceptId": "311000013103",
 		"term": "consulta de cirugía",
 		"fsn": "consulta de cirugía",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1167,7 +1561,11 @@
 		"conceptId": "311000013103",
 		"term": "consultorio de cirugía",
 		"fsn": "consultorio de cirugía",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1176,7 +1574,11 @@
 		"conceptId": "311000013103",
 		"term": "consulta quirúrgica",
 		"fsn": "consulta quirúrgica",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1185,7 +1587,11 @@
 		"conceptId": "311000013103",
 		"term": "consulta con cirujano",
 		"fsn": "consulta con cirujano",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1194,7 +1600,11 @@
 		"conceptId": "321000013106",
 		"term": "consulta de cirugía general (procedimiento)",
 		"fsn": "consulta de cirugía general (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1204,8 +1614,9 @@
 		"term": "consulta de cirugía general",
 		"fsn": "consulta de cirugía general",
 		"semanticTag": "procedimiento",
-		"ambito" : [ 
-			"ambulatorio"
+        "ambito": [
+			"ambulatorio",
+			"internacion"
 		]
 	},
 	{
@@ -1215,7 +1626,11 @@
 		"conceptId": "331000013109",
 		"term": "consulta de cirugía de aparato digstivo superior",
 		"fsn": "consulta de cirugía de aparato digstivo superior",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1224,7 +1639,11 @@
 		"conceptId": "341000013104",
 		"term": "consulta de coloproctología (procedimiento)",
 		"fsn": "consulta de coloproctología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1233,7 +1652,11 @@
 		"conceptId": "341000013104",
 		"term": "consulta de coloproctología",
 		"fsn": "consulta de coloproctología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1242,7 +1665,11 @@
 		"conceptId": "341000013104",
 		"term": "consulta de cirugía de aparato digestivo inferior",
 		"fsn": "consulta de cirugía de aparato digestivo inferior",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1251,7 +1678,11 @@
 		"conceptId": "351000013102",
 		"term": "consulta de cirugía de cabeza y cuello (procedimiento)",
 		"fsn": "consulta de cirugía de cabeza y cuello (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1260,7 +1691,11 @@
 		"conceptId": "351000013102",
 		"term": "consulta de cirugía de cabeza y cuello",
 		"fsn": "consulta de cirugía de cabeza y cuello",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1269,7 +1704,11 @@
 		"conceptId": "361000013100",
 		"term": "consulta de neurocirugía (procedimiento)",
 		"fsn": "consulta de neurocirugía (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1278,7 +1717,11 @@
 		"conceptId": "361000013100",
 		"term": "consulta de neurocirugía",
 		"fsn": "consulta de neurocirugía",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1287,7 +1730,11 @@
 		"conceptId": "361000013100",
 		"term": "consulta con neurocirujano",
 		"fsn": "consulta con neurocirujano",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1296,7 +1743,11 @@
 		"conceptId": "361000013100",
 		"term": "consulta neuroquirúrgica",
 		"fsn": "consulta neuroquirúrgica",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1305,7 +1756,11 @@
 		"conceptId": "371000013107",
 		"term": "consulta de hematología (procedimiento)",
 		"fsn": "consulta de hematología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1314,7 +1769,11 @@
 		"conceptId": "371000013107",
 		"term": "consulta de hematología",
 		"fsn": "consulta de hematología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1323,7 +1782,11 @@
 		"conceptId": "371000013107",
 		"term": "consulta al médico hematólogo",
 		"fsn": "consulta al médico hematólogo",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1332,7 +1795,11 @@
 		"conceptId": "381000013105",
 		"term": "consulta sobre alergias (procedimiento)",
 		"fsn": "consulta sobre alergias (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1341,7 +1808,11 @@
 		"conceptId": "381000013105",
 		"term": "consulta sobre alergias",
 		"fsn": "consulta sobre alergias",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1350,7 +1821,11 @@
 		"conceptId": "381000013105",
 		"term": "consulta con alergista",
 		"fsn": "consulta con alergista",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1359,7 +1834,10 @@
 		"conceptId": "381000013105",
 		"term": "consulta de alergología",
 		"fsn": "consulta de alergología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1369,8 +1847,9 @@
 		"term": "consulta de medicina general",
 		"fsn": "consulta de medicina general",
 		"semanticTag": "procedimiento",
-		"ambito" : [ 
-			"ambulatorio"
+        "ambito": [
+			"ambulatorio",
+			"internacion"
 		]
 	},
 	{
@@ -1380,7 +1859,11 @@
 		"conceptId": "391000013108",
 		"term": "consulta con médico general",
 		"fsn": "consulta con médico general",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1389,7 +1872,11 @@
 		"conceptId": "391000013108",
 		"term": "consulta con médico generalista",
 		"fsn": "consulta con médico generalista",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1398,7 +1885,11 @@
 		"conceptId": "401000013105",
 		"term": "consulta de clínica médica (procedimiento)",
 		"fsn": "consulta de clínica médica (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1408,8 +1899,9 @@
 		"term": "consulta de clínica médica",
 		"fsn": "consulta de clínica médica",
 		"semanticTag": "procedimiento",
-		"ambito" : [ 
-			"ambulatorio"
+        "ambito": [
+			"ambulatorio",
+			"internacion"
 		]
 	},
 	{
@@ -1419,7 +1911,11 @@
 		"conceptId": "421000013100",
 		"term": "consulta de neurología (procedimiento)",
 		"fsn": "consulta de neurología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1428,7 +1924,11 @@
 		"conceptId": "421000013100",
 		"term": "consulta de neurología",
 		"fsn": "consulta de neurología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1437,7 +1937,11 @@
 		"conceptId": "431000013102",
 		"term": "consulta de reumatología (procedimiento)",
 		"fsn": "consulta de reumatología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1446,7 +1950,11 @@
 		"conceptId": "431000013102",
 		"term": "consulta de reumatología",
 		"fsn": "consulta de reumatología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1455,7 +1963,11 @@
 		"conceptId": "431000013102",
 		"term": "consulta con médico reumatólogo",
 		"fsn": "consulta con médico reumatólogo",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1464,7 +1976,11 @@
 		"conceptId": "441000013107",
 		"term": "consulta de traumatología (procedimiento)",
 		"fsn": "consulta de traumatología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1473,7 +1989,11 @@
 		"conceptId": "441000013107",
 		"term": "consulta de traumatología",
 		"fsn": "consulta de traumatología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1482,7 +2002,11 @@
 		"conceptId": "451000013109",
 		"term": "consulta de traumatología general (procedimiento)",
 		"fsn": "consulta de traumatología general (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1491,7 +2015,11 @@
 		"conceptId": "451000013109",
 		"term": "consulta de traumatología general",
 		"fsn": "consulta de traumatología general",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1500,7 +2028,11 @@
 		"conceptId": "461000013106",
 		"term": "consulta de infectología (procedimiento)",
 		"fsn": "consulta de infectología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1509,7 +2041,11 @@
 		"conceptId": "461000013106",
 		"term": "consulta de infectología",
 		"fsn": "consulta de infectología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1518,7 +2054,11 @@
 		"conceptId": "461000013106",
 		"term": "consulta con médico infectólogo",
 		"fsn": "consulta con médico infectólogo",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1527,7 +2067,11 @@
 		"conceptId": "471000013104",
 		"term": "consulta de infectología pediátrica (procedimiento)",
 		"fsn": "consulta de infectología pediátrica (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1536,7 +2080,11 @@
 		"conceptId": "471000013104",
 		"term": "consulta de infectología pediátrica",
 		"fsn": "consulta de infectología pediátrica",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1545,7 +2093,11 @@
 		"conceptId": "471000013104",
 		"term": "consulta de infectología infantil",
 		"fsn": "consulta de infectología infantil",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1554,7 +2106,11 @@
 		"conceptId": "34043003",
 		"term": "consulta de odontología",
 		"fsn": "consulta de odontología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1563,7 +2119,11 @@
 		"conceptId": "34043003",
 		"term": "consulta de odontología (procedimiento)",
 		"fsn": "consulta de odontología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1572,7 +2132,11 @@
 		"conceptId": "481000013101",
 		"term": "consulta de odontología pediátrica (procedimiento)",
 		"fsn": "consulta de odontología pediátrica (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1581,7 +2145,11 @@
 		"conceptId": "481000013101",
 		"term": "consulta de odontología infantil",
 		"fsn": "consulta de odontología infantil",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1590,7 +2158,11 @@
 		"conceptId": "481000013101",
 		"term": "consulta de odontología pediátrica",
 		"fsn": "consulta de odontología pediátrica",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1599,7 +2171,11 @@
 		"conceptId": "481000013101",
 		"term": "consulta de odontopediatría",
 		"fsn": "consulta de odontopediatría",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1608,7 +2184,11 @@
 		"conceptId": "491000013103",
 		"term": "consulta de oftalmología (procedimiento)",
 		"fsn": "consulta de oftalmología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1617,7 +2197,11 @@
 		"conceptId": "491000013103",
 		"term": "consulta de oftalmología",
 		"fsn": "consulta de oftalmología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1626,7 +2210,11 @@
 		"conceptId": "491000013103",
 		"term": "consulta con médico oculista",
 		"fsn": "consulta con médico oculista",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1635,7 +2223,11 @@
 		"conceptId": "491000013103",
 		"term": "consulta con médico oftalmólogo",
 		"fsn": "consulta con médico oftalmólogo",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1644,7 +2236,11 @@
 		"conceptId": "501000013106",
 		"term": "consulta de otorrinolaringología (procedimiento)",
 		"fsn": "consulta de otorrinolaringología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1653,7 +2249,11 @@
 		"conceptId": "501000013106",
 		"term": "consulta de otorrinolaringología",
 		"fsn": "consulta de otorrinolaringología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1662,7 +2262,11 @@
 		"conceptId": "501000013106",
 		"term": "consulta de ORL",
 		"fsn": "consulta de ORL",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1671,7 +2275,11 @@
 		"conceptId": "501000013106",
 		"term": "consulta con médico otorrinolaringólogo",
 		"fsn": "consulta con médico otorrinolaringólogo",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1680,7 +2288,11 @@
 		"conceptId": "511000013109",
 		"term": "consulta de pediatría (procedimiento)",
 		"fsn": "consulta de pediatría (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1689,7 +2301,11 @@
 		"conceptId": "511000013109",
 		"term": "consulta de pediatría",
 		"fsn": "consulta de pediatría",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1698,7 +2314,11 @@
 		"conceptId": "511000013109",
 		"term": "consulta con médico pediatra",
 		"fsn": "consulta con médico pediatra",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1707,7 +2327,11 @@
 		"conceptId": "331000013109",
 		"term": "consulta de cirugía de aparato digestivo superior (procedimiento)",
 		"fsn": "consulta de cirugía de aparato digestivo superior (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1716,7 +2340,11 @@
 		"conceptId": "331000013109",
 		"term": "consulta de cirugía de aparato digestivo superior",
 		"fsn": "consulta de cirugía de aparato digestivo superior",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1725,7 +2353,11 @@
 		"conceptId": "531000013103",
 		"term": "consulta de traumatología de miembro inferior (procedimiento)",
 		"fsn": "consulta de traumatología de miembro inferior (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1734,7 +2366,11 @@
 		"conceptId": "531000013103",
 		"term": "consulta de traumatología de miembro inferior",
 		"fsn": "consulta de traumatología de miembro inferior",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1743,7 +2379,11 @@
 		"conceptId": "541000013108",
 		"term": "consulta de reumatología infantil (procedimiento)",
 		"fsn": "consulta de reumatología infantil (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1752,7 +2392,11 @@
 		"conceptId": "541000013108",
 		"term": "consulta de reumatología infantil",
 		"fsn": "consulta de reumatología infantil",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1761,7 +2405,11 @@
 		"conceptId": "541000013108",
 		"term": "consulta de reumatología pediátrica",
 		"fsn": "consulta de reumatología pediátrica",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1770,7 +2418,11 @@
 		"conceptId": "551000013105",
 		"term": "consulta de salud mental (procedimiento)",
 		"fsn": "consulta de salud mental (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1779,7 +2431,11 @@
 		"conceptId": "551000013105",
 		"term": "consulta de salud mental",
 		"fsn": "consulta de salud mental",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1788,7 +2444,11 @@
 		"conceptId": "561000013107",
 		"term": "consulta de traumatologia de pie (procedimiento)",
 		"fsn": "consulta de traumatologia de pie (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1797,7 +2457,11 @@
 		"conceptId": "561000013107",
 		"term": "consulta de traumatologia de pie",
 		"fsn": "consulta de traumatologia de pie",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1806,7 +2470,11 @@
 		"conceptId": "561000013107",
 		"term": "consulta a médico traumatolólogo de pie",
 		"fsn": "consulta a médico traumatolólogo de pie",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1815,7 +2483,11 @@
 		"conceptId": "581000013102",
 		"term": "consulta de traumatología de cadera (procedimiento)",
 		"fsn": "consulta de traumatología de cadera (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1824,7 +2496,11 @@
 		"conceptId": "581000013102",
 		"term": "consulta de traumatología de cadera",
 		"fsn": "consulta de traumatología de cadera",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1833,7 +2509,11 @@
 		"conceptId": "591000013104",
 		"term": "consulta de traumatología de hombro (procedimiento)",
 		"fsn": "consulta de traumatología de hombro (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1842,7 +2522,11 @@
 		"conceptId": "591000013104",
 		"term": "consulta de traumatología de hombro",
 		"fsn": "consulta de traumatología de hombro",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1851,7 +2535,11 @@
 		"conceptId": "601000013107",
 		"term": "consulta de traumatología de codo (procedimiento)",
 		"fsn": "consulta de traumatología de codo (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1860,7 +2548,11 @@
 		"conceptId": "601000013107",
 		"term": "consulta de traumatología de codo",
 		"fsn": "consulta de traumatología de codo",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1869,7 +2561,11 @@
 		"conceptId": "521000013101",
 		"term": "consulta de traumatología de miembro superior (procedimiento)",
 		"fsn": "consulta de traumatología de miembro superior (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1878,7 +2574,11 @@
 		"conceptId": "521000013101",
 		"term": "consulta de traumatología de miembro superior",
 		"fsn": "consulta de traumatología de miembro superior",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1887,7 +2587,11 @@
 		"conceptId": "611000013105",
 		"term": "consulta de traumatología de muñeca (procedimiento)",
 		"fsn": "consulta de traumatología de muñeca (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1896,7 +2600,11 @@
 		"conceptId": "611000013105",
 		"term": "consulta de traumatología de muñeca",
 		"fsn": "consulta de traumatología de muñeca",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1905,7 +2613,11 @@
 		"conceptId": "621000013102",
 		"term": "consulta de traumatologia de columna (procedimiento)",
 		"fsn": "consulta de traumatologia de columna (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1914,7 +2626,11 @@
 		"conceptId": "621000013102",
 		"term": "consulta de traumatologia de columna",
 		"fsn": "consulta de traumatologia de columna",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1923,7 +2639,11 @@
 		"conceptId": "631000013104",
 		"term": "consulta prequirúrgica de traumatología (procedimiento)",
 		"fsn": "consulta prequirúrgica de traumatología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1932,7 +2652,11 @@
 		"conceptId": "631000013104",
 		"term": "consulta prequirúrgica de traumatología",
 		"fsn": "consulta prequirúrgica de traumatología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1941,7 +2665,11 @@
 		"conceptId": "641000013109",
 		"term": "consulta postquirúrgica de traumatología (procedimiento)",
 		"fsn": "consulta postquirúrgica de traumatología (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1950,7 +2678,11 @@
 		"conceptId": "641000013109",
 		"term": "consulta postquirúrgica de traumatología",
 		"fsn": "consulta postquirúrgica de traumatología",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -1960,8 +2692,9 @@
 		"term": "consulta de ortopedia (procedimiento)",
 		"fsn": "consulta de ortopedia (procedimiento)",
 		"semanticTag": "procedimiento",
-		"ambito" : [ 
-			"ambulatorio"
+        "ambito": [
+			"ambulatorio",
+			"internacion"
 		]
 	},
 	{
@@ -1972,8 +2705,9 @@
 		"term": "consulta de ortopedia",
 		"fsn": "consulta de ortopedia",
 		"semanticTag": "procedimiento",
-		"ambito" : [ 
-			"ambulatorio"
+        "ambito": [
+			"ambulatorio",
+			"internacion"
 		]
 	},
 	{
@@ -1983,7 +2717,10 @@
 		"conceptId": "661000013108",
 		"term": "evaluación mental previa a cirugía bariátrica (procedimiento)",
 		"fsn": "evaluación mental previa a cirugía bariátrica (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -1992,7 +2729,10 @@
 		"conceptId": "661000013108",
 		"term": "evaluación mental previa a cirugía bariátrica",
 		"fsn": "evaluación mental previa a cirugía bariátrica",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2001,7 +2741,10 @@
 		"conceptId": "661000013108",
 		"term": "evaluación psicológica para pacientes candidatos a cirugía bariátrica",
 		"fsn": "evaluación psicológica para pacientes candidatos a cirugía bariátrica",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2010,7 +2753,11 @@
 		"conceptId": "671000013101",
 		"term": "consulta de cirugía de tórax (procedimiento)",
 		"fsn": "consulta de cirugía de tórax (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -2019,7 +2766,11 @@
 		"conceptId": "671000013101",
 		"term": "consulta de cirugía de tórax",
 		"fsn": "consulta de cirugía de tórax",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -2028,7 +2779,11 @@
 		"conceptId": "671000013101",
 		"term": "consulta de cirugía torácica",
 		"fsn": "consulta de cirugía torácica",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -2037,7 +2792,11 @@
 		"conceptId": "681000013103",
 		"term": "consulta de cirugía vascular (procedimiento)",
 		"fsn": "consulta de cirugía vascular (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -2046,7 +2805,11 @@
 		"conceptId": "681000013103",
 		"term": "consulta de cirugía vascular",
 		"fsn": "consulta de cirugía vascular",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -2055,7 +2818,11 @@
 		"conceptId": "571000013100",
 		"term": "consulta de traumatología de rodilla (procedimiento)",
 		"fsn": "consulta de traumatología de rodilla (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -2064,7 +2831,11 @@
 		"conceptId": "571000013100",
 		"term": "consulta de traumatología de rodilla",
 		"fsn": "consulta de traumatología de rodilla",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -2073,7 +2844,10 @@
 		"conceptId": "421000013100",
 		"term": "consulta con médico neurólogo",
 		"fsn": "consulta con médico neurólogo",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -2082,7 +2856,10 @@
 		"fsn": "Consulta de embarazo y HIV (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1001000013104",
-		"term": "Consulta de embarazo y HIV"
+		"term": "Consulta de embarazo y HIV",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2091,7 +2868,10 @@
 		"fsn": "Consulta de oxigenoterapia domiciliaria (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1011000013101",
-		"term": "Consulta de oxigenoterapia domiciliaria"
+		"term": "Consulta de oxigenoterapia domiciliaria",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2100,7 +2880,10 @@
 		"fsn": "Consulta de ventilación no invasiva (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1021000013109",
-		"term": "Consulta de ventilación no invasiva"
+		"term": "Consulta de ventilación no invasiva",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2109,7 +2892,10 @@
 		"fsn": "Consulta de titulación de ventilación no invasiva (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1031000013107",
-		"term": "Consulta de titulación de ventilación no invasiva''"
+		"term": "Consulta de titulación de ventilación no invasiva''",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2118,7 +2904,10 @@
 		"fsn": "Consulta prequirúrgica de neumonología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1041000013102",
-		"term": "Consulta prequirúrgica de neumonología"
+		"term": "Consulta prequirúrgica de neumonología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2127,7 +2916,10 @@
 		"fsn": "Consulta de cirugía infantil (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1051000013100",
-		"term": "Consulta de cirugía infantil "
+		"term": "Consulta de cirugía infantil ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2136,7 +2928,10 @@
 		"fsn": "Consulta de cirugía urológica infantil (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1061000013103",
-		"term": "Consulta de cirugía urológica infantil "
+		"term": "Consulta de cirugía urológica infantil ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2145,7 +2940,10 @@
 		"fsn": "Consulta de dermatología infantil (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1071000013105",
-		"term": "Consulta de dermatología infantil "
+		"term": "Consulta de dermatología infantil ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2154,7 +2952,10 @@
 		"fsn": "Consulta de endocrinología ginecológica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1091000013106",
-		"term": "Consulta de endocrinología ginecológica "
+		"term": "Consulta de endocrinología ginecológica ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2163,7 +2964,10 @@
 		"fsn": "Consulta de esterilidad (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1101000013100",
-		"term": "Consulta de esterilidad "
+		"term": "Consulta de esterilidad ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2172,7 +2976,10 @@
 		"fsn": "Consulta de ginecología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1111000013102",
-		"term": "Consulta de ginecología pediátrica "
+		"term": "Consulta de ginecología pediátrica ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2181,7 +2988,10 @@
 		"fsn": "Consulta de ginecología para adolescentes (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1121000013105",
-		"term": "Consulta de ginecología para adolescentes "
+		"term": "Consulta de ginecología para adolescentes ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2190,7 +3000,10 @@
 		"fsn": "Consulta de ginecología oncológica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1131000013108",
-		"term": "Consulta de ginecología oncológica "
+		"term": "Consulta de ginecología oncológica ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2199,7 +3012,10 @@
 		"fsn": "Consulta de tocoginecología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1141000013103",
-		"term": "Consulta de tocoginecología "
+		"term": "Consulta de tocoginecología ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2208,7 +3024,10 @@
 		"fsn": "Consulta de neonatología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1151000013101",
-		"term": "Consulta de neonatología "
+		"term": "Consulta de neonatología ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2217,7 +3036,10 @@
 		"fsn": "Consulta de seguimiento de neonatos prematuros (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1161000013104",
-		"term": "Consulta de seguimiento de neonatos prematuros "
+		"term": "Consulta de seguimiento de neonatos prematuros ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2226,7 +3048,10 @@
 		"fsn": "Consulta de control oftalmológico postquirúrgico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1171000013106",
-		"term": "Consulta de control oftalmológico postquirúrgico "
+		"term": "Consulta de control oftalmológico postquirúrgico ",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2235,7 +3060,10 @@
 		"fsn": "Consulta de obstetricia (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1181000013109",
-		"term": "Consulta de obstetricia"
+		"term": "Consulta de obstetricia",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2244,7 +3072,10 @@
 		"fsn": "Consulta de control de embarazo (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1191000013107",
-		"term": "Consulta de control de embarazo"
+		"term": "Consulta de control de embarazo",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2253,7 +3084,10 @@
 		"fsn": "Consulta de control de embarazo de pacientes adolescentes (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1201000013105",
-		"term": "Consulta de control de embarazo de pacientes adolescentes"
+		"term": "Consulta de control de embarazo de pacientes adolescentes",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2262,7 +3096,10 @@
 		"fsn": "Consulta de mielomeningocele (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1211000013108",
-		"term": "Consulta de mielomeningocele"
+		"term": "Consulta de mielomeningocele",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2271,7 +3108,10 @@
 		"fsn": "Consulta de nefrología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1221000013100",
-		"term": "Consulta de nefrología pediátrica"
+		"term": "Consulta de nefrología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2280,7 +3120,10 @@
 		"fsn": "Consulta de neumonología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1231000013102",
-		"term": "Consulta de neumonología pediátrica"
+		"term": "Consulta de neumonología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2289,7 +3132,10 @@
 		"fsn": "Consulta de neurología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1241000013107",
-		"term": "Consulta de neurología pediátrica"
+		"term": "Consulta de neurología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2298,7 +3144,10 @@
 		"fsn": "Consulta de diabetes para pacientes pediátricos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1251000013109",
-		"term": "Consulta de diabetes para pacientes pediátricos"
+		"term": "Consulta de diabetes para pacientes pediátricos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2307,7 +3156,10 @@
 		"fsn": "Consulta de endocrinología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1261000013106",
-		"term": "Consulta de endocrinología pediátrica"
+		"term": "Consulta de endocrinología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2316,7 +3168,10 @@
 		"fsn": "Consulta de gastroenterología infantil (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1271000013104",
-		"term": "Consulta de gastroenterología infantil"
+		"term": "Consulta de gastroenterología infantil",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2325,7 +3180,10 @@
 		"fsn": "Consulta de hematología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1281000013101",
-		"term": "Consulta de hematología pediátrica"
+		"term": "Consulta de hematología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2334,7 +3192,10 @@
 		"fsn": "Consulta de obesidad pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1291000013103",
-		"term": "Consulta de obesidad pediátrica"
+		"term": "Consulta de obesidad pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2343,7 +3204,10 @@
 		"fsn": "Consulta de fisura labioalveolarpalatina - FLAP (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1301000013102",
-		"term": "Consulta de fisura labioalveolarpalatina - FLAP"
+		"term": "Consulta de fisura labioalveolarpalatina - FLAP",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2352,7 +3216,10 @@
 		"fsn": "Consulta de cirugía de tórax pediátrida (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1311000013104",
-		"term": "Consulta de cirugía de tórax pediátrida"
+		"term": "Consulta de cirugía de tórax pediátrida",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2361,7 +3228,10 @@
 		"fsn": "Consulta de nutrición infantil (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1321000013107",
-		"term": "Consulta de nutrición infantil"
+		"term": "Consulta de nutrición infantil",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2370,7 +3240,10 @@
 		"fsn": "Consulta de oncología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1331000013105",
-		"term": "Consulta de oncología pediátrica"
+		"term": "Consulta de oncología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2379,7 +3252,10 @@
 		"fsn": "Consulta de control de embarazo de alto riesgo (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1341000013100",
-		"term": "Consulta de control de embarazo de alto riesgo"
+		"term": "Consulta de control de embarazo de alto riesgo",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2388,7 +3264,10 @@
 		"fsn": "Consulta de planificación familiar (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1351000013103",
-		"term": "Consulta de planificación familiar"
+		"term": "Consulta de planificación familiar",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2397,7 +3276,10 @@
 		"fsn": "Consulta de nutrición para pacientes embarazadas (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1361000013101",
-		"term": "Consulta de nutrición para pacientes embarazadas"
+		"term": "Consulta de nutrición para pacientes embarazadas",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2406,7 +3288,10 @@
 		"fsn": "Consulta para cuiados paliativos pediátricos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1371000013108",
-		"term": "Consulta para cuiados paliativos pediátricos"
+		"term": "Consulta para cuiados paliativos pediátricos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2415,7 +3300,10 @@
 		"fsn": "Consulta de hepatología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1381000013106",
-		"term": "Consulta de hepatología"
+		"term": "Consulta de hepatología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2424,7 +3312,10 @@
 		"fsn": "Consulta de hepatología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1391000013109",
-		"term": "Consulta de hepatología pediátrica"
+		"term": "Consulta de hepatología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2433,7 +3324,10 @@
 		"fsn": "Consulta prequirúrgica pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1411000013109",
-		"term": "Consulta prequirúrgica pediátrica"
+		"term": "Consulta prequirúrgica pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2442,7 +3336,10 @@
 		"fsn": "Consulta de crecimiento y desarrollo (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1421000013101",
-		"term": "Consulta de crecimiento y desarrollo"
+		"term": "Consulta de crecimiento y desarrollo",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2451,7 +3348,11 @@
 		"fsn": "Consulta de ortopedia infantil (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1431000013103",
-		"term": "Consulta de ortopedia infantil"
+		"term": "Consulta de ortopedia infantil",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -2460,7 +3361,10 @@
 		"fsn": "Consulta de terapia ocupacional (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1441000013108",
-		"term": "Consulta de terapia ocupacional"
+		"term": "Consulta de terapia ocupacional",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2469,7 +3373,10 @@
 		"fsn": "Consulta de terapia ocupacional pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1451000013105",
-		"term": "Consulta de terapia ocupacional pediátrica"
+		"term": "Consulta de terapia ocupacional pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2478,7 +3385,10 @@
 		"fsn": "Consulta de cardiología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1461000013107",
-		"term": "Consulta de cardiología pediátrica"
+		"term": "Consulta de cardiología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2487,7 +3397,10 @@
 		"fsn": "Consulta de cirugía plástica pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1471000013100",
-		"term": "Consulta de cirugía plástica pediátrica"
+		"term": "Consulta de cirugía plástica pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2496,7 +3409,10 @@
 		"fsn": "Consulta de cirugía de pacientes pediátricos quemados (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1481000013102",
-		"term": "Consulta de cirugía de pacientes pediátricos quemados"
+		"term": "Consulta de cirugía de pacientes pediátricos quemados",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2505,7 +3421,10 @@
 		"fsn": "Consulta de nutrición para pacientes nefrológicos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1491000013104",
-		"term": "Consulta de nutrición para pacientes nefrológicos"
+		"term": "Consulta de nutrición para pacientes nefrológicos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2514,7 +3433,10 @@
 		"fsn": "Consulta de nutrición para pacientes oncológicos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1501000013107",
-		"term": "Consulta de nutrición para pacientes oncológicos"
+		"term": "Consulta de nutrición para pacientes oncológicos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2523,7 +3445,10 @@
 		"fsn": "Consulta prequirúrgica de nutrición (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1511000013105",
-		"term": "Consulta prequirúrgica de nutrición"
+		"term": "Consulta prequirúrgica de nutrición",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2532,7 +3457,10 @@
 		"fsn": "Consulta de nutrición para pacientes postquirúrgicos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1521000013102",
-		"term": "Consulta de nutrición para pacientes postquirúrgicos"
+		"term": "Consulta de nutrición para pacientes postquirúrgicos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2541,7 +3469,10 @@
 		"fsn": "Consulta de nutrición para pacientes diabéticos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1531000013104",
-		"term": "Consulta de nutrición para pacientes diabéticos"
+		"term": "Consulta de nutrición para pacientes diabéticos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2550,7 +3481,10 @@
 		"fsn": "Consulta de nutrición para pacientes diabéticos pediátricos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1541000013109",
-		"term": "Consulta de nutrición para pacientes diabéticos pediátricos"
+		"term": "Consulta de nutrición para pacientes diabéticos pediátricos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2559,7 +3493,10 @@
 		"fsn": "Consulta programada (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1651000013107",
-		"term": "Consulta programada"
+		"term": "Consulta programada",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2568,7 +3505,10 @@
 		"fsn": "Consulta de curaciones ginecológicas (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1671000013102",
-		"term": "Consulta de curaciones ginecológicas"
+		"term": "Consulta de curaciones ginecológicas",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2577,7 +3517,10 @@
 		"fsn": "Consulta de interrupción legal del embarazo (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1681000013104",
-		"term": "Consulta de interrupción legal del embarazo"
+		"term": "Consulta de interrupción legal del embarazo",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2586,7 +3529,10 @@
 		"fsn": "Consulta de anticoncepción (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1691000013101",
-		"term": "Consulta de anticoncepción"
+		"term": "Consulta de anticoncepción",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2595,7 +3541,10 @@
 		"fsn": "Consulta de toma de muestra de HPV (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1701000013101",
-		"term": "Consulta de toma de muestra de HPV"
+		"term": "Consulta de toma de muestra de HPV",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2604,7 +3553,10 @@
 		"fsn": "Consulta de control de embarazo de bajo riesgo (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1711000013103",
-		"term": "Consulta de control de embarazo de bajo riesgo"
+		"term": "Consulta de control de embarazo de bajo riesgo",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2613,7 +3565,10 @@
 		"fsn": "Consulta de monitoreo fetal (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1721000013106",
-		"term": "Consulta de monitoreo fetal"
+		"term": "Consulta de monitoreo fetal",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2622,7 +3577,10 @@
 		"fsn": "Taller de educación preparto (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1731000013109",
-		"term": "Taller de educación preparto"
+		"term": "Taller de educación preparto",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2631,7 +3589,10 @@
 		"fsn": "Consulta de embarazo para pacientes diabéticas (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1741000013104",
-		"term": "Consulta de embarazo para pacientes diabéticas"
+		"term": "Consulta de embarazo para pacientes diabéticas",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2640,7 +3601,10 @@
 		"fsn": "Consulta de diagnóstico y seguimiento de anomalías genéticas prenatales (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1751000013102",
-		"term": "Consulta de diagnóstico y seguimiento de anomalías genéticas prenatales"
+		"term": "Consulta de diagnóstico y seguimiento de anomalías genéticas prenatales",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2649,7 +3613,10 @@
 		"fsn": "Consulta sobre pie diabético (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1791000013108",
-		"term": "Consulta sobre pie diabético"
+		"term": "Consulta sobre pie diabético",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2658,7 +3625,11 @@
 		"fsn": "Consulta de psicología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1801000013109",
-		"term": "Consulta de psicología"
+		"term": "Consulta de psicología",
+        "ambito": [
+			"ambulatorio",
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -2667,7 +3638,10 @@
 		"fsn": "Consulta de admisión al servicio de salud mental para sujeto adulto (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1811000013107",
-		"term": "Consulta de admisión al servicio de salud mental para sujeto adulto"
+		"term": "Consulta de admisión al servicio de salud mental para sujeto adulto",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2676,7 +3650,10 @@
 		"fsn": "Consulta de admisión al servicio de salud mental para sujeto menor (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1821000013104",
-		"term": "Consulta de admisión al servicio de salud mental para sujeto menor"
+		"term": "Consulta de admisión al servicio de salud mental para sujeto menor",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2685,7 +3662,10 @@
 		"fsn": "Consulta de psicoprofilaxis quirúrgica para pacientes pediátricos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1831000013101",
-		"term": "Consulta de psicoprofilaxis quirúrgica para pacientes pediátricos"
+		"term": "Consulta de psicoprofilaxis quirúrgica para pacientes pediátricos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2694,7 +3674,10 @@
 		"fsn": "Consulta de aprestamiento prequirurgico para sujetos candidatos a cirugía bariátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1841000013106",
-		"term": "Consulta de aprestamiento prequirurgico para sujetos candidatos a cirugía bariátrica"
+		"term": "Consulta de aprestamiento prequirurgico para sujetos candidatos a cirugía bariátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2703,7 +3686,10 @@
 		"fsn": "Consulta de asesoramiento social (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1851000013108",
-		"term": "Consulta de asesoramiento social"
+		"term": "Consulta de asesoramiento social",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2712,7 +3698,10 @@
 		"fsn": "Consulta de asesoramiento sobre abuso y maltrato de sujeto menor (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1861000013105",
-		"term": "Consulta de asesoramiento sobre abuso y maltrato de sujeto menor"
+		"term": "Consulta de asesoramiento sobre abuso y maltrato de sujeto menor",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2721,7 +3710,10 @@
 		"fsn": "Consulta de apoyo psicológico para pacientes oncológicos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1871000013103",
-		"term": "Consulta de apoyo psicológico para pacientes oncológicos"
+		"term": "Consulta de apoyo psicológico para pacientes oncológicos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2730,7 +3722,10 @@
 		"fsn": "Consulta de control de salud mental para sujetos adultos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1881000013100",
-		"term": "Consulta de control de salud mental para sujetos adultos"
+		"term": "Consulta de control de salud mental para sujetos adultos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2739,7 +3734,10 @@
 		"fsn": "Consulta de control de salud mental para sujetos menores (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1891000013102",
-		"term": "Consulta de control de salud mental para sujetos menores"
+		"term": "Consulta de control de salud mental para sujetos menores",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2748,7 +3746,10 @@
 		"fsn": "Consulta de endocrinología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "251000013108",
-		"term": "Consulta de endocrinología"
+		"term": "Consulta de endocrinología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2757,7 +3758,10 @@
 		"fsn": "Consulta de neumonología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "271000013103",
-		"term": "Consulta de neumonología"
+		"term": "Consulta de neumonología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2766,7 +3770,10 @@
 		"fsn": "Consulta de endocrinología para pacientes transgénero (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "281000013100",
-		"term": "Consulta de endocrinología para pacientes transgénero"
+		"term": "Consulta de endocrinología para pacientes transgénero",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2775,7 +3782,10 @@
 		"fsn": "Consulta de cardiología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "291000013102",
-		"term": "Consulta de cardiología"
+		"term": "Consulta de cardiología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2784,7 +3794,10 @@
 		"fsn": "Consulta de tabaquismo (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "301000013101",
-		"term": "Consulta de tabaquismo"
+		"term": "Consulta de tabaquismo",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2793,7 +3806,10 @@
 		"fsn": "Consulta de cirugía (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "311000013103",
-		"term": "Consulta de cirugía"
+		"term": "Consulta de cirugía",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2802,7 +3818,10 @@
 		"fsn": "Consulta de cirugía general (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "321000013106",
-		"term": "Consulta de cirugía general"
+		"term": "Consulta de cirugía general",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2811,7 +3830,10 @@
 		"fsn": "Consulta de cirugía de aparato digestivo superior (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "331000013109",
-		"term": "Consulta de cirugía de aparato digestivo superior"
+		"term": "Consulta de cirugía de aparato digestivo superior",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2820,7 +3842,10 @@
 		"fsn": "Consulta de odontología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "34043003",
-		"term": "Consulta de odontología"
+		"term": "Consulta de odontología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2829,7 +3854,10 @@
 		"fsn": "Consulta de coloproctología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "341000013104",
-		"term": "Consulta de coloproctología"
+		"term": "Consulta de coloproctología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2838,7 +3866,10 @@
 		"fsn": "Consulta de cirugía de cabeza y cuello (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "351000013102",
-		"term": "Consulta de cirugía de cabeza y cuello"
+		"term": "Consulta de cirugía de cabeza y cuello",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2847,7 +3878,10 @@
 		"fsn": "Consulta de neurocirugía (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "361000013100",
-		"term": "Consulta de neurocirugía"
+		"term": "Consulta de neurocirugía",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2856,7 +3890,10 @@
 		"fsn": "Consulta de hematología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "371000013107",
-		"term": "Consulta de hematología"
+		"term": "Consulta de hematología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2865,7 +3902,10 @@
 		"fsn": "Consulta de clínica médica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "401000013105",
-		"term": "Consulta de clínica médica"
+		"term": "Consulta de clínica médica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2874,7 +3914,10 @@
 		"fsn": "Consulta de recetas de antiepilépticos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "401062003",
-		"term": "Consulta de recetas de antiepilépticos"
+		"term": "Consulta de recetas de antiepilépticos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2883,7 +3926,10 @@
 		"fsn": "Consulta de neurología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "421000013100",
-		"term": "Consulta de neurología"
+		"term": "Consulta de neurología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2892,7 +3938,10 @@
 		"fsn": "Consulta de reumatología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "431000013102",
-		"term": "Consulta de reumatología"
+		"term": "Consulta de reumatología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2901,7 +3950,10 @@
 		"fsn": "Consulta de traumatología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "441000013107",
-		"term": "Consulta de traumatología"
+		"term": "Consulta de traumatología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2910,7 +3962,10 @@
 		"fsn": "Consulta e informe prostodóncicos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "44340006",
-		"term": "Consulta e informe prostodóncicos"
+		"term": "Consulta e informe prostodóncicos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2919,7 +3974,10 @@
 		"fsn": "Consulta de traumatología general (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "451000013109",
-		"term": "Consulta de traumatología general"
+		"term": "Consulta de traumatología general",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2928,7 +3986,10 @@
 		"fsn": "Consulta de infectología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "461000013106",
-		"term": "Consulta de infectología"
+		"term": "Consulta de infectología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2937,7 +3998,10 @@
 		"fsn": "Consulta de infectología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "471000013104",
-		"term": "Consulta de infectología pediátrica"
+		"term": "Consulta de infectología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2946,7 +4010,10 @@
 		"fsn": "Consulta de odontología pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "481000013101",
-		"term": "Consulta de odontología pediátrica"
+		"term": "Consulta de odontología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2955,7 +4022,10 @@
 		"fsn": "Consulta de oftalmología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "491000013103",
-		"term": "Consulta de oftalmología"
+		"term": "Consulta de oftalmología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2964,7 +4034,10 @@
 		"fsn": "Consulta de otorrinolaringología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "501000013106",
-		"term": "Consulta de otorrinolaringología"
+		"term": "Consulta de otorrinolaringología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2973,7 +4046,10 @@
 		"fsn": "Consulta de pediatría (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "511000013109",
-		"term": "Consulta de pediatría"
+		"term": "Consulta de pediatría",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2982,7 +4058,10 @@
 		"fsn": "Consulta de traumatología de miembro superior (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "521000013101",
-		"term": "Consulta de traumatología de miembro superior"
+		"term": "Consulta de traumatología de miembro superior",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -2991,7 +4070,10 @@
 		"fsn": "Consulta de traumatología de miembro inferior (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "531000013103",
-		"term": "Consulta de traumatología de miembro inferior"
+		"term": "Consulta de traumatología de miembro inferior",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3000,7 +4082,10 @@
 		"fsn": "Consulta de reumatología infantil (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "541000013108",
-		"term": "Consulta de reumatología infantil"
+		"term": "Consulta de reumatología infantil",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3009,7 +4094,10 @@
 		"fsn": "Consulta de salud mental (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "551000013105",
-		"term": "Consulta de salud mental"
+		"term": "Consulta de salud mental",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3018,7 +4106,10 @@
 		"fsn": "Consulta de traumatologia de pie (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "561000013107",
-		"term": "Consulta de traumatologia de pie"
+		"term": "Consulta de traumatologia de pie",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3027,7 +4118,10 @@
 		"fsn": "Consulta de traumatología de rodilla (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "571000013100",
-		"term": "Consulta de traumatología de rodilla"
+		"term": "Consulta de traumatología de rodilla",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3036,7 +4130,10 @@
 		"fsn": "Consulta de traumatología de cadera (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "581000013102",
-		"term": "Consulta de traumatología de cadera"
+		"term": "Consulta de traumatología de cadera",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3045,7 +4142,10 @@
 		"fsn": "Consulta de traumatología de hombro (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "591000013104",
-		"term": "Consulta de traumatología de hombro"
+		"term": "Consulta de traumatología de hombro",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3054,7 +4154,10 @@
 		"fsn": "Consulta de traumatología de codo (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "601000013107",
-		"term": "Consulta de traumatología de codo"
+		"term": "Consulta de traumatología de codo",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3063,7 +4166,10 @@
 		"fsn": "Consulta de traumatología de muñeca (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "611000013105",
-		"term": "Consulta de traumatología de muñeca"
+		"term": "Consulta de traumatología de muñeca",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3072,7 +4178,10 @@
 		"fsn": "Consulta de traumatologia de columna (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "621000013102",
-		"term": "Consulta de traumatologia de columna"
+		"term": "Consulta de traumatologia de columna",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3081,7 +4190,10 @@
 		"fsn": "Consulta prequirúrgica de traumatología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "631000013104",
-		"term": "Consulta prequirúrgica de traumatología"
+		"term": "Consulta prequirúrgica de traumatología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3090,7 +4202,10 @@
 		"fsn": "Consulta postquirúrgica de traumatología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "641000013109",
-		"term": "Consulta postquirúrgica de traumatología"
+		"term": "Consulta postquirúrgica de traumatología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3100,7 +4215,7 @@
 		"semanticTag": "procedimiento",
 		"conceptId": "651000013106",
 		"term": "Consulta de ortopedia",
-		"ambito" : [ 
+        "ambito": [
 			"ambulatorio"
 		]
 	},
@@ -3111,7 +4226,10 @@
 		"fsn": "evaluación mental previa a cirugía bariátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "661000013108",
-		"term": "evaluación mental previa a cirugía bariátrica"
+		"term": "evaluación mental previa a cirugía bariátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3120,7 +4238,10 @@
 		"fsn": "Consulta de cirugía de tórax (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "671000013101",
-		"term": "Consulta de cirugía de tórax"
+		"term": "Consulta de cirugía de tórax",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3129,7 +4250,10 @@
 		"fsn": "Consulta de cirugía vascular (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "681000013103",
-		"term": "Consulta de cirugía vascular"
+		"term": "Consulta de cirugía vascular",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3138,7 +4262,10 @@
 		"fsn": "Consulta de toxicología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "691000013100",
-		"term": "Consulta de toxicología"
+		"term": "Consulta de toxicología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3147,7 +4274,10 @@
 		"fsn": "Consulta de fonoaudiología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "701000013100",
-		"term": "Consulta de fonoaudiología"
+		"term": "Consulta de fonoaudiología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3156,7 +4286,10 @@
 		"fsn": "Consulta de genética (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "711000013102",
-		"term": "Consulta de genética"
+		"term": "Consulta de genética",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3165,7 +4298,10 @@
 		"fsn": "Consulta e informe endodóncicos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "71387007",
-		"term": "Consulta e informe endodóncicos"
+		"term": "Consulta e informe endodóncicos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3174,7 +4310,10 @@
 		"fsn": "Consulta de ginecología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "721000013105",
-		"term": "Consulta de ginecología"
+		"term": "Consulta de ginecología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3183,7 +4322,10 @@
 		"fsn": "Consulta de nefrología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "731000013108",
-		"term": "Consulta de nefrología"
+		"term": "Consulta de nefrología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3192,7 +4334,10 @@
 		"fsn": "Consulta post trasplante renal (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "741000013103",
-		"term": "Consulta post trasplante renal"
+		"term": "Consulta post trasplante renal",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3201,7 +4346,10 @@
 		"fsn": "Consulta de nutrición (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "751000013101",
-		"term": "Consulta de nutrición"
+		"term": "Consulta de nutrición",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3210,7 +4358,10 @@
 		"fsn": "Consulta de oncología clínica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "761000013104",
-		"term": "Consulta de oncología clínica"
+		"term": "Consulta de oncología clínica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3219,7 +4370,10 @@
 		"fsn": "Consulta de oncología radiante (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "771000013106",
-		"term": "Consulta de oncología radiante"
+		"term": "Consulta de oncología radiante",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3228,7 +4382,10 @@
 		"fsn": "Consulta de oncología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "781000013109",
-		"term": "Consulta de oncología"
+		"term": "Consulta de oncología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3237,7 +4394,10 @@
 		"fsn": "Consulta de adolescencia (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "791000013107",
-		"term": "Consulta de adolescencia"
+		"term": "Consulta de adolescencia",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3246,7 +4406,10 @@
 		"fsn": "Autocitación (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "811000013106",
-		"term": "Autocitación"
+		"term": "Autocitación",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3255,7 +4418,10 @@
 		"fsn": "Consulta de cirugía plástica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "831000013100",
-		"term": "Consulta de cirugía plástica"
+		"term": "Consulta de cirugía plástica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3264,7 +4430,10 @@
 		"fsn": "Consulta prequirúrgica de anestesiología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "83874006",
-		"term": "Consulta prequirúrgica de anestesiología"
+		"term": "Consulta prequirúrgica de anestesiología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3273,7 +4442,10 @@
 		"fsn": "Consulta de cirugía por quemaduras (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "841000013105",
-		"term": "Consulta de cirugía por quemaduras"
+		"term": "Consulta de cirugía por quemaduras",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3282,7 +4454,10 @@
 		"fsn": "Consulta de cirugía urológica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "851000013107",
-		"term": "Consulta de cirugía urológica"
+		"term": "Consulta de cirugía urológica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3291,7 +4466,10 @@
 		"fsn": "Consulta de enfermería (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "861000013109",
-		"term": "Consulta de enfermería"
+		"term": "Consulta de enfermería",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3300,7 +4478,10 @@
 		"fsn": "Consulta de enfermería de educación sobre diabetes (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "871000013102",
-		"term": "Consulta de enfermería de educación sobre diabetes"
+		"term": "Consulta de enfermería de educación sobre diabetes",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3309,7 +4490,10 @@
 		"fsn": "Consulta de enfermería de educación sobre ostomías (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "881000013104",
-		"term": "Consulta de enfermería de educación sobre ostomías"
+		"term": "Consulta de enfermería de educación sobre ostomías",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3318,7 +4502,10 @@
 		"fsn": "Consulta dental e informe ortodóncicos (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "89291005",
-		"term": "Consulta dental e informe ortodóncicos"
+		"term": "Consulta dental e informe ortodóncicos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3327,7 +4514,10 @@
 		"fsn": "Consulta de control de evolución de accidente cerebrovascular (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "901000013102",
-		"term": "Consulta de control de evolución de accidente cerebrovascular"
+		"term": "Consulta de control de evolución de accidente cerebrovascular",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3336,7 +4526,10 @@
 		"fsn": "Consulta de genética pediátrica (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "911000013104",
-		"term": "Consulta de genética pediátrica"
+		"term": "Consulta de genética pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3345,7 +4538,10 @@
 		"fsn": "Consulta de toma de papanicolau - PAP (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "921000013107",
-		"term": "Consulta de toma de papanicolau - PAP"
+		"term": "Consulta de toma de papanicolau - PAP",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3354,7 +4550,10 @@
 		"fsn": "Consulta de diabetes (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "931000013105",
-		"term": "Consulta de diabetes"
+		"term": "Consulta de diabetes",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3363,7 +4562,10 @@
 		"fsn": "Consulta de obesidad (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "941000013100",
-		"term": "Consulta de obesidad"
+		"term": "Consulta de obesidad",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3372,7 +4574,10 @@
 		"fsn": "Consulta de dermatología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "951000013103",
-		"term": "Consulta de dermatología"
+		"term": "Consulta de dermatología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3381,7 +4586,10 @@
 		"fsn": "Consulta de fibrosis quística (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "961000013101",
-		"term": "Consulta de fibrosis quística"
+		"term": "Consulta de fibrosis quística",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3390,7 +4598,10 @@
 		"fsn": "Consulta de hipertensión pulmonar (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "971000013108",
-		"term": "Consulta de hipertensión pulmonar"
+		"term": "Consulta de hipertensión pulmonar",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3399,7 +4610,10 @@
 		"fsn": "Consulta de patología mamaria (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "981000013106",
-		"term": "Consulta de patología mamaria"
+		"term": "Consulta de patología mamaria",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3408,7 +4622,10 @@
 		"fsn": "Consulta de uroginecología (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "991000013109",
-		"term": "Consulta de uroginecología"
+		"term": "Consulta de uroginecología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3417,7 +4634,10 @@
 		"fsn": "atención en hospital de día para menores (régimen/tratamiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "1971000013109",
-		"term": "atención en hospital de día pediátrico"
+		"term": "atención en hospital de día pediátrico",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3426,7 +4646,10 @@
 		"conceptId": "1931000013106",
 		"term": "consulta de evaluación de discapacidad",
 		"fsn": "consulta de evaluación de discapacidad (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3459,7 +4682,10 @@
 			"tipoPrestacionTituloOverride": true,
 			"registroTituloOverride": "Informe de Epicrisis",
 			"motivoPrincipalDeConsultaOverride": true
-		}
+		},
+        "ambito": [
+			"internacion"
+		]
 	},
 	{
 		"_id": {
@@ -3468,7 +4694,10 @@
 		"fsn": "esofagogastroduodenoscopia (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "76009000",
-		"term": "esofagogastroduodenoscopia (procedimiento)"
+		"term": "esofagogastroduodenoscopia (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3483,7 +4712,10 @@
 			"tipoPrestacionTituloOverride": true,
 			"registroTituloOverride": "Informe",
 			"motivoPrincipalDeConsultaOverride": true
-		}
+		},
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3492,7 +4724,10 @@
 		"fsn": "procedimiento de fisioterapia (régimen/tratamiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "91251008",
-		"term": "fisioterapia"
+		"term": "fisioterapia",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3501,7 +4736,10 @@
 		"conceptId": "2091000013100",
 		"term": "screening de otoemisión acústica neonatal",
 		"fsn": "screening de otoemisión acústica neonatal (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3510,7 +4748,10 @@
 		"fsn": "examen de garganta, nariz y oído",
 		"semanticTag": "procedimiento",
 		"conceptId": "113028003",
-		"term": "examen de garganta, nariz y oído"
+		"term": "examen de garganta, nariz y oído",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3520,7 +4761,10 @@
 		"semanticTag": "procedimiento",
 		"refsetIds": [],
 		"conceptId": "2301000013109",
-		"term": "consulta de urología"
+		"term": "consulta de urología",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3531,7 +4775,10 @@
 		"conceptActive": true,
 		"refsetIds": [],
 		"conceptId": "2311000013107",
-		"term": "consulta de oftalmología pediátrica"
+		"term": "consulta de oftalmología pediátrica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3540,7 +4787,10 @@
 		"fsn": "procedimiento de servicios sociales (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "410606002",
-		"term": "procedimiento de servicios sociales"
+		"term": "procedimiento de servicios sociales",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3550,7 +4800,10 @@
 		"semanticTag": "procedimiento",
 		"conceptId": "389067005",
 		"term": "procedimiento de salud comunitaria",
-		"noNominalizada": true
+		"noNominalizada": true,
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3561,7 +4814,7 @@
 		"conceptId": "389067005",
 		"term": "actividades con la comunidad",
 		"noNominalizada": true,
-		"ambito" : [ 
+        "ambito": [
 			"ambulatorio"
 		]
 	},
@@ -3573,7 +4826,10 @@
 		"semanticTag": "procedimiento",
 		"conceptId": "14734007",
 		"term": "actividades de planificación, gestión y capacitación de la organización",
-		"noNominalizada": true
+		"noNominalizada": true,
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3585,7 +4841,10 @@
 		"conceptId": "15220000",
 		"term": "prueba de laboratorio",
 		"fsn": "prueba de laboratorio (procedimiento)",
-		"semanticTag": "procedimiento"
+		"semanticTag": "procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3594,7 +4853,10 @@
 		"fsn": "procedimiento radiográfico (procedimiento)",
 		"semanticTag": "procedimiento",
 		"conceptId": "363680008",
-		"term": "procedimiento radiográfico"
+		"term": "procedimiento radiográfico",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3603,7 +4865,10 @@
 		"fsn": "indicación para procedimiento (entidad observable)",
 		"semanticTag": "entidad observable",
 		"conceptId": "432678004",
-		"term": "indicación para procedimiento"
+		"term": "indicación para procedimiento",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3615,7 +4880,10 @@
 			"900000000000497000"
 		],
 		"conceptId": "8306009",
-		"term": "ecografía Doppler diagnóstica"
+		"term": "ecografía Doppler diagnóstica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3627,7 +4895,10 @@
 			"900000000000497000"
 		],
 		"conceptId": "105376000",
-		"term": "ecocardiografía transesofágica"
+		"term": "ecocardiografía transesofágica",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3639,7 +4910,10 @@
 			"900000000000497000"
 		],
 		"conceptId": "433233004",
-		"term": "ecocardiograma de estrés durante el ejercicio"
+		"term": "ecocardiograma de estrés durante el ejercicio",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3651,7 +4925,10 @@
 			"900000000000497000"
 		],
 		"conceptId": "80635001",
-		"term": "ergometría con cinta sin fin"
+		"term": "ergometría con cinta sin fin",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3663,7 +4940,10 @@
 			"900000000000497000"
 		],
 		"conceptId": "439858009",
-		"term": "ecografía Doppler de tejido cardíaco"
+		"term": "ecografía Doppler de tejido cardíaco",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3675,7 +4955,10 @@
 			"900000000000497000"
 		],
 		"conceptId": "9061001",
-		"term": "control del marcapasos"
+		"term": "control del marcapasos",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3687,7 +4970,10 @@
 			"900000000000497000"
 		],
 		"conceptId": "252417001",
-		"term": "registro de 24 horas de Holter"
+		"term": "registro de 24 horas de Holter",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3699,7 +4985,10 @@
 			"900000000000497000"
 		],
 		"conceptId": "40701008",
-		"term": "ecocardiografía"
+		"term": "ecocardiografía",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3711,7 +5000,10 @@
 			"900000000000497000"
 		],
 		"conceptId": "424064009",
-		"term": "prueba de estrés cardiovascular con utilización de agente farmacológico (procedimiento)"
+		"term": "prueba de estrés cardiovascular con utilización de agente farmacológico (procedimiento)",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3723,7 +5015,10 @@
 		"refsetIds": [
 			"900000000000497000"
 		],
-		"term": "sesión de informes de enfermería"
+		"term": "sesión de informes de enfermería",
+        "ambito": [
+			"ambulatorio"
+		]
 	},
 	{
 		"_id": {
@@ -3732,6 +5027,9 @@
 		"fsn": "epicrisis médica (elemento de registro)",
 		"semanticTag": "elemento de registro",
 		"conceptId": "2341000013106",
-		"term": "epicrisis médica"
+		"term": "epicrisis médica",
+		"ambito": [
+			"internacion"
+		]
 	}
 ]
