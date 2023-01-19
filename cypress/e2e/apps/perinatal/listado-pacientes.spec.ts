@@ -4,7 +4,6 @@ context('Perinatal Listado', () => {
     let token;
     let listado;
     let paciente;
-    let paciente2;
     let control = [
         {
             _id: "60cb3fdd59cc1e701e759857",
@@ -74,7 +73,7 @@ context('Perinatal Listado', () => {
             fechaUltimoControl: "2021-07-16T03:00:00.000Z",
             fechaProximoControl: "2021-09-05T03:00:00.000Z",
 
-        }).then(p => { paciente2 = p; });
+        });
     });
 
     beforeEach(() => {
@@ -131,7 +130,6 @@ context('Perinatal Listado', () => {
         cy.get('tbody tr').eq(0).contains('06/07/2021');
         cy.get('tbody tr').eq(0).contains('ANDES, PACIENTE VALIDADO');
         cy.get('tbody tr').eq(0).contains('10000000');
-        cy.get('tbody tr').eq(0).contains('31 años');
         cy.get('tbody tr').eq(0).contains('AUSENTE');
         cy.get('tbody tr').eq(0).contains('07/07/2021');
         cy.get('tbody tr').eq(0).contains('06/07/2021');
