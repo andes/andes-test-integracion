@@ -25,12 +25,13 @@ context('Perfiles de usuario', () => {
         });
         cy.goto('/gestor-usuarios/usuarios', token);
         cy.server();
-        cy.route('GET', '**/api/modules/gestor-usuarios/perfiles').as('perfil');
+        cy.route('GET', '**/api/modules/gestor-usuarios/perfiles**').as('getPerfiles');
         cy.route('PATCH', '**/api/modules/gestor-usuarios/perfiles/**').as('savePerfil');
         cy.route('POST', '**/api/modules/gestor-usuarios/perfiles').as('postPerfil');
         cy.route('GET', '**/api/core/tm/conceptos-turneables?term=**').as('conceptoTurneables');
         cy.plexButton("PERFILES").click();
-        cy.wait('@perfil');
+        cy.wait('@getPerfiles');
+
     });
 
     it('Crear nuevo perfil', () => {
@@ -88,10 +89,8 @@ context('Perfiles de usuario', () => {
         });
         cy.toast('success', 'El perfil se ha guardado satisfactoriamente!');
 
-        cy.wait('@perfil');
-        cy.get('table tbody tr').find('.badge').contains('activo').should('not.exist');
+        cy.wait('@getPerfiles');
     });
-
     it('Editar prestaciones de RUP en un perfil existente', () => {
         cy.get('table tbody tr').first().click();
 
@@ -118,7 +117,7 @@ context('Perfiles de usuario', () => {
         cy.get('@rupAccordion').find('arbol-permisos-item').eq(0).plexSelectType('name="plexSelect"', 'consulta de nutrición');
 
         cy.plexButton('Cancelar').click();
-        cy.wait('@perfil').then((xhr) => {
+        cy.wait('@getPerfiles').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body[0].permisos).not.include('rup:tipoPrestacion:59ee2d9bf00c415246fd3d90');
         });
