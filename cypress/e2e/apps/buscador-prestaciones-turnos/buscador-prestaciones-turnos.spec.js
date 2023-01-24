@@ -157,7 +157,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
         });
-        cy.plexText('label="Documento"', pacientePrestacion.documento);
+        cy.plexText('label="paciente"', pacientePrestacion.documento);
         cy.plexButton("Buscar").click();
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
