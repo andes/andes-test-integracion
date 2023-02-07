@@ -106,7 +106,7 @@ context('SOLICITUDES', () => {
 
         cy.plexSelectType('name="prestacionDestino"', 'Consulta de neurología');
         cy.plexSelectType('name="estado"', 'auditoria');
-        cy.get('plex-list').find('plex-item').first('contain', 'consulta de neurología');
+        cy.get('table tbody tr').first('contain', 'consulta de neurología');
     });
 
     it('crear solicitud de entrada y auditarla', () => {
@@ -148,7 +148,7 @@ context('SOLICITUDES', () => {
             expect(xhr.status).to.be.eq(200);
         });
         cy.get('plex-label').contains('CORTES, JAZMIN');
-        cy.plexButtonIcon('lock-alert').first().click();
+        cy.get('plex-dropDown').click().get('a').contains('Auditar').click();
         cy.plexButton('Responder').click();
         cy.get('textarea').last().type('Una observacion', {
             force: true

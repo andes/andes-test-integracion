@@ -138,7 +138,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
             expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.toast('success');
-        cy.plexButtonIcon('lock-alert').last().click();
+        cy.get('plex-dropDown').first().click().get('a').contains('Auditar').click();
         cy.plexButton('Asignar').click();
         cy.plexTextArea('label="Observaciones"', 'un motivo lalala');
         cy.plexSelectType('label="Profesional"', 'natalia huenchuman');
@@ -154,6 +154,6 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
             expect(xhr.status).to.be.eq(200);
             cy.get('.badge').contains('asignada');
         });
-        cy.get('plex-item').should('have.length.above', 1);
+        cy.get('table tbody tr').should('length', 1);
     });
 });

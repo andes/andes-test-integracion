@@ -27,7 +27,7 @@ context('ACEPTAR SOLICITUD', () => {
 
     it('aceptar', () => {
         cy.server();
-        cy.plexButtonIcon('lock-alert').first().click();
+        cy.get('plex-dropDown').click().get('a').contains('Auditar').click();
         cy.plexButton('Aceptar').click();
         cy.get('textarea').last().type('Una observacion aceptar', { force: true });
         cy.plexButton('Confirmar').click();
@@ -38,6 +38,6 @@ context('ACEPTAR SOLICITUD', () => {
             expect(xhr.response.body.solicitud.historial[i].observaciones).to.be.eq('Una observacion aceptar');  
         });
         cy.get('plex-badge').contains('pendiente');
-        cy.plexButtonIcon('calendar-plus');
+        cy.get('plex-dropDown').click().get('a').contains('Dar Turno');
     })
 })
