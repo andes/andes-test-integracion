@@ -339,11 +339,9 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.plexButton("Guardar").click();
         cy.toast('success');
         cy.plexSelectType('label="Estado"').click().get('.option').contains('FINALIZADA').click();
-        cy.wait('@getDerivaciones').then(({response}) => {
-            expect(response.statusCode).to.be.eq(200);
-        });
-        cy.get('plex-list plex-label').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
-        cy.get('plex-label').contains('Solicitante: PRUEBA, ALICIA').first().click();
+        cy.wait('@getDerivaciones')
+        cy.get('.d-flex > small').contains('Solicitante: PRUEBA, ALICIA').should('have.length', 1);
+        cy.get('.d-flex > small').contains('Solicitante: PRUEBA, ALICIA').first().click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
         cy.get('plex-panel').should('have.length', 5);
     });

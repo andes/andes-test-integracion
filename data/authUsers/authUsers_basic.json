@@ -7,6 +7,9 @@
         "usuario": 30643636,
         "apellido": "30643636",
         "password": "f10e2821bbbea527ea02200352313bc059445190",
+        "configuracion" : {
+            "planIndicaciones" : true
+        },
         "organizaciones": [
             {
                 "permisos": [

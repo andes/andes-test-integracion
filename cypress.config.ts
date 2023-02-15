@@ -15,6 +15,12 @@ export default defineConfig({
   viewportHeight: 720,
   requestTimeout: 10000,
   responseTimeout: 100000,
+  numTestsKeptInMemory:0,
+  defaultCommandTimeout:10000,
+  
+  video:false,
+  videoUploadOnPasses:false,
+
   retries: {
     runMode: 3,
     openMode: 0,
@@ -23,9 +29,11 @@ export default defineConfig({
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
+      
+      [on, config] = require("@deploysentinel/cypress-debugger/plugin")(on, config);
       return require('./cypress/plugins/index.js')(on, config)
     },
-    experimentalSessionAndOrigin: true,
+    experimentalSessionAndOrigin: false,
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
   },
 })

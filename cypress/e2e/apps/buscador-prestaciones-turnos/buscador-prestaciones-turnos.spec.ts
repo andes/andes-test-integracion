@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
     let token;
     let pacientePrestacion;
@@ -71,110 +69,115 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
     });
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/modules/estadistica/turnos_prestaciones**').as('turnosPrestaciones');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
-        cy.route('POST', '**/api/modules/huds/export').as('exportHuds');
-        cy.route('GET', '**/api/modules/huds/export?**').as('pendientes');
+        cy.intercept('GET', '**/api/modules/estadistica/turnos_prestaciones**' , req => {
+            delete req.headers['if-none-match']
+        }).as('turnosPrestaciones');
+        cy.intercept('GET', '**/api/core/tm/profesionales**' , req => {
+            delete req.headers['if-none-match']
+        }).as('profesionales');
+        cy.intercept('POST', '**/api/modules/huds/export').as('exportHuds');
+        cy.intercept('GET', '**/api/modules/huds/export?**' , req => {
+            delete req.headers['if-none-match']
+        }).as('pendientes');
         cy.goto('/buscador', token);
     });
     it('Listar turnos con filtros de fechas', () => {
         if (cy.esFinDeMes()) {
-            cy.wait('@turnosPrestaciones').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(4);
+            cy.wait('@turnosPrestaciones').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(response.body).to.have.length(4);
             });
 
         } else {
-            cy.wait('@turnosPrestaciones').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(4);
+            cy.wait('@turnosPrestaciones').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(response.body).to.have.length(4);
             });
         }
     });
     it('Listar turnos con filtros de fechas y tipo de prestacion', () => {
-        cy.wait('@turnosPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@turnosPrestaciones').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
         cy.plexSelectType('label="Prestación"', 'consulta de medicina general');
         if (cy.esFinDeMes()) {
             cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().add(1, 'days').format('DD/MM/YYYY'));
             cy.plexButton("Buscar").click();
-            cy.wait('@turnosPrestaciones').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(3);
+            cy.wait('@turnosPrestaciones').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(response.body).to.have.length(3);
             });
         } else {
             cy.plexButton("Buscar").click();
-            cy.wait('@turnosPrestaciones').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(3);
+            cy.wait('@turnosPrestaciones').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(response.body).to.have.length(3);
             });
         }
     });
     it('Listar turnos con filtros de fechas y equipo de salud logueado', () => {
         cy.plexButton("Buscar").click();
-        cy.wait('@turnosPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@turnosPrestaciones').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
         if (cy.esFinDeMes()) {
-            cy.wait('@turnosPrestaciones').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(4);
-                expect(xhr.response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
-                expect(xhr.response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
+            cy.wait('@turnosPrestaciones').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(response.body).to.have.length(4);
+                expect(response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
+                expect(response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
             });
         } else {
-            cy.wait('@turnosPrestaciones').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
-                expect(xhr.response.body).to.have.length(4);
-                expect(xhr.response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
-                expect(xhr.response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
+            cy.wait('@turnosPrestaciones').then(({response}) => {
+                expect(response.statusCode).to.eq(200);
+                expect(response.body).to.have.length(4);
+                expect(response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
+                expect(response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
             });
         }
     });
     it('Exportar todas las prestaciones filtradas entre dos fechas', () => {
         let hoy = Cypress.moment().format('DD/MM/YYYY');
-        cy.wait('@turnosPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@turnosPrestaciones').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
         cy.plexBool('name="all"', true);
         cy.plexButton("Exportar").click();
-        cy.wait('@exportHuds').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.request.body.prestaciones).to.have.length(1);
+        cy.wait('@exportHuds').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.prestaciones).to.have.length(1);
         });
-        cy.wait('@pendientes').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].user.usuario.apellido).to.be.eq('Huenchuman');
-            expect(xhr.response.body[0].user.usuario.nombre).to.be.eq('Natalia');
-            expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
+        cy.wait('@pendientes').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body[0].user.usuario.apellido).to.be.eq('Huenchuman');
+            expect(response.body[0].user.usuario.nombre).to.be.eq('Natalia');
+            expect(response.body[0].user.usuario.username).to.be.eq(30643636);
         });
         cy.get('plex-table').find('td').contains(hoy);
     });
     it('Exportar una prestacion de las filtradas entre dos fechas', () => {
         let hoy = Cypress.moment().format('DD/MM/YYYY');
-        cy.wait('@turnosPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@turnosPrestaciones').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
         });
         cy.plexText('label="Documento"', pacientePrestacion.documento);
         cy.plexButton("Buscar").click();
-        cy.wait('@turnosPrestaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(1);
+        cy.wait('@turnosPrestaciones').then(({response}) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body).to.have.length(1);
         });
 
         cy.get('table tbody tr td plex-bool').first().click();
         cy.plexButton("Exportar").click();
-        cy.wait('@exportHuds').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.request.body.prestaciones).to.have.length(1);
+        cy.wait('@exportHuds').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.prestaciones).to.have.length(1);
         });
-        cy.wait('@pendientes').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].user.usuario.apellido).to.be.eq('Huenchuman');
-            expect(xhr.response.body[0].user.usuario.nombre).to.be.eq('Natalia');
-            expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
+        cy.wait('@pendientes').then(({response}) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body[0].user.usuario.apellido).to.be.eq('Huenchuman');
+            expect(response.body[0].user.usuario.nombre).to.be.eq('Natalia');
+            expect(response.body[0].user.usuario.username).to.be.eq(30643636);
         });
         cy.get('plex-table').find('td').contains(hoy);
     });

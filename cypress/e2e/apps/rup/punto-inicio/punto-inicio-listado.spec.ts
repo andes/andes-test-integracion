@@ -40,7 +40,7 @@ context('RUP - Punto de inicio', () => {
                 force: true
             });
             cy.wait('@prestaciones')
-            cy.get('tbody tr').contains('PEREZ, MARIA').click();
+            cy.get('.hover > :nth-child(2) > :nth-child(2) > div').contains('PEREZ, MARIA').click();
         });
 
         it('visualizar listados agendas', () => {
