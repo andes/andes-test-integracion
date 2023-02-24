@@ -80,11 +80,11 @@ describe('Capa Estadistica - Egresos', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchPrestaciones').then(({response}) => {
+        cy.wait('@patchPrestaciones').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
         cy.wait('@getHistorial');
-        
+
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
     });
 
@@ -102,12 +102,13 @@ describe('Capa Estadistica - Egresos', () => {
         cy.get('plex-tabs ul li').eq(1).click();
         cy.get('plex-options div div button').contains('EGRESO').click({ force: true });
 
+        cy.get('app-informe-egreso plex-button[icon="pencil"]').click({ force: true });
         cy.plexSelect('label="Tipo de egreso"').find('.remove-button').click();
         cy.plexSelectType('label="Tipo de egreso"', 'Defuncion').click();
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchPrestaciones').then(({response}) => {
+        cy.wait('@patchPrestaciones').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
 
