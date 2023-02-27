@@ -81,7 +81,7 @@ context('Perfiles de usuario', () => {
 
     it('Inactivar un perfil activo y verificar la modificación', () => {
         cy.get('table tbody tr').find('.badge-success').first().click();
-        cy.get('gestor-usarios-perfiles-detail >div').plexBool('name="activo"', false);
+        cy.get('gestor-usarios-perfiles-detail').plexBool('name="activo"', false);
         cy.plexButton('Guardar').click();
         cy.wait('@savePerfil').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
