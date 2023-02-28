@@ -150,6 +150,7 @@ declare namespace Cypress {
          */
         modalPrivacidad(opt?: Boolean | String): Chainable<Element>;
 
+        plexMenu(icon: string): Chainable<Element>;
 
         plexTab(label: string): Chainable<Element>;
 
@@ -246,5 +247,14 @@ declare namespace Cypress {
         toast(type: 'success' | 'danger' | 'warning' | 'alert' | 'error', texto?: string);
 
         swal(action: 'confirm' | 'cancel', texto?: string);
+
+        /**
+         * HTTP
+         */
+        patch(path: string, body: any, token: string);
+        post(path: string, body: any, token: string);
+        put(path: string, body: any, token: string);
+        fetch(path: string, body: any, token: string);
+        delete(path: string, body: any, token: string);
     }
 }

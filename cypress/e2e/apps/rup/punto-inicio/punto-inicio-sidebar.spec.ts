@@ -18,10 +18,7 @@ context('RUP - Punto de inicio', () => {
     })
 
     describe('acciones de agendas en sidebar', () => {
-
-
         before(() => {
-
             cy.cleanDB(['agenda', 'prestaciones']);
 
             if (tipoAgendas.includes('comun')) {
@@ -59,18 +56,17 @@ context('RUP - Punto de inicio', () => {
 
         beforeEach(() => {
 
-            cy.server();
-            cy.route({ method: 'GET', url: '**/api/modules/turnos/agenda**' }).as('agendas');
-            cy.route({ method: 'POST', url: '**/api/modules/rup/prestaciones**' }).as('crearPrestacion');
-            cy.route({ method: 'PATCH', url: '**/api/modules/rup/prestaciones/**' }).as('patchPrestacion');
-            cy.route({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
-            cy.route({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
-            cy.route({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' },).as('elementosRUP');
-            cy.route({ method: 'GET', url: '**/api/auth/organizaciones**' }).as('organizaciones');
-            cy.route({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
-            cy.route({ method: 'GET', url: '/api/modules/rup/prestaciones/huds/**', response: [] }).as('huds');
-            cy.route({ method: 'GET', url: '/api/modules/top/reglas**', response: [] }).as('reglas');
-            cy.route({ method: 'GET', url: '**/api/modules/rup/plantillas?conceptId=**' }).as('plantillas');
+            cy.intercept({ method: 'GET', url: '**/api/modules/turnos/agenda**' }).as('agendas');
+            cy.intercept({ method: 'POST', url: '**/api/modules/rup/prestaciones**' }).as('crearPrestacion');
+            cy.intercept({ method: 'PATCH', url: '**/api/modules/rup/prestaciones/**' }).as('patchPrestacion');
+            cy.intercept({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
+            cy.intercept({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
+            cy.intercept({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' },).as('elementosRUP');
+            cy.intercept({ method: 'GET', url: '**/api/auth/organizaciones**' }).as('organizaciones');
+            cy.intercept({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
+            cy.intercept({ method: 'GET', url: '/api/modules/rup/prestaciones/huds/**' }).as('huds');
+            cy.intercept({ method: 'GET', url: '/api/modules/top/reglas**' }).as('reglas');
+            cy.intercept({ method: 'GET', url: '**/api/modules/rup/plantillas?conceptId=**' }).as('plantillas');
 
         });
 
@@ -84,8 +80,8 @@ context('RUP - Punto de inicio', () => {
 
                     if (typeAgenda === 'dinamicaa') {
                         it(`agregar paciente agenda dinamica - ${typePaciente}`, () => {
-                            cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('consultaPaciente');
-                            cy.route('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agregarTurnoDinamico');
+                            cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('consultaPaciente');
+                            cy.intercept('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agregarTurnoDinamico');
                             cy.goto('/rup', token);
                             cy.wait('@agendas');
                             cy.wait('@prestaciones');
@@ -105,13 +101,13 @@ context('RUP - Punto de inicio', () => {
 
                             cy.swal('confirm');
 
-                            cy.wait('@agregarTurnoDinamico').then((xhr) => {
-                                const agenda = xhr.response.body;
+                            cy.wait('@agregarTurnoDinamico').then(({ response }) => {
+                                const agenda = response.body;
                                 expect(agenda.dinamica).to.be.eq(true);
                                 expect(agenda.bloques[0].turnos[i].paciente.id).to.be.eq(pacientes[i]._id);
                             });
-                            cy.wait('@crearPrestacion').then((xhr) => {
-                                const prestacion = xhr.response.body;
+                            cy.wait('@crearPrestacion').then(({ response }) => {
+                                const prestacion = response.body;
                                 expect(prestacion.paciente.id).to.be.eq(pacientes[i]._id);
                                 expect(prestacion.solicitud.tipoPrestacion.conceptId).to.be.eq(agendas['dinamica'].tipoPrestaciones[0].conceptId);
                             });
@@ -123,29 +119,28 @@ context('RUP - Punto de inicio', () => {
             if (typeAgenda !== 'no-nominalizada') {
                 it('Anular inicio de prestación', () => {
                     cy.goto('/rup', token);
-                    cy.wait('@agendas').then((xhr) => {
-                        expect(xhr.status).to.be.eq(200);
-                    });
-                    cy.wait('@prestaciones').then((xhr) => {
-                        expect(xhr.status).to.be.eq(200);
-                    });
-                    cy.get ('table tbody tr').eq(agendaIndex).click();
+                    cy.wait('@agendas');
+                    cy.wait('@prestaciones');
+                    cy.wait(1000);
+                    cy.get('table tbody tr').eq(agendaIndex).click();
                     cy.plexButton('INICIAR PRESTACIÓN').click();
                     cy.swal('confirm');
                     cy.wait('@crearPrestacion');
                     cy.wait('@prestaciones');
 
                     cy.goto('/rup', token)
+                    cy.wait('@agendas');
                     cy.wait('@prestaciones');
+                    cy.wait(1000);
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
 
                     if (typeAgenda !== 'no-nominalizada') {
                         cy.plexButton('ANULAR INICIO DE PRESTACIÓN').click();
                         cy.swal('confirm');
-                        cy.wait('@prestaciones').then((xhr) => {
-                            expect(xhr.status).to.be.eq(200);
-                            expect(xhr.response.body.length).to.be.eq(0);
+                        cy.wait('@prestaciones').then(({ response }) => {
+                            expect(response.statusCode).to.be.eq(200);
+                            expect(response.body.length).to.be.eq(0);
                         });
                     }
                 });
@@ -155,23 +150,21 @@ context('RUP - Punto de inicio', () => {
 
     describe('prestaciones fuera de agenda', () => {
         before(() => {
-            cy.server();
             cy.cleanDB(['agenda', 'prestaciones']);
             cy.task('database:seed:prestacion', { paciente: pacientes[0]._id });
         });
 
         beforeEach(() => {
 
-            cy.server();
-            cy.route({ method: 'GET', url: '**/api/modules/turnos/agenda**' }).as('agendas');
-            cy.route({ method: 'POST', url: '**/api/modules/rup/prestaciones**' }).as('crearPrestacion');
-            cy.route({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
-            cy.route({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
-            cy.route({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' }).as('elementosRUP');
-            cy.route({ method: 'GET', url: '**/api/auth/organizaciones**' }).as('organizaciones');
-            cy.route({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
-            cy.route({ method: 'GET', url: '/api/modules/rup/prestaciones/huds/**', response: [] }).as('huds');
-            cy.route({ method: 'GET', url: '/api/modules/top/reglas**', response: [] }).as('reglas');
+            cy.intercept({ method: 'GET', url: '**/api/modules/turnos/agenda**' }).as('agendas');
+            cy.intercept({ method: 'POST', url: '**/api/modules/rup/prestaciones**' }).as('crearPrestacion');
+            cy.intercept({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
+            cy.intercept({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
+            cy.intercept({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' }).as('elementosRUP');
+            cy.intercept({ method: 'GET', url: '**/api/auth/organizaciones**' }).as('organizaciones');
+            cy.intercept({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
+            cy.intercept({ method: 'GET', url: '/api/modules/rup/prestaciones/huds/**' }).as('huds');
+            cy.intercept({ method: 'GET', url: '/api/modules/top/reglas**' }).as('reglas');
 
         });
 
@@ -188,7 +181,9 @@ context('RUP - Punto de inicio', () => {
                 })
 
                 it('continuar prestacion', () => {
-                    cy.route('GET', '**/api/modules/rup/prestaciones/' + idPrestacion).as('findPrestacion');
+                    cy.intercept('GET', '**/api/modules/rup/prestaciones/' + idPrestacion, req => {
+                        delete req.headers['if-none-match']
+                    }).as('findPrestacion');
 
                     const paciente = pacientes[pacienteIndex];
 
@@ -198,13 +193,13 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@prestaciones');
 
                     cy.get('table').first().as('tablaAgendas');
-                    cy.get('@tablaAgendas').find('tbody tr').eq(1).click({force:true});
+                    cy.get('@tablaAgendas').find('tbody tr').eq(1).click({ force: true });
                     cy.plexButton('CONTINUAR REGISTRO').click();
 
 
                     cy.url().should('include', '/rup/ejecucion/');
-                    cy.wait('@findPrestacion').then((xhr) => {
-                        const prestacion = xhr.response.body;
+                    cy.wait('@findPrestacion').then(({ response }) => {
+                        const prestacion = response.body;
                         expect(prestacion.id).to.be.eq(idPrestacion)
                         if (paciente) {
                             expect(prestacion.paciente.id).to.be.eq(paciente._id);
@@ -242,8 +237,6 @@ context('RUP - Punto de inicio', () => {
                 });
 
                 it('VER HUDS', () => {
-                    const paciente = pacientes[pacienteIndex];
-
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
@@ -257,12 +250,8 @@ context('RUP - Punto de inicio', () => {
                     cy.plexButton('ACEPTAR').click();
                     cy.url().should('include', '/huds/paciente/');
                 });
-
             })
-
-
         });
-
     })
 
     function flujoPrestacion(typeAgenda, agendaIndex, typePaciente, pacienteIndex) {
@@ -288,8 +277,6 @@ context('RUP - Punto de inicio', () => {
                 cy.wait('@prestaciones');
 
                 cy.get('table').first().as('tablaAgendas');
-                // cy.get('@tablaAgendas').find('tbody tr').should('have.length', 3);
-
                 cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
 
                 cy.plexButton('INICIAR PRESTACIÓN').click();
@@ -297,11 +284,13 @@ context('RUP - Punto de inicio', () => {
 
                 const wait = typeAgenda !== 'con-solicitud' ? cy.wait('@crearPrestacion') : cy.wait('@patchPrestacion');
                 wait.then(xhr => {
-                    const body = xhr.response.body;
-                    idPrestacion = body.id;
+                    idPrestacion = xhr.response.body.id;
+                    cy.intercept('GET', '**/api/modules/rup/prestaciones/' + idPrestacion, req => {
+                        delete req.headers['if-none-match']
+                    }).as('findPrestacion');
+
                     cy.url().should('include', '/rup/ejecucion/' + idPrestacion);
-                    cy.route('GET', '**/api/modules/rup/prestaciones/' + idPrestacion).as('findPrestacion');
-                    cy.wait('@findPrestacion').then((xhr) => {
+                    cy.wait('@findPrestacion').then(({ response }) => {
                         const prestacion = xhr.response.body;
                         expect(prestacion.id).to.be.eq(idPrestacion)
                         if (paciente) {
@@ -314,11 +303,12 @@ context('RUP - Punto de inicio', () => {
             });
 
             it('continuar prestacion', () => {
-                cy.route('GET', '**/api/modules/rup/prestaciones/' + idPrestacion).as('findPrestacion');
-
-                const paciente = pacientes[pacienteIndex];
+                cy.intercept('GET', '**/api/modules/rup/prestaciones/' + idPrestacion, req => {
+                    delete req.headers['if-none-match']
+                }).as('findPrestacion');
 
                 setRoute();
+
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
                 cy.wait('@prestaciones');
@@ -327,15 +317,12 @@ context('RUP - Punto de inicio', () => {
                 cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
                 cy.plexButton('CONTINUAR REGISTRO').click();
 
-
                 cy.url().should('include', '/rup/ejecucion/');
-                cy.wait('@findPrestacion').then((xhr) => {
-                    const prestacion = xhr.response.body;
+                cy.wait('@findPrestacion').then(({ response }) => {
+                    expect(response.statusCode).to.be.eq(200);
+                    const prestacion = response.body;
                     expect(prestacion.id).to.be.eq(idPrestacion)
                 });
-
-                // cy.plexButton('Guardar').click();
-                // cy.url().should('include', '/rup/validacion/');
 
                 const dtoValidacion = {
                     op: 'estadoPush',
@@ -378,25 +365,21 @@ context('RUP - Punto de inicio', () => {
                     cy.url().should('include', '/huds/paciente/');
                 });
             }
-
         })
-
     }
 });
 
 
 function setRoute() {
-    cy.server();
-
-    cy.route({ method: 'GET', url: '**/api/modules/turnos/agenda**' }).as('agendas');
-    cy.route({ method: 'POST', url: '**/api/modules/rup/prestaciones**' }).as('crearPrestacion');
-    cy.route({ method: 'PATCH', url: '**/api/modules/rup/prestaciones**' }).as('patchPrestacion');
-    cy.route({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
-    cy.route({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
-    cy.route({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' }).as('elementosRUP');
-    cy.route({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
-    cy.route({ method: 'GET', url: '/api/modules/rup/prestaciones/huds/**', response: [] }).as('huds');
-    cy.route({ method: 'GET', url: '/api/modules/top/reglas**', response: [] }).as('reglas');
-    cy.route('GET', '/api/core/term/snomed/expression**', []).as('expression');
-    cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+    cy.intercept({ method: 'GET', url: '**/api/modules/turnos/agenda**' }).as('agendas');
+    cy.intercept({ method: 'POST', url: '**/api/modules/rup/prestaciones**' }).as('crearPrestacion');
+    cy.intercept({ method: 'PATCH', url: '**/api/modules/rup/prestaciones**' }).as('patchPrestacion');
+    cy.intercept({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
+    cy.intercept({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
+    cy.intercept({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' }).as('elementosRUP');
+    cy.intercept({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
+    cy.intercept({ method: 'GET', url: '/api/modules/rup/prestaciones/huds/**' }).as('huds');
+    cy.intercept({ method: 'GET', url: '/api/modules/top/reglas**' }).as('reglas');
+    cy.intercept('GET', '/api/core/term/snomed/expression**', []).as('expression');
+    cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
 }

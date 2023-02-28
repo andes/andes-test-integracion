@@ -19,14 +19,13 @@ context('prestaciones', () => {
     ['validado', 'temporal', 'sin-documento'].forEach((type, i) => {
         it('Registrar Prestación de Colonoscopia, Fuera de Agenda, paciente ' + type, () => {
             const paciente = pacientes[i];
-            cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('POST', '**/api/modules/rup/prestaciones').as('create');
-            cy.route('GET', '**/api/modules/rup/prestaciones*').as('guardar');
-            cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
-            cy.route('GET', '/api/modules/cda/paciente/**', []).as('cda');
-            cy.route('GET', '/api/core/term/snomed/**', []).as('search');
-            cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('POST', '**/api/modules/rup/prestaciones').as('create');
+            cy.intercept('GET', '**/api/modules/rup/prestaciones*').as('guardar');
+            cy.intercept('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+            cy.intercept('GET', '/api/modules/cda/paciente/**', []).as('cda');
+            cy.intercept('GET', '/api/core/term/snomed/**', []).as('search');
+            cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
 
             cy.plexButton('PACIENTE FUERA DE AGENDA').click();
             cy.plexSelectType('name="nombrePrestacion"', 'colonoscopia');
@@ -38,13 +37,13 @@ context('prestaciones', () => {
 
             cy.plexButton('INICIAR PRESTACIÓN').click();
 
-            cy.wait('@create').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@create').then(({ response }) => {
+                expect(response.statusCode).to.be.eq(200);
                 if (paciente.documento) {
-                    expect(xhr.response.body.paciente.documento).to.be.eq(paciente.documento);
+                    expect(response.body.paciente.documento).to.be.eq(paciente.documento);
                 }
-                expect(xhr.response.body.paciente.nombre).to.be.eq(paciente.nombre);
-                expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
+                expect(response.body.paciente.nombre).to.be.eq(paciente.nombre);
+                expect(response.body.estados[0].tipo).to.be.eq('ejecucion');
             });
             cy.wait('@paciente');
             // completo el procedimiento
@@ -95,13 +94,13 @@ context('prestaciones', () => {
 
             cy.plexButton('Guardar colonoscopia').click();
 
-            cy.wait('@patch').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@patch').then(({ response }) => {
+                expect(response.statusCode).to.be.eq(200);
                 if (paciente.documento) {
-                    expect(xhr.response.body.paciente.documento).to.be.eq(paciente.documento);
+                    expect(response.body.paciente.documento).to.be.eq(paciente.documento);
                 }
-                expect(xhr.response.body.paciente.nombre).to.be.eq(paciente.nombre);
-                expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
+                expect(response.body.paciente.nombre).to.be.eq(paciente.nombre);
+                expect(response.body.estados[0].tipo).to.be.eq('ejecucion');
             });
 
             cy.toast('success');
@@ -112,13 +111,13 @@ context('prestaciones', () => {
             // Popup alert
             cy.get('button').contains('CONFIRMAR').click();
 
-            cy.wait('@patch').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@patch').then(({ response }) => {
+                expect(response.statusCode).to.be.eq(200);
                 if (paciente.documento) {
-                    expect(xhr.response.body.paciente.documento).to.be.eq(paciente.documento);
+                    expect(response.body.paciente.documento).to.be.eq(paciente.documento);
                 }
-                expect(xhr.response.body.paciente.nombre).to.be.eq(paciente.nombre);
-                expect(xhr.response.body.estados[1].tipo).to.be.eq('validada');
+                expect(response.body.paciente.nombre).to.be.eq(paciente.nombre);
+                expect(response.body.estados[1].tipo).to.be.eq('validada');
             });
 
         });

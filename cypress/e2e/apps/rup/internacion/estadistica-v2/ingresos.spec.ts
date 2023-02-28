@@ -15,7 +15,7 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
                     { pacientes: [pacientes[2]], estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate() }
                 ]
             }).then(camasCreadas => {
-                camas = camasCreadas;              
+                camas = camasCreadas;
             });
         });
     });
@@ -23,21 +23,29 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
     beforeEach(() => {
         cy.goto('/mapa-camas', token);
 
-        cy.server();
+        cy.intercept('GET', '**api/core-v2/mpi/pacientes/**', req => {
+            delete req.headers['if-none-match']
+        }).as('getPaciente')
         cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');
         cy.intercept('GET', '**/api/modules/rup/internacion/camas/**').as('getCama');
         cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
+        cy.intercept('GET', '**/api/modules/rup/internacion/internacion-resumen/**', req => {
+            delete req.headers['if-none-match']
+        }).as('getResumenInternacion');
+        cy.intercept('GET', '**/api/modules/rup/internacion/camas/historial?**', req => {
+            delete req.headers['if-none-match']
+        }).as('getHistorial');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/changeTime/**').as('patchCamaEstados');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/internacion-resumen/**').as('patchResumen');
         cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
-        cy.route('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
+        cy.intercept('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
             "conceptId": "1234",
             "term": "Enfermeria en Rehabilitación",
         }, {
             "conceptId": "666",
             "term": "Dolor",
         }]).as('expEspecialidad');
-        cy.route('GET', '**/api/core/tm/ocupacion?nombre=**', [{
+        cy.intercept('GET', '**/api/core/tm/ocupacion?nombre=**', [{
             "_id": "5c793679af78f1fa5d0a8e1e",
             "id": "5c793679af78f1fa5d0a8e1e",
             "nombre": "Abogado",
@@ -55,9 +63,18 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.plexButton('Estadístico (nuevo)').click();
         cy.wait('@getCamas');
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
+
+        cy.wait('@getPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+        });
+        cy.wait('@getResumenInternacion').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+        });
+        cy.wait('@getHistorial').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+        });
         cy.plexTab('INTERNACION').click()
-        
-        cy.get('plex-layout-sidebar plex-title plex-button[icon="pencil"]').click({force: true});
+        cy.get('plex-layout-sidebar plex-button[icon="pencil"]').first().click({ force: true });
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-3, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
@@ -73,11 +90,11 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchPrestacion').then(({response}) => {
+        cy.wait('@patchPrestacion').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.wait('@patchResumen').then(({response}) => {
+        cy.wait('@patchResumen').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         })
     })
@@ -88,10 +105,18 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.plexButton('Médico').click();
         cy.wait('@getCamas');
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
+        cy.wait('@getPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+        });
+        cy.wait('@getResumenInternacion').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+        });
+        cy.wait('@getHistorial').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+        });
         cy.plexTab('INTERNACION').click();
         cy.get('plex-title[titulo="INGRESO"] div').eq(2);
-        cy.wait(100)
-        cy.get('plex-layout-sidebar plex-title plex-button[icon="pencil"]').click({ force: true });
+        cy.get('plex-layout-sidebar plex-button[icon="pencil"]').first().click({ force: true });
         cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha Ingreso"', { text: nuevaFecha, skipEnter: true });
         cy.plexButtonIcon('check').click();
@@ -101,8 +126,7 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.goto('/mapa-camas', token);
         cy.plexButton('Estadístico (nuevo)').click();
         cy.url().should('include', 'mapa-camas/internacion/estadistica-v2')
-        cy.wait('@getCamas');
-        cy.wait(100);   // sino no llega a 'ver' las camas aunque esten en pantalla
+        cy.wait('@getCamas');;   // sino no llega a 'ver' las camas aunque esten en pantalla
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
         cy.wait('@getCama')
         cy.plexTab('INTERNACION').click();
