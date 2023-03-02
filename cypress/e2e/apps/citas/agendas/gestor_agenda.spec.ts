@@ -57,7 +57,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@findAgenda').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        cy.get('plex-layout-sidebar').plexSelect('label="Equipo de Salud"').find('.remove-button').click();
+        cy.get('plex-layout-sidebar').plexSelect('label="Equipo de Salud"').type('{backspace}');
         cy.get('plex-layout-sidebar').plexSelectAsync('label="Equipo de Salud"', 'prueba alicia', '@getProfesional', 0);
         cy.get('plex-layout-sidebar').plexSelectAsync('label="Espacio Físico"', 'Huemul Consultorio 3 PB', '@getEspacioFisico', 0);
 
@@ -170,8 +170,8 @@ describe('CITAS - Planificar Agendas', () => {
 
         cy.wait('@getAgendas').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
+            cy.get('table tbody td').contains('examen pediátrico').click();
         });
-        cy.get('table tbody td').plexLabel('examen pediátrico').click();
         cy.wait('@findAgenda').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.estado).to.be.eq('publicada');
