@@ -1,6 +1,13 @@
 context('MPI-Registro Paciente Con Dni', () => {
     let token;
     let validado;
+
+    // fixtures
+    const pacienteValidado = { fixture: 'mpi/paciente-validado.json' };
+    const pacienteValidado2 = { fixture: 'mpi/paciente-validado2.json' };
+    const pacienteValidado3 = { fixture: 'mpi/paciente-validado3.json' };
+    const pacienteValidado4 = { fixture: 'mpi/paciente-validado4.json' };
+
     before(() => {
         cy.seed();
         cy.cleanDB()
@@ -13,12 +20,10 @@ context('MPI-Registro Paciente Con Dni', () => {
 
     beforeEach(() => {
         cy.goto('/apps/mpi/busqueda', token);
-        cy.server();
-        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('guardar');
-
-        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
-        cy.route('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
-        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
+        cy.intercept('POST', '**api/core-v2/mpi/pacientes**').as('guardar');
+        cy.intercept('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
+        cy.intercept('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');
+        cy.intercept('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
     });
 
     it('Validar paciente con Renaper y deshacer validación, luego volver a validar verificando datos', () => {
@@ -26,9 +31,7 @@ context('MPI-Registro Paciente Con Dni', () => {
            Se espera que los datos de la primera validación no se filtren a la segunda.  */
 
         // Intercepta la llamada a la ruta validar y devuelve un paciente validado
-        cy.fixture('mpi/paciente-validado').as('paciente_validado');
-        cy.fixture('mpi/paciente-validado4').as('paciente_validado4');
-        cy.route('POST', '**api/core-v2/mpi/validacion', '@paciente_validado4').as('renaper4');
+        cy.intercept('POST', '**api/core-v2/mpi/validacion', pacienteValidado4).as('renaper4');
 
         let validado1 = {
             documento: 12325489,
@@ -47,35 +50,36 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
         // Se completa datos básicos
-        cy.plexInt('name="documento"', validado4.documento);
+        cy.plexInt('name="documento"', validado4.documento.toString());
         cy.plexSelectType('name="sexo"', validado4.sexo);
 
         // Se valida con FA RENAPER y verifica que posee foto y fecha de fallecimiento
         cy.plexButton('Validar Paciente').click();
-        cy.wait('@renaper4').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.fechaFallecimiento).to.be.not.eq(null);
-            expect(xhr.response.body.foto).to.be.not.eq(null);
+        cy.wait('@renaper4').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.fechaFallecimiento).to.be.not.eq(null);
+            expect(response.body.foto).to.be.not.eq(null);
         });
 
+        cy.toast('success');
         // Deshacemos la validación y verificamos que los datos se hayan reestablecido correctamente
-        cy.plexButton('Deshacer Validación').click();
+        cy.plexButton('Deshacer Validación').click({ force: true });
         cy.plexText('name="apellido"').should('not.have.value');
         cy.plexText('name="nombre"').should('not.have.value');
         cy.plexDatetime('label="Fecha de Nacimiento"').find('input').should('not.have.value');
 
-        cy.route('POST', 'api/core-v2/mpi/validacion', '@paciente_validado').as('renaper1');
+        cy.intercept('POST', 'api/core-v2/mpi/validacion', pacienteValidado).as('renaper1');
 
         // Validamos con nuevo dni
         cy.plexInt('name="documento"', '{selectall}{backspace}');
         cy.plexInt('name="documento"', '555555');
         cy.plexButton('Validar Paciente').click();
-        cy.wait('@renaper1').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.fechaFallecimiento).to.be.eq(null);
-            expect(xhr.response.body.foto).to.be.eq('');
-            expect(xhr.response.body.nombre).to.be.eq(validado1.nombre);
-            expect(xhr.response.body.apellido).to.be.eq(validado1.apellido);
+        cy.wait('@renaper1').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.fechaFallecimiento).to.be.eq(null);
+            expect(response.body.foto).to.be.eq('');
+            expect(response.body.nombre).to.be.eq(validado1.nombre);
+            expect(response.body.apellido).to.be.eq(validado1.apellido);
             cy.get('plex-detail').find('plex-badge').contains('Fallecido').should('not.exist');
         });
 
@@ -85,9 +89,9 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.wait('@guardar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.direccion.length).eq(2)
+        cy.wait('@guardar').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.direccion.length).eq(2)
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
@@ -102,8 +106,7 @@ context('MPI-Registro Paciente Con Dni', () => {
             fechaNacimiento: '2019-06-26T11:46:48.465Z' // difiere del paciente validado en un dia
         };
 
-        cy.fixture('mpi/paciente-validado').as('paciente_validado');
-        cy.route('POST', '**api/core-v2/mpi/validacion', '@paciente_validado').as('renaper');
+        cy.intercept('POST', '**api/core-v2/mpi/validacion', pacienteValidado).as('renaper');
 
         cy.task('database:create:paciente', dtoTemp).then(pacienteTemp => {
             cy.plexText('name="buscador"', 'nuevo');
@@ -116,8 +119,8 @@ context('MPI-Registro Paciente Con Dni', () => {
 
             // Se valida con FA RENAPER
             cy.plexButton('Validar Paciente').click();
-            cy.wait('@renaper').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@renaper').then(({ response }) => {
+                expect(response.statusCode).to.be.eq(200);
             });
             // vuelta rta de renaper
             cy.toast('success')
@@ -145,8 +148,7 @@ context('MPI-Registro Paciente Con Dni', () => {
             nombre: 'JOSETEMP',
             fechaNacimiento: '2019-06-26T11:46:48.465Z'
         }
-        cy.fixture('mpi/paciente-validado').as('paciente_validado');
-        cy.route('POST', '**api/core-v2/mpi/validacion', '@paciente_validado').as('renaper');
+        cy.intercept('POST', '**api/core-v2/mpi/validacion', pacienteValidado).as('renaper');
 
         cy.task('database:create:paciente', dtoTemp).then(pacienteTemp => {
             cy.plexText('name="buscador"', 'nuevo');
@@ -157,8 +159,8 @@ context('MPI-Registro Paciente Con Dni', () => {
             cy.plexSelectType('name="sexo"', pacienteTemp.sexo);
             // Se valida con FA RENAPER
             cy.plexButton('Validar Paciente').click();
-            cy.wait('@renaper').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+            cy.wait('@renaper').then(({ response }) => {
+                expect(response.statusCode).to.be.eq(200);
             });
             // vuelta rta de renaper
             cy.toast('success')
@@ -192,19 +194,18 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.wait('@guardar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.estado).to.be.eq("temporal");
-            expect(xhr.response.body.nombre).to.be.eq("CON DNI");
-            expect(xhr.response.body.apellido).to.be.eq("TEST");
+        cy.wait('@guardar').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.estado).to.be.eq("temporal");
+            expect(response.body.nombre).to.be.eq("CON DNI");
+            expect(response.body.apellido).to.be.eq("TEST");
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
 
     it('verificar lista de pacientes validados similares con porcentaje 83% y verificamos  respuesta match', () => {
-        cy.route('POST', '**api/core-v2/mpi/validacion').as('validacion');
-        cy.fixture('mpi/paciente-validado2').as('paciente_validado2');
-        cy.route('POST', '**api/core-v2/mpi/validacion', '@paciente_validado2').as('renaper2');
+        cy.intercept('POST', '**api/core-v2/mpi/validacion', pacienteValidado2).as('renaper2');
+
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
@@ -217,10 +218,10 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.wait('@guardar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.nombre).to.be.eq("MARTIN");
-            expect(xhr.response.body.apellido).to.be.eq("BUCAREY");
+        cy.wait('@guardar').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.nombre).to.be.eq("MARTIN");
+            expect(response.body.apellido).to.be.eq("BUCAREY");
         });
         cy.contains('Los datos se actualizaron correctamente');
         cy.contains('Aceptar').click();
@@ -241,14 +242,14 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.contains('Aceptar').click();
         cy.contains('Similitud: 83 %');
         cy.plexButton(' Ignorar y Guardar ').click();
-        cy.wait('@guardar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@guardar').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
             //verificamos el resultado del match
-            expect(xhr.response.body.sugeridos[0]._score).to.be.eq(0.83);
-            expect(xhr.response.body.sugeridos[0].paciente.estado).to.be.eq("validado");
-            expect(xhr.response.body.sugeridos[0].paciente.documento).to.be.eq("33650509");
-            expect(xhr.response.body.sugeridos[0].paciente.nombre).to.be.eq("MARTIN");
-            expect(xhr.response.body.sugeridos[0].paciente.apellido).to.be.eq("BUCAREY");
+            expect(response.body.sugeridos[0]._score).to.be.eq(0.83);
+            expect(response.body.sugeridos[0].paciente.estado).to.be.eq("validado");
+            expect(response.body.sugeridos[0].paciente.documento).to.be.eq("33650509");
+            expect(response.body.sugeridos[0].paciente.nombre).to.be.eq("MARTIN");
+            expect(response.body.sugeridos[0].paciente.apellido).to.be.eq("BUCAREY");
         });
         cy.contains('Los datos se actualizaron correctamente');
         cy.contains('Aceptar').click();
@@ -256,9 +257,8 @@ context('MPI-Registro Paciente Con Dni', () => {
     });
 
     it('verificar lista de pacientes validados similares con porcentaje mayor al 95%', () => {
-        cy.route('POST', '**api/core-v2/mpi/validacion').as('validacion');
-        cy.fixture('mpi/paciente-validado3').as('paciente_validado3');
-        cy.route('POST', '**api/core-v2/mpi/validacion', '@paciente_validado3').as('renaper3');
+        cy.intercept('POST', '**api/core-v2/mpi/validacion', pacienteValidado3).as('renaper3');
+
         cy.plexText('name="buscador"', '1232548');
         cy.get('div').contains('NUEVO PACIENTE').click();
         cy.get('div').contains('CON DNI ARGENTINO').click();
@@ -271,10 +271,10 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.wait('@guardar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.nombre).to.be.eq("MARIA CELESTE");
-            expect(xhr.response.body.apellido).to.be.eq("RAMOS");
+        cy.wait('@guardar').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.nombre).to.be.eq("MARIA CELESTE");
+            expect(response.body.apellido).to.be.eq("RAMOS");
         });
         cy.contains('Los datos se actualizaron correctamente');
         cy.contains('Aceptar').click();
@@ -312,11 +312,11 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.wait('@guardar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.estado).to.be.eq("temporal");
-            expect(xhr.response.body.nombre).to.be.eq("MARIA JULIETA");
-            expect(xhr.response.body.apellido).to.be.eq("NUEZ");
+        cy.wait('@guardar').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.estado).to.be.eq("temporal");
+            expect(response.body.nombre).to.be.eq("MARIA JULIETA");
+            expect(response.body.apellido).to.be.eq("NUEZ");
         });
         cy.contains('Los datos se actualizaron correctamente');
         cy.contains('Aceptar').click();
@@ -371,11 +371,11 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.wait('@guardar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.estado).to.be.eq(pacienteTemp1.estado);
-            expect(xhr.response.body.nombre).to.be.eq(pacienteTemp1.nombre.toUpperCase());
-            expect(xhr.response.body.apellido).to.be.eq(pacienteTemp1.apellido.toUpperCase());
+        cy.wait('@guardar').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.estado).to.be.eq(pacienteTemp1.estado);
+            expect(response.body.nombre).to.be.eq(pacienteTemp1.nombre.toUpperCase());
+            expect(response.body.apellido).to.be.eq(pacienteTemp1.apellido.toUpperCase());
         });
         cy.contains('Los datos se actualizaron correctamente');
         cy.contains('Aceptar').click();
@@ -396,8 +396,8 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
-        cy.wait('@guardar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@guardar').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.contains('El paciente ya existe, verifique las sugerencias').get('button').contains('Aceptar').click();
         cy.get('plex-layout-sidebar plex-item plex-label').contains('Similitud: 98 %');
@@ -405,10 +405,10 @@ context('MPI-Registro Paciente Con Dni', () => {
 
         cy.plexButton('Guardar').click();
         // se guarda paciente con datos del paciente seleccionado (pacienteTemp1)
-        cy.wait('@patchPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.nombre).to.be.eq(pacienteTemp1.nombre.toUpperCase());
-            expect(xhr.response.body.apellido).to.be.eq(pacienteTemp1.apellido.toUpperCase());
+        cy.wait('@patchPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.nombre).to.be.eq(pacienteTemp1.nombre.toUpperCase());
+            expect(response.body.apellido).to.be.eq(pacienteTemp1.apellido.toUpperCase());
         });
         cy.contains('Los datos se actualizaron correctamente');
         cy.contains('Aceptar').click();
@@ -418,46 +418,46 @@ context('MPI-Registro Paciente Con Dni', () => {
         let direccion = 'Avenida las flores 1200'
 
         cy.plexText('name="buscador"', '20000000');
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].nombre).to.be.eq("PACIENTE TEMPORAL");
-            expect(xhr.response.body[0].apellido).to.be.eq("ANDES");
+        cy.wait('@getPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].nombre).to.be.eq("PACIENTE TEMPORAL");
+            expect(response.body[0].apellido).to.be.eq("ANDES");
         });
-        cy.get('paciente-listado').contains('20.000.000');
+        cy.get('paciente-busqueda > paciente-listado').contains('20.000.000').click();
         cy.plexButtonIcon('pencil').click();
 
-        cy.wait('@findPacienteByID').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@findPacienteByID').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTab('datos de contacto').click();
         cy.plexText('name=direccion', direccion);
         cy.plexTab('Relaciones').click();
 
         cy.plexText('name="buscador"', '10000000');
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].nombre).to.be.eq("PACIENTE VALIDADO");
-            expect(xhr.response.body[0].apellido).to.be.eq("ANDES");
+        cy.wait('@getPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].nombre).to.be.eq("PACIENTE VALIDADO");
+            expect(response.body[0].apellido).to.be.eq("ANDES");
         });
-        cy.get('paciente-listado').contains('10.000.000').parent().parent().click();
+        cy.get('relaciones-pacientes > paciente-listado').contains('10.000.000').parent().parent().click();
 
         cy.plexSelectType('name="nuevaRelacion"', 'otro');
         cy.plexButtonIcon('plus').click();
         cy.contains('ANDES, PACIENTE VALIDADO');
 
         cy.plexButton('Guardar').click();
-        cy.wait('@patchPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.documento).to.be.eq('20000000');
-            expect(xhr.response.body.nombre).to.be.eq('PACIENTE TEMPORAL');
-            expect(xhr.response.body.apellido).to.be.eq('ANDES');
-            expect(xhr.response.body.direccion[0].valor).to.be.eq(direccion)
+        cy.wait('@patchPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.documento).to.be.eq('20000000');
+            expect(response.body.nombre).to.be.eq('PACIENTE TEMPORAL');
+            expect(response.body.apellido).to.be.eq('ANDES');
+            expect(response.body.direccion[0].valor).to.be.eq(direccion)
         });
-        cy.wait('@patchPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.documento).to.be.eq('10000000');
-            expect(xhr.response.body.nombre).to.be.eq('PACIENTE VALIDADO');
-            expect(xhr.response.body.apellido).to.be.eq('ANDES');
+        cy.wait('@patchPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.documento).to.be.eq('10000000');
+            expect(response.body.nombre).to.be.eq('PACIENTE VALIDADO');
+            expect(response.body.apellido).to.be.eq('ANDES');
         });
         cy.contains('Los datos se actualizaron correctamente');
     });
@@ -469,14 +469,14 @@ context('MPI-Registro Paciente Con Dni', () => {
     it('editar lugar de nacimiento del paciente seleccionando los tres checkbox', () => {
 
         cy.plexText('name="buscador"', validado.documento);
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.get('paciente-listado').contains(format(validado.documento));
+        cy.get('paciente-busqueda > paciente-listado').contains(format(validado.documento));
         cy.plexButtonIcon('pencil').click();
 
-        cy.wait('@findPacienteByID').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@findPacienteByID').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTab('datos de contacto').click();
         cy.plexBool('name="noPoseeContacto"', true);
@@ -485,11 +485,11 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexBool('name="nacioLocActual"', true);
 
         cy.plexButton('Guardar').click();
-        cy.wait('@patchPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.lugarNacimiento.pais.nombre).to.be.eq('Argentina');
-            expect(xhr.response.body.lugarNacimiento.provincia.nombre).to.be.eq('Neuquén');
-            expect(xhr.response.body.lugarNacimiento.localidad.nombre).to.be.eq('NEUQUEN');
+        cy.wait('@patchPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.lugarNacimiento.pais.nombre).to.be.eq('Argentina');
+            expect(response.body.lugarNacimiento.provincia.nombre).to.be.eq('Neuquén');
+            expect(response.body.lugarNacimiento.localidad.nombre).to.be.eq('NEUQUEN');
         });
         cy.contains('Los datos se actualizaron correctamente');
         cy.contains('Aceptar').click();
@@ -498,14 +498,14 @@ context('MPI-Registro Paciente Con Dni', () => {
     it('editar lugar de nacimiento del paciente seleccionando los dos primeros checkbox', () => {
 
         cy.plexText('name="buscador"', validado.documento);
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.get('paciente-listado').contains(format(validado.documento));
+        cy.get('paciente-busqueda > paciente-listado').contains(format(validado.documento));
         cy.plexButtonIcon('pencil').click();
 
-        cy.wait('@findPacienteByID').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@findPacienteByID').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTab('datos de contacto').click();
         cy.plexBool('name="noPoseeContacto"', true);
@@ -515,11 +515,11 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexSelectType('name="localidadNacimiento"', "11 De Octubre");
 
         cy.plexButton('Guardar').click();
-        cy.wait('@patchPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.lugarNacimiento.pais.nombre).to.be.eq('Argentina');
-            expect(xhr.response.body.lugarNacimiento.provincia.nombre).to.be.eq('Neuquén');
-            expect(xhr.response.body.lugarNacimiento.localidad.nombre).to.be.eq('11 De Octubre');
+        cy.wait('@patchPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.lugarNacimiento.pais.nombre).to.be.eq('Argentina');
+            expect(response.body.lugarNacimiento.provincia.nombre).to.be.eq('Neuquén');
+            expect(response.body.lugarNacimiento.localidad.nombre).to.be.eq('11 De Octubre');
         });
         cy.contains('Los datos se actualizaron correctamente');
         cy.contains('Aceptar').click();
@@ -528,14 +528,14 @@ context('MPI-Registro Paciente Con Dni', () => {
     it('editar lugar de nacimiento del paciente seleccionando solamente el primer checkbox', () => {
 
         cy.plexText('name="buscador"', validado.documento);
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.get('paciente-listado').contains(format(validado.documento));
+        cy.get('paciente-busqueda > paciente-listado').contains(format(validado.documento));
         cy.plexButtonIcon('pencil').click();
 
-        cy.wait('@findPacienteByID').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@findPacienteByID').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTab('datos de contacto').click();
         cy.plexBool('name="noPoseeContacto"', true);
@@ -545,11 +545,11 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexText('name="nombre"', "Avellaneda");
 
         cy.plexButton('Guardar').click();
-        cy.wait('@patchPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.lugarNacimiento.pais.nombre).to.be.eq('Argentina');
-            expect(xhr.response.body.lugarNacimiento.provincia.nombre).to.be.eq('Buenos Aires');
-            expect(xhr.response.body.lugarNacimiento.lugar).to.be.eq('Avellaneda');
+        cy.wait('@patchPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.lugarNacimiento.pais.nombre).to.be.eq('Argentina');
+            expect(response.body.lugarNacimiento.provincia.nombre).to.be.eq('Buenos Aires');
+            expect(response.body.lugarNacimiento.lugar).to.be.eq('Avellaneda');
         });
         cy.contains('Los datos se actualizaron correctamente');
         cy.contains('Aceptar').click();
@@ -558,14 +558,14 @@ context('MPI-Registro Paciente Con Dni', () => {
     it('editar lugar de nacimiento del paciente perteneciente a otro pais', () => {
 
         cy.plexText('name="buscador"', validado.documento);
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.get('paciente-listado').contains(format(validado.documento));
+        cy.get('paciente-busqueda > paciente-listado').contains(format(validado.documento));
         cy.plexButtonIcon('pencil').click();
 
-        cy.wait('@findPacienteByID').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@findPacienteByID').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTab('datos de contacto').click();
         cy.plexBool('name="noPoseeContacto"', true);
@@ -575,10 +575,10 @@ context('MPI-Registro Paciente Con Dni', () => {
         cy.plexText('name="nombre"', "Hamburgo");
 
         cy.plexButton('Guardar').click();
-        cy.wait('@patchPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.lugarNacimiento.pais.nombre).to.be.eq('Alemania');
-            expect(xhr.response.body.lugarNacimiento.lugar).to.be.eq('Hamburgo');
+        cy.wait('@patchPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.lugarNacimiento.pais.nombre).to.be.eq('Alemania');
+            expect(response.body.lugarNacimiento.lugar).to.be.eq('Hamburgo');
         });
         cy.contains('Los datos se actualizaron correctamente');
         cy.contains('Aceptar').click();
