@@ -11,16 +11,16 @@ Cypress.Commands.add('getRegistrosMedicos', () => {
 Cypress.Commands.add('createUsuarioByCapa', (capa) => {
     let arrayPermisos = [...permisosUsuario];
     let usaEstadisticaV2 = false;
-    if(typeof capa === 'string') {
+    if (typeof capa === 'string') {
         arrayPermisos.push(`internacion:rol:${capa}`);
     } else {
         // array de capas
         capa.map(c => {
-            if(!usaEstadisticaV2) {
+            if (!usaEstadisticaV2) {
                 usaEstadisticaV2 = c === 'estadistica-v2';
             }
             arrayPermisos.push(`internacion:rol:${c}`);
-    });
+        });
     }
     return cy.task(
         'database:create:usuario',
@@ -42,12 +42,12 @@ Cypress.Commands.add('loginCapa', (capa) => {
         return cy.login(user.usuario, user.password, user.organizaciones[0]._id).then((token) => {
             return cy.task('database:seed:paciente').then(pacientes => {
                 // Creo un paciente aparte para que cada capa use distintos pacientes
-                return  cy.task('database:create:paciente', {
+                return cy.task('database:create:paciente', {
                     template: 'validado',
-                    nombre: capa==='medica' ? 'Paciente Medica': 'Paciente Enfermeria',
-                    apellido: capa==='medica' ? 'Medica': 'Enfermeria',
-                    documento: capa==='medica' ? '12345678': '87654321',
-                }).then(patient=>{
+                    nombre: capa === 'medica' ? 'Paciente Medica' : 'Paciente Enfermeria',
+                    apellido: capa === 'medica' ? 'Medica' : 'Enfermeria',
+                    documento: capa === 'medica' ? '12345678' : '87654321',
+                }).then(patient => {
                     pacientes.push(patient);
                     return [user, token, pacientes];
                 });
@@ -59,9 +59,9 @@ Cypress.Commands.add('factoryInternacion', (params = {}) => {
     const maquinaEstados = { ...params.maquinaEstados } || {};
     let organizacion = params.organizacion ? params.organizacion._id : null;
     cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica-v2', organizacion });
-    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica', organizacion});
-    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'medica', organizacion});
-    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria', organizacion});
+    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'estadistica', organizacion });
+    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'medica', organizacion });
+    cy.task('database:create:maquinaEstados', { ...maquinaEstados, capa: 'enfermeria', organizacion });
     if (params.sala) {
         return crearSalas(params);
     } else {
@@ -128,6 +128,7 @@ export const permisosUsuario = [
     'internacion:sala:create',
     'internacion:sala:edit',
     'internacion:sala:delete',
+    'internacion:indicaciones:*',
     'rup:tipoPrestacion:5951051aa784f4e1a8e2afe1',
     'rup:tipoPrestacion:5a26e113291f463c1b982d98',
     'rup:tipoPrestacion:598ca8375adc68e2a0c121c3',
