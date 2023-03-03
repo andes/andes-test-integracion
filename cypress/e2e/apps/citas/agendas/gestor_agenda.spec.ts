@@ -317,7 +317,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.get('plex-layout-sidebar table tbody td div').contains('Disponible').click({ force: true });
         cy.get('plex-layout-sidebar').plexButtonIcon('stop').click({ force: true });
         cy.get('plex-layout-sidebar plex-help').plexButtonIcon('check').click({ force: true });
-        cy.toast('alert', 'El turno seleccionado fue suspendido');
+        cy.toast('success', 'El turno seleccionado fue suspendido');
         cy.wait('@patchAgenda2').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.estado).to.be.eq('publicada');
