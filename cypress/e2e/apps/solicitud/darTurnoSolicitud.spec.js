@@ -27,7 +27,7 @@ context('TOP: nuevo turno', () => {
 
     it('intentar dar turno autocitado y cancelar', () => {
 
-        cy.plexButtonIcon('chevron-down').click();
+        cy.plexButtonIcon('chevron-down').click({ force: true });
         cy.plexSelectType('label="Estado"', 'pendiente');
 
         cy.wait('@solicitudes').then((xhr) => {
@@ -69,7 +69,7 @@ context('TOP: nuevo turno', () => {
 
     it('dar turno autocitado exitoso', () => {
 
-        cy.plexButtonIcon('chevron-down').click();
+        cy.plexButtonIcon('chevron-down').click({ force: true });
         cy.plexSelectType('label="Estado"', 'pendiente');
 
         cy.wait('@solicitudes').then((xhr) => {

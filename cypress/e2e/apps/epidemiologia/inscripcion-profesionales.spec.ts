@@ -27,28 +27,28 @@ context('Creacion de usuarios para profesionales', () => {
             }
         });
         cy.route('POST', '**/api/core/tm/profesionales/validar').as('pacienteValidado');
-        cy.plexText('name="nombre"', 'MARIA');
-        cy.plexText('name="apellido"', 'PEREZ');
-        cy.plexText('name="documento"', '4466777');
-        cy.plexSelectType('label="Seleccione sexo"', 'femenino');
-        cy.plexDatetime('name="fechaNacimiento"', "01/01/1990");
+        cy.plexText('name="nombre"', 'TEST');
+        cy.plexText('name="apellido"', 'PRUEBA');
+        cy.plexText('name="documento"', '325877758');
+        cy.plexSelectType('label="Seleccione sexo"', 'masculino');
+        cy.plexDatetime('name="fechaNacimiento"', "01/05/2019");
         cy.plexButton("VALIDAR").click();
         cy.wait('@pacienteValidado').then((xhr) => {
-            expect(xhr.response.body.profesional.documento).to.be.eq('4466777');
-            expect(xhr.response.body.profesional.apellido).to.be.eq('PEREZ');
-            expect(xhr.response.body.profesional.sexo).to.be.eq('femenino');
+            expect(xhr.response.body.profesional.documento).to.be.eq('325877758');
+            expect(xhr.response.body.profesional.apellido).to.be.eq('PRUEBA');
+            expect(xhr.response.body.profesional.sexo).to.be.eq('masculino');
         });
         cy.plexText('name="email"', 'prueba@gmail.com');
 
         cy.plexButton(" Nuevo Usuario ").click();
         cy.wait('@createUser').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.documento).to.be.eq('4466777');
+            expect(xhr.response.body.documento).to.be.eq('325877758');
             expect(xhr.response.body.organizaciones[0].id).to.be.eq('59380153db8e90fe4602ec02');
         })
         cy.wait('@updateProfesional').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.documento).to.be.eq('4466777');
+            expect(xhr.response.body.documento).to.be.eq('325877758');
         })
     })
 })
