@@ -1211,6 +1211,7 @@
         "organizaciones": [
             {
                 "permisos": [
+<<<<<<< HEAD
                     "com:*",
                     "mpi:*"
                 ],
@@ -1253,6 +1254,8 @@
             },
             {
                 "permisos": [
+=======
+>>>>>>> a4b627d (test(CIT): se corrige test de la rama CIT-169)
                     "turnos:*",
                     "mpi:*",
                     "auditoriaPacientes:*",
