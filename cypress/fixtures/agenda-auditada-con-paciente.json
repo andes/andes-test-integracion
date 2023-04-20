@@ -43,6 +43,7 @@
                     },
                     "estado": "asignado",
                     "_id": "5d78f9e29b1c83323ab66c77",
+                    "auditable": true,
                     "diagnostico": {
                         "codificaciones": [
                             {
