@@ -48,13 +48,13 @@ describe('Mapa Camas - Detalle de Cama', () => {
 
     it('Verificar datos de cama', () => {
         cy.goto('/mapa-camas', token);
-        cy.wait('@getCamas').then(({response}) => {
+        cy.wait('@getCamas').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
 
         cy.get('table tr').eq(1).find('td').eq(1).contains('ANDES').click();
 
-        cy.wait('@getCama').then(({response}) => {
+        cy.wait('@getCama').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
         // VERIF. NOMBRE
@@ -137,26 +137,26 @@ describe('Mapa Camas - Detalle de Cama', () => {
         });
 
         // VERIF. FECHA NACIMIENTO
-        cy.get('plex-detail').eq(1).find('plex-grid').find('plex-label').eq(1).find('small').should(($span) => {
+        cy.get('plex-detail').eq(1).find('plex-grid').find('plex-label').eq(2).find('small').should(($span) => {
             expect($span.text()).to.equal(moment(paciente.fechaNacimiento).format('DD/MM/YYYY'));
         });
     });
 
     it('Deshacer internacion', () => {
         cy.goto('/mapa-camas', token);
-        cy.wait('@getCamas').then(({response}) => {
+        cy.wait('@getCamas').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        
+
         cy.getCama(cama.cama.nombre).click();
-        
+
         cy.deshacerInternacion();
 
-        cy.wait('@deshacer').then(({response}) => {
+        cy.wait('@deshacer').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.wait('@anularPrestacion').then(({response}) => {
+        cy.wait('@anularPrestacion').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         })
 

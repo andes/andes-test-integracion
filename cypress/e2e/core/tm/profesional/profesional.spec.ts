@@ -33,10 +33,8 @@ context('TM Profesional', () => {
     })
 
     beforeEach(() => {
-        cy.server();
-        cy.route('POST', '**/core/tm/profesionales**').as('create');
-        cy.route('POST', '**/core-v2/mpi/validacion').as('renaper');
-
+        cy.intercept('POST', '**/core/tm/profesionales**').as('create');
+        cy.intercept('POST', '**/core-v2/mpi/validacion').as('renaper');
     })
 
     it('crear profesional no matriculado, sin validar', () => {
@@ -64,8 +62,8 @@ context('TM Profesional', () => {
 
     it('crear profesional no matriculado existente en renaper', () => {
         cy.goto('/tm/profesional/create', token);
-        cy.fixture('renaper-1').as('fxRenaper')
-        cy.route('POST', '**/core-v2/mpi/validacion', '@fxRenaper').as('renaper');
+        const pacienteValidado = { fixture: 'renaper-1.json' };
+        cy.intercept('POST', '**/core-v2/mpi/validacion', pacienteValidado).as('renaper');
 
         cy.plexInt('label="Número de Documento"', '26487951');
         cy.plexSelectType('label="Sexo"', 'masculino');
@@ -104,8 +102,8 @@ context('TM Profesional', () => {
     it('se intenta validar nuevo profesional que no existente en renaper', () => {
         cy.goto('/tm/profesional/create', token);
 
-        cy.fixture('renaper-error').as('fxRenaperError')
-        cy.route('POST', '**/core-v2/mpi/validacion', '@fxRenaperError').as('renaperError');
+        const renaperError = { fixture: 'renaper-error.json' };
+        cy.intercept('POST', '**/core-v2/mpi/validacion', renaperError).as('renaperError');
 
         cy.plexInt('label="Número de Documento"', '15654898');
 
@@ -123,7 +121,7 @@ context('TM Profesional', () => {
     it('crear profesional duplicado', () => {
         cy.goto('/tm/profesional/create', token);
 
-        cy.route('GET', '**/api/core/tm/profesionales?documento=4163782').as('get');
+        cy.intercept('GET', '**/api/core/tm/profesionales?documento=4163782').as('get');
 
         cy.plexText('label="Nombre"', 'ALICIA BEATRIZ');
         cy.plexText('label="Apellido"', 'ESPOSITO');

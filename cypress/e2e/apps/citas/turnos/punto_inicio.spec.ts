@@ -96,7 +96,9 @@ context('punto de inicio', () => {
     })
 
     it('editar datos de contacto', () => {
-        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**', req => {
+            delete req.headers['if-none-match']
+        }).as('getPaciente');
         cy.intercept('GET', '**/api/modules/turnos/historial?**').as('getHistorial');
 
 
@@ -136,7 +138,9 @@ context('punto de inicio', () => {
     });
 
     it('dar asistencia y quitarla', () => {
-        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**', req => {
+            delete req.headers['if-none-match']
+        }).as('getPaciente');
         cy.intercept('GET', '**/api/core/tm/provincias?**').as('getNeuquen');
         cy.intercept('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
 
@@ -174,7 +178,9 @@ context('punto de inicio', () => {
     });
 
     it('Liberar turno', () => {
-        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**', req => {
+            delete req.headers['if-none-match']
+        }).as('getPaciente');
         cy.intercept('GET', '**/api/modules/turnos/agenda/**').as('getTurnosAgenda');
         cy.intercept('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
 
@@ -208,7 +214,9 @@ context('punto de inicio', () => {
     });
 
     it('Historial', () => {
-        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*').as('getPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*', req => {
+            delete req.headers['if-none-match']
+        }).as('getPaciente');
 
         cy.plexText('name="buscador"', paciente.documento);
 
@@ -238,7 +246,9 @@ context('punto de inicio', () => {
         cy.intercept('GET', '**api/modules/carpetas/carpetasPacientes?*', req => {
             delete req.headers['if-none-match'] // evita que responda con datos de caché (statusCode 304)
         }).as('getCarpetas');
-        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*').as('getPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*', req => {
+            delete req.headers['if-none-match']
+        }).as('getPaciente');
         cy.intercept('PATCH', '**/api/core-v2/mpi/pacientes/*').as('carpetaNueva');
         cy.intercept('POST', '**/api/modules/carpetas/incrementarCuenta').as('incrementaCarpeta');
 
@@ -259,7 +269,7 @@ context('punto de inicio', () => {
             expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.plexButton("registrar nueva carpeta").click();
+        cy.get('plex-layout-sidebar').contains("registrar nueva carpeta").click();
 
         cy.plexText('label="Nuevo número de Carpeta"', '123');
 
@@ -278,7 +288,9 @@ context('punto de inicio', () => {
     });
 
     it('Editar direccion del paciente', () => {
-        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*').as('getPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*', req => {
+            delete req.headers['if-none-match']
+        }).as('getPaciente');
         cy.intercept('PATCH', '**/api/core-v2/mpi/pacientes/**').as('guardar');
 
 
@@ -305,7 +317,9 @@ context('punto de inicio', () => {
 
 
         it('Verificar obra social de un paciente ' + type, () => {
-            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*').as('getPaciente');
+            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*', req => {
+                delete req.headers['if-none-match']
+            }).as('getPaciente');
 
             cy.plexText('name="buscador"', pacientes[i].documento);
 
