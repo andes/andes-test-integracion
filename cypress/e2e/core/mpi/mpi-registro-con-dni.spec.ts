@@ -401,7 +401,7 @@ context('MPI-Registro Paciente Con Dni', () => {
         });
         cy.contains('El paciente ya existe, verifique las sugerencias').get('button').contains('Aceptar').click();
         cy.get('plex-layout-sidebar plex-item plex-label').contains('Similitud: 98 %');
-        cy.plexButton('Seleccionar').click();
+        cy.get('plex-item[label="Seleccionar"]').click();
 
         cy.plexButton('Guardar').click();
         // se guarda paciente con datos del paciente seleccionado (pacienteTemp1)
