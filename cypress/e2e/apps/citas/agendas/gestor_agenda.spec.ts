@@ -114,8 +114,7 @@ describe('CITAS - Planificar Agendas', () => {
 
         cy.plexSelect('label="Tipos de prestación"').find('.remove-button').click();
         cy.plexSelect('label="Tipos de prestación"', '59ee2d9bf00c415246fd3d85').click();
-
-        cy.plexSelect('name="modelo.profesionales"').type('{backspace}');
+        cy.plexSelect('name="modelo.profesionales"');
         cy.plexSelectAsync('name="modelo.profesionales"', 'prueba alicia', '@getProfesional', 0);
 
         cy.plexButton('Guardar').click();

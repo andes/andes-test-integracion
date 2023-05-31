@@ -194,6 +194,394 @@
 	},
 	{
 		"_id": {
+			"$oid": "5d4991772f6e30513e913e3f"
+		},
+		"nombre": "35593546",
+		"apellido": "35593546",
+		"tipoDocumento": "DNIM",
+		"documento": "35593546",
+		"tokens": [
+			"mariano",
+			"andres",
+			"palavecino",
+			"35593546"
+		],
+		"fechaNacimiento": {
+			"$date": "1943-01-08T03:00:00.000Z"
+		},
+		"lugarNacimiento": "CAPITAL FEDERAL",
+		"nacionalidad": {
+			"codigo": "200",
+			"nombre": "Argentina"
+		},
+		"sexo": "Masculino",
+		"notas": "",
+		"formacionGrado": [
+			{
+				"profesion": {
+					"codigo": 1,
+					"nombre": "MEDICO",
+					"tipoDeFormacion": "Grado Universitario"
+				},
+				"entidadFormadora": {
+					"codigo": "1172",
+					"nombre": "UNIV. DE BS. AS."
+				},
+				"titulo": "MEDICO",
+				"fechaEgreso": {
+					"$date": "1967-01-09T03:00:00.000Z"
+				},
+				"matriculacion": [
+					{
+						"matriculaNumero": 299,
+						"libro": "III",
+						"folio": "195/196/197",
+						"inicio": 1970,
+						"fin": {
+							"$date": "2022-01-08T03:00:00.000Z"
+						},
+						"baja": {
+							"motivo": "",
+							"fecha": null
+						}
+					}
+				],
+				"matriculado": false,
+				"papelesVerificados": false,
+				"renovacion": false
+			}
+		],
+		"formacionPosgrado": [
+			{
+				"matriculado": false,
+				"revalida": false,
+				"papelesVerificados": false,
+				"matriculacion": [
+					{
+						"baja": {
+							"motivo": "",
+							"fecha": null
+						},
+						"matriculaNumero": 555,
+						"libro": "II",
+						"folio": "40/41",
+						"fin": {
+							"$date": "1922-01-01T03:00:00.000Z"
+						}
+					}
+				],
+				"profesion": {
+					"_id": {
+						"$oid": "5b9a49e907924d16f06426eb"
+					},
+					"codigo": 1,
+					"nombre": "MEDICO"
+				},
+				"especialidad": {
+					"_id": {
+						"$oid": "5b9a49e907924d16f06426ec"
+					},
+					"codigo": 58,
+					"tipo": 1,
+					"nombre": "MEDICINA DEL TRABAJO"
+				}
+			}
+		],
+		"sanciones": [
+			{
+				"numero": null,
+				"sancion": {
+					"id": null
+				},
+				"motivo": null,
+				"normaLegal": null,
+				"fecha": null,
+				"vencimiento": null
+			}
+		],
+		"domicilios": [
+			{
+				"activo": true,
+				"tipo": "legal",
+				"valor": "LOS ALERCES 610",
+				"codigoPostal": "8324",
+				"ubicacion": {
+					"pais": {
+						"_id": {
+							"$oid": "57f3b5c469fe79a598e6281f"
+						},
+						"nombre": "Argentina"
+					},
+					"provincia": {
+						"nombre": "Río Negro"
+					},
+					"localidad": {
+						"nombre": "CIPOLLETTI"
+					}
+				}
+			},
+			{
+				"activo": true,
+				"tipo": "profesional",
+				"valor": "J. J. LASTRA 5400",
+				"codigoPostal": "8300",
+				"ubicacion": {
+					"pais": {
+						"_id": {
+							"$oid": "57f3b5c469fe79a598e6281f"
+						},
+						"nombre": "Argentina"
+					},
+					"provincia": {
+						"nombre": "Neuquén"
+					},
+					"localidad": {
+						"nombre": "NEUQUEN"
+					}
+				}
+			},
+			{
+				"activo": true,
+				"tipo": "real",
+				"valor": "LOS ALERCES 610",
+				"codigoPostal": "8324",
+				"ubicacion": {
+					"pais": {
+						"_id": {
+							"$oid": "57f3b5c469fe79a598e6281f"
+						},
+						"nombre": "Argentina"
+					},
+					"provincia": {
+						"nombre": "Río Negro"
+					},
+					"localidad": {
+						"nombre": "CIPOLLETTI"
+					}
+				}
+			}
+		],
+		"contactos": [
+			{
+				"tipo": "celular",
+				"valor": "0299-154058003",
+				"activo": true
+			},
+			{
+				"tipo": "email",
+				"valor": "crisbuschi@yahoo.com.ar",
+				"activo": true
+			},
+			{
+				"tipo": "fijo",
+				"valor": "0299-4775460",
+				"activo": true
+			}
+		],
+		"OtrosDatos": [],
+		"firmas": [],
+		"habilitado": true,
+		"incluidoSuperintendencia": false,
+		"rematriculado": false,
+		"__v": 1,
+		"profesionalMatriculado": true
+	},
+	{
+		"_id": {
+			"$oid": "58f74fd4d03019f919ea1249"
+		},
+		"nombre": "ELSA SUSANA",
+		"apellido": "MORALES",
+		"tipoDocumento": "DNIM",
+		"documento": "22683885",
+		"tokens": [
+			"elsa",
+			"susana",
+			"morales",
+			"22683885"
+		],
+		"fechaNacimiento": {
+			"$date": "1943-01-08T03:00:00.000Z"
+		},
+		"lugarNacimiento": "CAPITAL FEDERAL",
+		"nacionalidad": {
+			"codigo": "200",
+			"nombre": "Argentina"
+		},
+		"sexo": "Masculino",
+		"notas": "",
+		"formacionGrado": [
+			{
+				"profesion": {
+					"codigo": 1,
+					"nombre": "MEDICO",
+					"tipoDeFormacion": "Grado Universitario"
+				},
+				"entidadFormadora": {
+					"codigo": "1172",
+					"nombre": "UNIV. DE BS. AS."
+				},
+				"titulo": "MEDICO",
+				"fechaEgreso": {
+					"$date": "1967-01-09T03:00:00.000Z"
+				},
+				"matriculacion": [
+					{
+						"matriculaNumero": 299,
+						"libro": "III",
+						"folio": "195/196/197",
+						"inicio": 1970,
+						"fin": {
+							"$date": "2022-01-08T03:00:00.000Z"
+						},
+						"baja": {
+							"motivo": "",
+							"fecha": null
+						}
+					}
+				],
+				"matriculado": false,
+				"papelesVerificados": false,
+				"renovacion": false
+			}
+		],
+		"formacionPosgrado": [
+			{
+				"matriculado": false,
+				"revalida": false,
+				"papelesVerificados": false,
+				"matriculacion": [
+					{
+						"baja": {
+							"motivo": "",
+							"fecha": null
+						},
+						"matriculaNumero": 555,
+						"libro": "II",
+						"folio": "40/41",
+						"fin": {
+							"$date": "1922-01-01T03:00:00.000Z"
+						}
+					}
+				],
+				"profesion": {
+					"_id": {
+						"$oid": "5b9a49e907924d16f06426eb"
+					},
+					"codigo": 1,
+					"nombre": "MEDICO"
+				},
+				"especialidad": {
+					"_id": {
+						"$oid": "5b9a49e907924d16f06426ec"
+					},
+					"codigo": 58,
+					"tipo": 1,
+					"nombre": "MEDICINA DEL TRABAJO"
+				}
+			}
+		],
+		"sanciones": [
+			{
+				"numero": null,
+				"sancion": {
+					"id": null
+				},
+				"motivo": null,
+				"normaLegal": null,
+				"fecha": null,
+				"vencimiento": null
+			}
+		],
+		"domicilios": [
+			{
+				"activo": true,
+				"tipo": "legal",
+				"valor": "LOS ALERCES 610",
+				"codigoPostal": "8324",
+				"ubicacion": {
+					"pais": {
+						"_id": {
+							"$oid": "57f3b5c469fe79a598e6281f"
+						},
+						"nombre": "Argentina"
+					},
+					"provincia": {
+						"nombre": "Río Negro"
+					},
+					"localidad": {
+						"nombre": "CIPOLLETTI"
+					}
+				}
+			},
+			{
+				"activo": true,
+				"tipo": "profesional",
+				"valor": "J. J. LASTRA 5400",
+				"codigoPostal": "8300",
+				"ubicacion": {
+					"pais": {
+						"_id": {
+							"$oid": "57f3b5c469fe79a598e6281f"
+						},
+						"nombre": "Argentina"
+					},
+					"provincia": {
+						"nombre": "Neuquén"
+					},
+					"localidad": {
+						"nombre": "NEUQUEN"
+					}
+				}
+			},
+			{
+				"activo": true,
+				"tipo": "real",
+				"valor": "LOS ALERCES 610",
+				"codigoPostal": "8324",
+				"ubicacion": {
+					"pais": {
+						"_id": {
+							"$oid": "57f3b5c469fe79a598e6281f"
+						},
+						"nombre": "Argentina"
+					},
+					"provincia": {
+						"nombre": "Río Negro"
+					},
+					"localidad": {
+						"nombre": "CIPOLLETTI"
+					}
+				}
+			}
+		],
+		"contactos": [
+			{
+				"tipo": "celular",
+				"valor": "0299-154058003",
+				"activo": true
+			},
+			{
+				"tipo": "email",
+				"valor": "crisbuschi@yahoo.com.ar",
+				"activo": true
+			},
+			{
+				"tipo": "fijo",
+				"valor": "0299-4775460",
+				"activo": true
+			}
+		],
+		"OtrosDatos": [],
+		"firmas": [],
+		"habilitado": true,
+		"incluidoSuperintendencia": false,
+		"rematriculado": false,
+		"__v": 1,
+		"profesionalMatriculado": true
+	},
+	{
+		"_id": {
 			"$oid": "5c82a5a53c524e4c57f08cf2"
 		},
 		"documento": "1711999",
@@ -259,7 +647,7 @@
 		],
 		"cuit": "27041637825",
 		"fechaNacimiento": {
-			"$date": "1941-01-11T03:00:00.000Z"
+			"$date": "1990-01-01T03:00:00.000Z"
 		},
 		"sexo": "Femenino",
 		"formacionGrado": [

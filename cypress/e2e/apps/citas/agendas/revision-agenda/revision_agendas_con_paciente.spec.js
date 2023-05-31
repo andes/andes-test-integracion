@@ -28,7 +28,7 @@ context('CITAS - Revisión de Agendas', () => {
         }).then(xhrPac => {
             paciente = xhrPac.body;
             pacienteDoc = xhrPac.body;
-            return cy.createAgenda('agenda-auditada-con-paciente', null, null, null, token);
+            return cy.createAgenda('agenda-auditada-con-paciente', 0, 0, 1, token);
         }).then((xhrAgenda) => {
             idAgenda = xhrAgenda.body.id;
             idBloque = xhrAgenda.body.bloques[0].id;
