@@ -1371,7 +1371,8 @@
 		"semanticTag": "procedimiento",
 		"ambito" : [ 
 			"ambulatorio"
-		]
+		],
+		"agendaDinamica": true
 	},
 	{
 		"_id": {

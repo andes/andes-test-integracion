@@ -352,8 +352,8 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexDateTimeDinamico('Inicio', "08:00");
         cy.plexDateTimeDinamico('Fin', "16:00");
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
-        cy.plexBool('label="Dinámica"', true);
-        cy.plexBool('name="espacioFisicoPropios"', false);
+        cy.get('plex-bool[name="dinamica"]').click();
+        cy.get('plex-bool[name="espacioFisicoPropios"]').click();
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
         cy.plexButton("Guardar").click();
         cy.toast('success');
@@ -379,7 +379,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexDateTimeDinamico('Inicio', "08:00");
         cy.plexDateTimeDinamico('Fin', "16:00");
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
-        cy.plexBool('name="espacioFisicoPropios"', false);
+        cy.get('plex-bool[name="espacioFisicoPropios"]').click();
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
         cy.get('plex-layout-sidebar').plexInt('label="Cantidad de Turnos"', '10');
         cy.get('plex-layout-sidebar').plexInt('name="accesoDirectoDelDia"', '5');
