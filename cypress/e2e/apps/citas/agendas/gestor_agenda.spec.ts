@@ -115,8 +115,8 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexSelect('label="Tipos de prestación"').find('.remove-button').click();
         cy.plexSelect('label="Tipos de prestación"', '59ee2d9bf00c415246fd3d85').click();
 
-        cy.plexSelect('label="Equipo de Salud"').find('.remove-button').click({ force: true });
-        cy.plexSelectAsync('label="Equipo de Salud"', 'prueba alicia', '@getProfesional', 0);
+        cy.plexSelect('name="modelo.profesionales"').type('{backspace}');
+        cy.plexSelectAsync('name="modelo.profesionales"', 'prueba alicia', '@getProfesional', 0);
 
         cy.plexButton('Guardar').click();
         cy.wait('@putAgenda2').then(({ response }) => {
@@ -379,9 +379,11 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexDateTimeDinamico('Inicio', "08:00");
         cy.plexDateTimeDinamico('Fin', "16:00");
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
-        cy.plexBool('label="Dinámica"', true);
         cy.plexBool('name="espacioFisicoPropios"', false);
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
+        cy.get('plex-layout-sidebar').plexInt('label="Cantidad de Turnos"', '10');
+        cy.get('plex-layout-sidebar').plexInt('name="accesoDirectoDelDia"', '5');
+        cy.get('plex-layout-sidebar').plexInt('name="accesoDirectoProgramado"', '5');
         cy.plexButton("Guardar").click();
         cy.wait('@postAgenda').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
@@ -397,7 +399,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.otroEspacioFisico.nombre).to.be.eq('ESCUELA PRIMARIA 300');
             expect(response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
         });
-        cy.plexButtonIcon("content-copy").first().click();
+        cy.plexButtonIcon("content-copy").first().click({ force: true });
         cy.wait('@getAgendas').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
@@ -416,6 +418,34 @@ describe('CITAS - Planificar Agendas', () => {
         cy.contains('La Agenda se clonó correctamente');
         cy.swal('confirm');
     })
+
+    it('intentar clonar agenda dinamica con una institucion asignada', () => {
+        cy.plexButton("Crear agenda").click();
+        cy.plexDateTimeDinamico('Fecha', cy.today());
+        cy.plexDateTimeDinamico('Inicio', "08:00");
+        cy.plexDateTimeDinamico('Fin', "16:00");
+        cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
+        cy.plexBool('label="Dinámica"', true);
+        cy.plexBool('name="espacioFisicoPropios"', false);
+        cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
+        cy.plexButton("Guardar").click();
+        cy.wait('@postAgenda').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.otroEspacioFisico.nombre).to.be.eq('ESCUELA PRIMARIA 300');
+            expect(response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
+        });
+        cy.toast('success', 'La agenda se guardó correctamente');
+        cy.plexButtonIcon('chevron-down').click();
+        cy.plexSelectAsync('label="Espacio Físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
+        cy.get('table tbody td').plexLabel('consulta de medicina general').first().click();
+        cy.wait('@findAgenda').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.otroEspacioFisico.nombre).to.be.eq('ESCUELA PRIMARIA 300');
+            expect(response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
+        });
+        cy.get("button").contains('Clonar agenda').should('not.exist')
+
+    });
 
     it('verificar actualizacion de estado de agenda suspendida', () => {
         cy.wait('@getAgendas').then(({ response }) => {

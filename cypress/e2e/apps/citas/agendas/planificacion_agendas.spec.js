@@ -106,7 +106,8 @@ context('Planificacion Agendas', () => {
         });
 
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
-        cy.plexSelectAsync('label="Equipo de Salud"', 'JAZMIN', '@profesionales', 0);
+        cy.plexSelect('name="modelo.profesionales"').type('{backspace}');
+        cy.plexSelectAsync('name="modelo.profesionales"', 'JAZMIN', '@profesionales', 0);
 
         cy.wait('@agendas').then((xhr) => {
             expect(xhr.status).to.be.eq(200)
