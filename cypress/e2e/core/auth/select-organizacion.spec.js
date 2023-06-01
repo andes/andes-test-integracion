@@ -9,10 +9,11 @@ context('select organizacion', () => {
     })
 
     beforeEach(() => {
-        cy.server();
-        cy.route('POST', '/api/auth/v2/organizaciones').as('selectOrg');
-        cy.route('GET', '**/api/auth/organizaciones').as('getOrganizaciones');
-        cy.route('GET', '**/api/core/tm/disclaimer?**').as('disclaimer');
+        cy.intercept('POST', '/api/auth/v2/organizaciones').as('selectOrg');
+        cy.intercept('GET', '**/api/auth/organizaciones**', req => {
+            delete req.headers['if-none-match'] // evita que responda con datos de caché (statusCode 304)
+        }).as('getOrganizaciones');
+        cy.intercept('GET', '**/api/core/tm/disclaimer?**').as('disclaimer');
         cy.goto('/', token);
     })
 
@@ -23,14 +24,14 @@ context('select organizacion', () => {
 
         cy.get('ul.list-group li').eq(1).click();
 
-        cy.wait('@selectOrg').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
+        cy.wait('@selectOrg').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(typeof response.body.token === 'string').to.be.eq(true);
         });
 
-        cy.wait('@getOrganizaciones').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body).to.have.length(3);
+        cy.wait('@getOrganizaciones').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body).to.have.length(3);
         });
         cy.get('.userinfo > div span:nth-child(3)').contains('HOSPITAL DE AREA PLOTTIER');
     })
