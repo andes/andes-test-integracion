@@ -410,7 +410,7 @@ describe('CITAS - Planificar Agendas', () => {
             });
         }
         cy.get('table tr td').contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
-        cy.plexButton("Clonar Agenda").click();
+        cy.plexButtonIcon("check").click();
         cy.swal('confirm');
         cy.wait('@clonar').then(({ response }) => {
             expect(response.statusCode).to.eq(200)
