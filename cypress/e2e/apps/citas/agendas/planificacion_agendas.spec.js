@@ -169,7 +169,7 @@ context('Planificacion Agendas', () => {
             });
         }
         cy.get('table tr td').contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
-        cy.plexButton("Clonar Agenda").click();
+        cy.plexButtonIcon("check").click();
         cy.swal('confirm');
         cy.wait('@clonar');
         cy.contains('La Agenda se clonó correctamente');
@@ -614,7 +614,7 @@ context('Planificacion Agendas', () => {
         }
 
         cy.get('table').contains(hoy.format('D')).click({ force: true });
-        cy.plexButton("Clonar Agenda").click();
+        cy.plexButtonIcon("check").click();
         cy.swal('confirm');
         cy.wait('@clonar');
         cy.contains('La Agenda se clonó correctamente');
