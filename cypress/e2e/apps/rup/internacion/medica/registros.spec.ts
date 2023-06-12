@@ -1,16 +1,16 @@
+let i = 0;
 ['medica', 'enfermeria'].forEach((capa) => {
-
+    let arreProfesionales = [4163782, 15789463];
     describe(`Capa ${capa} - registros`, () => {
         let token;
         let pacientes;
         let paciente;
         before(() => {
             cy.seed();
-            cy.loginCapa(capa).then(([user, t, pacientesCreados]) => {
+            cy.loginCapa(capa, arreProfesionales[i]).then(([user, t, pacientesCreados]) => {
                 token = t;
                 pacientes = pacientesCreados;
                 paciente = pacientes[0];
-
                 // CREA UN MUNDO IDEAL DE INTERNACION
                 cy.factoryInternacion({
                     configCamas:
@@ -20,7 +20,6 @@
                             fechaIngreso: Cypress.moment().add(-5, 'day')
                         }]
                 }).then((camitas) => {
-                    cy.log(camitas);
                     cy.taskN('database:seed:prestacion', [{
                         paciente: paciente._id,
                         estado: 'validada',
@@ -42,6 +41,7 @@
                     return cy.goto('/mapa-camas', token);
                 });
             });
+            i++;
         });
 
         beforeEach(() => {
@@ -73,9 +73,8 @@
             cy.getRegistrosMedicos().plexButtonIcon('eye').click();
             cy.plexLayoutMain().contains('consulta con médico general');
             cy.plexLayoutMain().find('plex-title').plexButtonIcon('close').click();
-            
             let fecha = Cypress.moment().format('DD/MM/yyyy HH:mm');
-            cy.plexLayoutMain().contains("Mapa de camas - "+fecha);
+            cy.plexLayoutMain().contains("Mapa de camas - " + fecha);
         });
     });
 });
