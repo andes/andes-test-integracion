@@ -50,31 +50,32 @@ describe('Capa Estadistica - Ingresos', () => {
     });
 
     it('Ingreso completo cambiando paciente', () => {
-        cy.get('*[class="adi adi-plus ii-light sm"]').click({force:true});
+        cy.get('*[class="adi adi-plus ii-light sm"]').click({ force: true });
 
         cy.plexText('name="buscador"', pacientes[0].nombre);
-        cy.wait('@busquedaPaciente').then(({response}) => {
+        cy.wait('@busquedaPaciente').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.length).to.be.gte(1);
         });
 
-        cy.get('paciente-listado plex-item').contains(pacientes[0].nombre).click();
+        cy.get('plex-layout-sidebar paciente-listado plex-item').contains(pacientes[0].nombre).click();
         cy.swal('confirm', 'Paciente ya internado');
 
         cy.plexText('name="buscador"').clear();
         cy.plexText('name="buscador"', pacientes[1].nombre);
-        cy.wait('@busquedaPaciente').then(({response}) => {
+        cy.wait('@busquedaPaciente').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.length).to.be.gte(1);
         });
 
-        cy.get('paciente-listado plex-item').contains(pacientes[1].nombre).click();
-        cy.wait('@getPaciente').then(({response}) => {
+        cy.wait(1000)
+        cy.get('plex-layout-sidebar paciente-listado plex-item').contains(pacientes[1].nombre).click();
+        cy.wait('@getPaciente').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de ingreso"', { clear: true, skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexText('name="motivo"', 'Estornudo');
@@ -87,7 +88,7 @@ describe('Capa Estadistica - Ingresos', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchCamaEstados').then(({response}) => {
+        cy.wait('@patchCamaEstados').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
 
@@ -116,7 +117,7 @@ describe('Capa Estadistica - Ingresos', () => {
 
         cy.plexButtonIcon('check').click();
 
-        cy.wait('@patchPrestaciones').then(({response}) => {
+        cy.wait('@patchPrestaciones').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
 

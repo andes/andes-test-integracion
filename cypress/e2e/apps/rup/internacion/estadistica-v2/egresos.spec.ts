@@ -71,7 +71,7 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
     });
 
     it('Egreso de paciente desde listadado de internación', () => {
-        const fechaEgreso = Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm');
+        const fechaEgreso = Cypress.moment().format('DD/MM/YYYY HH:mm');
 
         cy.goto('/mapa-camas/listado-internacion-unificado/estadistica-v2', token);
         cy.url().should('include', 'listado-internacion-unificado');
@@ -80,8 +80,6 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.wait('@getPaciente');
         cy.wait('@getResumen');
 
-        cy.get('button').contains('EGRESO').click();
-        cy.get('button').contains('MOVIMIENTOS').click();
         cy.get('button').contains('EGRESO').click();
         cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
         cy.plexDatetime('label="Fecha y hora de egreso"', { text: fechaEgreso, skipEnter: true });

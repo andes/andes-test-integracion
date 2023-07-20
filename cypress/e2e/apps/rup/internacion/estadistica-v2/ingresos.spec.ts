@@ -74,12 +74,11 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
             expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTab('INTERNACION').click()
+        cy.wait(1000)
         cy.get('plex-layout-sidebar plex-button[icon="pencil"]').first().click({ force: true });
-        cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha Ingreso"', { text: Cypress.moment().add(-3, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de ingreso"', { clear: true, skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de ingreso"', { text: Cypress.moment().add(-3, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
-        cy.plexSelect('name="profesional"').clearSelect();
-        cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexText('name="motivo"').clear();
         cy.plexText('name="motivo"', 'Estornudo');
         cy.plexSelectType('label="Cobertura"', 'Ninguno');
@@ -101,7 +100,7 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
 
     it('Editar fecha de ingreso en capa asistencial y verificar sincronización en estadistica-v2', () => {
         const nuevaFecha = Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm');
-        // modificar fecha ingreso
+        // modificar fecha Ingreso
         cy.plexButton('Médico').click();
         cy.wait('@getCamas');
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
@@ -115,10 +114,11 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
             expect(response.statusCode).to.be.eq(200);
         });
         cy.plexTab('INTERNACION').click();
+        cy.wait(1000)
         cy.get('plex-title[titulo="INGRESO"] div').eq(2);
         cy.get('plex-layout-sidebar plex-button[icon="pencil"]').first().click({ force: true });
-        cy.plexDatetime('label="Fecha Ingreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha Ingreso"', { text: nuevaFecha, skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de ingreso"', { clear: true, skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de ingreso"', { text: nuevaFecha, skipEnter: true });
         cy.plexButtonIcon('check').click();
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
 

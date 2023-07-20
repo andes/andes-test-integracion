@@ -59,7 +59,9 @@ context('RUP - Punto de inicio', () => {
             cy.intercept({ method: 'GET', url: '**/api/modules/turnos/agenda**' }).as('agendas');
             cy.intercept({ method: 'POST', url: '**/api/modules/rup/prestaciones**' }).as('crearPrestacion');
             cy.intercept({ method: 'PATCH', url: '**/api/modules/rup/prestaciones/**' }).as('patchPrestacion');
-            cy.intercept({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
+            cy.intercept({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }, req => {
+                delete req.headers['if-none-match'] // evita que responda con datos de caché (statusCode 304)
+            }).as('prestaciones');
             cy.intercept({ method: 'GET', url: '**/api/modules/turnero/pantalla**' }).as('turnero');
             cy.intercept({ method: 'GET', url: '**/api/modules/rup/elementosRUP**' },).as('elementosRUP');
             cy.intercept({ method: 'GET', url: '**/api/auth/organizaciones**' }).as('organizaciones');
@@ -194,6 +196,7 @@ context('RUP - Punto de inicio', () => {
 
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(1).click({ force: true });
+                    cy.wait(1000)
                     cy.plexButton('CONTINUAR REGISTRO').click();
 
 

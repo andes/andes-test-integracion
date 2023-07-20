@@ -36,7 +36,7 @@ Cypress.Commands.add('deshacerInternacion', (completa = false) => {
     const opcionDeshacer = completa ? 'Toda la internación' : 'Último movimiento';
     cy.get('plex-layout-sidebar plex-title').eq(1).plexDropdown('tooltip="Deshacer Internacion"').click();
     cy.contains(opcionDeshacer).click();
-    cy.swal('confirm', '¿Quiere deshacer esta internación?');
+    cy.swal('confirm', 'Esta acción deshace un movimiento, es decir, ya no figurará en el listado. ¡Esta acción no se puede revertir!');
 })
 Cypress.Commands.add('loginCapa', (capa, documento) => {
     return cy.createUsuarioByCapa(capa, documento).then((user) => {
