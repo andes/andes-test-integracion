@@ -73,6 +73,8 @@ context('CITAS - Revisión de Agendas', () => {
     it('Se reestablece diagnóstico', () => {
 
         cy.goto(`/citas/auditoria_agendas`, token);
+        cy.intercept('PUT', '**/api/modules/turnos/turno/*/bloque/*/agenda/**').as('putTurno');
+        cy.intercept('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
 
         seleccionarAgenda();
         cy.seleccionarTurno('Auditado', '.turnos');
@@ -87,15 +89,12 @@ context('CITAS - Revisión de Agendas', () => {
         cy.plexButtonIcon('-herramienta').click();
         cy.plexText('name="searchTerm"', 'fiebre inducida por drogas');
 
-        // cy.wait('@diagnosticos').then(({ response }) => {
-        //     expect(response.statusCode).to.be.eq(200);
-        //     console.log('response.body', response.body[0].codigo);
-        //     expect(response.body[0].codigo).to.be.eq('R50.2');
-        // });
+        cy.wait('@diagnosticos').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].codigo).to.be.eq('R50.2');
+        });
 
-        cy.wait('@diagnosticos')
         cy.get('tr td').contains('Fiebre inducida por drogas').click();
-
         cy.wait('@putTurno').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
             expect(response.body.id).to.be.eq(idAgenda);
@@ -103,18 +102,22 @@ context('CITAS - Revisión de Agendas', () => {
             expect(idTurnoPut).to.be.eq(idTurno);
         });
 
-        // cy.wait('@agendaPatch').then(({ response }) => {
-        //     expect(response.statusCode).to.be.eq(200);
-        //     expect(response.body.id).to.be.eq(idAgenda);
-        //     const diagCIE10 = response.body.bloques.find(
-        //         x => x.id === idBloque).turnos.find(
-        //             y => y.id === idTurno).diagnostico.codificaciones[0];
+        // patch Asistencia.
+        cy.wait('@patchAgenda').then(({ response }) => {
+            cy.log(response.body)
+        })
 
-        //     if (diagCIE10 && diagCIE10.codificacionAuditoria) {
-        //         console.log('id', response.body.id, 'diagCIE10.codificacionAuditoria.codigo', diagCIE10.codificacionAuditoria.codigo);
-        //         expect(diagCIE10.codificacionAuditoria.codigo).to.be.eq('R50.2');
-        //     }
-        // });
+        // patch Codificación.
+        cy.wait('@patchAgenda').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.id).to.be.eq(idAgenda);
+            const diagCIE10 = response.body.bloques.find(
+                x => x.id === idBloque).turnos.find(
+                    y => y.id === idTurno).diagnostico.codificaciones[0];
+            if (diagCIE10 && diagCIE10.codificacionAuditoria) {
+                expect(diagCIE10.codificacionAuditoria.codigo).to.be.eq('R50.2');
+            }
+        });
     });
 
     it('Se agrega sobreturno', () => {

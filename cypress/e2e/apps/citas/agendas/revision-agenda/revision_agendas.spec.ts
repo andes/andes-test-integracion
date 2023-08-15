@@ -19,7 +19,7 @@ context('CITAS - Revisión de Agendas', () => {
             return cy.createPaciente('paciente-masculino', token);
         }).then(xhr => {
             paciente = xhr.body;
-            pacienteDoc = xhr.body.documento;
+            pacienteDoc = paciente.documento;
             return cy.createAgenda('agenda-auditada', 0, 0, 0, token);
         }).then((xhr) => {
             idAgenda = xhr.body.id;
