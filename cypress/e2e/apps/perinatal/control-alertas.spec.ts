@@ -76,25 +76,22 @@ context('Perinatal Listado', () => {
     });
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
-        cy.route('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
-        cy.route('GET', '**/api/modules/perinatal/carnet-perinatal**').as('listadoPerinatal');
-        cy.route('PATCH', '**/api/modules/perinatal/carnet-perinatal/**').as('patchPaciente');
+        cy.intercept('GET', '**/api/modules/perinatal/carnet-perinatal**',
+            req => { delete req.headers['if-none-match'] }).as('listadoPerinatal');
+        cy.intercept('PATCH', '**/api/modules/perinatal/carnet-perinatal/**').as('patchPaciente');
         cy.goto('/perinatal', token);
         cy.wait('@listadoPerinatal').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
     })
 
     it('Paciente con control de embarazo vencido y dentro de alertas', () => {
         cy.plexButtonIcon('bell').click();
-        cy.get('plex-help').contains('ANDES, PACIENTE VALIDADO');
-        cy.get('plex-help').contains('10000000');
-        cy.get('plex-help').contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-        cy.get('plex-help').contains('07/07/2021');
-        cy.get('plex-help').contains('AUSENTE');
+        cy.plexHelp('ANDES, PACIENTE VALIDADO');
+        cy.plexHelp('10000000');
+        cy.plexHelp('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+        cy.plexHelp('07/07/2021');
+        cy.plexHelp('AUSENTE');
         cy.plexButtonIcon('close').click();
     });
 
