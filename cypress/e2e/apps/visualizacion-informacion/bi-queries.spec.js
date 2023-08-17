@@ -27,12 +27,12 @@ context('Visualizacion de Información - BI-Queries', function () {
                     "required": true
                 },
                 {
-                    "key": "organizacion",
+                    "key": "organizacionOrigen",
                     "label": "Organización",
                     "tipo": "organizacion",
                     "required": false,
                     "subquery": {
-                        "solicitud.organizacion.id": "#organizacion"
+                        "solicitud.organizacion.id": "#organizacionOrigen"
                     }
                 },
                 {
