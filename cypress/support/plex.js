@@ -411,6 +411,10 @@ Cypress.Commands.add('toast', (option, label) => {
 
 })
 
+Cypress.Commands.add('plexHelp', (label) => {
+    return cy.get(`plex-help`).contains(label);
+})
+
 Cypress.Commands.add('plexAccordion', { prevSubject: 'optional' }, (subject, index) => {
     let element;
     if (subject) {

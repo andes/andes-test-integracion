@@ -242,7 +242,7 @@ declare namespace Cypress {
 
         plexRadio(label: string, index: number);
         plexRadioMultiple(label: string, index: number);
-
+        plexHelp(label: string);
 
         toast(type: 'success' | 'danger' | 'warning' | 'alert' | 'error', texto?: string);
 
