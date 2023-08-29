@@ -36,7 +36,9 @@ Cypress.Commands.add('deshacerInternacion', (completa = false) => {
     const opcionDeshacer = completa ? 'Toda la internación' : 'Último movimiento';
     cy.get('plex-layout-sidebar plex-title').eq(1).plexDropdown('tooltip="Deshacer Internacion"').click();
     cy.contains(opcionDeshacer).click();
-    cy.swal('confirm', 'Esta acción deshace un movimiento, es decir, ya no figurará en el listado. ¡Esta acción no se puede revertir!');
+    cy.swal('confirm', completa ?
+        'Si el paciente tiene prestaciones se deberá romper validación de las mismas antes de intentar realizar esta acción. ¿Está seguro que desea anular la internación?'
+        : 'Esta acción deshace el último movimiento.¡Esta acción no se puede revertir!');
 })
 Cypress.Commands.add('loginCapa', (capa, documento) => {
     return cy.createUsuarioByCapa(capa, documento).then((user) => {
