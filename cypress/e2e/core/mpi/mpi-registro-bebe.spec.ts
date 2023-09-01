@@ -211,10 +211,8 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexTab('Notas').click();
         cy.plexButton('Agregar nota').click();
         cy.plexText('name="titulo"', 'Nueva nota');
-        cy.get('plex-text[name="nota"] input').first().type('Esta es una nueva nota', { force: true });
-        cy.plexButtonIcon('plus').click();
-        cy.get('plex-item').contains('Nueva nota');
-        cy.get('plex-item').contains('Esta es una nueva nota');
+        cy.get('plex-text[name="nota"] textarea').type('Esta es una nueva nota', { force: true });
+        cy.plexButtonIcon('check').click({ force: true });
         cy.plexButton('Guardar').click();
         cy.wait('@registroBebe').then(({ response }) => {
             expect(response.statusCode).to.eq(200);

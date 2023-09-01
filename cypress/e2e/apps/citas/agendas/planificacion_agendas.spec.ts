@@ -85,17 +85,32 @@ context('Planificacion Agendas', () => {
     })
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/citas/gestor_agendas', token);
         cy.plexButton("Crear agenda").click();
-        cy.route('POST', '**/api/modules/turnos/agenda**').as('create');
-        cy.route('GET', '**/api/modules/turnos/espacioFisico**').as('espacios');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('profesionales');
-        cy.route('GET', '**/api/modules/rup/prestaciones**').as('prestacionesRup');
-        cy.route('GET', '**/api/modules/turnos/agenda**').as('agendas');
-        cy.route('GET', '**/api/modules/turnero/pantalla**').as('pantallas');
-        cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('edicionAgenda');
-        cy.route('POST', '**/api/modules/turnos/agenda/clonar/**').as('clonar');
+        cy.intercept('POST', '**/api/modules/turnos/agenda**', req => {
+            delete req.headers['if-none-match']
+        }).as('create');
+        cy.intercept('GET', '**/api/modules/turnos/espacioFisico**', req => {
+            delete req.headers['if-none-match']
+        }).as('espacios');
+        cy.intercept('GET', '**/api/core/tm/profesionales**', req => {
+            delete req.headers['if-none-match']
+        }).as('profesionales');
+        cy.intercept('GET', '**/api/modules/rup/prestaciones**', req => {
+            delete req.headers['if-none-match']
+        }).as('prestacionesRup');
+        cy.intercept('GET', '**/api/modules/turnos/agenda**', req => {
+            delete req.headers['if-none-match']
+        }).as('agendas');
+        cy.intercept('GET', '**/api/modules/turnero/pantalla**', req => {
+            delete req.headers['if-none-match']
+        }).as('pantallas');
+        cy.intercept('PATCH', '**/api/modules/turnos/agenda/**', req => {
+            delete req.headers['if-none-match']
+        }).as('edicionAgenda');
+        cy.intercept('POST', '**/api/modules/turnos/agenda/clonar/**', req => {
+            delete req.headers['if-none-match']
+        }).as('clonar');
     });
 
     it('Guardar agenda del día con un solo bloque', () => {
@@ -109,14 +124,14 @@ context('Planificacion Agendas', () => {
         cy.plexSelect('name="modelo.profesionales"').type('{backspace}');
         cy.plexSelectAsync('name="modelo.profesionales"', 'JAZMIN', '@profesionales', 0);
 
-        cy.wait('@agendas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@agendas').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.plexSelectAsync('name="espacioFisico"', 'consultorio 1', '@espacios', 0);
 
-        cy.wait('@agendas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@agendas').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         complete({
@@ -127,8 +142,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.toast('success', 'La agenda se guardó correctamente');
@@ -149,23 +164,23 @@ context('Planificacion Agendas', () => {
         });
         cy.plexButton("Guardar y clonar").click();
         let fecha;
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.estado).to.be.eq('planificacion');
-            expect(xhr.response.body.bloques[0].accesoDirectoDelDia).to.be.eq(7);
-            expect(xhr.response.body.bloques[0].restantesDelDia).to.be.eq(7);
-            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b8');
-            expect(xhr.response.body.bloques[0].tipoPrestaciones[0].term).to.be.eq('consulta de medicina general');
-            fecha = xhr.response.body.horaInicio;
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.estado).to.be.eq('planificacion');
+            expect(response.body.bloques[0].accesoDirectoDelDia).to.be.eq(7);
+            expect(response.body.bloques[0].restantesDelDia).to.be.eq(7);
+            expect(response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b8');
+            expect(response.body.bloques[0].tipoPrestaciones[0].term).to.be.eq('consulta de medicina general');
+            fecha = response.body.horaInicio;
         });
         cy.toast('success', 'La agenda se guardó correctamente');
-        cy.wait('@agendas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@agendas').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
         if (cy.esFinDeMes()) {
             cy.plexButtonIcon('chevron-right').click();
-            cy.wait('@agendas').then((xhr) => {
-                expect(xhr.status).to.be.eq(200)
+            cy.wait('@agendas').then(({ response }) => {
+                expect(response.statusCode).to.be.eq(200)
             });
         }
         cy.get('table tr td').contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
@@ -215,8 +230,8 @@ context('Planificacion Agendas', () => {
         cy.plexButton("Guardar").click();
 
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.contains('La agenda se guardó correctamente');
@@ -236,8 +251,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.contains('La agenda se guardó correctamente');
@@ -261,8 +276,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.contains('La agenda se guardó correctamente');
@@ -274,7 +289,9 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00"
         });
-        cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgendas');
+        cy.intercept('GET', '**/api/modules/turnos/agenda**', req => {
+            delete req.headers['if-none-match']
+        }).as('getAgendas');
 
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
 
@@ -285,8 +302,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Cancelar").click();
 
-        cy.wait('@getAgendas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@getAgendas').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
     });
 
@@ -305,8 +322,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.contains('La agenda se guardó correctamente');
@@ -334,8 +351,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.contains('La agenda se guardó correctamente');
@@ -362,8 +379,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.contains('La agenda se guardó correctamente');
@@ -390,8 +407,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.contains('La agenda se guardó correctamente');
@@ -412,8 +429,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.contains('La agenda se guardó correctamente');
@@ -434,8 +451,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.contains('La agenda se guardó correctamente');
@@ -478,8 +495,8 @@ context('Planificacion Agendas', () => {
 
         cy.plexButton("Guardar").click();
 
-        cy.wait('@create').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+        cy.wait('@create').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
         });
 
         cy.contains('La agenda se guardó correctamente');
@@ -568,7 +585,9 @@ context('Planificacion Agendas', () => {
     });
 
     it('Crear agenda dinamica en una institucion', () => {
-        cy.route('GET', '**/api/modules/turnos/institucion**').as('institucion');
+        cy.intercept('GET', '**/api/modules/turnos/institucion**', req => {
+            delete req.headers['if-none-match']
+        }).as('institucion');
         complete({
             fecha: cy.today(),
             horaInicio: "08:00",
@@ -616,7 +635,9 @@ context('Planificacion Agendas', () => {
         cy.get('table').contains(hoy.format('D')).click({ force: true });
         cy.plexButtonIcon("check").click();
         cy.swal('confirm');
-        cy.wait('@clonar');
+        cy.wait('@clonar').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200)
+        });
         cy.contains('La Agenda se clonó correctamente');
         cy.swal('confirm');
         cy.wait('@agendas');
