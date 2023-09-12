@@ -65,7 +65,6 @@ context('Ficha Epidemiológica', () => {
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
-        cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
         cy.plexSelectTypeDinamico('segunda clasificación', 'LAMP{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
@@ -89,7 +88,6 @@ context('Ficha Epidemiológica', () => {
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}299');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
-        cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
         cy.plexSelectTypeDinamico('segunda clasificación', 'LAMP{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
@@ -164,7 +162,6 @@ context('Ficha Epidemiológica', () => {
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
-        cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
         cy.plexSelectTypeDinamico('segunda clasificación', 'antigeno{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
@@ -195,7 +192,6 @@ context('Ficha Epidemiológica', () => {
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
-        cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
         cy.plexSelectTypeDinamico('segunda clasificación', 'LAMP{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
@@ -237,7 +233,6 @@ context('Ficha Epidemiológica', () => {
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}22');
         cy.plexSelectTypeDinamico('Clasificacion', 'Caso sospechoso{enter}');
-        cy.plexSelectTypeDinamico('tipo de busqueda', 'Activa{enter}');
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', cy.today());
         cy.plexSelectTypeDinamico('segunda clasificación', 'LAMP{enter}');
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
