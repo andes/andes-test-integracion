@@ -160,7 +160,7 @@ context('CITAS - punto de inicio', () => {
             const paciente = pacientes[i];
             darTurno(paciente);
 
-            cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
+            cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@conceptoTurneables', 0);
             cy.wait('@cargaAgendas');
             cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
             cy.wait('@seleccionAgenda')
@@ -211,7 +211,8 @@ context('CITAS - punto de inicio', () => {
             expect(xhr.response.statusCode).to.be.eq(200);
             const fechaHora = Cypress.moment(xhr.response.body[0].bloques[0].turnos[0].fechaHoraDacion).format('DD/MM/YYYY');
             expect(fechaHora).to.be.eq(hoy);
-            expect(xhr.response.body[0].bloques[0].turnos[0].usuarioDacion.nombreCompleto).to.be.eq('Natalia Huenchuman');
+            const index = xhr.response.body[0].bloques[0].turnos.length - 1;
+            expect(xhr.response.body[0].bloques[0].turnos[index].usuarioDacion.nombreCompleto).to.be.eq('Natalia Huenchuman');
         });
     });
 
