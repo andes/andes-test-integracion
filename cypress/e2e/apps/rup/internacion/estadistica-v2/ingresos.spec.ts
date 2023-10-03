@@ -101,7 +101,7 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
     it('Editar fecha de ingreso en capa asistencial y verificar sincronización en estadistica-v2', () => {
         const nuevaFecha = Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm');
         // modificar fecha Ingreso
-        cy.plexButton('Médico').click();
+        cy.plexButton('Profesional a cargo').click();
         cy.wait('@getCamas');
         cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click();
         cy.wait('@getPaciente').then(({ response }) => {
