@@ -106,6 +106,6 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
             const fechaEgresoPrestacion = Cypress.moment(response.body.ejecucion.registros[1].valor.InformeEgreso.fechaEgreso).format('DD/MM/YYYY HH:mm');
             expect(fechaEgresoPrestacion).to.be.eq(fechaEgreso);
         });
-        cy.toast('success', 'Egreso guardado correctamente')
+        cy.swal('confirm', 'Los datos se actualizaron correctamente');
     })
 })
