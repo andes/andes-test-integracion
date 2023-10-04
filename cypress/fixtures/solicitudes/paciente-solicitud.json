@@ -7,6 +7,7 @@
     "apellido": "SOLICITUD",
     "nombreCompleto": "",
     "alias": "",
+    "numeroIdentificacion":"",
     "contacto": [{
         "tipo": "celular",
         "valor": "",
