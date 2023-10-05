@@ -25,9 +25,12 @@ const snomedBuscador = [
 
 context('Conceptos Turneables', () => {
     let token
+
     before(() => {
+        cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
+
         });
     });
 

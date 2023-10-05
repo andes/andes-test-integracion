@@ -119,7 +119,6 @@ context('Planificacion Agendas', () => {
             horaInicio: "10:00",
             horaFin: "12:00",
         });
-
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
         cy.plexSelect('name="modelo.profesionales"').type('{backspace}');
         cy.plexSelectAsync('name="modelo.profesionales"', 'JAZMIN', '@profesionales', 0);
