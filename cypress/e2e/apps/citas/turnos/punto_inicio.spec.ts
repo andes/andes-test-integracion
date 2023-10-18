@@ -38,7 +38,7 @@ context('punto de inicio', () => {
         cy.wait('@busquedaPaciente').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        cy.get('.alert.alert-danger').should('contain', 'No se encontró ningún paciente..');
+        cy.get('.alert.alert-danger').should('contain', 'No se encontró ningún paciente');
     });
 
     it('Generar solicitud', () => {
