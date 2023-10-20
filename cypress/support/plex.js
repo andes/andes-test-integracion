@@ -27,7 +27,7 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
             element = element.children()
                 .children('.selectize-control')
                 .find('.selectize-dropdown-content')
-                .find(`.option[data-value="${option}"]`, { force: true });
+                .find(`div[data-value="${option}"]`, { force: true });
         } else {
             element.children().children('.selectize-control').click();
             element.find('.selectize-dropdown-content').children().eq(option);
@@ -461,7 +461,7 @@ Cypress.Commands.add('plexIcon', { prevSubject: 'optional' }, (subject, icon) =>
  */
 Cypress.Commands.add('selectOption', (label, value) => {
     return cy.get(`plex-select[${label}]`).children().children('.selectize-control').click()
-        .find(`.option[data-value=${value}]`).click({
+        .find(`div[data-value=${value}]`).click({
             force: true
         });
 });
