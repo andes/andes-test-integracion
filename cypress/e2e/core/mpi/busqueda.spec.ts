@@ -72,7 +72,7 @@ context('MPI-Busqueda Paciente', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(0);
         });
-        cy.contains('No se encontró ningún paciente..');
+        cy.contains('No se encontró ningún paciente');
     });
 
     it('buscar paciente por nombre/apellido y verificar que no existe', () => {
@@ -83,7 +83,7 @@ context('MPI-Busqueda Paciente', () => {
             expect(xhr.status).to.be.eq(200);
             expect(xhr.response.body).to.have.length(0);
         });
-        cy.contains('No se encontró ningún paciente..');
+        cy.contains('No se encontró ningún paciente');
     });
 
     it('buscar paciente con scan y verificar precarga de datos básicos', () => {
