@@ -18,20 +18,20 @@ describe('Capa Estadistica - Ingresos', () => {
     });
 
     beforeEach(() => {
-        cy.server();
+        // cy.server();
         cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
         cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
         cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-        cy.route('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
+        cy.intercept('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
             "conceptId": "1234",
             "term": "Enfermeria en Rehabilitación",
         }, {
             "conceptId": "666",
             "term": "Dolor",
         }]).as('expEspecialidad');
-        cy.route('GET', '**/api/core/tm/ocupacion?nombre=**', [{
+        cy.intercept('GET', '**/api/core/tm/ocupacion?nombre=**', [{
             "_id": "5c793679af78f1fa5d0a8e1e",
             "id": "5c793679af78f1fa5d0a8e1e",
             "nombre": "Abogado",

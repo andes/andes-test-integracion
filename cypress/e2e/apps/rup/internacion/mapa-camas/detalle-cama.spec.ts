@@ -142,7 +142,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
         });
     });
 
-    it('Deshacer internacion', () => {
+    it('Deshacer internación', () => {
         cy.goto('/mapa-camas', token);
         cy.wait('@getCamas').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);

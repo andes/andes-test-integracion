@@ -34,7 +34,7 @@ Cypress.Commands.add('createUsuarioByCapa', (capa, documento) => {
 });
 Cypress.Commands.add('deshacerInternacion', (completa = false) => {
     const opcionDeshacer = completa ? 'Toda la internación' : 'Último movimiento';
-    cy.get('plex-layout-sidebar plex-title').eq(1).plexDropdown('tooltip="Deshacer Internacion"').click();
+    cy.get('plex-layout-sidebar plex-title').eq(1).plexDropdown('tooltip="Deshacer Internación"').click();
     cy.contains(opcionDeshacer).click();
     cy.swal('confirm', completa ?
         'Si el paciente tiene prestaciones se deberá romper validación de las mismas antes de intentar realizar esta acción. ¿Está seguro que desea anular la internación?'
