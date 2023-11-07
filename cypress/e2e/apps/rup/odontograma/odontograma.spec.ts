@@ -1,5 +1,3 @@
-
-
 describe('RUP - Odontograma', () => {
     let token;
     before(() => {
@@ -15,7 +13,7 @@ describe('RUP - Odontograma', () => {
         cy.snomedSearchStub('odontograma', rupBuscador, 'rup-buscador');
         cy.snomedFrecuentesStub(frecuentes);
         cy.expressionStub('^721145008', 'odontograma-piezas-dentales.json');
-        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+        cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
 
         cy.task(
             'database:seed:prestacion',
@@ -27,18 +25,21 @@ describe('RUP - Odontograma', () => {
     })
 
     it('Seleccion simple de caras de diente', () => {
+        cy.get('plex-tabs').contains('Buscador').click({ force: true });
         cy.RupBuscarConceptos('odontograma');
         cy.seleccionarConcepto(0);
+        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
         cy.get('path[class="diente vestibular diente-null"]').first().click({ force: true });
         cy.plexButton('Limpiar selección').click();
     })
 
     it('Seleccion multiple de caras de diente', () => {
+        cy.get('plex-tabs').contains('Buscador').click({ force: true });
         cy.RupBuscarConceptos('odontograma');
         cy.seleccionarConcepto(0);
 
+        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
         cy.plexBool('label="Seleccionar piezas/caras múltiples"', true);
-
         cy.get('path[class="diente vestibular diente-null"]').first().click({ force: true });
         cy.get('path[class="diente vestibular diente-null"]').eq(3).click({ force: true });
         cy.get('path[class="diente vestibular diente-null"]').eq(5).click({ force: true });
@@ -47,9 +48,11 @@ describe('RUP - Odontograma', () => {
     })
 
     it('Guardar odontograma', () => {
+        cy.get('plex-tabs').contains('Buscador').click({ force: true });
         cy.RupBuscarConceptos('odontograma');
         cy.seleccionarConcepto(0);
 
+        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
         cy.plexBool('label="Seleccionar piezas/caras múltiples"', true);
 
         cy.get('path[class="diente vestibular diente-null"]').first().click({ force: true });
@@ -60,9 +63,10 @@ describe('RUP - Odontograma', () => {
     })
 
     it('Registrar Tratamiento de conducto', () => {
+        cy.get('plex-tabs').contains('Buscador').click({ force: true });
         cy.RupBuscarConceptos('odontograma');
         cy.seleccionarConcepto(0);
-
+        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
         cy.plexBool('label="Seleccionar piezas/caras múltiples"', true);
 
         cy.get('snomed-buscar').plexText('name="searchTerm"', '{selectall}{backspace}');
@@ -88,9 +92,10 @@ describe('RUP - Odontograma', () => {
 
 
     it('Desvincular Caras', () => {
+        cy.get('plex-tabs').contains('Buscador').click({ force: true });
         cy.RupBuscarConceptos('odontograma');
         cy.seleccionarConcepto(0);
-
+        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
         cy.plexBool('label="Seleccionar piezas/caras múltiples"', true);
 
         cy.get('path[class="diente vestibular diente-null"]').first().click({ force: true });

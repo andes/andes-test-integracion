@@ -16,8 +16,8 @@ context('RUP - Ejecucion', () => {
         let idPrestacion, idElementoRUP;
         beforeEach(() => {
             cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             const resultadoSnomed = [{
                 "conceptId": "440377005",
@@ -51,9 +51,11 @@ context('RUP - Ejecucion', () => {
 
         it('test validacion y grabar', () => {
 
-            cy.route('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
-            cy.route('GET', '**/api/modules/cda/paciente/**').as('paciente');
+            cy.intercept('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
+            cy.intercept('GET', '**/api/modules/cda/paciente/**').as('paciente');
 
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.get('rup-buscador button').contains('BUSCADOR BÁSICO ').click();
             cy.get('snomed-buscar').plexText('name="searchTerm"', 'derivaci');
             cy.wait('@rup-buscador');
@@ -80,9 +82,8 @@ context('RUP - Ejecucion', () => {
             cy.plexButton('Continuar').click();
 
             cy.wait('@paciente');
-            // cy.plexButtonIcon('chevron-double-down').click();
-
-
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.get('.rup-card').first().as('rupCard');
             cy.get('@rupCard').plexSelect('name="organizacion"').contains('PUESTO SANITARIO RAMON CASTRO (POR NOMIVAC)');
             cy.get('@rupCard').find('plex-bool[label="OTRO"]').should('not.exist');
@@ -97,10 +98,8 @@ context('RUP - Ejecucion', () => {
         let idPrestacion, idElementoRUP;
         beforeEach(() => {
             cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
-
-
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             const resultadoSnomed = [{
                 "conceptId": "440377005",
@@ -136,17 +135,17 @@ context('RUP - Ejecucion', () => {
 
         it('test validacion y grabar', () => {
 
-            cy.route('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
-            cy.route('GET', '**/api/modules/cda/paciente/**').as('paciente');
+            cy.intercept('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
+            cy.intercept('GET', '**/api/modules/cda/paciente/**').as('paciente');
 
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.get('rup-buscador button').contains('BUSCADOR BÁSICO ').click();
             cy.get('snomed-buscar').plexText('name="searchTerm"', 'derivaci');
             cy.wait('@rup-buscador');
             cy.get('rup-buscador').plexButtonIcon('plus').click();
 
             cy.get('.rup-card').first().as('rupCard');
-
-
 
             cy.get('@rupCard').contains('Hallazgos');
             cy.get('@rupCard').plexSelectAsync('name="organizacion"', 'derivación', '@query', 0);
@@ -164,9 +163,9 @@ context('RUP - Ejecucion', () => {
             cy.plexButton('Continuar').click();
 
             cy.wait('@paciente');
-            // cy.plexButtonIcon('chevron-double-down').click();
 
-
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.get('.rup-card').first().as('rupCard');
             cy.get('@rupCard').plexSelect('name="organizacion"').contains('derivación por');
             cy.get('@rupCard').find('plex-bool[label="OTRO"]').should('not.exist');

@@ -66,26 +66,20 @@ context('RUP - Ejecucion', () => {
 
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '/api/modules/seguimiento-paciente**', []);
-        cy.route('GET', '/api/modules/huds/accesos**', []);
-        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-
-
-        cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
-
-
-
+        cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
+        cy.intercept('GET', '/api/modules/huds/accesos**', []);
+        cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+        cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
     });
 
     it('evolucionar trastorno desde buscador', () => {
-        cy.route('GET', '/api/core/term/snomed/expression?expression=**', []);
-
+        cy.intercept('GET', '/api/core/term/snomed/expression?expression=**', []);
+        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
         cy.plexTab('Historia de Salud').click();
+        cy.get('rup-hudsbusqueda .menu-buscador button').contains('PRESTACIONES').click();
         cy.get('plex-layout-sidebar .rup-card').should('have.length', 2);
         cy.HudsBusquedaFiltros('trastorno');
         cy.get('plex-layout-sidebar .rup-card').should('have.length', 1);
-        // cy.seleccionarConcepto('fiebre Q');
 
         // [TODO] En la HUDS no hay un plex-button para añadir así que hay que hacerlo a mano
         cy.get('plex-layout-sidebar .rup-card').contains('fiebre Q').parentsUntil('.rup-card').find('.mdi-plus').click();
@@ -95,10 +89,6 @@ context('RUP - Ejecucion', () => {
             cy.wrap($elem).should('not.contain', 'plex-int');
         });
 
-
     });
 
 });
-
-
-//

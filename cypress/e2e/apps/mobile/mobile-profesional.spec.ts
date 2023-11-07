@@ -44,31 +44,32 @@ context('mobile profesional', () => {
             return false;
         })
         cy.server();
-        cy.route('POST', '**/api/modules/mobileApp/login').as('login');
-        cy.route('POST', '**/api/auth/login').as('loginProfesional');
-        cy.route('GET', '**/api/modules/mobileApp/prestaciones-adjuntar').as('prestaciones-adjuntar');
-        cy.route('PATCH', '**/api/modules/mobileApp/prestaciones-adjuntar/**').as('patch-adjuntar');
+        cy.intercept('POST', '**/api/modules/mobileApp/login').as('login');
+        cy.intercept('POST', '**/api/auth/login').as('loginProfesional');
+        cy.intercept('GET', '**/api/modules/mobileApp/prestaciones-adjuntar').as('prestaciones-adjuntar');
+        cy.intercept('PATCH', '**/api/modules/mobileApp/prestaciones-adjuntar/**').as('patch-adjuntar');
 
 
     });
 
 
     it('cargar adjunto', () => {
-        cy.route('POST', '/api/drive**').as('store');
-        cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+        cy.intercept('POST', '/api/drive**').as('store');
+        cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
         cy.goto('/rup/ejecucion/' + idPrestacion, token);
+        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
 
         const fileName = '/archivos/cat.png';
         cy.get('[type="file"]').attachFile(fileName);
-        cy.wait('@store').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);;
+        cy.wait('@store').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);;
         });
 
         cy.plexButton("Guardar sesión de informes de enfermería").click();
-        cy.wait('@patchPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.ejecucion.registros[0].valor.documentos[0].ext).to.be.eq('png');
+        cy.wait('@patchPrestacion').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.ejecucion.registros[0].valor.documentos[0].ext).to.be.eq('png');
         });
     });
 
@@ -90,9 +91,9 @@ context('mobile profesional', () => {
         cy.get('input').first().type('30643636');
         cy.get('#password').first().type('asd');
         cy.get('.success').click();
-        cy.wait('@loginProfesional').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(typeof xhr.responseBody.token === 'string').to.be.eq(true);
+        cy.wait('@loginProfesional').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(typeof response.body.token === 'string').to.be.eq(true);
         });
         cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON').click();
         cy.contains('Hola Natalia');
@@ -100,21 +101,19 @@ context('mobile profesional', () => {
 
     it.skip('Adjunto RUP', () => {
         cy.get('[name="andes-vacuna"]').click();
-        cy.wait('@prestaciones-adjuntar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@prestaciones-adjuntar').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);
         });
         cy.url().should('include', '/mobile/profesional/adjuntar');
         cy.wait('@prestaciones-adjuntar');
         cy.wait(500);
-
-        // cy.get('[name="search"]').click({ force: true });
         cy.get('[type="file"]').attachFile('archivos/cat.png');
         cy.wait(500);
 
         cy.get('ion-button').get('.ion-color-success').click();
-        cy.wait('@patch-adjuntar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.status).to.be.eq("ok");
+        cy.wait('@patch-adjuntar').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.status).to.be.eq("ok");
         });
     });
 

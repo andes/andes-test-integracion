@@ -41,6 +41,8 @@ context('RUP - Ejecucion', () => {
             "fsn": "derivación por (entidad observable)",
             "semanticTag": "entidad observable"
         }];
+        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
+        cy.get('plex-tabs').contains('Buscador').click({ force: true });
         cy.snomedSearchStub('derivaci', resultadoSnomed, 'rup-buscador');
         cy.RupBuscarConceptos('derivaci');
         cy.seleccionarConcepto(0);

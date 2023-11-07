@@ -25,7 +25,9 @@ context('Seguimiento Epidemiológico', () => {
         cy.intercept('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
         cy.intercept('POST', '**api/modules/forms/forms-epidemiologia/formEpidemiologia').as('registroFicha');
         cy.intercept('POST', '**/api/modules/rup/prestaciones').as('postPrestacion');
-        cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
+        cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**', req => {
+            delete req.headers['if-none-match']
+        }).as('patchPrestacion');
         cy.intercept('GET', '**/api/modules/rup/prestaciones/**', req => {
             delete req.headers['if-none-match']
         }).as('getPrestacion');
@@ -53,7 +55,8 @@ context('Seguimiento Epidemiológico', () => {
         cy.wait('@getPrestacion').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
-
+        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
+        cy.get('plex-tabs').contains('Buscador').click({ force: true });
         cy.RupBuscarConceptos('Seguimiento telefónico', 'SUGERIDOS');
         cy.seleccionarConcepto(0);
         cy.plexButton('Guardar consulta de seguimiento de paciente asociado a infección por COVID-19').click();
@@ -65,7 +68,7 @@ context('Seguimiento Epidemiológico', () => {
         cy.wait('@getPrestacion').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.length).to.be.eq(0);
-        })
+        });
         cy.toast('success');
 
         cy.url().should('include', 'validacion');

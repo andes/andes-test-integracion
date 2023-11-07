@@ -135,6 +135,8 @@ context('RUP - Ejecucion', () => {
                 "semanticTag": "hallazgo"
             }], 'expFiebre');
 
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.snomedSearchStub('derivacion', search, 'rup-buscador');
             cy.RupBuscarConceptos('derivacion');
             cy.seleccionarConcepto(0);
@@ -146,11 +148,9 @@ context('RUP - Ejecucion', () => {
             });
 
             cy.plexButton('Guardar sesión de informes de enfermería').click();
-            cy.url().should('include', 'validacion');
             cy.contains('concepto uno');
             cy.contains('fiebre');
-
-
+            cy.url().should('include', 'validacion');
         });
 
     });

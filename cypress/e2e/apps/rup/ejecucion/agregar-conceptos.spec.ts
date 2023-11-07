@@ -15,7 +15,9 @@ context('RUP - Ejecucion', () => {
 
         beforeEach(() => {
             cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '/api/core/**', []).as('huds');
             cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
+
             cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             cy.cleanDB(['prestaciones']);
@@ -32,12 +34,12 @@ context('RUP - Ejecucion', () => {
 
         it('agregar conceptos desde el buscador', () => {
             cy.snomedSearchStub('fiebre', 'mitos/fiebre.json', 'rup-buscador');
-
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
             cy.RupBuscarConceptos('fiebre');
             cy.seleccionarConcepto(0);
             cy.seleccionarConcepto(0);
             cy.toast('alert');
-
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.assertRupCard(0, { semanticTag: 'hallazgo', term: 'fiebre' });
 
             cy.RupSetearFiltros('trastorno');
@@ -63,8 +65,10 @@ context('RUP - Ejecucion', () => {
 
         it('agregar conceptos desde freceuntes', () => {
             cy.snomedFrecuentesStub('mitos/frecuentes.json');
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
             cy.RupBuscarConceptos('fiebre', 'MIS FRECUENTES');
             cy.seleccionarConcepto(0);
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.assertRupCard(0, { semanticTag: 'hallazgo', term: 'fiebre crónica' });
 
             cy.plexHtml('name="evolucion"', 'hola mundo');
@@ -123,10 +127,12 @@ context('RUP - Ejecucion', () => {
             cy.intercept('GET', '/api/core/term/snomed/expression?expression=**', []);
             cy.wait('@paciente');
             cy.snomedSearchStub('fiebre', 'mitos/fiebre.json', 'rup-buscador');
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
             cy.RupBuscarConceptos('fiebre');
             cy.seleccionarConcepto('fiebre Q');
             cy.swal('confirm');
 
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.assertRupCard(0, { semanticTag: 'trastorno', term: 'fiebre Q' }).then(($elem) => {
                 cy.wrap($elem).contains('Inicio del Hallazgo');
             });

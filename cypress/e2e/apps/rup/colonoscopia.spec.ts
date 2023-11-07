@@ -30,12 +30,11 @@ context('prestaciones', () => {
             cy.plexButton('PACIENTE FUERA DE AGENDA').click();
             cy.plexSelectType('name="nombrePrestacion"', 'colonoscopia');
 
-
-
             cy.plexText('name="buscador"', paciente.nombre);
             cy.get('paciente-listado plex-item').contains(paciente.nombre).click();
 
             cy.plexButton('INICIAR PRESTACIÓN').click();
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
 
             cy.wait('@create').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
