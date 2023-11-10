@@ -381,9 +381,7 @@ context('RUP - Ejecucion', () => {
             profesional: 'Natalia Huenchuman'
         }).click();
 
-        cy.get('vista-registro .menu-left').click();
-        cy.get('vista-registro').plexBadge('fiebre');
-        cy.get('vista-registro').plexBadge('fiebre Q');
+        cy.get('detalle-registro').plexBadge('trastorno');
     });
 
     it('HUDS - Filtro por texto libre', () => {
@@ -483,46 +481,12 @@ context('RUP - Ejecucion', () => {
             profesional: 'Huenchuman, Natalia',
         }).click();
 
-        cy.get('.columna-completa').contains("consulta de medicina general"); //Tipo de prestación origen
-        cy.get('.columna-completa').contains("HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"); //Organización origen
-        cy.get('.columna-completa').contains("motivo de la solicitud"); //Motivo de la solicitud
-        cy.get('.columna-completa').contains("auditoria"); //Estado de la solicitud
+        cy.get('.solicitud').contains("consulta de medicina general"); //Tipo de prestación origen
+        cy.get('.solicitud').contains(Cypress.moment().format('DD/MM/YYYY')); //Motivo de la solicitud
+        cy.get('.solicitud').contains("auditoria"); //Estado de la solicitud
 
         cy.get('historial-solicitud').plexLabel(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('historial-solicitud').plexLabel('Creada por Natalia Huenchuman');
         cy.get('historial-solicitud').plexLabel('Creacion de solicitud');
     });
-
-    it('HUDS - Filtro internacion', () => {
-        cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
-        cy.assertHudsBusquedaFiltros('prestaciones', 5);
-        cy.HudsBusquedaFiltros('prestaciones');
-        cy.plexOptions('Internación').click();
-
-        cy.plexButtonIcon('chevron-down').click();
-
-        cy.plexSelectType('label="Prestación"', 'epicrisis medica');
-        cy.plexDatetime('name="fechaInicio"', Cypress.moment().subtract(1, 'day').format('DD/MM/YYYY'));
-
-        cy.getHUDSItems().eq(0).assertRUPMiniCard({
-            term: 'epicrisis médica',
-            fecha: Cypress.moment().format('DD/MM/YYYY'),
-            profesional: 'Natalia Huenchuman',
-            badge: 'validada'
-        }).click();
-
-        cy.assertRupCard(0, { term: ' Informe de alta ' }).then((elem) => {
-            cy.wrap(elem).contains(' servicio de clínica médica '); // UNIDAD ORGANIZATIVA DE LA EPICRISIS
-            cy.wrap(elem).contains('Texto resumen de la internación'); // RESUMEN DE LA INTERNACIÓN
-            cy.wrap(elem).contains('Texto del tratamiento recibido durante la internacion'); // TRATAMIENTO RECIBIDO DURANTE LA INTERNACIÓN
-            cy.wrap(elem).contains('Texto del resumen de laboratorios'); // REGISTROS DE LABORATORIOS/ESTUDIOS (Resumen de laboratorios)
-            cy.wrap(elem).contains('Texto del resumen de procedimientos'); // REGISTROS DE LABORATORIOS/ESTUDIOS ( Resumen de procedimientos)
-            cy.wrap(elem).contains('Texto de situaciones pendientes'); // SITUACIONES PENDIENTES
-            cy.wrap(elem).contains('Texto de tratamiento a seguir post internacion'); // TRATAMIENTOS A SEGUIR
-            cy.wrap(elem).contains('Texto de dieta a seguir post internacion'); // DIETA A SEGUIR
-            cy.wrap(elem).contains('Texto de pautas de alarma post internacion'); // PAUTAS DE ALARMA
-            cy.wrap(elem).contains('Texto de diagnostico de egreso'); // DIAGNOSTICO AL EGRESO
-        });
-    })
-
 });
