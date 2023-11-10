@@ -90,13 +90,10 @@ describe('Capa Estadistica - Egresos', () => {
 
     it('Editar egreso', () => {
         cy.goto('/mapa-camas', token);
-        cy.get('plex-badge span plex-datetime div div span button').click()
-        const day = (Cypress.moment().date() < 10) ? '0' + Cypress.moment().date() : '' + Cypress.moment().date();
-        const hour = (Cypress.moment().hour() - 1);
-        const minute = '' + Cypress.moment().minute() - 1;
-        cy.get('a').contains(day).click();
-        cy.get('text').contains(hour).click();
-        cy.get(`circle[id='m-${minute}']`).click({ force: true });
+        cy.get('plex-layout-sidebar').plexButtonIcon('pencil').click({ force: true });
+        cy.plexDatetime('label="Fecha y hora del mapa de camas"', { clear: true, skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora del mapa de camas"', { text: Cypress.moment().add(-1, 'hours').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+        cy.get('plex-layout-sidebar').plexIcon('check').click();
         cy.contains(pacientes[1].nombre).click();
 
         cy.get('plex-tabs ul li').eq(1).click();
