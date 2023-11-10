@@ -101,12 +101,12 @@ const filtrosMap = {
 
 Cypress.Commands.add('HudsBusquedaFiltros', (search) => {
     const index = typeof search === 'number' ? search : filtrosMap[search];
-    cy.get('rup-hudsbusqueda .menu-buscador button').eq(index).click();
+    cy.get('rup-hudsbusqueda plex-card').eq(index).click();
 });
 
 Cypress.Commands.add('assertHudsBusquedaFiltros', (search, count) => {
     const index = typeof search === 'number' ? search : filtrosMap[search];
-    cy.get('rup-hudsbusqueda .menu-buscador li').eq(index).then(elem => {
+    cy.get('rup-hudsbusqueda .menu-buscador plex-card').eq(index).then(elem => {
         if (count > 0) {
             cy.wrap(elem).contains(count);
         } else {
