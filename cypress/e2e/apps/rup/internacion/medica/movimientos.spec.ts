@@ -37,7 +37,7 @@ const moment = require('moment');
         it('Movimiento Sala -> Cama', () => {
             cy.getCama(pacientes[0].apellido).click();
 
-            cy.wait('@getHistorial').then(({response}) => {
+            cy.wait('@getHistorial').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
             });
 
@@ -49,13 +49,14 @@ const moment = require('moment');
 
             cy.plexButtonIcon('check').click();
 
-            cy.wait('@egresoSalaComun').then(({response}) => {
+            cy.wait('@patchCamaEstados').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
             });
 
-            cy.wait('@patchCamaEstados').then(({response}) => {
+            cy.wait('@egresoSalaComun').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
             });
+
 
             cy.swal('confirm', 'Pase de unidad organizativa exitoso');
 
