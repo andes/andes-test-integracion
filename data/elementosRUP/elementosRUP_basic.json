@@ -13280,6 +13280,32 @@
 	},
 	{
 		"_id": {
+			"$oid": "60ed8c8770569dd3ad533e96"
+		},
+		"activo": true,
+		"componente": "SolicitudPrescripcionMedicamentoInternacionComponent",
+		"tipo": "molecula",
+		"nombre": "molecula medicamentos plan indicacion",
+		"esSolicitud": true,
+		"style": {
+			"columnas": 6.0,
+			"cssClass": null
+		},
+		"conceptos": [
+			{
+				"conceptId": "33633005",
+				"term": "prescripción de un medicamento",
+				"fsn": "prescripción de un medicamento (procedimiento)",
+				"semanticTag": "procedimiento"
+			}
+		],
+		"requeridos": [],
+		"frecuentes": [],
+		"indicaciones": true,
+		"permiteRepetidos": true
+	},
+	{
+		"_id": {
 			"$oid": "5ea76e5fc4baa64a68b04393"
 		},
 		"defaultFor": [],
@@ -14783,14 +14809,14 @@
 				"semanticTag": "procedimiento"
 			}
 		],
-		"dispatch" : [
+		"dispatch": [
 			{
-				"event" : "epidemiologia:prestaciones:validate",
-				"method" : "validar-prestacion"
+				"event": "epidemiologia:prestaciones:validate",
+				"method": "validar-prestacion"
 			},
 			{
-				"event" : "epidemiologia:prestaciones:romperValidacion",
-				"method" : "romper-validacion"
+				"event": "epidemiologia:prestaciones:romperValidacion",
+				"method": "romper-validacion"
 			}
 		],
 		"busqueda_guiada": []

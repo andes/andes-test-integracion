@@ -44,5 +44,45 @@
             "icon": "menos",
             "accion": "desocuparCama"
         }
-    ]
+    ],
+    "planIndicaciones": {
+        "secciones": [
+            {
+                "concepto": {
+                    "conceptId": "6311000013108",
+                    "fsn": "sección: indicaciones de medicación (elemento de registro)",
+                    "semanticTag": "elemento de registro",
+                    "term": "sección: indicaciones de medicación"
+                },
+                "icono": "documento",
+                "registro": {
+                    "conceptId": "33633005",
+                    "fsn": "prescripción de fármaco (procedimiento)",
+                    "semanticTag": "procedimiento",
+                    "term": "prescripción de medicamento"
+                }
+            },
+            {
+                "concepto": {
+                    "conceptId": "6321000013100",
+                    "fsn": "sección: indicaciones de hidratación (elemento de registro)",
+                    "semanticTag": "elemento de registro",
+                    "term": "sección: indicaciones de hidratación"
+                },
+                "icono": "documento",
+                "registro": {
+                    "conceptId": "430147008",
+                    "fsn": "seguimiento del equilibrio hídrico (régimen/tratamiento)",
+                    "semanticTag": "régimen/tratamiento",
+                    "term": "seguimiento del equilibrio hídrico"
+                }
+            }
+        ],
+        "tipoPrestacion": {
+            "conceptId": "4981000013105",
+            "fsn": "plan de indicaciones médicas (procedimiento)",
+            "semanticTag": "procedimiento",
+            "term": "plan de indicaciones médicas"
+        }
+    }
 }

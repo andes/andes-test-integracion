@@ -487,7 +487,11 @@
 				"semanticTag": "medio ambiente"
 			}
 		],
-		"configuraciones": {}
+		"configuraciones": {
+			"planIndicaciones": {
+				"horaInicio": 12
+			}
+		}
 	},
 	{
 		"_id": {
@@ -4144,7 +4148,7 @@
 		"_id": {
 			"$oid": "57fcf037326e73143fb48bd1"
 		},
-		"nombre" : "HTAL SENILLOSA - DR ADOLFO DEL VALLE",
+		"nombre": "HTAL SENILLOSA - DR ADOLFO DEL VALLE",
 		"usaEstadisticaV2": true,
 		"contacto": [],
 		"direccion": {
