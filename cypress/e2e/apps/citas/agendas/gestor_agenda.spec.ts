@@ -61,7 +61,6 @@ describe('CITAS - Planificar Agendas', () => {
         cy.get('plex-layout-sidebar').plexSelectAsync('label="Equipo de Salud"', 'prueba alicia', '@getProfesional', 0);
         cy.get('plex-layout-sidebar').plexSelectAsync('label="Espacio Físico"', 'Huemul Consultorio 3 PB', '@getEspacioFisico', 0);
 
-
         cy.plexButton('Guardar').click();
         cy.wait('@patchAgenda2').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
@@ -115,14 +114,17 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexSelect('label="Tipos de prestación"').find('.remove-button').click();
         cy.plexSelect('label="Tipos de prestación"', '59ee2d9bf00c415246fd3d85').click();
         cy.plexSelect('name="modelo.profesionales"');
-        cy.plexSelectAsync('name="modelo.profesionales"', 'prueba alicia', '@getProfesional', 0);
+        cy.plexSelectAsync('name="modelo.profesionales"', 'PRUEBA ALICIA', '@getProfesional', 0);
 
         cy.plexButton('Guardar').click();
+
+        cy.plexDateTimeDinamico('Hasta', '{selectall}{backspace}' + manana);
+
         cy.wait('@putAgenda2').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.estado).to.be.eq('planificacion');
             expect(response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
-            expect(response.body.profesionales[0].id).to.be.eq('5c82a5a53c524e4c57f08cf2');
+            expect(response.body.profesionales[1].id).to.be.eq('5c82a5a53c524e4c57f08cf2');
             expect(response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('59ee2d9bf00c415246fd3d85');
         });
         cy.toast('success', 'La agenda se guardó correctamente');
@@ -202,7 +204,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@getCandidatas').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
-        cy.contains(' No hay agendas que contengan turnos que coincidan');
+        cy.contains('No hay agendas disponibles. Para agregar click aquí ');
     })
 
     it('suspender agenda disponible con turno y reasignarlo', () => {
@@ -260,10 +262,11 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.statusCode).to.eq(200);
         });
 
-        cy.get('.reasignar').first().click();
-        cy.get('button').contains('CONFIRMAR').click();
-        cy.toast('success', 'El turno se reasignó correctamente');
-        cy.toast('info', 'INFO: SMS no enviado');
+        cy.get('plex-list').find('plex-item').contains('20:00').click();
+        cy.get('plex-card').contains('20:30').click();
+        cy.plexButtonIcon('check').first().click();
+        cy.get('plex-modal').get('plex-modal-subtitle').contains('El turno fué reasignado exitosamente');
+        cy.plexButton("Aceptar").click();
         cy.wait('@patchAgenda').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.estado).to.be.eq('publicada');
@@ -284,8 +287,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.bloques[0].tipoPrestaciones[0]._id).to.be.eq('57f5060669fe79a598f4e841');
             expect(response.body.bloques[0].turnos[0].estado).to.be.eq('suspendido');
         });
-        cy.plexButton('Gestor de Agendas').click();
-
+        cy.plexButton("Volver").click();
         cy.wait('@getAgendas');
         cy.get('table tbody td div').contains('servicio de neumonología').click();
         cy.wait(1000)
@@ -293,7 +295,6 @@ describe('CITAS - Planificar Agendas', () => {
     })
 
     it('suspender turno de agenda publicada', () => {
-
         cy.wait('@getAgendas').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
@@ -311,7 +312,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('57f5060669fe79a598f4e841');
             expect(response.body.bloques[0].accesoDirectoDelDia).to.be.eq(4);
             expect(response.body.bloques[0].restantesDelDia).to.be.eq(3);
-            expect(response.body.bloques[0].turnos[1].estado).to.be.eq('disponible');
+            expect(response.body.bloques[0].turnos[0].estado).to.be.eq('disponible');
         });
         cy.get('plex-layout-sidebar table tbody td div').contains('Disponible').click({ force: true });
         cy.get('plex-layout-sidebar').plexButtonIcon('stop').click({ force: true });
@@ -326,7 +327,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.bloques[0].accesoDirectoDelDia).to.be.eq(4);
             expect(response.body.bloques[0].restantesDelDia).to.be.eq(2);
             expect(response.body.bloques[0].tipoPrestaciones[0]._id).to.be.eq('57f5060669fe79a598f4e841');
-            expect(response.body.bloques[0].turnos[2].estado).to.be.eq('disponible');
+            expect(response.body.bloques[0].turnos[1].estado).to.be.eq('asignado');
         });
         cy.wait('@findAgenda').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
@@ -341,7 +342,6 @@ describe('CITAS - Planificar Agendas', () => {
         });
         cy.wait('@getAgendas');
         cy.get('plex-layout-sidebar table tbody td div').contains('suspendido(sin paciente)');
-
     })
 
     it('editar agenda dinamica con institucion', () => {
