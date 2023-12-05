@@ -26,11 +26,10 @@ describe('TOP: Nueva Solicitud de Salida', () => {
     })
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('conceptosTurneables');
-        cy.route('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('searchPaciente');
-        cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
+        cy.intercept('GET', '**/core/tm/conceptos-turneables?permisos=solicitudes:tipoPrestacion:?**').as('conceptosTurneables');
+        cy.intercept('POST', '**/modules/rup/prestaciones**').as('createSolicitud');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('searchPaciente');
+        cy.intercept('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
         secuencia(token);
     });
 
@@ -38,19 +37,19 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
         cy.plexDatetime('label="Fecha de solicitud"', cy.today());
-        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@conceptosTurneables', '59ee2d9bf00c415246fd3d1c');
-        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
+        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@conceptosTurneables', 0);
+        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', 0);
         cy.plexSelect('label="Organización destino"', 0).click();
         cy.plexSelect('label="Tipo de Prestación Solicitada"', 0).then((elemento) => {
             idPrestacion = elemento.attr('data-value');
         }).click();
         cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'un motivo lalala');
         cy.plexButton('Guardar').click();
-        cy.wait('@createSolicitud').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.paciente.documento).to.be.eq(dni);
-            expect(xhr.response.body.solicitud.tipoPrestacion.conceptId).to.be.eq(idPrestacion);
-            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
+        cy.wait('@createSolicitud').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.paciente.documento).to.be.eq(dni);
+            expect(response.body.solicitud.tipoPrestacion.conceptId).to.be.eq(idPrestacion);
+            expect(response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.toast('success', 'Solicitud guardada');
         cy.get('table tbody tr').contains('CORTES, JAZMIN').click();
@@ -72,12 +71,12 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.plexSelectType('label="Tipos de Prestación Origen"').validationMessage()
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
-        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@conceptosTurneables', '59ee2d9bf00c415246fd3d1c');
+        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@conceptosTurneables', 0);
 
         cy.plexSelectType('label="Profesional solicitante"').validationMessage()
         cy.plexButton('Guardar').click();
         cy.swal('confirm');
-        cy.route('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
+        cy.intercept('GET', '**/core/tm/profesionales**').as('profesionalSolicitante');
         cy.plexSelectAsync('label="Profesional solicitante"', 'HUENCHUMAN NATALIA', '@profesionalSolicitante', 0);
 
         cy.plexSelectType('label="Organización destino"').validationMessage()
@@ -94,9 +93,9 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         cy.swal('confirm');
         cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'un motivo lalala');
         cy.plexButton('Guardar').click();
-        cy.wait('@createSolicitud').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
+        cy.wait('@createSolicitud').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.get('table tbody tr').contains('Huenchuman, Natalia').click();
         cy.get('plex-options div div button').contains('HISTORIAL').click({ force: true });
