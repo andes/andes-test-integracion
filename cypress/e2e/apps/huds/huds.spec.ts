@@ -525,4 +525,18 @@ context('RUP - Ejecucion', () => {
         });
     })
 
+    it('Editar paciente desde HUDS', () => {
+        cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
+        cy.intercept('PATCH', '/api/core-v2/mpi/pacientes/**').as('paciente');
+        cy.get('plex-tabs').contains('Resumen del Paciente').click();
+        cy.plexButtonIcon('pencil').click();
+        const alias = 'MODIFICADO';
+        cy.get('plex-text[name="nombreAutopercibido"]').type(alias);
+        cy.plexButton('Guardar').click();
+        cy.wait('@paciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.alias).to.be.eq(alias);
+        });
+    });
+
 });
