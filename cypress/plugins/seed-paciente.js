@@ -164,12 +164,18 @@ module.exports.createPaciente = async (mongoUri, params) => {
 
         dto.tokens = generarTokens(dto);
 
+        if (params.numeroIdentificacion) {
+            dto.numeroIdentificacion = params.numeroIdentificacion;
+        }
+        if (params.tipoIdentificacion) {
+            dto.tipoIdentificacion = params.tipoIdentificacion;
+        }
+        if (params.estado) {
+            dto.estado = params.estado;
+        }
         dto.contacto[0].valor = params.telefono || faker.phone.phoneNumber().replace('-', '').replace('-', '');
         dto.direccion[0].valor = params.direccion || dto.direccion[0].valor;
         dto.fechaNacimiento = (params.fechaNacimiento) ? params.fechaNacimiento : dto.fechaNacimiento;
-        dto.numeroIdentificacion = params.numeroIdentificacion || null;
-        dto.tipoIdentificacion = params.tipoIdentificacion || null;
-        dto.estado = params.estado || null;
         dto._id = params._id ? new ObjectId(params._id) : new ObjectId();
         await PacienteDB.insertOne(dto);
 
