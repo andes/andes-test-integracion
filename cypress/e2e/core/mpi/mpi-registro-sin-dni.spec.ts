@@ -54,13 +54,12 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.contains('Los datos se actualizaron correctamente');
     });
 
-    it('verificar la carga de paciente con datos obligatorios requeridos contactos', () => {
+    it('verificar la carga de paciente con datos obligatorios requeridos y contactos', () => {
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'SIN DNI');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
         cy.plexDatetime('label="Fecha de Nacimiento"', '02/10/2019');
         cy.contains('datos de contacto').click()
-        cy.plexSelect('label="Tipo"', 'celular');
         cy.plexPhone('label="Número"', '2990000000');
         cy.plexButtonIcon('plus').click();
         cy.get('plex-select[label="Tipo"]').last().click().contains('Teléfono Fijo').click();
@@ -149,8 +148,8 @@ context('MPI-Registro Paciente Sin DNI', () => {
         cy.plexTab('Notas').click();
         cy.plexButton('Agregar nota').click();
         cy.plexText('name="titulo"', 'Nueva nota');
-        cy.get('plex-text[name="nota"] textarea').type('Esta es una nueva nota', { force: true });
-        cy.plexButtonIcon('check').click({ force: true });
+        cy.get('plex-text[name="nota"] input').first().type('Esta es una nueva nota', { force: true });
+        cy.plexButtonIcon('check').click();
         cy.get('plex-item').contains('Nueva nota');
         cy.get('plex-item').contains('Esta es una nueva nota');
         cy.plexButton('Guardar').click();

@@ -50,7 +50,7 @@ context('MPI-Registro de Pacientes Similares', () => {
 
         cy.swal('confirm');
         cy.plexButton('Guardar').should('have.prop', 'disabled', true);
-        cy.plexButton('Seleccionar').click();
+        cy.get('plex-item[label="Seleccionar"]').click();
         cy.plexButton('Guardar').click();
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);
@@ -80,7 +80,7 @@ context('MPI-Registro de Pacientes Similares', () => {
         // Popup alert
 
         cy.swal('confirm');
-        cy.plexButton('Seleccionar').click();
+        cy.get('plex-item[label="Seleccionar"]').click();
         cy.plexButton('Guardar').click();
         cy.wait('@patchPaciente').then((xhr) => {
             expect(xhr.status).to.be.eq(200);

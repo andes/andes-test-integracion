@@ -153,13 +153,26 @@ module.exports.createPaciente = async (mongoUri, params) => {
         // si no tiene notaError y no se envió en params se le asigna string vacío
         dto.notaError = (params.notaError) ? params.notaError : (dto.notaError) ? dto.notaError : '';
 
-
         if (dto.documento) {
             dto.documento = (params.documento) ? params.documento + '' : ('' + faker.random.number({ min: 40000000, max: 49999999 }));
             dto.documento_fuzzy = makeNGrams(config, dto.documento);
         }
+
+        if (!params.documento && (params.numeroIdentificacion || params.tipoIdentificacion)) {
+            dto.documento = null;
+        }
+
         dto.tokens = generarTokens(dto);
 
+        if (params.numeroIdentificacion) {
+            dto.numeroIdentificacion = params.numeroIdentificacion;
+        }
+        if (params.tipoIdentificacion) {
+            dto.tipoIdentificacion = params.tipoIdentificacion;
+        }
+        if (params.estado) {
+            dto.estado = params.estado;
+        }
         dto.contacto[0].valor = params.telefono || faker.phone.phoneNumber().replace('-', '').replace('-', '');
         dto.direccion[0].valor = params.direccion || dto.direccion[0].valor;
         dto.fechaNacimiento = (params.fechaNacimiento) ? params.fechaNacimiento : dto.fechaNacimiento;

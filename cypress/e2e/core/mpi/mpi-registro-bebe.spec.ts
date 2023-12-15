@@ -144,7 +144,6 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
         cy.plexDatetime('label="Fecha y hora de Nacimiento"', '02/10/2019');
         cy.plexTab('datos de contacto').click();
-        cy.plexSelect('label="Tipo"', 'celular');
         cy.plexPhone('label="Número"', '2990000000');
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
@@ -164,7 +163,7 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
         cy.plexDatetime('label="Fecha y hora de Nacimiento"', '02/10/2019');
         cy.plexTab('datos de contacto').click();
-        cy.plexSelect('label="Tipo"', 'fijo');
+        cy.plexSelect('label="Tipo"', 0);   //fijo
         cy.plexPhone('label="Número"', '2994752158');
         cy.plexBool('name="viveProvActual"', true);
         cy.plexBool('name="viveLocActual"', true);
@@ -211,8 +210,10 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexTab('Notas').click();
         cy.plexButton('Agregar nota').click();
         cy.plexText('name="titulo"', 'Nueva nota');
-        cy.get('plex-text[name="nota"] textarea').type('Esta es una nueva nota', { force: true });
-        cy.plexButtonIcon('check').click({ force: true });
+        cy.get('plex-text[name="nota"] input').first().type('Esta es una nueva nota', { force: true });
+        cy.plexButtonIcon('check').click();
+        cy.get('plex-item').contains('Nueva nota');
+        cy.get('plex-item').contains('Esta es una nueva nota');
         cy.plexButton('Guardar').click();
         cy.wait('@registroBebe').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
@@ -311,13 +312,7 @@ context('MPI-Registro Paciente Bebé', () => {
             expect(response.statusCode).to.eq(200);
         });
         cy.get('paciente-listado plex-item').contains(nombreBebe).click();
-
-        cy.wait('@busquedaProgenitor').then(({ response }) => {
-            expect(response.statusCode).to.eq(200);
-        });
-        cy.get('paciente-detalle').plexIcon('help');
-        cy.get('paciente-detalle').plexBadge(' Sin DNI ');
-        // verificamos que se vea el documento del progenitor en paciente detalle
+        cy.get('paciente-detalle').contains(' Sin DNI ');        // verificamos que se vea el documento del progenitor en paciente detalle
         cy.get('paciente-detalle').contains(format(progenitorScan.documento));
         // verificamos que este el documento del progenitor en las relaciones del paciente (sidebar)
         cy.get('plex-layout-sidebar').get('paciente-listado plex-item').contains(format(progenitorScan.documento));
