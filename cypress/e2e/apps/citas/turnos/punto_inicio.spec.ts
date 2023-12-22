@@ -385,9 +385,8 @@ context('punto de inicio', () => {
                 expect(response.body.profesionales[0].apellido).to.be.eq('ESPOSITO');
             });
             cy.wait(1000);
-            cy.get('plex-radio').contains('Prepaga').click({ force: true });
-            cy.plexSelectType('label="Seleccione una Prepaga"', 'swiss medical').click({ force: true });
-
+            cy.get('plex-radio').contains('Otras').click({ force: true });
+            cy.plexSelectType('name="financiador"', 'swiss medical').click({ force: true });
         });
     });
 
