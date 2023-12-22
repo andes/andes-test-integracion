@@ -497,7 +497,7 @@ context('RUP - Ejecucion', () => {
         cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
         cy.assertHudsBusquedaFiltros('prestaciones', 5);
         cy.HudsBusquedaFiltros('prestaciones');
-        cy.plexOptions('Internación').click();
+        cy.get('button').contains('INTERNACIÓN').click();
 
         cy.plexButtonIcon('chevron-down').click();
 
