@@ -18,16 +18,17 @@ context('SOLICITUDES', () => {
 
     beforeEach(() => {
         cy.goto('/solicitudes', token);
-        cy.server();
-        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('consultaPaciente');
-        cy.route('GET', '**/api/core/tm/conceptos-turneables?**').as('conceptosTurneables');
-        cy.route('GET', '**/api/modules/top/reglas?organizacionDestino=**').as('getReglas');
-        cy.route('GET', '**/api/core/tm/profesionales?nombreCompleto=**').as('getProfesional');
-        cy.route('GET', '**/api/modules/rup/prestaciones/solicitudes**').as('solicitudes');
-        cy.route('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
-        cy.route('POST', '**/api/modules/rup/prestaciones').as('guardarSolicitud');
-        cy.route('POST', '**/api/modules/top/reglas').as('guardarRegla');
-        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('auditarSolicitud');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes**', req => {
+            delete req.headers['if-none-match'] // evita que responda con datos de caché (statusCode 304)
+        }).as('consultaPaciente');
+        cy.intercept('GET', '**/api/core/tm/conceptos-turneables?**', req => { delete req.headers['if-none-match'] }).as('conceptosTurneables');
+        cy.intercept('GET', '**/api/modules/top/reglas?organizacionDestino=**', req => { delete req.headers['if-none-match'] }).as('getReglas');
+        cy.intercept('GET', '**/api/core/tm/profesionales?nombreCompleto=**', req => { delete req.headers['if-none-match'] }).as('getProfesional');
+        cy.intercept('GET', '**/api/modules/rup/prestaciones/solicitudes**', req => { delete req.headers['if-none-match'] }).as('solicitudes');
+        cy.intercept('GET', '**/api/core/tm/organizaciones**', req => { delete req.headers['if-none-match'] }).as('getOrganizaciones');
+        cy.intercept('POST', '**/api/modules/rup/prestaciones', req => { delete req.headers['if-none-match'] }).as('guardarSolicitud');
+        cy.intercept('POST', '**/api/modules/top/reglas', req => { delete req.headers['if-none-match'] }).as('guardarRegla');
+        cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**', req => { delete req.headers['if-none-match'] }).as('auditarSolicitud');
 
     })
 
@@ -41,17 +42,17 @@ context('SOLICITUDES', () => {
         cy.plexSelectAsync('name="prestacionOrigen"', 'consulta de clínica médica', '@conceptosTurneables', 0);
         cy.plexButtonIcon('plus').eq(1).click();
         cy.plexButton('Guardar').click();
-        cy.wait('@guardarRegla').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[1].origen.organizacion.nombre).to.be.eq('HOSPITAL DE AREA RINCON DE LOS SAUCES');
-            expect(xhr.response.body[1].origen.prestaciones[0].prestacion.term).to.be.eq('consulta de urología');
-            expect(xhr.response.body[1].origen.prestaciones[0].prestacion.conceptId).to.be.eq('2301000013109');
-            expect(xhr.response.body[1].origen.prestaciones[1].prestacion.term).to.be.eq('consulta de clínica médica');
-            expect(xhr.response.body[1].origen.prestaciones[1].prestacion.conceptId).to.be.eq('401000013105');
+        cy.wait('@guardarRegla').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[1].origen.organizacion.nombre).to.be.eq('HOSPITAL DE AREA RINCON DE LOS SAUCES');
+            expect(response.body[1].origen.prestaciones[0].prestacion.term).to.be.eq('consulta de urología');
+            expect(response.body[1].origen.prestaciones[0].prestacion.conceptId).to.be.eq('2301000013109');
+            expect(response.body[1].origen.prestaciones[1].prestacion.term).to.be.eq('consulta de clínica médica');
+            expect(response.body[1].origen.prestaciones[1].prestacion.conceptId).to.be.eq('401000013105');
 
-            expect(xhr.response.body[1].destino.organizacion.nombre).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-            expect(xhr.response.body[1].destino.prestacion.term).to.be.eq('consulta de medicina general');
-            expect(xhr.response.body[1].destino.prestacion.conceptId).to.be.eq('391000013108');
+            expect(response.body[1].destino.organizacion.nombre).to.be.eq('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+            expect(response.body[1].destino.prestacion.term).to.be.eq('consulta de medicina general');
+            expect(response.body[1].destino.prestacion.conceptId).to.be.eq('391000013108');
         });
         cy.toast('success', 'Las reglas se guardaron correctamente');
     });
@@ -76,8 +77,8 @@ context('SOLICITUDES', () => {
 
         cy.plexButton('Nueva Solicitud de Entrada').click();
         cy.plexText('name="buscador"', '32589654');
-        cy.wait('@consultaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@consultaPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
 
         cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
@@ -85,8 +86,8 @@ context('SOLICITUDES', () => {
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@conceptosTurneables', 0);
 
-        cy.wait('@getReglas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getReglas').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexSelectType('label="Organización origen"', 'HOSPITAL DR. HORACIO HELLER');
         cy.plexSelectType('label="Tipos de Prestación Origen"', 'Consulta de clínica médica');
@@ -96,10 +97,10 @@ context('SOLICITUDES', () => {
             force: true
         });
         cy.plexButton('Guardar').click();
-        cy.wait('@guardarSolicitud').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
-            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
+        cy.wait('@guardarSolicitud').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
+            expect(response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
         cy.plexButtonIcon('chevron-down').click();
         cy.plexText('name="paciente"', 'SOLICITUD TEST');
@@ -110,7 +111,6 @@ context('SOLICITUDES', () => {
     });
 
     it('crear solicitud de entrada y auditarla', () => {
-        cy.server();
 
         cy.plexButton('Nueva Solicitud').click();
         cy.plexText('name="buscador"', '32589654');
@@ -118,9 +118,9 @@ context('SOLICITUDES', () => {
         cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
 
         cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
-        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de cirugía infantil', '@conceptosTurneables', '59ee2d9bf00c415246fd3d18');
-        cy.wait('@getReglas').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de cirugía infantil', '@conceptosTurneables', 0);
+        cy.wait('@getReglas').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
 
         cy.plexSelectType('label="Organización origen"', 'HOSPITAL DE AREA PLOTTIER');
@@ -134,32 +134,31 @@ context('SOLICITUDES', () => {
             force: true
         });
         cy.plexButton('Guardar').click();
-        cy.wait('@guardarSolicitud').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
-            expect(xhr.response.body.solicitud.historial[0].accion).to.be.eq('creacion');
+        cy.wait('@guardarSolicitud').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
+            expect(response.body.solicitud.historial[0].accion).to.be.eq('creacion');
 
         });
         cy.toast('success', 'Consulta de cirugía infantil');
         cy.plexButtonIcon('chevron-down').click();
         cy.plexSelectType('name="prestacionDestino"', 'Consulta de cirugía infantil');
 
-        cy.wait('@solicitudes').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@solicitudes').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
-        cy.get('plex-label').contains('CORTES, JAZMIN');
-        cy.get('plex-dropDown').click().get('a').contains('Auditar').click();
-        cy.plexButton('Responder').click();
-        cy.get('textarea').last().type('Una observacion', {
-            force: true
-        });
-        cy.plexButton('Confirmar').click();
-        cy.wait('@auditarSolicitud').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.estados[1].observaciones).to.be.eq('Una observacion');
+        cy.get('plex-label').contains('CORTES, JAZMIN').click();
+        cy.get('plex-layout-sidebar').plexIcon('lock-alert').click({ force: true })
+        cy.plexButton('Aceptar').click({ force: true });
+        cy.get('textarea').last().type('Una observacion', { force: true });
+        cy.plexIcon('check').click({ force: true });
+        cy.wait('@auditarSolicitud').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body.estados[1].observaciones).to.be.eq('Una observacion');
         });
     })
 });
+
 function formatDocumento(documentoPac) {
     // armamos un documento con puntos como se muestra en la lista de pacientes
     if (documentoPac) {
