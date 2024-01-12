@@ -127,9 +127,7 @@ context('SOLICITUDES', () => {
 
         cy.plexSelect('label="Tipos de Prestación Origen"', 0).click();
 
-        cy.plexSelectAsync('name="profesionalOrigen"', 'cortes jazmin', '@getProfesional', 0);
-
-
+        cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@getProfesional', 0);
         cy.get('textarea').last().type('Motivo de la solicitud', {
             force: true
         });
