@@ -140,4 +140,5 @@ export const permisosUsuario = [
     'log:*',
     'usuarios:*',
     'reportes:*',
+    'cda:*'
 ];
