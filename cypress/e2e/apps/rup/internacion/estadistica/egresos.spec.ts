@@ -68,7 +68,7 @@ describe('Capa Estadistica - Egresos', () => {
 
     it('Egreso completo', () => {
         cy.wait(400)
-        cy.get('plex-dropDown').plexIcon('menos').click().get('a').contains('Egresar paciente').click();
+        cy.plexDropdown('icon="menos"').first().click().get('a').contains('Egresar paciente').click();
 
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
         cy.plexSelectAsync('label="Diagnostico Principal al egreso"', 'Neumo', '@getDiagnostico', 0);
