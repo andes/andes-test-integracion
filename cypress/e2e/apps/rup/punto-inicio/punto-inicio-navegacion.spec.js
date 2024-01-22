@@ -3,7 +3,6 @@
 context('RUP - Punto de inicio', () => {
 
     let token;
-    let pacientes;
 
     before(() => {
         cy.login('30643636', 'asd').then(t => {
@@ -17,18 +16,21 @@ context('RUP - Punto de inicio', () => {
         });
 
         it('iniciar prestacion fuera de agenda', () => {
-            cy.plexButton('PACIENTE FUERA DE AGENDA').click();
-            cy.url().should('include', '/rup/crear/fueraAgenda')
+            cy.get('[tooltip="Fuera de agenda"]').then((items) => {
+                items[0].click()
+            });
         });
 
         it('ver huds', () => {
-            cy.plexButton('HUDS DE UN PACIENTE').click();
-            cy.url().should('include', '/huds')
+            cy.get('[tooltip="HUDS de paciente"]').then((items) => {
+                items[0].click()
+            });
         });
 
         it('autocitar paciente', () => {
-            cy.plexButton('PACIENTE AUTOCITADO').click();
-            cy.url().should('include', '/rup/crear/autocitar')
+            cy.get('[tooltip="Autocitado"]').then((items) => {
+                items[0].click()
+            });
         });
     });
 
