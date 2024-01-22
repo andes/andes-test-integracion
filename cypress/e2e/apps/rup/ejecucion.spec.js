@@ -28,9 +28,12 @@ context('RUP - Punto de inicio', () => {
         cy.intercept('GET', '**api/core-v2/mpi/pacientes?**').as('pacientes');
         cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
 
-        cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
-        cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
+        cy.get('[tooltip="Fuera de agenda"]').then((items) => {
+            items[0].click()
+        });
+
+        cy.plexSelectType('label="Seleccione el tipo de prestación"', 'consulta de medicina general')
 
         cy.plexText('name="buscador"', '3399661');
         cy.wait('@pacientes');
@@ -101,13 +104,15 @@ context('RUP - Punto de inicio', () => {
             force: true
         });
 
-        cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
-        cy.get('table tr').contains('consulta de medicina general').first().click();
-        cy.get('div[class="plex-box-content"] table').eq(1).plexButton('INICIAR PRESTACIÓN').click({
-            force: true
+        cy.plexSelectType('label="Prestación"', 'consulta de medicina general')
+
+        cy.get('plex-item').contains('consulta de medicina general').first().click();
+
+        cy.get('[tooltip="Iniciar Prestación"]').then((items) => {
+            items[0].click()
         });
-        cy.get('button').contains('CONFIRMAR').click();
-        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
+
+        cy.swal('confirm');
 
         cy.wait('@create').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
@@ -171,13 +176,16 @@ context('RUP - Punto de inicio', () => {
         cy.get('plex-radio[name="agendas"] input').eq(1).click({
             force: true
         });
-        cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
-        cy.get('table tr').contains('consulta de medicina general').first().click();
-        cy.get('div[class="plex-box-content"] table').eq(2).plexButton('INICIAR PRESTACIÓN').click({
-            force: true
+
+        cy.plexSelectType('label="Prestación"', 'consulta de medicina general')
+        
+        cy.get('plex-item').contains('consulta de medicina general').first().click();
+
+        cy.get('[tooltip="Iniciar Prestación"]').then((items) => {
+            items[0].click()
         });
-        cy.get('button').contains('CONFIRMAR').click();
-        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
+
+        cy.swal('confirm');
 
         cy.wait('@create').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
@@ -244,11 +252,11 @@ context('RUP - Punto de inicio', () => {
         cy.intercept('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
         cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
 
+        cy.get('[tooltip="Fuera de agenda"]').then((items) => {
+            items[0].click()
+        });
 
-        cy.plexButton('PACIENTE FUERA DE AGENDA').click();
-
-
-        cy.plexSelectType('name="nombrePrestacion"', 'consulta de medicina general');
+        cy.plexSelectType('label="Seleccione el tipo de prestación"', 'consulta de medicina general')
 
         cy.plexText('name="buscador"', '31549268');
         cy.get('paciente-listado plex-item').contains(formatDocumento('31549268')).click();
@@ -300,8 +308,14 @@ context('RUP - Punto de inicio', () => {
         });
         cy.plexButton('Punto de Inicio').click();
         cy.wait(2000);
-        cy.get('table tbody tr td').contains(' Fuera de agenda ').click({ force: true });
-        cy.get('tr td').contains("TURNO, PACIENTE ").parent().parent().plexButton(' VER HUDS ').click();
+
+        cy.get('[tooltip="HUDS de paciente"]').then((items) => {
+            items[0].click()
+        });
+
+        cy.plexText('name="buscador"', '31549268');
+
+        cy.get('plex-item').contains("TURNO, PACIENTE").click();
         cy.get('plex-radio').contains(' Procesos de Auditoría ').click({ force: true });
         cy.plexButton('ACEPTAR').click();
         cy.get('rup-hudsbusqueda .menu-buscador button').contains('PRESTACIONES').click();

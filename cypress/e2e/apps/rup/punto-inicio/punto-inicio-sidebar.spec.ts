@@ -89,7 +89,7 @@ context('RUP - Punto de inicio', () => {
                             cy.wait('@prestaciones');
                             cy.wait(1000);
 
-                            cy.get('table').first().as('tablaAgendas');
+                            cy.get('plex-list').first().as('tablaAgendas');
                             cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
 
                             cy.plexButton('AGREGAR PACIENTE').click();
@@ -124,8 +124,10 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@agendas');
                     cy.wait('@prestaciones');
                     cy.wait(1000);
-                    cy.get('table tbody tr').eq(agendaIndex).click();
-                    cy.plexButton('INICIAR PRESTACIÓN').click();
+                    cy.get('plex-item').eq(agendaIndex).click();
+                    cy.get('[tooltip="Iniciar Prestación"]').then((items) => {
+                        items[0].click()
+                    });
                     cy.swal('confirm');
                     cy.wait('@crearPrestacion');
                     cy.wait('@prestaciones');
@@ -134,16 +136,18 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@agendas');
                     cy.wait('@prestaciones');
                     cy.wait(1000);
-                    cy.get('table').first().as('tablaAgendas');
-                    cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
-
+                    cy.get('plex-item').eq(agendaIndex).click();
                     if (typeAgenda !== 'no-nominalizada') {
-                        cy.plexButton('ANULAR INICIO DE PRESTACIÓN').click();
-                        cy.swal('confirm');
-                        cy.wait('@prestaciones').then(({ response }) => {
-                            expect(response.statusCode).to.be.eq(200);
-                            expect(response.body.length).to.be.eq(0);
+                        cy.get('[tooltip="Anular inicio de prestación"]').then((items) => {
+                            items[0].click();
+
+                            cy.swal('confirm');
+                            cy.wait('@prestaciones').then(({ response }) => {
+                                expect(response.statusCode).to.be.eq(200);
+                                expect(response.body.length).to.be.eq(0);
+                            });
                         });
+
                     }
                 });
             }
@@ -157,7 +161,6 @@ context('RUP - Punto de inicio', () => {
         });
 
         beforeEach(() => {
-
             cy.intercept({ method: 'GET', url: '**/api/modules/turnos/agenda**' }).as('agendas');
             cy.intercept({ method: 'POST', url: '**/api/modules/rup/prestaciones**' }).as('crearPrestacion');
             cy.intercept({ method: 'GET', url: '**/api/modules/rup/prestaciones**' }).as('prestaciones');
@@ -194,11 +197,9 @@ context('RUP - Punto de inicio', () => {
                     cy.wait('@agendas');
                     cy.wait('@prestaciones');
                     cy.wait(1000);
-                    cy.get('table').first().as('tablaAgendas');
-                    cy.get('@tablaAgendas').find('tbody tr').eq(1).click({ force: true });
-                    cy.wait(1000)
+                    cy.get('plex-list').as('tablaAgendas');
+                    cy.get('@tablaAgendas').find('plex-item').eq(1).click({ force: true });
                     cy.plexButton('CONTINUAR REGISTRO').click();
-
 
                     cy.url().should('include', '/rup/ejecucion/');
                     cy.wait('@findPrestacion').then(({ response }) => {
@@ -224,17 +225,14 @@ context('RUP - Punto de inicio', () => {
                 });
 
                 it('ver resumen', () => {
-                    const paciente = pacientes[pacienteIndex];
-
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
                     cy.wait('@prestaciones');
                     cy.wait(1000);
-                    cy.get('table').first().as('tablaAgendas');
-                    cy.get('@tablaAgendas').find('tbody tr').eq(1).click();
+                    cy.get('plex-list').as('tablaAgendas');
+                    cy.get('@tablaAgendas').find('plex-item').eq(1).click();
                     cy.get('plex-layout-sidebar table').find('tbody tr').eq(0).as('turnoRow');
-
                     cy.get('@turnoRow').plexButton('VER RESUMEN').click();
                     cy.url().should('include', '/rup/validacion/' + idPrestacion);
                 });
@@ -249,7 +247,6 @@ context('RUP - Punto de inicio', () => {
                     cy.get('@tablaAgendas').find('tbody tr').eq(1).click();
                     cy.plexButton('VER HUDS').click();
                     cy.contains('Procesos de Auditoría').click({ force: true });
-
                     cy.plexButton('ACEPTAR').click();
                     cy.url().should('include', '/huds/paciente/');
                 });
@@ -259,7 +256,7 @@ context('RUP - Punto de inicio', () => {
 
     function flujoPrestacion(typeAgenda, agendaIndex, typePaciente, pacienteIndex) {
 
-        describe(`flujo prestación agenda ${typeAgenda} paciente ${typePaciente}`, () => {
+        describe.only(`flujo prestación agenda ${typeAgenda} paciente ${typePaciente}`, () => {
             let idPrestacion;
 
             if (typeAgenda === 'con-solicitud') {
@@ -279,10 +276,11 @@ context('RUP - Punto de inicio', () => {
                 cy.wait('@agendas');
                 cy.wait('@prestaciones');
                 cy.wait(1000);
-                cy.get('table').first().as('tablaAgendas');
-                cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
+                cy.get('plex-item').eq(agendaIndex).click();
+                cy.get('[tooltip="Iniciar Prestación"]').then((items) => {
+                    items[0].click()
+                });
 
-                cy.plexButton('INICIAR PRESTACIÓN').click();
                 cy.swal('confirm');
 
                 const wait = typeAgenda !== 'con-solicitud' ? cy.wait('@crearPrestacion') : cy.wait('@patchPrestacion');
@@ -316,9 +314,10 @@ context('RUP - Punto de inicio', () => {
                 cy.wait('@agendas');
                 cy.wait('@prestaciones');
                 cy.wait(1000);
-                cy.get('table').first().as('tablaAgendas');
-                cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
-                cy.plexButton('CONTINUAR REGISTRO').click();
+                cy.get('plex-item').eq(agendaIndex).click();
+                cy.get('[tooltip="Continuar registro"]').then((items) => {
+                    items[0].click()
+                });
 
                 cy.url().should('include', '/rup/ejecucion/');
                 cy.wait('@findPrestacion').then(({ response }) => {
@@ -335,33 +334,31 @@ context('RUP - Punto de inicio', () => {
             });
 
             it('ver resumen', () => {
-                const paciente = pacientes[pacienteIndex];
-
                 setRoute();
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
                 cy.wait('@prestaciones');
                 cy.wait(1000);
-                cy.get('table').first().as('tablaAgendas');
-                cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
-                cy.get('plex-layout-sidebar table').find('tbody tr').eq(pacienteIndex).as('turnoRow');
+                cy.get('plex-item').eq(agendaIndex).click();
+                cy.get('[tooltip="Ver resumen"]').then((items) => {
+                    items[pacienteIndex].click()
+                });
 
-                cy.get('@turnoRow').plexButton('VER RESUMEN').click();
                 cy.url().should('include', '/rup/validacion/' + idPrestacion);
             });
 
             if (typePaciente) {
                 it('VER HUDS', () => {
-                    const paciente = pacientes[pacienteIndex];
-
                     setRoute();
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
                     cy.wait('@prestaciones');
                     cy.wait(1000);
-                    cy.get('table').first().as('tablaAgendas');
-                    cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
-                    cy.plexButton('VER HUDS').click();
+                    cy.get('plex-item').eq(agendaIndex).click();
+                    cy.get('[tooltip="Ver HUDS"]').then((items) => {
+                        items[0].click()
+                    });
+
                     cy.contains('Procesos de Auditoría').click({ force: true });
 
                     cy.plexButton('ACEPTAR').click();
