@@ -42,18 +42,17 @@ const moment = require('moment');
             });
 
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
-            cy.get('plex-layout-sidebar').plexButtonIcon('menos').click();
-            cy.plexButton('Pase de unidad organizativa').click();
+            cy.plexDropdown('icon="menos"').first().click().get('a').contains('Pase de unidad organizativa').click();
 
             cy.plexSelectType('label="Cama"', 'CAMA');
 
             cy.plexButtonIcon('check').click();
 
-            cy.wait('@patchCamaEstados').then(({ response }) => {
+            cy.wait('@egresoSalaComun').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
             });
 
-            cy.wait('@egresoSalaComun').then(({ response }) => {
+            cy.wait('@patchCamaEstados').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
             });
 

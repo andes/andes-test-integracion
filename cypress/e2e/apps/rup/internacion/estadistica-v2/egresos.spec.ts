@@ -75,7 +75,6 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
 
         cy.goto('/mapa-camas/listado-internacion-unificado/estadistica-v2', token);
         cy.url().should('include', 'listado-internacion-unificado');
-        //cy.wait('@getPrestaciones');
         cy.get('table tbody tr td').contains(pacientes[2].nombre).first().click();
         cy.wait('@getPaciente');
         cy.wait('@getResumen');
