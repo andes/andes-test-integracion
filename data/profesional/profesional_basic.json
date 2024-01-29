@@ -631,7 +631,8 @@
 		"fechaNacimiento": {
 			"$date": "1995-12-12T03:00:00.000Z"
 		},
-		"profesionalMatriculado": false
+		"profesionalMatriculado": false,
+		"habilitado": true
 	},
 	{
 		"_id": {
