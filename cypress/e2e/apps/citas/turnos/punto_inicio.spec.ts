@@ -4,6 +4,12 @@ context('punto de inicio', () => {
     let pacientes = [];
     let paciente;
     let turno;
+    let financiador = [{
+        codigoPuco: 1,
+        financiador: "MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES",
+        nombre: "MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES"
+    }];
+
     before(() => {
         // Borro los datos de la base antes de los test
         cy.seed();
@@ -319,6 +325,10 @@ context('punto de inicio', () => {
         it('Verificar obra social de un paciente ' + type, () => {
             cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*', req => {
                 delete req.headers['if-none-match']
+
+                req.continue((res) => {
+                    res.body.financiador = financiador;
+                })
             }).as('getPaciente');
 
             cy.plexText('name="buscador"', pacientes[i].documento);
@@ -333,7 +343,11 @@ context('punto de inicio', () => {
         });
 
         it('Sacar turno y seleccionar prepaga ' + type, () => {
-            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*').as('getPaciente');
+            cy.intercept('GET', '**/api/core-v2/mpi/pacientes/*', req => {
+                req.continue((res) => {
+                    res.body.financiador = financiador;
+                })
+            }).as('getPaciente');
             cy.intercept('GET', '**/api/modules/turnos/historial?*').as('getHistorial');
             cy.intercept('GET', '**/api/modules/carpetas/carpetasPacientes?**', req => {
                 delete req.headers['if-none-match'] // evita que responda con datos de caché (statusCode 304)
