@@ -12,7 +12,7 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
                 vincularInformePrestacion: true,    // vinculamos el resumen con la prestación (informe)
                 organizacion: user.organizaciones[0],
                 configCamas: [
-                    { pacientes: [pacientes[2]], estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate(), unidadOrganizativa: "3191000013108" }
+                    { pacientes: [pacientes[2]], extras: { ingreso: true }, estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate(), unidadOrganizativa: "3191000013108" }
                 ]
             });
         });
@@ -20,7 +20,7 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
 
     beforeEach(() => {
         cy.intercept('GET', '**/api/modules/rup/internacion/prestaciones?**').as('getPrestaciones');
-        cy.intercept('GET', '**/api/modules/rup/internacion/internacion-resumen?**').as('getResumen');
+        cy.intercept('GET', '**/api/modules/rup/internacion/listado-internacion?**').as('getResumen');
         cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/internacion-resumen/**').as('patchResumen');
         cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
@@ -86,7 +86,6 @@ describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
         cy.plexSelectAsync('label="Diagnostico Principal al egreso"', 'Neumo', '@getDiagnostico', 0);
         cy.plexSelectAsync('label="Otros Diagnósticos"', 'Otros trastornos', '@getDiagnostico', 0);
         cy.plexSelectAsync('label="Otras circunstancias que prolongan la internación"', 'Mutismo', '@getDiagnostico', 0);
-
 
         cy.plexButtonIcon('check').click();
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
