@@ -34,22 +34,23 @@ context('Seguimiento Epidemiológico', () => {
         }).as('buscarSeguimiento');
         cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.intercept('GET', '**/api/core/tm/organizaciones?**').as('getOrganizaciones');
-        cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('paciente');
 
 
     })
 
     it('Iniciar seguimiento epidemiologico', () => {
         cy.plexButton('Buscar').click();
-        cy.wait('@buscarSeguimiento').then(({response}) => {
+        cy.wait('@buscarSeguimiento').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
+        cy.wait(500)    // porque el listado tarda mil horas en cargarse
 
         cy.plexButton('Iniciar').click();
-        cy.wait('@postPrestacion').then(({response}) => {
+        cy.wait('@postPrestacion').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
-        cy.wait('@getPrestacion').then(({response}) => {
+        cy.wait('@getPrestacion').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
 
@@ -57,32 +58,34 @@ context('Seguimiento Epidemiológico', () => {
         cy.seleccionarConcepto(0);
         cy.plexButton('Guardar consulta de seguimiento de paciente asociado a infección por COVID-19').click();
 
-        cy.wait('@patchPrestacion').then(({response}) => {
+        cy.wait('@patchPrestacion').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
         cy.wait('@paciente');
-        cy.wait('@getPrestacion').then(({response}) => {
+        cy.wait('@getPrestacion').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.length).to.be.eq(0);
         })
         cy.toast('success');
-        cy.wait('@paciente');
-        cy.plexButton('Validar consulta de seguimiento de paciente asociado a infección por COVID-19').click();
+
+        cy.url().should('include', 'validacion');
+        cy.wait(1000)
+        cy.plexButton(' Validar consulta de seguimiento de paciente asociado a infección por COVID-19 ').click();
         cy.get('button').contains('CONFIRMAR').click();
 
-        cy.wait('@patchPrestacion').then(({response}) => {
+        cy.wait('@patchPrestacion').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.wait('@getPrestacion').then(({response}) => {
+        cy.wait('@getPrestacion').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         })
 
-        cy.plexButton('SEGUIMIENTO').click();
+        cy.plexButton('SEGUIMIENTO').click({ force: true });
 
         cy.plexSelectType('label="Estado"', 'Pendiente');
         cy.plexButton('Buscar').click();
-        cy.wait('@buscarSeguimiento').then(({response}) => {
+        cy.wait('@buscarSeguimiento').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
 
@@ -91,7 +94,7 @@ context('Seguimiento Epidemiológico', () => {
         cy.plexButtonIcon('chevron-down').click();
         cy.plexText('name="documento"', validado.documento);
         cy.plexButton('Buscar').click();
-        cy.wait('@buscarSeguimiento').then(({response}) => {
+        cy.wait('@buscarSeguimiento').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.data[0].paciente.documento).to.be.eq(validado.documento);
             expect(response.body.data[0].paciente.apellido).to.be.eq(validado.apellido);
@@ -106,10 +109,10 @@ context('Seguimiento Epidemiológico', () => {
         cy.wait('@buscarSeguimiento');
         cy.plexBool('name="all"', true);
         cy.plexButton('Asignar').click();
-        cy.plexSelectAsync('name="profesional"', 'PRUEBA USUARIO', '@getProfesionales', 0);
+        cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexButton('Guardar').click();
-        cy.toast('success').click({force: true});
-        cy.wait('@buscarSeguimiento').then(({response}) => {
+        cy.toast('success').click({ force: true });
+        cy.wait('@buscarSeguimiento').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             cy.plexButtonIcon('pencil').click();
         });
@@ -120,11 +123,10 @@ context('Seguimiento Epidemiológico', () => {
             token = t;
             cy.goto('/epidemiologia/seguimiento', token);
         });
-        cy.wait('@buscarSeguimiento').then(({response}) => {
+        cy.wait('@buscarSeguimiento').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.data[0].paciente.apellido).to.be.eq('EPIDEMIO');
             expect(response.body.data[0].paciente.documento).to.be.eq('33650500');
-
         });
     });
 })
