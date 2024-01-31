@@ -170,6 +170,7 @@ context('RUP - Punto de inicio', () => {
             cy.intercept({ method: 'GET', url: '**api/modules/cde/paciente**' }).as('paciente');
             cy.intercept({ method: 'GET', url: '/api/modules/rup/prestaciones/huds/**' }).as('huds');
             cy.intercept({ method: 'GET', url: '/api/modules/top/reglas**' }).as('reglas');
+            cy.intercept('GET', '/api/modules/huds/motivosHuds/motivosHuds**', { fixture: 'huds/modalHuds.json' }).as('motivosHuds');
 
         });
 
@@ -199,6 +200,8 @@ context('RUP - Punto de inicio', () => {
                     cy.wait(1000);
                     cy.get('plex-list').as('tablaAgendas');
                     cy.get('@tablaAgendas').find('plex-item').eq(1).click({ force: true });
+                    cy.wait('@motivosHuds');
+                    cy.wait(1000)
                     cy.plexButton('CONTINUAR REGISTRO').click();
 
                     cy.url().should('include', '/rup/ejecucion/');
@@ -246,6 +249,8 @@ context('RUP - Punto de inicio', () => {
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(1).click();
                     cy.plexButton('VER HUDS').click();
+                    cy.wait(500);
+                    cy.wait('@motivosHuds');
                     cy.contains('Procesos de Auditoría').click({ force: true });
                     cy.plexButton('ACEPTAR').click();
                     cy.url().should('include', '/huds/paciente/');
@@ -268,6 +273,10 @@ context('RUP - Punto de inicio', () => {
                     });
                 });
             }
+            beforeEach(() => {
+                cy.intercept('GET', '/api/modules/huds/motivosHuds/motivosHuds**', { fixture: 'huds/modalHuds.json' }).as('motivosHuds');
+
+            });
 
             it('iniciar prestacion', () => {
                 const paciente = typePaciente && pacientes[pacienteIndex];
@@ -283,6 +292,8 @@ context('RUP - Punto de inicio', () => {
 
                 cy.swal('confirm');
 
+                cy.swal('confirm');
+                cy.wait('@motivosHuds');
                 const wait = typeAgenda !== 'con-solicitud' ? cy.wait('@crearPrestacion') : cy.wait('@patchPrestacion');
                 wait.then(xhr => {
                     idPrestacion = xhr.response.body.id;
@@ -316,7 +327,9 @@ context('RUP - Punto de inicio', () => {
                 cy.wait(1000);
                 cy.get('plex-item').eq(agendaIndex).click();
                 cy.get('[tooltip="Continuar registro"]').then((items) => {
-                    items[0].click()
+                    items[0].click();
+                    cy.wait('@motivosHuds');
+
                 });
 
                 cy.url().should('include', '/rup/ejecucion/');
@@ -339,6 +352,8 @@ context('RUP - Punto de inicio', () => {
                 cy.wait('@agendas');
                 cy.wait('@prestaciones');
                 cy.wait(1000);
+                cy.wait('@motivosHuds');
+                cy.wait(1000);
                 cy.get('plex-item').eq(agendaIndex).click();
                 cy.get('[tooltip="Ver resumen"]').then((items) => {
                     items[pacienteIndex].click()
@@ -356,7 +371,9 @@ context('RUP - Punto de inicio', () => {
                     cy.wait(1000);
                     cy.get('plex-item').eq(agendaIndex).click();
                     cy.get('[tooltip="Ver HUDS"]').then((items) => {
-                        items[0].click()
+                        items[0].click();
+                        cy.wait(500);
+                        cy.wait('@motivosHuds');
                     });
 
                     cy.contains('Procesos de Auditoría').click({ force: true });

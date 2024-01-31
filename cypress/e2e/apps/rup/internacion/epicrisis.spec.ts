@@ -4,6 +4,7 @@ context("RUP - Epicrisis", () => {
   let token;
   const paciente = "3399661";
   before(() => {
+    cy.intercept('GET', '/api/modules/huds/motivosHuds/motivosHuds**', { fixture: 'huds/modalHuds.json' }).as('motivosHuds');
     cy.seed();
     cy.login("38906735", "asd").then(t => {
       token = t;

@@ -26,6 +26,7 @@ context('prestaciones', () => {
             cy.intercept('GET', '/api/modules/cda/paciente/**', []).as('cda');
             cy.intercept('GET', '/api/core/term/snomed/**', []).as('search');
             cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+            cy.intercept('GET', '/api/modules/huds/motivosHuds/motivosHuds**', { fixture: 'huds/modalHuds.json' }).as('motivosHuds');
 
             cy.get('[tooltip="Fuera de agenda"]').then((items) => {
                 items[0].click()
@@ -37,6 +38,8 @@ context('prestaciones', () => {
             cy.get('paciente-listado plex-item').contains(paciente.nombre).click();
 
             cy.plexButton('INICIAR PRESTACIÓN').click();
+            cy.wait('@motivosHuds')
+
             cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
 
             cy.wait('@create').then(({ response }) => {
