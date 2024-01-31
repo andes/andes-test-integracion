@@ -2,30 +2,27 @@
 
 context('RUP - Ejecucion', () => {
     let token;
+    let idPaciente;
 
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => token = t);
-        cy.task('database:seed:paciente');
+        cy.task('database:seed:paciente').then(p => idPaciente = p[0]._id)
     });
-
 
     describe('agregar conceptos', () => {
         let idPrestacion;
 
         beforeEach(() => {
-            cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('GET', '/api/core/**', []).as('huds');
-            cy.route('GET', '/api/modules/seguimiento-paciente**', []);
-
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
+            cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             cy.cleanDB(['prestaciones']);
 
             cy.task(
                 'database:seed:prestacion',
-                { paciente: '586e6e8627d3107fde116cdb', tipoPrestacion: '5cdc4c865cd661b503d727a6' }
+                { paciente: idPaciente, tipoPrestacion: '5cdc4c865cd661b503d727a6' }
             ).then((prestacion) => {
                 idPrestacion = prestacion._id;
                 cy.goto('/rup/ejecucion/' + idPrestacion, token);
@@ -33,10 +30,8 @@ context('RUP - Ejecucion', () => {
 
         })
 
-
         it('agregar conceptos desde el buscador', () => {
             cy.snomedSearchStub('fiebre', 'mitos/fiebre.json', 'rup-buscador');
-
 
             cy.RupBuscarConceptos('fiebre');
             cy.seleccionarConcepto(0);
@@ -77,32 +72,30 @@ context('RUP - Ejecucion', () => {
             cy.plexButton("Guardar sesión de informes de enfermería").click();
 
             cy.assertRupCard(0, { semanticTag: 'hallazgo', term: 'fiebre crónica' });
-
         });
     });
+
 
     describe('evolucionar trastorno', () => {
         let idPrestacion;
 
         before(() => {
-            cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('GET', '/api/modules/seguimiento-paciente**', []);
-            cy.route('GET', '/api/modules/huds/accesos**', []);
-            cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
-
-
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
+            cy.intercept('GET', '/api/modules/huds/accesos**', []);
+            cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+            cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             cy.cleanDB(['prestaciones']);
 
-            cy.task(
-                'database:seed:prestacion',
+            cy.task('database:seed:prestacion',
                 {
-                    paciente: '586e6e8627d3107fde116cdb',
+                    paciente: idPaciente,
                     tipoPrestacion: '5cdc4c865cd661b503d727a6',
                     estado: 'validada',
+                    fecha: Cypress.moment().subtract(1, 'day').toDate(),
                     registros: [{
+                        id: "5f772b7ac9264781190bc794",
                         concepto: {
                             "conceptId": "186788009",
                             "term": "fiebre Q",
@@ -111,25 +104,23 @@ context('RUP - Ejecucion', () => {
                         },
                         valor: {
                             "estado": "activo",
-                            "fechaInicio": new Date(),
-                            "evolucion": "<p>hola mundo</p>"
+                            "fechaInicio": Cypress.moment().subtract(1, 'day'),
+                            "evolucion": "<p>una evolución</p>"
                         },
                     }]
                 }
-            );
+            )
 
-            cy.task(
-                'database:seed:prestacion',
-                { paciente: '586e6e8627d3107fde116cdb', tipoPrestacion: '5cdc4c865cd661b503d727a6' }
+            cy.task('database:seed:prestacion',
+                { paciente: idPaciente, tipoPrestacion: '5cdc4c865cd661b503d727a6' }
             ).then((prestacion) => {
                 idPrestacion = prestacion._id;
                 cy.goto('/rup/ejecucion/' + idPrestacion, token);
             });
-
         });
 
         it('evolucionar trastorno desde buscador', () => {
-            cy.route('GET', '/api/core/term/snomed/expression?expression=**', []);
+            cy.intercept('GET', '/api/core/term/snomed/expression?expression=**', []);
             cy.wait('@paciente');
             cy.snomedSearchStub('fiebre', 'mitos/fiebre.json', 'rup-buscador');
             cy.RupBuscarConceptos('fiebre');
@@ -138,7 +129,6 @@ context('RUP - Ejecucion', () => {
 
             cy.assertRupCard(0, { semanticTag: 'trastorno', term: 'fiebre Q' }).then(($elem) => {
                 cy.wrap($elem).contains('Inicio del Hallazgo');
-                // cy.wrap($elem).should('not.contain', 'plex-int');
             });
 
             cy.removeRupCard(0);
@@ -161,8 +151,7 @@ context('RUP - Ejecucion', () => {
         });
 
         it('ver trastorno en HUDS', () => {
-            cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
             cy.HudsBusquedaFiltros('trastorno');
 

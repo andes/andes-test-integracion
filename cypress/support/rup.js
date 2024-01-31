@@ -33,7 +33,6 @@ Cypress.Commands.add('expressionStub', (expression, response, alias = 'snomed-ex
 });
 
 Cypress.Commands.add('RupBuscarConceptos', (term, type = 'BUSCADOR BÁSICO', alias = 'rup-buscador') => {
-    cy.log('BUSQUEDA SNOMED' + term);
     cy.get('rup-buscador button', { log: false }).contains(type, { log: false }).click();
     if (type === 'BUSCADOR BÁSICO') {
         cy.get('snomed-buscar', { log: false }).plexText('name="searchTerm"', term);
