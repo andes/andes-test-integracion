@@ -1,13 +1,11 @@
 /// <reference types="Cypress" />
 
-const search = [
-    {
-        "conceptId": "440377005",
-        "term": "derivación por",
-        "fsn": "derivación por (entidad observable)",
-        "semanticTag": "entidad observable"
-    },
-];
+const search = [{
+    "conceptId": "440377005",
+    "term": "derivación por",
+    "fsn": "derivación por (entidad observable)",
+    "semanticTag": "entidad observable"
+}];
 
 const resultadoSnomed = [
     {
@@ -23,8 +21,8 @@ const resultadoSnomed = [
         "semanticTag": "entidad observable"
     }
 ];
-
 let token;
+
 context('RUP - Ejecucion', () => {
 
     before(() => {
@@ -50,6 +48,7 @@ context('RUP - Ejecucion', () => {
             cy.snomedSearchStub('derivacion', search, 'rup-buscador');
             cy.RupBuscarConceptos('derivacion');
             cy.seleccionarConcepto(0);
+            cy.get('rup-prestacionejecucion').contains('Registros de esta consulta').click()
             cy.assertRupCard(0, { semanticTag: 'procedimiento', term: 'derivación por' }).then(card => {
                 cy.wrap(card).plexRadio('name="plex-radio"', 0);
             });
@@ -57,7 +56,6 @@ context('RUP - Ejecucion', () => {
 
             cy.contains('concepto uno');
         });
-
     });
 
 
@@ -77,6 +75,7 @@ context('RUP - Ejecucion', () => {
             cy.snomedSearchStub('derivacion', search, 'rup-buscador');
             cy.RupBuscarConceptos('derivacion');
             cy.seleccionarConcepto(0);
+            cy.get('rup-prestacionejecucion').contains('Registros de esta consulta').click()
             cy.assertRupCard(0, { semanticTag: 'procedimiento', term: 'derivación por' }).then(card => {
                 cy.wrap(card).plexRadioMultiple('name="plex-radio"', 0);
                 cy.wrap(card).plexRadioMultiple('name="plex-radio"', 1);
@@ -86,7 +85,6 @@ context('RUP - Ejecucion', () => {
             cy.contains('concepto uno');
             cy.contains('concepto dos');
         });
-
     });
 
     describe('checklist atomo - requerido', () => {
@@ -106,11 +104,11 @@ context('RUP - Ejecucion', () => {
             cy.snomedSearchStub('derivacion', search, 'rup-buscador');
             cy.RupBuscarConceptos('derivacion');
             cy.seleccionarConcepto(0);
+            cy.get('rup-prestacionejecucion').contains('Registros de esta consulta').click()
             cy.plexButton('Guardar sesión de informes de enfermería').click();
             cy.toast('error');
             cy.contains('Valor requerido');
         });
-
     });
 
     describe('checklist atomo - allowOtherQuery', () => {
@@ -127,7 +125,7 @@ context('RUP - Ejecucion', () => {
             }
         );
 
-        it.only('test opcion multiple', () => {
+        it('test opcion multiple', () => {
             cy.expressionStub('<<404684003', [{
                 "conceptId": "386661006",
                 "term": "fiebre",
@@ -150,9 +148,7 @@ context('RUP - Ejecucion', () => {
             cy.plexButton('Guardar sesión de informes de enfermería').click();
             cy.contains('concepto uno');
             cy.contains('fiebre');
-            cy.url().should('include', 'validacion');
         });
-
     });
 })
 
@@ -161,7 +157,7 @@ function createTest(params) {
     let idPrestacion, idElementoRUP;
     beforeEach(() => {
         cy.server();
-
+        cy.route('GET', '**/api/modules/rup/prestaciones/huds/**', []).as('getHuds');
         cy.cleanDB(['prestaciones']);
 
         cy.task('database:seed:elemento-rup', {

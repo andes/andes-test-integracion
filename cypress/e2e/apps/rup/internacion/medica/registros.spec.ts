@@ -52,6 +52,7 @@ let i = 0;
         it('ver registros de un paciente', () => {
             cy.getCama(pacientes[0].apellido).click();
             cy.plexTab('INTERNACION').click();
+            cy.wait(2000)
             cy.plexOptions('REGISTROS').click();
             cy.modalPrivacidad(true);
 

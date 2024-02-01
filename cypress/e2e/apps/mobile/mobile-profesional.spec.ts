@@ -43,18 +43,17 @@ context('mobile profesional', () => {
             console.log(err);
             return false;
         })
-        cy.server();
         cy.intercept('POST', '**/api/modules/mobileApp/login').as('login');
         cy.intercept('POST', '**/api/auth/login').as('loginProfesional');
         cy.intercept('GET', '**/api/modules/mobileApp/prestaciones-adjuntar').as('prestaciones-adjuntar');
         cy.intercept('PATCH', '**/api/modules/mobileApp/prestaciones-adjuntar/**').as('patch-adjuntar');
-
-
+        cy.intercept('GET', '**/api/modules/rup/prestaciones/huds/**', []).as('getHuds')
+        cy.intercept('GET', '/api/core/term/snomed/expression?expression=**', []).as('snomed');
     });
 
 
     it('cargar adjunto', () => {
-        cy.intercept('POST', '/api/drive**').as('store');
+        cy.intercept('POST', '/api/drive**', []).as('store');
         cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
         cy.goto('/rup/ejecucion/' + idPrestacion, token);
@@ -87,6 +86,7 @@ context('mobile profesional', () => {
         );
 
         cy.goto("/mobile/");
+        cy.url().should('include', '/mobile/home');
         cy.get('.nologin').click();
         cy.get('input').first().type('30643636');
         cy.get('#password').first().type('asd');

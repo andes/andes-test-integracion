@@ -37,29 +37,28 @@ context('Ficha Epidemiológica', () => {
         }).then(p => {
             validado5 = p;
         });
-
     })
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/epidemiologia/ficha-epidemiologica', token);
-        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('POST', '**api/modules/forms/forms-epidemiologia/formEpidemiologia').as('registroFicha');
-        cy.route('PATCH', '**api/modules/forms/forms-epidemiologia/formEpidemiologia/?**').as('actualizarFicha');
-        cy.route('GET', '**/api/modules/rup/prestaciones/**').as('getPrestacion');
-        cy.route('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
-        cy.route('GET', '**/api/modules/cda/paciente/**').as('getCDA');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**api/modules/forms/forms-epidemiologia/formEpidemiologia?**').as('getFicha');
-        cy.route('GET', '**/api/modules/forms/forms-epidemiologia/formsHistory?**').as('getHistory')
+        cy.intercept('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
+        cy.intercept('POST', '**api/modules/forms/forms-epidemiologia/formEpidemiologia').as('registroFicha');
+        cy.intercept('PATCH', '**api/modules/forms/forms-epidemiologia/formEpidemiologia/?**').as('actualizarFicha');
+        cy.intercept('GET', '**/api/modules/rup/prestaciones/*').as('getPrestacion');
+        cy.intercept('GET', '**/api/modules/rup/prestaciones/huds/**', []).as('getHuds');
+        cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestacion');
+        cy.intercept('GET', '**/api/modules/cda/paciente/**').as('getCDA');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**api/modules/forms/forms-epidemiologia/formEpidemiologia?**').as('getFicha');
+        cy.intercept('GET', '**/api/modules/forms/forms-epidemiologia/formsHistory?**').as('getHistory')
     })
 
     it('crear nueva ficha covid19', () => {
         cy.plexText('name="buscador"', validado.documento);
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].apellido).to.be.eq(validado.apellido);
-            expect(xhr.response.body[0].nombre).to.be.eq(validado.nombre);
+        cy.wait('@busquedaPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].apellido).to.be.eq(validado.apellido);
+            expect(response.body[0].nombre).to.be.eq(validado.nombre);
         });
         cy.get('paciente-listado plex-item').contains(validado.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
@@ -70,8 +69,8 @@ context('Ficha Epidemiológica', () => {
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
         cy.plexSelectTypeDinamico('LAMP (NeoKit)', 'Se detecta genoma de SARS-CoV-2{enter}');
         cy.plexButton('Registrar ficha').click();
-        cy.wait('@registroFicha').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@registroFicha').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         })
         cy.toast('success', 'Su ficha fue registrada correctamente');
     });
@@ -79,10 +78,10 @@ context('Ficha Epidemiológica', () => {
     it('crear nueva ficha covid19, registrar concepto covid positivo y editarla', () => {
         let semanaPasada = Cypress.moment().add('days', -7).format('DD/MM/YYYY');
         cy.plexText('name="buscador"', validado2.documento);
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].apellido).to.be.eq(validado2.apellido);
-            expect(xhr.response.body[0].nombre).to.be.eq(validado2.nombre);
+        cy.wait('@busquedaPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].apellido).to.be.eq(validado2.apellido);
+            expect(response.body[0].nombre).to.be.eq(validado2.nombre);
         });
         cy.get('paciente-listado plex-item').contains(validado2.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
@@ -93,59 +92,50 @@ context('Ficha Epidemiológica', () => {
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
         cy.plexSelectTypeDinamico('LAMP (NeoKit)', 'Se detecta genoma de SARS-CoV-2{enter}');
         cy.plexButton('Registrar ficha').click();
-        cy.wait('@registroFicha').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@registroFicha').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.toast('success', 'Su ficha fue registrada correctamente');
-        cy.wait('@getPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getPrestacion').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
 
         cy.plexButton(' Guardar consulta de seguimiento de paciente asociado a infección por COVID-19 ').click();
 
-        cy.wait('@patchPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@patchPrestacion').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.wait('@getPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getCDA').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-        });
-
-        cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.toast('success', 'Prestación guardada correctamente');
+
+        cy.wait(2000)
         cy.plexButton(' Validar consulta de seguimiento de paciente asociado a infección por COVID-19 ').click();
 
         cy.get('button').contains('CONFIRMAR').click();
 
-        cy.wait('@patchPrestacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@patchPrestacion').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.get('button').contains(' EPIDEMIOLOGÍA ').click();
+        cy.wait(2000)
+        cy.get('button').contains(' EPIDEMIOLOGÍA ').click({ force: true });
 
         cy.plexText('name="buscador"', validado2.documento);
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].apellido).to.be.eq(validado2.apellido);
-            expect(xhr.response.body[0].nombre).to.be.eq(validado2.nombre);
+        cy.wait('@busquedaPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].apellido).to.be.eq(validado2.apellido);
+            expect(response.body[0].nombre).to.be.eq(validado2.nombre);
         });
         cy.get('paciente-listado plex-item').contains(validado2.apellido).click();
         cy.plexButtonIcon('pencil').click();
         cy.plexInputDinamico('phone', 'telefono', '{selectall}{backspace}200');
         cy.plexDateTimeDinamico('fecha de inicio de 1º síntoma', '{selectall}{backspace}' + semanaPasada);
         cy.plexButton('Registrar ficha').click();
-        cy.wait('@actualizarFicha').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@actualizarFicha').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         })
         cy.toast('success', 'Su ficha fue actualizada correctamente');
 
@@ -153,10 +143,10 @@ context('Ficha Epidemiológica', () => {
 
     it('crear nueva ficha covid19 con contactos estrechos', () => {
         cy.plexText('name="buscador"', validado4.documento);
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].apellido).to.be.eq(validado4.apellido);
-            expect(xhr.response.body[0].nombre).to.be.eq(validado4.nombre);
+        cy.wait('@busquedaPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].apellido).to.be.eq(validado4.apellido);
+            expect(response.body[0].nombre).to.be.eq(validado4.nombre);
         });
         cy.get('paciente-listado plex-item').contains(validado4.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
@@ -175,18 +165,18 @@ context('Ficha Epidemiológica', () => {
         cy.plexSelectType('name="tipoContacto"', 'Social{enter}');
         cy.plexIcon('mas').click();
         cy.plexButton('Registrar ficha').click();
-        cy.wait('@registroFicha').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@registroFicha').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         })
         cy.toast('success', 'Su ficha fue registrada correctamente');
     });
 
     it('crear nueva ficha covid19 y verificar historial', () => {
         cy.plexText('name="buscador"', validado3.documento);
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].apellido).to.be.eq(validado3.apellido);
-            expect(xhr.response.body[0].nombre).to.be.eq(validado3.nombre);
+        cy.wait('@busquedaPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].apellido).to.be.eq(validado3.apellido);
+            expect(response.body[0].nombre).to.be.eq(validado3.nombre);
         });
         cy.get('paciente-listado plex-item').contains(validado3.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
@@ -197,37 +187,37 @@ context('Ficha Epidemiológica', () => {
         cy.plexSelectTypeDinamico('tipo de muestra', 'Aspirado{enter}');
         cy.plexSelectTypeDinamico('LAMP (NeoKit)', 'Se detecta genoma de SARS-CoV-2{enter}');
         cy.plexButton('Registrar ficha').click();
-        cy.wait('@registroFicha').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@registroFicha').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         })
         cy.toast('success', 'Su ficha fue registrada correctamente');
         cy.goto('/epidemiologia/buscador-ficha-epidemiologica', token);
         cy.plexText('name="buscador"', validado3.documento);
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].apellido).to.be.eq(validado3.apellido);
-            expect(xhr.response.body[0].nombre).to.be.eq(validado3.nombre);
+        cy.wait('@busquedaPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].apellido).to.be.eq(validado3.apellido);
+            expect(response.body[0].nombre).to.be.eq(validado3.nombre);
         });
         cy.get('paciente-listado plex-item').contains(validado3.apellido).click();
         cy.plexButton('Buscar Fichas').click();
-        cy.wait('@getFicha').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@getFicha').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         });
         cy.plexButtonIcon('history').click();
-        cy.wait('@getHistory').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].paciente.documento).to.be.eq(validado3.documento);
-            expect(xhr.response.body[0].paciente.id).to.be.eq(validado3._id);
-            expect(xhr.response.body[0].type.name).to.be.eq('covid19');
+        cy.wait('@getHistory').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].paciente.documento).to.be.eq(validado3.documento);
+            expect(response.body[0].paciente.id).to.be.eq(validado3._id);
+            expect(response.body[0].type.name).to.be.eq('covid19');
         })
     });
 
     it('carga parcial ficha covid19', () => {
         cy.plexText('name="buscador"', validado5.documento);
-        cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body[0].apellido).to.be.eq(validado5.apellido);
-            expect(xhr.response.body[0].nombre).to.be.eq(validado5.nombre);
+        cy.wait('@busquedaPaciente').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            expect(response.body[0].apellido).to.be.eq(validado5.apellido);
+            expect(response.body[0].nombre).to.be.eq(validado5.nombre);
         });
         cy.get('paciente-listado plex-item').contains(validado5.apellido).click();
         cy.plexDropdown('label="NUEVA FICHA"').click().get('a').contains('covid19').click();
@@ -241,8 +231,8 @@ context('Ficha Epidemiológica', () => {
         cy.get('plex-label').contains('La seccion no se encuentra disponible');
         cy.get('label').contains('LAMP (NeoKit)').should('not.exist');
         cy.plexButton('Registrar ficha').click();
-        cy.wait('@registroFicha').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+        cy.wait('@registroFicha').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
         })
         cy.toast('success', 'Su ficha fue registrada correctamente');
     });

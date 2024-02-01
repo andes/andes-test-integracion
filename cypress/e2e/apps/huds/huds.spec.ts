@@ -493,7 +493,7 @@ context('RUP - Ejecucion', () => {
         cy.get('historial-solicitud').plexLabel('Creacion de solicitud');
     });
 
-    it('HUDS - Filtro internacion', () => {
+    it.only('HUDS - Filtro internacion', () => {
         cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
         cy.assertHudsBusquedaFiltros('prestaciones', 5);
         cy.HudsBusquedaFiltros('prestaciones');

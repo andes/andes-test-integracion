@@ -9,7 +9,7 @@ describe('RUP - Odontograma', () => {
     })
 
     beforeEach(() => {
-        cy.server();
+        cy.server(); // porque las funciones de abajo no estan actualizadas
         cy.snomedSearchStub('odontograma', rupBuscador, 'rup-buscador');
         cy.snomedFrecuentesStub(frecuentes);
         cy.expressionStub('^721145008', 'odontograma-piezas-dentales.json');
