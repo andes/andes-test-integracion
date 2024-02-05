@@ -115,7 +115,7 @@ context('Solicitudes', () => {
         });
 
 
-        it('Responder solicitud', () => {
+        it.only('Responder solicitud', () => {
             cy.get('plex-table tr').contains('auditoria').first().click();
             cy.get('plex-layout-sidebar').plexIcon('lock-alert').click({ force: true })
             cy.plexButton('Responder').click({ force: true });
@@ -130,6 +130,10 @@ context('Solicitudes', () => {
             cy.wait('@solicitudes').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
             });
+
+            cy.plexButtonIcon('chevron-down').click();
+            cy.plexSelectType('label="Estado"', 'CONTRARREFERIDA');
+
             cy.get('plex-table tr').contains('CONTRARREFERIDA')
         });
     });
