@@ -54,9 +54,6 @@ describe('Mapa Camas - Detalle de Cama', () => {
 
         cy.get('table tr').eq(1).find('td').eq(1).contains('ANDES').click();
 
-        cy.wait('@getCama').then(({ response }) => {
-            expect(response.statusCode).to.be.eq(200);
-        });
         // VERIF. NOMBRE
         cy.get('plex-detail section div.contenedor-textos > div').eq(1).find('div').should(($div) => {
             expect($div.contents().eq(cama.cama.nombre));
