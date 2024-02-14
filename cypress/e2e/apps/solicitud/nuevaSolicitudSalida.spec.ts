@@ -37,7 +37,7 @@ describe('TOP: Nueva Solicitud de Salida', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
         cy.plexDatetime('label="Fecha de solicitud"', cy.today());
-        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@conceptosTurneables', 0);
+        cy.plexSelectAsync('label="Tipos de Prestación Origen"', 'Consulta de esterilidad', '@conceptosTurneables', '59ee2d9bf00c415246fd3d1c');
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', 0);
         cy.plexSelect('label="Organización destino"', 0).click();
         cy.plexSelect('label="Tipo de Prestación Solicitada"', 0).then((elemento) => {
