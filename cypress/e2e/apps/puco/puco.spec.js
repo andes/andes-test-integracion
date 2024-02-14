@@ -28,7 +28,7 @@ context('PUCO', () => {
         }];
         cy.route('GET', '**/api/modules/obraSocial/puco/?dni=45687&periodo=**', respuesta).as('consulta');
 
-        cy.plexInt('name="searchTerm"', '45687');
+        cy.plexInt('name="searchTerm"', 45687);
 
         cy.wait('@consulta').then(xhr => {
             expect(xhr.status).to.be.eq(200);
