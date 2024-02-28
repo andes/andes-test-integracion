@@ -84,6 +84,7 @@ context('auditoria', () => {
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(format(validado2.documento));
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
+        cy.wait(500)
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
         cy.wait('@patchPacienteB').then((xhr) => {
@@ -123,6 +124,7 @@ context('auditoria', () => {
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(format(temporal2.documento));
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
+        cy.wait(500)
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
         cy.wait('@patchPacienteB').then((xhr) => {
@@ -162,6 +164,7 @@ context('auditoria', () => {
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(format(temporal1.documento));
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
+        cy.wait(500)
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
         cy.wait('@patchPacienteB').then((xhr) => {
@@ -201,6 +204,7 @@ context('auditoria', () => {
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(sinDocumento1.nombre);
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
+        cy.wait(500)
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
         cy.wait('@patchPacienteB').then((xhr) => {
@@ -243,6 +247,7 @@ context('auditoria', () => {
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(sinDocumento1.nombre);
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
+        cy.wait(500)
         cy.plexButton('desvincular').click();
         cy.swal('confirm', '¿Está seguro que desea desvincular a este paciente?');
         cy.wait('@patchPacienteSinDoc').then((xhr) => {
@@ -281,6 +286,7 @@ context('auditoria', () => {
         // chequea que el paciente figure en lista de vinculados
         cy.get('plex-list').find('plex-item').contains(sinDocumento2.nombre);
         cy.toast('success', 'La vinculación ha sido realizada correctamente');
+        cy.wait(500)
     });
 })
 

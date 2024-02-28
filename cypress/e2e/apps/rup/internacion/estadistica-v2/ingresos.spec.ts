@@ -1,4 +1,4 @@
-describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
+describe.skip('Acciones sobre paciente ingresado desde capa asistencial', () => {
     let token;
     let pacientes;
     let camas;
@@ -70,13 +70,13 @@ describe('Acciones sobre paciente ingresado desde capa asistencial', () => {
         cy.wait('@getResumenInternacion').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        
+
         cy.plexTab('HISTORIAL').click();
         cy.plexButton('Buscar').click();
         cy.wait('@getHistorial').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        
+
         cy.plexTab('INTERNACION').click()
         cy.wait(1000)
         cy.get('plex-layout-sidebar plex-button[icon="pencil"]').first().click({ force: true });

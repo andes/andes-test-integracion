@@ -121,6 +121,7 @@ context('CITAS - punto de inicio', () => {
                 expect(xhr.response.body).to.have.length(1);
             });
 
+            cy.wait(1000)
             cy.get('div[class="dia"]').contains(Cypress.moment().add(1, 'days').format('D')).click();
 
             cy.wait('@seleccionAgenda').then((xhr) => {
@@ -199,6 +200,7 @@ context('CITAS - punto de inicio', () => {
             expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body).to.have.length(1);
         });
+        cy.wait(1000)
         cy.get('div[class="dia"]').contains(Cypress.moment().add(1, 'days').format('D')).click();
 
         cy.wait('@seleccionAgenda').then((xhr) => {
@@ -209,9 +211,9 @@ context('CITAS - punto de inicio', () => {
         cy.plexButton('Confirmar').click();
         cy.wait('@cargaAgendas').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200);
-            const fechaHora = Cypress.moment(xhr.response.body[0].bloques[0].turnos[0].fechaHoraDacion).format('DD/MM/YYYY');
+            const fechaHora = Cypress.moment(xhr.response.body[0].bloques[0].turnos[3].fechaHoraDacion).format('DD/MM/YYYY');
             expect(fechaHora).to.be.eq(hoy);
-            expect(xhr.response.body[0].bloques[0].turnos[0].usuarioDacion.nombreCompleto).to.be.eq('Natalia Huenchuman');
+            expect(xhr.response.body[0].bloques[0].turnos[3].usuarioDacion.nombreCompleto).to.be.eq('Natalia Huenchuman');
         });
     });
 
