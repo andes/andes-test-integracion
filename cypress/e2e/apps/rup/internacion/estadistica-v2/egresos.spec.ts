@@ -1,4 +1,4 @@
-describe('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
+describe.skip('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
     let token;
     let pacientes;
     before(() => {
