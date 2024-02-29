@@ -20,14 +20,15 @@ context('RUP - Punto de inicio', () => {
 
     it('Iniciar prestación - Niño sano', () => {
 
-        cy.server();
-        cy.route(/api\/modules\/rup\/frecuentesProfesional\?/).as('search');
-        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-        cy.route('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
-        cy.route('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+        cy.intercept(/api\/modules\/rup\/frecuentesProfesional\?/).as('search');
+        cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+        cy.intercept('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
+        cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
 
 
         cy.wait('@paciente');
+        cy.get('plex-tabs').contains('Buscador').click({ force: true });
+        cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
         cy.RupBuscarConceptos('consulta de niño sano, recién nacido', 'SUGERIDOS');
         cy.seleccionarConcepto(0);
         cy.assertRupCard(0, { semanticTag: 'procedimiento', term: 'consulta de niño sano, recién nacido' }).then($elem => {
@@ -40,16 +41,15 @@ context('RUP - Punto de inicio', () => {
             cy.wrap($elem).get('plex-bool').first().click();
         })
 
-
         cy.plexButton('Guardar consulta de niño sano').click();
 
-        cy.wait('@patch').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.solicitud.turno).to.be.null;
-            expect(xhr.response.body.solicitud.tipoPrestacion.conceptId).to.be.eq("410620009");
-            expect(xhr.response.body.paciente.documento).to.be.eq('10000000');
-            expect(xhr.response.body.estados[0].tipo).to.be.eq('ejecucion');
-            expect(xhr.response.body.estados[1]).to.be.eq(undefined);
+        cy.wait('@patch').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.solicitud.turno).to.be.null;
+            expect(response.body.solicitud.tipoPrestacion.conceptId).to.be.eq("410620009");
+            expect(response.body.paciente.documento).to.be.eq('10000000');
+            expect(response.body.estados[0].tipo).to.be.eq('ejecucion');
+            expect(response.body.estados[1]).to.be.eq(undefined);
         });
 
         cy.toast('success');
@@ -59,13 +59,13 @@ context('RUP - Punto de inicio', () => {
         // Popup alert
         cy.get('button').contains('CONFIRMAR').click();
 
-        cy.wait('@patch').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.response.body.solicitud.turno).to.be.null;
-            expect(xhr.response.body.solicitud.tipoPrestacion.conceptId).to.be.eq("410620009");
-            expect(xhr.response.body.paciente.documento).to.be.eq('10000000');
-            expect(xhr.response.body.estados[1].tipo).to.be.eq('validada');
-            expect(xhr.response.body.estados[2]).to.be.eq(undefined);
+        cy.wait('@patch').then(({ response }) => {
+            expect(response.statusCode).to.eq(200);
+            expect(response.body.solicitud.turno).to.be.null;
+            expect(response.body.solicitud.tipoPrestacion.conceptId).to.be.eq("410620009");
+            expect(response.body.paciente.documento).to.be.eq('10000000');
+            expect(response.body.estados[1].tipo).to.be.eq('validada');
+            expect(response.body.estados[2]).to.be.eq(undefined);
         });
     });
 

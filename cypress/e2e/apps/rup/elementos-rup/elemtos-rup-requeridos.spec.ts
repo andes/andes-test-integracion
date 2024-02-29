@@ -17,12 +17,12 @@ context('RUP - Ejecucion', () => {
 
         beforeEach(() => {
             cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('GET', '/api/modules/seguimiento-paciente**', []);
-            cy.route('GET', '/api/modules/huds/accesos**', []);
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
+            cy.intercept('GET', '/api/modules/huds/accesos**', []);
 
 
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+            cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             cy.cleanDB(['prestaciones']);
 
@@ -46,7 +46,10 @@ context('RUP - Ejecucion', () => {
 
 
         it('segundo registro debe ser fractura', () => {
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
             cy.get('rup-buscador button').contains('BUSCADOR BÁSICO ').click();
+            cy.wait(1000);
             cy.assertRupCard(1, { semanticTag: 'trastorno', term: 'fractura de cabeza de fémur' })
         });
 
@@ -59,12 +62,12 @@ context('RUP - Ejecucion', () => {
 
         beforeEach(() => {
             cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('GET', '/api/modules/seguimiento-paciente**', []);
-            cy.route('GET', '/api/modules/huds/accesos**', []);
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
+            cy.intercept('GET', '/api/modules/huds/accesos**', []);
 
 
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+            cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             cy.cleanDB(['prestaciones']);
 
@@ -88,12 +91,13 @@ context('RUP - Ejecucion', () => {
 
 
         it('solo debe haber un registro', () => {
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
             cy.get('rup-buscador button').contains('BUSCADOR BÁSICO ').click();
+            cy.wait(1000);
             cy.get('plex-layout-main .rup-card').should('have.length', 1);
 
         });
-
-
 
     });
 
@@ -102,12 +106,12 @@ context('RUP - Ejecucion', () => {
 
         beforeEach(() => {
             cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('GET', '/api/modules/seguimiento-paciente**', []);
-            cy.route('GET', '/api/modules/huds/accesos**', []);
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
+            cy.intercept('GET', '/api/modules/huds/accesos**', []);
 
 
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+            cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             cy.cleanDB(['prestaciones']);
 
@@ -140,14 +144,14 @@ context('RUP - Ejecucion', () => {
 
         });
 
-
         it('segundo registro debe ser fractura', () => {
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
             cy.get('rup-buscador button').contains('BUSCADOR BÁSICO ').click();
+            cy.wait(1000);
             cy.assertRupCard(1, { semanticTag: 'trastorno', term: 'fractura de cabeza de fémur' })
 
         });
-
-
 
     });
 

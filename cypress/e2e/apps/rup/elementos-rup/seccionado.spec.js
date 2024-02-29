@@ -23,8 +23,8 @@ context('RUP - Ejecucion', () => {
         let idPrestacion, idSeccionComponenet, idSeccionadoComponent;
         beforeEach(() => {
             cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             cy.snomedSearchStub('alta', [informeAlta], 'rup-buscador');
 
@@ -63,8 +63,10 @@ context('RUP - Ejecucion', () => {
 
         it('test validacion y grabar', () => {
 
-            cy.route('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
-            cy.route('GET', '**/api/modules/cda/paciente/**').as('paciente');
+            cy.intercept('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
+            cy.intercept('GET', '**/api/modules/cda/paciente/**').as('paciente');
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
 
             cy.get('rup-buscador button').contains('BUSCADOR BÁSICO ').click();
             cy.get('snomed-buscar').plexText('name="searchTerm"', 'alta');

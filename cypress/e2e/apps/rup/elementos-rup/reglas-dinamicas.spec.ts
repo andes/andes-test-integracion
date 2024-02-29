@@ -14,12 +14,12 @@ context('RUP - Ejecucion', () => {
 
         beforeEach(() => {
             cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('GET', '/api/modules/seguimiento-paciente**', []);
-            cy.route('GET', '/api/modules/huds/accesos**', []);
+            cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
+            cy.intercept('GET', '/api/modules/huds/accesos**', []);
 
 
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+            cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             cy.cleanDB(['prestaciones']);
 
@@ -89,14 +89,15 @@ context('RUP - Ejecucion', () => {
             cy.task('database:delete:elemento-rup', idElementoRUP);
         })
 
-
         it('agregar conceptos desde el buscador', () => {
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
+
             cy.snomedSearchStub('fase de la fiebre', 'mitos/fiebre.json', 'rup-buscador');
 
             cy.RupBuscarConceptos('fase de la fiebre');
             cy.RupSetearFiltros('procedimiento');
             cy.seleccionarConcepto(1);
-
 
             cy.assertRupCard(0, { semanticTag: 'procedimiento', term: 'fase de la fiebre' }).then(card => {
                 cy.wrap(card).plexInputDinamico('int', 'Fase Fiebre', '40');
@@ -110,10 +111,7 @@ context('RUP - Ejecucion', () => {
 
             cy.toast('error', 'Revise los campos cargados');
 
-
         });
-
-
 
     });
 

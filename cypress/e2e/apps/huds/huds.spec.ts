@@ -297,10 +297,9 @@ context('RUP - Ejecucion', () => {
 
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '/api/modules/rup/prestaciones/huds/586e6e8627d3107fde116cdb?**', []).as('huds');
-        cy.route('GET', '/api/modules/seguimiento-paciente**', []);
-        cy.route('GET', '/api/modules/huds/accesos**', []);
+        cy.intercept('GET', '/api/modules/rup/prestaciones/huds/586e6e8627d3107fde116cdb?**', []).as('huds');
+        cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
+        cy.intercept('GET', '/api/modules/huds/accesos**', []);
     });
 
     it('no puedo entrar sin token HUDS', () => {
@@ -314,6 +313,7 @@ context('RUP - Ejecucion', () => {
         cy.assertHudsBusquedaFiltros('producto', 1);
         cy.assertHudsBusquedaFiltros('procedimiento', 1);
 
+        cy.get('rup-hudsbusqueda .menu-buscador button').contains('PRESTACIONES').click();
         cy.getHUDSItems().should('have.length', 4);
 
         cy.getHUDSItems().eq(0).assertRUPMiniCard({
@@ -493,7 +493,7 @@ context('RUP - Ejecucion', () => {
         cy.get('historial-solicitud').plexLabel('Creacion de solicitud');
     });
 
-    it('HUDS - Filtro internacion', () => {
+    it.only('HUDS - Filtro internacion', () => {
         cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
         cy.assertHudsBusquedaFiltros('prestaciones', 5);
         cy.HudsBusquedaFiltros('prestaciones');

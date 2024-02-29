@@ -15,48 +15,48 @@ context("RUP - Epicrisis", () => {
   });
 
   beforeEach(() => {
-    cy.server();
     cy.goto("/internacion/inicio", token);
-    cy.route("GET", "**api/core-v2/mpi/pacientes?**").as("busquedaPaciente");
-    cy.route("GET", "**api/core/log/paciente?idPaciente=**").as(
+    cy.intercept("GET", "**api/core-v2/mpi/pacientes?**").as("busquedaPaciente");
+    cy.intercept("GET", "**api/core/log/paciente?idPaciente=**").as(
       "seleccionPaciente"
     );
-    cy.route("POST", "**/api/modules/rup/prestaciones**").as("prestaciones");
-    cy.route("GET", "**/api/modules/rup/prestaciones?idPaciente=**").as(
+    cy.intercept("POST", "**/api/modules/rup/prestaciones**").as("prestaciones");
+    cy.intercept("GET", "**/api/modules/rup/prestaciones?idPaciente=**").as(
       "prestacionesPaciente"
     );
-    cy.route("GET", "**/api/modules/rup/prestaciones/**").as("getPrestacion");
-    cy.route("GET", "**/api/modules/rup/internaciones/ultima/**").as(
+    cy.intercept("GET", "**/api/modules/rup/prestaciones/**").as("getPrestacion");
+    cy.intercept("GET", "**/api/modules/rup/internaciones/ultima/**").as(
       "ultimaInternacion"
     );
-    cy.route("GET", "/api/modules/rup/prestaciones/huds/**", []).as("huds");
+    cy.intercept("GET", "/api/modules/rup/prestaciones/huds/**", []).as("huds");
   });
 
   it("Iniciar EPICRISIS", () => {
     cy.plexText("name=buscador", paciente);
-    cy.wait("@busquedaPaciente").then(xhr => {
-      expect(xhr.status).to.be.eq(200);
+    cy.wait("@busquedaPaciente").then(({ response }) => {
+      expect(response.statusCode).to.eq(200);
     });
     cy.get('paciente-listado').contains(format(paciente)).click();
 
-    cy.wait("@prestacionesPaciente").then(xhr => {
-      expect(xhr.status).to.be.eq(200);
+    cy.wait("@prestacionesPaciente").then(({ response }) => {
+      expect(response.statusCode).to.eq(200);
     });
 
     cy.plexDropdown('label="NUEVO REGISTRO"', "EPICRISIS");
 
-    cy.wait("@prestaciones").then(xhr => {
-      expect(xhr.status).to.be.eq(200);
+    cy.wait("@prestaciones").then(({ response }) => {
+      expect(response.statusCode).to.eq(200);
     });
 
-    cy.wait("@getPrestacion").then(xhr => {
-      expect(xhr.status).to.be.eq(200);
+    cy.wait("@getPrestacion").then(({ response }) => {
+      expect(response.statusCode).to.eq(200);
     });
 
     let monthAgo = Cypress.moment()
       .add(-30, "days")
       .format("DD/MM/YYYY");
 
+    cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
     cy.plexDatetime('label="Ingreso"', {
       text: monthAgo,
       clear: true,

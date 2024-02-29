@@ -3,6 +3,7 @@ Cypress.Commands.add('snomedSearchStub', (searchtext, response, alias = 'rup-bus
     const url = `/api/core/term/snomed?search=${searchtext}&semanticTag=hallazgo&semanticTag=trastorno&semanticTag=procedimiento&semanticTag=entidad observable&semanticTag=producto&semanticTag=situación&semanticTag=régimen/tratamiento&semanticTag=elemento de registro&semanticTag=objeto físico&semanticTag=medicamento clínico&semanticTag=fármaco de uso clínico&semanticTag=evento`
     if (typeof response === 'string') {
         return cy.fixture(response).then(response => {
+            cy.get('plex-layout-sidebar').contains('Buscador').click({ force: true })
             return cy.route(url, response).as(alias);
         });
     } else {
@@ -33,7 +34,8 @@ Cypress.Commands.add('expressionStub', (expression, response, alias = 'snomed-ex
 });
 
 Cypress.Commands.add('RupBuscarConceptos', (term, type = 'BUSCADOR BÁSICO', alias = 'rup-buscador') => {
-    cy.get('rup-buscador button', { log: false }).contains(type, { log: false }).click();
+    cy.get('plex-layout-sidebar').contains('Buscador').click({ force: true })
+    cy.get('rup-buscador button', { log: false }).contains(type, { log: false }).click({ force: true });
     if (type === 'BUSCADOR BÁSICO') {
         cy.get('snomed-buscar', { log: false }).plexText('name="searchTerm"', term);
     } else {
@@ -43,7 +45,7 @@ Cypress.Commands.add('RupBuscarConceptos', (term, type = 'BUSCADOR BÁSICO', ali
 
 Cypress.Commands.add('seleccionarConcepto', (term) => {
     if (typeof term === 'number') {
-        return cy.get('plex-layout-sidebar .rup-card').eq(term).plexButtonIcon('plus').click();
+        return cy.get('plex-layout-sidebar .rup-card').eq(term).plexButtonIcon('plus').click({ force: true });
     } else {
         return cy.get('plex-layout-sidebar .rup-card').contains(term).parentsUntil('.rup-card').plexButtonIcon('plus').click();
     }

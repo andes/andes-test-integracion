@@ -2,29 +2,32 @@
 
 context('RUP - Ejecucion', () => {
     let token;
+    const resultadoSnomed = [{
+        "conceptId": "440377005",
+        "term": "derivación por",
+        "fsn": "derivación por (entidad observable)",
+        "semanticTag": "entidad observable"
+    }];
 
-    before(() => {
+    beforeEach(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {
             token = t;
         });
         cy.task('database:seed:paciente');
+        cy.server(); // porque las funciones de rup.js no estan actualizadas
+        cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+        cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+        cy.intercept('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
+        cy.intercept('GET', '**/api/modules/cda/paciente/**').as('paciente');
+        cy.intercept('GET', '**/api/core/term/snomed?**', resultadoSnomed).as('query');
     });
 
 
     describe('select organizacion', () => {
         let idPrestacion, idElementoRUP;
         beforeEach(() => {
-            cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
-            const resultadoSnomed = [{
-                "conceptId": "440377005",
-                "term": "derivación por",
-                "fsn": "derivación por (entidad observable)",
-                "semanticTag": "entidad observable"
-            }];
             cy.snomedSearchStub('derivaci', resultadoSnomed, 'rup-buscador');
 
             cy.cleanDB(['prestaciones']);
@@ -41,7 +44,6 @@ context('RUP - Ejecucion', () => {
                 idPrestacion = prestacion._id;
                 cy.goto('/rup/ejecucion/' + idPrestacion, token);
             });
-
         })
 
         afterEach(() => {
@@ -51,12 +53,10 @@ context('RUP - Ejecucion', () => {
 
         it('test validacion y grabar', () => {
 
-            cy.route('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
-            cy.route('GET', '**/api/modules/cda/paciente/**').as('paciente');
-
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.get('rup-buscador button').contains('BUSCADOR BÁSICO ').click();
             cy.get('snomed-buscar').plexText('name="searchTerm"', 'derivaci');
-            cy.wait('@rup-buscador');
             cy.get('rup-buscador').plexButtonIcon('plus').click();
 
             cy.get('.rup-card').first().as('rupCard');
@@ -80,9 +80,8 @@ context('RUP - Ejecucion', () => {
             cy.plexButton('Continuar').click();
 
             cy.wait('@paciente');
-            // cy.plexButtonIcon('chevron-double-down').click();
-
-
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.get('.rup-card').first().as('rupCard');
             cy.get('@rupCard').plexSelect('name="organizacion"').contains('PUESTO SANITARIO RAMON CASTRO (POR NOMIVAC)');
             cy.get('@rupCard').find('plex-bool[label="OTRO"]').should('not.exist');
@@ -96,21 +95,7 @@ context('RUP - Ejecucion', () => {
     describe('select SNOMED', () => {
         let idPrestacion, idElementoRUP;
         beforeEach(() => {
-            cy.server();
-            cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-            cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
-
-
-
-            const resultadoSnomed = [{
-                "conceptId": "440377005",
-                "term": "derivación por",
-                "fsn": "derivación por (entidad observable)",
-                "semanticTag": "entidad observable"
-            }];
-
             cy.snomedSearchStub('derivaci', resultadoSnomed, 'rup-buscador');
-            cy.route('GET', '/api/core/term/snomed?expression=440377005&search=derivación', resultadoSnomed).as('query');
 
             cy.cleanDB(['prestaciones']);
 
@@ -133,24 +118,18 @@ context('RUP - Ejecucion', () => {
             cy.task('database:delete:elemento-rup', idElementoRUP);
         })
 
-
         it('test validacion y grabar', () => {
 
-            cy.route('GET', '**/api/core/tm/organizaciones**').as('getOrganizaciones');
-            cy.route('GET', '**/api/modules/cda/paciente/**').as('paciente');
-
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.get('rup-buscador button').contains('BUSCADOR BÁSICO ').click();
             cy.get('snomed-buscar').plexText('name="searchTerm"', 'derivaci');
-            cy.wait('@rup-buscador');
             cy.get('rup-buscador').plexButtonIcon('plus').click();
 
             cy.get('.rup-card').first().as('rupCard');
 
-
-
             cy.get('@rupCard').contains('Hallazgos');
             cy.get('@rupCard').plexSelectAsync('name="organizacion"', 'derivación', '@query', 0);
-
             cy.get('@rupCard').find('plex-bool[label="OTRO"]').should('not.exist');
 
             cy.plexButton('Guardar').click();
@@ -164,15 +143,14 @@ context('RUP - Ejecucion', () => {
             cy.plexButton('Continuar').click();
 
             cy.wait('@paciente');
-            // cy.plexButtonIcon('chevron-double-down').click();
 
-
+            cy.get('plex-tabs').contains('Buscador').click({ force: true });
+            cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
             cy.get('.rup-card').first().as('rupCard');
             cy.get('@rupCard').plexSelect('name="organizacion"').contains('derivación por');
             cy.get('@rupCard').find('plex-bool[label="OTRO"]').should('not.exist');
             cy.get('@rupCard').find('plex-text[label="Otro"]').should('not.exist');
 
         });
-
     })
 })
