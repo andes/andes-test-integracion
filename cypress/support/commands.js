@@ -34,9 +34,9 @@ Cypress.Commands.add("login", (usuario, password, id) => {
         headers: {
             'Connection': "close"
         },
-        body:{
-        usuario,
-        password
+        body: {
+            usuario,
+            password
         }
     }).then((response) => {
         token = response.body.token;
@@ -67,8 +67,9 @@ Cypress.Commands.add("login", (usuario, password, id) => {
 
 Cypress.Commands.add('goto', (url, token, hudsToken, location) => {
     if (token) {
-        cy.server();
-        cy.route('GET', '**/api/auth/sesion**').as('sesion');
+        cy.intercept('GET', '**/api/auth/sesion**', req => {
+            delete req.headers['if-none-match']
+        }).as('sesion');
     }
     cy.visit(url, {
         onBeforeLoad: (win) => {
