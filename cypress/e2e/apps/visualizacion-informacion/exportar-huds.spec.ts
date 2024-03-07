@@ -30,6 +30,8 @@ context('Exportar HUDS', () => {
     })
 
     beforeEach(() => {
+        cy.intercept('GET', '/api/modules/huds/motivosHuds/motivosHuds**', { fixture: 'huds/modalHuds.json' }).as('motivosHuds');
+
         cy.server();
         cy.goto('/visualizacion-informacion/exportar-huds', token);
         cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
