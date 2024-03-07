@@ -29,9 +29,6 @@ module.exports.seedAgenda = async (mongoUri, params) => {
             agenda.organizacion._id = new ObjectId(agenda.organizacion._id)
         }
 
-
-
-
         if (params.profesionales) {
             const ProfesionalesDB = await client.db().collection('profesional');
 
@@ -118,9 +115,9 @@ module.exports.seedAgenda = async (mongoUri, params) => {
         agenda.bloques[0].horaFin = horaFin.toDate();
 
         const cantTurnos = horaFin.diff(horaInicio, 'hours') * 2;
-        agenda.bloques[0][labelTipoTurno] = cantTurnos;
-        agenda.bloques[0][labelTipoTurnoRestante] = cantTurnos;
-        agenda.bloques[0].cantidadTurnos = cantTurnos;
+        agenda.bloques[0][labelTipoTurno] = (agenda.dinamica) ? 0 : cantTurnos;
+        agenda.bloques[0][labelTipoTurnoRestante] = (agenda.dinamica) ? 0 : cantTurnos;
+        agenda.bloques[0].cantidadTurnos = (agenda.dinamica) ? 0 : cantTurnos;
 
         if (params.tipo === 'programado') {
             agenda.bloques[0].cupoMobile = cantTurnos;
