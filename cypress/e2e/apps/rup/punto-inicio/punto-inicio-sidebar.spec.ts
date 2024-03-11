@@ -193,7 +193,7 @@ context('RUP - Punto de inicio', () => {
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
                     cy.wait('@prestaciones');
-
+                    cy.wait(1000);
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(1).click({ force: true });
                     cy.wait(1000)
@@ -230,7 +230,7 @@ context('RUP - Punto de inicio', () => {
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
                     cy.wait('@prestaciones');
-
+                    cy.wait(1000);
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(1).click();
                     cy.get('plex-layout-sidebar table').find('tbody tr').eq(0).as('turnoRow');
@@ -244,7 +244,7 @@ context('RUP - Punto de inicio', () => {
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
                     cy.wait('@prestaciones');
-
+                    cy.wait(1000);
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(1).click();
                     cy.plexButton('VER HUDS').click();
@@ -278,7 +278,7 @@ context('RUP - Punto de inicio', () => {
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
                 cy.wait('@prestaciones');
-
+                cy.wait(1000);
                 cy.get('table').first().as('tablaAgendas');
                 cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
 
@@ -315,7 +315,7 @@ context('RUP - Punto de inicio', () => {
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
                 cy.wait('@prestaciones');
-
+                cy.wait(1000);
                 cy.get('table').first().as('tablaAgendas');
                 cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
                 cy.plexButton('CONTINUAR REGISTRO').click();
@@ -341,7 +341,7 @@ context('RUP - Punto de inicio', () => {
                 cy.goto('/rup', token);
                 cy.wait('@agendas');
                 cy.wait('@prestaciones');
-
+                cy.wait(1000);
                 cy.get('table').first().as('tablaAgendas');
                 cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
                 cy.get('plex-layout-sidebar table').find('tbody tr').eq(pacienteIndex).as('turnoRow');
@@ -358,7 +358,7 @@ context('RUP - Punto de inicio', () => {
                     cy.goto('/rup', token);
                     cy.wait('@agendas');
                     cy.wait('@prestaciones');
-
+                    cy.wait(1000);
                     cy.get('table').first().as('tablaAgendas');
                     cy.get('@tablaAgendas').find('tbody tr').eq(agendaIndex).click();
                     cy.plexButton('VER HUDS').click();
