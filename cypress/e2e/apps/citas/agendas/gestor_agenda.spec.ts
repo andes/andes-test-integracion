@@ -12,7 +12,6 @@ describe('CITAS - Planificar Agendas', () => {
         cy.task('database:seed:agenda', { tipoPrestaciones: '57f5060669fe79a598f4e841', estado: 'publicada', profesionales: '5d49fa8bb6834a1d95e277b8', inicio: '20', fin: '22' });
         cy.login('30643636', 'asd').then(t => {
             token = t;
-
         });
     })
 
@@ -261,7 +260,8 @@ describe('CITAS - Planificar Agendas', () => {
         });
 
         cy.get('.reasignar').first().click();
-        cy.get('button').contains('CONFIRMAR').click();
+        // cy.get('button').contains('CONFIRMAR').click();
+        cy.swal('confirm');
         cy.toast('success', 'El turno se reasignó correctamente');
         cy.toast('info', 'INFO: SMS no enviado');
         cy.wait('@patchAgenda').then(({ response }) => {
