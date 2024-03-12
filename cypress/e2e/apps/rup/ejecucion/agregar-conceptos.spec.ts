@@ -17,7 +17,6 @@ context('RUP - Ejecucion', () => {
             cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.intercept('GET', '/api/core/**', []).as('huds');
             cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
-
             cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
             cy.cleanDB(['prestaciones']);
@@ -29,7 +28,7 @@ context('RUP - Ejecucion', () => {
                 idPrestacion = prestacion._id;
                 cy.goto('/rup/ejecucion/' + idPrestacion, token);
             });
-
+            cy.server() // para las funciones de rup que estan desactualizadas
         })
 
         it('agregar conceptos desde el buscador', () => {
@@ -114,13 +113,14 @@ context('RUP - Ejecucion', () => {
                     }]
                 }
             )
-
             cy.task('database:seed:prestacion',
                 { paciente: idPaciente, tipoPrestacion: '5cdc4c865cd661b503d727a6' }
             ).then((prestacion) => {
                 idPrestacion = prestacion._id;
                 cy.goto('/rup/ejecucion/' + idPrestacion, token);
             });
+
+            cy.server() // para las funciones de rup que estan desactualizadas
         });
 
         it('evolucionar trastorno desde buscador', () => {
@@ -162,7 +162,6 @@ context('RUP - Ejecucion', () => {
             cy.HudsBusquedaFiltros('trastorno');
 
             cy.get('plex-layout-sidebar .rup-card').should('have.length', 2);
-
         });
     });
 });
