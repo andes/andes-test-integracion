@@ -88,7 +88,6 @@ context('TOP: Acciones con turno', () => {
             cy.get('table tbody td').should('contain', 'pendiente').and('contain', 'PEREZ, MARIA');
         });
 
-
         it('dar turno autocitado exitoso', () => {
 
             cy.plexButtonIcon('chevron-down').click({ force: true });
@@ -110,7 +109,6 @@ context('TOP: Acciones con turno', () => {
             cy.wait('@getAgenda').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
             });
-
 
             if (pasadoManiana > Cypress.moment().endOf('month') || cy.esFinDeMes()) {
                 cy.plexButtonIcon('chevron-right').click();
@@ -140,7 +138,6 @@ context('TOP: Acciones con turno', () => {
             cy.get('historial-solicitud').contains('Turno asignado por Natalia Huenchuman');
         });
     });
-
 
     describe('TOP: Liberar turno', () => {
 

@@ -79,10 +79,9 @@ context('turnos', () => {
     });
 
     it('registrar paciente sin dni argentino desde punto de Inicio de Turnos', () => {
-        cy.server();
         //Rutas para control
-        cy.route('POST', '**api/core-v2/mpi/pacientes').as('sinDniGuardar');
-        cy.route('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
+        cy.intercept('POST', '**api/core-v2/mpi/pacientes').as('sinDniGuardar');
+        cy.intercept('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
 
         // Buscador
         cy.get('plex-text input[type="text"]').first().type('1232548').should('have.value', '1232548');
@@ -139,10 +138,9 @@ context('turnos', () => {
     });
 
     it('registrar paciente con dni argentino desde punto de Inicio de Turnos', () => {
-        cy.server();
         //Rutas para control
-        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('conDniGuardar');
-        cy.route('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
+        cy.intercept('POST', '**api/core-v2/mpi/pacientes**').as('conDniGuardar');
+        cy.intercept('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
 
         // Buscador
         cy.plexText('name="buscador"', '79546213');
@@ -194,14 +192,13 @@ context('turnos', () => {
     });
 
     it('dar turno de día', () => {
-        cy.server();
-        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('consultaPaciente');
-        cy.route('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');
-        cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgendas');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');
-        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
-        cy.route('GET', '**/api/core/tm/conceptos-turneables**').as('conceptoTurneables');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('consultaPaciente');
+        cy.intercept('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
+        cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesional');
+        cy.intercept('GET', '**/api/modules/turnos/agenda**').as('getAgendas');
+        cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesional');
+        cy.intercept('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
+        cy.intercept('GET', '**/api/core/tm/conceptos-turneables**').as('conceptoTurneables');
 
         cy.plexText('name="buscador"', validado1.documento);
 
