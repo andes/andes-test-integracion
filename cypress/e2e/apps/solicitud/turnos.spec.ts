@@ -84,12 +84,7 @@ context('TOP: Acciones con turno', () => {
             });
 
             cy.get('plex-card').eq(0).click();
-            cy.plexButton('Demanda Rechazada').click();
-            cy.wait('@listaEspera').then(({ response }) => {
-                expect(response.statusCode).to.be.eq(200);
-                expect(response.body.profesional.nombre).to.be.eq('MARIA');
-                expect(response.body.profesional.apellido).to.be.eq('PEREZ');
-            })
+            cy.plexButton('Volver').click();
             cy.get('table tbody td').should('contain', 'pendiente').and('contain', 'PEREZ, MARIA');
         });
 

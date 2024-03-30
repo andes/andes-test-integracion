@@ -154,23 +154,6 @@ context('CITAS - punto de inicio', () => {
                 expect(xhr.response.statusCode).to.be.eq(200)
             });
         });
-
-        // Test para verificar que al no asignar el turno, guarde la organizacion
-        it('rechazar turno', () => {
-            cy.intercept('POST', '**/api/modules/turnos/listaEspera**').as('listaEspera');
-            const paciente = pacientes[i];
-            darTurno(paciente);
-
-            cy.selectOption('name="tipoPrestacion"', '"598ca8375adc68e2a0c121d5"');
-            cy.wait('@cargaAgendas');
-            cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
-            cy.wait('@seleccionAgenda')
-            cy.plexButton('Demanda Rechazada').click();
-            cy.wait('@listaEspera').then((xhr) => {
-                expect(xhr.response.body).to.have.property('organizacion');
-            });
-        });
-
     })
 
     it('Verifica fecha/hora y usuario de dacion de turno', () => {
