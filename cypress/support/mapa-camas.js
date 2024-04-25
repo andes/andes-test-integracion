@@ -33,12 +33,15 @@ Cypress.Commands.add('createUsuarioByCapa', (capa, documento) => {
     );
 });
 Cypress.Commands.add('deshacerInternacion', (completa = false) => {
-    const opcionDeshacer = completa ? 'Toda la internación' : 'Último movimiento';
-    cy.get('plex-layout-sidebar plex-title').eq(1).plexDropdown('tooltip="Deshacer Internación"').click();
-    cy.contains(opcionDeshacer).click();
-    cy.swal('confirm', completa ?
-        'Si el paciente tiene prestaciones se deberá romper validación de las mismas antes de intentar realizar esta acción. ¿Está seguro que desea anular la internación?'
-        : 'Esta acción deshace el último movimiento.¡Esta acción no se puede revertir!');
+    // TODO: Si la internación tiene mas de un movimiento debería buscarse el dropdown en lugar del botón
+
+    // const opcionDeshacer = completa ? 'Toda la internación' : 'Último movimiento';
+    cy.get('plex-layout-sidebar plex-title').plexButtonIcon('account-off').click();
+    // cy.contains(opcionDeshacer).click();
+    // cy.swal('confirm', completa ?
+    //     'Si el paciente tiene prestaciones se deberá romper validación de las mismas antes de intentar realizar esta acción. ¿Está seguro que desea anular la internación?'
+    //     : 'Esta acción deshace el último movimiento.¡Esta acción no se puede revertir!');
+    cy.swal('confirm');
 })
 Cypress.Commands.add('loginCapa', (capa, documento) => {
     return cy.createUsuarioByCapa(capa, documento).then((user) => {
