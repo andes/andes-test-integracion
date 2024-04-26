@@ -101,8 +101,7 @@ describe('Capa Estadistica - Ingresos', () => {
 
         cy.get('plex-tabs ul li').eq(1).click();
         cy.get('plex-title[titulo="INGRESO"] div').eq(2);
-        cy.get('plex-layout-sidebar').plexButtonIcon('pencil').click();
-
+        cy.get('plex-layout-sidebar plex-button[tooltip="Editar ingreso"]').first().click({ force: true });
         cy.plexSelect('name="origen"').clearSelect();
         cy.plexSelectType('name="origen"', 'Emergencia');
 
