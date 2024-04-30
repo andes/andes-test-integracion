@@ -13,19 +13,17 @@ context('RUP - Punto de inicio', () => {
             { paciente: '586e6e8627d3107fde116cdb', tipoPrestacion: '57f5069d69fe79a5980b072e' }
         ).then((prestacion) => {
             idPrestacion = prestacion._id;
+            cy.viewport(1600, 900);
             cy.goto('/rup/ejecucion/' + idPrestacion, token);
         });
-
     })
 
     it('Iniciar prestación - Niño sano', () => {
-
         cy.intercept(/api\/modules\/rup\/frecuentesProfesional\?/).as('search');
         cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.intercept('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
         cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
-        cy.intercept('GET', '/api/core/term/snomed/expression**', []).as('expression');
-
+        cy.intercept('GET', '/api/core/term/snomed/expression?expression=**', []);
 
         cy.wait('@paciente');
         cy.get('plex-tabs').contains('Buscador').click({ force: true });
@@ -53,12 +51,13 @@ context('RUP - Punto de inicio', () => {
             expect(response.body.estados[1]).to.be.eq(undefined);
         });
 
+        cy.wait(500)
         cy.toast('success');
+        cy.wait(500)
         cy.wait('@paciente');
-        cy.wait(1000);
+        cy.wait(500)
         cy.plexButton('Validar consulta de niño sano').click();
-
-        // Popup alert
+        cy.wait(500)
         cy.get('button').contains('CONFIRMAR').click();
 
         cy.wait('@patch').then(({ response }) => {

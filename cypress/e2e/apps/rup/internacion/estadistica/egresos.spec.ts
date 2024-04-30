@@ -7,12 +7,20 @@ describe('Capa Estadistica - Egresos', () => {
             token = t;
             pacientes = pacientesCreados;
             cy.factoryInternacion({
-                configCamas: [
-                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment('2020-01-10').toDate() },
-                    { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: Cypress.moment().subtract(5, 'hour').toDate(), fechaEgreso: Cypress.moment().toDate() }]
-            }).then(camasCreadas => {
-                return cy.goto('/mapa-camas', token);
+                configCamas: [{
+                    estado: 'ocupada', pacientes: [pacientes[1]],
+                    fechaIngreso: Cypress.moment().subtract(1, 'day').toDate(),
+                    extras: { ingreso: true }
+                }]
             });
+            cy.task('database:seed:prestacion',
+                {
+                    paciente: pacientes[1]._id,
+                    estado: 'ejecucion',
+                    fecha: Cypress.moment().subtract(1, 'day').toDate(),
+                    ambitoOrigen: 'internacion'
+                }
+            )
         });
     });
 
@@ -61,15 +69,19 @@ describe('Capa Estadistica - Egresos', () => {
         cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.intercept('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
         cy.intercept('GET', '**/api/modules/rup/internacion/camas/historial?**').as('getHistorial');
+        cy.intercept('GET', '**/api/modules/rup/internacion/prestaciones?fechaIngresoDesde=?**').as('getListado');
+
         cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
         cy.viewport(1920, 1080);
+
+        cy.goto('/mapa-camas', token);
+        cy.wait(300)
     });
 
     it('Egreso completo', () => {
-        cy.wait(400)
-        cy.plexDropdown('icon="menos"').first().click().get('a').contains('Egresar paciente').click();
-
+        cy.wait(300)
+        cy.plexDropdown('icon="menos"').click().wait(500).get('a').contains('Egresar paciente').click();
         cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
         cy.plexSelectAsync('label="Diagnostico Principal al egreso"', 'Neumo', '@getDiagnostico', 0);
         cy.plexSelectAsync('label="Otros Diagnósticos"', 'Otros trastornos', '@getDiagnostico', 0);
@@ -82,25 +94,22 @@ describe('Capa Estadistica - Egresos', () => {
         cy.wait('@patchPrestaciones').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        cy.wait('@getHistorial');
 
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
     });
 
-    it('Editar egreso', () => {
-        cy.goto('/mapa-camas', token);
-        cy.get('plex-layout-sidebar').plexButtonIcon('pencil').click({ force: true });
-        cy.plexDatetime('label="Fecha y hora del mapa de camas"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha y hora del mapa de camas"', { text: Cypress.moment().add(-1, 'hours').format('DD/MM/YYYY HH:mm'), skipEnter: true });
-        cy.get('plex-layout-sidebar').plexIcon('check').click();
-        cy.contains(pacientes[1].nombre).click();
-
-        cy.get('plex-tabs ul li').eq(1).click();
-        cy.get('plex-options div div button').contains('EGRESO').click({ force: true });
+    it('Editar egreso desde listado', () => {
+        cy.plexButton('LISTADO DE INTERNACIÓN').click()
+        cy.wait('@getListado');
+        cy.get('plex-table tr td').first().click();
+        cy.get('plex-options').contains('EGRESO').click({ force: true });
 
         cy.get('app-informe-egreso plex-button[icon="pencil"]').click({ force: true });
+
         cy.plexSelect('label="Tipo de egreso"').find('.remove-button').click();
         cy.plexSelectType('label="Tipo de egreso"', 'Defuncion').click();
+        cy.plexSelect('label="Otros Diagnósticos"').find('.remove-button').click();;
+        cy.plexSelectAsync('label="Otros Diagnósticos"', 'Otros trastornos', '@getDiagnostico', 0);
 
         cy.plexButtonIcon('check').click();
 

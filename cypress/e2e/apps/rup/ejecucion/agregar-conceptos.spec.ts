@@ -26,6 +26,7 @@ context('RUP - Ejecucion', () => {
                 { paciente: idPaciente, tipoPrestacion: '5cdc4c865cd661b503d727a6' }
             ).then((prestacion) => {
                 idPrestacion = prestacion._id;
+                cy.viewport(1600, 900);
                 cy.goto('/rup/ejecucion/' + idPrestacion, token);
             });
             cy.server() // para las funciones de rup que estan desactualizadas
