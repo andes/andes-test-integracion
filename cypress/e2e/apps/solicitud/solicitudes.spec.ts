@@ -35,12 +35,12 @@ context('SOLICITUDES', () => {
     it('crear nueva regla de entrada', () => {
         cy.plexButton('Reglas de entrada').click();
         cy.plexSelectAsync('name="tipoPrestacion"', 'consulta de medicina general', '@conceptosTurneables', 0);
-        cy.plexSelectAsync('name="organizacion"', 'HOSPITAL DE AREA RINCON DE LOS SAUCES', '@getOrganizaciones', 0);
-        cy.plexButtonIcon('plus').click();
+        cy.plexSelectAsync('name="organizacionOrigen"', 'HOSPITAL DE AREA RINCON DE LOS SAUCES', '@getOrganizaciones', 0);
+        cy.plexButton(' Agregar organización ').click();
         cy.plexSelectAsync('name="prestacionOrigen"', 'consulta de urologia', '@conceptosTurneables', 0);
-        cy.plexButtonIcon('plus').eq(1).click();
+        cy.plexButton(' Agregar prestación ').click();
         cy.plexSelectAsync('name="prestacionOrigen"', 'consulta de clínica médica', '@conceptosTurneables', 0);
-        cy.plexButtonIcon('plus').eq(1).click();
+        cy.plexButton(' Agregar prestación ').click();
         cy.plexButton('Guardar').click();
         cy.wait('@guardarRegla').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
@@ -59,8 +59,8 @@ context('SOLICITUDES', () => {
 
     it('Verificar prestacion destino - Reglas de entrada', () => {
         cy.plexButton('Reglas de entrada').click();
-        cy.plexSelectAsync('name="organizacion"', 'HOSPITAL DE AREA RINCON DE LOS SAUCES', '@getOrganizaciones', 0);
-        cy.plexButtonIcon('plus').click();
+        cy.plexSelectAsync('name="organizacionOrigen"', 'HOSPITAL DE AREA RINCON DE LOS SAUCES', '@getOrganizaciones', 0);
+        cy.plexButton(' Agregar organización ').click();
         cy.swal('confirm', 'Debe seleccionar la prestación destino');
         cy.plexButton('Guardar').should('have.prop', 'disabled', true);
     });
@@ -68,9 +68,9 @@ context('SOLICITUDES', () => {
     it('Verificar organización origen - Reglas de entrada', () => {
         cy.plexButton('Reglas de entrada').click();
         cy.plexSelectAsync('name="tipoPrestacion"', 'consulta de medicina general', '@conceptosTurneables', 0);
-        cy.plexButtonIcon('plus').click();
+        cy.plexButton(' Agregar organización ').click();
         cy.swal('confirm', 'Debe seleccionar la organización de origen');
-        cy.plexButton('Guardar').should('have.prop', 'disabled', false);
+        cy.plexButton('Guardar').should('have.prop', 'disabled', true);
     });
 
     it('crear solicitud de entrada y verificar filtros', () => {
@@ -102,7 +102,7 @@ context('SOLICITUDES', () => {
             expect(response.body.solicitud.registros[0].valor.solicitudPrestacion.motivo).to.be.eq('Motivo de la solicitud');
             expect(response.body.solicitud.historial[0].accion).to.be.eq('creacion');
         });
-        cy.plexButtonIcon('chevron-down').click();
+        cy.plexButtonIcon('chevron-down').click({ force: true });
         cy.plexText('name="paciente"', 'SOLICITUD TEST');
 
         cy.plexSelectType('name="prestacionDestino"', 'Consulta de neurología');
@@ -139,7 +139,7 @@ context('SOLICITUDES', () => {
 
         });
         cy.toast('success', 'Consulta de cirugía infantil');
-        cy.plexButtonIcon('chevron-down').click();
+        cy.plexButtonIcon('chevron-down').click({ force: true });
         cy.plexSelectType('name="prestacionDestino"', 'Consulta de cirugía infantil');
 
         cy.wait('@solicitudes').then(({ response }) => {
