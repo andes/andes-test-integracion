@@ -26,7 +26,7 @@ context('mobile paciente', () => {
 
         it('Login de paciente inexistente', () => {
             cy.viewport(550, 750);
-            cy.goto("/mobile/home", null, null, {
+            cy.goto("/mobile/home/paciente", null, null, {
                 "coords": {
                     "latitude": -38.9502334061469,
                     "longitude": -68.0569198206332
@@ -59,7 +59,7 @@ context('mobile paciente', () => {
             cy.intercept('GET', '**/api/modules/vacunas/**').as('getVacunas');
             cy.viewport(550, 750);
 
-            cy.goto("/mobile/home", null, null, {
+            cy.goto("/mobile/home/paciente", null, null, {
                 "coords": {
                     "latitude": -38.9502334061469,
                     "longitude": -68.0569198206332
@@ -79,7 +79,7 @@ context('mobile paciente', () => {
             cy.get('ion-menu-button').first().click({ force: true });
             cy.wait(1000)
             cy.contains('Cerrar sesión').click({ force: true })
-            cy.contains('Bienvenido');
+            cy.contains('Elegí el perfil que te corresponda');
         })
 
         it('Visualización de perfil', () => {

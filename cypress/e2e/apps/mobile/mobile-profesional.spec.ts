@@ -87,7 +87,7 @@ context('mobile profesional', () => {
 
         cy.goto("/mobile/");
         cy.url().should('include', '/mobile/home');
-        cy.get('.nologin').click();
+        cy.get('[name="loginProfesional"]').click();
         cy.get('input').first().type('30643636');
         cy.get('#password').first().type('asd');
         cy.get('.success').click();
