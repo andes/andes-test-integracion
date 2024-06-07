@@ -63,7 +63,7 @@ let i = 0;
 
             cy.wait('@acceso').then((xhr) => {
                 const body = xhr.request.body;
-                expect(body.motivo[0]).to.be.eq('Procesos de Auditoría');
+                expect(body.motivo).to.be.eq('Procesos de Auditoría');
                 expect(body.paciente.id).to.be.eq(paciente._id);
             })
 
