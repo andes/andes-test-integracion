@@ -169,7 +169,7 @@ context('punto de inicio', () => {
             expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.toast('success', 'Se registro la asistencia del paciente');
+        cy.toast('success', 'Se registró la asistencia del paciente');
         cy.wait(1000)
 
         cy.get('li[class="list-group-item"]').find('div[class="list-group-item-text"]').find('div[class="row"]')
@@ -179,7 +179,7 @@ context('punto de inicio', () => {
             expect(response.statusCode).to.be.eq(200);
         });
 
-        cy.toast('alert', 'Se registro la inasistencia del paciente');
+        cy.toast('alert', 'Se registró la inasistencia del paciente');
 
     });
 
