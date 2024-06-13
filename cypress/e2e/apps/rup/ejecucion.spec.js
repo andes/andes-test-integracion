@@ -13,6 +13,9 @@ context('RUP - Punto de inicio', () => {
 
         })
     })
+    beforeEach(() => {
+        cy.intercept('GET', '/api/modules/huds/motivosHuds/motivosHuds**', { fixture: 'huds/modalHuds.json' }).as('motivosHuds');
+    })
 
     it('Iniciar prestación - Fuera de agenda', () => {
         cy.goto('/rup', token);
@@ -37,6 +40,7 @@ context('RUP - Punto de inicio', () => {
         cy.get('paciente-listado plex-item').contains(formatDocumento('3399661')).click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
+        cy.wait('@motivosHuds');
         cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
         cy.wait('@create').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
@@ -107,6 +111,8 @@ context('RUP - Punto de inicio', () => {
             force: true
         });
         cy.get('button').contains('CONFIRMAR').click();
+        cy.wait('@motivosHuds');
+
         cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
 
         cy.wait('@create').then(({ response }) => {
@@ -177,6 +183,8 @@ context('RUP - Punto de inicio', () => {
             force: true
         });
         cy.get('button').contains('CONFIRMAR').click();
+        cy.wait('@motivosHuds');
+
         cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
 
         cy.wait('@create').then(({ response }) => {
@@ -244,7 +252,6 @@ context('RUP - Punto de inicio', () => {
         cy.intercept('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
         cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
 
-
         cy.plexButton('PACIENTE FUERA DE AGENDA').click();
 
 
@@ -254,6 +261,7 @@ context('RUP - Punto de inicio', () => {
         cy.get('paciente-listado plex-item').contains(formatDocumento('31549268')).click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
+        cy.wait('@motivosHuds');
         cy.get('plex-tabs').contains('Registros de esta consulta').click({ force2: true });
         cy.wait('@create').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);

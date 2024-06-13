@@ -47,6 +47,8 @@ let i = 0;
         beforeEach(() => {
             cy.intercept('POST', '/api/modules/huds/accesos/token').as('acceso');
             cy.viewport(1920, 1080);
+            cy.intercept('GET', '/api/modules/huds/motivosHuds/motivosHuds**', { fixture: 'huds/modalHuds.json' }).as('motivosHuds');
+
         });
 
         it('ver registros de un paciente', () => {
@@ -63,6 +65,7 @@ let i = 0;
 
             cy.wait('@acceso').then((xhr) => {
                 const body = xhr.request.body;
+                cy.wait('@motivosHuds');
                 expect(body.motivo).to.be.eq('Procesos de Auditoría');
                 expect(body.paciente.id).to.be.eq(paciente._id);
             })
