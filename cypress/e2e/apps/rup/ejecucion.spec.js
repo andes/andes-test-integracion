@@ -318,7 +318,7 @@ context('RUP - Punto de inicio', () => {
         cy.get('plex-item').contains("TURNO, PACIENTE").click();
         cy.get('plex-radio').contains(' Procesos de Auditoría ').click({ force: true });
         cy.plexButton('ACEPTAR').click();
-        cy.get('rup-hudsbusqueda .menu-buscador button').contains('PRESTACIONES').click();
+        cy.get('.slider-filtros .card-filtro').contains('prestaciones').click();
         cy.get('rup-hudsbusqueda ul li .rup-header').first().click();
         cy.get('.rup-card.elementoderegistro .rup-header .title').contains(' Nota privada (elemento de registro) ');
 
