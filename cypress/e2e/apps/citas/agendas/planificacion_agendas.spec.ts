@@ -662,9 +662,11 @@ context('Planificacion Agendas', () => {
         cy.get('plex-radio[name="agendas"] input').eq(1).click({
             force: true
         });
-        cy.get('table tr').contains('actividades con la comunidad').first().click();
-        cy.plexButton('INICIAR PRESTACIÓN').click();
-        cy.get('button').contains('CONFIRMAR').click();
+        cy.get('plex-item').contains('actividades con la comunidad').first().click();
+        cy.get('[tooltip="Iniciar Prestación"]').then((items) => {
+            items[0].click()
+        });
+        cy.swal('confirm');
     });
 
 });

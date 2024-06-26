@@ -27,8 +27,11 @@ context('prestaciones', () => {
             cy.intercept('GET', '/api/core/term/snomed/**', []).as('search');
             cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
 
-            cy.plexButton('PACIENTE FUERA DE AGENDA').click();
-            cy.plexSelectType('name="nombrePrestacion"', 'colonoscopia');
+            cy.get('[tooltip="Fuera de agenda"]').then((items) => {
+                items[0].click()
+            });
+
+            cy.plexSelectType('label="Seleccione el tipo de prestación"', 'colonoscopia')
 
             cy.plexText('name="buscador"', paciente.nombre);
             cy.get('paciente-listado plex-item').contains(paciente.nombre).click();
@@ -71,9 +74,6 @@ context('prestaciones', () => {
                 force: true
             });
             cy.plexInt('name="intValue"').type('100');
-            // cy.get('plex-radio[name="binario"] input').eq(15).click({
-            //     force: true
-            // });
 
             cy.get('plex-radio[name="binario"] input').eq(16).click({
                 force: true

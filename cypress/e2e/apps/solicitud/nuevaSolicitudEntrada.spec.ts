@@ -116,7 +116,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.plexSelectType('label="Tipos de Prestación Origen"').find('.selectize-dropdown-content').children().should('have.length', 0);
     });
 
-    it.only('nueva solicitud, asignación a profesional y control de historial', () => {
+    it('nueva solicitud, asignación a profesional y control de historial', () => {
         let idPrestacion;
         seleccionarPaciente(dni);
         cy.plexDatetime('label="Fecha de solicitud"', cy.today());
@@ -151,7 +151,9 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.wait('@patchSolicitud');
         cy.get('.badge').contains('asignada');
         cy.goto('/rup', token);
-        cy.plexButton('Mis solicitudes').click();
+        cy.get('[tooltip="Mis solicitudes"]').then((items) => {
+            items[0].click()
+        });
         cy.wait('@getSolicitudes').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
             cy.get('.badge').contains('asignada');
