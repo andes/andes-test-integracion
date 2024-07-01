@@ -601,7 +601,7 @@ context('Planificacion Agendas', () => {
     });
 
 
-    it.only('Guardar, clonar y verificar botón iniciar prestación en agenda no nominalizada', () => {
+    it('Guardar, clonar y verificar botón iniciar prestación en agenda no nominalizada', () => {
         let ayer = Cypress.moment().add('days', -1);
         let hoy = Cypress.moment();
         complete({
@@ -630,7 +630,7 @@ context('Planificacion Agendas', () => {
             cy.plexButtonIcon('chevron-right').click();
             cy.wait('@agendas');
         }
-
+        cy.wait(500);
         cy.get('table').contains(hoy.format('D')).click({ force: true });
         cy.plexButtonIcon("check").click();
         cy.swal('confirm');
@@ -663,9 +663,7 @@ context('Planificacion Agendas', () => {
             force: true
         });
         cy.get('plex-item').contains('actividades con la comunidad').first().click();
-        cy.get('[tooltip="Iniciar Prestación"]').then((items) => {
-            items[0].click()
-        });
+        cy.plexButtonIcon('notas-check').click();
         cy.swal('confirm');
     });
 
