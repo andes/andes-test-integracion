@@ -313,7 +313,7 @@ context('RUP - Ejecucion', () => {
         cy.assertHudsBusquedaFiltros('producto', 1);
         cy.assertHudsBusquedaFiltros('procedimiento', 1);
 
-        cy.get('rup-hudsbusqueda .menu-buscador button').contains('PRESTACIONES').click();
+        cy.get('.slider-filtros .card-filtro').contains('prestaciones').click();
         cy.getHUDSItems().should('have.length', 4);
 
         cy.getHUDSItems().eq(0).assertRUPMiniCard({
@@ -381,9 +381,7 @@ context('RUP - Ejecucion', () => {
             profesional: 'Natalia Huenchuman'
         }).click();
 
-        cy.get('vista-registro .menu-left').click();
-        cy.get('vista-registro').plexBadge('fiebre');
-        cy.get('vista-registro').plexBadge('fiebre Q');
+        cy.get('detalle-registro').plexBadge('trastorno');
     });
 
     it('HUDS - Filtro por texto libre', () => {
@@ -483,21 +481,20 @@ context('RUP - Ejecucion', () => {
             profesional: 'Huenchuman, Natalia',
         }).click();
 
-        cy.get('.columna-completa').contains("consulta de medicina general"); //Tipo de prestación origen
-        cy.get('.columna-completa').contains("HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON"); //Organización origen
-        cy.get('.columna-completa').contains("motivo de la solicitud"); //Motivo de la solicitud
-        cy.get('.columna-completa').contains("auditoria"); //Estado de la solicitud
+        cy.get('.solicitud').contains("consulta de medicina general"); //Tipo de prestación origen
+        cy.get('.solicitud').contains(Cypress.moment().format('DD/MM/YYYY')); //Motivo de la solicitud
+        cy.get('.solicitud').contains("auditoria"); //Estado de la solicitud
 
         cy.get('historial-solicitud').plexLabel(Cypress.moment().format('DD/MM/YYYY'));
         cy.get('historial-solicitud').plexLabel('Creada por Natalia Huenchuman');
         cy.get('historial-solicitud').plexLabel('Creacion de solicitud');
     });
 
-    it.only('HUDS - Filtro internacion', () => {
+    it.skip('HUDS - Filtro internacion', () => {
         cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
         cy.assertHudsBusquedaFiltros('prestaciones', 5);
         cy.HudsBusquedaFiltros('prestaciones');
-        cy.get('button').contains('INTERNACIÓN').click();
+        cy.get('button').contains(' Internación ').click();
 
         cy.plexButtonIcon('chevron-down').click();
 

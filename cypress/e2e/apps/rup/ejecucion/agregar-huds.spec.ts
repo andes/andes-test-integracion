@@ -76,7 +76,7 @@ context('RUP - Ejecucion', () => {
         cy.intercept('GET', '/api/core/term/snomed/expression?expression=**', []);
         cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
         cy.plexTab('Historia de Salud').click();
-        cy.get('rup-hudsbusqueda .menu-buscador button').contains('PRESTACIONES').click();
+        cy.get('.card-filtro').contains('prestaciones').click();
         cy.get('plex-layout-sidebar .rup-card').should('have.length', 2);
         cy.HudsBusquedaFiltros('trastorno');
         cy.get('plex-layout-sidebar .rup-card').should('have.length', 1);
