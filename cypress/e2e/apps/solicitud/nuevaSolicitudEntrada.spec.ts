@@ -130,6 +130,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.plexSelectType('label="Profesional solicitante"', '{enter}');
         cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'un motivo lalala');
         cy.plexButton('Guardar').click();
+        cy.get('button').contains('CONFIRMAR').click();
         cy.wait('@createSolicitud').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
             expect(response.body.paciente.documento).to.be.eq(dni);
@@ -143,9 +144,7 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.get('plex-layout-sidebar').plexButtonIcon('lock-alert').click()
         cy.plexButton('Asignar').click();
         cy.plexTextArea('label="Observaciones"', 'un motivo lalala');
-        cy.plexSelectType('label="Profesional"', 'natalia huenchuman');
-        cy.wait('@profesionalSolicitante');
-        cy.plexSelectType('label="Profesional"', '{enter}');
+        cy.plexSelectAsync('label="Profesional"', 'Natalia Huenchuman', '@profesionalSolicitante', 0);
         cy.plexButtonIcon('check').click();
         cy.wait('@getSolicitudes')
         cy.wait('@patchSolicitud');
