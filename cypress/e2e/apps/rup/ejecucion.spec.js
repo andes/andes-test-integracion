@@ -13,6 +13,9 @@ context('RUP - Punto de inicio', () => {
 
         })
     })
+    beforeEach(() => {
+        cy.intercept('GET', '/api/modules/huds/motivosHuds/motivosHuds**', { fixture: 'huds/modalHuds.json' }).as('motivosHuds');
+    })
 
     it('Iniciar prestación - Fuera de agenda', () => {
         cy.goto('/rup', token);
@@ -40,6 +43,7 @@ context('RUP - Punto de inicio', () => {
         cy.get('paciente-listado plex-item').contains(formatDocumento('3399661')).click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
+        cy.wait('@motivosHuds');
         cy.get('plex-tabs').contains('Registros de esta consulta').click({ force: true });
         cy.wait('@create').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
@@ -113,6 +117,7 @@ context('RUP - Punto de inicio', () => {
         });
 
         cy.swal('confirm');
+        cy.wait('@motivosHuds');
 
         cy.wait('@create').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
@@ -178,7 +183,7 @@ context('RUP - Punto de inicio', () => {
         });
 
         cy.plexSelectType('label="Prestación"', 'consulta de medicina general')
-        
+
         cy.get('plex-item').contains('consulta de medicina general').first().click();
 
         cy.get('[tooltip="Iniciar Prestación"]').then((items) => {
@@ -186,6 +191,7 @@ context('RUP - Punto de inicio', () => {
         });
 
         cy.swal('confirm');
+        cy.wait('@motivosHuds');
 
         cy.wait('@create').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
@@ -262,6 +268,7 @@ context('RUP - Punto de inicio', () => {
         cy.get('paciente-listado plex-item').contains(formatDocumento('31549268')).click();
 
         cy.plexButton('INICIAR PRESTACIÓN').click();
+        cy.wait('@motivosHuds');
         cy.get('plex-tabs').contains('Registros de esta consulta').click({ force2: true });
         cy.wait('@create').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
