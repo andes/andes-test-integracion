@@ -390,7 +390,7 @@ context('punto de inicio', () => {
 
             cy.get('plex-card').eq(i).click();
             cy.plexButton('Confirmar').click();
-            cy.wait('@getAgendas').then(({ response }) => {
+            cy.wait('@getHistorial').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
             });
             cy.wait('@confirmarTurno').then(({ response }) => {

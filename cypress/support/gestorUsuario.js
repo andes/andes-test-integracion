@@ -1,3 +1,3 @@
-Cypress.Commands.add('buscarPermisos', (valor1, valor2) => {
-    cy.get('plex-layout-sidebar arbol-permisos>div').eq(valor1).plexAccordion().eq(valor2);
+Cypress.Commands.add('buscarPermisos', (name) => {
+    cy.get('plex-layout-sidebar gestor-usarios-perfiles-detail').contains(name);
 });
