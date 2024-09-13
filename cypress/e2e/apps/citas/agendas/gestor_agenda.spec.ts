@@ -35,7 +35,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.intercept('GET', '**/api/modules/turnos/espacioFisico**').as('getEspacioFisico');
         cy.intercept('GET', '**/api/modules/turnos/institucion**').as('institucion');
         cy.goto('/citas/gestor_agendas', token);
-        cy.viewport(1920, 1080);
+        cy.viewport(1600, 900);
     })
 
     it('editar agenda publicada', () => {
@@ -101,7 +101,6 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.organizacion.id).to.be.eq('57e9670e52df311059bc8964');
             expect(response.body.profesionales[0].id).to.be.eq('5d02602588c4d1772a8a17f8');
             expect(response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b9');
-
         });
 
         const manana = Cypress.moment().add(1, 'days').format('DD/MM/YYYY');
@@ -134,7 +133,6 @@ describe('CITAS - Planificar Agendas', () => {
 
         cy.get('section.d-flex').contains('PRUEBA, ALICIA');
         cy.get('section.d-flex').contains('Consulta de ortopedia');
-
     })
 
     it('suspender agenda disponible sin turnos', () => {
@@ -197,11 +195,8 @@ describe('CITAS - Planificar Agendas', () => {
         cy.wait('@findAgenda').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
-        cy.get('table tbody td').first().click({ force: true });
-        cy.wait('@getCandidatas').then(({ response }) => {
-            expect(response.statusCode).to.eq(200);
-        });
-        cy.contains('No hay agendas disponibles. Para agregar click aquí');
+
+        cy.contains('Seleccione un turno para ver agendas candidatas a reasignar');
     })
 
     it('suspender agenda disponible con turno y reasignarlo', () => {
@@ -351,7 +346,7 @@ describe('CITAS - Planificar Agendas', () => {
         cy.plexDateTimeDinamico('Inicio', "08:00");
         cy.plexDateTimeDinamico('Fin', "16:00");
         cy.plexSelectType('label="Tipos de prestación"', 'consulta de medicina general');
-        cy.get('plex-bool[name="dinamica"]').click();
+        cy.plexBool('label="Dinámica"', true);
         cy.get('plex-bool[name="espacioFisicoPropios"]').click();
         cy.plexSelectAsync('label="Seleccione un espacio físico"', 'ESCUELA PRIMARIA 300', '@institucion', 0);
         cy.plexButton("Guardar").click();

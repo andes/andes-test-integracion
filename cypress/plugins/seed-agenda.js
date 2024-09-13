@@ -161,6 +161,7 @@ module.exports.seedAgenda = async (mongoUri, params) => {
                     "emitidoPor": "Gestión de pacientes",
                     "tipoTurno": "delDia", // A mejorar
                     "horaInicio": horaInicio.clone().add(i * 30, 'minutes').toDate(),
+                    "fechaHoraDacion": horaInicio.clone().subtract(1, 'h').toDate(),
                     "paciente": {
                         ...paciente,
                         id: paciente._id,

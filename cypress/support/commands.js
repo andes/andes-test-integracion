@@ -125,3 +125,10 @@ Cypress.Commands.add('taskN', (name, argumentos) => {
     }
     return runTask(name, argumentos, []);
 });
+
+Cypress.Commands.add('shouldBeCalled', (alias, timesCalled) => {
+    expect(
+      cy.state('requests').filter(call => call.alias === alias),
+      `${alias} should have been called ${timesCalled} times`
+    ).to.have.length(timesCalled);
+  });

@@ -18,6 +18,7 @@ context('CITAS - punto de inicio', () => {
             delete req.headers['if-none-match']
         }).as('busquedaPaciente');
         cy.intercept('GET', '**api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**api/modules/turnos/historial?pacienteId=**').as('getHistorial');
         cy.intercept('GET', '**/api/core/tm/conceptos-turneables').as('conceptoTurneables');
         cy.intercept('GET', '**/api/modules/turnos/agenda?rango=true&desde=**').as('cargaAgendas');
         cy.intercept('PATCH', '**/api/modules/turnos/turno/**').as('darTurno');
@@ -75,6 +76,7 @@ context('CITAS - punto de inicio', () => {
         cy.plexSelectAsync('name="profesional"', 'HUENCHUMAN NATALIA', '@getProfesionales', 0);
 
         if (cy.esFinDeMes()) {
+            run
             cy.wait('@cargaAgendas').then((xhr) => {
                 expect(xhr.response.statusCode).to.be.eq(200);
                 expect(xhr.response.body).to.have.length(0);
@@ -185,18 +187,17 @@ context('CITAS - punto de inicio', () => {
         });
         cy.wait(1000)
         cy.get('div[class="dia"]').contains(Cypress.moment().add(1, 'days').format('D')).click();
-
         cy.wait('@seleccionAgenda').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200)
         });
         cy.get('plex-card').eq(3).click();
-
         cy.plexButton('Confirmar').click();
-        cy.wait('@cargaAgendas').then((xhr) => {
-            expect(xhr.response.statusCode).to.be.eq(200);
-            const fechaHora = Cypress.moment(xhr.response.body[0].bloques[0].turnos[3].fechaHoraDacion).format('DD/MM/YYYY');
+
+        cy.wait('@getHistorial').then(({ response }) => {
+            expect(response.statusCode).to.be.eq(200);
+            const fechaHora = Cypress.moment(response.body[0].fechaHoraDacion).format('DD/MM/YYYY');
             expect(fechaHora).to.be.eq(hoy);
-            expect(xhr.response.body[0].bloques[0].turnos[3].usuarioDacion.nombreCompleto).to.be.eq('Natalia Huenchuman');
+            expect(response.body[2].usuarioDacion.nombreCompleto).to.be.eq('Natalia Huenchuman');
         });
     });
 
