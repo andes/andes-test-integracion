@@ -1,0 +1,122 @@
+{
+    "_id" : "586e6e9327d3107fde165b44",
+    "documento" : "30001954",
+    "cuil":"20300019544",
+    "estado" : "validado",
+    "nombre" : "MARIBEL",
+    "apellido" : "PERALTA",
+    "sexo" : "femenino",
+    "genero" : "femenino",
+    "fechaNacimiento" : "1983-05-02T00:00:00.000-03:00",
+    "estadoCivil" : "soltero",
+    "entidadesValidadoras" : [ 
+        "Sisa"
+    ],
+    "claveBlocking" : [ 
+        "PRLTMRV", 
+        "PRLT", 
+        "MRVL", 
+        "09536915", 
+        "0953"
+    ],
+    "financiador" : [],
+    "relaciones" : [ 
+        {
+            "_id" : "607070907846773dafa5a9ed",
+            "relacion" : {
+                "_id" : "59247c391ebf0273353b23c0",
+                "nombre" : "hijo/a",
+                "opuesto" : "progenitor/a"
+            },
+            "referencia" : "607070907846773dafa5a97d",
+            "nombre" : "RAMIRO",
+            "apellido" : "IBARROLA PERALTA",
+            "documento" : null,
+            "numeroIdentificacion" : null,
+            "fechaFallecimiento" : null,
+            "fechaNacimiento" : "2021-04-09T00:00:00.000-03:00",
+            "activo" : true
+        }
+    ],
+    "direccion" : [ 
+        {
+            "geoReferencia" : [],
+            "activo" : true,
+            "_id" : "58cf368ad816ea2b7c04882f",
+            "valor" : "PEATONAL   26 SECTOR:E  B",
+            "codigoPostal" : "8316",
+            "ubicacion" : {
+                "_id" : "58cf368ad816ea2b7c048830",
+                "localidad" : {
+                    "_id" : "57f538a472325875a199a831",
+                    "nombre" : "Senillosa"
+                },
+                "provincia" : {
+                    "_id" : "582074b2de27c98959a5e350",
+                    "nombre" : "Neuquén"
+                },
+                "pais" : {
+                    "_id" : "582074dcde27c98959a5e351",
+                    "nombre" : "Argentina"
+                }
+            },
+            "ranking" : 1
+        }
+    ],
+    "contacto" : [
+        {
+            "activo" : true,
+            "_id" : "607070907846773dafa5a97e",
+            "tipo" : "email",
+            "valor" : "pmaribelji@gmail.com",
+            "ultimaActualizacion" : "2021-04-09T12:19:44.089-03:00"
+        }
+    ],
+    "identificadores" : [ 
+        {
+            "entidad" : "SIPS",
+            "valor" : "698551"
+        }
+    ],
+    "__v" : 0,
+    "activo" : true,
+    "documento_fuzzy" : [ 
+        "954", 
+        "195", 
+        "019", 
+        "001", 
+        "000", 
+        "300", 
+        "1954", 
+        "0195", 
+        "0019", 
+        "0001", 
+        "3000", 
+        "01954", 
+        "00195", 
+        "00019", 
+        "30001", 
+        "001954", 
+        "000195", 
+        "300019", 
+        "0001954", 
+        "3000195", 
+        "30001954"
+    ],
+    "carpetaEfectores" : [],
+    "notas" : [],
+    "tokens" : [ 
+        "30001954", 
+        "maribel", 
+        "peralta"
+    ],
+    "documentos" : [],
+    "updatedAt" : "2022-04-06T15:03:59.220-03:00",
+    "updatedBy" : {
+        "nombre" : "Andes",
+        "apellido" : "Scheduler",
+        "organizacion" : {
+            "nombre" : "Andes"
+        }
+    }
+}
