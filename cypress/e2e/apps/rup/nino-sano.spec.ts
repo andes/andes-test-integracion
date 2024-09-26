@@ -24,6 +24,7 @@ context('RUP - Punto de inicio', () => {
         cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.intercept('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
         cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+        cy.intercept('GET', '/api/core/term/snomed/expression**', []).as('expression');
 
 
         cy.wait('@paciente');
@@ -54,6 +55,7 @@ context('RUP - Punto de inicio', () => {
 
         cy.toast('success');
         cy.wait('@paciente');
+        cy.wait(1000);
         cy.plexButton('Validar consulta de niño sano').click();
 
         // Popup alert
