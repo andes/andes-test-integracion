@@ -12,7 +12,7 @@ const moment = require('moment');
             cy.loginCapa(capa).then(([user, t, pacientesCreados]) => {
                 pacientes = pacientesCreados;
                 token = t;
-                cy.factoryInternacion({ configCamas: [{ estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: moment('2020-01-10').toDate() }] })
+                cy.factoryInternacion({ configCamas: [{ estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: moment().subtract(1, 'month').toDate() }] })
                     .then(camasCreadas => {
                         camas = camasCreadas;
                         cy.factoryInternacion({ sala: true, config: [{ estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(1, 'hour').toDate() }] })
@@ -32,7 +32,7 @@ const moment = require('moment');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('egresoSalaComun');
 
-            cy.viewport(1920, 1080);
+            cy.viewport(1600, 900);
         });
 
         it('Egreso simplificado', () => {

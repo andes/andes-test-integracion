@@ -2,6 +2,24 @@ const faker = require('faker');
 const moment = require('moment')
 const { connectToDB, ObjectId } = require('./database');
 
+// version simplificada de la funcion de app para setear datos del paciente segun el esquema de PacienteSubSchema.
+function pacienteToBasico(paciente) {
+    const response = {
+        id: undefined,
+        nombre: undefined,
+        apellido: undefined,
+        alias: undefined,
+        documento: undefined,
+        numeroIdentificacion: undefined,
+        estado: undefined,
+        sexo: undefined,
+        genero: undefined,
+        fechaNacimiento: undefined
+    };
+    Object.keys(response).map(key => response[key] = paciente[key]);
+    return response;
+}
+
 module.exports.createMaquinaEstados = async (mongoUri, params) => {
     params = params || {};
     try {
@@ -87,7 +105,7 @@ module.exports.createCama = async (mongoUri, params) => {
             dtoPrestacion = require(linkPrestacion);
             dtoPrestacion = JSON.parse(JSON.stringify(dtoPrestacion));
             dtoPrestacion._id = new ObjectId();
-            if (params.unidadOrganizativa){
+            if (params.unidadOrganizativa) {
                 dtoPrestacion.unidadOrganizativa = dtoCama.unidadOrganizativaOriginal;
             }
             dtoPrestacion.solicitud.organizacion = dtoCama.organizacion || dtoPrestacion.solicitud.organizacion;
@@ -109,10 +127,11 @@ module.exports.createCama = async (mongoUri, params) => {
             if (params.paciente) {
                 const pacientesDB = await client.db().collection('paciente');
                 paciente = await pacientesDB.findOne({ documento: params.paciente.documento });
-                dtoPrestacion.paciente = paciente;
-                dtoResumen.paciente = paciente;
+                dtoPrestacion.paciente = pacienteToBasico(paciente);;
+                dtoResumen.paciente = pacienteToBasico(paciente);
             } else {
-                paciente = dtoPrestacion.paciente || dtoResumen.paciente;
+                const pacienteAux = dtoPrestacion.paciente || dtoResumen.paciente;
+                paciente = pacienteToBasico(pacienteAux);
             }
             paciente._id = ObjectId(paciente._id);
             paciente.id = ObjectId(paciente._id);
@@ -204,7 +223,7 @@ module.exports.createCama = async (mongoUri, params) => {
             }
             await camaEstadosDB.insertOne(dtoEstadistica);
         }
-        
+
         let dtoMedica = Object.create(dtoEstadoDefault);
         dtoMedica._id = new ObjectId();
         dtoMedica.capa = 'medica';
