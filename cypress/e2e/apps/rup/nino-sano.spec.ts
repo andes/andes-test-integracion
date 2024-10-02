@@ -24,6 +24,7 @@ context('RUP - Punto de inicio', () => {
         cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
         cy.intercept('PATCH', 'api/modules/rup/prestaciones/**').as('patch');
         cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
+        cy.intercept('GET', '/api/core/term/snomed/expression?expression=**', []).as('snomed')
 
 
         cy.wait('@paciente');

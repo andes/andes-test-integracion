@@ -46,7 +46,7 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
-        cy.viewport(1920, 1080);
+        cy.viewport(1600, 900);
     });
 
     it('Ingreso completo cambiando paciente', () => {
