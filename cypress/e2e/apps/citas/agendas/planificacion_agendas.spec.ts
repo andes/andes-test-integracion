@@ -111,6 +111,7 @@ context('Planificacion Agendas', () => {
         cy.intercept('POST', '**/api/modules/turnos/agenda/clonar/**', req => {
             delete req.headers['if-none-match']
         }).as('clonar');
+        cy.intercept('GET', '/api/core/term/snomed/expression?expression=**', []).as('snomed');
     });
 
     it('Guardar agenda del día con un solo bloque', () => {

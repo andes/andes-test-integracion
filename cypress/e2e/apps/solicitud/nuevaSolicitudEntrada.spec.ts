@@ -130,7 +130,6 @@ describe('TOP: Nueva Solicitud de Entrada', () => {
         cy.plexSelectType('label="Profesional solicitante"', '{enter}');
         cy.plexTextArea('label="Notas / Diagnóstico / Motivo"', 'un motivo lalala');
         cy.plexButton('Guardar').click();
-        cy.get('button').contains('CONFIRMAR').click();
         cy.wait('@createSolicitud').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
             expect(response.body.paciente.documento).to.be.eq(dni);
