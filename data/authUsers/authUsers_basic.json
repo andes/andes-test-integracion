@@ -82,6 +82,7 @@
                     "vacunacion:*",
                     "perinatal:*"
                 ],
+                "activo": true,
                 "_id": {
                     "$oid": "57e9670e52df311059bc8964"
                 },
@@ -116,6 +117,7 @@
                 "_id": {
                     "$oid": "57fcf038326e73143fb48dac"
                 },
+                "activo": true,
                 "nombre": "HOSPITAL DR. HORACIO HELLER",
                 "perfiles": []
             },
@@ -889,7 +891,6 @@
                     "com:*",
                     "mpi:*"
                 ],
-                "activo": true,
                 "perfiles": [],
                 "_id": {
                     "$oid": "5ef7ae883e3de57c0a429797"
@@ -1757,6 +1758,7 @@
         "nombre": "38906735",
         "usuario": 38906735,
         "apellido": "38906735",
+        "documento": "38906735",
         "password": "f10e2821bbbea527ea02200352313bc059445190",
         "organizaciones": [
             {
@@ -1797,6 +1799,7 @@
                 "_id": {
                     "$oid": "57e9670e52df311059bc8964"
                 },
+                "activo": true,
                 "nombre": "HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON",
                 "perfiles": []
             },
@@ -1839,6 +1842,7 @@
                 "_id": {
                     "$oid": "57f67a7ad86d9f64130a138d"
                 },
+                "activo": true,
                 "nombre": "HOSPITAL DE AREA PLOTTIER",
                 "perfiles": []
             },
@@ -1921,12 +1925,12 @@
                 "_id": {
                     "$oid": "5a5e3f7e0bd5677324737244"
                 },
+                "activo": true,
                 "nombre": "CENTRO MÉDICO INTEGRAL",
                 "perfiles": []
             }
         ],
         "__v": 16,
-        "documento": "38906735",
         "lastLogin": {
             "$date": "2020-07-29T14:25:11.858Z"
         }

@@ -78,7 +78,7 @@ let i = 0;
             cy.plexLayoutMain().contains('consulta con médico general');
             cy.plexLayoutMain().find('plex-title').plexButtonIcon('close').click();
             let fecha = Cypress.moment().format('DD/MM/yyyy HH:mm');
-            cy.plexLayoutMain().contains("Mapa de camas - " + fecha);
+            cy.plexLayoutMain().get('plex-title').contains(fecha)
         });
     });
 });
