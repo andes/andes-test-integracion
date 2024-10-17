@@ -134,6 +134,7 @@ export const permisosUsuario = [
     'internacion:sala:create',
     'internacion:sala:edit',
     'internacion:sala:delete',
+    'internacion:indicaciones:*',
     'rup:tipoPrestacion:5951051aa784f4e1a8e2afe1',
     'rup:tipoPrestacion:5a26e113291f463c1b982d98',
     'rup:tipoPrestacion:598ca8375adc68e2a0c121c3',
