@@ -1792,6 +1792,7 @@
                     "tm:especialidad:postEspecialidad",
                     "tm:especialidad:putEspecialidad",
                     "tm:especialidad:deleteEspecialidad",
+                    "tm:farmacia:*",
                     "cda:*",
                     "huds:visualizacionHuds",
                     "monitoreo:*"
