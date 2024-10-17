@@ -97,12 +97,11 @@ Cypress.Commands.add('goto', (url, token, hudsToken, location) => {
 });
 
 Cypress.Commands.add('buscarPaciente', (pacienteDoc, cambiarPaciente = true) => {
-    cy.plexButton("Buscar Paciente").click();
     cy.plexText('name="buscador"', pacienteDoc);
-    cy.server();
-    cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
+    cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
     cy.wait('@listaPacientes');
     const documento = pacienteDoc.substr(0, pacienteDoc.length - 6) + '.' + pacienteDoc.substr(-6, 3) + '.' + pacienteDoc.substr(-3);
+    cy.wait(1000);
     cy.get('plex-item').contains(documento).click();
     if (cambiarPaciente) {
         cy.plexButton("Cambiar Paciente").click();
@@ -110,6 +109,10 @@ Cypress.Commands.add('buscarPaciente', (pacienteDoc, cambiarPaciente = true) => 
         cy.wait('@listaPacientes');
         cy.get('plex-item').contains(documento).click();
     }
+});
+
+Cypress.Commands.add('seleccionarTurno', (texto, clase = '') => {
+    cy.get(`plex-layout-sidebar plex-table${clase} tr td`).contains(texto).first().click();
 });
 
 Cypress.Commands.add('taskN', (name, argumentos) => {
