@@ -37,7 +37,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
     });
 
     beforeEach(() => {
-        cy.viewport(1920, 1080);
+        cy.viewport(1600, 900);
         cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
         cy.intercept('GET', '**/api/modules/rup/internacion/camas/**').as('getCama');
         cy.intercept('GET', '**/api/modules/rup/internacion/camas?**').as('getCamas');

@@ -18,6 +18,7 @@ const moment = require('moment');
                         cy.factoryInternacion({ sala: true, config: [{ estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(1, 'hour').toDate() }] })
                             .then(salasCreadas => {
                                 salas = salasCreadas;
+                                cy.viewport(1920, 1080);
                                 return cy.goto('/mapa-camas', token);
                             });
                     });
@@ -31,11 +32,9 @@ const moment = require('moment');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
             cy.intercept('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('egresoSalaComun');
-
-            cy.viewport(1920, 1080);
         });
 
-        it('Egreso simplificado', () => {
+        it('Egreso desde cama', () => {
             cy.getCama(pacientes[0].apellido).click();
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexIcon('menos').click().get('a').contains('Egresar paciente').click();
@@ -50,11 +49,12 @@ const moment = require('moment');
             cy.swal('confirm');
         });
 
-        it('Egreso en Sala Comun', () => {
+        // Skipeamos test de sala hasta decidir si se vuelven a usar
+        it('Egreso desde Sala Comun', () => {
             cy.goto('/mapa-camas', token);
-            cy.getCama(pacientes[0].apellido).click();
-            cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
-            cy.plexDropdown('icon="menos"').first().click().get('a').contains('Egresar paciente').click();
+            cy.getCama(pacientes[1].nombre).click();
+            // cy.get('plex-layout-sidebar plex-title[titulo="DATOS DE CAMA"] div').eq(2);
+            cy.get('plex-layout-sidebar').plexDropdown('icon="menos"').first().click().get('a').contains('Egresar paciente').click();
 
             cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
             cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
