@@ -80,7 +80,8 @@
                     "epidemiologia:*",
                     "formBuilder:*",
                     "vacunacion:*",
-                    "perinatal:*"
+                    "perinatal:*",
+                    "auditoriaPacientes:*"
                 ],
                 "activo": true,
                 "_id": {
