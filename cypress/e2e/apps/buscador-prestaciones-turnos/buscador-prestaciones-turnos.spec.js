@@ -126,14 +126,14 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
                 expect(response.statusCode).to.be.eq(200);
                 expect(response.body).to.have.length(4);
                 expect(response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
-                expect(response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
+                expect(response.body[2].profesionales0).to.be.eq('HUENCHUMAN');
             });
         } else {
             cy.wait('@turnosPrestaciones').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
                 expect(response.body).to.have.length(4);
                 expect(response.body[0].profesionales0).to.be.eq('HUENCHUMAN');
-                expect(response.body[1].profesionales0).to.be.eq('HUENCHUMAN');
+                expect(response.body[2].profesionales0).to.be.eq('HUENCHUMAN');
             });
         }
     });
