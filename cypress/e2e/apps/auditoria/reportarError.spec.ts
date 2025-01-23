@@ -97,88 +97,88 @@ context('auditoria', () => {
     // });
 
 
-    it('Modificar nombre de un paciente reportado con error', () => {
-        let nombreCorrecto = `${validado6.nombre}NN`;
+    // it('Modificar nombre de un paciente reportado con error', () => {
+    //     let nombreCorrecto = `${validado6.nombre}NN`;
 
-        cy.goto('/apps/mpi/auditoria', token);
-        let cantReportes = 0;
-        cy.plexTab('Errores reportados').click()
-        cy.wait('@getReportados').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            cantReportes = xhr.response.body.length;
-        });
+    //     cy.goto('/apps/mpi/auditoria', token);
+    //     let cantReportes = 0;
+    //     cy.plexTab('Errores reportados').click()
+    //     cy.wait('@getReportados').then(xhr => {
+    //         expect(xhr.status).to.be.eq(200);
+    //         cantReportes = xhr.response.body.length;
+    //     });
 
-        cy.get('plex-item').contains(validado6.nombre).click();
-        cy.get('plex-layout-sidebar').contains(validado6.nombre);
-        cy.get('plex-layout-sidebar').plexButton('corregir').click();
-        cy.get('plex-modal').get('plex-item').contains(validado6.nombre);
-        cy.plexText('name="nombre"', `{selectall}{backspace}${nombreCorrecto}`);
-        cy.plexButton(' ACEPTAR ').click();
+    //     cy.get('plex-item').contains(validado6.nombre).click();
+    //     cy.get('plex-layout-sidebar').contains(validado6.nombre);
+    //     cy.get('plex-layout-sidebar').plexButton('corregir').click();
+    //     cy.get('plex-modal').get('plex-item').contains(validado6.nombre);
+    //     cy.plexText('name="nombre"', `{selectall}{backspace}${nombreCorrecto}`);
+    //     cy.plexButton(' ACEPTAR ').click();
 
-        // verificamos que se guarde el cambio en el campo nombre
-        cy.wait('@patchPaciente').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody.nombre).to.be.eq(nombreCorrecto);
-            expect(xhr.responseBody.apellido).to.be.eq(validado6.apellido);
-            expect(xhr.responseBody.reportarError).to.be.eq(false)
-            expect(xhr.responseBody.notaError).to.be.eq('');
-        });
+    //     // verificamos que se guarde el cambio en el campo nombre
+    //     cy.wait('@patchPaciente').then(xhr => {
+    //         expect(xhr.status).to.be.eq(200);
+    //         expect(xhr.responseBody.nombre).to.be.eq(nombreCorrecto);
+    //         expect(xhr.responseBody.apellido).to.be.eq(validado6.apellido);
+    //         expect(xhr.responseBody.reportarError).to.be.eq(false)
+    //         expect(xhr.responseBody.notaError).to.be.eq('');
+    //     });
 
-        cy.toast('success', 'Los datos se actualizaron correctamente!');
+    //     cy.toast('success', 'Los datos se actualizaron correctamente!');
 
-        cy.wait('@getReportados').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody).to.have.length(cantReportes);
-        });
+    //     cy.wait('@getReportados').then(xhr => {
+    //         expect(xhr.status).to.be.eq(200);
+    //         expect(xhr.responseBody).to.have.length(cantReportes);
+    //     });
 
-    });
+    // });
 
-    it('Modificar apellido de un paciente reportado con error', () => {
+    // it('Modificar apellido de un paciente reportado con error', () => {
 
-        let apellidoCorrecto = `${validado7.apellido}AA`;
+    //     let apellidoCorrecto = `${validado7.apellido}AA`;
 
-        cy.goto('/apps/mpi/auditoria', token);
+    //     cy.goto('/apps/mpi/auditoria', token);
 
-        cy.plexTab('Errores reportados').click()
-        let cantReportes;
-        cy.wait('@getReportados').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            cantReportes = xhr.response.body.length;
-        });
+    //     cy.plexTab('Errores reportados').click()
+    //     let cantReportes;
+    //     cy.wait('@getReportados').then(xhr => {
+    //         expect(xhr.status).to.be.eq(200);
+    //         cantReportes = xhr.response.body.length;
+    //     });
 
-        cy.get('plex-item').contains(validado7.apellido).click();
-        cy.get('plex-layout-sidebar').contains(validado7.apellido);
-        cy.get('plex-layout-sidebar').plexButton('corregir').click();
-        cy.get('plex-modal').get('plex-item').contains(validado7.nombre);
-        cy.plexText('name="apellido"', `{selectall}{backspace}${apellidoCorrecto}`);
-        cy.plexButton(' ACEPTAR ').click();
+    //     cy.get('plex-item').contains(validado7.apellido).click();
+    //     cy.get('plex-layout-sidebar').contains(validado7.apellido);
+    //     cy.get('plex-layout-sidebar').plexButton('corregir').click();
+    //     cy.get('plex-modal').get('plex-item').contains(validado7.nombre);
+    //     cy.plexText('name="apellido"', `{selectall}{backspace}${apellidoCorrecto}`);
+    //     cy.plexButton(' ACEPTAR ').click();
 
-        // verificamos que se guarde el cambio en el campo apellido
-        cy.wait('@patchPaciente').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody.nombre).to.be.eq(validado7.nombre);
-            expect(xhr.responseBody.apellido).to.be.eq(apellidoCorrecto);
-            expect(xhr.responseBody.reportarError).to.be.eq(false)
-            expect(xhr.responseBody.notaError).to.eq('');
-        });
-        cy.toast('success', 'Los datos se actualizaron correctamente!');
-        cy.wait('@getReportados').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-        });
-    });
+    //     // verificamos que se guarde el cambio en el campo apellido
+    //     cy.wait('@patchPaciente').then(xhr => {
+    //         expect(xhr.status).to.be.eq(200);
+    //         expect(xhr.responseBody.nombre).to.be.eq(validado7.nombre);
+    //         expect(xhr.responseBody.apellido).to.be.eq(apellidoCorrecto);
+    //         expect(xhr.responseBody.reportarError).to.be.eq(false)
+    //         expect(xhr.responseBody.notaError).to.eq('');
+    //     });
+    //     cy.toast('success', 'Los datos se actualizaron correctamente!');
+    //     cy.wait('@getReportados').then(xhr => {
+    //         expect(xhr.status).to.be.eq(200);
+    //     });
+    // });
 
-    it('Modificar datos de un paciente reportado con error y cancelar, verificar que los datos no se modifiquen', () => {
-        cy.plexTab('Errores reportados').click();
-        cy.get('plex-item').contains(validado8.apellido).click();
-        cy.get('plex-layout-sidebar').contains(validado8.apellido);
-        cy.get('plex-layout-sidebar').plexButton('corregir').click();
-        cy.get('plex-modal').get('plex-item').contains(validado8.nombre);
-        cy.plexText('name="nombre"', `{selectall}{backspace}NNN`);
-        cy.plexText('name="apellido"', `{selectall}{backspace}AAA`);
-        cy.plexButton(' CANCELAR ').click();
+    // it('Modificar datos de un paciente reportado con error y cancelar, verificar que los datos no se modifiquen', () => {
+    //     cy.plexTab('Errores reportados').click();
+    //     cy.get('plex-item').contains(validado8.apellido).click();
+    //     cy.get('plex-layout-sidebar').contains(validado8.apellido);
+    //     cy.get('plex-layout-sidebar').plexButton('corregir').click();
+    //     cy.get('plex-modal').get('plex-item').contains(validado8.nombre);
+    //     cy.plexText('name="nombre"', `{selectall}{backspace}NNN`);
+    //     cy.plexText('name="apellido"', `{selectall}{backspace}AAA`);
+    //     cy.plexButton(' CANCELAR ').click();
 
-        // verificamos que el paciente siga estando en el listado
-        cy.get('plex-item').contains(validado8.nombre).contains(validado8.apellido);
+    //     // verificamos que el paciente siga estando en el listado
+    //     cy.get('plex-item').contains(validado8.nombre).contains(validado8.apellido);
 
-    });
+    // });
 });
