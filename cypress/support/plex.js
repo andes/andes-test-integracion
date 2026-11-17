@@ -325,18 +325,36 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
                 if (!$body.find('.cdk-overlay-backdrop-showing').length) {
                     return $input;
                 }
+                const input = $input[0];
+                const doc = input.ownerDocument;
+                const bloquear = (ev) => {
+                    if (ev.target === input) {
+                        ev.stopImmediatePropagation();
+                        input.blur();
+                    }
+                };
+                doc.addEventListener('focusin', bloquear, true);
                 const celda = [...$body.find('.mat-calendar-body-selected, .mat-calendar-body-active')].pop();
-                // Click nativo en el host de plex-button. Un click real cae al input cuando el overlay se cierra y lo vuelve a abrir.
-                const cerrar = () => cy.get('.cdk-overlay-container plex-button').filter((_, el) => (el.innerText || '').trim().toLowerCase() === 'aceptar').find('button').should('not.be.disabled').then(($btn) => {
-                    $btn[0].closest('plex-button').click();
-                    return cy.wrap($input).blur({ force: true });
-                });
-                if (!celda) {
-                    return cerrar();
+                if (celda) {
+                    celda.click();
                 }
-                return cy.wrap(celda).then(($celda) => {
-                    $celda[0].click();
-                }).then(cerrar);
+                const host = [...$body.find('.cdk-overlay-container plex-button')].filter((el) => (el.innerText || '').trim().toLowerCase() === 'aceptar').pop();
+                if (host) {
+                    const boton = host.querySelector('button');
+                    if (boton) {
+                        boton.disabled = false;
+                    }
+                    host.removeAttribute('disabled');
+                    host.click();
+                }
+                input.blur();
+                return cy.wrap($input).then(() => {
+                    doc.querySelectorAll('.cdk-overlay-backdrop, .cdk-overlay-pane').forEach((nodo) => nodo.remove());
+                }).wait(400).then(() => {
+                    doc.querySelectorAll('.cdk-overlay-backdrop, .cdk-overlay-pane').forEach((nodo) => nodo.remove());
+                    doc.removeEventListener('focusin', bloquear, true);
+                    return $input;
+                });
             });
         });
         cy.get('.cdk-overlay-backdrop-showing').should('not.exist');
