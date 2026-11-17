@@ -26,6 +26,7 @@ import './gestorUsuario'
 import './rup'
 import './mapa-camas'
 import './privacidad'
+import 'cypress-real-events'
 
 // Cypress 16 deja pasar el cache del browser. Sin este header la API responde 304.
 beforeEach(() => {
