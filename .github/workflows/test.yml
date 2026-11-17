@@ -97,13 +97,16 @@ jobs:
             docker
 
       # El compose del repo no publica puertos: Cypress y el seeder corren en el
-      # runner, no en la red de Compose. El override solo agrega puertos y health.
+      # runner, no en la red de Compose. El override publica puertos, agrega health
+      # y usa mongo:5.0, la misma imagen que el compose de la API. Mongoose 5.13
+      # habla con ese server. El archivo del repo queda en 4.4.10 para Jenkins.
       # baseUrl y API_SERVER apuntan a nginx, que proxea /api/ hacia api:3002.
       - name: Levantar stack
         run: |
           cat > "${RUNNER_TEMP}/compose.ports.yml" <<'EOF'
           services:
             db:
+              image: mongo:5.0
               ports:
                 - "127.0.0.1:27017:27017"
               healthcheck:
@@ -141,11 +144,12 @@ jobs:
             -f "${RUNNER_TEMP}/compose.ports.yml" \
             up -d --wait --wait-timeout 600
 
-      # Cypress 10.3.1 no declara Node 18. El binario es Electron y usa las libs del sistema.
+      # Cypress 10.3.1 declara Node >=12. 18.20 es la banda de app.
+      # El binario es Electron y usa las libs del sistema.
       - name: Setup Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 16.20.2
+          node-version: 18.20.8
           cache: npm
 
       - name: Bibliotecas de Cypress
@@ -176,8 +180,8 @@ jobs:
             xvfb \
             xauth
 
-      # npm 8 rechaza el peer de cypress-select-tests@1.5.7 (pide Cypress 3).
-      # El lock ya resolvió Cypress 10. Jenkins corría con npm 6, que no frenaba por eso.
+      # npm 7+ rechaza el peer de cypress-select-tests@1.5.7 (pide Cypress 3).
+      # El lock ya resolvió Cypress 10. Node 18 trae npm 10.
       - name: Instalar
         run: npm ci --legacy-peer-deps
 
