@@ -91,7 +91,7 @@ jobs:
           fi
           docker pull "andesnqn/api:${API}"
           docker build \
-            --file docker/andes.Dockerfile \
+            --file docker/app.Dockerfile \
             --build-arg "APP=${APP}" \
             --tag "andesnqn/nginx:${APP}" \
             docker
