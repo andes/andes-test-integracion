@@ -153,7 +153,7 @@ context('Pagina de login', () => {
         });
     });
 
-    it.only('Login usuario sin permisos para ninguna organizacion', () => {
+    it('Login usuario sin permisos para ninguna organizacion', () => {
         cy.plexInt('name="usuario"').type('33650509');
         cy.plexText('name="password"', 'asd');
         cy.plexButton('Iniciar sesión').click();
