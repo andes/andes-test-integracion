@@ -26,11 +26,10 @@ context('turnos', () => {
 
     it('registrar bebé desde punto de Inicio de Turnos', () => {
 
-        cy.server();
         // Rutas para control
-        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaProgenitor');
-        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('relacionProgenitor');
-        cy.route('POST', '**api/core-v2/mpi/pacientes').as('bebeAgregado');
+        cy.intercept('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaProgenitor');
+        cy.intercept('PATCH', '**api/core-v2/mpi/pacientes/**').as('relacionProgenitor');
+        cy.intercept('POST', '**api/core-v2/mpi/pacientes').as('bebeAgregado');
 
         cy.get('paciente-buscar input').first().type('4659874562');
         cy.get('div').contains('NUEVO PACIENTE').click();
@@ -51,7 +50,7 @@ context('turnos', () => {
 
         //Espera confirmación de la búsqueda correcta del progenitor
         cy.wait('@busquedaProgenitor').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         // Se selecciona el progenitor 
         cy.get('paciente-listado').contains(validado1.nombre).click();
@@ -66,23 +65,22 @@ context('turnos', () => {
 
         // Se espera la actualización de la relación del progenitor con el bebé
         cy.wait('@relacionProgenitor').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.relaciones).to.have.length(1)
         });
 
         // Se espera confirmación de que se agrego nuevo paciente(bebe) correctamente
         cy.wait('@bebeAgregado').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.apellido).to.contains("BEBE");
             expect(xhr.response.body.nombre).to.contains("BEBE");
         });
     });
 
     it('registrar paciente sin dni argentino desde punto de Inicio de Turnos', () => {
-        cy.server();
         //Rutas para control
-        cy.route('POST', '**api/core-v2/mpi/pacientes').as('sinDniGuardar');
-        cy.route('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
+        cy.intercept('POST', '**api/core-v2/mpi/pacientes').as('sinDniGuardar');
+        cy.intercept('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
 
         // Buscador
         cy.get('plex-text input[type="text"]').first().type('1232548').should('have.value', '1232548');
@@ -124,7 +122,7 @@ context('turnos', () => {
         cy.plexButtonIcon("map-marker").click();
 
         cy.wait('@geoReferencia').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
 
         // Se guardan los cambios
@@ -133,16 +131,15 @@ context('turnos', () => {
 
         // Se espera confirmación de que se agrego nuevo paciente SIN DNI correctamente
         cy.wait('@sinDniGuardar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.documento).to.have.length(0);
         });
     });
 
     it('registrar paciente con dni argentino desde punto de Inicio de Turnos', () => {
-        cy.server();
         //Rutas para control
-        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('conDniGuardar');
-        cy.route('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
+        cy.intercept('POST', '**api/core-v2/mpi/pacientes**').as('conDniGuardar');
+        cy.intercept('GET', '**api/modules/georeferencia/georeferenciar**').as('geoReferencia');
 
         // Buscador
         cy.plexText('name="buscador"', '79546213');
@@ -180,7 +177,7 @@ context('turnos', () => {
         cy.plexButtonIcon("map-marker").click();
 
         cy.wait('@geoReferencia').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
 
         // Se guardan cambios
@@ -188,26 +185,25 @@ context('turnos', () => {
         cy.swal('confirm');
 
         cy.wait('@conDniGuardar').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.documento).to.be.eq('79546213');
         });
     });
 
     it('dar turno de día', () => {
-        cy.server();
-        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('consultaPaciente');
-        cy.route('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');
-        cy.route('GET', '**/api/modules/turnos/agenda**').as('getAgendas');
-        cy.route('GET', '**/api/core/tm/profesionales**').as('getProfesional');
-        cy.route('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
-        cy.route('GET', '**/api/core/tm/conceptos-turneables**').as('conceptoTurneables');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('consultaPaciente');
+        cy.intercept('GET', '**/api/modules/carpetas/carpetasPacientes?**').as('getCarpetas');
+        cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesional');
+        cy.intercept('GET', '**/api/modules/turnos/agenda**').as('getAgendas');
+        cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesional');
+        cy.intercept('PATCH', '**/api/modules/turnos/turno/**').as('confirmarTurno');
+        cy.intercept('GET', '**/api/core/tm/conceptos-turneables**').as('conceptoTurneables');
 
         cy.plexText('name="buscador"', validado1.documento);
 
         cy.wait('@consultaPaciente').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody.length).to.be.gte(1);
+            expect(xhr.response.statusCode).to.be.eq(200);
+            expect(xhr.response.body.length).to.be.gte(1);
         });
         cy.get('paciente-listado plex-item').contains(formatDocumento(validado1.documento)).click();
         cy.plexButtonIcon('calendar-plus').click();
@@ -230,7 +226,7 @@ context('turnos', () => {
         cy.plexButton('Confirmar').click();
 
         cy.wait('@confirmarTurno').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
 
         cy.toast('info', 'El turno se asignó correctamente');

@@ -41,20 +41,19 @@ context('auditoria', () => {
     })
 
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes?reportarError**').as('getReportados');
-        cy.route('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes?reportarError**').as('getReportados');
+        cy.intercept('PATCH', '**api/core-v2/mpi/pacientes/**').as('patchPaciente');
         cy.goto('/apps/mpi/auditoria', token);
     })
 
     // it('Reportar error desde mpi y verificar que aparezca en el listado y detalle', () => {
     //     cy.goto('/apps/mpi/busqueda', token);
-    //     cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+    //     cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
 
     //     cy.plexText('name="buscador"', `${validado5.nombre} ${validado5.apellido}`);
     //     cy.wait('@busquedaPaciente').then((xhr) => {
-    //         expect(xhr.status).to.be.eq(200);
+    //         expect(xhr.response.statusCode).to.be.eq(200);
     //         expect(xhr.response.body[0].nombre).to.be.eq(validado5.nombre);
     //         expect(xhr.response.body[0].apellido).to.be.eq(validado5.apellido);
     //     });
@@ -62,7 +61,7 @@ context('auditoria', () => {
     //     cy.plexButtonIcon('pencil').click();
 
     //     cy.wait('@getPaciente').then((xhr) => {
-    //         expect(xhr.status).to.be.eq(200);
+    //         expect(xhr.response.statusCode).to.be.eq(200);
     //     });
     //     cy.plexTab('datos básicos').click();
     //     cy.plexBool('name="reportarError"', true);
@@ -76,7 +75,7 @@ context('auditoria', () => {
 
     //     cy.plexButton('Guardar').click();
     //     cy.wait('@patchPaciente').then((xhr) => {
-    //         expect(xhr.status).to.be.eq(200);
+    //         expect(xhr.response.statusCode).to.be.eq(200);
     //         expect(xhr.response.body.reportarError).to.eq(true);
     //         expect(xhr.response.body.notaError).to.eq(notaError);
     //     });
@@ -86,7 +85,7 @@ context('auditoria', () => {
 
     //     cy.plexTab('Errores reportados').click()
     //     cy.wait('@getReportados').then(xhr => {
-    //         expect(xhr.status).to.be.eq(200);
+    //         expect(xhr.response.statusCode).to.be.eq(200);
     //         cy.log(xhr);
     //         expect(xhr.response.body.length).to.gte(1);
     //     });
@@ -104,7 +103,7 @@ context('auditoria', () => {
         let cantReportes = 0;
         cy.plexTab('Errores reportados').click()
         cy.wait('@getReportados').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             cantReportes = xhr.response.body.length;
         });
 
@@ -117,18 +116,18 @@ context('auditoria', () => {
 
         // verificamos que se guarde el cambio en el campo nombre
         cy.wait('@patchPaciente').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody.nombre).to.be.eq(nombreCorrecto);
-            expect(xhr.responseBody.apellido).to.be.eq(validado6.apellido);
-            expect(xhr.responseBody.reportarError).to.be.eq(false)
-            expect(xhr.responseBody.notaError).to.be.eq('');
+            expect(xhr.response.statusCode).to.be.eq(200);
+            expect(xhr.response.body.nombre).to.be.eq(nombreCorrecto);
+            expect(xhr.response.body.apellido).to.be.eq(validado6.apellido);
+            expect(xhr.response.body.reportarError).to.be.eq(false)
+            expect(xhr.response.body.notaError).to.be.eq('');
         });
 
         cy.toast('success', 'Los datos se actualizaron correctamente!');
 
         cy.wait('@getReportados').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody).to.have.length(cantReportes);
+            expect(xhr.response.statusCode).to.be.eq(200);
+            expect(xhr.response.body).to.have.length(cantReportes);
         });
 
     });
@@ -142,7 +141,7 @@ context('auditoria', () => {
         cy.plexTab('Errores reportados').click()
         let cantReportes;
         cy.wait('@getReportados').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             cantReportes = xhr.response.body.length;
         });
 
@@ -155,15 +154,15 @@ context('auditoria', () => {
 
         // verificamos que se guarde el cambio en el campo apellido
         cy.wait('@patchPaciente').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
-            expect(xhr.responseBody.nombre).to.be.eq(validado7.nombre);
-            expect(xhr.responseBody.apellido).to.be.eq(apellidoCorrecto);
-            expect(xhr.responseBody.reportarError).to.be.eq(false)
-            expect(xhr.responseBody.notaError).to.eq('');
+            expect(xhr.response.statusCode).to.be.eq(200);
+            expect(xhr.response.body.nombre).to.be.eq(validado7.nombre);
+            expect(xhr.response.body.apellido).to.be.eq(apellidoCorrecto);
+            expect(xhr.response.body.reportarError).to.be.eq(false)
+            expect(xhr.response.body.notaError).to.eq('');
         });
         cy.toast('success', 'Los datos se actualizaron correctamente!');
         cy.wait('@getReportados').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
     });
 

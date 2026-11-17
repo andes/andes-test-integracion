@@ -29,7 +29,6 @@ context('RUP - Ejecucion', () => {
                 cy.viewport(1600, 900);
                 cy.goto('/rup/ejecucion/' + idPrestacion, token);
             });
-            cy.server() // para las funciones de rup que estan desactualizadas
         })
 
         it('agregar conceptos desde el buscador', () => {
@@ -121,7 +120,6 @@ context('RUP - Ejecucion', () => {
                 cy.goto('/rup/ejecucion/' + idPrestacion, token);
             });
 
-            cy.server() // para las funciones de rup que estan desactualizadas
         });
 
         it('evolucionar trastorno desde buscador', () => {

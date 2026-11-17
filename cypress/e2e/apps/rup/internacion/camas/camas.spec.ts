@@ -1,17 +1,17 @@
 function getStubs() {
     cy.intercept('**/internacion**/**').as('backToMapa');
 
-    cy.route('GET', '/api/core/term/snomed/expression?expression=^2051000013106**', [{
+    cy.intercept('GET', '/api/core/term/snomed/expression?expression=^2051000013106**', [{
         "conceptId": "12345",
         "term": "Cama",
     }]).as('expTipoDeCama');
 
-    cy.route('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
+    cy.intercept('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
         "conceptId": "1234",
         "term": "Enfermeria en Rehabilitación",
     }]).as('expEspecialidad');
 
-    cy.route('GET', '/api/core/term/snomed/expression?expression=70311**', [{
+    cy.intercept('GET', '/api/core/term/snomed/expression?expression=70311**', [{
         "conceptId": "5555",
         "term": "género masculino",
     }, {
@@ -19,7 +19,7 @@ function getStubs() {
         "term": "género femenino",
     }]).as('expGenero');
 
-    cy.route('GET', '/api/core/term/snomed/expression?expression=^2061000013108**', [{
+    cy.intercept('GET', '/api/core/term/snomed/expression?expression=^2061000013108**', [{
         "conceptId": "470361",
         "term": "sistema de aspiración para uso general, al vacío",
         "fsn": "sistema de aspiración para uso general, al vacío (objeto físico)",
@@ -52,7 +52,6 @@ describe('ABM Camas', () => {
     });
 
     beforeEach(() => {
-        cy.server();
         getStubs();
 
         cy.viewport(1920, 1080);

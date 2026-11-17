@@ -4,10 +4,10 @@ Cypress.Commands.add('snomedSearchStub', (searchtext, response, alias = 'rup-bus
     if (typeof response === 'string') {
         return cy.fixture(response).then(response => {
             cy.get('plex-layout-sidebar').contains('Buscador').click({ force: true })
-            return cy.route(url, response).as(alias);
+            return cy.intercept(url, response).as(alias);
         });
     } else {
-        return cy.route(url, response).as(alias);
+        return cy.intercept(url, response).as(alias);
     }
 });
 
@@ -15,10 +15,10 @@ Cypress.Commands.add('snomedFrecuentesStub', (response) => {
     const url = '**/api/modules/rup/frecuentesProfesional**';
     if (typeof response === 'string') {
         return cy.fixture(response).then(response => {
-            return cy.route(url, response).as('rup-frecuentes');
+            return cy.intercept(url, response).as('rup-frecuentes');
         });
     } else {
-        return cy.route(url, response).as('rup-frecuentes');
+        return cy.intercept(url, response).as('rup-frecuentes');
     }
 });
 
@@ -26,10 +26,10 @@ Cypress.Commands.add('expressionStub', (expression, response, alias = 'snomed-ex
     const url = '**/api/core/term/snomed/expression?expression=' + expression + '**';
     if (typeof response === 'string') {
         return cy.fixture(response).then(response => {
-            return cy.route(url, response).as(alias);
+            return cy.intercept(url, response).as(alias);
         });
     } else {
-        return cy.route(url, response).as(alias);
+        return cy.intercept(url, response).as(alias);
     }
 });
 

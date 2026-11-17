@@ -156,8 +156,7 @@ context('RUP - Ejecucion', () => {
 function createTest(params) {
     let idPrestacion, idElementoRUP;
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/modules/rup/prestaciones/huds/**', []).as('getHuds');
+        cy.intercept('GET', '**/api/modules/rup/prestaciones/huds/**', []).as('getHuds');
         cy.cleanDB(['prestaciones']);
 
         cy.task('database:seed:elemento-rup', {

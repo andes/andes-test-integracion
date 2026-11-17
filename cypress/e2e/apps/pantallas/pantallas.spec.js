@@ -8,13 +8,12 @@ context('gestor-pantallas', () => {
     });
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/pantallas', token);
-        cy.route('GET', '**/api/modules/turnero/pantalla').as('pantallas');
-        cy.route('DELETE', '**/api/modules/turnero/pantalla/**').as('deletePantalla');
-        cy.route('GET', '**/api/modules/turnos/espacioFisico**').as('espacios');
-        cy.route('POST', '**/api/modules/turnero/pantalla').as('postPantalla');
-        cy.route('PATCH', '**/api/modules/turnero/pantalla/**').as('patchPantalla');
+        cy.intercept('GET', '**/api/modules/turnero/pantalla').as('pantallas');
+        cy.intercept('DELETE', '**/api/modules/turnero/pantalla/**').as('deletePantalla');
+        cy.intercept('GET', '**/api/modules/turnos/espacioFisico**').as('espacios');
+        cy.intercept('POST', '**/api/modules/turnero/pantalla').as('postPantalla');
+        cy.intercept('PATCH', '**/api/modules/turnero/pantalla/**').as('patchPantalla');
     });
 
     it('Crear nueva pantalla para turnero y editarla', () => {
@@ -27,7 +26,7 @@ context('gestor-pantallas', () => {
         cy.contains('Pantalla guardada correctamente');
         let tokenPantalla;
         cy.wait('@postPantalla').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.nombre).to.be.eq('Pantalla turnero');
             expect(xhr.response.body.playlist).to.be.eq('http://youtube.com');
             expect(xhr.response.body.tipo).to.be.eq('turnero');
@@ -40,7 +39,7 @@ context('gestor-pantallas', () => {
         cy.plexButton('Guardar').click();
         cy.wait('@patchPantalla').then((xhr) => {
             cy.contains('Pantalla guardada correctamente');
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             cy.get('table tr td').contains('Box 1');
         });
     });
@@ -53,7 +52,7 @@ context('gestor-pantallas', () => {
         cy.contains('Pantalla guardada correctamente');
         let tokenPantalla;
         cy.wait('@postPantalla').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.nombre).to.be.eq('Pantalla totem');
             expect(xhr.response.body.tipo).to.be.eq('totem');
             tokenPantalla = xhr.response.body.token;
@@ -64,7 +63,7 @@ context('gestor-pantallas', () => {
         cy.plexButton('Guardar').click();
         cy.wait('@patchPantalla').then((xhr) => {
             cy.contains('Pantalla guardada correctamente');
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.nombre).to.be.eq('Pantalla totem nueva');
             cy.get('table tr td').contains('Pantalla totem nueva');
         });
@@ -75,7 +74,7 @@ context('gestor-pantallas', () => {
         cy.contains('Eliminar pantalla "Pantalla totem nueva"');
         cy.swal('confirm');
         cy.wait('@deletePantalla').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
     });
 });

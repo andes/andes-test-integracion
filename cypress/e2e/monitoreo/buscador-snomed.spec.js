@@ -17,17 +17,16 @@ context('Buscador de conceptos SNOMED', () => {
     });
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/monitoreo/buscador-snomed', token);
-        cy.route('GET', '**/api/core/term/snomed?search=concepto cualquiera', []).as('busquedaInexistente');
-        cy.route('GET', '**/api/core/term/snomed?search=autocitacion', conceptAutocitacion).as('busquedaAutocitacion');
+        cy.intercept('GET', '**/api/core/term/snomed?search=concepto cualquiera', []).as('busquedaInexistente');
+        cy.intercept('GET', '**/api/core/term/snomed?search=autocitacion', conceptAutocitacion).as('busquedaAutocitacion');
     });
 
     it('buscar concepto por term y verificar que no existe', () => {
         // cy.plexMenu('magnify');
         cy.plexText('name="searchTerm"', 'concepto cualquiera');
         cy.wait('@busquedaInexistente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             cy.get('plex-item').should('have.length', 0);
         });
     });
@@ -36,7 +35,7 @@ context('Buscador de conceptos SNOMED', () => {
         // cy.plexMenu('magnify');
         cy.plexText('name="searchTerm"', 'autocitacion');
         cy.wait('@busquedaAutocitacion').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             cy.get('plex-item').should('have.length', 1);
             cy.plexBadge('procedimiento', 'buscador');
             cy.plexLabel('Autocitación');

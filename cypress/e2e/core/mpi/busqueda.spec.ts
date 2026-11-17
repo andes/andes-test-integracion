@@ -15,15 +15,14 @@ context('MPI-Busqueda Paciente', () => {
 
     beforeEach(() => {
         cy.goto('/apps/mpi/busqueda', token);
-        cy.server();
-        cy.route('GET', '**api/core-v2/mpi/pacientes**').as('busqueda');
+        cy.intercept('GET', '**api/core-v2/mpi/pacientes**').as('busqueda');
     });
 
     ['validado', 'temporal', 'sin-documento', 'extranjero'].forEach((type, i) => {
         it('busca paciente ' + type + ' por nombre', () => {
             cy.plexText('name="buscador"', pacientes[i].nombre);
             cy.wait('@busqueda').then((xhr) => {
-                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.statusCode).to.be.eq(200);
                 expect(xhr.response.body[0].nombre).to.be.eq(pacientes[i].nombre);
             });
             cy.get('paciente-listado').contains(pacientes[i].nombre);
@@ -41,7 +40,7 @@ context('MPI-Busqueda Paciente', () => {
             if (pacientes[i].documento) {
                 cy.plexText('name="buscador"', pacientes[i].documento);
                 cy.wait('@busqueda').then((xhr) => {
-                    expect(xhr.status).to.be.eq(200);
+                    expect(xhr.response.statusCode).to.be.eq(200);
                     expect(xhr.response.body).to.have.length(1);
                     expect(xhr.response.body[0].documento).to.be.eq(pacientes[i].documento);
                 });
@@ -53,7 +52,7 @@ context('MPI-Busqueda Paciente', () => {
                 cy.plexText('name="buscador"', pacientes[i].numeroIdentificacion);
                 cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', false);
                 cy.wait('@busqueda').then((xhr) => {
-                    expect(xhr.status).to.be.eq(200);
+                    expect(xhr.response.statusCode).to.be.eq(200);
                     expect(xhr.response.body).to.have.length(1);
                     expect(xhr.response.body[0].numeroIdentificacion).to.be.eq(pacientes[i].numeroIdentificacion);
                 });
@@ -69,7 +68,7 @@ context('MPI-Busqueda Paciente', () => {
         cy.plexText('name="buscador"', '52081206');
         cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', false);
         cy.wait('@busqueda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body).to.have.length(0);
         });
         cy.contains('No se encontró ningún paciente');
@@ -80,7 +79,7 @@ context('MPI-Busqueda Paciente', () => {
         cy.plexText('name="buscador"', 'nopatient');
         cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', false);
         cy.wait('@busqueda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body).to.have.length(0);
         });
         cy.contains('No se encontró ningún paciente');
@@ -89,7 +88,7 @@ context('MPI-Busqueda Paciente', () => {
     it('buscar paciente con scan y verificar precarga de datos básicos', () => {
         cy.plexText('name="buscador"', '00535248130@TEST@TEST@M@26108063@B@02/10/1977@14/02/2018@200');
         cy.wait('@busqueda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             cy.plexInt('name="documento"').should('have.value', '26108063');
             cy.plexText('label="Nombre"').should('have.value', 'TEST');
             cy.plexText('label="Apellido"').should('have.value', 'TEST');
@@ -104,7 +103,7 @@ context('MPI-Busqueda Paciente', () => {
         cy.plexText('name="buscador"', 'fallecido');
         cy.plexDropdown('label="NUEVO PACIENTE"').should('have.prop', 'disabled', false);
         cy.wait('@busqueda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body).to.have.length(1);
             expect(xhr.response.body.fechaFallecimiento).to.not.be.eq(null);
         });

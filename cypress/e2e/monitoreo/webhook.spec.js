@@ -30,14 +30,13 @@ context('Webhook', () => {
     });
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/monitoreo/webhook', token);
-        cy.route('GET', '**api/modules/webhook/webhook**').as('busq');
+        cy.intercept('GET', '**api/modules/webhook/webhook**').as('busq');
     });
 
     it('Alta de un webhook', () => {
         cy.plexButton('Nuevo').click();
-        cy.route('POST', '**api/modules/webhook/webhook**').as('create');
+        cy.intercept('POST', '**api/modules/webhook/webhook**').as('create');
         complete({
             nombre: 'Nombre',
             event: 'mpi:patient:create',
@@ -51,19 +50,19 @@ context('Webhook', () => {
 
         cy.wait('@create').then((xhr) => {
             cy.log('@create');
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
 
         cy.contains('Aceptar').click();
     });
 
     it('Editar un webhook', () => {
-        cy.route('PATCH', '**/api/modules/webhook/webhook/**').as('edit');
+        cy.intercept('PATCH', '**/api/modules/webhook/webhook/**').as('edit');
 
         cy.plexText('label="Filtrar (Nombre)"', ' ');
 
         cy.wait('@busq').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
         cy.get('table tbody tr').plexButtonIcon('pencil').first().click();
         cy.plexBool('name="active"', true);
@@ -71,7 +70,7 @@ context('Webhook', () => {
         cy.plexButton('Guardar').click();
 
         cy.wait('@edit').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
 
         cy.contains('El webhook fue editado');
@@ -80,12 +79,12 @@ context('Webhook', () => {
 
     it('Eliminar un webhook', () => {
 
-        cy.route('DELETE', '**/api/modules/webhook/webhook/**').as('delete');
+        cy.intercept('DELETE', '**/api/modules/webhook/webhook/**').as('delete');
 
         cy.plexText('label="Filtrar (Nombre)"', 'Nombre');
 
         cy.wait('@busq').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
         cy.wait('@busq');
         cy.wait('@busq');
@@ -99,14 +98,14 @@ context('Webhook', () => {
         cy.contains('CONFIRMAR').click();
 
         cy.wait('@delete').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
 
         cy.contains('El Webhook fue eliminado');
         cy.contains('Aceptar').click();
 
         cy.wait('@busq').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
     });
 });

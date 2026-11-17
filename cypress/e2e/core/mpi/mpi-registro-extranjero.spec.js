@@ -11,7 +11,6 @@ context('MPI-Registro Paciente Extranjero', () => {
 
     beforeEach(() => {
         cy.goto('/apps/mpi/paciente/extranjero/mpi', token);
-        cy.server();
     });
 
     it('verificar campos obligatorios de datos basicos de paciente', () => {
@@ -27,7 +26,7 @@ context('MPI-Registro Paciente Extranjero', () => {
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y sin contacto', () => {
-        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroExtranjero');
+        cy.intercept('POST', '**api/core-v2/mpi/pacientes**').as('registroExtranjero');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'EXTRANJERO');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
@@ -38,7 +37,7 @@ context('MPI-Registro Paciente Extranjero', () => {
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
         cy.wait('@registroExtranjero').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
             expect(xhr.response.body.apellido).to.be.eq("TEST");
             expect(xhr.response.body.nombre).to.be.eq("EXTRANJERO");
@@ -48,7 +47,7 @@ context('MPI-Registro Paciente Extranjero', () => {
     });
 
     it('verificar la carga de paciente con datos obligatorios requeridos y telefono móvil', () => {
-        cy.route('POST', '**api/core-v2/mpi/pacientes**').as('registroExtranjero');
+        cy.intercept('POST', '**api/core-v2/mpi/pacientes**').as('registroExtranjero');
         cy.plexText('label="Apellido"', 'TEST');
         cy.plexText('label="Nombre"', 'EXTRANJERO');
         cy.plexSelectType('label="Seleccione sexo"', 'masculino');
@@ -59,7 +58,7 @@ context('MPI-Registro Paciente Extranjero', () => {
         cy.plexBool('name="viveLocActual"', true);
         cy.plexButton('Guardar').click();
         cy.wait('@registroExtranjero').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.estado).to.be.eq("temporal");
             expect(xhr.response.body.apellido).to.be.eq("TEST");
             expect(xhr.response.body.nombre).to.be.eq("EXTRANJERO");

@@ -11,11 +11,10 @@ context('Gestor de módulos', () => {
     });
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/monitoreo/modulos', token);
-        cy.route('GET', '**/api/core/tm/modulos**').as('modulos');
-        cy.route('POST', '**/api/core/tm/modulos').as('postModulos');
-        cy.route('PATCH', '**/api/core/tm/modulos**').as('patchModulos');
+        cy.intercept('GET', '**/api/core/tm/modulos**').as('modulos');
+        cy.intercept('POST', '**/api/core/tm/modulos').as('postModulos');
+        cy.intercept('PATCH', '**/api/core/tm/modulos**').as('patchModulos');
     });
 
     it('Registro de nuevo módulo', () => {
@@ -28,11 +27,11 @@ context('Gestor de módulos', () => {
         cy.plexInt('formControlName="orden"', '1');
         cy.plexButton('Guardar').click();
         cy.wait('@postModulos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.toast('success', 'Los datos se guardaron correctamente');
         cy.wait('@modulos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.get('plex-item').contains('HUDS');
         cy.get('plex-item').contains('Activo');
@@ -68,11 +67,11 @@ context('Gestor de módulos', () => {
 
         cy.plexButton('Guardar').click();
         cy.wait('@postModulos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.toast('success', 'Los datos se guardaron correctamente');
         cy.wait('@modulos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.get('plex-item').contains('Módulo Principal');
         cy.get('plex-item').contains('Activo');
@@ -89,11 +88,11 @@ context('Gestor de módulos', () => {
         cy.plexInt('formControlName="orden"', '2');
         cy.plexButton('Guardar').click();
         cy.wait('@postModulos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.toast('success', 'Los datos se guardaron correctamente');
         cy.wait('@modulos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
 
         cy.get('plex-item').plexBadge('Inactivo').first().click();
@@ -115,11 +114,11 @@ context('Gestor de módulos', () => {
         cy.plexInt('formControlName="orden"', '3');
         cy.plexButton('Guardar').click();
         cy.wait('@postModulos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.toast('success', 'Los datos se guardaron correctamente');
         cy.wait('@modulos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.plexText('label="Nombre"', 'INTERNACIÓN');
         cy.get('plex-item').first().contains('INTERNACIÓN');

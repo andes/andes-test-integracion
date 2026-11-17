@@ -39,10 +39,9 @@ context('CITAS - Revisión de Agendas', () => {
 
     it('Se quita asistencia a paciente existente', () => {
 
-        cy.server();
-        cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('paciente');
-        cy.route('PUT', '**/api/modules/turnos/turno/*/bloque/*/agenda/**').as('putTurno');
+        cy.intercept('GET', '**/api/modules/turnos/agenda/**').as('agenda');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('paciente');
+        cy.intercept('PUT', '**/api/modules/turnos/turno/*/bloque/*/agenda/**').as('putTurno');
 
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
         cy.get('tbody:nth-child(1) tr:first-child').click();
@@ -50,11 +49,11 @@ context('CITAS - Revisión de Agendas', () => {
         cy.toast('success', 'El estado de la agenda fue actualizado');
 
         cy.wait('@agenda').then(xhrAgenda => {
-            cy.expect(xhrAgenda.status).to.be.eq(200);
+            cy.expect(xhrAgenda.response.statusCode).to.be.eq(200);
             const turnoAgendaAsistio = xhrAgenda.response.body.bloques.find(x => x.id === idBloque).turnos.find(y => y.id === idTurno);
 
             cy.wait('@paciente').then(xhrPaciente => {
-                cy.expect(xhrPaciente.status).to.be.eq(200);
+                cy.expect(xhrPaciente.response.statusCode).to.be.eq(200);
                 cy.expect(xhrPaciente.response.body.id).to.be.eq(turnoAgendaAsistio.paciente.id);
                 cy.expect(turnoAgendaAsistio.asistencia).to.be.eq('asistio');
             });
@@ -63,7 +62,7 @@ context('CITAS - Revisión de Agendas', () => {
                 // cy.log(xhrTurno.response.body);
                 const turnoAgendaNoAsistio = xhrTurno.response.body.bloques.find(x => x.id === idBloque).turnos.find(y => y.id === idTurno);
 
-                cy.expect(xhrTurno.status).to.be.eq(200);
+                cy.expect(xhrTurno.response.statusCode).to.be.eq(200);
                 cy.expect(turnoAgendaNoAsistio.paciente.id).to.be.eq(turnoAgendaAsistio.paciente.id);
                 cy.expect(turnoAgendaNoAsistio.asistencia).to.be.eq('noAsistio');
             });
@@ -74,11 +73,10 @@ context('CITAS - Revisión de Agendas', () => {
     });
 
     it('Se reestablece diagnóstico', () => {
-        cy.server();
-        cy.route('GET', '**/api/core/term/cie10**').as('diagnosticos');
-        cy.route('PUT', '**/api/modules/turnos/turno/*/bloque/*/agenda/**').as('putTurno');
-        // cy.route('PUT', '**/api/modules/turnos/turno/*/bloque/*/agenda/**', req2).as('putTurno2');
-        cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
+        cy.intercept('GET', '**/api/core/term/cie10**').as('diagnosticos');
+        cy.intercept('PUT', '**/api/modules/turnos/turno/*/bloque/*/agenda/**').as('putTurno');
+        // cy.intercept('PUT', '**/api/modules/turnos/turno/*/bloque/*/agenda/**', req2).as('putTurno2');
+        cy.intercept('PATCH', '**/api/modules/turnos/agenda/**').as('patchAgenda');
 
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
         cy.get('tbody:nth-child(1) tr:first-child').click();
@@ -94,7 +92,7 @@ context('CITAS - Revisión de Agendas', () => {
         cy.plexText('name="searchTerm"', 'fiebre inducida por drogas');
 
         cy.wait('@diagnosticos').then(xhrDiag => {
-            cy.expect(xhrDiag.status).to.be.eq(200);
+            cy.expect(xhrDiag.response.statusCode).to.be.eq(200);
             cy.expect(xhrDiag.response.body[0].codigo).to.be.eq('R50.2');
         });
 
@@ -104,7 +102,7 @@ context('CITAS - Revisión de Agendas', () => {
 
 
         cy.wait('@putTurno').then(xhrPT => {
-            cy.expect(xhrPT.status).to.be.eq(200);
+            cy.expect(xhrPT.response.statusCode).to.be.eq(200);
             cy.expect(xhrPT.response.body.id).to.be.eq(idAgenda);
             const idTurnoPut = xhrPT.response.body.bloques.find(x => x.id === idBloque).turnos.find(y => y.id === idTurno).id;
             cy.expect(idTurnoPut).to.be.eq(idTurno);
@@ -112,7 +110,7 @@ context('CITAS - Revisión de Agendas', () => {
         });
 
         cy.wait('@patchAgenda').then(xhrPA => {
-            cy.expect(xhrPA.status).to.be.eq(200);
+            cy.expect(xhrPA.response.statusCode).to.be.eq(200);
             cy.expect(xhrPA.response.body.id).to.be.eq(idAgenda);
             const diagCIE10 = xhrPA.response.body.bloques.find(
                 x => x.id === idBloque).turnos.find(
@@ -127,29 +125,28 @@ context('CITAS - Revisión de Agendas', () => {
     });
 
     it('Se agrega sobreturno', () => {
-        cy.server();
-        cy.route('GET', '**/api/auth/organizaciones**').as('organizacionesGet');
-        cy.route('POST', '**/api/auth/organizaciones**').as('organizacionesPost');
-        cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
-        cy.route('PATCH', '**/api/modules/turnos/agenda/**').as('agendaPatch');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
+        cy.intercept('GET', '**/api/auth/organizaciones**').as('organizacionesGet');
+        cy.intercept('POST', '**/api/auth/organizaciones**').as('organizacionesPost');
+        cy.intercept('GET', '**/api/modules/turnos/agenda/**').as('agenda');
+        cy.intercept('PATCH', '**/api/modules/turnos/agenda/**').as('agendaPatch');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
 
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
 
         cy.wait('@agenda').then(xhrAgenda => {
-            cy.expect(xhrAgenda.status).to.be.eq(200);
+            cy.expect(xhrAgenda.response.statusCode).to.be.eq(200);
             cy.expect(xhrAgenda.response.body.id).to.be.eq(idAgenda);
             cy.plexButton('Agregar Sobreturno').click();
             cy.plexText('name="buscador"', pacienteDoc.documento);
             cy.wait('@listaPacientes').then(xhrPacientes => {
                 cy.log(xhrPacientes);
-                cy.expect(xhrPacientes.responseBody[0].documento).to.be.eq(pacienteDoc.documento)
+                cy.expect(xhrPacientes.response.body[0].documento).to.be.eq(pacienteDoc.documento)
             })
             cy.get('plex-item').contains(pacienteDoc.nombre).contains(pacienteDoc.apellido).click();
             cy.plexDatetime('label="Hora Turno"', Cypress.moment(xhrAgenda.response.body.horaInicio).add(10, 'minutes').format('HH:mm'));
             cy.plexButton('Guardar').click();
             cy.wait('@agendaPatch').then(xhrAgendaPatch => {
-                cy.expect(xhrAgendaPatch.status).to.be.eq(200);
+                cy.expect(xhrAgendaPatch.response.statusCode).to.be.eq(200);
                 cy.expect(xhrAgendaPatch.response.body.sobreturnos.find(x => x.paciente.id === paciente.id).paciente.id).to.be.eq(paciente.id);
             });
         });
@@ -158,10 +155,9 @@ context('CITAS - Revisión de Agendas', () => {
     });
 
     it('Se agrega sobreturno agenda dinamica', () => {
-        cy.server();
-        cy.route('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agendaPatch');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
-        cy.route('GET', '**/api/modules/turnos/agenda/**').as('agenda');
+        cy.intercept('PATCH', '**/api/modules/turnos/turno/agenda/**').as('agendaPatch');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
+        cy.intercept('GET', '**/api/modules/turnos/agenda/**').as('agenda');
 
 
         cy.goto(`/citas/gestor_agendas`, token);
@@ -176,12 +172,12 @@ context('CITAS - Revisión de Agendas', () => {
         cy.plexText('name="buscador"', pacienteDoc.documento);
         cy.wait('@listaPacientes').then(xhrPacientes => {
             cy.log(xhrPacientes);
-            cy.expect(xhrPacientes.responseBody[0].documento).to.be.eq(pacienteDoc.documento)
+            cy.expect(xhrPacientes.response.body[0].documento).to.be.eq(pacienteDoc.documento)
         })
         cy.get('plex-item').contains(pacienteDoc.nombre).contains(pacienteDoc.apellido).click();
         cy.plexButton('Guardar').click();
         cy.wait('@agendaPatch').then(xhrAgendaPatch => {
-            cy.expect(xhrAgendaPatch.status).to.be.eq(200);
+            cy.expect(xhrAgendaPatch.response.statusCode).to.be.eq(200);
         });
     });
 })

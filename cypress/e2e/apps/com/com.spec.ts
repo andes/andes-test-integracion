@@ -43,7 +43,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
             delete req.headers['if-none-match']
         }).as('getDispositivo');
         // Lo removemos por ahora hasta encontrar la solución
-        // cy.route('POST', '**/api/modules/descargas/reporteDerivacion').as('reporteDerivacion');
+        // cy.intercept('POST', '**/api/modules/descargas/reporteDerivacion').as('reporteDerivacion');
         secuencia(tokenOriginal);
     });
 
@@ -492,7 +492,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         //     statusCode: 200
         // }).as('reporteDerivacion');
         // cy.wait('@reporteDerivacion').then((xhr) => {
-        //     expect(xhr.status).to.be.eq(200);
+        //     expect(xhr.response.statusCode).to.be.eq(200);
         // });
         cy.login('30643636', 'asd', '5f68c547cbd0db303ac4aee9').then(t => {
             token = t;

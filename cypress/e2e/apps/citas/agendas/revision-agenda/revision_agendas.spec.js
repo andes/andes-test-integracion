@@ -4,20 +4,20 @@ export function buscarPaciente(dni) {
     cy.plexButton("Buscar Paciente").click();
     cy.plexText('name="buscador"', dni);
     cy.wait('@listaPacientes').then((xhr) => {
-        expect(xhr.status).to.be.eq(200);
+        expect(xhr.response.statusCode).to.be.eq(200);
         expect(xhr.response.body[0].documento).to.be.eq(dni);
     });
 
     const documento = dni.substr(0, dni.length - 6) + '.' + dni.substr(-6, 3) + '.' + dni.substr(-3);
     cy.get('plex-item').contains(documento).click();
     cy.wait('@getPaciente').then((xhr) => {
-        expect(xhr.status).to.be.eq(200);
+        expect(xhr.response.statusCode).to.be.eq(200);
     });
     cy.get('plex-copy').contains(documento);
     cy.plexButton("Cambiar Paciente").click();
     cy.plexText('name="buscador"', dni);
     cy.wait('@listaPacientes').then((xhr) => {
-        expect(xhr.status).to.be.eq(200);
+        expect(xhr.response.statusCode).to.be.eq(200);
         expect(xhr.response.body[0].documento).to.be.eq(dni);
     });
     cy.get('plex-item').contains(documento).click();
@@ -50,9 +50,8 @@ context('CITAS - Revisión de Agendas', () => {
 
     beforeEach(() => {
         cy.goto(`/citas/revision_agenda/${idAgenda}`, token);
-        cy.server();
-        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('listaPacientes');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
     });
 
     it('Comprueba datos de la agenda', () => {
@@ -72,7 +71,7 @@ context('CITAS - Revisión de Agendas', () => {
 
         cy.plexText('name="searchTerm"', 'c11');
 
-        cy.route('GET', '**/api/core/term/cie10**').as('diagnosticos');
+        cy.intercept('GET', '**/api/core/term/cie10**').as('diagnosticos');
 
         cy.wait('@diagnosticos');
 
