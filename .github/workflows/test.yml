@@ -1,6 +1,7 @@
 name: Test de integración
 
-# Un spec, un stack, en un runner de GitHub. Cypress corre con npx en el runner.
+# Un stack, en un runner de GitHub. Cypress corre con npx en el runner.
+# spec acepta un archivo, varios separados por coma, o una carpeta.
 # La imagen de la rama la publica docker-image de andes/api y andes/app, llamado
 # con workflow_call. El tag es el SHA corto. Nginx se arma acá con el dist de app.
 # Este corte no usa Cypress Cloud y no publica el informe fuera del artifact.
@@ -24,7 +25,7 @@ on:
         default: master
         type: string
       spec:
-        description: Path de un spec. Ejemplo cypress/e2e/core/auth/login.spec.ts
+        description: Un spec, varios separados por coma, o una carpeta. Ejemplo cypress/e2e/core/auth
         required: true
         type: string
 
@@ -198,12 +199,32 @@ jobs:
         env:
           SPEC: ${{ inputs.spec }}
         run: |
-          if [[ ! -f "$SPEC" ]]; then
-            echo "El spec no existe o no es un archivo: ${SPEC}" >&2
+          shopt -s nullglob
+          IFS=',' read -ra partes <<< "$SPEC"
+          specs=()
+          for cruda in "${partes[@]}"; do
+            ruta="${cruda#"${cruda%%[![:space:]]*}"}"
+            ruta="${ruta%"${ruta##*[![:space:]]}"}"
+            [[ -z "$ruta" ]] && continue
+            if [[ -d "$ruta" ]]; then
+              while IFS= read -r archivo; do
+                specs+=("$archivo")
+              done < <(find "$ruta" -type f \( -name '*.spec.ts' -o -name '*.spec.js' -o -name '*.spec.jsx' -o -name '*.spec.tsx' \) | sort)
+            elif [[ -f "$ruta" ]]; then
+              specs+=("$ruta")
+            else
+              echo "El spec no existe: ${ruta}" >&2
+              exit 1
+            fi
+          done
+          if [[ ${#specs[@]} -eq 0 ]]; then
+            echo "No hay specs para correr: ${SPEC}" >&2
             exit 1
           fi
+          printf 'Spec: %s\n' "${specs[@]}"
+          lista=$(IFS=,; echo "${specs[*]}")
           npx cypress run \
-            --spec "$SPEC" \
+            --spec "$lista" \
             --env "MONGO_URI=${MONGO_URI},API_SERVER=${NGINX_URL}" \
             --config "baseUrl=${NGINX_URL},video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false"
 
