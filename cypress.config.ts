@@ -25,7 +25,8 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.js')(on, config)
     },
-    experimentalSessionAndOrigin: true,
+    // Los specs se loguean en el before y siguen con la misma sesión.
+    testIsolation: false,
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
   },
 })
