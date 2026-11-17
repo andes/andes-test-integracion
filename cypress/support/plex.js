@@ -315,13 +315,19 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
         }
     }
     if (cerroConEnter) {
-        // El calendario de plex queda abierto hasta ACEPTAR. Escape no lo cierra.
+        // El calendario de plex queda abierto hasta ACEPTAR. No es un button y escape no lo cierra.
         element = element.then(($input) => {
-            const aceptar = Cypress.$('.cdk-overlay-pane button').filter((_, nodo) => (nodo.textContent || '').trim() === 'ACEPTAR');
-            if (!aceptar.length) {
-                return $input;
-            }
-            return cy.wrap(aceptar).click().then(() => $input);
+            return cy.get('.cdk-overlay-container').should(($contenedor) => {
+                const abierto = Cypress.$('.cdk-overlay-backdrop-showing').length > 0;
+                const hayAceptar = $contenedor.text().includes('ACEPTAR');
+                expect(!abierto || hayAceptar, 'calendario listo').to.eq(true);
+            }).then(($contenedor) => {
+                if (!Cypress.$('.cdk-overlay-backdrop-showing').length) {
+                    return $input;
+                }
+                const nodo = [...$contenedor.find('*')].filter((el) => (el.textContent || '').trim() === 'ACEPTAR').pop();
+                return cy.wrap(nodo).click({ force: true }).then(() => $input);
+            });
         });
         cy.get('.cdk-overlay-backdrop-showing').should('not.exist');
     }
