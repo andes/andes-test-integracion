@@ -303,18 +303,27 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
     } else {
         element = cy.get(`plex-datetime[${label}] input`);
     }
+    const cerroConEnter = (data && typeof data === 'string') || (data && data.text && !data.skipEnter);
     if (data && typeof data === 'string') {
-        element.type(`${data}{enter}`);
+        element = element.type(`${data}{enter}`);
     } else if (data) {
         if (data.clear) {
-            element.clear();
+            element = element.clear();
         }
         if (data.text) {
-            element.type(`${data.text}${!data.skipEnter ? '{enter}' : ''}`);
+            element = element.type(`${data.text}${!data.skipEnter ? '{enter}' : ''}`);
         }
     }
-    element = element.parent().parent().parent();
-    return element;
+    if (cerroConEnter) {
+        element = element.then(($input) => {
+            const abierto = Cypress.$('.cdk-overlay-backdrop-showing').length > 0;
+            if (abierto) {
+                return cy.wrap($input).type('{esc}', { force: true });
+            }
+            return $input;
+        });
+    }
+    return element.parent().parent().parent();
 });
 
 Cypress.Commands.add('plexDateTimeDinamico', { prevSubject: 'optional' }, (subject, label, text = null) => {
