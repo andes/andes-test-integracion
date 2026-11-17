@@ -13,7 +13,7 @@ describe('Capa Estadistica - Ingresos', () => {
                     { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: moment().add(-2, 'd').toDate() }
                 ]
             }).then(camasCreadas => {
-                return cy.goto('/mapa-camas', token);
+                return cy.goto('/mapa-camas/internacion', token);
             });
         });
     });
@@ -96,7 +96,7 @@ describe('Capa Estadistica - Ingresos', () => {
     });
 
     it('Editar ingreso', () => {
-        cy.goto('/mapa-camas', token);
+        cy.goto('/mapa-camas/internacion', token);
         cy.get('table tbody tr td').contains(pacientes[0].nombre).first().click();
 
         cy.get('plex-tabs ul li').eq(1).click();

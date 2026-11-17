@@ -19,7 +19,7 @@ const moment = require('moment');
                             .then(salasCreadas => {
                                 salas = salasCreadas;
                                 cy.viewport(1920, 1080);
-                                return cy.goto('/mapa-camas', token);
+                                return cy.goto('/mapa-camas/internacion', token);
                             });
                     });
             });
@@ -51,7 +51,7 @@ const moment = require('moment');
 
         // Skipeamos test de sala hasta decidir si se vuelven a usar
         it('Egreso desde Sala Comun', () => {
-            cy.goto('/mapa-camas', token);
+            cy.goto('/mapa-camas/internacion', token);
             cy.getCama(pacientes[1].nombre).click();
             // cy.get('plex-layout-sidebar plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexDropdown('icon="menos"').first().click().get('a').contains('Egresar paciente').click();

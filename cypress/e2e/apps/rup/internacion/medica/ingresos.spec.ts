@@ -24,7 +24,7 @@ import moment = require('moment');
                         ]
                     }).then(salasCreadas => {
                         salas = salasCreadas
-                        return cy.goto('/mapa-camas', token);
+                        return cy.goto('/mapa-camas/internacion', token);
                     });
                 });
             });
@@ -43,7 +43,7 @@ import moment = require('moment');
             cy.intercept('POST', '**/api/modules/rup/internacion/sala-comun/**').as('internarPaciente');
             cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.viewport(1920, 1080);
-            cy.goto('/mapa-camas', token);
+            cy.goto('/mapa-camas/internacion', token);
         });
         it('Ingreso simplificado cambiando paciente', () => {
             cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click({ force: true });

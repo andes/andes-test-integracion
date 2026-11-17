@@ -76,7 +76,7 @@ describe('Capa Estadistica - Egresos', () => {
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
         cy.viewport(1920, 1080);
 
-        cy.goto('/mapa-camas', token);
+        cy.goto('/mapa-camas/internacion', token);
         cy.wait(300)
     });
 

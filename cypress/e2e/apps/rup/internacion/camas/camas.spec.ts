@@ -56,7 +56,7 @@ describe('ABM Camas', () => {
 
         cy.viewport(1920, 1080);
 
-        cy.goto('/mapa-camas', token);
+        cy.goto('/mapa-camas/internacion', token);
     });
 
     it('Alta Cama', () => {

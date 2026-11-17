@@ -72,18 +72,19 @@ Cypress.Commands.add('removeRupCard', (index) => {
 });
 
 Cypress.Commands.add('RupSetearFiltros', (search) => {
-    const filtrosMap = {
-        todos: 0,
-        hallazgo: 1,
-        trastorno: 2,
-        procedimiento: 3,
-        solicitud: 4,
-        producto: 5
+    const titulos = {
+        todos: 'todos',
+        hallazgo: 'hallazgos',
+        trastorno: 'trastornos',
+        procedimiento: 'procedimientos',
+        solicitud: 'solicitudes',
+        producto: 'insumos'
     }
+    const cards = cy.get('rup-buscador .contenedor-filtros plex-card');
     if (typeof search === 'number') {
-        cy.get('rup-buscador .menu-buscador button').eq(search).click();
+        cards.eq(search).click();
     } else {
-        cy.get('rup-buscador .menu-buscador button').eq(filtrosMap[search]).click();
+        cards.contains('.titulo', titulos[search]).click();
     }
 });
 
