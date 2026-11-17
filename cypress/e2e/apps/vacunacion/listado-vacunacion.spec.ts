@@ -165,7 +165,7 @@ context('Vacunacion Listado', () => {
         });
     });
 
-    it.only('Agregar notas a paciente', () => {
+    it('Agregar notas a paciente', () => {
         cy.get('tbody tr').eq(0).contains(' 10000000 ').click();
         cy.get('plex-layout-sidebar plex-title').plexButton(' Agregar nota ').click();
         cy.get('plex-layout-sidebar').plexSelect('name="nota"', 0).click();

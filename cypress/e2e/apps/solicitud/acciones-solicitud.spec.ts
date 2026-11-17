@@ -115,7 +115,7 @@ context('Solicitudes', () => {
         });
 
 
-        it.only('Responder solicitud', () => {
+        it('Responder solicitud', () => {
             cy.get('plex-table tr').contains('auditoria').first().click();
             cy.get('plex-layout-sidebar').plexIcon('lock-alert').click({ force: true })
             cy.plexButton('Responder').click({ force: true });

@@ -261,7 +261,7 @@ context('RUP - Punto de inicio', () => {
 
     function flujoPrestacion(typeAgenda, agendaIndex, typePaciente, pacienteIndex) {
 
-        describe.only(`flujo prestación agenda ${typeAgenda} paciente ${typePaciente}`, () => {
+        describe(`flujo prestación agenda ${typeAgenda} paciente ${typePaciente}`, () => {
             let idPrestacion;
 
             if (typeAgenda === 'con-solicitud') {
