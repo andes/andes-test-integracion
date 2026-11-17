@@ -37,7 +37,7 @@ const moment = require('moment');
         it('Egreso desde cama', () => {
             cy.getCama(pacientes[0].apellido).click();
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
-            cy.get('plex-layout-sidebar').plexIcon('menos').click().get('a').contains('Egresar paciente').click();
+            cy.get('plex-layout-sidebar').plexDropdown('icon="menos"').first().click().get('a').contains('Egresar paciente').click();
 
             cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
             cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });

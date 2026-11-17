@@ -54,10 +54,12 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
 
     }
     if (data && typeof data === 'string') {
-        const textForType = clicked ? `${data}{enter}` : data;
-        element = element.type(textForType, {
-            force: true
-        });
+        element = element.type(data, { force: true });
+        if (clicked) {
+            element = element.then(($input) => {
+                return cy.wrap($input).parents('plex-select').find('.selectize-dropdown .option').contains(data).click({ force: true }).then(() => $input);
+            });
+        }
     } else if (data) {
         if (data.clear) {
             element.type('{backspace}', { force: true });
@@ -299,9 +301,9 @@ Cypress.Commands.add('plexLayout', (name) => {
 Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, label, data = null) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject).find(`plex-datetime[${label}] input`)
+        element = cy.wrap(subject).find(`plex-datetime[${label}] input[data-main]:not(.hidden)`)
     } else {
-        element = cy.get(`plex-datetime[${label}] input`);
+        element = cy.get(`plex-datetime[${label}] input[data-main]:not(.hidden)`);
     }
     const cerroConEnter = (data && typeof data === 'string') || (data && data.text && !data.skipEnter);
     if (data && typeof data === 'string') {
