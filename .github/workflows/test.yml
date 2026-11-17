@@ -1,0 +1,234 @@
+name: Test de integración
+
+# Un spec, un stack, en un runner de GitHub. Cypress corre con npx en el runner.
+# La imagen de la rama la publica docker-image de andes/api y andes/app, llamado
+# con workflow_call. El tag es el SHA corto. Nginx se arma acá con el dist de app.
+# Este corte no usa Cypress Cloud y no publica el informe fuera del artifact.
+
+on:
+  workflow_dispatch:
+    inputs:
+      app:
+        description: Rama de andes/app. Dispara su workflow docker-image.
+        required: true
+        default: master
+        type: string
+      api:
+        description: Rama de andes/api. Dispara su workflow docker-image.
+        required: true
+        default: master
+        type: string
+      tests:
+        description: Rama de andes-test-integracion.
+        required: true
+        default: master
+        type: string
+      spec:
+        description: Path de un spec. Ejemplo cypress/e2e/core/auth/login.spec.ts
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  imagen-api:
+    name: Imagen api
+    uses: andes/api/.github/workflows/docker-image.yml@ci/docker-workflow-call
+    with:
+      ref: ${{ inputs.api }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  imagen-app:
+    name: Imagen app
+    uses: andes/app/.github/workflows/docker-image.yml@ci/docker-workflow-call
+    with:
+      ref: ${{ inputs.app }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  test:
+    name: Cypress
+    needs: [imagen-api, imagen-app]
+    runs-on: ubuntu-latest
+    env:
+      APP: ${{ needs.imagen-app.outputs.tag }}
+      API: ${{ needs.imagen-api.outputs.tag }}
+      MONGO_URI: mongodb://127.0.0.1:27017/andes
+      NGINX_URL: http://127.0.0.1:8080
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.tests }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      # Misma operación que el Jenkinsfile: merge local de origin/master, sin push.
+      # En master no cambia nada. Un conflicto falla el job.
+      - name: Merge de origin/master
+        env:
+          GIT_MERGE_AUTOEDIT: "no"
+        run: |
+          git fetch origin master:refs/remotes/origin/master
+          git -c user.name='github-actions[bot]' \
+              -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+              merge origin/master --no-edit
+
+      # API ya está en Docker Hub con el SHA corto. Nginx no se publica: copia solo el dist de app.
+      - name: Bajar api y armar nginx
+        run: |
+          if [[ ! "$APP" =~ ^[0-9a-f]{7}$ || ! "$API" =~ ^[0-9a-f]{7}$ ]]; then
+            echo "El tag de la imagen tiene que ser el SHA corto de 7 caracteres. app=${APP} api=${API}" >&2
+            exit 1
+          fi
+          docker pull "andesnqn/api:${API}"
+          docker build \
+            --file docker/app.Dockerfile \
+            --build-arg "APP=${APP}" \
+            --tag "andesnqn/nginx:${APP}" \
+            docker
+
+      # El compose del repo no publica puertos: Cypress y el seeder corren en el
+      # runner, no en la red de Compose. El override solo agrega puertos y health.
+      # baseUrl y API_SERVER apuntan a nginx, que proxea /api/ hacia api:3002.
+      - name: Levantar stack
+        run: |
+          cat > "${RUNNER_TEMP}/compose.ports.yml" <<'EOF'
+          services:
+            db:
+              ports:
+                - "127.0.0.1:27017:27017"
+              healthcheck:
+                test: ["CMD", "mongo", "--quiet", "--eval", "db.adminCommand('ping')"]
+                interval: 5s
+                timeout: 5s
+                retries: 36
+                start_period: 20s
+            api:
+              depends_on:
+                db:
+                  condition: service_healthy
+              healthcheck:
+                test: ["CMD", "node", "-e", "const s=require('net').connect(3002,'127.0.0.1',()=>process.exit(0));s.on('error',()=>process.exit(1))"]
+                interval: 5s
+                timeout: 5s
+                retries: 36
+                start_period: 20s
+            nginx:
+              ports:
+                - "127.0.0.1:8080:80"
+              depends_on:
+                api:
+                  condition: service_healthy
+              healthcheck:
+                test: ["CMD", "bash", "-c", "echo >/dev/tcp/127.0.0.1/80"]
+                interval: 5s
+                timeout: 5s
+                retries: 24
+                start_period: 5s
+          EOF
+          docker compose \
+            -p andes-test \
+            -f docker/docker-compose.yml \
+            -f "${RUNNER_TEMP}/compose.ports.yml" \
+            up -d --wait --wait-timeout 600
+
+      # Cypress 10.3.1 no declara Node 18. El binario es Electron y usa las libs del sistema.
+      - name: Setup Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 16.20.2
+          cache: npm
+
+      - name: Bibliotecas de Cypress
+        run: |
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            libgtk2.0-0t64 \
+            libgtk-3-0t64 \
+            libgbm1 \
+            libnotify4 \
+            libnss3 \
+            libxss1 \
+            libasound2t64 \
+            libxtst6 \
+            libatk1.0-0t64 \
+            libatk-bridge2.0-0t64 \
+            libcups2t64 \
+            libdrm2 \
+            libxkbcommon0 \
+            libxcomposite1 \
+            libxdamage1 \
+            libxfixes3 \
+            libxrandr2 \
+            libxshmfence1 \
+            libpango-1.0-0 \
+            libcairo2 \
+            libgdk-pixbuf-2.0-0 \
+            xvfb \
+            xauth
+
+      - name: Instalar
+        run: npm ci
+
+      - name: Verificar Cypress
+        run: npx cypress verify
+
+      - name: Cargar datos
+        run: node scripts/seeder.js
+
+      - name: Cypress
+        id: cypress
+        env:
+          SPEC: ${{ inputs.spec }}
+        run: |
+          if [[ ! -f "$SPEC" ]]; then
+            echo "El spec no existe o no es un archivo: ${SPEC}" >&2
+            exit 1
+          fi
+          npx cypress run \
+            --spec "$SPEC" \
+            --env "MONGO_URI=${MONGO_URI},API_SERVER=${NGINX_URL}" \
+            --config "baseUrl=${NGINX_URL},video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false"
+
+      # Sin --record ni --parallel. Las capturas van a assets/ para que el HTML se abra solo.
+      # cancelled() evita el success() implícito: el informe también sale si Cypress falla.
+      - name: Informe
+        if: ${{ !cancelled() && (steps.cypress.outcome == 'success' || steps.cypress.outcome == 'failure') }}
+        run: |
+          npm run report
+          mkdir -p mochawesome-report/web/assets
+          if [[ -d cypress/screenshots ]]; then
+            cp -a cypress/screenshots/. mochawesome-report/web/assets/
+          fi
+          test -s mochawesome-report/web/mochawesome.html
+          shopt -s nullglob
+          junit=(results/cypress-report-*.xml)
+          [[ ${#junit[@]} -gt 0 ]]
+
+      # 7 días: la org Free comparte 500 MB de artifacts.
+      - name: Subir informe
+        if: ${{ !cancelled() && (steps.cypress.outcome == 'success' || steps.cypress.outcome == 'failure') }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: informe-cypress
+          path: |
+            mochawesome-report/web
+            results/cypress-report-*.xml
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Bajar stack
+        if: always()
+        run: |
+          if [[ -f docker/docker-compose.yml ]]; then
+            docker compose -p andes-test -f docker/docker-compose.yml down -v --remove-orphans
+          fi
