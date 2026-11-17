@@ -60,6 +60,8 @@ jobs:
       API: ${{ needs.imagen-api.outputs.tag }}
       MONGO_URI: mongodb://127.0.0.1:27017/andes
       NGINX_URL: http://127.0.0.1:8080
+      # El login de la app exige offset 180 (UTC-3). El runner está en UTC.
+      TZ: America/Argentina/Buenos_Aires
     defaults:
       run:
         shell: bash
