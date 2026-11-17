@@ -57,7 +57,13 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
         element = element.type(data, { force: true });
         if (clicked) {
             element = element.then(($input) => {
-                return cy.wrap($input).parents('plex-select').find('.selectize-dropdown .option').contains(data).click({ force: true }).then(() => $input);
+                const opciones = $input.parents('plex-select').find('.selectize-dropdown [data-selectable]');
+                const activa = opciones.filter('.active');
+                const opcion = (activa.length ? activa : opciones).first();
+                if (!opcion.length) {
+                    return cy.wrap($input).type('{enter}', { force: true }).then(() => $input);
+                }
+                return cy.wrap(opcion).click({ force: true }).then(() => $input);
             });
         }
     } else if (data) {
