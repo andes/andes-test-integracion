@@ -326,11 +326,17 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
                     return $input;
                 }
                 const celda = [...$body.find('.mat-calendar-body-selected, .mat-calendar-body-active')].pop();
-                const cerrar = () => cy.get('.cdk-overlay-container button').filter((_, el) => (el.innerText || '').trim().toLowerCase() === 'aceptar').should('not.be.disabled').realClick().then(() => $input);
+                // Click nativo en el host de plex-button. Un click real cae al input cuando el overlay se cierra y lo vuelve a abrir.
+                const cerrar = () => cy.get('.cdk-overlay-container plex-button').filter((_, el) => (el.innerText || '').trim().toLowerCase() === 'aceptar').find('button').should('not.be.disabled').then(($btn) => {
+                    $btn[0].closest('plex-button').click();
+                    return cy.wrap($input).blur({ force: true });
+                });
                 if (!celda) {
                     return cerrar();
                 }
-                return cy.wrap(celda).realClick().then(cerrar);
+                return cy.wrap(celda).then(($celda) => {
+                    $celda[0].click();
+                }).then(cerrar);
             });
         });
         cy.get('.cdk-overlay-backdrop-showing').should('not.exist');
