@@ -331,7 +331,10 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
         });
         cy.get('.cdk-overlay-backdrop-showing').should('not.exist');
     }
-    return element.parent().parent().parent();
+    if (subject) {
+        return cy.wrap(subject).find(`plex-datetime[${label}]`);
+    }
+    return cy.get(`plex-datetime[${label}]`);
 });
 
 Cypress.Commands.add('plexDateTimeDinamico', { prevSubject: 'optional' }, (subject, label, text = null) => {
