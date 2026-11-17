@@ -176,8 +176,10 @@ jobs:
             xvfb \
             xauth
 
+      # npm 8 rechaza el peer de cypress-select-tests@1.5.7 (pide Cypress 3).
+      # El lock ya resolvió Cypress 10. Jenkins corría con npm 6, que no frenaba por eso.
       - name: Instalar
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Verificar Cypress
         run: npx cypress verify
