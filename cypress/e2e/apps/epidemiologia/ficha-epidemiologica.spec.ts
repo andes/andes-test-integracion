@@ -1,7 +1,8 @@
 /// <reference types="Cypress" />
-import moment from 'moment';
+import moment = require('moment');
 
 context('Ficha Epidemiológica', () => {
+    let token;
     let validado;
     let validado2;
     let validado3;

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment = require('moment');
 let i = 0;
 ['medica', 'enfermeria'].forEach((capa) => {
     let arreProfesionales = [4163782, 15789463];

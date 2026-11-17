@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment = require('moment');
 // <reference types="Cypress" />
 
 function seleccionarPaciente(dni) {

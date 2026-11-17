@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment = require('moment');
 context('punto de inicio', () => {
     let token;
     // const = '36425896';

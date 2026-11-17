@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment = require('moment');
 context('mobile paciente', () => {
     let paciente;
 

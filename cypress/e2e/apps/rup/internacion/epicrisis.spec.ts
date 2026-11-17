@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-import moment from 'moment';
+import moment = require('moment');
 
 context("RUP - Epicrisis", () => {
   let token;

@@ -1,4 +1,5 @@
 context('Ficha Epidemiológica', () => {
+    let token;
     before(() => {
         cy.seed();
         cy.login('30643636', 'asd').then(t => {

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment = require('moment');
 context('CITAS - punto de inicio', () => {
     let token;
     let pacientes;

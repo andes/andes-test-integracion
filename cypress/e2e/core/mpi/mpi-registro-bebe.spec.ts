@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment = require('moment');
 context('MPI-Registro Paciente Bebé', () => {
     let token;
     let progenitor, progenitorScan;

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment = require('moment');
 ['medica', 'enfermeria'].forEach((capa) => {
     describe(`Capa ${capa} - Ingresos`, () => {
         let token;

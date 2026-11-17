@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment = require('moment');
 describe.skip('Acciones sobre paciente ingresado desde capa asistencial', () => {
     let token;
     let pacientes;

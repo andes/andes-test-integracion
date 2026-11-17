@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment = require('moment');
 describe('CITAS - Planificar Agendas', () => {
     let token
     before(() => {

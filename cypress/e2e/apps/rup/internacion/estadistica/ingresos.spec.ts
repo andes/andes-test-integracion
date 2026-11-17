@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment = require('moment');
 describe('Capa Estadistica - Ingresos', () => {
     let token;
     let pacientes;
