@@ -315,12 +315,13 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
         }
     }
     if (cerroConEnter) {
-        // Enter deja el foco en la celda del calendario, no en el input.
+        // El calendario de plex queda abierto hasta ACEPTAR. Escape no lo cierra.
         element = element.then(($input) => {
-            if (!Cypress.$('.cdk-overlay-backdrop-showing').length) {
+            const aceptar = Cypress.$('.cdk-overlay-pane button').filter((_, nodo) => (nodo.textContent || '').trim() === 'ACEPTAR');
+            if (!aceptar.length) {
                 return $input;
             }
-            return cy.focused().type('{esc}', { force: true }).then(() => $input);
+            return cy.wrap(aceptar).click().then(() => $input);
         });
         cy.get('.cdk-overlay-backdrop-showing').should('not.exist');
     }
