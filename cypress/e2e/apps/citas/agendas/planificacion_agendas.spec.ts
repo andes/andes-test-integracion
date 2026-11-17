@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 
 const complete = (dto) => {
     if (dto.fecha) {
@@ -183,7 +184,7 @@ context('Planificacion Agendas', () => {
                 expect(response.statusCode).to.be.eq(200)
             });
         }
-        cy.get('table tr td').contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
+        cy.get('table tr td').contains(moment().add(1, 'days').format('D')).click({ force: true });
         cy.plexButtonIcon("check").click();
         cy.swal('confirm');
         cy.wait('@clonar');
@@ -309,7 +310,7 @@ context('Planificacion Agendas', () => {
 
     it('Guardar agenda con turnos programados', () => {
         complete({
-            fecha: Cypress.moment().add(1, 'days').format('DD/MM/YYYY'),
+            fecha: moment().add(1, 'days').format('DD/MM/YYYY'),
             horaInicio: "10:00",
             horaFin: "12:00"
         });
@@ -332,7 +333,7 @@ context('Planificacion Agendas', () => {
     it('Crear agenda con turnos programados y turnos mobile', () => {
 
         complete({
-            fecha: Cypress.moment().add(1, 'days').format('DD/MM/YYYY'),
+            fecha: moment().add(1, 'days').format('DD/MM/YYYY'),
             horaInicio: "10:00",
             horaFin: "12:00"
         });
@@ -603,8 +604,8 @@ context('Planificacion Agendas', () => {
 
 
     it('Guardar, clonar y verificar botón iniciar prestación en agenda no nominalizada', () => {
-        let ayer = Cypress.moment().add('days', -1);
-        let hoy = Cypress.moment();
+        let ayer = moment().add('days', -1);
+        let hoy = moment();
         complete({
             fecha: ayer.format('DD/MM/YYYY'),
             horaInicio: "10:00",
@@ -641,9 +642,9 @@ context('Planificacion Agendas', () => {
         cy.contains('La Agenda se clonó correctamente');
         cy.swal('confirm');
         cy.wait('@agendas');
-        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().date());
+        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + moment().date());
         cy.wait('@agendas');
-        cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().date());
+        cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + moment().date());
         cy.wait('@agendas');
         cy.plexSelectType('name="prestaciones"', 'actividades con la comunidad');
         cy.wait('@agendas');

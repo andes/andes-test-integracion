@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 
 context("RUP - Epicrisis", () => {
   let token;
@@ -53,7 +54,7 @@ context("RUP - Epicrisis", () => {
       expect(response.statusCode).to.eq(200);
     });
 
-    let monthAgo = Cypress.moment()
+    let monthAgo = moment()
       .add(-30, "days")
       .format("DD/MM/YYYY");
 
@@ -64,7 +65,7 @@ context("RUP - Epicrisis", () => {
       skipEnter: true
     });
     cy.plexDatetime('label="Egreso"', {
-      text: Cypress.moment().format("DD/MM/YYYY"),
+      text: moment().format("DD/MM/YYYY"),
       clear: true,
       skipEnter: true
     });

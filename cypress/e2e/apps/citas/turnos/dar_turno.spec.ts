@@ -1,3 +1,4 @@
+import moment from 'moment';
 context('CITAS - punto de inicio', () => {
     let token;
     let pacientes;
@@ -124,7 +125,7 @@ context('CITAS - punto de inicio', () => {
             });
 
             cy.wait(1000)
-            cy.get('div[class="dia"]').contains(Cypress.moment().add(1, 'days').format('D')).click();
+            cy.get('div[class="dia"]').contains(moment().add(1, 'days').format('D')).click();
 
             cy.wait('@seleccionAgenda').then((xhr) => {
                 expect(xhr.response.statusCode).to.be.eq(200)
@@ -146,7 +147,7 @@ context('CITAS - punto de inicio', () => {
 
             cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@conceptoTurneables', 0);
             cy.wait('@cargaAgendas');
-            cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
+            cy.get('app-calendario .dia').contains(moment().date()).click();
             cy.wait('@seleccionAgenda').then((xhr) => {
                 expect(xhr.response.statusCode).to.be.eq(200)
             });
@@ -159,7 +160,7 @@ context('CITAS - punto de inicio', () => {
     })
 
     it('Verifica fecha/hora y usuario de dacion de turno', () => {
-        const hoy = Cypress.moment().format('DD/MM/YYYY')
+        const hoy = moment().format('DD/MM/YYYY')
         darTurno(pacientes[0]);
         cy.plexSelectAsync('name="tipoPrestacion"', 'consulta con médico oftalmólogo', '@conceptoTurneables', 0);
         if (cy.esFinDeMes()) {
@@ -186,7 +187,7 @@ context('CITAS - punto de inicio', () => {
             expect(xhr.response.body).to.have.length(1);
         });
         cy.wait(1000)
-        cy.get('div[class="dia"]').contains(Cypress.moment().add(1, 'days').format('D')).click();
+        cy.get('div[class="dia"]').contains(moment().add(1, 'days').format('D')).click();
         cy.wait('@seleccionAgenda').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200)
         });
@@ -195,7 +196,7 @@ context('CITAS - punto de inicio', () => {
 
         cy.wait('@getHistorial').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
-            const fechaHora = Cypress.moment(response.body[0].fechaHoraDacion).format('DD/MM/YYYY');
+            const fechaHora = moment(response.body[0].fechaHoraDacion).format('DD/MM/YYYY');
             expect(fechaHora).to.be.eq(hoy);
             expect(response.body[2].usuarioDacion.nombreCompleto).to.be.eq('Natalia Huenchuman');
         });

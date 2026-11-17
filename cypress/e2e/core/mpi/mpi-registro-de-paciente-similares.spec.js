@@ -1,3 +1,4 @@
+import moment from 'moment';
 context('MPI-Registro de Pacientes Similares', () => {
     let token
     before(() => {
@@ -61,7 +62,7 @@ context('MPI-Registro de Pacientes Similares', () => {
         irANuevoPaciente();
         // Se completa datos básicos
         cy.plexInt('name="documento"', '10000000');
-        cy.plexDatetime('name="fechaNacimiento"', Cypress.moment().format('DD/MM/YYYY'));
+        cy.plexDatetime('name="fechaNacimiento"', moment().format('DD/MM/YYYY'));
         cy.plexSelectType('name="sexo"', 'Masculino');
         cy.plexText('name="apellido"', 'X');
         cy.plexText('name="nombre"', 'X');

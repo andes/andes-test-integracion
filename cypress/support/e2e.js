@@ -15,9 +15,7 @@
 
 // Import commands.js using ES2015 syntax:
 
-const moment = require('moment');
 const resizeObserverLoopErrRe = /^[^(ResizeObserver loop limit exceeded)]/;
-Cypress.moment = moment;
 
 import './commands'
 import './http'

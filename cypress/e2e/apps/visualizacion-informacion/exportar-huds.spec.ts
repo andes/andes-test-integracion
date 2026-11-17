@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 
 context('Exportar HUDS', () => {
     let token;
@@ -43,8 +44,8 @@ context('Exportar HUDS', () => {
     })
 
     it('Seleccionar un paciente y solicitar exportar huds entre dos fechas', () => {
-        let ayer = Cypress.moment().add('days', -1).format('DD/MM/YYYY');
-        let hoy = Cypress.moment().format('DD/MM/YYYY');
+        let ayer = moment().add('days', -1).format('DD/MM/YYYY');
+        let hoy = moment().format('DD/MM/YYYY');
         cy.plexText('name="buscador"', pacienteValidado.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200);
@@ -101,8 +102,8 @@ context('Exportar HUDS', () => {
     });
 
     it('Seleccionar un paciente y solicitar exportar huds entre dos fechas y con una prestación', () => {
-        let ayer = Cypress.moment().add('days', -1).format('DD/MM/YYYY');
-        let hoy = Cypress.moment().format('DD/MM/YYYY');
+        let ayer = moment().add('days', -1).format('DD/MM/YYYY');
+        let hoy = moment().format('DD/MM/YYYY');
         cy.plexText('name="buscador"', pacienteConPrestacion.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200);

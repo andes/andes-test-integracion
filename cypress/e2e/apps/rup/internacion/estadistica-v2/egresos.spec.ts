@@ -1,3 +1,4 @@
+import moment from 'moment';
 describe.skip('Acciones sobre paciente ingresado desde capa estadistica-v2', () => {
     let token;
     let pacientes;
@@ -12,7 +13,7 @@ describe.skip('Acciones sobre paciente ingresado desde capa estadistica-v2', () 
                 vincularInformePrestacion: true,    // vinculamos el resumen con la prestación (informe)
                 organizacion: user.organizaciones[0],
                 configCamas: [
-                    { pacientes: [pacientes[2]], extras: { ingreso: true }, estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate(), unidadOrganizativa: "3191000013108" }
+                    { pacientes: [pacientes[2]], extras: { ingreso: true }, estado: 'ocupada', fechaIngreso: moment().add(-5, 'm').toDate(), unidadOrganizativa: "3191000013108" }
                 ]
             });
         });
@@ -71,7 +72,7 @@ describe.skip('Acciones sobre paciente ingresado desde capa estadistica-v2', () 
     });
 
     it('Egreso de paciente desde listadado de internación', () => {
-        const fechaEgreso = Cypress.moment().format('DD/MM/YYYY HH:mm');
+        const fechaEgreso = moment().format('DD/MM/YYYY HH:mm');
 
         cy.goto('/mapa-camas/listado-internacion-unificado/estadistica-v2', token);
         cy.url().should('include', 'listado-internacion-unificado');
@@ -96,12 +97,12 @@ describe.skip('Acciones sobre paciente ingresado desde capa estadistica-v2', () 
         // verificamos sincronización entre resumen y prestación
         cy.wait('@patchResumen').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
-            expect(Cypress.moment(response.body.fechaEgreso).format('DD/MM/YYYY HH:mm')).to.be.eq((fechaEgreso))
+            expect(moment(response.body.fechaEgreso).format('DD/MM/YYYY HH:mm')).to.be.eq((fechaEgreso))
         });
         cy.wait('@patchPrestacion').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
             expect(response.body.ejecucion.registros).have.length(2);
-            const fechaEgresoPrestacion = Cypress.moment(response.body.ejecucion.registros[1].valor.InformeEgreso.fechaEgreso).format('DD/MM/YYYY HH:mm');
+            const fechaEgresoPrestacion = moment(response.body.ejecucion.registros[1].valor.InformeEgreso.fechaEgreso).format('DD/MM/YYYY HH:mm');
             expect(fechaEgresoPrestacion).to.be.eq(fechaEgreso);
         });
         cy.swal('confirm', 'Los datos se actualizaron correctamente');

@@ -1,3 +1,4 @@
+import moment from 'moment';
 let i = 0;
 ['medica', 'enfermeria'].forEach((capa) => {
     let arreProfesionales = [4163782, 15789463];
@@ -17,7 +18,7 @@ let i = 0;
                         [{
                             estado: 'ocupada',
                             pacientes: [paciente],
-                            fechaIngreso: Cypress.moment().add(-5, 'day')
+                            fechaIngreso: moment().add(-5, 'day')
                         }]
                 }).then((camitas) => {
                     cy.taskN('database:seed:prestacion', [{
@@ -77,7 +78,7 @@ let i = 0;
             cy.getRegistrosMedicos().plexButtonIcon('eye').click();
             cy.plexLayoutMain().contains('consulta con médico general');
             cy.plexLayoutMain().find('plex-title').plexButtonIcon('close').click();
-            let fecha = Cypress.moment().format('DD/MM/yyyy HH:mm');
+            let fecha = moment().format('DD/MM/yyyy HH:mm');
             cy.plexLayoutMain().get('plex-title').contains(fecha)
         });
     });

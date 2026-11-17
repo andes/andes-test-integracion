@@ -1,3 +1,4 @@
+import moment from 'moment';
 describe('Capa Estadistica - Ingresos', () => {
     let token;
     let pacientes;
@@ -8,8 +9,8 @@ describe('Capa Estadistica - Ingresos', () => {
             pacientes = pacientesCreados;
             cy.factoryInternacion({
                 configCamas: [
-                    { estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() },
-                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate() }
+                    { estado: 'disponible', fechaIngreso: moment().add(-2, 'm').toDate() },
+                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: moment().add(-2, 'd').toDate() }
                 ]
             }).then(camasCreadas => {
                 return cy.goto('/mapa-camas', token);
@@ -74,7 +75,7 @@ describe('Capa Estadistica - Ingresos', () => {
         });
 
         cy.plexDatetime('label="Fecha y hora de ingreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha y hora de ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de ingreso"', { text: moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexText('name="motivo"', 'Estornudo');

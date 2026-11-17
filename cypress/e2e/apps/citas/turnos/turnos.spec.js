@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 // Realiza las pruebas del camino básico: crear paciente, agendas, dar turno del dia, profesional, programado (crea solicitudes)
 context('turnos', () => {
     let token;
@@ -218,7 +219,7 @@ context('turnos', () => {
         cy.plexSelectAsync('label="Equipo de Salud"', 'CORTES JAZMIN', '@getProfesional', 0);
 
         cy.wait('@getAgendas').then(() => {
-            cy.get('app-calendario .dia').contains(Cypress.moment().date()).click();
+            cy.get('app-calendario .dia').contains(moment().date()).click();
         });
 
         cy.get('plex-card').eq(0).click();

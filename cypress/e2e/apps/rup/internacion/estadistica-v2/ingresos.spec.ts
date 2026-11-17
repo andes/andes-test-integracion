@@ -1,3 +1,4 @@
+import moment from 'moment';
 describe.skip('Acciones sobre paciente ingresado desde capa asistencial', () => {
     let token;
     let pacientes;
@@ -12,7 +13,7 @@ describe.skip('Acciones sobre paciente ingresado desde capa asistencial', () => 
                 vincularInformePrestacion: true,    // vinculamos el resumen con la prestación (informe)
                 organizacion: user.organizaciones[0],
                 configCamas: [
-                    { pacientes: [pacientes[2]], estado: 'ocupada', fechaIngreso: Cypress.moment().add(-5, 'm').toDate() }
+                    { pacientes: [pacientes[2]], estado: 'ocupada', fechaIngreso: moment().add(-5, 'm').toDate() }
                 ]
             }).then(camasCreadas => {
                 camas = camasCreadas;
@@ -81,7 +82,7 @@ describe.skip('Acciones sobre paciente ingresado desde capa asistencial', () => 
         cy.wait(1000)
         cy.get('plex-layout-sidebar plex-button[icon="pencil"]').first().click({ force: true });
         cy.plexDatetime('label="Fecha y hora de ingreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha y hora de ingreso"', { text: Cypress.moment().add(-3, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de ingreso"', { text: moment().add(-3, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
         cy.plexText('name="motivo"').clear();
         cy.plexText('name="motivo"', 'Estornudo');
@@ -103,7 +104,7 @@ describe.skip('Acciones sobre paciente ingresado desde capa asistencial', () => 
     })
 
     it('Editar fecha de ingreso en capa asistencial y verificar sincronización en estadistica-v2', () => {
-        const nuevaFecha = Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm');
+        const nuevaFecha = moment().add(-1, 'm').format('DD/MM/YYYY HH:mm');
         // modificar fecha Ingreso
         cy.plexButton('Profesional a cargo').click();
         cy.wait('@getCamas');

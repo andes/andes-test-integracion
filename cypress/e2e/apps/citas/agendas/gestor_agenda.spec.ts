@@ -1,3 +1,4 @@
+import moment from 'moment';
 describe('CITAS - Planificar Agendas', () => {
     let token
     before(() => {
@@ -103,7 +104,7 @@ describe('CITAS - Planificar Agendas', () => {
             expect(response.body.bloques[0].tipoPrestaciones[0].id).to.be.eq('598ca8375adc68e2a0c121b9');
         });
 
-        const manana = Cypress.moment().add(1, 'days').format('DD/MM/YYYY');
+        const manana = moment().add(1, 'days').format('DD/MM/YYYY');
 
         cy.plexDateTimeDinamico('Fecha', '{selectall}{backspace}' + manana);
         cy.wait('@getAgendas').then(({ response }) => {
@@ -403,7 +404,7 @@ describe('CITAS - Planificar Agendas', () => {
                 expect(response.statusCode).to.eq(200);
             });
         }
-        cy.get('table tr td').contains(Cypress.moment().add(1, 'days').format('D')).click({ force: true });
+        cy.get('table tr td').contains(moment().add(1, 'days').format('D')).click({ force: true });
         cy.plexButtonIcon("check").click();
         cy.swal('confirm');
         cy.wait('@clonar').then(({ response }) => {

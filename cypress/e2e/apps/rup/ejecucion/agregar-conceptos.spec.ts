@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 
 context('RUP - Ejecucion', () => {
     let token;
@@ -96,7 +97,7 @@ context('RUP - Ejecucion', () => {
                     paciente: idPaciente,
                     tipoPrestacion: '5cdc4c865cd661b503d727a6',
                     estado: 'validada',
-                    fecha: Cypress.moment().subtract(1, 'day').toDate(),
+                    fecha: moment().subtract(1, 'day').toDate(),
                     registros: [{
                         id: "5f772b7ac9264781190bc794",
                         concepto: {
@@ -107,7 +108,7 @@ context('RUP - Ejecucion', () => {
                         },
                         valor: {
                             "estado": "activo",
-                            "fechaInicio": Cypress.moment().subtract(1, 'day'),
+                            "fechaInicio": moment().subtract(1, 'day'),
                             "evolucion": "<p>una evolución</p>"
                         },
                     }]

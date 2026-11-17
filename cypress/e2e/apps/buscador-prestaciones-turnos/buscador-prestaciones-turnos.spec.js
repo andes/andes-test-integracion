@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 
 context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
     let token;
@@ -97,7 +98,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         });
         cy.plexSelectType('label="Prestación"', 'consulta de medicina general');
         if (cy.esFinDeMes()) {
-            cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().add(1, 'days').format('DD/MM/YYYY'));
+            cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + moment().add(1, 'days').format('DD/MM/YYYY'));
             cy.plexButton("Buscar").click();
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.response.statusCode).to.be.eq(200);
@@ -133,7 +134,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         }
     });
     it('Exportar todas las prestaciones filtradas entre dos fechas', () => {
-        let hoy = Cypress.moment().format('DD/MM/YYYY');
+        let hoy = moment().format('DD/MM/YYYY');
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200);
         });
@@ -152,7 +153,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.get('plex-table').find('td').contains(hoy);
     });
     it('Exportar una prestacion de las filtradas entre dos fechas', () => {
-        let hoy = Cypress.moment().format('DD/MM/YYYY');
+        let hoy = moment().format('DD/MM/YYYY');
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200);
         });

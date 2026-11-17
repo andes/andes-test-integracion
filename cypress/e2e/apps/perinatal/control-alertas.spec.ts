@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 
 context('Perinatal Listado', () => {
     let token;
@@ -96,7 +97,7 @@ context('Perinatal Listado', () => {
     });
 
     it('Paciente con control de embarazo no vencido', () => {
-        let fecha = Cypress.moment().add('days', 1).format('DD/MM/YYYY');
+        let fecha = moment().add('days', 1).format('DD/MM/YYYY');
         cy.get('tbody tr').eq(1).contains(fecha);
     })
 

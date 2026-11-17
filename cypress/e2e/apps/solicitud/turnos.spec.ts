@@ -1,3 +1,4 @@
+import moment from 'moment';
 // <reference types="Cypress" />
 
 function seleccionarPaciente(dni) {
@@ -9,7 +10,7 @@ function seleccionarPaciente(dni) {
 
 context('TOP: Acciones con turno', () => {
     let token, dni, pacientes;
-    const pasadoManiana = Cypress.moment().add(2, 'days');
+    const pasadoManiana = moment().add(2, 'days');
 
     before(() => {
         cy.seed();
@@ -73,7 +74,7 @@ context('TOP: Acciones con turno', () => {
                 expect(response.statusCode).to.be.eq(200);
             });
 
-            if (pasadoManiana > Cypress.moment().endOf('month') || cy.esFinDeMes()) {
+            if (pasadoManiana > moment().endOf('month') || cy.esFinDeMes()) {
                 cy.plexButtonIcon('chevron-right').click();
                 cy.wait('@listadoAgendas').then(({ response }) => {
                     expect(response.statusCode).to.be.eq(200);
@@ -81,7 +82,7 @@ context('TOP: Acciones con turno', () => {
             }
             cy.wait('@listadoAgendas').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
-                cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
+                cy.get('app-calendario .dia').contains(moment().add(2, 'days').format('D')).click({ force: true });
             });
 
             cy.get('plex-card').eq(0).click();
@@ -113,7 +114,7 @@ context('TOP: Acciones con turno', () => {
             });
 
 
-            if (pasadoManiana > Cypress.moment().endOf('month') || cy.esFinDeMes()) {
+            if (pasadoManiana > moment().endOf('month') || cy.esFinDeMes()) {
                 cy.plexButtonIcon('chevron-right').click();
                 cy.wait('@listadoAgendas').then(({ response }) => {
                     expect(response.statusCode).to.be.eq(200);
@@ -122,7 +123,7 @@ context('TOP: Acciones con turno', () => {
 
             cy.wait('@listadoAgendas').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
-                cy.get('app-calendario .dia').contains(Cypress.moment().add(2, 'days').format('D')).click({ force: true });
+                cy.get('app-calendario .dia').contains(moment().add(2, 'days').format('D')).click({ force: true });
             });
 
             cy.get('plex-card').eq(0).click();
@@ -202,7 +203,7 @@ context('TOP: Acciones con turno', () => {
                 expect(response.statusCode).to.be.eq(200)
             });
 
-            if (pasadoManiana > Cypress.moment().endOf('month') || cy.esFinDeMes()) {
+            if (pasadoManiana > moment().endOf('month') || cy.esFinDeMes()) {
                 cy.plexButtonIcon('chevron-right').click();
                 cy.wait('@listadoAgendas').then(({ response }) => {
                     expect(response.statusCode).to.be.eq(200)

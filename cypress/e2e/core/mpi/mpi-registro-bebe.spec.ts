@@ -1,3 +1,4 @@
+import moment from 'moment';
 context('MPI-Registro Paciente Bebé', () => {
     let token;
     let progenitor, progenitorScan;
@@ -234,7 +235,7 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexText('name="documentoRelacion"').should('have.value', progenitorScan.documento);
         cy.plexText('name="nombreRelacion"').should('have.value', progenitorScan.nombre);
         cy.plexText('name="apellidoRelacion"').should('have.value', progenitorScan.apellido);
-        cy.plexDatetime('name="fechaNacimientoRelacion"').find('input').should('have.value', Cypress.moment(progenitorScan.fechaNacimiento).format("DD/MM/YYYY"));
+        cy.plexDatetime('name="fechaNacimientoRelacion"').find('input').should('have.value', moment(progenitorScan.fechaNacimiento).format("DD/MM/YYYY"));
         cy.plexSelect('name="sexoRelacion"').contains('Masculino');
     });
 
@@ -245,7 +246,7 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexText('label="Apellido"', apellidoBebe);
         cy.plexText('label="Nombre"', nombreBebe);
         cy.plexSelectType('label="Seleccione sexo"', 'femenino');
-        cy.plexDatetime('label="Fecha y hora de Nacimiento"', Cypress.moment().format("DD/MM/YYYY"));        // se agrega progenitor/a
+        cy.plexDatetime('label="Fecha y hora de Nacimiento"', moment().format("DD/MM/YYYY"));        // se agrega progenitor/a
         cy.plexText('name="buscador"', progenitorScan.nombre);
         cy.get('paciente-listado plex-item').contains(progenitorScan.nombre).click();
         cy.wait('@busquedaPaciente').then(({ response }) => {
@@ -284,7 +285,7 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.plexText('label="Apellido"', apellidoBebe);
         cy.plexText('label="Nombre"', nombreBebe);
         cy.plexSelectType('label="Seleccione sexo"', 'femenino');
-        cy.plexDatetime('label="Fecha y hora de Nacimiento"', Cypress.moment().format("DD/MM/YYYY"));
+        cy.plexDatetime('label="Fecha y hora de Nacimiento"', moment().format("DD/MM/YYYY"));
         //se agrega progenitor/a
         cy.plexText('name="buscador"', progenitorScan.nombre);
         cy.get('paciente-listado plex-item').contains(progenitorScan.nombre).click();

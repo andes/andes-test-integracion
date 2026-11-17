@@ -41,7 +41,7 @@ const moment = require('moment');
 
             cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
             cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
-            cy.plexDatetime('label="Fecha y hora de egreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+            cy.plexDatetime('label="Fecha y hora de egreso"', { text: moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
 
             cy.plexButtonIcon('check').click();
 
@@ -58,7 +58,7 @@ const moment = require('moment');
 
             cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
             cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
-            cy.plexDatetime('label="Fecha y hora de egreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+            cy.plexDatetime('label="Fecha y hora de egreso"', { text: moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
 
             cy.plexButtonIcon('check').click();
 

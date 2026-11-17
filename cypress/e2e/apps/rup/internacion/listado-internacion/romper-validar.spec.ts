@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 describe('Capa Estadistica - listado internacion', () => {
     let token;
@@ -10,8 +11,8 @@ describe('Capa Estadistica - listado internacion', () => {
             pacientes = pacientesCreados;
             cy.factoryInternacion({
                 configCamas: [
-                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate(), fechaEgreso: Cypress.moment().toDate() },
-                    { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: Cypress.moment().subtract(5, 'hour').toDate(), fechaEgreso: Cypress.moment().toDate(), validada: true }
+                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: moment().add(-2, 'd').toDate(), fechaEgreso: moment().toDate() },
+                    { estado: 'ocupada', pacientes: [pacientes[1]], fechaIngreso: moment().subtract(5, 'hour').toDate(), fechaEgreso: moment().toDate(), validada: true }
                 ]
             }).then(() => {
                 return cy.goto('/mapa-camas/listado-internacion/estadistica', token);

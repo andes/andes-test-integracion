@@ -1,3 +1,4 @@
+import moment from 'moment';
 context('mobile paciente', () => {
     let paciente;
 
@@ -89,7 +90,7 @@ context('mobile paciente', () => {
             cy.contains('Datos Personales').click({ force: true });
             cy.contains('ANDES, PACIENTE VALIDADO');
             cy.contains(paciente.documento);
-            cy.contains(Cypress.moment(paciente.fechaNacimiento).format('DD/MM/YYYY'));
+            cy.contains(moment(paciente.fechaNacimiento).format('DD/MM/YYYY'));
         });
 
         it('Modificacion de datos de acceso', () => {

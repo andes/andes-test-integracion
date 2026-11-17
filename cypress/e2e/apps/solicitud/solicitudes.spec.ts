@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 
 /**
  * VER TEMA DE REGLAS COMO RESETEAR
@@ -83,7 +84,7 @@ context('SOLICITUDES', () => {
 
         cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
 
-        cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
+        cy.plexDatetime('name="fechaSolicitud"', moment().format('DD/MM/YYYY'));
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de neurología', '@conceptosTurneables', 0);
 
         cy.wait('@getReglas').then(({ response }) => {
@@ -117,7 +118,7 @@ context('SOLICITUDES', () => {
         cy.wait('@consultaPaciente');
         cy.get('paciente-listado plex-item').contains(formatDocumento('32589654')).click();
 
-        cy.plexDatetime('name="fechaSolicitud"', Cypress.moment().format('DD/MM/YYYY'));
+        cy.plexDatetime('name="fechaSolicitud"', moment().format('DD/MM/YYYY'));
         cy.plexSelectAsync('label="Tipo de Prestación Solicitada"', 'Consulta de cirugía infantil', '@conceptosTurneables', 0);
         cy.wait('@getReglas').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);

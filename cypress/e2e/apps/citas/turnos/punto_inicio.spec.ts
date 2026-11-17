@@ -1,3 +1,4 @@
+import moment from 'moment';
 context('punto de inicio', () => {
     let token;
     // const = '36425896';
@@ -241,7 +242,7 @@ context('punto de inicio', () => {
 
         cy.get('li[class="list-group-item"]').plexBadge('ASIGNADO');
 
-        cy.get('li[class="list-group-item"]').contains(Cypress.moment(turno).format('DD/MM/YYYY'));
+        cy.get('li[class="list-group-item"]').contains(moment(turno).format('DD/MM/YYYY'));
 
         cy.get('li[class="list-group-item"]').contains('consulta con médico general');
 
@@ -383,7 +384,7 @@ context('punto de inicio', () => {
                 expect(response.statusCode).to.be.eq(200);
             });
 
-            cy.get('div[class="dia"]').contains(Cypress.moment().format('D')).click();
+            cy.get('div[class="dia"]').contains(moment().format('D')).click();
             cy.wait('@getAgenda').then(({ response }) => {
                 expect(response.statusCode).to.be.eq(200);
             });

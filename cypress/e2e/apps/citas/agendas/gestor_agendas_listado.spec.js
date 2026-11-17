@@ -1,3 +1,4 @@
+import moment from 'moment';
 describe('CITAS - Gestor de Agendas', () => {
     let token
     before(() => {
@@ -32,7 +33,7 @@ describe('CITAS - Gestor de Agendas', () => {
             expect(xhr.response.body.length).to.be.eq(2);
         });
 
-        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
+        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + moment().add(-1, 'days').format('DD/MM/YYYY'));
 
         cy.wait('@getAgendas').then((xhr) => {
             cy.get('table tbody tr').should('length', 3);
@@ -44,9 +45,9 @@ describe('CITAS - Gestor de Agendas', () => {
             expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.length).to.be.eq(2);
         });
-        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
+        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + moment().add(-1, 'days').format('DD/MM/YYYY'));
         cy.wait('@getAgendas');
-        cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + Cypress.moment().add(+1, 'days').format('DD/MM/YYYY'));
+        cy.plexDatetime('label="Hasta"', '{selectall}{backspace}' + moment().add(+1, 'days').format('DD/MM/YYYY'));
         cy.wait('@getAgendas').then((xhr) => {
             cy.get('table tbody tr').should('length', 4);
         });

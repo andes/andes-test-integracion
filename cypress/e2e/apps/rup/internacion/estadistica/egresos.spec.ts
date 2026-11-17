@@ -1,3 +1,4 @@
+import moment from 'moment';
 describe('Capa Estadistica - Egresos', () => {
     let token;
     let pacientes;
@@ -9,7 +10,7 @@ describe('Capa Estadistica - Egresos', () => {
             cy.factoryInternacion({
                 configCamas: [{
                     estado: 'ocupada', pacientes: [pacientes[1]],
-                    fechaIngreso: Cypress.moment().subtract(1, 'day').toDate(),
+                    fechaIngreso: moment().subtract(1, 'day').toDate(),
                     extras: { ingreso: true }
                 }]
             });
@@ -17,7 +18,7 @@ describe('Capa Estadistica - Egresos', () => {
                 {
                     paciente: pacientes[1]._id,
                     estado: 'ejecucion',
-                    fecha: Cypress.moment().subtract(1, 'day').toDate(),
+                    fecha: moment().subtract(1, 'day').toDate(),
                     ambitoOrigen: 'internacion'
                 }
             )
@@ -87,7 +88,7 @@ describe('Capa Estadistica - Egresos', () => {
         cy.plexSelectAsync('label="Otros Diagnósticos"', 'Otros trastornos', '@getDiagnostico', 0);
         cy.plexSelectAsync('label="Otras circunstancias que prolongan la internación"', 'Mutismo', '@getDiagnostico', 0);
         cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha y hora de egreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de egreso"', { text: moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
 
         cy.plexButtonIcon('check').click();
 

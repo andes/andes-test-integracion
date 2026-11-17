@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 
 context('Ficha Epidemiológica', () => {
     let validado;
@@ -76,7 +77,7 @@ context('Ficha Epidemiológica', () => {
     });
 
     it('crear nueva ficha covid19, registrar concepto covid positivo y editarla', () => {
-        let semanaPasada = Cypress.moment().add('days', -7).format('DD/MM/YYYY');
+        let semanaPasada = moment().add('days', -7).format('DD/MM/YYYY');
         cy.plexText('name="buscador"', validado2.documento);
         cy.wait('@busquedaPaciente').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);

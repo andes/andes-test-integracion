@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 
 context('CITAS - Revisión de Agendas', () => {
     let token;
@@ -143,7 +144,7 @@ context('CITAS - Revisión de Agendas', () => {
                 cy.expect(xhrPacientes.response.body[0].documento).to.be.eq(pacienteDoc.documento)
             })
             cy.get('plex-item').contains(pacienteDoc.nombre).contains(pacienteDoc.apellido).click();
-            cy.plexDatetime('label="Hora Turno"', Cypress.moment(xhrAgenda.response.body.horaInicio).add(10, 'minutes').format('HH:mm'));
+            cy.plexDatetime('label="Hora Turno"', moment(xhrAgenda.response.body.horaInicio).add(10, 'minutes').format('HH:mm'));
             cy.plexButton('Guardar').click();
             cy.wait('@agendaPatch').then(xhrAgendaPatch => {
                 cy.expect(xhrAgendaPatch.response.statusCode).to.be.eq(200);
@@ -162,7 +163,7 @@ context('CITAS - Revisión de Agendas', () => {
 
         cy.goto(`/citas/gestor_agendas`, token);
 
-        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + Cypress.moment().add(-1, 'days').format('DD/MM/YYYY'));
+        cy.plexDatetime('label="Desde"', '{selectall}{backspace}' + moment().add(-1, 'days').format('DD/MM/YYYY'));
 
         cy.get('table tbody tr').plexLabel('consulta con médico oftalmólogo').click();
         cy.plexButtonIcon('format-list-checks').click();
