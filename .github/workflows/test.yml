@@ -33,55 +33,97 @@ permissions:
   actions: write
 
 jobs:
-  imagen-api:
-    name: Imagen api
+  imagenes:
+    name: Imágenes
     runs-on: ubuntu-latest
     timeout-minutes: 90
     outputs:
-      tag: ${{ steps.imagen.outputs.tag }}
+      api: ${{ steps.imagen.outputs.api }}
+      app: ${{ steps.imagen.outputs.app }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-
-      - name: Disparar docker-image en andes/api
+      # workflow_dispatch en otro repo no lo puede hacer el GITHUB_TOKEN de esta corrida.
+      # DISPATCH_TOKEN es un token de GitHub con actions:write en andes/api y andes/app.
+      # El push a Docker Hub lo hace el workflow de cada repo, con los secrets que ya tiene.
+      - name: Disparar docker-image
         id: imagen
         env:
           GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
-          REPO: andes/api
-          IMAGE: andesnqn/api
-          REF: ${{ inputs.api }}
-        run: bash .github/workflows/dispatch-image.sh
+          API_REF: ${{ inputs.api }}
+          APP_REF: ${{ inputs.app }}
+        run: |
+          set -euo pipefail
 
-  imagen-app:
-    name: Imagen app
-    runs-on: ubuntu-latest
-    timeout-minutes: 90
-    outputs:
-      tag: ${{ steps.imagen.outputs.tag }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
+          if [[ -z "${GH_TOKEN:-}" ]]; then
+            echo "Falta el secret DISPATCH_TOKEN, con actions:write en andes/api y andes/app." >&2
+            exit 1
+          fi
 
-      - name: Disparar docker-image en andes/app
-        id: imagen
-        env:
-          GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
-          REPO: andes/app
-          IMAGE: andesnqn/app
-          REF: ${{ inputs.app }}
-        run: bash .github/workflows/dispatch-image.sh
+          disparar() {
+            local repo="$1"
+            local ref="$2"
+            local prev candidate run_id sha
+
+            prev=$(gh run list \
+              --repo "$repo" \
+              --workflow docker-image.yml \
+              --branch "$ref" \
+              --event workflow_dispatch \
+              --limit 1 \
+              --json databaseId \
+              --jq '.[0].databaseId // empty')
+
+            gh workflow run docker-image.yml --repo "$repo" --ref "$ref" >&2
+
+            run_id=""
+            for _ in $(seq 1 30); do
+              candidate=$(gh run list \
+                --repo "$repo" \
+                --workflow docker-image.yml \
+                --branch "$ref" \
+                --event workflow_dispatch \
+                --limit 1 \
+                --json databaseId \
+                --jq '.[0].databaseId // empty')
+              if [[ -n "$candidate" && "$candidate" != "$prev" ]]; then
+                run_id="$candidate"
+                break
+              fi
+              sleep 2
+            done
+
+            if [[ -z "$run_id" ]]; then
+              echo "No apareció la corrida de docker-image.yml en ${repo}@${ref}." >&2
+              exit 1
+            fi
+
+            gh run watch "$run_id" --repo "$repo" --exit-status >&2
+            sha=$(gh run view "$run_id" --repo "$repo" --json headSha --jq .headSha)
+            echo "${sha:0:7}"
+          }
+
+          disparar andes/api "$API_REF" > "${RUNNER_TEMP}/api-tag" &
+          api_pid=$!
+          disparar andes/app "$APP_REF" > "${RUNNER_TEMP}/app-tag" &
+          app_pid=$!
+          wait "$api_pid"
+          wait "$app_pid"
+
+          api_tag=$(<"${RUNNER_TEMP}/api-tag")
+          app_tag=$(<"${RUNNER_TEMP}/app-tag")
+          if [[ ! "$api_tag" =~ ^[0-9a-f]{7}$ || ! "$app_tag" =~ ^[0-9a-f]{7}$ ]]; then
+            echo "SHA corto inesperado. api=${api_tag} app=${app_tag}" >&2
+            exit 1
+          fi
+          echo "api=${api_tag}" >> "$GITHUB_OUTPUT"
+          echo "app=${app_tag}" >> "$GITHUB_OUTPUT"
 
   test:
     name: Cypress
-    needs: [imagen-api, imagen-app]
+    needs: imagenes
     runs-on: ubuntu-latest
     env:
-      APP: ${{ needs.imagen-app.outputs.tag }}
-      API: ${{ needs.imagen-api.outputs.tag }}
+      APP: ${{ needs.imagenes.outputs.app }}
+      API: ${{ needs.imagenes.outputs.api }}
       MONGO_URI: mongodb://127.0.0.1:27017/andes
       NGINX_URL: http://127.0.0.1:8080
     defaults:
@@ -106,8 +148,7 @@ jobs:
               -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
               merge origin/master --no-edit
 
-      # API ya está en Docker Hub con el SHA corto. Nginx no se publica: copia el dist
-      # de andesnqn/app:${APP} y los frontends que el Dockerfile todavía toma de master.
+      # API ya está en Docker Hub con el SHA corto. Nginx no se publica: copia solo el dist de app.
       - name: Bajar api y armar nginx
         run: |
           if [[ ! "$APP" =~ ^[0-9a-f]{7}$ || ! "$API" =~ ^[0-9a-f]{7}$ ]]; then
