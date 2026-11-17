@@ -353,20 +353,31 @@ Cypress.Commands.add('plexDateTimeDinamico', { prevSubject: 'optional' }, (subje
 });
 
 Cypress.Commands.add('plexBool', { prevSubject: 'optional' }, (subject, label, checked = false) => {
-    let element;
-    if (subject) {
-        element = cy.wrap(subject).find(`plex-bool[${label}] input[type="checkbox"]`)
-    } else {
-        element = cy.get(`plex-bool[${label}] input[type="checkbox"]`);
-    }
-    if (checked !== undefined) {
-        if (checked) {
-            element = element.check({ force: true });
-        } else {
-            element = element.uncheck({ force: true });
+    const root = subject
+        ? cy.wrap(subject).find(`plex-bool[${label}]`)
+        : cy.get(`plex-bool[${label}]`);
+    return root.each(($bool) => {
+        const checkbox = $bool.find('input[type="checkbox"]');
+        if (checkbox.length) {
+            if (checked) {
+                cy.wrap(checkbox).check({ force: true });
+            } else {
+                cy.wrap(checkbox).uncheck({ force: true });
+            }
+            return;
         }
-    }
-    return element;
+        const toggle = $bool.find('button[role="switch"]');
+        const activo = toggle.attr('aria-checked') === 'true';
+        if (activo !== !!checked) {
+            cy.wrap(toggle).click({ force: true });
+        }
+    }).then(($bool) => {
+        const checkbox = $bool.find('input[type="checkbox"]');
+        if (checkbox.length) {
+            return cy.wrap(checkbox);
+        }
+        return cy.wrap($bool.find('button[role="switch"]'));
+    });
 });
 
 Cypress.Commands.add('plexBoolDinamico', { prevSubject: 'optional' }, (subject, label, checked = false) => {
