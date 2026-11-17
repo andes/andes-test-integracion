@@ -58,9 +58,10 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
         if (clicked) {
             element = element.then(($input) => {
                 const opciones = $input.parents('plex-select').find('.selectize-dropdown [data-selectable]');
-                const activa = opciones.filter('.active');
-                const opcion = (activa.length ? activa : opciones).first();
-                if (!opcion.length) {
+                const buscado = data.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+                const coincidencia = [...opciones].find((el) => (el.textContent || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(buscado));
+                const opcion = coincidencia || opciones.filter('.active')[0];
+                if (!opcion) {
                     return cy.wrap($input).type('{enter}', { force: true }).then(() => $input);
                 }
                 return cy.wrap(opcion).click({ force: true }).then(() => $input);
