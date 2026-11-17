@@ -315,13 +315,11 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
         }
     }
     if (cerroConEnter) {
-        element = element.then(($input) => {
-            const abierto = Cypress.$('.cdk-overlay-backdrop-showing').length > 0;
-            if (abierto) {
-                return cy.wrap($input).type('{esc}', { force: true });
-            }
+        element = element.blur().then(($input) => {
+            Cypress.$('.cdk-overlay-backdrop-showing').each((_, nodo) => nodo.click());
             return $input;
         });
+        cy.get('.cdk-overlay-backdrop-showing').should('not.exist');
     }
     return element.parent().parent().parent();
 });
