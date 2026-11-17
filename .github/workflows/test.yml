@@ -224,7 +224,8 @@ jobs:
           lista=$(IFS=,; echo "${specs[*]}")
           npx cypress run \
             --spec "$lista" \
-            --env "MONGO_URI=${MONGO_URI},API_SERVER=${NGINX_URL}" \
+            --env "MONGO_URI=${MONGO_URI}" \
+            --expose "API_SERVER=${NGINX_URL}" \
             --config "baseUrl=${NGINX_URL},video=false,numTestsKeptInMemory=1,trashAssetsBeforeRuns=false"
 
       # Sin --record ni --parallel. Las capturas van a assets/ para que el HTML se abra solo.

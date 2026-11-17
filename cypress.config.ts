@@ -1,7 +1,7 @@
 import { defineConfig } from 'cypress'
 
 export default defineConfig({
-  env: {
+  expose: {
     API_SERVER: 'http://localhost:3002',
   },
   reporter: 'mocha-multi-reporters',

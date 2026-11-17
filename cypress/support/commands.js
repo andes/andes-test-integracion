@@ -30,7 +30,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
     let token;
     return cy.request({
         method: 'POST',
-        url: Cypress.env('API_SERVER') + '/api/auth/login',
+        url: Cypress.expose('API_SERVER') + '/api/auth/login',
         headers: {
             'Connection': "close"
         },
@@ -41,7 +41,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
     }).then((response) => {
         token = response.body.token;
         return response = cy.request({
-            url: Cypress.env('API_SERVER') + '/api/auth/organizaciones',
+            url: Cypress.expose('API_SERVER') + '/api/auth/organizaciones',
             method: 'GET',
             headers: {
                 Authorization: 'JWT ' + token
@@ -50,7 +50,7 @@ Cypress.Commands.add("login", (usuario, password, id) => {
             //Si no se especifica id de organizacion, por defecto se usa el id del HPN
             const defaultId = '57e9670e52df311059bc8964';
             return response = cy.request({
-                url: Cypress.env('API_SERVER') + '/api/auth/v2/organizaciones',
+                url: Cypress.expose('API_SERVER') + '/api/auth/v2/organizaciones',
                 method: 'POST',
                 headers: {
                     Authorization: 'JWT ' + token

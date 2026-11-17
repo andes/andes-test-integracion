@@ -1,6 +1,6 @@
 import moment from 'moment';
 Cypress.Commands.add('seed', () => {
-    const develop = Cypress.env('ENVIRONMENT') === 'develop';
+    const develop = Cypress.expose('ENVIRONMENT') === 'develop';
     if (develop) {
         cy.task('database:initial');
     } else {
@@ -43,7 +43,7 @@ Cypress.Commands.add('createPaciente', (name, token) => {
     return cy.fixture(name).then((paciente) => {
         return cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/core-v2/mpi/pacientes',
+            url: Cypress.expose('API_SERVER') + '/api/core-v2/mpi/pacientes',
             body: paciente,
             headers: {
                 Authorization: `JWT ${token}`
@@ -64,7 +64,7 @@ Cypress.Commands.add('createPrestacion', (name, token, options = {}) => {
         }
         return cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/rup/prestaciones',
+            url: Cypress.expose('API_SERVER') + '/api/modules/rup/prestaciones',
             body: prestacion,
             headers: {
                 Authorization: `JWT ${token}`
@@ -77,7 +77,7 @@ Cypress.Commands.add('createProfesional', (name, token) => {
     return cy.fixture(name).then((profesional) => {
         return cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/core/tm/profesionales',
+            url: Cypress.expose('API_SERVER') + '/api/core/tm/profesionales',
             body: {
                 profesional
             },
@@ -141,7 +141,7 @@ Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset,
         }
         return cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
+            url: Cypress.expose('API_SERVER') + '/api/modules/turnos/agenda',
             body: agenda,
             failOnStatusCode: false,
             headers: {
@@ -162,7 +162,7 @@ Cypress.Commands.add('createAgenda48hs', (name, token) => {
         agenda.horaFin = agenda.horaFin.replace('2019-07-01', newDate);
         cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
+            url: Cypress.expose('API_SERVER') + '/api/modules/turnos/agenda',
             body: agenda,
             headers: {
                 Authorization: `JWT ${token}`
@@ -222,7 +222,7 @@ Cypress.Commands.add('createAgendaPaciente', (name, daysOffset, horaInicioOffset
         }
         cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
+            url: Cypress.expose('API_SERVER') + '/api/modules/turnos/agenda',
             body: agenda,
             failOnStatusCode: false,
             headers: {
@@ -238,7 +238,7 @@ Cypress.Commands.add('createSolicitud', (name, token) => {
         solicitud.solicitud.fecha = solicitud.solicitud.fecha.replace('2019-08-01', newDate);
         cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/rup/prestaciones',
+            url: Cypress.expose('API_SERVER') + '/api/modules/rup/prestaciones',
             body: solicitud,
             headers: {
                 Authorization: `JWT ${token}`
@@ -255,7 +255,7 @@ Cypress.Commands.add('createTurno', (fixtureName, idTurno, idBloque, idAgenda, p
         }
         cy.request({
             method: 'PATCH',
-            url: Cypress.env('API_SERVER') + `/api/modules/turnos/turno/${idTurno}/${idBloque}/${idAgenda}`,
+            url: Cypress.expose('API_SERVER') + `/api/modules/turnos/turno/${idTurno}/${idBloque}/${idAgenda}`,
             body: turno,
             headers: {
                 Authorization: `JWT ${token}`
