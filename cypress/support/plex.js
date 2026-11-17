@@ -326,7 +326,8 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
                     return $input;
                 }
                 const nodo = [...$body.find('*')].filter((el) => (el.textContent || '').trim().toLowerCase() === 'aceptar').pop();
-                return cy.wrap(nodo).click({ force: true }).then(() => $input);
+                const boton = nodo.closest('button, a, [role="button"]') || nodo;
+                return cy.wrap(boton).click().then(() => $input);
             });
         });
         cy.get('.cdk-overlay-backdrop-showing').should('not.exist');
