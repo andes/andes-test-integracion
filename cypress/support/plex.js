@@ -315,9 +315,12 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
         }
     }
     if (cerroConEnter) {
-        element = element.blur().then(($input) => {
-            Cypress.$('.cdk-overlay-backdrop-showing').each((_, nodo) => nodo.click());
-            return $input;
+        // Enter deja el foco en la celda del calendario, no en el input.
+        element = element.then(($input) => {
+            if (!Cypress.$('.cdk-overlay-backdrop-showing').length) {
+                return $input;
+            }
+            return cy.focused().type('{esc}', { force: true }).then(() => $input);
         });
         cy.get('.cdk-overlay-backdrop-showing').should('not.exist');
     }
