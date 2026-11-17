@@ -1,19 +1,20 @@
 name: Test de integración
 
 # Un spec, un stack, en un runner de GitHub. Cypress corre con npx en el runner.
-# La imagen de nginx publicada ya trae los cuatro frontends. Este corte no
-# construye imágenes, no usa Cypress Cloud y no publica el informe fuera del artifact.
+# La imagen de la rama la publica el workflow docker-image de andes/api y andes/app.
+# El tag es el SHA corto de esa corrida. Nginx se arma acá con el dist de app.
+# Este corte no usa Cypress Cloud y no publica el informe fuera del artifact.
 
 on:
   workflow_dispatch:
     inputs:
       app:
-        description: Rama de app. Tag de andesnqn/nginx.
+        description: Rama de andes/app. Dispara su workflow docker-image.
         required: true
         default: master
         type: string
       api:
-        description: Rama de api. Tag de andesnqn/api.
+        description: Rama de andes/api. Dispara su workflow docker-image.
         required: true
         default: master
         type: string
@@ -32,12 +33,55 @@ permissions:
   actions: write
 
 jobs:
+  imagen-api:
+    name: Imagen api
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    outputs:
+      tag: ${{ steps.imagen.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Disparar docker-image en andes/api
+        id: imagen
+        env:
+          GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
+          REPO: andes/api
+          IMAGE: andesnqn/api
+          REF: ${{ inputs.api }}
+        run: bash .github/workflows/dispatch-image.sh
+
+  imagen-app:
+    name: Imagen app
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    outputs:
+      tag: ${{ steps.imagen.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Disparar docker-image en andes/app
+        id: imagen
+        env:
+          GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
+          REPO: andes/app
+          IMAGE: andesnqn/app
+          REF: ${{ inputs.app }}
+        run: bash .github/workflows/dispatch-image.sh
+
   test:
     name: Cypress
+    needs: [imagen-api, imagen-app]
     runs-on: ubuntu-latest
     env:
-      APP: ${{ inputs.app }}
-      API: ${{ inputs.api }}
+      APP: ${{ needs.imagen-app.outputs.tag }}
+      API: ${{ needs.imagen-api.outputs.tag }}
       MONGO_URI: mongodb://127.0.0.1:27017/andes
       NGINX_URL: http://127.0.0.1:8080
     defaults:
@@ -62,20 +106,20 @@ jobs:
               -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
               merge origin/master --no-edit
 
-      - name: Bajar imágenes
+      # API ya está en Docker Hub con el SHA corto. Nginx no se publica: copia el dist
+      # de andesnqn/app:${APP} y los frontends que el Dockerfile todavía toma de master.
+      - name: Bajar api y armar nginx
         run: |
-          tag_valido() {
-            local nombre="$1"
-            local valor="$2"
-            if [[ ! "$valor" =~ ^[A-Za-z0-9_][A-Za-z0-9_.-]{0,127}$ ]]; then
-              echo "La rama de ${nombre} no es un tag de Docker válido: ${valor}" >&2
-              exit 1
-            fi
-          }
-          tag_valido app "$APP"
-          tag_valido api "$API"
+          if [[ ! "$APP" =~ ^[0-9a-f]{7}$ || ! "$API" =~ ^[0-9a-f]{7}$ ]]; then
+            echo "El tag de la imagen tiene que ser el SHA corto de 7 caracteres. app=${APP} api=${API}" >&2
+            exit 1
+          fi
           docker pull "andesnqn/api:${API}"
-          docker pull "andesnqn/nginx:${APP}"
+          docker build \
+            --file docker/andes.Dockerfile \
+            --build-arg "APP=${APP}" \
+            --tag "andesnqn/nginx:${APP}" \
+            docker
 
       # El compose del repo no publica puertos: Cypress y el seeder corren en el
       # runner, no en la red de Compose. El override solo agrega puertos y health.
