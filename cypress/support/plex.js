@@ -325,9 +325,12 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
                 if (!$body.find('.cdk-overlay-backdrop-showing').length) {
                     return $input;
                 }
-                const nodo = [...$body.find('*')].filter((el) => (el.textContent || '').trim().toLowerCase() === 'aceptar').pop();
-                const boton = nodo.closest('button, a, [role="button"]') || nodo;
-                return cy.wrap(boton).realClick().then(() => $input);
+                const celda = [...$body.find('.mat-calendar-body-selected, .mat-calendar-body-active')].pop();
+                const cerrar = () => cy.get('.cdk-overlay-container button').filter((_, el) => (el.innerText || '').trim().toLowerCase() === 'aceptar').should('not.be.disabled').realClick().then(() => $input);
+                if (!celda) {
+                    return cerrar();
+                }
+                return cy.wrap(celda).realClick().then(cerrar);
             });
         });
         cy.get('.cdk-overlay-backdrop-showing').should('not.exist');
