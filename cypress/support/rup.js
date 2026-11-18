@@ -1,14 +1,17 @@
 
 Cypress.Commands.add('snomedSearchStub', (searchtext, response, alias = 'rup-buscador') => {
-    const url = `/api/core/term/snomed?search=${searchtext}&semanticTag=hallazgo&semanticTag=trastorno&semanticTag=procedimiento&semanticTag=entidad observable&semanticTag=producto&semanticTag=situación&semanticTag=régimen/tratamiento&semanticTag=elemento de registro&semanticTag=objeto físico&semanticTag=medicamento clínico&semanticTag=fármaco de uso clínico&semanticTag=evento`
+    const responder = (body) => cy.intercept({
+        method: 'GET',
+        pathname: '/api/core/term/snomed',
+        query: { search: searchtext }
+    }, body).as(alias);
     if (typeof response === 'string') {
-        return cy.fixture(response).then(response => {
-            cy.get('plex-layout-sidebar').contains('Buscador').click({ force: true })
-            return cy.intercept(url, response).as(alias);
+        return cy.fixture(response).then(body => {
+            cy.get('plex-layout-sidebar').contains('Buscador').click({ force: true });
+            return responder(body);
         });
-    } else {
-        return cy.intercept(url, response).as(alias);
     }
+    return responder(response);
 });
 
 Cypress.Commands.add('snomedFrecuentesStub', (response) => {
@@ -45,9 +48,9 @@ Cypress.Commands.add('RupBuscarConceptos', (term, type = 'BUSCADOR BÁSICO', ali
 
 Cypress.Commands.add('seleccionarConcepto', (term) => {
     if (typeof term === 'number') {
-        return cy.get('plex-layout-sidebar .rup-card').eq(term).plexButtonIcon('plus').click({ force: true });
+        return cy.get('.buscador-resultados .rup-card').eq(term).plexButtonIcon('plus').click({ force: true });
     } else {
-        return cy.get('plex-layout-sidebar .rup-card').contains(term).parentsUntil('.rup-card').plexButtonIcon('plus').click();
+        return cy.get('.buscador-resultados .rup-card').contains(term).parentsUntil('.rup-card').plexButtonIcon('plus').click();
     }
 });
 

@@ -221,9 +221,9 @@ Cypress.Commands.add('plexInputDinamico', { prevSubject: 'optional' }, (subject,
 Cypress.Commands.add('plexPhone', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject).find(`plex-phone[${label}] input`);
+        element = cy.wrap(subject).find(`plex-phone[${label}] input`).first();
     } else {
-        element = cy.get(`plex-phone[${label}] input`);
+        element = cy.get(`plex-phone[${label}] input`).first();
     }
     if (text) {
         element.type(text);
