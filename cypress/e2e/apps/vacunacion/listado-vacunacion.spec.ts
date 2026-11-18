@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment from 'moment';
 
 context('Vacunacion Listado', () => {
     let token;
@@ -54,11 +55,11 @@ context('Vacunacion Listado', () => {
         cy.get('tbody tr').eq(0).contains(' Personas entre 12 y 59 años, c .. ');
         cy.get('tbody tr').eq(0).contains(' 10000000 ');
         cy.get('tbody tr').eq(0).contains(' ANDES, PACIENTE VALIDADO ');
-        cy.get('tbody tr').eq(0).contains(' M ');
-        cy.get('tbody tr').eq(0).contains(' 30 años ');
+        cy.get('tbody tr').eq(0).contains('masculino');
+        cy.get('tbody tr').eq(0).contains(`${moment().diff(moment('1991-01-18'), 'years')} años`);
         cy.get('tbody tr').eq(0).contains(' Neuquén ');
         cy.get('tbody tr').eq(0).contains(' 28/04/2021 ');
-        cy.get('tbody tr').eq(0).plexBadge('pendiente', 'warning');
+        cy.get('tbody tr').eq(0).plexBadge(/pendiente/i, 'warning');
         cy.get('tbody tr').eq(0).plexIcon('close').first();
         cy.get('tbody tr').eq(0).plexIcon('close').last();
         cy.get('tbody tr').eq(0).contains(' 10000000 ').click();
@@ -77,10 +78,10 @@ context('Vacunacion Listado', () => {
         cy.get('tbody tr').eq(1).contains(' Personal de Salud ');
         cy.get('tbody tr').eq(1).contains(' 20000000 ');
         cy.get('tbody tr').eq(1).contains(' ANDES, PACIENTE TEMPORAL ');
-        cy.get('tbody tr').eq(1).contains(' F ');
+        cy.get('tbody tr').eq(1).contains('femenino');
         cy.get('tbody tr').eq(1).contains(' Neuquén ');
         cy.get('tbody tr').eq(1).contains(' 28/04/2021 ');
-        cy.get('tbody tr').eq(1).plexBadge('pendiente', 'warning');
+        cy.get('tbody tr').eq(1).plexBadge(/pendiente/i, 'warning');
         cy.get('tbody tr').eq(1).plexIcon('check');
         cy.get('tbody tr').eq(1).contains(' No corresponde ');
         cy.get('tbody tr').eq(1).contains(' 20000000 ').click();

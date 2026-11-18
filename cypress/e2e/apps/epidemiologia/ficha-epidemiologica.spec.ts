@@ -2,6 +2,8 @@
 import moment = require('moment');
 
 context('Ficha Epidemiológica', () => {
+    // La sección CLASIFICACION se ve, pero el select con label Clasificacion no se renderiza.
+    // Queda para el PR de app o del formulario. No se elige una opción que no está.
     let token;
     let validado;
     let validado2;

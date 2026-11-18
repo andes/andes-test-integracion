@@ -2,6 +2,7 @@
 import moment from 'moment';
 
 context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
+    // El listado responde 500. El assert de 200 queda: es un bug de api, no del spec.
     let token;
     let pacientePrestacion;
     before(() => {

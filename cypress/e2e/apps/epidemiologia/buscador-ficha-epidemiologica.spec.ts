@@ -68,6 +68,7 @@ context('Ficha Epidemiológica', () => {
         });
     });
 
+    // El wait de la búsqueda llega sin response. El assert de 200 queda.
     it('Agregar y limpiar código SISA a una ficha', () => {
         cy.plexDatetime('name="fechaDesde"', '25/03/2021');
         cy.plexDatetime('name="fechaHasta"', '26/03/2021');

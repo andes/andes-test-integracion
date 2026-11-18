@@ -88,11 +88,12 @@ context('Perinatal Listado', () => {
 
     it('Paciente con control de embarazo vencido y dentro de alertas', () => {
         cy.plexButtonIcon('bell').click();
-        cy.plexHelp('ANDES, PACIENTE VALIDADO');
-        cy.plexHelp('10000000');
-        cy.plexHelp('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-        cy.plexHelp('07/07/2021');
-        cy.plexHelp('AUSENTE');
+        // La alerta sale en el popover, no en un plex-help.
+        cy.contains('ANDES, PACIENTE VALIDADO');
+        cy.contains('10000000');
+        cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+        cy.contains('07/07/2021');
+        cy.contains('AUSENTE');
         cy.plexButtonIcon('close').click();
     });
 

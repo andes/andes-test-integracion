@@ -42,6 +42,8 @@ context('Seguimiento Epidemiológico', () => {
 
     })
 
+    // Con estado Seguimiento y ese documento la búsqueda no trae filas y el wait
+    // queda sin response. El assert de 200 queda.
     it('Iniciar seguimiento epidemiologico', () => {
         cy.plexButton('Buscar').click();
         cy.wait('@buscarSeguimiento').then(({ response }) => {
