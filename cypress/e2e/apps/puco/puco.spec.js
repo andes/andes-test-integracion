@@ -11,7 +11,6 @@ context('PUCO', () => {
     });
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/puco', token);
     });
 
@@ -26,21 +25,21 @@ context('PUCO', () => {
             "financiador": "OBRA SOCIAL DE LOS EMPLEADOS DE COMERCIO Y ACTIVIDADES CIVILES",
             "version": "2019-06-01T00:00:00.000Z"
         }];
-        cy.route('GET', '**/api/modules/obraSocial/puco/?dni=45687&periodo=**', respuesta).as('consulta');
+        cy.intercept('GET', '**/api/modules/obraSocial/puco/?dni=45687&periodo=**', respuesta).as('consulta');
 
         cy.plexInt('name="searchTerm"', 45687);
 
         cy.wait('@consulta').then(xhr => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
     });
 
     ['validado', 'temporal'].forEach((type, i) => {
         it('verificar datos de un paciente ' + type, () => {
-            cy.route('GET', '**/api/modules/obraSocial/puco/**').as('buscadorPuco');
+            cy.intercept('GET', '**/api/modules/obraSocial/puco/**').as('buscadorPuco');
             cy.plexInt('name="searchTerm"', pacientes[i].documento);
             cy.wait('@buscadorPuco').then(xhr => {
-                expect(xhr.status).to.be.eq(200);
+                expect(xhr.response.statusCode).to.be.eq(200);
             });
             cy.get('table tbody tr td').contains('MUTUAL DE LOS MEDICOS MUNICIPALES DE LA CIUDAD DE BUENOS AIRES');
         });

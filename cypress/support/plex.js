@@ -30,7 +30,15 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
                 .find(`div[data-value="${option}"]`, { force: true });
         } else {
             element.children().children('.selectize-control').click();
-            element.find('.selectize-dropdown-content').children().eq(option);
+            element = element.find('.selectize-dropdown-content').should(($content) => {
+                const hijos = $content.children().length;
+                const opciones = $content.closest('plex-select').find('[data-selectable]').length;
+                expect(hijos || opciones).to.be.greaterThan(option);
+            }).then(($content) => {
+                const hijos = $content.children();
+                const lista = hijos.length ? hijos : $content.closest('plex-select').find('[data-selectable]');
+                return lista.get(option);
+            });
         }
     } else {
         return element.children().eq(0);
@@ -54,10 +62,51 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
 
     }
     if (data && typeof data === 'string') {
-        const textForType = clicked ? `${data}{enter}` : data;
-        element = element.type(textForType, {
-            force: true
-        });
+        element = element.type(data, { force: true });
+        if (clicked) {
+            const sinAcento = (texto) => (texto || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            const buscado = sinAcento(data);
+            const porTexto = ($root) => {
+                const lista = [...$root.find('.selectize-dropdown [data-selectable]')];
+                return lista.find((el) => sinAcento(el.textContent).trim() === buscado)
+                    || lista.find((el) => sinAcento(el.textContent).includes(buscado));
+            };
+            const clickOpcion = (opcion, $input) => {
+                const fila = opcion.closest('[data-value]') || opcion;
+                return cy.wrap(fila).click({ force: true }).then(() => $input);
+            };
+            element = element.then(($input) => {
+                const raiz = () => $input.parents('plex-select');
+                // El desplegable a veces queda fuera del plex-select. Solo se mira el que está abierto.
+                const opcionVisible = () => porTexto(raiz()) || porTexto(Cypress.$('.selectize-dropdown:visible'));
+                const buscar = (quedan) => {
+                    const opcion = opcionVisible();
+                    if (opcion) {
+                        return clickOpcion(opcion, $input);
+                    }
+                    if (quedan > 0) {
+                        return cy.wait(100, { log: false }).then(() => buscar(quedan - 1));
+                    }
+                    // El filtro de selectize a veces no deja la opción en el DOM. Se vacía la búsqueda
+                    // y, si la lista se cerró, se vuelve a abrir. No se elige la opción activa:
+                    // puede ser otra distinta de la buscada.
+                    return cy.wrap($input).type('{selectall}{backspace}', { force: true }).then(() => {
+                        const dropdown = raiz().find('.selectize-dropdown');
+                        const visible = dropdown.length && Cypress.dom.isVisible(dropdown);
+                        if (!visible) {
+                            return cy.wrap(raiz()).find('.selectize-control').click({ force: true });
+                        }
+                    }).wait(200).then(() => {
+                        const abierta = opcionVisible();
+                        if (abierta) {
+                            return clickOpcion(abierta, $input);
+                        }
+                        return cy.wrap($input);
+                    });
+                };
+                return buscar(8);
+            });
+        }
     } else if (data) {
         if (data.clear) {
             element.type('{backspace}', { force: true });
@@ -189,6 +238,7 @@ Cypress.Commands.add('plexPhone', { prevSubject: 'optional' }, (subject, label, 
         element = cy.get(`plex-phone[${label}] input`);
     }
     if (text) {
+        element = element.first();
         element.type(text);
     }
     return element;
@@ -210,9 +260,9 @@ Cypress.Commands.add('plexText', { prevSubject: 'optional' }, (subject, label, t
 Cypress.Commands.add('plexHtml', { prevSubject: 'optional' }, (subject, label, text = null) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject).find(`plex-text[${label}] quill-editor div[class="ql-container ql-snow"] div p`).first();
+        element = cy.wrap(subject).find(`plex-text[${label}] .st-area`).first();
     } else {
-        element = cy.get(`plex-text[${label}] quill-editor div[class="ql-container ql-snow"] div p`).first();
+        element = cy.get(`plex-text[${label}] .st-area`).first();
     }
     if (text) {
         element.type(text, { force: true });
@@ -277,9 +327,9 @@ Cypress.Commands.add('plexButtonIcon', { prevSubject: 'optional' }, (subject, ic
     let element;
     if (subject) {
 
-        element = cy.wrap(subject).find(`plex-button i.adi.adi-${icon}`, { timeout: 10000 }).parent();
+        element = cy.wrap(subject).find(`plex-button i.adi.adi-${icon}`, { timeout: 10000 }).closest('button');
     } else {
-        element = cy.get(`plex-button i.adi.adi-${icon}`, { timeout: 10000 }).parent();
+        element = cy.get(`plex-button i.adi.adi-${icon}`, { timeout: 10000 }).closest('button');
     }
     return element;
 });
@@ -299,22 +349,80 @@ Cypress.Commands.add('plexLayout', (name) => {
 Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, label, data = null) => {
     let element;
     if (subject) {
-        element = cy.wrap(subject).find(`plex-datetime[${label}] input`)
+        element = cy.wrap(subject).find(`plex-datetime[${label}] input[data-main]:not(.hidden)`)
     } else {
-        element = cy.get(`plex-datetime[${label}] input`);
+        element = cy.get(`plex-datetime[${label}] input[data-main]:not(.hidden)`);
     }
-    if (data && typeof data === 'string') {
-        element.type(`${data}{enter}`);
-    } else if (data) {
+    // blur confirma el ngModel con el evento change y no manda el formulario.
+    // Enter en un input de un form dispara el submit.
+    const confirmaAlSalir = !!(data && data.blur);
+    const cerroConEnter = !confirmaAlSalir && ((data && typeof data === 'string') || (data && data.text && !data.skipEnter));
+    if (confirmaAlSalir) {
         if (data.clear) {
-            element.clear();
+            element = element.clear({ force: true });
         }
         if (data.text) {
-            element.type(`${data.text}${!data.skipEnter ? '{enter}' : ''}`);
+            element = element.type(data.text).blur();
+        }
+    } else if (data && typeof data === 'string') {
+        element = element.type(`${data}{enter}`);
+    } else if (data) {
+        if (data.clear) {
+            element = element.clear({ force: true });
+        }
+        if (data.text) {
+            element = element.type(`${data.text}${!data.skipEnter ? '{enter}' : ''}`);
         }
     }
-    element = element.parent().parent().parent();
-    return element;
+    if (cerroConEnter) {
+        // El calendario de plex queda abierto hasta ACEPTAR. No es un button y escape no lo cierra.
+        element = element.then(($input) => {
+            return cy.get('body').should(($body) => {
+                const abierto = $body.find('.cdk-overlay-backdrop-showing').length > 0;
+                const hayAceptar = /aceptar/i.test($body.text());
+                expect(!abierto || hayAceptar, 'calendario listo').to.eq(true);
+            }).then(($body) => {
+                if (!$body.find('.cdk-overlay-backdrop-showing').length) {
+                    return $input;
+                }
+                const input = $input[0];
+                const doc = input.ownerDocument;
+                const bloquear = (ev) => {
+                    if (ev.target === input) {
+                        ev.stopImmediatePropagation();
+                        input.blur();
+                    }
+                };
+                doc.addEventListener('focusin', bloquear, true);
+                const celda = [...$body.find('.mat-calendar-body-selected, .mat-calendar-body-active')].pop();
+                if (celda) {
+                    celda.click();
+                }
+                const host = [...$body.find('.cdk-overlay-container plex-button')].filter((el) => (el.innerText || '').trim().toLowerCase() === 'aceptar').pop();
+                if (host) {
+                    const boton = host.querySelector('button');
+                    if (boton) {
+                        boton.disabled = false;
+                    }
+                    host.removeAttribute('disabled');
+                    host.click();
+                }
+                input.blur();
+                return cy.wrap($input).then(() => {
+                    doc.querySelectorAll('.cdk-overlay-backdrop, .cdk-overlay-pane').forEach((nodo) => nodo.remove());
+                }).wait(400).then(() => {
+                    doc.querySelectorAll('.cdk-overlay-backdrop, .cdk-overlay-pane').forEach((nodo) => nodo.remove());
+                    doc.removeEventListener('focusin', bloquear, true);
+                    return $input;
+                });
+            });
+        });
+        cy.get('.cdk-overlay-backdrop-showing').should('not.exist');
+    }
+    if (subject) {
+        return cy.wrap(subject).find(`plex-datetime[${label}]`);
+    }
+    return cy.get(`plex-datetime[${label}]`);
 });
 
 Cypress.Commands.add('plexDateTimeDinamico', { prevSubject: 'optional' }, (subject, label, text = null) => {
@@ -332,37 +440,59 @@ Cypress.Commands.add('plexDateTimeDinamico', { prevSubject: 'optional' }, (subje
 });
 
 Cypress.Commands.add('plexBool', { prevSubject: 'optional' }, (subject, label, checked = false) => {
-    let element;
-    if (subject) {
-        element = cy.wrap(subject).find(`plex-bool[${label}] input[type="checkbox"]`)
-    } else {
-        element = cy.get(`plex-bool[${label}] input[type="checkbox"]`);
-    }
-    if (checked !== undefined) {
-        if (checked) {
-            element = element.check({ force: true });
-        } else {
-            element = element.uncheck({ force: true });
+    const buscar = () => (subject
+        ? cy.wrap(subject).find(`plex-bool[${label}]`)
+        : cy.get(`plex-bool[${label}]`));
+
+    // Cada click re-renderiza el slide. Se vuelve a buscar el siguiente
+    // para no seguir la cadena sobre un nodo que ya salió del DOM.
+    const aplicar = (indice) => buscar().then(($bools) => {
+        if (indice >= $bools.length) {
+            return;
         }
-    }
-    return element;
+        const $bool = $bools.eq(indice);
+        const checkbox = $bool.find('input[type="checkbox"]');
+        if (checkbox.length) {
+            cy.wrap(checkbox)[checked ? 'check' : 'uncheck']({ force: true });
+        } else {
+            const toggle = $bool.find('button[role="switch"]');
+            const activo = toggle.attr('aria-checked') === 'true';
+            if (toggle.length && activo !== !!checked) {
+                cy.wrap(toggle).click({ force: true });
+            }
+        }
+        return aplicar(indice + 1);
+    });
+
+    return aplicar(0).then(() => buscar().then(($bools) => {
+        const checkbox = $bools.find('input[type="checkbox"]');
+        if (checkbox.length) {
+            return cy.wrap(checkbox);
+        }
+        return cy.wrap($bools.find('button[role="switch"]'));
+    }));
 });
 
 Cypress.Commands.add('plexBoolDinamico', { prevSubject: 'optional' }, (subject, label, checked = false) => {
-
-    let element = cy.get('plex-bool', { prevSubject: subject })
+    const root = cy.get('plex-bool', { prevSubject: subject })
         .find('label').contains(label)
-        .parent().parent()
-        .find('input[type="checkbox"]');
-    if (checked !== undefined) {
-        if (checked) {
-            element = element.check({ force: true });
-        } else {
-            element = element.uncheck({ force: true });
+        .parents('plex-bool')
+        .first();
+    return root.then(($bool) => {
+        const checkbox = $bool.find('input[type="checkbox"]');
+        if (checkbox.length) {
+            if (checked) {
+                return cy.wrap(checkbox).check({ force: true });
+            }
+            return cy.wrap(checkbox).uncheck({ force: true });
         }
-    }
-
-    return element;
+        const toggle = $bool.find('button[role="switch"]');
+        const activo = toggle.attr('aria-checked') === 'true';
+        if (activo !== !!checked) {
+            return cy.wrap(toggle).click({ force: true });
+        }
+        return cy.wrap(toggle);
+    });
 });
 
 Cypress.Commands.add('plexTab', { prevSubject: 'optional' }, (subject, label) => {
@@ -401,14 +531,13 @@ Cypress.Commands.add('validationMessage', { prevSubject: true }, (subject, text)
 })
 
 Cypress.Commands.add('toast', (option, label) => {
-
+    // plex arma la clase con [class]="toast" y ngClass del tipo. El atributo
+    // no queda exactamente "simple-notification toast success".
+    const aviso = cy.get(`div.toast.${option}`);
     if (label) {
-        return cy.get(`div[class="simple-notification toast ${option}"]`).contains(label).click();
-    } else {
-        return cy.get(`div[class="simple-notification toast ${option}"]`).click();
+        return aviso.contains(label).click({ force: true });
     }
-
-
+    return aviso.click({ force: true });
 })
 
 Cypress.Commands.add('plexHelp', (label) => {

@@ -1,3 +1,4 @@
+import moment = require('moment');
 describe('Capa Estadistica - Ingresos', () => {
     let token;
     let pacientes;
@@ -8,30 +9,33 @@ describe('Capa Estadistica - Ingresos', () => {
             pacientes = pacientesCreados;
             cy.factoryInternacion({
                 configCamas: [
-                    { estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() },
-                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: Cypress.moment().add(-2, 'd').toDate() }
+                    { estado: 'disponible', fechaIngreso: moment().add(-2, 'm').toDate() },
+                    { estado: 'ocupada', pacientes: [pacientes[0]], fechaIngreso: moment().add(-2, 'd').toDate() }
                 ]
             }).then(camasCreadas => {
-                return cy.goto('/mapa-camas', token);
+                return cy.goto('/mapa-camas/internacion', token);
             });
         });
     });
 
     beforeEach(() => {
-        cy.server();
         cy.intercept('GET', '**/api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
         cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
         cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-        cy.route('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
+        cy.intercept({
+            method: 'GET',
+            pathname: '/api/core/term/snomed/expression',
+            query: { expression: '<<394658006' }
+        }, [{
             "conceptId": "1234",
             "term": "Enfermeria en Rehabilitación",
         }, {
             "conceptId": "666",
             "term": "Dolor",
         }]).as('expEspecialidad');
-        cy.route('GET', '**/api/core/tm/ocupacion?nombre=**', [{
+        cy.intercept('GET', '**/api/core/tm/ocupacion?nombre=**', [{
             "_id": "5c793679af78f1fa5d0a8e1e",
             "id": "5c793679af78f1fa5d0a8e1e",
             "nombre": "Abogado",
@@ -47,10 +51,11 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
         cy.viewport(1920, 1080);
+        cy.window().then((win) => win.localStorage.removeItem('<<394658006'));
     });
 
     it('Ingreso completo cambiando paciente', () => {
-        cy.get('*[class="adi adi-plus ii-light sm"]').click({ force: true });
+        cy.plexButton('ADMITIR PACIENTE').click();
 
         cy.plexText('name="buscador"', pacientes[0].nombre);
         cy.wait('@busquedaPaciente').then(({ response }) => {
@@ -75,11 +80,12 @@ describe('Capa Estadistica - Ingresos', () => {
         });
 
         cy.plexDatetime('label="Fecha y hora de ingreso"', { clear: true, skipEnter: true });
-        cy.plexDatetime('label="Fecha y hora de ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+        cy.plexDatetime('label="Fecha y hora de ingreso"', { text: moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
         cy.plexSelectType('name="origen"', 'Emergencia');
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexText('name="motivo"', 'Estornudo');
-        cy.plexSelectAsync('name="especialidad"', 'Enf', '@expEspecialidad', 0);
+        cy.wait('@expEspecialidad');
+        cy.plexSelectType('name="especialidad"', 'Enf');
         cy.plexSelectType('label="Cobertura"', 'Ninguno');
         cy.plexSelectType('name="situacionLaboral"', 'No trabaja y no busca trabajo');
         cy.plexSelectAsync('name="ocupacionHabitual"', 'Abog', '@getOcupacion', 0);
@@ -96,7 +102,7 @@ describe('Capa Estadistica - Ingresos', () => {
     });
 
     it('Editar ingreso', () => {
-        cy.goto('/mapa-camas', token);
+        cy.goto('/mapa-camas/internacion', token);
         cy.get('table tbody tr td').contains(pacientes[0].nombre).first().click();
 
         cy.get('plex-tabs ul li').eq(1).click();
@@ -108,13 +114,14 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.plexSelect('name="profesional"').clearSelect();
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexText('name="motivo"', 'Estornudo');
-        cy.plexSelectAsync('name="especialidad"', 'Dol', '@expEspecialidad', 0);
+        cy.wait('@expEspecialidad');
+        cy.plexSelectType('name="especialidad"', 'Dol');
         cy.plexSelectType('label="Cobertura"', 'Plan o Seguro publico');
         cy.plexSelectType('name="situacionLaboral"', 'Trabaja o está de licencia');
         cy.plexSelectAsync('name="ocupacionHabitual"', 'Med', '@getOcupacion', 0);
         cy.plexSelectType('name="nivelInstruccion"', 'Ninguno');
 
-        cy.plexButtonIcon('check').click();
+        cy.get('app-ingresar-paciente').plexButtonIcon('check').click();
 
         cy.wait('@patchPrestaciones').then(({ response }) => {
             expect(response.statusCode).to.eq(200);

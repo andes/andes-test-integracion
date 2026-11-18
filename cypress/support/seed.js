@@ -1,5 +1,6 @@
+import moment from 'moment';
 Cypress.Commands.add('seed', () => {
-    const develop = Cypress.env('ENVIRONMENT') === 'develop';
+    const develop = Cypress.expose('ENVIRONMENT') === 'develop';
     if (develop) {
         cy.task('database:initial');
     } else {
@@ -42,7 +43,7 @@ Cypress.Commands.add('createPaciente', (name, token) => {
     return cy.fixture(name).then((paciente) => {
         return cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/core-v2/mpi/pacientes',
+            url: Cypress.expose('API_SERVER') + '/api/core-v2/mpi/pacientes',
             body: paciente,
             headers: {
                 Authorization: `JWT ${token}`
@@ -63,7 +64,7 @@ Cypress.Commands.add('createPrestacion', (name, token, options = {}) => {
         }
         return cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/rup/prestaciones',
+            url: Cypress.expose('API_SERVER') + '/api/modules/rup/prestaciones',
             body: prestacion,
             headers: {
                 Authorization: `JWT ${token}`
@@ -76,7 +77,7 @@ Cypress.Commands.add('createProfesional', (name, token) => {
     return cy.fixture(name).then((profesional) => {
         return cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/core/tm/profesionales',
+            url: Cypress.expose('API_SERVER') + '/api/core/tm/profesionales',
             body: {
                 profesional
             },
@@ -90,22 +91,22 @@ Cypress.Commands.add('createProfesional', (name, token) => {
 Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset, horaFinOffset, token) => {
     return cy.fixture(fixtureName).then((agenda) => {
         if (horaInicioOffset !== null) {
-            let newDate = Cypress.moment().add(daysOffset, 'days'); //.format('YYYY-MM-DD');
-            let newFechaInicio = Cypress.moment().set({
+            let newDate = moment().add(daysOffset, 'days'); //.format('YYYY-MM-DD');
+            let newFechaInicio = moment().set({
                 'year': newDate.year(),
                 'month': newDate.month(),
                 'date': newDate.date(),
-                'hour': Cypress.moment().add(horaInicioOffset, 'hours').format('HH'),
+                'hour': moment().add(horaInicioOffset, 'hours').format('HH'),
                 'minute': 0,
                 'second': 0,
                 'millisecond': 0
             });
 
-            let newFechaFin = Cypress.moment().set({
+            let newFechaFin = moment().set({
                 'year': newDate.year(),
                 'month': newDate.month(),
                 'date': newDate.date(),
-                'hour': Cypress.moment().add(horaFinOffset, 'hours').format('HH'),
+                'hour': moment().add(horaFinOffset, 'hours').format('HH'),
                 'minute': 0,
                 'second': 0,
                 'millisecond': 0
@@ -127,7 +128,7 @@ Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset,
             }
         } else { // no modifica la hora del json de la agenda, solo las fechas
             if (daysOffset !== null) {
-                let newDate = Cypress.moment().add(daysOffset, 'days').format('YYYY-MM-DD');
+                let newDate = moment().add(daysOffset, 'days').format('YYYY-MM-DD');
                 agenda.bloques[0].horaInicio = agenda.bloques[0].horaInicio.replace('2019-07-01', newDate);
                 agenda.bloques[0].horaFin = agenda.bloques[0].horaFin.replace('2019-07-01', newDate);
                 if (!agenda.dinamica) {
@@ -140,7 +141,7 @@ Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset,
         }
         return cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
+            url: Cypress.expose('API_SERVER') + '/api/modules/turnos/agenda',
             body: agenda,
             failOnStatusCode: false,
             headers: {
@@ -152,7 +153,7 @@ Cypress.Commands.add('createAgenda', (fixtureName, daysOffset, horaInicioOffset,
 
 Cypress.Commands.add('createAgenda48hs', (name, token) => {
     return cy.fixture(name).then((agenda) => {
-        let newDate = Cypress.moment().add(2, 'days').format('YYYY-MM-DD');
+        let newDate = moment().add(2, 'days').format('YYYY-MM-DD');
         agenda.bloques[0].horaInicio = agenda.bloques[0].horaInicio.replace('2019-07-01', newDate);
         agenda.bloques[0].horaFin = agenda.bloques[0].horaFin.replace('2019-07-01', newDate);
         agenda.bloques[0].turnos[0].horaInicio = agenda.bloques[0].turnos[0].horaInicio.replace('2019-07-01', newDate);
@@ -161,7 +162,7 @@ Cypress.Commands.add('createAgenda48hs', (name, token) => {
         agenda.horaFin = agenda.horaFin.replace('2019-07-01', newDate);
         cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
+            url: Cypress.expose('API_SERVER') + '/api/modules/turnos/agenda',
             body: agenda,
             headers: {
                 Authorization: `JWT ${token}`
@@ -174,22 +175,22 @@ Cypress.Commands.add('createAgendaPaciente', (name, daysOffset, horaInicioOffset
     return cy.fixture(name).then((agenda) => {
         agenda.bloques[0].turnos[0].paciente = paciente;
         if (horaInicioOffset !== null) {
-            let newDate = Cypress.moment().add(daysOffset, 'days'); //.format('YYYY-MM-DD');
-            let newFechaInicio = Cypress.moment().set({
+            let newDate = moment().add(daysOffset, 'days'); //.format('YYYY-MM-DD');
+            let newFechaInicio = moment().set({
                 'year': newDate.year(),
                 'month': newDate.month(),
                 'date': newDate.date(),
-                'hour': Cypress.moment().add(horaInicioOffset, 'hours').format('HH'),
+                'hour': moment().add(horaInicioOffset, 'hours').format('HH'),
                 'minute': 0,
                 'second': 0,
                 'millisecond': 0
             });
 
-            let newFechaFin = Cypress.moment().set({
+            let newFechaFin = moment().set({
                 'year': newDate.year(),
                 'month': newDate.month(),
                 'date': newDate.date(),
-                'hour': Cypress.moment().add(horaFinOffset, 'hours').format('HH'),
+                'hour': moment().add(horaFinOffset, 'hours').format('HH'),
                 'minute': 0,
                 'second': 0,
                 'millisecond': 0
@@ -210,7 +211,7 @@ Cypress.Commands.add('createAgendaPaciente', (name, daysOffset, horaInicioOffset
                 agenda.sobreturnos[0].horaInicio = newFechaInicio;
             }
         } else { // no modifica la hora del json de la agenda, solo las fechas
-            let newDate = Cypress.moment().add(daysOffset, 'days').format('YYYY-MM-DD');
+            let newDate = moment().add(daysOffset, 'days').format('YYYY-MM-DD');
             agenda.bloques[0].horaInicio = agenda.bloques[0].horaInicio.replace('2019-07-01', newDate);
             agenda.bloques[0].horaFin = agenda.bloques[0].horaFin.replace('2019-07-01', newDate);
             if (!agenda.dinamica) {
@@ -221,7 +222,7 @@ Cypress.Commands.add('createAgendaPaciente', (name, daysOffset, horaInicioOffset
         }
         cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/turnos/agenda',
+            url: Cypress.expose('API_SERVER') + '/api/modules/turnos/agenda',
             body: agenda,
             failOnStatusCode: false,
             headers: {
@@ -233,11 +234,11 @@ Cypress.Commands.add('createAgendaPaciente', (name, daysOffset, horaInicioOffset
 
 Cypress.Commands.add('createSolicitud', (name, token) => {
     return cy.fixture(name).then((solicitud) => {
-        let newDate = Cypress.moment().format('YYYY-MM-DD');
+        let newDate = moment().format('YYYY-MM-DD');
         solicitud.solicitud.fecha = solicitud.solicitud.fecha.replace('2019-08-01', newDate);
         cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/modules/rup/prestaciones',
+            url: Cypress.expose('API_SERVER') + '/api/modules/rup/prestaciones',
             body: solicitud,
             headers: {
                 Authorization: `JWT ${token}`
@@ -254,7 +255,7 @@ Cypress.Commands.add('createTurno', (fixtureName, idTurno, idBloque, idAgenda, p
         }
         cy.request({
             method: 'PATCH',
-            url: Cypress.env('API_SERVER') + `/api/modules/turnos/turno/${idTurno}/${idBloque}/${idAgenda}`,
+            url: Cypress.expose('API_SERVER') + `/api/modules/turnos/turno/${idTurno}/${idBloque}/${idAgenda}`,
             body: turno,
             headers: {
                 Authorization: `JWT ${token}`

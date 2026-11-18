@@ -205,7 +205,7 @@ declare namespace Cypress {
         /**
          * Plex DateTime
          */
-        plexDatetime(label: string, data?: string | { text?: string, clear?: Boolean, skipEnter?: Boolean }): Chainable<Element>;
+        plexDatetime(label: string, data?: string | { text?: string, clear?: Boolean, skipEnter?: Boolean, blur?: Boolean }): Chainable<Element>;
 
         /**
          * Plex DateTime Dinámico

@@ -1,24 +1,27 @@
 
 Cypress.Commands.add('snomedSearchStub', (searchtext, response, alias = 'rup-buscador') => {
-    const url = `/api/core/term/snomed?search=${searchtext}&semanticTag=hallazgo&semanticTag=trastorno&semanticTag=procedimiento&semanticTag=entidad observable&semanticTag=producto&semanticTag=situación&semanticTag=régimen/tratamiento&semanticTag=elemento de registro&semanticTag=objeto físico&semanticTag=medicamento clínico&semanticTag=fármaco de uso clínico&semanticTag=evento`
+    const responder = (body) => cy.intercept({
+        method: 'GET',
+        pathname: '/api/core/term/snomed',
+        query: { search: searchtext }
+    }, body).as(alias);
     if (typeof response === 'string') {
-        return cy.fixture(response).then(response => {
-            cy.get('plex-layout-sidebar').contains('Buscador').click({ force: true })
-            return cy.route(url, response).as(alias);
+        return cy.fixture(response).then(body => {
+            cy.get('plex-layout-sidebar').contains('Buscador').click({ force: true });
+            return responder(body);
         });
-    } else {
-        return cy.route(url, response).as(alias);
     }
+    return responder(response);
 });
 
 Cypress.Commands.add('snomedFrecuentesStub', (response) => {
     const url = '**/api/modules/rup/frecuentesProfesional**';
     if (typeof response === 'string') {
         return cy.fixture(response).then(response => {
-            return cy.route(url, response).as('rup-frecuentes');
+            return cy.intercept(url, response).as('rup-frecuentes');
         });
     } else {
-        return cy.route(url, response).as('rup-frecuentes');
+        return cy.intercept(url, response).as('rup-frecuentes');
     }
 });
 
@@ -26,10 +29,10 @@ Cypress.Commands.add('expressionStub', (expression, response, alias = 'snomed-ex
     const url = '**/api/core/term/snomed/expression?expression=' + expression + '**';
     if (typeof response === 'string') {
         return cy.fixture(response).then(response => {
-            return cy.route(url, response).as(alias);
+            return cy.intercept(url, response).as(alias);
         });
     } else {
-        return cy.route(url, response).as(alias);
+        return cy.intercept(url, response).as(alias);
     }
 });
 
@@ -45,9 +48,9 @@ Cypress.Commands.add('RupBuscarConceptos', (term, type = 'BUSCADOR BÁSICO', ali
 
 Cypress.Commands.add('seleccionarConcepto', (term) => {
     if (typeof term === 'number') {
-        return cy.get('plex-layout-sidebar .rup-card').eq(term).plexButtonIcon('plus').click({ force: true });
+        return cy.get('.buscador-resultados .rup-card').eq(term).plexButtonIcon('plus').click({ force: true });
     } else {
-        return cy.get('plex-layout-sidebar .rup-card').contains(term).parentsUntil('.rup-card').plexButtonIcon('plus').click();
+        return cy.get('.buscador-resultados .rup-card').contains(term).parentsUntil('.rup-card').plexButtonIcon('plus').click();
     }
 });
 
@@ -72,41 +75,49 @@ Cypress.Commands.add('removeRupCard', (index) => {
 });
 
 Cypress.Commands.add('RupSetearFiltros', (search) => {
-    const filtrosMap = {
-        todos: 0,
-        hallazgo: 1,
-        trastorno: 2,
-        procedimiento: 3,
-        solicitud: 4,
-        producto: 5
+    const titulos = {
+        todos: 'todos',
+        hallazgo: 'hallazgos',
+        trastorno: 'trastornos',
+        procedimiento: 'procedimientos',
+        solicitud: 'solicitudes',
+        producto: 'insumos'
     }
+    const cards = cy.get('rup-buscador .contenedor-filtros plex-card');
     if (typeof search === 'number') {
-        cy.get('rup-buscador .menu-buscador button').eq(search).click();
+        cards.eq(search).click();
     } else {
-        cy.get('rup-buscador .menu-buscador button').eq(filtrosMap[search]).click();
+        cards.contains('.titulo', titulos[search]).click();
     }
 });
 
 
-const filtrosMap = {
-    prestaciones: 0,
-    solicitudes: 1,
-    hallazgo: 2,
-    trastorno: 3,
-    procedimiento: 4,
-    producto: 5,
-    laboratorio: 6,
-    vacunas: 7
-}
+const filtrosTitulo = {
+    prestaciones: 'prestaciones',
+    solicitudes: 'solicitudes',
+    hallazgo: 'hallazgos',
+    trastorno: 'trastornos',
+    procedimiento: 'procedimientos',
+    producto: 'productos',
+    laboratorio: 'laboratorios',
+    vacunas: 'vacunas'
+};
+
+const filtroHuds = (search) => {
+    if (typeof search === 'number') {
+        return cy.get('rup-hudsbusqueda .menu-buscador plex-card.card-filtro').eq(search);
+    }
+    return cy.get('rup-hudsbusqueda .menu-buscador plex-card.card-filtro')
+        .contains('.titulo', filtrosTitulo[search])
+        .parents('plex-card.card-filtro');
+};
 
 Cypress.Commands.add('HudsBusquedaFiltros', (search) => {
-    const index = typeof search === 'number' ? search : filtrosMap[search];
-    cy.get('rup-hudsbusqueda plex-card').eq(index).click();
+    filtroHuds(search).click();
 });
 
 Cypress.Commands.add('assertHudsBusquedaFiltros', (search, count) => {
-    const index = typeof search === 'number' ? search : filtrosMap[search];
-    cy.get('rup-hudsbusqueda .menu-buscador plex-card').eq(index).then(elem => {
+    filtroHuds(search).then(elem => {
         if (count > 0) {
             cy.wrap(elem).contains(count);
         } else {

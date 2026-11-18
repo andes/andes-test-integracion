@@ -15,9 +15,7 @@
 
 // Import commands.js using ES2015 syntax:
 
-const moment = require('moment');
 const resizeObserverLoopErrRe = /^[^(ResizeObserver loop limit exceeded)]/;
-Cypress.moment = moment;
 
 import './commands'
 import './http'
@@ -28,6 +26,14 @@ import './gestorUsuario'
 import './rup'
 import './mapa-camas'
 import './privacidad'
+import 'cypress-real-events'
+
+// Cypress 16 deja pasar el cache del browser. Sin este header la API responde 304.
+beforeEach(() => {
+    cy.intercept({ url: '**', middleware: true }, (req) => {
+        delete req.headers['if-none-match']
+    })
+})
 
 const addContext = require('mochawesome/addContext');
 

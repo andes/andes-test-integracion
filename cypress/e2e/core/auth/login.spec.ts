@@ -25,7 +25,7 @@ context('Pagina de login', () => {
     it('Login de usuario con disclaimer', () => {
         cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/core/tm/disclaimer',
+            url: Cypress.expose('API_SERVER') + '/api/core/tm/disclaimer',
             body:
             {
                 "version": "1.1.0",
@@ -57,7 +57,7 @@ context('Pagina de login', () => {
             });
             cy.request({
                 method: 'PATCH',
-                url: Cypress.env('API_SERVER') + '/api/core/tm/disclaimer/' + disclaimer.id,
+                url: Cypress.expose('API_SERVER') + '/api/core/tm/disclaimer/' + disclaimer.id,
                 body: {
                     "activo": false
                 }
@@ -69,7 +69,7 @@ context('Pagina de login', () => {
     it('Login de usuario rechazando disclaimer', () => {
         cy.request({
             method: 'POST',
-            url: Cypress.env('API_SERVER') + '/api/core/tm/disclaimer',
+            url: Cypress.expose('API_SERVER') + '/api/core/tm/disclaimer',
             body:
             {
                 "version": "1.2.0",
@@ -98,7 +98,7 @@ context('Pagina de login', () => {
             cy.request({
                 method: 'PATCH',
                 failOnStatusCode: false,
-                url: Cypress.env('API_SERVER') + '/api/core/tm/disclaimer/' + disclaimer.id,
+                url: Cypress.expose('API_SERVER') + '/api/core/tm/disclaimer/' + disclaimer.id,
                 body: {
                     "activo": false
                 }
@@ -110,7 +110,7 @@ context('Pagina de login', () => {
         cy.request({
             method: 'POST',
             failOnStatusCode: false,
-            url: Cypress.env('API_SERVER') + '/api/core/tm/disclaimer',
+            url: Cypress.expose('API_SERVER') + '/api/core/tm/disclaimer',
             body: {
                 "version": "1.3.0",
                 "texto": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
@@ -153,7 +153,7 @@ context('Pagina de login', () => {
         });
     });
 
-    it.only('Login usuario sin permisos para ninguna organizacion', () => {
+    it('Login usuario sin permisos para ninguna organizacion', () => {
         cy.plexInt('name="usuario"').type('33650509');
         cy.plexText('name="password"', 'asd');
         cy.plexButton('Iniciar sesión').click();

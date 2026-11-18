@@ -35,10 +35,9 @@ context('Conceptos Turneables', () => {
     });
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/monitoreo/conceptos-turneables', token);
-        cy.route('GET', '**api/core/term/snomed?search=**', snomedBuscador).as('busq');
-        cy.route('GET', '**api/core/tm/conceptos-turneables**').as('conceptos');
+        cy.intercept('GET', '**api/core/term/snomed?search=**', snomedBuscador).as('busq');
+        cy.intercept('GET', '**api/core/tm/conceptos-turneables**').as('conceptos');
 
     });
 
@@ -49,13 +48,13 @@ context('Conceptos Turneables', () => {
     */
     it('Alta de un concepto turneable', () => {
         cy.plexButton('Nuevo').click();
-        cy.route('POST', '**api/core/tm/conceptos-turneables**').as('create');
+        cy.intercept('POST', '**api/core/tm/conceptos-turneables**').as('create');
         complete({
             nombre: 'educacion',
         });
 
         cy.wait('@busq').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
 
         cy.get('tr[label="elemento conceptos snomed"]').eq(0).click();
@@ -67,7 +66,7 @@ context('Conceptos Turneables', () => {
 
         cy.wait('@create').then((xhr) => {
             cy.log('@create');
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body).to.have.any.keys('conceptId');
             expect(xhr.response.body).to.have.any.keys('term');
             expect(xhr.response.body).to.have.any.keys('semanticTag');
@@ -77,7 +76,7 @@ context('Conceptos Turneables', () => {
     });
 
     it('Editar un concepto turneable', () => {
-        cy.route('PATCH', '**api/core/tm/conceptos-turneables/**').as('edit');
+        cy.intercept('PATCH', '**api/core/tm/conceptos-turneables/**').as('edit');
 
         complete({
             conceptId: '700152009',
@@ -85,7 +84,7 @@ context('Conceptos Turneables', () => {
         });
 
         cy.wait('@conceptos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
 
         cy.get('tr[label="elemento conceptos turneables"]').eq(0).click();
@@ -99,7 +98,7 @@ context('Conceptos Turneables', () => {
         cy.contains('CONFIRMAR').click();
 
         cy.wait('@edit').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
 
         cy.contains('El concepto turneable fue editado');
@@ -107,7 +106,7 @@ context('Conceptos Turneables', () => {
     });
 
     it.skip('Eliminar un concepto turneable', () => {
-        cy.route('DELETE', '**api/core/tm/conceptos-turneables/**').as('delete');
+        cy.intercept('DELETE', '**api/core/tm/conceptos-turneables/**').as('delete');
 
         complete({
             conceptId: '385805005',
@@ -115,7 +114,7 @@ context('Conceptos Turneables', () => {
         });
 
         cy.wait('@conceptos').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
 
         cy.get('tr[label="elemento conceptos turneables"]').eq(0).click();
@@ -126,7 +125,7 @@ context('Conceptos Turneables', () => {
         cy.contains('CONFIRMAR').click();
 
         cy.wait('@delete').then((xhr) => {
-            expect(xhr.status).to.be.eq(200)
+            expect(xhr.response.statusCode).to.be.eq(200)
         });
 
         cy.contains('El Concepto Turneable fue eliminado');

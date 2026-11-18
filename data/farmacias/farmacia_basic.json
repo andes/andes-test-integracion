@@ -1,0 +1,89 @@
+[
+    {
+        "_id": {
+            "$oid": "66c5d9f3d2ccdf2a9e43c115"
+        },
+        "farmaceuticosAuxiliares": [
+            {
+                "farmaceutico": "SARA PATRICIA IVANA",
+                "matricula": "570",
+                "disposicionAlta": "793/10"
+            }
+        ],
+        "horarios": [
+            {
+                "dia": "LUNES A VIERNES DE 8: 00 A 16:00"
+            }
+        ],
+        "contactos": [
+            {
+                "tipo": {
+                    "id": "fijo",
+                    "nombre": "Teléfono Fijo"
+                },
+                "valor": 4493552,
+                "activo": true
+            },
+            {
+                "tipo": {
+                    "id": "email",
+                    "nombre": "Email"
+                },
+                "valor": "valebdiaz@hotmail.com",
+                "activo": true
+            }
+        ],
+        "denominacion": "CEC",
+        "razonSocial": "CENTRO DE EMPLEADOS DE COMERCIO DE NEUQUEN",
+        "cuit": "30-58049510-5",
+        "DTResponsable": "VALERIA BENITA DIAZ",
+        "matriculaDTResponsable": "715",
+        "disposicionAltaDT": "535/17",
+        "activo": true,
+        "domicilio": {
+            "geoReferencia": [],
+            "activo": true,
+            "_id": {
+                "$oid": "66c5d9f3d2ccdf2a9e43c116"
+            },
+            "valor": "PERITO MORENO 650",
+            "codigoPostal": "",
+            "ubicacion": {
+                "_id": {
+                    "$oid": "66c5d9f3d2ccdf2a9e43c117"
+                },
+                "provincia": {
+                    "_id": {
+                        "$oid": "57f3f3aacebd681cc2014c53"
+                    },
+                    "nombre": "Neuquén"
+                },
+                "localidad": {
+                    "_id": {
+                        "$oid": "57f538a472325875a199a82d"
+                    },
+                    "nombre": "Neuquén"
+                }
+            }
+        },
+        "asociadoA": "Farmacias Sociales",
+        "disposicionHabilitacion": "1115/21",
+        "fechaHabilitacion": {
+            "$date": "2021-08-21T00:00:00.000-03:00"
+        },
+        "fechaRenovacion": {
+            "$date": "2023-09-03T00:00:00.000-03:00"
+        },
+        "vencimientoHabilitacion": {
+            "$date": "2025-09-03T00:00:00.000-03:00"
+        },
+        "gabineteInyenctables": false,
+        "laboratoriosMagistrales": false,
+        "expedientePapel": "4420-107633/12",
+        "expedienteGDE": "2021-01041817/21",
+        "nroCaja": "CAJA N° 16",
+        "disposiciones": [],
+        "sancion": [],
+        "__v": 10
+    }
+]

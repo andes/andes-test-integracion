@@ -1,3 +1,4 @@
+import moment = require('moment');
 context('mobile paciente', () => {
     let paciente;
 
@@ -33,7 +34,8 @@ context('mobile paciente', () => {
                 }
             });
             cy.wait(500)
-            cy.get('.nologin').click();
+            // ion-content deja el botón en pantalla y checkVisibility lo rechaza.
+            cy.get('button.fab-principal').click({ force: true });
             cy.get('input').first().type('pepe@gmail.com');
             cy.get('#password').first().type('pepe');
             cy.get('.success').click();
@@ -66,7 +68,8 @@ context('mobile paciente', () => {
                 }
             });
             cy.wait(500)
-            cy.get('.nologin').click();
+            // ion-content deja el botón en pantalla y checkVisibility lo rechaza.
+            cy.get('button.fab-principal').click({ force: true });
             cy.get('input').first().type('pacientevalidado@gmail.com');
             cy.get('#password').first().type('martin');
             cy.get('.success').click();
@@ -89,7 +92,7 @@ context('mobile paciente', () => {
             cy.contains('Datos Personales').click({ force: true });
             cy.contains('ANDES, PACIENTE VALIDADO');
             cy.contains(paciente.documento);
-            cy.contains(Cypress.moment(paciente.fechaNacimiento).format('DD/MM/YYYY'));
+            cy.contains(moment(paciente.fechaNacimiento).format('DD/MM/YYYY'));
         });
 
         it('Modificacion de datos de acceso', () => {
@@ -152,10 +155,11 @@ context('mobile paciente', () => {
             cy.get('.circle-container',).within($container => {
                 cy.wrap($container).find('[name="andes-turno"]').click();
             });
+            cy.contains('Listado de turnos').click({ force: true });
 
             cy.wait('@getTurnosMobile');
             cy.contains('No tienes ningún turno programado');
-            cy.get('ion-back-button').click({ force: true })
+            cy.get('ion-back-button').last().click({ force: true })
         });
 
         it('Dacion de turno', () => {

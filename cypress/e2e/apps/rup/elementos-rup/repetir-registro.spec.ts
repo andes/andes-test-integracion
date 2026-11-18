@@ -9,9 +9,8 @@ context('RUP - Ejecucion', () => {
             token = t;
         });
         cy.task('database:seed:paciente');
-        cy.server();
-        cy.route('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-        cy.route('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
+        cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+        cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 
 
 

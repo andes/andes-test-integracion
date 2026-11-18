@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment = require('moment');
 
 context('Perinatal Listado', () => {
     let token;
@@ -87,16 +88,17 @@ context('Perinatal Listado', () => {
 
     it('Paciente con control de embarazo vencido y dentro de alertas', () => {
         cy.plexButtonIcon('bell').click();
-        cy.plexHelp('ANDES, PACIENTE VALIDADO');
-        cy.plexHelp('10000000');
-        cy.plexHelp('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
-        cy.plexHelp('07/07/2021');
-        cy.plexHelp('AUSENTE');
-        cy.plexButtonIcon('close').click();
+        // La alerta sale en el popover, no en un plex-help.
+        cy.contains('ANDES, PACIENTE VALIDADO');
+        cy.contains('10000000');
+        cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
+        cy.contains('07/07/2021');
+        cy.contains('AUSENTE');
+        cy.get('body').type('{esc}');
     });
 
     it('Paciente con control de embarazo no vencido', () => {
-        let fecha = Cypress.moment().add('days', 1).format('DD/MM/YYYY');
+        let fecha = moment().add('days', 1).format('DD/MM/YYYY');
         cy.get('tbody tr').eq(1).contains(fecha);
     })
 

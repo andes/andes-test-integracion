@@ -1,3 +1,4 @@
+import moment = require('moment');
 ['medica', 'enfermeria'].forEach((capa) => {
     describe(`Capa ${capa} - Ingresos`, () => {
         let token;
@@ -12,7 +13,7 @@
                 pacientes = pacientesCreados;
                 cy.factoryInternacion({
                     configCamas: [
-                        { estado: 'disponible', fechaIngreso: Cypress.moment().add(-2, 'm').toDate() }
+                        { estado: 'disponible', fechaIngreso: moment().add(-2, 'm').toDate() }
                     ]
                 }).then(camasCreadas => {
                     camas = camasCreadas
@@ -23,7 +24,7 @@
                         ]
                     }).then(salasCreadas => {
                         salas = salasCreadas
-                        return cy.goto('/mapa-camas', token);
+                        return cy.goto('/mapa-camas/internacion', token);
                     });
                 });
             });
@@ -42,7 +43,7 @@
             cy.intercept('POST', '**/api/modules/rup/internacion/sala-comun/**').as('internarPaciente');
             cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.viewport(1920, 1080);
-            cy.goto('/mapa-camas', token);
+            cy.goto('/mapa-camas/internacion', token);
         });
         it('Ingreso simplificado cambiando paciente', () => {
             cy.get('table tbody tr td').contains(camas[0].cama.nombre).first().click({ force: true });
@@ -59,7 +60,7 @@
                 expect(response.statusCode).to.eq(200);
             });
             cy.plexDatetime('label="Fecha y hora de ingreso"', { clear: true, skipEnter: true });
-            cy.plexDatetime('label="Fecha y hora de ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+            cy.plexDatetime('label="Fecha y hora de ingreso"', { text: moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
             cy.wait('@getCamas');
             cy.plexSelectType('label="Cama"', 'CAMA');
             cy.plexButtonIcon('check').click();
@@ -81,7 +82,7 @@
             });
             cy.get('paciente-listado plex-item').contains(pacientes[posPaciente].nombre).click({ force: true });
             cy.plexDatetime('label="Fecha y hora de ingreso"', { clear: true, skipEnter: true });
-            cy.plexDatetime('label="Fecha y hora de ingreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+            cy.plexDatetime('label="Fecha y hora de ingreso"', { text: moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
             cy.wait('@getCamas');
             cy.plexSelectType('label="Cama"', 'SALA');
             cy.plexButtonIcon('check').click();

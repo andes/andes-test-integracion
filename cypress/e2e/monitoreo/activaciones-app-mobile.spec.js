@@ -60,15 +60,14 @@ context('Monitoreo de Activaciones app-mobile', () => {
     });
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/monitoreo/monitor-activaciones', token);
-        cy.route('GET', '**api/modules/mobileApp/pacienteApp**').as('busqueda');
+        cy.intercept('GET', '**api/modules/mobileApp/pacienteApp**').as('busqueda');
     });
 
     it('buscar paciente por documento y verificar que no existe', () => {
         cy.plexText('name="buscador"', '11111111');
         cy.wait('@busqueda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.contains(' No hay resultados que coincidan con los filtros de búsqueda ');
     });
@@ -77,7 +76,7 @@ context('Monitoreo de Activaciones app-mobile', () => {
         cy.plexText('name="buscador"', pacienteApp.documento);
 
         cy.wait('@busqueda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.get('table').find('tbody tr').should('have.length', 1);
         cy.get('tbody').find('td').contains(pacienteApp.documento);
@@ -88,7 +87,7 @@ context('Monitoreo de Activaciones app-mobile', () => {
     it('buscar paciente por documento que exista, seleccionarlo del listado y verificar que cargue sus datos en el panel lateral', () => {
         cy.plexText('name="buscador"', pacienteApp.documento);
         cy.wait('@busqueda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
 
         });
         cy.get('tbody').find('td').contains(pacienteApp.documento);
@@ -102,18 +101,18 @@ context('Monitoreo de Activaciones app-mobile', () => {
 
 
     it('buscar paciente por documento que exista, seleccionarlo del listado y verificar que cargue su historial ', () => {
-        cy.route('GET', '**api/modules/mobileApp/sendMessageCache?email**', sendMessage).as('sendMessage');
+        cy.intercept('GET', '**api/modules/mobileApp/sendMessageCache?email**', sendMessage).as('sendMessage');
 
         cy.plexText('name="buscador"', pacienteApp.documento);
         cy.wait('@busqueda').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
 
         cy.get('tbody').find('td').contains(pacienteApp.documento);
         cy.get('tbody').find('tr').first().click();
         cy.get('plex-layout-sidebar').should('contain', pacienteApp.documento);
         cy.wait('@sendMessage').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.get('plex-layout-sidebar').find('td').contains(sendMessage[0].email);
         cy.get('plex-layout-sidebar').find('td').contains(sendMessage[0].status);

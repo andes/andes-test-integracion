@@ -19,7 +19,7 @@ const moment = require('moment');
                             .then(salasCreadas => {
                                 salas = salasCreadas;
                                 cy.viewport(1920, 1080);
-                                return cy.goto('/mapa-camas', token);
+                                return cy.goto('/mapa-camas/internacion', token);
                             });
                     });
             });
@@ -37,11 +37,11 @@ const moment = require('moment');
         it('Egreso desde cama', () => {
             cy.getCama(pacientes[0].apellido).click();
             cy.get('plex-title[titulo="DATOS DE CAMA"] div').eq(2);
-            cy.get('plex-layout-sidebar').plexIcon('menos').click().get('a').contains('Egresar paciente').click();
+            cy.get('plex-layout-sidebar').plexDropdown('icon="menos"').first().click().get('a').contains('Egresar paciente').click();
 
             cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
             cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
-            cy.plexDatetime('label="Fecha y hora de egreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+            cy.plexDatetime('label="Fecha y hora de egreso"', { text: moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
 
             cy.plexButtonIcon('check').click();
 
@@ -51,14 +51,14 @@ const moment = require('moment');
 
         // Skipeamos test de sala hasta decidir si se vuelven a usar
         it('Egreso desde Sala Comun', () => {
-            cy.goto('/mapa-camas', token);
+            cy.goto('/mapa-camas/internacion', token);
             cy.getCama(pacientes[1].nombre).click();
             // cy.get('plex-layout-sidebar plex-title[titulo="DATOS DE CAMA"] div').eq(2);
             cy.get('plex-layout-sidebar').plexDropdown('icon="menos"').first().click().get('a').contains('Egresar paciente').click();
 
             cy.plexSelectType('label="Tipo de egreso"', 'Alta medica');
             cy.plexDatetime('label="Fecha y hora de egreso"', { clear: true, skipEnter: true });
-            cy.plexDatetime('label="Fecha y hora de egreso"', { text: Cypress.moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
+            cy.plexDatetime('label="Fecha y hora de egreso"', { text: moment().add(-1, 'm').format('DD/MM/YYYY HH:mm'), skipEnter: true });
 
             cy.plexButtonIcon('check').click();
 
