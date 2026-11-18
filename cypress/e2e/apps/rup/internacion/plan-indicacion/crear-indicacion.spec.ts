@@ -1,5 +1,7 @@
 const moment = require('moment');
 
+// El mapa no muestra la fila de la internación. El spec queda, la fila no.
+
 context('Plan de Indicaciones', () => {
     let token;
     let pacientes;

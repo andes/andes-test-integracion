@@ -1,6 +1,8 @@
 /// <reference types="Cypress" />
 import moment = require('moment');
 
+// El before hace POST /api/core-v2/mpi/pacientes y la api responde 400.
+
 context("RUP - Epicrisis", () => {
   let token;
   const paciente = "3399661";

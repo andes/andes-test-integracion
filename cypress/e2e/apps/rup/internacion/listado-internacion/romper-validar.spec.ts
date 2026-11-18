@@ -1,5 +1,7 @@
 import moment = require('moment');
 
+// El listado de internación no trae filas.
+
 describe('Capa Estadistica - listado internacion', () => {
     let token;
     let pacientes;

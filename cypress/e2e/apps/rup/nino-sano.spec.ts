@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+// La búsqueda del paciente no dispara el request.
+
 context('RUP - Punto de inicio', () => {
     let token, idPrestacion;
     before(() => {

@@ -1,3 +1,4 @@
+// El path del diente ya no tiene la clase diente vestibular diente-null.
 describe('RUP - Odontograma', () => {
     let token;
     before(() => {

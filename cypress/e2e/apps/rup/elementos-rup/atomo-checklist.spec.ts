@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+// test opcion multiple espera expFiebre y el request no sale.
+
 const search = [{
     "conceptId": "440377005",
     "term": "derivación por",

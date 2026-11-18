@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 
+// El before hace POST /api/core-v2/mpi/pacientes y la api responde 400.
 context('RUP - Punto de inicio', () => {
     let token
     before(() => {
