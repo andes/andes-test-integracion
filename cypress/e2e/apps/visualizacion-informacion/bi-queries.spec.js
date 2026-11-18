@@ -96,8 +96,8 @@ context('Visualizacion de Información - BI-Queries', function () {
         cy.goto('/visualizacion-informacion/bi-queries', token);
 
         cy.plexSelectType('name="select"', 'Prestaciones');
-        cy.get('plex-datetime[name="fechaDesde"] input').first().type(`${cy.today()}{enter}`, { force: true });
-        cy.get('plex-datetime[name="fechaHasta"] input').first().type(`${cy.today()}{enter}`, { force: true });
+        cy.get('plex-datetime[name="fechaDesde"] input[data-main]:not(.hidden)').first().type(cy.today()).blur();
+        cy.get('plex-datetime[name="fechaHasta"] input[data-main]:not(.hidden)').first().type(cy.today()).blur();
         cy.plexSelectTypeDinamico('Organización', 'dr eduardo castro rendon');
         cy.plexBoolDinamico('Nombre Completo', false);
         cy.contains('plex-button', 'Descargar CSV').find('button').should('not.be.disabled');

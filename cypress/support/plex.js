@@ -343,8 +343,18 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
     } else {
         element = cy.get(`plex-datetime[${label}] input[data-main]:not(.hidden)`);
     }
-    const cerroConEnter = (data && typeof data === 'string') || (data && data.text && !data.skipEnter);
-    if (data && typeof data === 'string') {
+    // blur confirma el ngModel con el evento change y no manda el formulario.
+    // Enter en un input de un form dispara el submit.
+    const confirmaAlSalir = !!(data && data.blur);
+    const cerroConEnter = !confirmaAlSalir && ((data && typeof data === 'string') || (data && data.text && !data.skipEnter));
+    if (confirmaAlSalir) {
+        if (data.clear) {
+            element = element.clear();
+        }
+        if (data.text) {
+            element = element.type(data.text).blur();
+        }
+    } else if (data && typeof data === 'string') {
         element = element.type(`${data}{enter}`);
     } else if (data) {
         if (data.clear) {
