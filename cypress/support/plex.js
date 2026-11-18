@@ -56,15 +56,43 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
     if (data && typeof data === 'string') {
         element = element.type(data, { force: true });
         if (clicked) {
+            const sinAcento = (texto) => (texto || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            const buscado = sinAcento(data);
+            const porTexto = ($root) => {
+                const lista = [...$root.find('.selectize-dropdown [data-selectable]')];
+                return lista.find((el) => sinAcento(el.textContent).trim() === buscado)
+                    || lista.find((el) => sinAcento(el.textContent).includes(buscado));
+            };
+            const clickOpcion = (opcion, $input) => {
+                const fila = opcion.closest('[data-value]') || opcion;
+                return cy.wrap(fila).click({ force: true }).then(() => $input);
+            };
             element = element.then(($input) => {
-                const opciones = $input.parents('plex-select').find('.selectize-dropdown [data-selectable]');
-                const buscado = data.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-                const coincidencia = [...opciones].find((el) => (el.textContent || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().includes(buscado));
-                const opcion = coincidencia || opciones.filter('.active')[0];
-                if (!opcion) {
-                    return cy.wrap($input).type('{enter}', { force: true }).then(() => $input);
-                }
-                return cy.wrap(opcion).click({ force: true }).then(() => $input);
+                const raiz = () => $input.parents('plex-select');
+                const buscar = (quedan) => {
+                    const opcion = porTexto(raiz());
+                    if (opcion) {
+                        return clickOpcion(opcion, $input);
+                    }
+                    if (quedan > 0) {
+                        return cy.wait(100, { log: false }).then(() => buscar(quedan - 1));
+                    }
+                    // El filtro de selectize a veces no deja la opción en el DOM. Se abre la lista completa.
+                    return cy.wrap($input).type('{selectall}{backspace}', { force: true }).then(() => {
+                        return cy.wrap(raiz()).find('.selectize-control').click({ force: true });
+                    }).wait(200).then(() => {
+                        const abierta = porTexto(raiz());
+                        if (abierta) {
+                            return clickOpcion(abierta, $input);
+                        }
+                        const activa = raiz().find('.selectize-dropdown [data-selectable].active')[0];
+                        if (activa) {
+                            return clickOpcion(activa, $input);
+                        }
+                        return cy.wrap($input).type('{enter}', { force: true }).then(() => $input);
+                    });
+                };
+                return buscar(8);
             });
         }
     } else if (data) {
