@@ -38,7 +38,7 @@ Para un solo grupo, agregar `-f spec=cypress/e2e/apps/mobile`. Para unas celdas,
 
 ## Desde un PR
 
-App, api, mobile, monitoreo y matriculaciones llaman este workflow en cada push. La imagen de ese repo es el commit del PR. El resto queda en `master`. Corre el grupo que se descomenta. `api`, `app` y `matriculaciones` no son grupos. `todos` corre la matriz.
+App, api, mobile, monitoreo y matriculaciones llaman este workflow en cada push. La imagen de ese repo es el commit del PR. El resto queda en `master`. Para otra rama se descomenta la línea, por ejemplo `app: mi-rama`. Corre el grupo que se descomenta. `api`, `app` y `matriculaciones` no son grupos. `todos` corre la matriz.
 
 ## Local
 
