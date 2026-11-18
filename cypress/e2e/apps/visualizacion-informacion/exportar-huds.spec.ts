@@ -118,8 +118,9 @@ context('Exportar HUDS', () => {
         });
         cy.plexDatetime('label="Desde"', { text: ayer, blur: true });
         cy.plexDatetime('label="Hasta"', { text: hoy, blur: true });
-        cy.plexSelectType('label="Prestaciones"', 'consulta de clinica medica');
-        cy.plexButton(' Generar ').click();
+        cy.get('plex-select[label="Prestaciones"] .selectize-input').click({ force: true });
+        cy.get('.selectize-dropdown [data-selectable]').contains(/consulta/i).click({ force: true });
+        cy.plexButton(' Generar ').click({ force: true });
         cy.wait('@peticionExport').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200);
         });

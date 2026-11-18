@@ -96,10 +96,14 @@ context('Visualizacion de Información - BI-Queries', function () {
         cy.goto('/visualizacion-informacion/bi-queries', token);
 
         cy.plexSelectType('name="select"', 'Prestaciones');
-        cy.get('plex-datetime[name="fechaDesde"] input[data-main]:not(.hidden)').first().type(cy.today()).blur();
-        cy.get('plex-datetime[name="fechaHasta"] input[data-main]:not(.hidden)').first().type(cy.today()).blur();
+        escribirFecha('Desde');
+        escribirFecha('Hasta');
         cy.plexSelectTypeDinamico('Organización', 'dr eduardo castro rendon');
         cy.plexBoolDinamico('Nombre Completo', false);
         cy.contains('plex-button', 'Descargar CSV').find('button').should('not.be.disabled');
     });
 });
+
+function escribirFecha(etiqueta) {
+    cy.contains('label', etiqueta).closest('.form-group').find('input:visible').first().type(cy.today()).blur();
+}
