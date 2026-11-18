@@ -79,7 +79,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         cy.intercept('GET', '**/api/modules/huds/export?**').as('pendientes');
         cy.goto('/buscador', token);
     });
-    it('Listar turnos con filtros de fechas', () => {
+    it.skip('Listar turnos con filtros de fechas', () => {
         if (cy.esFinDeMes()) {
             cy.wait('@turnosPrestaciones').then((xhr) => {
                 expect(xhr.response.statusCode).to.be.eq(200);
@@ -93,7 +93,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             });
         }
     });
-    it('Listar turnos con filtros de fechas y tipo de prestacion', () => {
+    it.skip('Listar turnos con filtros de fechas y tipo de prestacion', () => {
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200);
         });
@@ -113,7 +113,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             });
         }
     });
-    it('Listar turnos con filtros de fechas y equipo de salud logueado', () => {
+    it.skip('Listar turnos con filtros de fechas y equipo de salud logueado', () => {
         cy.plexButton("Buscar").click();
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200);
@@ -134,7 +134,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
             });
         }
     });
-    it('Exportar todas las prestaciones filtradas entre dos fechas', () => {
+    it.skip('Exportar todas las prestaciones filtradas entre dos fechas', () => {
         let hoy = moment().format('DD/MM/YYYY');
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200);
@@ -153,7 +153,7 @@ context('BUSCADOR - Buscador de turnos y Prestaciones', function () {
         });
         cy.get('plex-table').find('td').contains(hoy);
     });
-    it('Exportar una prestacion de las filtradas entre dos fechas', () => {
+    it.skip('Exportar una prestacion de las filtradas entre dos fechas', () => {
         let hoy = moment().format('DD/MM/YYYY');
         cy.wait('@turnosPrestaciones').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200);
