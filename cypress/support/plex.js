@@ -29,8 +29,8 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
                 .find('.selectize-dropdown-content')
                 .find(`div[data-value="${option}"]`, { force: true });
         } else {
-            element.children().children('.selectize-control').click();
-            element.find('.selectize-dropdown-content').children().eq(option);
+            element.children().children('.selectize-control').click({ force: true });
+            element = element.find('[data-selectable]').eq(option);
         }
     } else {
         return element.children().eq(0);

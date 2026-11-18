@@ -441,9 +441,12 @@ context('RUP - Ejecucion', () => {
         cy.plexButtonIcon('chevron-down').click();
 
         cy.plexSelectType('label="Prestación"', 'sesion de informes de enfermeria');
+        // El desplegable tapa el datetime si la opción queda abierta.
+        cy.get('body').type('{esc}', { force: true });
         cy.plexDatetime('name="fechaInicio"', moment().subtract(1, 'day').format('DD/MM/YYYY'));
 
         cy.getHUDSItems().eq(0).assertRUPMiniCard({
+            // La card ya no trae esta prestación con el filtro. El assert queda.
             term: 'sesión de informes de enfermería',
             fecha: moment().subtract(1, 'day').format('DD/MM/YYYY'),
             profesional: 'Natalia Huenchuman',
@@ -458,6 +461,7 @@ context('RUP - Ejecucion', () => {
         cy.plexButtonIcon('chevron-down').click();
 
         cy.plexSelectType('label="Organización"', 'HOSPITAL DE AREA CENTENARIO - DR. NATALIO BURD');
+        cy.get('body').type('{esc}', { force: true });
         cy.plexDatetime('name="fechaInicio"', moment().subtract(1, 'day').format('DD/MM/YYYY'));
 
         cy.getHUDSItems().eq(0).assertRUPMiniCard({
