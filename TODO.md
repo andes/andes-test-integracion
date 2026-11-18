@@ -38,8 +38,10 @@ Bugs de app, cada uno en su pantalla. El arreglo es un PR de andes/app, salvo do
 - [ ] Gestor de agenda: el clear de la hora queda deshabilitado, o el conteo y los waits no cierran. `apps/citas/agendas/gestor_agenda.spec.ts`
 - [ ] Listado de agendas: tres filtros no cierran. `apps/citas/agendas/gestor_agendas_listado.spec.js`
 - [ ] Punto de inicio de turnos: cinco flujos no cierran (botón, carpeta o click tapado). `apps/citas/turnos/punto_inicio.spec.ts`
+- [ ] Mobile paciente: Cypress 16 no clickea `button.fab-principal` aunque está en el DOM con opacidad 1. El `beforeEach` no llega al login y los otros 7 no corren. `apps/mobile/mobile-paciente.spec.ts`
+- [ ] Novedades: la fecha de plex 7 se tipea. `plexHtml` busca `.st-area` y el `plex-text` de la descripción no lo tiene. `monitoreo/novedades.spec.js`
 
-Estos archivos se movieron enteros y adentro también hay tests que pasaban. Al volverlos, separar el test rojo para no sacar de `cypress/e2e` lo que ya está verde: bebé, checklist, listado de agendas, punto de inicio de turnos, buscador de fichas, seguimiento, reporte de error, egreso de estadística, registro con DNI, extranjero con DNI, turnos de citas y gestor de agenda.
+Estos archivos se movieron enteros. En varios también hay tests que pasaban. Al volverlos, separar el test rojo para no sacar de `cypress/e2e` lo que ya está verde: bebé, checklist, listado de agendas, punto de inicio de turnos, buscador de fichas, seguimiento, reporte de error, egreso de estadística, registro con DNI, extranjero con DNI, turnos de citas y gestor de agenda. Paciente mobile y novedades quedaron enteros en rojo.
 
 ## Skipped
 
@@ -65,10 +67,12 @@ Fuera de esta revisión, y siguen en el árbol:
 
 - [ ] Monitoreo: eliminar un concepto turneable. `e2e/monitoreo/conceptos_turneables.spec.js`
 - [ ] Mobile profesional: adjunto RUP. `e2e/apps/mobile/mobile-profesional.spec.ts`
+- [ ] Buscador SNOMED: `autocitacion` pasa. `concepto cualquiera` no dispara un request que matchee `concepto+cualquiera`. `e2e/monitoreo/buscador-snomed.spec.js`
+- [ ] Login de monitoreo: `cy.visit('/monitoreo')` corta con socket hang up y el login fallido no corre. En el mismo job las otras rutas de `/monitoreo/` abrieron. `e2e/monitoreo/login.spec.js`
 
 ## Huecos
 
 - [ ] Matriculaciones no tiene specs de Cypress. El front se sirve en `/matriculaciones/` y no hay celda en la matriz.
-- [ ] Monitoreo y mobile tienen celda propia. El front se sirve. Lo que siga rojo después de apuntar el click, la fecha de plex 7, el `+` del buscador y el GET del webhook queda anotado.
+- [x] Monitoreo y mobile tienen celda propia. El webhook ya pasa con un solo GET. Paciente y novedades quedaron en `cypress/failing`. El buscador y el login de monitoreo siguen en `e2e`.
 - [ ] En planificación, Inicio está deshabilitado hasta que el formulario toma la fecha. El helper limpia con `force` porque la fecha se tipea con `skipEnter` y sin blur. Hay que salir del campo Fecha y sacar el `force`.
 - [x] La matriz de `cypress/e2e` ya corrió. `seccionado` pasó en esa corrida.
