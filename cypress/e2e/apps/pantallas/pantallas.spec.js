@@ -35,12 +35,12 @@ context('gestor-pantallas', () => {
         });
         cy.plexButtonIcon('pencil').last().click();
         cy.plexSelect('label="Espacios físicos"').find('.remove-button').click({ force: true });
-        cy.plexSelectAsync('label="Espacios físicos"', 'Box 1', '@espacios', 0);
+        cy.plexSelectAsync('label="Espacios físicos"', 'Consultorio 8', '@espacios', 0);
         cy.plexButton('Guardar').click();
         cy.wait('@patchPantalla').then((xhr) => {
             cy.contains('Pantalla guardada correctamente');
             expect(xhr.response.statusCode).to.be.eq(200);
-            cy.get('table tr td').contains('Box 1');
+            cy.get('table tr td').contains('Consultorio 8');
         });
     });
 

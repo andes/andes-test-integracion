@@ -63,6 +63,8 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
                 return lista.find((el) => sinAcento(el.textContent).trim() === buscado)
                     || lista.find((el) => sinAcento(el.textContent).includes(buscado));
             };
+            // Selectize a veces pinta el desplegable fuera del plex-select.
+            const opcionVisible = () => porTexto(raiz()) || porTexto(Cypress.$('body'));
             const clickOpcion = (opcion, $input) => {
                 const fila = opcion.closest('[data-value]') || opcion;
                 return cy.wrap(fila).click({ force: true }).then(() => $input);
@@ -70,7 +72,7 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
             element = element.then(($input) => {
                 const raiz = () => $input.parents('plex-select');
                 const buscar = (quedan) => {
-                    const opcion = porTexto(raiz());
+                    const opcion = opcionVisible();
                     if (opcion) {
                         return clickOpcion(opcion, $input);
                     }
@@ -87,7 +89,7 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
                             return cy.wrap(raiz()).find('.selectize-control').click({ force: true });
                         }
                     }).wait(200).then(() => {
-                        const abierta = porTexto(raiz());
+                        const abierta = opcionVisible();
                         if (abierta) {
                             return clickOpcion(abierta, $input);
                         }
@@ -521,14 +523,13 @@ Cypress.Commands.add('validationMessage', { prevSubject: true }, (subject, text)
 })
 
 Cypress.Commands.add('toast', (option, label) => {
-
+    // plex arma la clase con [class]="toast" y ngClass del tipo. El atributo
+    // no queda exactamente "simple-notification toast success".
+    const aviso = cy.get(`div.toast.${option}`);
     if (label) {
-        return cy.get(`div[class="simple-notification toast ${option}"]`).contains(label).click();
-    } else {
-        return cy.get(`div[class="simple-notification toast ${option}"]`).click();
+        return aviso.contains(label).click({ force: true });
     }
-
-
+    return aviso.click({ force: true });
 })
 
 Cypress.Commands.add('plexHelp', (label) => {

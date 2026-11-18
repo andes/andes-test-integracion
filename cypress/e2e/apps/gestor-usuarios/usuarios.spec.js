@@ -39,10 +39,9 @@ context('Gestor de Usuarios', () => {
         cy.plexButton('AGREGAR ORGANIZACION').click();
 
         cy.get('plex-layout-sidebar').within(() => {
-            cy.plexSelectType('placeholder="Seleccione una organización"', 'dr. eduardo castro rendon{enter}');
+            cy.plexSelectType('placeholder="Seleccione una organización"', 'dr. eduardo castro rendon');
             cy.plexButton('AGREGAR').click({ force: true });
         });
-        // El texto del toast sigue en la app. Si no aparece, la organización no se agregó.
         cy.toast('success', 'Organizacion agregada exitosamente!');
         cy.get('plex-layout-main').find('.plex-box').find('.list-group-item').contains(perfil.nombre).find('plex-bool').eq(0).click();
 
