@@ -100,7 +100,10 @@ describe('Capa Estadistica - Egresos', () => {
     });
 
     it('Editar egreso desde listado', () => {
-        cy.plexButton('LISTADO DE INTERNACIÓN').click()
+        cy.plexButton('LISTADO DE INTERNACIÓN').click();
+        cy.plexDatetime('name="fechaIngresoDesde"', moment().subtract(7, 'days').format('DD/MM/YYYY'));
+        cy.plexDatetime('name="fechaIngresoHasta"', moment().format('DD/MM/YYYY'));
+        cy.plexButton('Buscar').click();
         cy.wait('@getListado');
         cy.get('plex-table tr td').first().click();
         cy.get('plex-options').contains('EGRESO').click({ force: true });
