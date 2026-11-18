@@ -38,16 +38,7 @@ Para un solo grupo, agregar `-f spec=cypress/e2e/apps/mobile`. Para unas celdas,
 
 ## Desde un PR
 
-App, api, mobile, monitoreo y matriculaciones llaman este workflow con `workflow_call` en cada push del PR. Pasan `DOCKERHUB_USERNAME` y `DOCKERHUB_TOKEN`.
-
-Bajo `### Test`, un bloque. Sin rama es `master`. El repo del PR queda en el commit de ese push. Sin bloque, no corre.
-
-```
-mobile
-monitoreo: mi-rama
-```
-
-`todos` corre la matriz y va solo. Los grupos son los de la tabla. `app`, `api`, `tests`, `matriculaciones`, `monitoreo` y `mobile` aceptan una rama. Matriculaciones no tiene specs: `matriculaciones: rama` solo cambia la imagen. Una ruta (`cypress/e2e/...`) corre en un solo job.
+App, api, mobile, monitoreo y matriculaciones llaman este workflow en cada push. La imagen de ese repo es el commit del PR. El resto queda en `master`. Corre el grupo que se descomenta. `api`, `app` y `matriculaciones` no son grupos. `todos` corre la matriz.
 
 ## Local
 
