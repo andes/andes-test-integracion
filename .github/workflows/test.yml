@@ -158,11 +158,11 @@ jobs:
       - name: Bibliotecas de Cypress
         run: |
           sudo apt-get update
+          # ubuntu-latest es 26.04 y no publica libgtk2.0-0t64 ni libnotify4.
+          # Esas dos las pedía Electron. Chrome usa el resto.
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-            libgtk2.0-0t64 \
             libgtk-3-0t64 \
             libgbm1 \
-            libnotify4 \
             libnss3 \
             libxss1 \
             libasound2t64 \
