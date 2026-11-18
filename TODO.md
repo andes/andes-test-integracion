@@ -69,6 +69,6 @@ Fuera de esta revisión, y siguen en el árbol:
 ## Huecos
 
 - [ ] Matriculaciones no tiene specs de Cypress. El front se sirve en `/matriculaciones/` y no hay celda en la matriz.
-- [x] Monitoreo y mobile tienen celda propia. El webhook filtra con un solo GET. Paciente clickea el botón con `force` porque `ion-content` no pasa `checkVisibility`. Novedades tipea la fecha de plex 7 y la descripción en `.ql-editor`. El buscador acepta el espacio como `%20` o `+`. El login entra a `/monitoreo/`.
+- [x] Monitoreo y mobile tienen celda propia. El webhook filtra con un solo GET. Paciente clickea el botón con `force` porque `ion-content` no pasa `checkVisibility`. Sin turnos, abre Listado de turnos y vuelve con el último `ion-back-button`. Novedades tipea la fecha de plex 7 y la descripción en `.ql-editor`. El buscador acepta el espacio como `%20` o `+`. El login entra a `/monitoreo/`.
 - [ ] En planificación, Inicio está deshabilitado hasta que el formulario toma la fecha. El helper limpia con `force` porque la fecha se tipea con `skipEnter` y sin blur. Hay que salir del campo Fecha y sacar el `force`.
-- [x] La matriz de `cypress/e2e` ya corrió. `seccionado` pasó en esa corrida.
+- [x] La matriz de `cypress/e2e` ya corrió. `seccionado` pasó en esa corrida. El grupo mobile quedó verde después, en una corrida sola.
