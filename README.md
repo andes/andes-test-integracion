@@ -34,7 +34,20 @@ gh workflow run test.yml --ref master \
   -f matriculaciones=master -f monitoreo=master -f mobile=master
 ```
 
-Para un solo grupo, agregar `-f spec=cypress/e2e/apps/mobile`.
+Para un solo grupo, agregar `-f spec=cypress/e2e/apps/mobile`. Para unas celdas, `-f grupos=mobile,monitoreo`.
+
+## Desde un PR
+
+App, api, mobile, monitoreo y matriculaciones llaman este workflow con `workflow_call` en cada push del PR. Pasan `DOCKERHUB_USERNAME` y `DOCKERHUB_TOKEN`.
+
+Bajo `### Test`, un bloque. Sin rama es `master`. El repo del PR queda en el commit de ese push. Sin bloque, no corre.
+
+```
+mobile
+monitoreo: mi-rama
+```
+
+`todos` corre la matriz y va solo. Los grupos son los de la tabla. `app`, `api`, `tests`, `matriculaciones`, `monitoreo` y `mobile` aceptan una rama. Matriculaciones no tiene specs: `matriculaciones: rama` solo cambia la imagen. Una ruta (`cypress/e2e/...`) corre en un solo job.
 
 ## Local
 

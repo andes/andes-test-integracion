@@ -1,11 +1,14 @@
 name: Test de integración
 
 # Las imágenes se arman una vez. Cypress corre en un runner por grupo, cada uno
-# con su stack. spec vacío dispara esa matriz. Si viene un valor, es un archivo,
-# varios separados por coma, o una carpeta, y corre un solo job.
+# con su stack. spec vacío y grupos vacío disparan la matriz. spec es un archivo,
+# varios separados por coma, o una carpeta, y corre un solo job. grupos elige
+# celdas de la matriz, separadas por coma. Si vienen los dos, spec gana.
 # La imagen de cada rama la publica su docker-image, llamado con workflow_call.
 # El tag es el SHA corto. Nginx copia app, matriculaciones, monitoreo y mobile.
 # Este corte no usa Cypress Cloud y no publica el informe fuera del artifact.
+# workflow_call lo usan los PR de app, api, mobile, monitoreo y matriculaciones.
+# Esos repos pasan los secrets de Docker Hub: este workflow no ve los de allá.
 
 on:
   workflow_dispatch:
@@ -45,6 +48,58 @@ on:
         required: false
         default: ""
         type: string
+      grupos:
+        description: Vacío es la matriz, salvo que spec venga con valor. Si no, grupos separados por coma.
+        required: false
+        default: ""
+        type: string
+  workflow_call:
+    inputs:
+      app:
+        description: Rama o SHA de andes/app.
+        type: string
+        default: master
+        required: false
+      api:
+        description: Rama o SHA de andes/api.
+        type: string
+        default: master
+        required: false
+      tests:
+        description: Rama o SHA de andes-test-integracion.
+        type: string
+        default: master
+        required: false
+      matriculaciones:
+        description: Rama o SHA de andes/matriculaciones.
+        type: string
+        default: master
+        required: false
+      monitoreo:
+        description: Rama o SHA de andes/monitoreo-app.
+        type: string
+        default: master
+        required: false
+      mobile:
+        description: Rama o SHA de andes/mobile-app.
+        type: string
+        default: master
+        required: false
+      spec:
+        description: Un spec, varios separados por coma, o una carpeta. Vacío usa grupos.
+        type: string
+        default: ""
+        required: false
+      grupos:
+        description: Grupos separados por coma. Vacío, con spec vacío, es la matriz.
+        type: string
+        default: ""
+        required: false
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_TOKEN:
+        required: true
 
 permissions:
   contents: read
@@ -106,19 +161,30 @@ jobs:
         id: lista
         env:
           SPEC: ${{ inputs.spec }}
+          GRUPOS: ${{ inputs.grupos }}
         run: |
+          set -euo pipefail
+          mapa='[
+            {"grupo":"core","ruta":"cypress/e2e/core"},
+            {"grupo":"citas","ruta":"cypress/e2e/apps/citas"},
+            {"grupo":"rup-internacion","ruta":"cypress/e2e/apps/rup/internacion"},
+            {"grupo":"rup","ruta":"cypress/e2e/apps/rup/elementos-rup,cypress/e2e/apps/rup/punto-inicio,cypress/e2e/apps/rup/ejecucion,cypress/e2e/apps/rup/colonoscopia.spec.ts"},
+            {"grupo":"apps","ruta":"cypress/e2e/apps/auditoria,cypress/e2e/apps/com,cypress/e2e/apps/epidemiologia,cypress/e2e/apps/forms,cypress/e2e/apps/gestor-usuarios,cypress/e2e/apps/huds,cypress/e2e/apps/pantallas,cypress/e2e/apps/perinatal,cypress/e2e/apps/puco,cypress/e2e/apps/vacunacion,cypress/e2e/apps/visualizacion-informacion"},
+            {"grupo":"monitoreo","ruta":"cypress/e2e/monitoreo"},
+            {"grupo":"mobile","ruta":"cypress/e2e/apps/mobile"}
+          ]'
           if [[ -n "$SPEC" ]]; then
             jq -n --arg spec "$SPEC" '{include:[{grupo:"spec", ruta:$spec}]}' > "$RUNNER_TEMP/matrix.json"
+          elif [[ -n "$GRUPOS" ]]; then
+            jq -n --argjson mapa "$mapa" --arg grupos "$GRUPOS" '
+              ($grupos | split(",") | map(gsub("^\\s+|\\s+$";"")) | map(select(length > 0))) as $pedidos
+              | if ($pedidos | length) == 0 then error("grupos no trae ningún nombre") else . end
+              | ($pedidos - ($mapa | map(.grupo))) as $mal
+              | if ($mal | length) > 0 then error("Grupo desconocido: \($mal | join(", "))") else . end
+              | {include: [$mapa[] | select(.grupo as $g | $pedidos | index($g) != null)]}
+            ' > "$RUNNER_TEMP/matrix.json"
           else
-            jq -n '{include:[
-              {grupo:"core", ruta:"cypress/e2e/core"},
-              {grupo:"citas", ruta:"cypress/e2e/apps/citas"},
-              {grupo:"rup-internacion", ruta:"cypress/e2e/apps/rup/internacion"},
-              {grupo:"rup", ruta:"cypress/e2e/apps/rup/elementos-rup,cypress/e2e/apps/rup/punto-inicio,cypress/e2e/apps/rup/ejecucion,cypress/e2e/apps/rup/colonoscopia.spec.ts"},
-              {grupo:"apps", ruta:"cypress/e2e/apps/auditoria,cypress/e2e/apps/com,cypress/e2e/apps/epidemiologia,cypress/e2e/apps/forms,cypress/e2e/apps/gestor-usuarios,cypress/e2e/apps/huds,cypress/e2e/apps/pantallas,cypress/e2e/apps/perinatal,cypress/e2e/apps/puco,cypress/e2e/apps/vacunacion,cypress/e2e/apps/visualizacion-informacion"},
-              {grupo:"monitoreo", ruta:"cypress/e2e/monitoreo"},
-              {grupo:"mobile", ruta:"cypress/e2e/apps/mobile"}
-            ]}' > "$RUNNER_TEMP/matrix.json"
+            jq -n --argjson mapa "$mapa" '{include:$mapa}' > "$RUNNER_TEMP/matrix.json"
           fi
           {
             echo "matrix<<EOF"
@@ -153,6 +219,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # workflow_call corre con el github context del caller. Sin repository
+          # bajaría ese repo, no los specs.
+          repository: andes/andes-test-integracion
           ref: ${{ inputs.tests }}
           fetch-depth: 0
           persist-credentials: false
