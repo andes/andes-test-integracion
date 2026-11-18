@@ -18,7 +18,7 @@ context('Buscador de conceptos SNOMED', () => {
 
     beforeEach(() => {
         cy.goto('/monitoreo/buscador-snomed', token);
-        cy.intercept('GET', '**/api/core/term/snomed?search=concepto+cualquiera', []).as('busquedaInexistente');
+        cy.intercept('GET', /\/api\/core\/term\/snomed\?search=concepto(?:%20|\+)cualquiera/, []).as('busquedaInexistente');
         cy.intercept('GET', '**/api/core/term/snomed?search=autocitacion', conceptAutocitacion).as('busquedaAutocitacion');
     });
 

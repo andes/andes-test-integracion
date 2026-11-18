@@ -2,7 +2,7 @@
 
 context('Pagina de login', () => {
     beforeEach(() => {
-        cy.visit('/monitoreo', {
+        cy.visit('/monitoreo/', {
             onBeforeLoad: (win) => {
                 win.sessionStorage.clear()
             }

@@ -53,7 +53,7 @@ context('Registro novedades', () => {
         cy.plexText('label="titulo"', 'Novedad activa');
         cy.get('plex-datetime[label="fecha"] input.form-control').type('07/02/2020').blur();
 
-        cy.plexHtml('label="descripcion"', text);
+        cy.get('plex-text[label="descripcion"] .ql-editor').type(text, { force: true });
 
         cy.plexButtonIcon('image'); //revisamos que el boton exista
 
@@ -80,7 +80,7 @@ context('Registro novedades', () => {
         cy.plexText('label="titulo"', "Novedad inactiva");
         cy.get('plex-datetime[label="fecha"] input.form-control').type('08/02/2020').blur();
 
-        cy.plexHtml('label="descripcion"', text);
+        cy.get('plex-text[label="descripcion"] .ql-editor').type(text, { force: true });
 
         cy.plexButtonIcon('image'); //revisamos que el boton exista
 
@@ -110,7 +110,7 @@ context('Registro novedades', () => {
         cy.plexText('label="titulo"', "Novedad búsqueda por módulo");
         cy.get('plex-datetime[label="fecha"] input.form-control').type('10/02/2020').blur();
 
-        cy.plexHtml('label="descripcion"', text);
+        cy.get('plex-text[label="descripcion"] .ql-editor').type(text, { force: true });
 
         cy.plexButtonIcon('image'); //revisamos que el boton exista
 
@@ -139,7 +139,7 @@ context('Registro novedades', () => {
         cy.plexText('label="titulo"', 'Novedad búsqueda por título');
         cy.get('plex-datetime[label="fecha"] input.form-control').type('10/02/2020').blur();
 
-        cy.plexHtml('label="descripcion"', text);
+        cy.get('plex-text[label="descripcion"] .ql-editor').type(text, { force: true });
 
         cy.plexButtonIcon('image'); //revisamos que el boton exista
 

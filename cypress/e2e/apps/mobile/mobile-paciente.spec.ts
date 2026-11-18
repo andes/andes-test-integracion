@@ -34,7 +34,8 @@ context('mobile paciente', () => {
                 }
             });
             cy.wait(500)
-            cy.get('button.fab-principal').click();
+            // ion-content deja el botón en pantalla y checkVisibility lo rechaza.
+            cy.get('button.fab-principal').click({ force: true });
             cy.get('input').first().type('pepe@gmail.com');
             cy.get('#password').first().type('pepe');
             cy.get('.success').click();
@@ -67,7 +68,8 @@ context('mobile paciente', () => {
                 }
             });
             cy.wait(500)
-            cy.get('button.fab-principal').click();
+            // ion-content deja el botón en pantalla y checkVisibility lo rechaza.
+            cy.get('button.fab-principal').click({ force: true });
             cy.get('input').first().type('pacientevalidado@gmail.com');
             cy.get('#password').first().type('martin');
             cy.get('.success').click();

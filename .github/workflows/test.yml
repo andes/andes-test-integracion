@@ -53,7 +53,7 @@ permissions:
 jobs:
   imagen-api:
     name: Imagen api
-    uses: andes/api/.github/workflows/docker-image.yml@ci/docker-workflow-call
+    uses: andes/api/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.api }}
     secrets:
@@ -62,7 +62,7 @@ jobs:
 
   imagen-app:
     name: Imagen app
-    uses: andes/app/.github/workflows/docker-image.yml@ci/docker-workflow-call
+    uses: andes/app/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.app }}
     secrets:
@@ -157,7 +157,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      # Misma operación que el Jenkinsfile: merge local de origin/master, sin push.
+      # Merge local de origin/master, sin push.
       # En master no cambia nada. Un conflicto falla el job.
       - name: Merge de origin/master
         env:
@@ -192,7 +192,7 @@ jobs:
       # El compose del repo no publica puertos: Cypress y el seeder corren en el
       # runner, no en la red de Compose. El override publica puertos, agrega health
       # y usa mongo:5.0, la misma imagen que el compose de la API. Mongoose 5.13
-      # habla con ese server. El archivo del repo queda en 4.4.10 para Jenkins.
+      # habla con ese server. El compose del repo queda en mongo 4.4.10.
       # baseUrl y API_SERVER apuntan a nginx, que proxea /api/ hacia api:3002.
       - name: Levantar stack
         run: |
