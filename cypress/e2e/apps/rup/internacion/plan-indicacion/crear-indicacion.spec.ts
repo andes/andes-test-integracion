@@ -108,7 +108,6 @@ context('Plan de Indicaciones', () => {
     })
 
     beforeEach(() => {
-        cy.server();
         cy.goto('/mapa-camas', token);
         cy.intercept('GET', '**/api/modules/rup/internacion/estados**').as('getPrestaciones');
         cy.intercept('GET', '**/api/core/term/snomed/expression?**', conceptSustancia).as('getSustancia');
