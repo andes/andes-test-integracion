@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 import moment = require('moment');
 
+// La hora de inicio está deshabilitada y el clear no entra. Queda afuera hasta poder habilitarla sin forzar el guardado.
 const complete = (dto) => {
     if (dto.fecha) {
         cy.plexDatetime('label="Fecha"', { clear: true, skipEnter: true });

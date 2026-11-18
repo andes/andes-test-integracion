@@ -1,4 +1,5 @@
 import moment = require('moment');
+// Varios tests no pasan: el clear de la hora queda deshabilitado, o el conteo y los waits no cierran.
 describe('CITAS - Planificar Agendas', () => {
     let token
     before(() => {

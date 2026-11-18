@@ -1,6 +1,8 @@
 /// <reference types="Cypress" />
 import moment from 'moment';
 
+// El before hace POST /api/core-v2/mpi/pacientes y la api responde 400. Queda para el PR de api.
+
 context('CITAS - Revisión de Agendas', () => {
     let token;
     let horaInicio;

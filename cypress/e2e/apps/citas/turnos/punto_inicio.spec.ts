@@ -1,4 +1,5 @@
 import moment = require('moment');
+// Cinco flujos no cierran (botón, carpeta o click tapado).
 context('punto de inicio', () => {
     let token;
     // const = '36425896';

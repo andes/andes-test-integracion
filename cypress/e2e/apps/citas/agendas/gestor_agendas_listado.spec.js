@@ -1,4 +1,5 @@
 import moment from 'moment';
+// Tres filtros no cierran. El resto del listado pasa.
 describe('CITAS - Gestor de Agendas', () => {
     let token
     before(() => {

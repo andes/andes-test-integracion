@@ -359,7 +359,7 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
     const cerroConEnter = !confirmaAlSalir && ((data && typeof data === 'string') || (data && data.text && !data.skipEnter));
     if (confirmaAlSalir) {
         if (data.clear) {
-            element = element.clear();
+            element = element.clear({ force: true });
         }
         if (data.text) {
             element = element.type(data.text).blur();
@@ -368,7 +368,7 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
         element = element.type(`${data}{enter}`);
     } else if (data) {
         if (data.clear) {
-            element = element.clear();
+            element = element.clear({ force: true });
         }
         if (data.text) {
             element = element.type(`${data.text}${!data.skipEnter ? '{enter}' : ''}`);

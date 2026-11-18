@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 import moment from 'moment';
-// Realiza las pruebas del camino básico: crear paciente, agendas, dar turno del dia, profesional, programado (crea solicitudes)
+// Dos altas pegan a POST /api/core-v2/mpi/pacientes y la api responde 400. Queda para el PR de api.
 context('turnos', () => {
     let token;
     let validado1;

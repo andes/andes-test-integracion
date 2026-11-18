@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+// El before hace POST /api/core-v2/mpi/pacientes y la api responde 400. Queda para el PR de api.
+
 export function buscarPaciente(dni) {
     cy.plexButton("Buscar Paciente").click();
     cy.plexText('name="buscador"', dni);
