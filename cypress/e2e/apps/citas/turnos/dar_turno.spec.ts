@@ -202,6 +202,31 @@ context('CITAS - punto de inicio', () => {
         });
     });
 
+    it('Demanda insatisfecha', () => {
+        cy.intercept('POST', '**/api/modules/turnos/listaEspera**').as('listaEspera');
+        const paciente = pacientes[0];
+        const searchList = paciente.documento
+            ? paciente.documento.substr(0, paciente.documento.length - 6) + '.' +
+            paciente.documento.substr(-6, 3) + '.' + paciente.documento.substr(-3)
+            : paciente.nombre;
+        const searchField = paciente.documento || paciente.nombre;
+        cy.plexText('name="buscador"', searchField);
+        cy.wait('@busquedaPaciente').then((xhr) => {
+            expect(xhr.response.statusCode).to.be.eq(200);
+        });
+        cy.get('paciente-listado plex-item').contains(searchList).click();
+        cy.plexButtonIcon('account-cruz').click();
+        cy.plexSelectAsync('name="tipoPrestacion"', 'consulta de medicina general', '@conceptoTurneables', 0);
+        cy.plexSelectAsync('name="profesionales"', 'USUARIO PRUEBA', '@getProfesionales', 0);
+        cy.get('plex-select[name="motivos"]').click();
+        cy.get('.selectize-dropdown [data-selectable]').contains('No existe la oferta').click({ force: true });
+        cy.get('demandaInsatisfecha plex-button[icon="check"]').click();
+        cy.wait('@listaEspera').then((xhr) => {
+            expect(xhr.response.statusCode).to.be.eq(200);
+            expect(xhr.response.body).to.have.property('demandas');
+        });
+    });
+
 });
 
 function darTurno(paciente) {
