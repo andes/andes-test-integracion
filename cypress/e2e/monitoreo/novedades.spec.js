@@ -51,7 +51,7 @@ context('Registro novedades', () => {
         cy.plexBool('name="activo"', true); // `Activa`
         cy.plexSelectType('name="select"', modulo.nombre);
         cy.plexText('label="titulo"', 'Novedad activa');
-        cy.plexDatetime('label="fecha"', '07/02/2020');
+        cy.get('plex-datetime[label="fecha"] input.form-control').type('07/02/2020').blur();
 
         cy.plexHtml('label="descripcion"', text);
 
@@ -78,7 +78,7 @@ context('Registro novedades', () => {
         cy.plexBool('name="activo"', false); // `Inactiva`
         cy.plexSelectType('name="select"', modulo.nombre);
         cy.plexText('label="titulo"', "Novedad inactiva");
-        cy.plexDatetime('label="fecha"', '08/02/2020');
+        cy.get('plex-datetime[label="fecha"] input.form-control').type('08/02/2020').blur();
 
         cy.plexHtml('label="descripcion"', text);
 
@@ -108,7 +108,7 @@ context('Registro novedades', () => {
         cy.plexBool('name="activo"', true); // `Inactiva`
         cy.plexSelectType('name="select"', modulo.nombre);
         cy.plexText('label="titulo"', "Novedad búsqueda por módulo");
-        cy.plexDatetime('label="fecha"', '10/02/2020');
+        cy.get('plex-datetime[label="fecha"] input.form-control').type('10/02/2020').blur();
 
         cy.plexHtml('label="descripcion"', text);
 
@@ -137,7 +137,7 @@ context('Registro novedades', () => {
         cy.plexBool('name="activo"', true); // `Inactiva`
         cy.plexSelectType('name="select"', modulo.nombre);
         cy.plexText('label="titulo"', 'Novedad búsqueda por título');
-        cy.plexDatetime('label="fecha"', '10/02/2020');
+        cy.get('plex-datetime[label="fecha"] input.form-control').type('10/02/2020').blur();
 
         cy.plexHtml('label="descripcion"', text);
 

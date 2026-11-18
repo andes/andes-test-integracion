@@ -86,13 +86,8 @@ context('Webhook', () => {
         cy.wait('@busq').then((xhr) => {
             expect(xhr.response.statusCode).to.be.eq(200)
         });
-        cy.wait('@busq');
-        cy.wait('@busq');
-        cy.wait('@busq');
-        cy.wait('@busq');
-        cy.wait('@busq');
 
-        cy.get('table tbody tr').plexButtonIcon('trash-can').click();
+        cy.contains('table tbody tr', 'Nombre').plexButtonIcon('trash-can').click();
 
         cy.contains('¿Desea eliminar?');
         cy.contains('CONFIRMAR').click();

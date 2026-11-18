@@ -34,7 +34,7 @@ context('mobile paciente', () => {
                 }
             });
             cy.wait(500)
-            cy.get('.nologin').click();
+            cy.get('button.fab-principal').click();
             cy.get('input').first().type('pepe@gmail.com');
             cy.get('#password').first().type('pepe');
             cy.get('.success').click();
@@ -67,7 +67,7 @@ context('mobile paciente', () => {
                 }
             });
             cy.wait(500)
-            cy.get('.nologin').click();
+            cy.get('button.fab-principal').click();
             cy.get('input').first().type('pacientevalidado@gmail.com');
             cy.get('#password').first().type('martin');
             cy.get('.success').click();

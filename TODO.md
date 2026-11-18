@@ -69,6 +69,6 @@ Fuera de esta revisión, y siguen en el árbol:
 ## Huecos
 
 - [ ] Matriculaciones no tiene specs de Cypress. El front se sirve en `/matriculaciones/` y no hay celda en la matriz.
-- [ ] Monitoreo y mobile tienen celda propia. El front se sirve, y los specs que sigan fallando después del `visit` quedan anotados.
+- [ ] Monitoreo y mobile tienen celda propia. El front se sirve. Lo que siga rojo después de apuntar el click, la fecha de plex 7, el `+` del buscador y el GET del webhook queda anotado.
 - [ ] En planificación, Inicio está deshabilitado hasta que el formulario toma la fecha. El helper limpia con `force` porque la fecha se tipea con `skipEnter` y sin blur. Hay que salir del campo Fecha y sacar el `force`.
-- [ ] No hay una corrida única de `cypress/e2e` después de apartar `failing` y `skipped`.
+- [x] La matriz de `cypress/e2e` ya corrió. `seccionado` pasó en esa corrida.
