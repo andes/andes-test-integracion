@@ -315,9 +315,9 @@ Cypress.Commands.add('plexButtonIcon', { prevSubject: 'optional' }, (subject, ic
     let element;
     if (subject) {
 
-        element = cy.wrap(subject).find(`plex-button i.adi.adi-${icon}`, { timeout: 10000 }).parent();
+        element = cy.wrap(subject).find(`plex-button i.adi.adi-${icon}`, { timeout: 10000 }).closest('button');
     } else {
-        element = cy.get(`plex-button i.adi.adi-${icon}`, { timeout: 10000 }).parent();
+        element = cy.get(`plex-button i.adi.adi-${icon}`, { timeout: 10000 }).closest('button');
     }
     return element;
 });
