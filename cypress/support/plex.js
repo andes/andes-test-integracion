@@ -420,31 +420,37 @@ Cypress.Commands.add('plexDateTimeDinamico', { prevSubject: 'optional' }, (subje
 });
 
 Cypress.Commands.add('plexBool', { prevSubject: 'optional' }, (subject, label, checked = false) => {
-    const root = subject
+    const buscar = () => (subject
         ? cy.wrap(subject).find(`plex-bool[${label}]`)
-        : cy.get(`plex-bool[${label}]`);
-    return root.each(($bool) => {
-        const checkbox = $bool.find('input[type="checkbox"]');
-        if (checkbox.length) {
-            if (checked) {
-                cy.wrap(checkbox).check({ force: true });
-            } else {
-                cy.wrap(checkbox).uncheck({ force: true });
-            }
+        : cy.get(`plex-bool[${label}]`));
+
+    // Cada click re-renderiza el slide. Se vuelve a buscar el siguiente
+    // para no seguir la cadena sobre un nodo que ya salió del DOM.
+    const aplicar = (indice) => buscar().then(($bools) => {
+        if (indice >= $bools.length) {
             return;
         }
-        const toggle = $bool.find('button[role="switch"]');
-        const activo = toggle.attr('aria-checked') === 'true';
-        if (activo !== !!checked) {
-            cy.wrap(toggle).click({ force: true });
-        }
-    }).then(($bool) => {
+        const $bool = $bools.eq(indice);
         const checkbox = $bool.find('input[type="checkbox"]');
+        if (checkbox.length) {
+            cy.wrap(checkbox)[checked ? 'check' : 'uncheck']({ force: true });
+        } else {
+            const toggle = $bool.find('button[role="switch"]');
+            const activo = toggle.attr('aria-checked') === 'true';
+            if (toggle.length && activo !== !!checked) {
+                cy.wrap(toggle).click({ force: true });
+            }
+        }
+        return aplicar(indice + 1);
+    });
+
+    return aplicar(0).then(() => buscar().then(($bools) => {
+        const checkbox = $bools.find('input[type="checkbox"]');
         if (checkbox.length) {
             return cy.wrap(checkbox);
         }
-        return cy.wrap($bool.find('button[role="switch"]'));
-    });
+        return cy.wrap($bools.find('button[role="switch"]'));
+    }));
 });
 
 Cypress.Commands.add('plexBoolDinamico', { prevSubject: 'optional' }, (subject, label, checked = false) => {

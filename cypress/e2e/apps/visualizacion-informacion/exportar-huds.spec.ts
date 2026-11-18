@@ -59,7 +59,7 @@ context('Exportar HUDS', () => {
             expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.plexDatetime('label="Desde"', ayer);
-        cy.plexDatetime('label="Hasta"', { text: hoy, skipEnter: true });
+        cy.plexDatetime('label="Hasta"', hoy);
         cy.plexButton(' Generar ').click();
 
         cy.wait('@peticionExport').then((xhr) => {
@@ -117,7 +117,7 @@ context('Exportar HUDS', () => {
             expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.plexDatetime('label="Desde"', ayer);
-        cy.plexDatetime('label="Hasta"', { text: hoy, skipEnter: true });
+        cy.plexDatetime('label="Hasta"', hoy);
         cy.plexSelectType('label="Prestaciones"', 'consulta de clinica medica');
         cy.plexButton(' Generar ').click();
         cy.wait('@peticionExport').then((xhr) => {
