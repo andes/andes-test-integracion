@@ -103,7 +103,6 @@ on:
 
 permissions:
   contents: read
-  actions: write
 
 jobs:
   imagen-api:
