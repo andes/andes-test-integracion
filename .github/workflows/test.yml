@@ -3,8 +3,8 @@ name: Test de integración
 # Las imágenes se arman una vez. Cypress corre en un runner por grupo, cada uno
 # con su stack. spec vacío dispara esa matriz. Si viene un valor, es un archivo,
 # varios separados por coma, o una carpeta, y corre un solo job.
-# La imagen de la rama la publica docker-image de andes/api y andes/app, llamado
-# con workflow_call. El tag es el SHA corto. Nginx se arma acá con el dist de app.
+# La imagen de cada rama la publica su docker-image, llamado con workflow_call.
+# El tag es el SHA corto. Nginx copia app, matriculaciones, monitoreo y mobile.
 # Este corte no usa Cypress Cloud y no publica el informe fuera del artifact.
 
 on:
@@ -22,6 +22,21 @@ on:
         type: string
       tests:
         description: Rama de andes-test-integracion.
+        required: true
+        default: master
+        type: string
+      matriculaciones:
+        description: Rama de andes/matriculaciones. Dispara su workflow docker-image.
+        required: true
+        default: master
+        type: string
+      monitoreo:
+        description: Rama de andes/monitoreo-app. Dispara su workflow docker-image.
+        required: true
+        default: master
+        type: string
+      mobile:
+        description: Rama de andes/mobile-app. Dispara su workflow docker-image.
         required: true
         default: master
         type: string
@@ -54,6 +69,33 @@ jobs:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
+  imagen-matriculaciones:
+    name: Imagen matriculaciones
+    uses: andes/matriculaciones/.github/workflows/docker-image.yml@master
+    with:
+      ref: ${{ inputs.matriculaciones }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  imagen-monitoreo:
+    name: Imagen monitoreo
+    uses: andes/monitoreo-app/.github/workflows/docker-image.yml@master
+    with:
+      ref: ${{ inputs.monitoreo }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  imagen-mobile:
+    name: Imagen mobile
+    uses: andes/mobile-app/.github/workflows/docker-image.yml@master
+    with:
+      ref: ${{ inputs.mobile }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
   carpetas:
     name: Carpetas
     runs-on: ubuntu-latest
@@ -73,7 +115,9 @@ jobs:
               {grupo:"citas", ruta:"cypress/e2e/apps/citas"},
               {grupo:"rup-internacion", ruta:"cypress/e2e/apps/rup/internacion"},
               {grupo:"rup", ruta:"cypress/e2e/apps/rup/elementos-rup,cypress/e2e/apps/rup/punto-inicio,cypress/e2e/apps/rup/ejecucion,cypress/e2e/apps/rup/colonoscopia.spec.ts"},
-              {grupo:"apps", ruta:"cypress/e2e/apps/auditoria,cypress/e2e/apps/com,cypress/e2e/apps/epidemiologia,cypress/e2e/apps/forms,cypress/e2e/apps/gestor-usuarios,cypress/e2e/apps/huds,cypress/e2e/apps/pantallas,cypress/e2e/apps/perinatal,cypress/e2e/apps/puco,cypress/e2e/apps/vacunacion,cypress/e2e/apps/visualizacion-informacion,cypress/e2e/apps/mobile,cypress/e2e/monitoreo"}
+              {grupo:"apps", ruta:"cypress/e2e/apps/auditoria,cypress/e2e/apps/com,cypress/e2e/apps/epidemiologia,cypress/e2e/apps/forms,cypress/e2e/apps/gestor-usuarios,cypress/e2e/apps/huds,cypress/e2e/apps/pantallas,cypress/e2e/apps/perinatal,cypress/e2e/apps/puco,cypress/e2e/apps/vacunacion,cypress/e2e/apps/visualizacion-informacion"},
+              {grupo:"monitoreo", ruta:"cypress/e2e/monitoreo"},
+              {grupo:"mobile", ruta:"cypress/e2e/apps/mobile"}
             ]}' > "$RUNNER_TEMP/matrix.json"
           fi
           {
@@ -84,7 +128,7 @@ jobs:
 
   test:
     name: Cypress (${{ matrix.grupo }})
-    needs: [imagen-api, imagen-app, carpetas]
+    needs: [imagen-api, imagen-app, imagen-matriculaciones, imagen-monitoreo, imagen-mobile, carpetas]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -92,6 +136,9 @@ jobs:
     env:
       APP: ${{ needs.imagen-app.outputs.tag }}
       API: ${{ needs.imagen-api.outputs.tag }}
+      MATRICULACIONES: ${{ needs.imagen-matriculaciones.outputs.tag }}
+      MONITOREO: ${{ needs.imagen-monitoreo.outputs.tag }}
+      MOBILE: ${{ needs.imagen-mobile.outputs.tag }}
       MONGO_URI: mongodb://127.0.0.1:27017/andes
       NGINX_URL: http://127.0.0.1:8080
       # mocha-junit-reporter, con mocha >=6, no lee reporterOptions anidado.
@@ -121,17 +168,24 @@ jobs:
               -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
               merge origin/master --no-edit
 
-      # API ya está en Docker Hub con el SHA corto. Nginx no se publica: copia solo el dist de app.
+      # Las imágenes ya están en Docker Hub con el SHA corto. Nginx no se publica:
+      # copia app, matriculaciones, monitoreo y mobile.
       - name: Bajar api y armar nginx
         run: |
-          if [[ ! "$APP" =~ ^[0-9a-f]{7}$ || ! "$API" =~ ^[0-9a-f]{7}$ ]]; then
-            echo "El tag de la imagen tiene que ser el SHA corto de 7 caracteres. app=${APP} api=${API}" >&2
-            exit 1
-          fi
+          for nombre in APP API MATRICULACIONES MONITOREO MOBILE; do
+            valor="${!nombre}"
+            if [[ ! "$valor" =~ ^[0-9a-f]{7}$ ]]; then
+              echo "El tag de la imagen tiene que ser el SHA corto de 7 caracteres. ${nombre}=${valor}" >&2
+              exit 1
+            fi
+          done
           docker pull "andesnqn/api:${API}"
           docker build \
-            --file docker/app.Dockerfile \
+            --file docker/andes.Dockerfile \
             --build-arg "APP=${APP}" \
+            --build-arg "MATRICULACIONES=${MATRICULACIONES}" \
+            --build-arg "MONITOREO=${MONITOREO}" \
+            --build-arg "MOBILE=${MOBILE}" \
             --tag "andesnqn/nginx:${APP}" \
             docker
 
