@@ -29,8 +29,8 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
                 .find('.selectize-dropdown-content')
                 .find(`div[data-value="${option}"]`, { force: true });
         } else {
-            element.children().children('.selectize-control').click({ force: true });
-            element = element.find('[data-selectable]').eq(option);
+            element.children().children('.selectize-control').click();
+            element = element.find('.selectize-dropdown-content').children().eq(option);
         }
     } else {
         return element.children().eq(0);
@@ -63,14 +63,14 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
                 return lista.find((el) => sinAcento(el.textContent).trim() === buscado)
                     || lista.find((el) => sinAcento(el.textContent).includes(buscado));
             };
-            // Selectize a veces pinta el desplegable fuera del plex-select.
-            const opcionVisible = () => porTexto(raiz()) || porTexto(Cypress.$('body'));
             const clickOpcion = (opcion, $input) => {
                 const fila = opcion.closest('[data-value]') || opcion;
                 return cy.wrap(fila).click({ force: true }).then(() => $input);
             };
             element = element.then(($input) => {
                 const raiz = () => $input.parents('plex-select');
+                // El desplegable a veces queda fuera del plex-select. Solo se mira el que está abierto.
+                const opcionVisible = () => porTexto(raiz()) || porTexto(Cypress.$('.selectize-dropdown:visible'));
                 const buscar = (quedan) => {
                     const opcion = opcionVisible();
                     if (opcion) {

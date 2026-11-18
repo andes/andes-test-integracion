@@ -94,7 +94,7 @@ context('Perinatal Listado', () => {
         cy.contains('HOSPITAL PROVINCIAL NEUQUEN - DR. EDUARDO CASTRO RENDON');
         cy.contains('07/07/2021');
         cy.contains('AUSENTE');
-        cy.plexButtonIcon('close').click();
+        cy.get('body').type('{esc}');
     });
 
     it('Paciente con control de embarazo no vencido', () => {
