@@ -226,6 +226,8 @@ context('MPI-Registro Paciente Bebé', () => {
         cy.contains('Los datos se actualizaron correctamente');
     });
 
+    // Bug de app: el template lee relacionBebe.documento y relacionBebe.nombre,
+    // y onPacienteSelected solo guarda { referencia, relacion }. PR de andes/app.
     it('ingresar scan de progenitor existente y verificar datos básicos ingresados', () => {
         cy.plexText('name="buscador"', progenitorScan.scan);
         cy.log(progenitorScan);

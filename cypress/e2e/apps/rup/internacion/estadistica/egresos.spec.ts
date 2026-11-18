@@ -99,6 +99,8 @@ describe('Capa Estadistica - Egresos', () => {
         cy.swal('confirm', 'Los datos se actualizaron correctamente');
     });
 
+    // Bug de app: el formulario queda completo y Guardar sigue deshabilitado.
+    // No se fuerza el click. El arreglo va en un PR de andes/app.
     it('Editar egreso desde listado', () => {
         cy.plexButton('LISTADO DE INTERNACIÓN').click();
         cy.plexDatetime('name="fechaIngresoDesde"', moment().subtract(7, 'days').format('DD/MM/YYYY'));

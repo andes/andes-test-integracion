@@ -20,6 +20,8 @@ context('MPI-Registro Paciente Con Dni', () => {
 
     beforeEach(() => {
         cy.goto('/apps/mpi/busqueda', token);
+        // Bug de api: POST /api/core-v2/mpi/pacientes responde 400 y el catch
+        // esconde la excepción. Las altas HTTP quedan para un PR de andes/api.
         cy.intercept('POST', '**api/core-v2/mpi/pacientes**').as('guardar');
         cy.intercept('GET', '**api/core-v2/mpi/pacientes**').as('getPaciente');
         cy.intercept('GET', '**api/core-v2/mpi/pacientes/**').as('findPacienteByID');

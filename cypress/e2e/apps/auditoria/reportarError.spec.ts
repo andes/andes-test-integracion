@@ -117,7 +117,8 @@ context('auditoria', () => {
         cy.plexText('name="nombre"', `{selectall}{backspace}${nombreCorrecto}`);
         cy.plexButton(' ACEPTAR ').click();
 
-        // verificamos que se guarde el cambio en el campo nombre
+        // Bug de app o api: la pantalla manda notaError vacío y la respuesta lo conserva.
+        // No se afloja el assert. El arreglo va en un PR de andes/app o andes/api.
         cy.wait('@patchPaciente').then(xhr => {
             expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.nombre).to.be.eq(nombreCorrecto);

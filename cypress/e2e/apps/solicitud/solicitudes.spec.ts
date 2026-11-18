@@ -4,6 +4,8 @@ import moment = require('moment');
 /**
  * VER TEMA DE REGLAS COMO RESETEAR
  * A LA NOCHE DA ERROR POR PROBLEMA DE TIMEZONE
+ * Bug de api: si el alta pega a POST /api/core-v2/mpi/pacientes, responde 400.
+ * El arreglo va en un PR de andes/api. Los cy.task no usan ese endpoint.
  */
 
 context('SOLICITUDES', () => {
