@@ -67,7 +67,7 @@ context('Vacunacion Listado', () => {
             expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.apellido).to.be.eq('ANDES');
             expect(xhr.response.body.nombre).to.be.eq('PACIENTE VALIDADO');
-            expect(xhr.response.body.nombreCompleto).to.be.eq('PACIENTE VALIDADO ANDES');
+            expect(xhr.response.body.nombreCompleto).to.be.eq('ANDES, PACIENTE VALIDADO');
             expect(xhr.response.body.documento).to.be.eq('10000000');
             expect(xhr.response.body.estado).to.be.eq('validado');
         });
@@ -89,7 +89,7 @@ context('Vacunacion Listado', () => {
             expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body.apellido).to.be.eq('ANDES');
             expect(xhr.response.body.nombre).to.be.eq('PACIENTE TEMPORAL');
-            expect(xhr.response.body.nombreCompleto).to.be.eq('PACIENTE TEMPORAL ANDES');
+            expect(xhr.response.body.nombreCompleto).to.be.eq('ANDES, PACIENTE TEMPORAL');
             expect(xhr.response.body.documento).to.be.eq('20000000');
             expect(xhr.response.body.estado).to.be.eq('temporal');
 

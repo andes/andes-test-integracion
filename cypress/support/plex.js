@@ -30,7 +30,15 @@ Cypress.Commands.add('plexSelect', { prevSubject: 'optional' }, (subject, label,
                 .find(`div[data-value="${option}"]`, { force: true });
         } else {
             element.children().children('.selectize-control').click();
-            element = element.find('.selectize-dropdown-content').children().eq(option);
+            element = element.find('.selectize-dropdown-content').should(($content) => {
+                const hijos = $content.children().length;
+                const opciones = $content.closest('plex-select').find('[data-selectable]').length;
+                expect(hijos || opciones).to.be.greaterThan(option);
+            }).then(($content) => {
+                const hijos = $content.children();
+                const lista = hijos.length ? hijos : $content.closest('plex-select').find('[data-selectable]');
+                return lista.get(option);
+            });
         }
     } else {
         return element.children().eq(0);
