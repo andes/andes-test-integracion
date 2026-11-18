@@ -92,25 +92,32 @@ Cypress.Commands.add('RupSetearFiltros', (search) => {
 });
 
 
-const filtrosMap = {
-    prestaciones: 0,
-    solicitudes: 1,
-    hallazgo: 2,
-    trastorno: 3,
-    procedimiento: 4,
-    producto: 5,
-    laboratorio: 6,
-    vacunas: 7
-}
+const filtrosTitulo = {
+    prestaciones: 'prestaciones',
+    solicitudes: 'solicitudes',
+    hallazgo: 'hallazgos',
+    trastorno: 'trastornos',
+    procedimiento: 'procedimientos',
+    producto: 'productos',
+    laboratorio: 'laboratorios',
+    vacunas: 'vacunas'
+};
+
+const filtroHuds = (search) => {
+    if (typeof search === 'number') {
+        return cy.get('rup-hudsbusqueda .menu-buscador plex-card.card-filtro').eq(search);
+    }
+    return cy.get('rup-hudsbusqueda .menu-buscador plex-card.card-filtro')
+        .contains('.titulo', filtrosTitulo[search])
+        .parents('plex-card.card-filtro');
+};
 
 Cypress.Commands.add('HudsBusquedaFiltros', (search) => {
-    const index = typeof search === 'number' ? search : filtrosMap[search];
-    cy.get('rup-hudsbusqueda plex-card').eq(index).click();
+    filtroHuds(search).click();
 });
 
 Cypress.Commands.add('assertHudsBusquedaFiltros', (search, count) => {
-    const index = typeof search === 'number' ? search : filtrosMap[search];
-    cy.get('rup-hudsbusqueda .menu-buscador plex-card').eq(index).then(elem => {
+    filtroHuds(search).then(elem => {
         if (count > 0) {
             cy.wrap(elem).contains(count);
         } else {

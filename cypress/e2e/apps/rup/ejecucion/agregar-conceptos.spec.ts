@@ -85,6 +85,7 @@ context('RUP - Ejecucion', () => {
 
         before(() => {
             cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '/api/modules/rup/prestaciones?**').as('prestacionesPaciente');
             cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
             cy.intercept('GET', '/api/modules/huds/accesos**', []);
             cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
@@ -118,7 +119,8 @@ context('RUP - Ejecucion', () => {
                 { paciente: idPaciente, tipoPrestacion: '5cdc4c865cd661b503d727a6' }
             ).then((prestacion) => {
                 idPrestacion = prestacion._id;
-                cy.goto('/rup/ejecucion/' + idPrestacion, token);
+                cy.goto('/rup/ejecucion/' + idPrestacion, token, token);
+                cy.wait('@prestacionesPaciente');
             });
 
         });
@@ -144,6 +146,7 @@ context('RUP - Ejecucion', () => {
             cy.assertRupCard(0, { semanticTag: 'trastorno', term: 'fiebre Q' }).then(($elem) => {
                 cy.wrap($elem).should('not.contain', 'Inicio del Hallazgo');
                 cy.wrap($elem).plexInt('name="inicioEstimadoUnidad"', '10');
+                cy.wrap($elem).plexHtml('name="evolucion"', 'una evolucion');
             });
 
             cy.plexButton("Guardar sesión de informes de enfermería").click()
@@ -160,7 +163,7 @@ context('RUP - Ejecucion', () => {
             cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
             cy.HudsBusquedaFiltros('trastorno');
 
-            cy.get('plex-layout-sidebar .rup-card').should('have.length', 2);
+            cy.get('plex-layout-sidebar .rup-card').contains('fiebre Q');
         });
     });
 });
