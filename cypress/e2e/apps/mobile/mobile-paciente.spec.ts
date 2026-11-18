@@ -159,7 +159,7 @@ context('mobile paciente', () => {
 
             cy.wait('@getTurnosMobile');
             cy.contains('No tienes ningún turno programado');
-            cy.get('ion-back-button').click({ force: true })
+            cy.get('ion-back-button').last().click({ force: true })
         });
 
         it('Dacion de turno', () => {
