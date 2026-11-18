@@ -343,8 +343,7 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
     } else {
         element = cy.get(`plex-datetime[${label}] input[data-main]:not(.hidden)`);
     }
-    const tieneTexto = (typeof data === 'string' && data) || (data && data.text);
-    const sinEnter = !!(data && data.skipEnter);
+    const cerroConEnter = (data && typeof data === 'string') || (data && data.text && !data.skipEnter);
     if (data && typeof data === 'string') {
         element = element.type(`${data}{enter}`);
     } else if (data) {
@@ -352,10 +351,10 @@ Cypress.Commands.add('plexDatetime', { prevSubject: 'optional' }, (subject, labe
             element = element.clear();
         }
         if (data.text) {
-            element = element.type(`${data.text}${sinEnter ? '' : '{enter}'}`);
+            element = element.type(`${data.text}${!data.skipEnter ? '{enter}' : ''}`);
         }
     }
-    if (tieneTexto) {
+    if (cerroConEnter) {
         // El calendario de plex queda abierto hasta ACEPTAR. No es un button y escape no lo cierra.
         element = element.then(($input) => {
             return cy.get('body').should(($body) => {
