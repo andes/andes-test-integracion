@@ -10,7 +10,7 @@ context('Visualizacion de Información - BI-Queries', function () {
 
     it('Verificar filtros de entrada y salida', () => {
         // Stub para devolver la query de prestaciones sin el microservicio
-        cy.intercept('GET', '/api/bi/queries?desdeAndes=true**', [{
+        cy.intercept('GET', '**/api/bi/queries**', [{
             "_id": "5f47c1d31787bd8018805228",
             "nombre": "Prestaciones",
             "argumentos": [
@@ -96,8 +96,8 @@ context('Visualizacion de Información - BI-Queries', function () {
         cy.goto('/visualizacion-informacion/bi-queries', token);
 
         cy.plexSelectType('name="select"', 'Prestaciones');
-        cy.plexDateTimeDinamico('Desde', cy.today());
-        cy.plexDateTimeDinamico('Hasta', cy.today());
+        cy.plexDatetime('label="Desde"', cy.today());
+        cy.plexDatetime('label="Hasta"', cy.today());
         cy.plexSelectTypeDinamico('Organización', 'dr eduardo castro rendon{enter}');
         cy.plexBoolDinamico('Nombre Completo', false);
         cy.plexButton(' Descargar CSV ').should('have.prop', 'disabled', false);

@@ -47,6 +47,16 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         secuencia(tokenOriginal);
     });
 
+    function datosDerivacion(texto) {
+        cy.plexSelectType('label="Condición"', 'Agudo');
+        cy.plexSelectType('label="Necesidad"', 'Mayor complejidad');
+        cy.plexText('name="motivo"', texto);
+        cy.plexText('name="diagnosticoActual"', 'diagnostico');
+        cy.plexText('name="estadoClinico"', 'estable');
+        cy.plexText('name="diagnosticoBase"', 'base');
+        cy.plexText('name="comorbilidades"', 'ninguna');
+    }
+
     function seleccionarPaciente(dni) {
         cy.plexText('name="buscador"', dni);
         cy.wait('@searchPaciente')
@@ -68,7 +78,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.wait('@profesionalSolicitante').then(({ response }) => {
             expect(response.statusCode).to.eq(200);
         });
-        cy.plexTextArea('label="Detalle"', 'a rechazar');
+        datosDerivacion('a rechazar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexButton("Guardar").click({ force: true });
@@ -102,7 +112,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear nueva derivacion y cancelarla', () => {
         seleccionarPaciente('2006712');
-        cy.plexTextArea('label="Detalle"', 'para cancelar');
+        datosDerivacion('para cancelar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'TEST PRUEBA', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
@@ -125,7 +135,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear nueva derivacion y sumar nota', () => {
         seleccionarPaciente('2111893');
-        cy.plexTextArea('label="Detalle"', 'sumar nota');
+        datosDerivacion('sumar nota');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'TEST PRUEBA', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
@@ -164,7 +174,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
 
     it('crear nueva derivacion y control de derivación en curso', () => {
         seleccionarPaciente('2001294');
-        cy.plexTextArea('label="Detalle"', 'prueba de nueva derivación');
+        datosDerivacion('prueba de nueva derivación');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexButton("Guardar").click({ force: true });
@@ -175,7 +185,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.toast('success', 'Derivación guardada');
         cy.plexButton('Nueva derivación').click({ force: true });
         seleccionarPaciente('2001294');
-        cy.plexTextArea('label="Detalle"', 'prueba de nueva derivación');
+        datosDerivacion('prueba de nueva derivación');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'CORTES JAZMIN', '@profesionalSolicitante', '58f74fd3d03019f919e9fff2');
         cy.plexButton("Guardar").click({ force: true });
@@ -190,7 +200,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.wait('@getOrganizacion').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        cy.plexTextArea('label="Detalle"', 'a aceptar');
+        datosDerivacion('a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'NATALIA HUENCHUMAN', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
@@ -274,7 +284,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.wait('@getOrganizacion').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        cy.plexTextArea('label="Detalle"', 'a aceptar');
+        datosDerivacion('a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'ALICIA PRUEBA', '@profesionalSolicitante', 0);
         cy.plexButton("Guardar").click({ force: true });
@@ -356,7 +366,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.wait('@getOrganizacion').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        cy.plexTextArea('label="Detalle"', 'a aceptar');
+        datosDerivacion('a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'ALICIA PRUEBA', '@profesionalSolicitante', 0);
         cy.plexSelectType('name="trasladoEspecial"', 'VUELO SANITARIO');
@@ -465,7 +475,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.wait('@getOrganizacion').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        cy.plexTextArea('label="Detalle"', 'a aceptar');
+        datosDerivacion('a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'ALICIA PRUEBA', '@profesionalSolicitante', 0);
         cy.plexSelectType('name="trasladoEspecial"', 'VUELO SANITARIO');
@@ -518,7 +528,7 @@ context('CENTRO OPERATIVO MÉDICO', () => {
         cy.wait('@getDispositivo').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
-        cy.plexTextArea('label="Detalle"', 'a aceptar');
+        datosDerivacion('a aceptar');
         cy.plexSelectType('name="profesionalOrigen"').clearSelect();
         cy.plexSelectAsync('label="Profesional solicitante"', 'NATALIA HUENCHUMAN', '@profesionalSolicitante', 0);
         cy.plexSelect('label="Dispositivo"', 0).click();

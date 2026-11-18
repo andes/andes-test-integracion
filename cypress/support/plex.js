@@ -448,20 +448,25 @@ Cypress.Commands.add('plexBool', { prevSubject: 'optional' }, (subject, label, c
 });
 
 Cypress.Commands.add('plexBoolDinamico', { prevSubject: 'optional' }, (subject, label, checked = false) => {
-
-    let element = cy.get('plex-bool', { prevSubject: subject })
+    const root = cy.get('plex-bool', { prevSubject: subject })
         .find('label').contains(label)
-        .parent().parent()
-        .find('input[type="checkbox"]');
-    if (checked !== undefined) {
-        if (checked) {
-            element = element.check({ force: true });
-        } else {
-            element = element.uncheck({ force: true });
+        .parents('plex-bool')
+        .first();
+    return root.then(($bool) => {
+        const checkbox = $bool.find('input[type="checkbox"]');
+        if (checkbox.length) {
+            if (checked) {
+                return cy.wrap(checkbox).check({ force: true });
+            }
+            return cy.wrap(checkbox).uncheck({ force: true });
         }
-    }
-
-    return element;
+        const toggle = $bool.find('button[role="switch"]');
+        const activo = toggle.attr('aria-checked') === 'true';
+        if (activo !== !!checked) {
+            return cy.wrap(toggle).click({ force: true });
+        }
+        return cy.wrap(toggle);
+    });
 });
 
 Cypress.Commands.add('plexTab', { prevSubject: 'optional' }, (subject, label) => {

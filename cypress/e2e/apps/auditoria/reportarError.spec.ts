@@ -20,21 +20,24 @@ context('auditoria', () => {
         cy.task('database:create:paciente', {
             template: 'validado',
             reportarError: true,
-            notaError
+            notaError,
+            nombreCorrectoReportado: 'JUAN'
         }).then(p => {
             validado6 = p;
         });
         cy.task('database:create:paciente', {
             template: 'validado',
             reportarError: true,
-            notaError
+            notaError,
+            nombreCorrectoReportado: 'JUAN'
         }).then(p => {
             validado7 = p;
         });
         cy.task('database:create:paciente', {
             template: 'validado',
             reportarError: true,
-            notaError
+            notaError,
+            nombreCorrectoReportado: 'JUAN'
         }).then(p => {
             validado8 = p;
         });
