@@ -58,6 +58,7 @@ let i = 0;
             cy.wait(2000)
             cy.plexOptions('REGISTROS').click();
             cy.modalPrivacidad(true);
+            cy.getCama(pacientes[0].apellido).click();
             cy.plexTab('INTERNACION').click();
 
             cy.plexLayoutSidebar().contains('MOVIMIENTOS');

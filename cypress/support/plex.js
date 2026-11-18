@@ -77,19 +77,21 @@ Cypress.Commands.add('plexSelectType', { prevSubject: 'optional' }, (subject, la
                     if (quedan > 0) {
                         return cy.wait(100, { log: false }).then(() => buscar(quedan - 1));
                     }
-                    // El filtro de selectize a veces no deja la opción en el DOM. Se abre la lista completa.
+                    // El filtro de selectize a veces no deja la opción en el DOM. Se vacía la búsqueda
+                    // y, si la lista se cerró, se vuelve a abrir. No se elige la opción activa:
+                    // puede ser otra distinta de la buscada.
                     return cy.wrap($input).type('{selectall}{backspace}', { force: true }).then(() => {
-                        return cy.wrap(raiz()).find('.selectize-control').click({ force: true });
+                        const dropdown = raiz().find('.selectize-dropdown');
+                        const visible = dropdown.length && Cypress.dom.isVisible(dropdown);
+                        if (!visible) {
+                            return cy.wrap(raiz()).find('.selectize-control').click({ force: true });
+                        }
                     }).wait(200).then(() => {
                         const abierta = porTexto(raiz());
                         if (abierta) {
                             return clickOpcion(abierta, $input);
                         }
-                        const activa = raiz().find('.selectize-dropdown [data-selectable].active')[0];
-                        if (activa) {
-                            return clickOpcion(activa, $input);
-                        }
-                        return cy.wrap($input).type('{enter}', { force: true }).then(() => $input);
+                        return cy.wrap($input);
                     });
                 };
                 return buscar(8);

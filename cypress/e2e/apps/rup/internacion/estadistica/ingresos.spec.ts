@@ -121,7 +121,7 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.plexSelectAsync('name="ocupacionHabitual"', 'Med', '@getOcupacion', 0);
         cy.plexSelectType('name="nivelInstruccion"', 'Ninguno');
 
-        cy.plexButtonIcon('check').click();
+        cy.get('app-ingresar-paciente').plexButtonIcon('check').click();
 
         cy.wait('@patchPrestaciones').then(({ response }) => {
             expect(response.statusCode).to.eq(200);

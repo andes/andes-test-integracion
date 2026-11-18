@@ -111,11 +111,11 @@ describe('Capa Estadistica - Egresos', () => {
         cy.get('app-informe-egreso plex-button[icon="pencil"]').click({ force: true });
 
         cy.plexSelect('label="Tipo de egreso"').find('.remove-button').click();
-        cy.plexSelectType('label="Tipo de egreso"', 'Defuncion').click();
+        cy.plexSelectType('label="Tipo de egreso"', 'Defuncion');
         cy.plexSelect('label="Otros Diagnósticos"').find('.remove-button').click();;
         cy.plexSelectAsync('label="Otros Diagnósticos"', 'Otros trastornos', '@getDiagnostico', 0);
 
-        cy.plexButtonIcon('check').click();
+        cy.get('app-egresar-paciente').plexButtonIcon('check').click();
 
         cy.wait('@patchPrestaciones').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
