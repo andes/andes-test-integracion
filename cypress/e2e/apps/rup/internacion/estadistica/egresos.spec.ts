@@ -70,7 +70,7 @@ describe('Capa Estadistica - Egresos', () => {
         cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
         cy.intercept('GET', '**/api/modules/rup/internacion/camas**').as('getCamas');
         cy.intercept('GET', '**/api/modules/rup/internacion/camas/historial?**').as('getHistorial');
-        cy.intercept('GET', '**/api/modules/rup/internacion/prestaciones?fechaIngresoDesde=?**').as('getListado');
+        cy.intercept('GET', '**/api/modules/rup/internacion/prestaciones?**').as('getListado');
 
         cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('patchPrestaciones');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');

@@ -24,7 +24,11 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.intercept('GET', '**/api/core/tm/profesionales**').as('getProfesionales');
         cy.intercept('GET', '**/api/auth/organizaciones**').as('getOrganizaciones');
         cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-        cy.intercept('GET', '/api/core/term/snomed/expression?expression=<<394658006&words=**', [{
+        cy.intercept({
+            method: 'GET',
+            pathname: '/api/core/term/snomed/expression',
+            query: { expression: '<<394658006' }
+        }, [{
             "conceptId": "1234",
             "term": "Enfermeria en Rehabilitación",
         }, {
@@ -47,10 +51,11 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camas/**').as('patchCamas');
         cy.intercept('PATCH', '**/api/modules/rup/internacion/camaEstados/**').as('patchCamaEstados');
         cy.viewport(1920, 1080);
+        cy.window().then((win) => win.localStorage.removeItem('<<394658006'));
     });
 
     it('Ingreso completo cambiando paciente', () => {
-        cy.get('*[class="adi adi-plus ii-light sm"]').click({ force: true });
+        cy.plexButton('ADMITIR PACIENTE').click();
 
         cy.plexText('name="buscador"', pacientes[0].nombre);
         cy.wait('@busquedaPaciente').then(({ response }) => {
@@ -79,7 +84,8 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.plexSelectType('name="origen"', 'Emergencia');
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexText('name="motivo"', 'Estornudo');
-        cy.plexSelectAsync('name="especialidad"', 'Enf', '@expEspecialidad', 0);
+        cy.wait('@expEspecialidad');
+        cy.plexSelectType('name="especialidad"', 'Enf');
         cy.plexSelectType('label="Cobertura"', 'Ninguno');
         cy.plexSelectType('name="situacionLaboral"', 'No trabaja y no busca trabajo');
         cy.plexSelectAsync('name="ocupacionHabitual"', 'Abog', '@getOcupacion', 0);
@@ -108,7 +114,8 @@ describe('Capa Estadistica - Ingresos', () => {
         cy.plexSelect('name="profesional"').clearSelect();
         cy.plexSelectAsync('name="profesional"', 'PRUEBA ALICIA', '@getProfesionales', 0);
         cy.plexText('name="motivo"', 'Estornudo');
-        cy.plexSelectAsync('name="especialidad"', 'Dol', '@expEspecialidad', 0);
+        cy.wait('@expEspecialidad');
+        cy.plexSelectType('name="especialidad"', 'Dol');
         cy.plexSelectType('label="Cobertura"', 'Plan o Seguro publico');
         cy.plexSelectType('name="situacionLaboral"', 'Trabaja o está de licencia');
         cy.plexSelectAsync('name="ocupacionHabitual"', 'Med', '@getOcupacion', 0);
