@@ -61,6 +61,7 @@ context('Conceptos Turneables', () => {
 
         cy.get('plex-bool[name="nominalizada"]').click();
         cy.get('plex-bool[name="auditable"]').click();
+        cy.get('plex-bool[name="agendaDinamica"]').click();
         cy.plexButton('Guardar').click();
         cy.contains('CONFIRMAR').click();
 
@@ -92,6 +93,7 @@ context('Conceptos Turneables', () => {
 
         cy.get('plex-bool[name="nominalizada"]').click();
         cy.get('plex-bool[name="auditable"]').click();
+        cy.get('plex-bool[name="agendaDinamica"]').click();
         cy.plexButton('Guardar').click();
 
         cy.contains('¿Desea guardar cambios?');
