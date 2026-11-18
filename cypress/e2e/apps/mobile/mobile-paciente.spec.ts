@@ -155,6 +155,7 @@ context('mobile paciente', () => {
             cy.get('.circle-container',).within($container => {
                 cy.wrap($container).find('[name="andes-turno"]').click();
             });
+            cy.contains('Listado de turnos').click({ force: true });
 
             cy.wait('@getTurnosMobile');
             cy.contains('No tienes ningún turno programado');
