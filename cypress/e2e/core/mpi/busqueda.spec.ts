@@ -1,4 +1,5 @@
 
+// El before hace POST /api/core-v2/mpi/pacientes y la api responde 400.
 context('MPI-Busqueda Paciente', () => {
     let token;
     let pacientes;

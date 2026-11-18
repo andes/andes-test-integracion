@@ -1,4 +1,5 @@
 import moment from 'moment';
+// El alta responde 400 en POST /api/core-v2/mpi/pacientes.
 context('MPI-Registro de Pacientes Similares', () => {
     let token
     before(() => {

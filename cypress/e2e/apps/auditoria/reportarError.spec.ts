@@ -1,6 +1,7 @@
 /// <reference types="Cypress" />
 
 context('auditoria', () => {
+    // El listado no muestra CIELO ni WALSH. El assert de notaError vacío queda: la respuesta lo conserva.
     let token;
     let validado5, validado6, validado7, validado8;
 

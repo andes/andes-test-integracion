@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 
+// El before hace POST /api/core-v2/mpi/pacientes y la api responde 400.
 function secuencia(token) {
     cy.goto('/solicitudes', token);
     cy.wait('@getSolicitudes')

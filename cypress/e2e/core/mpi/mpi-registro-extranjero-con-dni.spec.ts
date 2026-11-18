@@ -1,3 +1,4 @@
+// Un alta responde 400 en POST /api/core-v2/mpi/pacientes.
 context('MPI-Registro Paciente Extranjero Con DNI Argentino', () => {
     let token;
 

@@ -1,4 +1,5 @@
 import moment = require('moment');
+// El before hace POST /api/core-v2/mpi/pacientes y la api responde 400.
 // <reference types="Cypress" />
 
 function seleccionarPaciente(dni) {
