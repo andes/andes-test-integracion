@@ -125,7 +125,6 @@ context('RUP - Ejecucion', () => {
 
         it('evolucionar trastorno desde buscador', () => {
             cy.intercept('GET', '/api/core/term/snomed/expression?expression=**', []);
-            cy.wait('@paciente');
             cy.snomedSearchStub('fiebre', 'mitos/fiebre.json', 'rup-buscador');
             cy.get('plex-tabs').contains('Buscador').click({ force: true });
             cy.RupBuscarConceptos('fiebre');
