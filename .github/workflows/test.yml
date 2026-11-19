@@ -170,7 +170,8 @@ jobs:
             {"grupo":"rup","ruta":"cypress/e2e/apps/rup/elementos-rup,cypress/e2e/apps/rup/punto-inicio,cypress/e2e/apps/rup/ejecucion,cypress/e2e/apps/rup/colonoscopia.spec.ts"},
             {"grupo":"apps","ruta":"cypress/e2e/apps/auditoria,cypress/e2e/apps/com,cypress/e2e/apps/epidemiologia,cypress/e2e/apps/forms,cypress/e2e/apps/gestor-usuarios,cypress/e2e/apps/huds,cypress/e2e/apps/pantallas,cypress/e2e/apps/perinatal,cypress/e2e/apps/puco,cypress/e2e/apps/vacunacion,cypress/e2e/apps/visualizacion-informacion"},
             {"grupo":"monitoreo","ruta":"cypress/e2e/monitoreo"},
-            {"grupo":"mobile","ruta":"cypress/e2e/apps/mobile"}
+            {"grupo":"mobile","ruta":"cypress/e2e/apps/mobile"},
+            {"grupo":"pacs","ruta":"cypress/e2e/apps/pacs","opcional":true}
           ]'
           if [[ -n "$SPEC" ]]; then
             jq -n --arg spec "$SPEC" '{include:[{grupo:"spec", ruta:$spec}]}' > "$RUNNER_TEMP/matrix.json"
@@ -180,10 +181,10 @@ jobs:
               | if ($pedidos | length) == 0 then error("grupos no trae ningún nombre") else . end
               | ($pedidos - ($mapa | map(.grupo))) as $mal
               | if ($mal | length) > 0 then error("Grupo desconocido: \($mal | join(", "))") else . end
-              | {include: [$mapa[] | select(.grupo as $g | $pedidos | index($g) != null)]}
+              | {include: [$mapa[] | select(.grupo as $g | $pedidos | index($g) != null) | del(.opcional)]}
             ' > "$RUNNER_TEMP/matrix.json"
           else
-            jq -n --argjson mapa "$mapa" '{include:$mapa}' > "$RUNNER_TEMP/matrix.json"
+            jq -n --argjson mapa "$mapa" '{include:[$mapa[] | select(.opcional != true) | del(.opcional)]}' > "$RUNNER_TEMP/matrix.json"
           fi
           {
             echo "matrix<<EOF"
@@ -263,7 +264,26 @@ jobs:
       # habla con ese server. El compose del repo queda en mongo 4.4.10.
       # baseUrl y API_SERVER apuntan a nginx, que proxea /api/ hacia api:3002.
       - name: Levantar stack
+        env:
+          GRUPO: ${{ matrix.grupo }}
+          RUTA: ${{ matrix.ruta }}
         run: |
+          stack=andes
+          if [[ "$GRUPO" == "pacs" || "$RUTA" == *apps/pacs* ]]; then
+            stack=pacs
+          fi
+          echo "STACK=$stack" >> "$GITHUB_ENV"
+          if [[ "$stack" == "pacs" ]]; then
+            echo "MONGO_URI=mongodb://127.0.0.1:27067/andes" >> "$GITHUB_ENV"
+            echo "NGINX_URL=http://127.0.0.1:8090" >> "$GITHUB_ENV"
+            docker compose \
+              -p andes-pacs \
+              -f docker/docker-compose-pacs.yml \
+              --env-file docker/pacs/stack.env \
+              up -d
+            bash docker/pacs/setup.sh
+            exit 0
+          fi
           cat > "${RUNNER_TEMP}/compose.ports.yml" <<'EOF'
           services:
             db:
@@ -416,6 +436,8 @@ jobs:
       - name: Bajar stack
         if: always()
         run: |
-          if [[ -f docker/docker-compose.yml ]]; then
+          if [[ "${STACK:-andes}" == "pacs" ]]; then
+            docker compose -p andes-pacs -f docker/docker-compose-pacs.yml --env-file docker/pacs/stack.env down -v --remove-orphans
+          elif [[ -f docker/docker-compose.yml ]]; then
             docker compose -p andes-test -f docker/docker-compose.yml down -v --remove-orphans
           fi

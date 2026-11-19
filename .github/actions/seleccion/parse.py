@@ -13,6 +13,7 @@ GRUPOS = (
     "apps",
     "monitoreo",
     "mobile",
+    "pacs",
 )
 RAMAS = (
     "app",

@@ -83,4 +83,18 @@ if [ "$mwl_ok" -ne 1 ]; then
     exit 1
 fi
 
+echo "esperando el archive..."
+arc_ok=0
+for _ in $(seq 1 60); do
+    if curl -sS -o /dev/null --max-time 5 "http://127.0.0.1:8080/dcm4chee-arc/aets/PACS/rs/studies"; then
+        arc_ok=1
+        break
+    fi
+    sleep 5
+done
+if [ "$arc_ok" -ne 1 ]; then
+    echo "el archive no respondió en el 8080" >&2
+    exit 1
+fi
+
 echo "cliente andes y MWL listos"
