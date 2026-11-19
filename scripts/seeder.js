@@ -6,6 +6,8 @@ const { Seeder } = require('mongo-seeding');
 const config = {
     database: process.env.MONGO_URI || 'mongodb://localhost:27066/andes',
     dropDatabase: false,
+    // Las plantillas de andes-services usan claves como $apply. El driver las rechaza si valida las keys.
+    collectionInsertManyOptions: { checkKeys: false },
 };
 
 
