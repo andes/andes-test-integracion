@@ -55,14 +55,23 @@ describe('Filtros de Mapa Camas', () => {
                     { estado: 'disponible', count: 5, unidadOrganizativa: filtros.unidadesOrganizativas[1].conceptId, sector: filtros.sectores[1], tipoCama: filtros.tipoCama.conceptId }
                 ]
             }).then(camasCreadas => {
-                return cy.goto('/mapa-camas', token);
+                return cy.goto('/mapa-camas/internacion', token);
             });
         });
     });
 
     beforeEach(() => {
-        cy.goto('/mapa-camas', token);
+        cy.goto('/mapa-camas/internacion', token);
         cy.viewport(1920, 1080);
+        // El mapa muestra solo censables hasta que se prende el slide. El autosave puede
+        // restaurar un filtro de la prueba anterior y vaciar las opciones del select.
+        cy.get('app-filtros-camas').then(($filtros) => {
+            const cerrar = $filtros.find('.adi-close-circle').length;
+            for (let i = 0; i < cerrar; i++) {
+                cy.get('app-filtros-camas .adi-close-circle').first().click({ force: true });
+            }
+        });
+        cy.plexBool('label="Incluir No censables"', true);
     });
 
     it('Filtrar por nombre de paciente', () => {
@@ -119,7 +128,7 @@ describe('Filtros de Mapa Camas', () => {
     it('Filtrar por Censable', () => {
         // FILTRAR ES CENSABLE.
         cy.plexButtonIcon('chevron-down').click();
-        const censable = (filtros.tipoCama) ? 'Censable' : 'No censable';
+        const censable = filtros.esCensable ? 'Censable' : 'No censable';
         cy.plexSelectType('label="Censable"', censable).click();
         cy.get('table tr').should('length', 3);
         cy.plexSelect('label="Censable"').clearSelect();

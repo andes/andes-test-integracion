@@ -26,8 +26,7 @@ context('CITAS - Revisión de Agendas', () => {
         });
     });
     beforeEach(() => {
-        cy.server();
-        cy.route('GET', '**/api/core-v2/mpi/pacientes**').as('busquedaPaciente');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes**').as('busquedaPaciente');
     });
 
     it('Se selecciona la primera de dos prestaciones, luego se cambia por la segunda', () => {

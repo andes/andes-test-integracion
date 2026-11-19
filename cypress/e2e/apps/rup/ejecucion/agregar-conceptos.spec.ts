@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment = require('moment');
 
 context('RUP - Ejecucion', () => {
     let token;
@@ -29,7 +30,6 @@ context('RUP - Ejecucion', () => {
                 cy.viewport(1600, 900);
                 cy.goto('/rup/ejecucion/' + idPrestacion, token);
             });
-            cy.server() // para las funciones de rup que estan desactualizadas
         })
 
         it('agregar conceptos desde el buscador', () => {
@@ -85,6 +85,7 @@ context('RUP - Ejecucion', () => {
 
         before(() => {
             cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
+            cy.intercept('GET', '/api/modules/rup/prestaciones?**').as('prestacionesPaciente');
             cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
             cy.intercept('GET', '/api/modules/huds/accesos**', []);
             cy.intercept('GET', '/api/core-v2/mpi/pacientes/**').as('paciente');
@@ -97,7 +98,7 @@ context('RUP - Ejecucion', () => {
                     paciente: idPaciente,
                     tipoPrestacion: '5cdc4c865cd661b503d727a6',
                     estado: 'validada',
-                    fecha: Cypress.moment().subtract(1, 'day').toDate(),
+                    fecha: moment().subtract(1, 'day').toDate(),
                     registros: [{
                         id: "5f772b7ac9264781190bc794",
                         concepto: {
@@ -108,7 +109,7 @@ context('RUP - Ejecucion', () => {
                         },
                         valor: {
                             "estado": "activo",
-                            "fechaInicio": Cypress.moment().subtract(1, 'day'),
+                            "fechaInicio": moment().subtract(1, 'day'),
                             "evolucion": "<p>una evolución</p>"
                         },
                     }]
@@ -118,15 +119,14 @@ context('RUP - Ejecucion', () => {
                 { paciente: idPaciente, tipoPrestacion: '5cdc4c865cd661b503d727a6' }
             ).then((prestacion) => {
                 idPrestacion = prestacion._id;
-                cy.goto('/rup/ejecucion/' + idPrestacion, token);
+                cy.goto('/rup/ejecucion/' + idPrestacion, token, token);
+                cy.wait('@prestacionesPaciente');
             });
 
-            cy.server() // para las funciones de rup que estan desactualizadas
         });
 
         it('evolucionar trastorno desde buscador', () => {
             cy.intercept('GET', '/api/core/term/snomed/expression?expression=**', []);
-            cy.wait('@paciente');
             cy.snomedSearchStub('fiebre', 'mitos/fiebre.json', 'rup-buscador');
             cy.get('plex-tabs').contains('Buscador').click({ force: true });
             cy.RupBuscarConceptos('fiebre');
@@ -146,6 +146,7 @@ context('RUP - Ejecucion', () => {
             cy.assertRupCard(0, { semanticTag: 'trastorno', term: 'fiebre Q' }).then(($elem) => {
                 cy.wrap($elem).should('not.contain', 'Inicio del Hallazgo');
                 cy.wrap($elem).plexInt('name="inicioEstimadoUnidad"', '10');
+                cy.wrap($elem).plexHtml('name="evolucion"', 'una evolucion');
             });
 
             cy.plexButton("Guardar sesión de informes de enfermería").click()
@@ -162,7 +163,7 @@ context('RUP - Ejecucion', () => {
             cy.goto('/huds/paciente/586e6e8627d3107fde116cdb', token, token);
             cy.HudsBusquedaFiltros('trastorno');
 
-            cy.get('plex-layout-sidebar .rup-card').should('have.length', 2);
+            cy.get('plex-layout-sidebar .rup-card').contains('fiebre Q');
         });
     });
 });

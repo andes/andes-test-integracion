@@ -1,4 +1,5 @@
 /// <reference types="Cypress" />
+import moment = require('moment');
 
 context('Exportar HUDS', () => {
     let token;
@@ -32,23 +33,22 @@ context('Exportar HUDS', () => {
     beforeEach(() => {
         cy.intercept('GET', '/api/modules/huds/motivosHuds/motivosHuds**', { fixture: 'huds/modalHuds.json' }).as('motivosHuds');
 
-        cy.server();
         cy.goto('/visualizacion-informacion/exportar-huds', token);
-        cy.route('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
-        cy.route('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
-        cy.route('POST', '**api/modules/huds/export').as('peticionExport');
-        cy.route('GET', '**api/modules/huds/export?**').as('pendientes');
-        cy.route('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
+        cy.intercept('GET', '**/api/core-v2/mpi/pacientes/**').as('getPaciente');
+        cy.intercept('GET', '**api/core-v2/mpi/pacientes?**').as('busquedaPaciente');
+        cy.intercept('POST', '**api/modules/huds/export').as('peticionExport');
+        cy.intercept('GET', '**api/modules/huds/export?**').as('pendientes');
+        cy.intercept('GET', '**/api/core/tm/tiposPrestaciones**').as('prestaciones');
 
 
     })
 
     it('Seleccionar un paciente y solicitar exportar huds entre dos fechas', () => {
-        let ayer = Cypress.moment().add('days', -1).format('DD/MM/YYYY');
-        let hoy = Cypress.moment().format('DD/MM/YYYY');
+        let ayer = moment().add('days', -1).format('DD/MM/YYYY');
+        let hoy = moment().format('DD/MM/YYYY');
         cy.plexText('name="buscador"', pacienteValidado.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body[0].apellido).to.be.eq(pacienteValidado.apellido);
             expect(xhr.response.body[0].nombre).to.be.eq(pacienteValidado.nombre);
             expect(xhr.response.body[0].documento).to.be.eq(pacienteValidado.documento);
@@ -56,17 +56,17 @@ context('Exportar HUDS', () => {
         cy.get('paciente-listado plex-item').contains(pacienteValidado.nombre).click();
         cy.modalPrivacidad('Procesos de Auditoría');
         cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
-        cy.plexDatetime('label="Desde"', ayer);
-        cy.plexDatetime('label="Hasta"', { text: hoy, skipEnter: true });
+        cy.plexDatetime('label="Desde"', { text: ayer, blur: true });
+        cy.plexDatetime('label="Hasta"', { text: hoy, blur: true });
         cy.plexButton(' Generar ').click();
 
         cy.wait('@peticionExport').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.wait('@pendientes').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body[0].user.usuario.apellido).to.be.eq("Huenchuman");
             expect(xhr.response.body[0].user.usuario.nombre).to.be.eq("Natalia");
             expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
@@ -77,7 +77,7 @@ context('Exportar HUDS', () => {
     it('Seleccionar un paciente y solicitar exportar huds completa', () => {
         cy.plexText('name="buscador"', pacienteHudsCompleta.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body[0].apellido).to.be.eq(pacienteHudsCompleta.apellido);
             expect(xhr.response.body[0].nombre).to.be.eq(pacienteHudsCompleta.nombre);
             expect(xhr.response.body[0].documento).to.be.eq(pacienteHudsCompleta.documento);
@@ -85,15 +85,15 @@ context('Exportar HUDS', () => {
         cy.get('paciente-listado plex-item').contains(pacienteHudsCompleta.nombre).click();
         cy.modalPrivacidad('Procesos de Auditoría');
         cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.plexBool("label='HUDS Completa'", true);
         cy.plexButton(' Generar ').click();
         cy.wait('@peticionExport').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.wait('@pendientes').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body[0].user.usuario.apellido).to.be.eq("Huenchuman");
             expect(xhr.response.body[0].user.usuario.nombre).to.be.eq("Natalia");
             expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);
@@ -102,11 +102,11 @@ context('Exportar HUDS', () => {
     });
 
     it('Seleccionar un paciente y solicitar exportar huds entre dos fechas y con una prestación', () => {
-        let ayer = Cypress.moment().add('days', -1).format('DD/MM/YYYY');
-        let hoy = Cypress.moment().format('DD/MM/YYYY');
+        let ayer = moment().add('days', -1).format('DD/MM/YYYY');
+        let hoy = moment().format('DD/MM/YYYY');
         cy.plexText('name="buscador"', pacienteConPrestacion.documento);
         cy.wait('@busquedaPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body[0].apellido).to.be.eq(pacienteConPrestacion.apellido);
             expect(xhr.response.body[0].nombre).to.be.eq(pacienteConPrestacion.nombre);
             expect(xhr.response.body[0].documento).to.be.eq(pacienteConPrestacion.documento);
@@ -114,17 +114,18 @@ context('Exportar HUDS', () => {
         cy.get('paciente-listado plex-item').contains(pacienteConPrestacion.nombre).click();
         cy.modalPrivacidad('Procesos de Auditoría');
         cy.wait('@getPaciente').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
-        cy.plexDatetime('label="Desde"', ayer);
-        cy.plexDatetime('label="Hasta"', { text: hoy, skipEnter: true });
-        cy.plexSelectType('label="Prestaciones"', 'consulta de clinica medica');
-        cy.plexButton(' Generar ').click();
+        cy.plexDatetime('label="Desde"', { text: ayer, blur: true });
+        cy.plexDatetime('label="Hasta"', { text: hoy, blur: true });
+        cy.get('plex-select[label="Prestaciones"] .selectize-input').click({ force: true });
+        cy.get('.selectize-dropdown [data-selectable]').contains(/consulta/i).click({ force: true });
+        cy.plexButton(' Generar ').click({ force: true });
         cy.wait('@peticionExport').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
         });
         cy.wait('@pendientes').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(xhr.response.body[0].user.usuario.apellido).to.be.eq("Huenchuman");
             expect(xhr.response.body[0].user.usuario.nombre).to.be.eq("Natalia");
             expect(xhr.response.body[0].user.usuario.username).to.be.eq(30643636);

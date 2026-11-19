@@ -487,7 +487,11 @@
 				"semanticTag": "medio ambiente"
 			}
 		],
-		"configuraciones": {}
+		"configuraciones": {
+			"planIndicaciones": {
+				"horaInicio": 12
+			}
+		}
 	},
 	{
 		"_id": {

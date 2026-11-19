@@ -1,3 +1,4 @@
+import moment = require('moment');
 let i = 0;
 ['medica', 'enfermeria'].forEach((capa) => {
     let arreProfesionales = [4163782, 15789463];
@@ -17,7 +18,7 @@ let i = 0;
                         [{
                             estado: 'ocupada',
                             pacientes: [paciente],
-                            fechaIngreso: Cypress.moment().add(-5, 'day')
+                            fechaIngreso: moment().add(-5, 'day')
                         }]
                 }).then((camitas) => {
                     cy.taskN('database:seed:prestacion', [{
@@ -38,7 +39,7 @@ let i = 0;
                         fecha: -1,
                         createdBy: user._id
                     }]);
-                    return cy.goto('/mapa-camas', token);
+                    return cy.goto('/mapa-camas/internacion', token);
                 });
             });
             i++;
@@ -57,6 +58,8 @@ let i = 0;
             cy.wait(2000)
             cy.plexOptions('REGISTROS').click();
             cy.modalPrivacidad(true);
+            cy.getCama(pacientes[0].apellido).click();
+            cy.plexTab('INTERNACION').click();
 
             cy.plexLayoutSidebar().contains('MOVIMIENTOS');
 
@@ -77,7 +80,7 @@ let i = 0;
             cy.getRegistrosMedicos().plexButtonIcon('eye').click();
             cy.plexLayoutMain().contains('consulta con médico general');
             cy.plexLayoutMain().find('plex-title').plexButtonIcon('close').click();
-            let fecha = Cypress.moment().format('DD/MM/yyyy HH:mm');
+            let fecha = moment().format('DD/MM/yyyy HH:mm');
             cy.plexLayoutMain().get('plex-title').contains(fecha)
         });
     });

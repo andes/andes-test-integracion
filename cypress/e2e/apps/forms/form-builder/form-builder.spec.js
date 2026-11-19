@@ -17,8 +17,7 @@ context('Ficha Epidemiológica', () => {
         cy.fixture('/form/form-example.json').then(json => {
             form = json;
         });
-        cy.server();
-        cy.route('POST', 'api/modules/forms/formulario').as('post');
+        cy.intercept('POST', 'api/modules/forms/formulario').as('post');
         cy.goto('/forms', token);
     })
 
@@ -69,7 +68,7 @@ context('Ficha Epidemiológica', () => {
         }
         cy.plexButton('Guardar').click();
         cy.wait('@post').then((xhr) => {
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             const compare = (o1, o2) => {
                 Object.keys(o1).forEach(k => {
                     if (o1[k] === Object(o1[k])) {

@@ -12,8 +12,6 @@
 // the project's config changing)
 
 
-const selectTestsWithGrep = require('cypress-select-tests/grep');
-
 const { seedAgenda } = require('./seed-agenda');
 const { seedNomivac } = require('./seed-nomivac');
 const { seedPrestacion } = require('./seed-prestaciones');
@@ -34,8 +32,6 @@ const { createElementosRequeridos } = require('./seed-elementos-rup-requeridos')
 const { worklist, enviarEstudio } = require('./pacs');
 
 module.exports = (on, config) => {
-
-    on('file:preprocessor', selectTestsWithGrep(config))
 
     const mongoUri = config.env.MONGO_URI || 'mongodb://localhost:27066/andes';
 

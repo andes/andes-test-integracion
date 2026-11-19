@@ -152,6 +152,15 @@ module.exports.createPaciente = async (mongoUri, params) => {
         dto.reportarError = (params.reportarError) ? params.reportarError : (dto.reportarError) ? dto.reportarError : false;
         // si no tiene notaError y no se envió en params se le asigna string vacío
         dto.notaError = (params.notaError) ? params.notaError : (dto.notaError) ? dto.notaError : '';
+        if (params.nombreCorrectoReportado) {
+            dto.nombreCorrectoReportado = params.nombreCorrectoReportado;
+        }
+        if (params.apellidoCorrectoReportado) {
+            dto.apellidoCorrectoReportado = params.apellidoCorrectoReportado;
+        }
+        if (params.fechaNacimientoCorrectoReportado) {
+            dto.fechaNacimientoCorrectoReportado = params.fechaNacimientoCorrectoReportado;
+        }
 
         if (dto.documento) {
             dto.documento = (params.documento) ? params.documento + '' : ('' + faker.random.number({ min: 40000000, max: 49999999 }));

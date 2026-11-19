@@ -1,8 +1,8 @@
 const moment = require('moment')
 
 function getStubs() {
-    cy.route('POST', '**/api/modules/rup/internacion/sala-comun**').as('createSala')
-    cy.route('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('editSala')
+    cy.intercept('POST', '**/api/modules/rup/internacion/sala-comun**').as('createSala')
+    cy.intercept('PATCH', '**/api/modules/rup/internacion/sala-comun/**').as('editSala')
 }
 
 describe('ABM Salas', () => {
@@ -19,7 +19,6 @@ describe('ABM Salas', () => {
     });
 
     beforeEach(() => {
-        cy.server();
 
         getStubs();
 
@@ -36,7 +35,7 @@ describe('ABM Salas', () => {
         cy.plexButton('GUARDAR').click();
         cy.wait('@createSala').then((xhr) => {
             const cama = xhr.response.body;
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(cama.nombre).to.be.eq('Sala 666');
             expect(cama.unidadOrganizativas[0].term).to.be.eq('servicio médico');
             expect(cama.sectores[0].nombre).to.be.eq('habi1');
@@ -57,7 +56,7 @@ describe('ABM Salas', () => {
         cy.plexButton('GUARDAR').click();
         cy.wait('@editSala').then((xhr) => {
             const sala = xhr.response.body;
-            expect(xhr.status).to.be.eq(200);
+            expect(xhr.response.statusCode).to.be.eq(200);
             expect(sala.nombre).to.be.eq('Sala 666');
             expect(sala.unidadOrganizativas[0].term).to.be.eq('servicio médico');
             expect(sala.sectores[0].nombre).to.be.eq('habi1');

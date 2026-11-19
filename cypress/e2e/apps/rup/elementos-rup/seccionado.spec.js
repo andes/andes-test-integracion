@@ -22,7 +22,6 @@ context('RUP - Ejecucion', () => {
     describe('secciones', () => {
         let idPrestacion, idSeccionComponenet, idSeccionadoComponent;
         beforeEach(() => {
-            cy.server();
             cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.intercept('PATCH', '/api/modules/rup/prestaciones/**').as('patchPrestacion');
 

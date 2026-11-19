@@ -47,7 +47,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
     });
 
     it('Verificar datos de cama', () => {
-        cy.goto('/mapa-camas', token);
+        cy.goto('/mapa-camas/internacion', token);
         cy.wait('@getCamas').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });
@@ -140,7 +140,7 @@ describe('Mapa Camas - Detalle de Cama', () => {
     });
 
     it('Deshacer internacion', () => {
-        cy.goto('/mapa-camas', token);
+        cy.goto('/mapa-camas/internacion', token);
         cy.wait('@getCamas').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });

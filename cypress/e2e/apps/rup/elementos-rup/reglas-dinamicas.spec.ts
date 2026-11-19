@@ -13,7 +13,6 @@ context('RUP - Ejecucion', () => {
         let idPrestacion, idElementoRUP;
 
         beforeEach(() => {
-            cy.server();
             cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
             cy.intercept('GET', '/api/modules/seguimiento-paciente**', []);
             cy.intercept('GET', '/api/modules/huds/accesos**', []);

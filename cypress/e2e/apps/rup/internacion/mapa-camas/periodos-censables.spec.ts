@@ -44,7 +44,7 @@ describe('Mapa Camas - Periodos censables', () => {
         cy.intercept('PATCH', '**/api/modules/rup/prestaciones/**').as('anularPrestacion');
 
         cy.viewport(1920, 1080);
-        cy.goto('/mapa-camas', token);
+        cy.goto('/mapa-camas/internacion', token);
         cy.wait('@getCamas').then(({ response }) => {
             expect(response.statusCode).to.be.eq(200);
         });

@@ -18,7 +18,10 @@ const check = (dto) => {
     }
 
     if (dto.fechaNacimiento) {
-        cy.plexDatetime('label="Fecha de nacimiento"').find('input').should('have.value', dto.fechaNacimiento);
+        cy.plexDatetime('label="Fecha de nacimiento"').find('input').should(($input) => {
+            const partes = (valor) => String(valor).split('/').map((parte) => String(Number(parte))).join('/');
+            expect(partes($input.val())).to.eq(partes(dto.fechaNacimiento));
+        });
     }
 }
 
