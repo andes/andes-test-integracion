@@ -1,16 +1,18 @@
 /// <reference types="Cypress" />
 
 // Corre contra el stack de pacs:up. La app está en el 8090 y el Mongo en el 27067.
-// npm run pacs:test
+// Usa un paciente distinto a radiografia.spec.js para no chocar en la búsqueda por
+// PatientID + StudyDate (multiple-match).
 
 context('PACS - reconciliación', () => {
     let token;
+    const documento = '31549268';
 
     before(() => {
         cy.seed();
         cy.login('38906735', 'asd').then(t => {
             token = t;
-            cy.createPaciente('paciente-rup', token);
+            cy.createPaciente('paciente-turno', token);
         });
     });
 
@@ -22,6 +24,8 @@ context('PACS - reconciliación', () => {
     });
 
     it('reconcilia el estudio enviado con otro StudyInstanceUID', () => {
+        cy.task('pacs:borrar-estudios', { patientId: documento }, { timeout: 60000 });
+
         cy.goto('/rup', token);
         cy.get('[tooltip="Fuera de agenda"]').then((items) => {
             items[0].click();
@@ -29,9 +33,9 @@ context('PACS - reconciliación', () => {
 
         cy.plexSelectType('label="Seleccione el tipo de prestación"', 'radiografía');
 
-        cy.plexText('name="buscador"', '3399661');
+        cy.plexText('name="buscador"', documento);
         cy.wait('@pacientes');
-        cy.get('paciente-listado plex-item').contains(formatDocumento('3399661')).click();
+        cy.get('paciente-listado plex-item').contains(formatDocumento(documento)).click();
         cy.plexButton('INICIAR PRESTACIÓN').click();
 
         cy.wait('@create').then(({ response }) => {
@@ -41,7 +45,7 @@ context('PACS - reconciliación', () => {
             cy.task('pacs:worklist', { prestacionId }, { timeout: 90000 }).then((estudio) => {
                 const worklistUID = estudio.studyInstanceUID;
                 const sentUID = `${worklistUID}.9`;
-                expect(estudio.patientId).to.eq('3399661');
+                expect(estudio.patientId).to.eq(documento);
                 expect(estudio.studyDate).to.match(/^\d{8}$/);
 
                 cy.task('pacs:enviar-estudio', {

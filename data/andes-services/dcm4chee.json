@@ -154,7 +154,8 @@
             },
             "params": {
                 "00100020": "$.patientID",
-                "00080020": "$.studyDate"
+                "00080020": "$.studyDate",
+                "includefield": "all"
             },
             "json": true
         }

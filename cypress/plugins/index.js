@@ -29,7 +29,7 @@ const { cleanDB, connectToDB, fetch } = require('./database');
 const { InitDatabase } = require('./database-initial');
 const { seedServices } = require('./seed-services');
 const { createElementosRequeridos } = require('./seed-elementos-rup-requeridos');
-const { worklist, enviarEstudio } = require('./pacs');
+const { worklist, enviarEstudio, borrarEstudios } = require('./pacs');
 
 module.exports = (on, config) => {
 
@@ -113,6 +113,9 @@ module.exports = (on, config) => {
         },
         'pacs:enviar-estudio': (estudio) => {
             return enviarEstudio(estudio);
+        },
+        'pacs:borrar-estudios': (dto) => {
+            return borrarEstudios(dto);
         }
     });
 
