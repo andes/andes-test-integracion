@@ -17,7 +17,6 @@ context('PACS - radiografía', () => {
     beforeEach(() => {
         cy.intercept('GET', '/api/modules/huds/motivosHuds/motivosHuds**', { fixture: 'huds/modalHuds.json' }).as('motivosHuds');
         cy.intercept('GET', '/api/modules/rup/prestaciones/huds/**', []).as('huds');
-        cy.intercept('GET', '**/api/core/tm/conceptos-turneables?**').as('conceptos');
         cy.intercept('GET', '**api/core-v2/mpi/pacientes?**').as('pacientes');
         cy.intercept('POST', '**/api/modules/rup/prestaciones').as('create');
     });
@@ -28,9 +27,7 @@ context('PACS - radiografía', () => {
             items[0].click();
         });
 
-        cy.plexSelectType('label="Seleccione el tipo de prestación"', 'radiografía', false);
-        cy.wait('@conceptos');
-        cy.get('plex-select[label="Seleccione el tipo de prestación"] input').type('{enter}', { force: true });
+        cy.plexSelectType('label="Seleccione el tipo de prestación"', 'radiografía');
 
         cy.plexText('name="buscador"', '3399661');
         cy.wait('@pacientes');
