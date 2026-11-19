@@ -115,8 +115,59 @@ permissions:
   contents: read
 
 jobs:
+  entradas:
+    name: Entradas
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validar inputs
+        env:
+          APP: ${{ inputs.app }}
+          API: ${{ inputs.api }}
+          TESTS: ${{ inputs.tests }}
+          MATRICULACIONES: ${{ inputs.matriculaciones }}
+          MONITOREO: ${{ inputs.monitoreo }}
+          MOBILE: ${{ inputs.mobile }}
+          STACK: ${{ inputs.stack }}
+          SPEC: ${{ inputs.spec }}
+          GRUPOS: ${{ inputs.grupos }}
+        run: |
+          node --input-type=module <<'EOF'
+          const ref = /^(?!.*\.\.)(?!\/)(?!.*\/$)[A-Za-z0-9][A-Za-z0-9._/-]{0,200}$/
+          const ruta = /^(?!.*\.\.)[A-Za-z0-9][A-Za-z0-9._/-]{0,200}$/
+          const nombre = /^[a-z][a-z0-9-]*$/
+          const stacks = new Set(["andes", "pacs", "recetar"])
+
+          function fallo(mensaje) {
+            process.stderr.write(`::error::${mensaje}\n`)
+            process.exit(1)
+          }
+
+          function referencia(valor, etiqueta) {
+            if (!ref.test(valor || "")) fallo(`${etiqueta} no es una referencia válida.`)
+          }
+
+          referencia(process.env.APP, "app")
+          referencia(process.env.API, "api")
+          referencia(process.env.TESTS, "tests")
+          referencia(process.env.MATRICULACIONES, "matriculaciones")
+          referencia(process.env.MONITOREO, "monitoreo")
+          referencia(process.env.MOBILE, "mobile")
+
+          const stack = process.env.STACK || "andes"
+          if (!stacks.has(stack)) fallo("El stack no es válido.")
+          for (const parte of (process.env.SPEC || "").split(",")) {
+            const item = parte.trim()
+            if (item && !ruta.test(item)) fallo("La ruta no es válida.")
+          }
+          for (const parte of (process.env.GRUPOS || "").split(",")) {
+            const item = parte.trim()
+            if (item && !nombre.test(item)) fallo("El grupo no es válido.")
+          }
+          EOF
+
   imagen-api:
     name: Imagen api
+    needs: entradas
     uses: andes/api/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.api }}
@@ -126,6 +177,7 @@ jobs:
 
   imagen-app:
     name: Imagen app
+    needs: entradas
     uses: andes/app/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.app }}
@@ -135,6 +187,7 @@ jobs:
 
   imagen-matriculaciones:
     name: Imagen matriculaciones
+    needs: entradas
     uses: andes/matriculaciones/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.matriculaciones }}
@@ -144,6 +197,7 @@ jobs:
 
   imagen-monitoreo:
     name: Imagen monitoreo
+    needs: entradas
     uses: andes/monitoreo-app/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.monitoreo }}
@@ -153,6 +207,7 @@ jobs:
 
   imagen-mobile:
     name: Imagen mobile
+    needs: entradas
     uses: andes/mobile-app/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.mobile }}
@@ -162,6 +217,7 @@ jobs:
 
   carpetas:
     name: Carpetas
+    needs: entradas
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.lista.outputs.matrix }}
@@ -174,7 +230,10 @@ jobs:
           GRUPOS: ${{ inputs.grupos }}
         run: |
           set -euo pipefail
-          # andes es el default. Cada stack trae sus grupos. El mismo mapa está en parse.py.
+          # andes es el default. Cada stack trae sus grupos. El mismo mapa está en index.js.
+          es_nombre() { [[ "$1" =~ ^[a-z][a-z0-9-]*$ ]]; }
+          es_ruta() { [[ "$1" =~ ^[A-Za-z0-9][A-Za-z0-9._/-]*$ && "$1" != *..* && ${#1} -le 200 ]]; }
+          rechazar() { echo "::error::$1" >&2; exit 1; }
           mapa='{
             "andes": [
               {"grupo":"core","ruta":"cypress/e2e/core"},
@@ -191,16 +250,21 @@ jobs:
             "recetar": []
           }'
           stack="${STACK:-andes}"
+          es_nombre "$stack" || rechazar "El stack no es válido."
           if ! jq -e --arg stack "$stack" 'has($stack)' <<<"$mapa" >/dev/null; then
             echo "Stack desconocido: $stack" >&2
             exit 1
           fi
           if [[ -n "$SPEC" ]]; then
             duenos=""
+            limpios=()
             IFS=',' read -ra rutas <<< "$SPEC"
             for ruta in "${rutas[@]}"; do
               ruta="${ruta#"${ruta%%[![:space:]]*}"}"
               ruta="${ruta%"${ruta##*[![:space:]]}"}"
+              [[ -z "$ruta" ]] && continue
+              es_ruta "$ruta" || rechazar "La ruta no es válida."
+              limpios+=("$ruta")
               este=andes
               if [[ "$ruta" == cypress/e2e/apps/pacs || "$ruta" == cypress/e2e/apps/pacs/* ]]; then
                 este=pacs
@@ -212,6 +276,7 @@ jobs:
                 *) duenos="$duenos $este" ;;
               esac
             done
+            [[ ${#limpios[@]} -gt 0 ]] || rechazar "La ruta no es válida."
             set -- $duenos
             if [[ $# -gt 1 ]]; then
               echo "Las rutas son de stacks distintos" >&2
@@ -225,9 +290,21 @@ jobs:
             if [[ "$dueno" != "andes" ]]; then
               stack=$dueno
             fi
-            jq -n --arg stack "$stack" --arg spec "$SPEC" '{include:[{stack:$stack, grupo:"spec", ruta:$spec}]}' > "$RUNNER_TEMP/matrix.json"
+            spec_limpio=$(IFS=,; echo "${limpios[*]}")
+            jq -n --arg stack "$stack" --arg spec "$spec_limpio" '{include:[{stack:$stack, grupo:"spec", ruta:$spec}]}' > "$RUNNER_TEMP/matrix.json"
           elif [[ -n "$GRUPOS" ]]; then
-            jq -n --argjson mapa "$mapa" --arg stack "$stack" --arg grupos "$GRUPOS" '
+            grupos_limpios=()
+            IFS=',' read -ra pedidos <<< "$GRUPOS"
+            for grupo in "${pedidos[@]}"; do
+              grupo="${grupo#"${grupo%%[![:space:]]*}"}"
+              grupo="${grupo%"${grupo##*[![:space:]]}"}"
+              [[ -z "$grupo" ]] && continue
+              es_nombre "$grupo" || rechazar "El grupo no es válido."
+              grupos_limpios+=("$grupo")
+            done
+            [[ ${#grupos_limpios[@]} -gt 0 ]] || rechazar "El grupo no es válido."
+            grupos_limpio=$(IFS=,; echo "${grupos_limpios[*]}")
+            jq -n --argjson mapa "$mapa" --arg stack "$stack" --arg grupos "$grupos_limpio" '
               ($grupos | split(",") | map(gsub("^\\s+|\\s+$";"")) | map(select(length > 0))) as $pedidos
               | if ($pedidos | length) == 0 then error("grupos no trae ningún nombre") else . end
               | ($mapa[$stack] | map(.grupo)) as $delstack
@@ -322,9 +399,9 @@ jobs:
         env:
           STACK: ${{ matrix.stack }}
         run: |
-          echo "STACK=$STACK" >> "$GITHUB_ENV"
           case "$STACK" in
             pacs)
+              echo "STACK=pacs" >> "$GITHUB_ENV"
               echo "MONGO_URI=mongodb://127.0.0.1:27067/andes" >> "$GITHUB_ENV"
               echo "NGINX_URL=http://127.0.0.1:8090" >> "$GITHUB_ENV"
               docker compose \
@@ -336,13 +413,15 @@ jobs:
               exit 0
               ;;
             recetar)
+              echo "STACK=recetar" >> "$GITHUB_ENV"
               echo "el stack recetar no está armado" >&2
               exit 1
               ;;
             andes)
+              echo "STACK=andes" >> "$GITHUB_ENV"
               ;;
             *)
-              echo "Stack desconocido: $STACK" >&2
+              echo "::error::El stack no es válido." >&2
               exit 1
               ;;
           esac
@@ -438,12 +517,14 @@ jobs:
           SPEC: ${{ matrix.ruta }}
         run: |
           shopt -s nullglob
+          es_ruta() { [[ "$1" =~ ^[A-Za-z0-9][A-Za-z0-9._/-]*$ && "$1" != *..* && ${#1} -le 200 ]]; }
           IFS=',' read -ra partes <<< "$SPEC"
           specs=()
           for cruda in "${partes[@]}"; do
             ruta="${cruda#"${cruda%%[![:space:]]*}"}"
             ruta="${ruta%"${ruta##*[![:space:]]}"}"
             [[ -z "$ruta" ]] && continue
+            es_ruta "$ruta" || { echo "::error::La ruta no es válida." >&2; exit 1; }
             if [[ -d "$ruta" ]]; then
               while IFS= read -r archivo; do
                 specs+=("$archivo")

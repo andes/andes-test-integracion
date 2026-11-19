@@ -53,4 +53,4 @@ runs:
         BODY: ${{ inputs.body }}
         ORIGEN: ${{ inputs.origen }}
         ORIGEN_REF: ${{ inputs.origen_ref }}
-      run: python3 "${{ github.action_path }}/parse.py"
+      run: node "${{ github.action_path }}/index.js"
