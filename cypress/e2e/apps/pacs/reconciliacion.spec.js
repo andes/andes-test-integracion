@@ -2,9 +2,10 @@
 
 // Corre contra el stack de pacs:up. La app está en el 8090 y el Mongo en el 27067.
 // Usa un paciente distinto a radiografia.spec.js para no chocar en la búsqueda por
-// PatientID + StudyDate (multiple-match).
+// PatientID + StudyDate (multiple-match). Sin retries: cada reintento dejaría otro
+// estudio del mismo paciente en el PACS.
 
-context('PACS - reconciliación', () => {
+context('PACS - reconciliación', { retries: 0 }, () => {
     let token;
     const documento = '31549268';
 
@@ -24,8 +25,6 @@ context('PACS - reconciliación', () => {
     });
 
     it('reconcilia el estudio enviado con otro StudyInstanceUID', () => {
-        cy.task('pacs:borrar-estudios', { patientId: documento }, { timeout: 60000 });
-
         cy.goto('/rup', token);
         cy.get('[tooltip="Fuera de agenda"]').then((items) => {
             items[0].click();

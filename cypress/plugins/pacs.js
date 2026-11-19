@@ -11,8 +11,6 @@ const composeArgs = [
     '--env-file', 'docker/pacs/stack.env',
 ];
 const TZ = 'America/Argentina/Buenos_Aires';
-const KEYCLOAK_TOKEN = 'http://localhost:8880/auth/realms/dcm4che/protocol/openid-connect/token';
-const ARC_RS = 'http://localhost:8080/dcm4chee-arc/aets/PACS/rs';
 
 function sleep(ms) {
     Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
@@ -116,51 +114,6 @@ async function worklist(mongoUri, { prestacionId }) {
     };
 }
 
-async function httpJson(url, options = {}) {
-    const response = await fetch(url, options);
-    const text = await response.text();
-    if (!response.ok) {
-        throw new Error(`${options.method || 'GET'} ${url} → ${response.status}: ${text}`);
-    }
-    if (!text) {
-        return [];
-    }
-    return JSON.parse(text);
-}
-
-async function loginArc() {
-    const body = new URLSearchParams({
-        grant_type: 'client_credentials',
-        client_id: 'andes',
-        client_secret: '1111111111111111111111111',
-    });
-    const data = await httpJson(KEYCLOAK_TOKEN, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body.toString(),
-    });
-    return data.access_token;
-}
-
-async function borrarEstudios({ patientId }) {
-    const token = await loginArc();
-    const studies = await httpJson(
-        `${ARC_RS}/studies?PatientID=${encodeURIComponent(patientId)}&includefield=all`,
-        { headers: { Authorization: `Bearer ${token}`, Accept: 'application/dicom+json' } }
-    );
-    for (const study of studies) {
-        const uid = study?.['0020000D']?.Value?.[0];
-        if (!uid) {
-            continue;
-        }
-        await httpJson(`${ARC_RS}/studies/${encodeURIComponent(uid)}`, {
-            method: 'DELETE',
-            headers: { Authorization: `Bearer ${token}` },
-        });
-    }
-    return true;
-}
-
 function enviarEstudio(estudio) {
     const studyInstanceUID = estudio.studyInstanceUID;
     const fecha = estudio.studyDate || dicomDate(new Date());
@@ -203,4 +156,4 @@ function enviarEstudio(estudio) {
     return true;
 }
 
-module.exports = { worklist, enviarEstudio, borrarEstudios };
+module.exports = { worklist, enviarEstudio };
