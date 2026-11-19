@@ -24,7 +24,9 @@ context('PACS - radiografía', () => {
 
     it('inicia la radiografía, consulta la worklist y abre la imagen en OHIF', () => {
         cy.goto('/rup', token);
-        cy.get('[tooltip="Fuera de agenda"]').first().click();
+        cy.get('[tooltip="Fuera de agenda"]').then((items) => {
+            items[0].click();
+        });
 
         cy.plexSelectType('label="Seleccione el tipo de prestación"', 'radiografía', false);
         cy.wait('@conceptos');
