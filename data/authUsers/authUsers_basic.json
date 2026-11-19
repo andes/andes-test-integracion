@@ -1765,6 +1765,7 @@
                 "permisos": [
                     "turnos:*",
                     "mpi:*",
+                    "rup:tipoPrestacion:595107fba784f4e1a8e2afe4",
                     "rup:tipoPrestacion:5951051aa784f4e1a8e2afe1",
                     "rup:tipoPrestacion:598ca8375adc68e2a0c121bc",
                     "rup:tipoPrestacion:598ca8375adc68e2a0c121b8",

@@ -1,0 +1,99 @@
+services:
+  andes-db:
+    image: mongo:5.0
+    ports:
+      - "27067:27017"
+    volumes:
+      - andes-mongo:/data/db
+
+  api:
+    image: "andesnqn/api:${API:-master}"
+    entrypoint: ["node", "index.js"]
+    ports:
+      - "3003:3002"
+    environment:
+      APP_KEY: "5gCYFZPp3dfA2m5UNElVkgRLFcFnlele"
+      MONGO_MAIN: "mongodb://andes-db:27017/andes"
+      MONGO_LOGS: "mongodb://andes-db:27017/logs"
+      MONGO_PUCO: "mongodb://andes-db:27017/andes"
+      EMAIL_ACTIVE: "false"
+    depends_on:
+      - andes-db
+
+  nginx:
+    image: "andesnqn/nginx:${APP:-master}"
+    ports:
+      - "8090:80"
+    depends_on:
+      - api
+
+  ldap:
+    image: dcm4che/slapd-dcm4chee:2.4.57-24.2
+    env_file: pacs/stack.env
+    volumes:
+      - ldap-data:/var/lib/openldap/openldap-data
+      - slapd-config:/etc/openldap/slapd.d
+
+  keycloak:
+    image: dcm4che/keycloak:15.0.1
+    ports:
+      - "8880:8880"
+    env_file: pacs/stack.env
+    environment:
+      HTTP_PORT: 8880
+      HTTPS_PORT: 8843
+      MANAGEMENT_HTTP_PORT: 8990
+      MANAGEMENT_HTTPS_PORT: 8993
+      HTTP_PROXY_ADDRESS_FORWARDING: "true"
+      KEYCLOAK_WAIT_FOR: ldap:389
+    depends_on:
+      - ldap
+    volumes:
+      - keycloak-data:/opt/keycloak/standalone
+
+  pacs-db:
+    image: dcm4che/postgres-dcm4chee:13.3-24
+    env_file: pacs/stack.env
+    volumes:
+      - pacs-db-data:/var/lib/postgresql/data
+
+  arc:
+    image: dcm4che/dcm4chee-arc-psql:5.24.2-secure
+    ports:
+      - "8080:8080"
+      - "11112:11112"
+    env_file: pacs/stack.env
+    environment:
+      POSTGRES_HOST: pacs-db
+      WILDFLY_CHOWN: /opt/wildfly/standalone /storage
+      WILDFLY_WAIT_FOR: ldap:389 pacs-db:5432 keycloak:8880
+      HTTP_PROXY_ADDRESS_FORWARDING: "true"
+    depends_on:
+      - ldap
+      - keycloak
+      - pacs-db
+    volumes:
+      - arc-wildfly:/opt/wildfly/standalone
+      - arc-storage:/storage
+
+  ohif:
+    image: ohif/viewer:v4.12.51.21579
+    ports:
+      - "8888:80"
+    volumes:
+      - ./pacs/ohif-app-config.js:/usr/share/nginx/html/app-config.js:ro
+
+  tools:
+    image: dcm4che/dcm4che-tools:5.24.2
+    entrypoint: ["sleep", "infinity"]
+    depends_on:
+      - arc
+
+volumes:
+  andes-mongo:
+  ldap-data:
+  slapd-config:
+  keycloak-data:
+  pacs-db-data:
+  arc-wildfly:
+  arc-storage:

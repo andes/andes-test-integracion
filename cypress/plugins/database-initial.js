@@ -12,6 +12,8 @@ const InitDatabase = async (mongoUri) => {
     const config = {
         database: mongoUri,
         dropDatabase: false,
+        // Las plantillas de andes-services usan claves como $apply. El driver las rechaza si valida las keys.
+        collectionInsertManyOptions: { checkKeys: false },
     };
     const seeder = new Seeder(config);
     const path = require('path');

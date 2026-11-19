@@ -72,3 +72,12 @@ Fuera de esta revisión, y siguen en el árbol:
 - [x] Monitoreo y mobile tienen celda propia. El webhook filtra con un solo GET. Paciente clickea el botón con `force` porque `ion-content` no pasa `checkVisibility`. Sin turnos, abre Listado de turnos y vuelve con el último `ion-back-button`. Novedades tipea la fecha de plex 7 y la descripción en `.ql-editor`. El buscador acepta el espacio como `%20` o `+`. El login entra a `/monitoreo/`.
 - [ ] En planificación, Inicio está deshabilitado hasta que el formulario toma la fecha. El helper limpia con `force` porque la fecha se tipea con `skipEnter` y sin blur. Hay que salir del campo Fecha y sacar el `force`.
 - [x] La matriz de `cypress/e2e` ya corrió. `seccionado` pasó en esa corrida. El grupo mobile quedó verde después, en una corrida sola.
+
+## PRs abiertos
+
+La rama es Cypress viejo (`cy.server`, `cy.route`). No se mergea. Se porta el caso a la suite de `master`.
+
+- [ ] #504 RUP-371. Editar paciente desde RUP: en Resumen del Paciente, el lápiz guarda el alias. `apps/rup/ejecucion/agregar-conceptos.spec.ts`. En la rama quedó con `it.only`.
+- [ ] #490 MONIT-58. Al crear y al editar un concepto turneable, clickear `plex-bool[name="agendaDinamica"]`. `e2e/monitoreo/conceptos_turneables.spec.js`
+- [ ] #482 CIT-227. Revisión de agendas: asistencia a varios turnos del mismo paciente, sobreturno, paciente con prestación y asistencia, y sobreturno con prestación y asistencia. El helper es `seleccionarTurno`. `apps/citas/agendas/revision-agenda/`
+- [ ] #452 MISC-251. Historial de COM: Huenchuman sigue en `:nth-child(2) > .plex-label`. Pasarlo a `plex-label`. `apps/com/com.spec.ts`

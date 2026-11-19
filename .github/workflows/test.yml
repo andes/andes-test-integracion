@@ -1,11 +1,14 @@
 name: Test de integración
 
-# Las imágenes se arman una vez. Cypress corre en un runner por grupo, cada uno
-# con su stack. spec vacío dispara esa matriz. Si viene un valor, es un archivo,
-# varios separados por coma, o una carpeta, y corre un solo job.
+# Las imágenes se arman una vez. Cypress corre en un runner por grupo.
+# El stack se elige primero: andes, pacs o recetar. andes es el default y trae
+# sus grupos. spec es un archivo, varios separados por coma, o una carpeta, y
+# corre un solo job. grupos elige dentro del stack. Si vienen los dos, spec gana.
 # La imagen de cada rama la publica su docker-image, llamado con workflow_call.
 # El tag es el SHA corto. Nginx copia app, matriculaciones, monitoreo y mobile.
 # Este corte no usa Cypress Cloud y no publica el informe fuera del artifact.
+# workflow_call lo usan los PR de app, api, mobile, monitoreo y matriculaciones.
+# Esos repos pasan los secrets de Docker Hub: este workflow no ve los de allá.
 
 on:
   workflow_dispatch:
@@ -40,19 +43,131 @@ on:
         required: true
         default: master
         type: string
+      stack:
+        description: andes, pacs o recetar. andes es el default y trae sus grupos.
+        required: false
+        default: andes
+        type: string
       spec:
-        description: Vacío corre la suite por grupos. Si no, un spec, varios separados por coma, o una carpeta.
+        description: Vacío corre los grupos del stack. Si no, un spec, varios separados por coma, o una carpeta.
         required: false
         default: ""
         type: string
+      grupos:
+        description: Vacío corre los grupos del stack, salvo que spec venga con valor. Si no, grupos separados por coma.
+        required: false
+        default: ""
+        type: string
+  workflow_call:
+    inputs:
+      app:
+        description: Rama o SHA de andes/app.
+        type: string
+        default: master
+        required: false
+      api:
+        description: Rama o SHA de andes/api.
+        type: string
+        default: master
+        required: false
+      tests:
+        description: Rama o SHA de andes-test-integracion.
+        type: string
+        default: master
+        required: false
+      matriculaciones:
+        description: Rama o SHA de andes/matriculaciones.
+        type: string
+        default: master
+        required: false
+      monitoreo:
+        description: Rama o SHA de andes/monitoreo-app.
+        type: string
+        default: master
+        required: false
+      mobile:
+        description: Rama o SHA de andes/mobile-app.
+        type: string
+        default: master
+        required: false
+      stack:
+        description: andes, pacs o recetar. andes es el default.
+        type: string
+        default: andes
+        required: false
+      spec:
+        description: Un spec, varios separados por coma, o una carpeta. Vacío usa los grupos del stack.
+        type: string
+        default: ""
+        required: false
+      grupos:
+        description: Grupos del stack, separados por coma. Vacío, con spec vacío, corre los del stack.
+        type: string
+        default: ""
+        required: false
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_TOKEN:
+        required: true
 
 permissions:
   contents: read
-  actions: write
 
 jobs:
+  entradas:
+    name: Entradas
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validar inputs
+        env:
+          APP: ${{ inputs.app }}
+          API: ${{ inputs.api }}
+          TESTS: ${{ inputs.tests }}
+          MATRICULACIONES: ${{ inputs.matriculaciones }}
+          MONITOREO: ${{ inputs.monitoreo }}
+          MOBILE: ${{ inputs.mobile }}
+          STACK: ${{ inputs.stack }}
+          SPEC: ${{ inputs.spec }}
+          GRUPOS: ${{ inputs.grupos }}
+        run: |
+          node --input-type=module <<'EOF'
+          const ref = /^(?!.*\.\.)(?!\/)(?!.*\/$)[A-Za-z0-9][A-Za-z0-9._/-]{0,200}$/
+          const ruta = /^(?!.*\.\.)[A-Za-z0-9][A-Za-z0-9._/-]{0,200}$/
+          const nombre = /^[a-z][a-z0-9-]*$/
+          const stacks = new Set(["andes", "pacs", "recetar"])
+
+          function fallo(mensaje) {
+            process.stderr.write(`::error::${mensaje}\n`)
+            process.exit(1)
+          }
+
+          function referencia(valor, etiqueta) {
+            if (!ref.test(valor || "")) fallo(`${etiqueta} no es una referencia válida.`)
+          }
+
+          referencia(process.env.APP, "app")
+          referencia(process.env.API, "api")
+          referencia(process.env.TESTS, "tests")
+          referencia(process.env.MATRICULACIONES, "matriculaciones")
+          referencia(process.env.MONITOREO, "monitoreo")
+          referencia(process.env.MOBILE, "mobile")
+
+          const stack = process.env.STACK || "andes"
+          if (!stacks.has(stack)) fallo("El stack no es válido.")
+          for (const parte of (process.env.SPEC || "").split(",")) {
+            const item = parte.trim()
+            if (item && !ruta.test(item)) fallo("La ruta no es válida.")
+          }
+          for (const parte of (process.env.GRUPOS || "").split(",")) {
+            const item = parte.trim()
+            if (item && !nombre.test(item)) fallo("El grupo no es válido.")
+          }
+          EOF
+
   imagen-api:
     name: Imagen api
+    needs: entradas
     uses: andes/api/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.api }}
@@ -62,6 +177,7 @@ jobs:
 
   imagen-app:
     name: Imagen app
+    needs: entradas
     uses: andes/app/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.app }}
@@ -71,6 +187,7 @@ jobs:
 
   imagen-matriculaciones:
     name: Imagen matriculaciones
+    needs: entradas
     uses: andes/matriculaciones/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.matriculaciones }}
@@ -80,6 +197,7 @@ jobs:
 
   imagen-monitoreo:
     name: Imagen monitoreo
+    needs: entradas
     uses: andes/monitoreo-app/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.monitoreo }}
@@ -89,6 +207,7 @@ jobs:
 
   imagen-mobile:
     name: Imagen mobile
+    needs: entradas
     uses: andes/mobile-app/.github/workflows/docker-image.yml@master
     with:
       ref: ${{ inputs.mobile }}
@@ -98,6 +217,7 @@ jobs:
 
   carpetas:
     name: Carpetas
+    needs: entradas
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.lista.outputs.matrix }}
@@ -105,20 +225,98 @@ jobs:
       - name: Armar la matriz
         id: lista
         env:
+          STACK: ${{ inputs.stack }}
           SPEC: ${{ inputs.spec }}
+          GRUPOS: ${{ inputs.grupos }}
         run: |
+          set -euo pipefail
+          # andes es el default. Cada stack trae sus grupos. El mismo mapa está en index.js.
+          es_nombre() { [[ "$1" =~ ^[a-z][a-z0-9-]*$ ]]; }
+          es_ruta() { [[ "$1" =~ ^[A-Za-z0-9][A-Za-z0-9._/-]*$ && "$1" != *..* && ${#1} -le 200 ]]; }
+          rechazar() { echo "::error::$1" >&2; exit 1; }
+          mapa='{
+            "andes": [
+              {"grupo":"core","ruta":"cypress/e2e/core"},
+              {"grupo":"citas","ruta":"cypress/e2e/apps/citas"},
+              {"grupo":"rup-internacion","ruta":"cypress/e2e/apps/rup/internacion"},
+              {"grupo":"rup","ruta":"cypress/e2e/apps/rup/elementos-rup,cypress/e2e/apps/rup/punto-inicio,cypress/e2e/apps/rup/ejecucion,cypress/e2e/apps/rup/colonoscopia.spec.ts"},
+              {"grupo":"apps","ruta":"cypress/e2e/apps/auditoria,cypress/e2e/apps/com,cypress/e2e/apps/epidemiologia,cypress/e2e/apps/forms,cypress/e2e/apps/gestor-usuarios,cypress/e2e/apps/huds,cypress/e2e/apps/pantallas,cypress/e2e/apps/perinatal,cypress/e2e/apps/puco,cypress/e2e/apps/vacunacion,cypress/e2e/apps/visualizacion-informacion"},
+              {"grupo":"monitoreo","ruta":"cypress/e2e/monitoreo"},
+              {"grupo":"mobile","ruta":"cypress/e2e/apps/mobile"}
+            ],
+            "pacs": [
+              {"grupo":"pacs","ruta":"cypress/e2e/apps/pacs"}
+            ],
+            "recetar": []
+          }'
+          stack="${STACK:-andes}"
+          es_nombre "$stack" || rechazar "El stack no es válido."
+          if ! jq -e --arg stack "$stack" 'has($stack)' <<<"$mapa" >/dev/null; then
+            echo "Stack desconocido: $stack" >&2
+            exit 1
+          fi
           if [[ -n "$SPEC" ]]; then
-            jq -n --arg spec "$SPEC" '{include:[{grupo:"spec", ruta:$spec}]}' > "$RUNNER_TEMP/matrix.json"
+            duenos=""
+            limpios=()
+            IFS=',' read -ra rutas <<< "$SPEC"
+            for ruta in "${rutas[@]}"; do
+              ruta="${ruta#"${ruta%%[![:space:]]*}"}"
+              ruta="${ruta%"${ruta##*[![:space:]]}"}"
+              [[ -z "$ruta" ]] && continue
+              es_ruta "$ruta" || rechazar "La ruta no es válida."
+              limpios+=("$ruta")
+              este=andes
+              if [[ "$ruta" == cypress/e2e/apps/pacs || "$ruta" == cypress/e2e/apps/pacs/* ]]; then
+                este=pacs
+              elif [[ "$ruta" == cypress/e2e/apps/recetar || "$ruta" == cypress/e2e/apps/recetar/* ]]; then
+                este=recetar
+              fi
+              case " $duenos " in
+                *" $este "*) ;;
+                *) duenos="$duenos $este" ;;
+              esac
+            done
+            [[ ${#limpios[@]} -gt 0 ]] || rechazar "La ruta no es válida."
+            set -- $duenos
+            if [[ $# -gt 1 ]]; then
+              echo "Las rutas son de stacks distintos" >&2
+              exit 1
+            fi
+            dueno=$1
+            if [[ "$stack" != "andes" && "$stack" != "$dueno" ]]; then
+              echo "El spec es de $dueno y el stack es $stack" >&2
+              exit 1
+            fi
+            if [[ "$dueno" != "andes" ]]; then
+              stack=$dueno
+            fi
+            spec_limpio=$(IFS=,; echo "${limpios[*]}")
+            jq -n --arg stack "$stack" --arg spec "$spec_limpio" '{include:[{stack:$stack, grupo:"spec", ruta:$spec}]}' > "$RUNNER_TEMP/matrix.json"
+          elif [[ -n "$GRUPOS" ]]; then
+            grupos_limpios=()
+            IFS=',' read -ra pedidos <<< "$GRUPOS"
+            for grupo in "${pedidos[@]}"; do
+              grupo="${grupo#"${grupo%%[![:space:]]*}"}"
+              grupo="${grupo%"${grupo##*[![:space:]]}"}"
+              [[ -z "$grupo" ]] && continue
+              es_nombre "$grupo" || rechazar "El grupo no es válido."
+              grupos_limpios+=("$grupo")
+            done
+            [[ ${#grupos_limpios[@]} -gt 0 ]] || rechazar "El grupo no es válido."
+            grupos_limpio=$(IFS=,; echo "${grupos_limpios[*]}")
+            jq -n --argjson mapa "$mapa" --arg stack "$stack" --arg grupos "$grupos_limpio" '
+              ($grupos | split(",") | map(gsub("^\\s+|\\s+$";"")) | map(select(length > 0))) as $pedidos
+              | if ($pedidos | length) == 0 then error("grupos no trae ningún nombre") else . end
+              | ($mapa[$stack] | map(.grupo)) as $delstack
+              | ($pedidos - $delstack) as $mal
+              | if ($mal | length) > 0 then error("\($mal | join(", ")) no es un grupo de \($stack)") else . end
+              | {include: [$mapa[$stack][] | select(.grupo as $g | $pedidos | index($g) != null) | .stack = $stack]}
+            ' > "$RUNNER_TEMP/matrix.json"
           else
-            jq -n '{include:[
-              {grupo:"core", ruta:"cypress/e2e/core"},
-              {grupo:"citas", ruta:"cypress/e2e/apps/citas"},
-              {grupo:"rup-internacion", ruta:"cypress/e2e/apps/rup/internacion"},
-              {grupo:"rup", ruta:"cypress/e2e/apps/rup/elementos-rup,cypress/e2e/apps/rup/punto-inicio,cypress/e2e/apps/rup/ejecucion,cypress/e2e/apps/rup/colonoscopia.spec.ts"},
-              {grupo:"apps", ruta:"cypress/e2e/apps/auditoria,cypress/e2e/apps/com,cypress/e2e/apps/epidemiologia,cypress/e2e/apps/forms,cypress/e2e/apps/gestor-usuarios,cypress/e2e/apps/huds,cypress/e2e/apps/pantallas,cypress/e2e/apps/perinatal,cypress/e2e/apps/puco,cypress/e2e/apps/vacunacion,cypress/e2e/apps/visualizacion-informacion"},
-              {grupo:"monitoreo", ruta:"cypress/e2e/monitoreo"},
-              {grupo:"mobile", ruta:"cypress/e2e/apps/mobile"}
-            ]}' > "$RUNNER_TEMP/matrix.json"
+            jq -n --argjson mapa "$mapa" --arg stack "$stack" '
+              if ($mapa[$stack] | length) == 0 then error("el stack \($stack) no tiene grupos") else . end
+              | {include: [$mapa[$stack][] | .stack = $stack]}
+            ' > "$RUNNER_TEMP/matrix.json"
           fi
           {
             echo "matrix<<EOF"
@@ -153,6 +351,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # workflow_call corre con el github context del caller. Sin repository
+          # bajaría ese repo, no los specs.
+          repository: andes/andes-test-integracion
           ref: ${{ inputs.tests }}
           fetch-depth: 0
           persist-credentials: false
@@ -195,7 +396,35 @@ jobs:
       # habla con ese server. El compose del repo queda en mongo 4.4.10.
       # baseUrl y API_SERVER apuntan a nginx, que proxea /api/ hacia api:3002.
       - name: Levantar stack
+        env:
+          STACK: ${{ matrix.stack }}
         run: |
+          case "$STACK" in
+            pacs)
+              echo "STACK=pacs" >> "$GITHUB_ENV"
+              echo "MONGO_URI=mongodb://127.0.0.1:27067/andes" >> "$GITHUB_ENV"
+              echo "NGINX_URL=http://127.0.0.1:8090" >> "$GITHUB_ENV"
+              docker compose \
+                -p andes-pacs \
+                -f docker/docker-compose-pacs.yml \
+                --env-file docker/pacs/stack.env \
+                up -d
+              bash docker/pacs/setup.sh
+              exit 0
+              ;;
+            recetar)
+              echo "STACK=recetar" >> "$GITHUB_ENV"
+              echo "el stack recetar no está armado" >&2
+              exit 1
+              ;;
+            andes)
+              echo "STACK=andes" >> "$GITHUB_ENV"
+              ;;
+            *)
+              echo "::error::El stack no es válido." >&2
+              exit 1
+              ;;
+          esac
           cat > "${RUNNER_TEMP}/compose.ports.yml" <<'EOF'
           services:
             db:
@@ -288,12 +517,14 @@ jobs:
           SPEC: ${{ matrix.ruta }}
         run: |
           shopt -s nullglob
+          es_ruta() { [[ "$1" =~ ^[A-Za-z0-9][A-Za-z0-9._/-]*$ && "$1" != *..* && ${#1} -le 200 ]]; }
           IFS=',' read -ra partes <<< "$SPEC"
           specs=()
           for cruda in "${partes[@]}"; do
             ruta="${cruda#"${cruda%%[![:space:]]*}"}"
             ruta="${ruta%"${ruta##*[![:space:]]}"}"
             [[ -z "$ruta" ]] && continue
+            es_ruta "$ruta" || { echo "::error::La ruta no es válida." >&2; exit 1; }
             if [[ -d "$ruta" ]]; then
               while IFS= read -r archivo; do
                 specs+=("$archivo")
@@ -348,6 +579,13 @@ jobs:
       - name: Bajar stack
         if: always()
         run: |
-          if [[ -f docker/docker-compose.yml ]]; then
-            docker compose -p andes-test -f docker/docker-compose.yml down -v --remove-orphans
-          fi
+          case "${STACK:-andes}" in
+            pacs)
+              docker compose -p andes-pacs -f docker/docker-compose-pacs.yml --env-file docker/pacs/stack.env down -v --remove-orphans
+              ;;
+            andes)
+              if [[ -f docker/docker-compose.yml ]]; then
+                docker compose -p andes-test -f docker/docker-compose.yml down -v --remove-orphans
+              fi
+              ;;
+          esac

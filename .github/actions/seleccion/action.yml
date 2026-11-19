@@ -1,0 +1,56 @@
+name: Selección de la suite
+description: Lee el bloque Test del pull request y arma los inputs de la corrida.
+
+inputs:
+  body:
+    description: Body del pull request.
+    required: true
+  origen:
+    description: Componente de este PR. api, app, mobile, monitoreo o matriculaciones.
+    required: true
+  origen_ref:
+    description: SHA del push. Pisa la rama de ese componente.
+    required: true
+
+outputs:
+  run:
+    description: true si hay un stack, grupos, un spec o todos.
+    value: ${{ steps.parse.outputs.run }}
+  stack:
+    description: andes, pacs o recetar. andes es el default.
+    value: ${{ steps.parse.outputs.stack }}
+  spec:
+    description: Paths separados por coma. Vacío si corre por grupos del stack.
+    value: ${{ steps.parse.outputs.spec }}
+  grupos:
+    description: Grupos separados por coma. Vacío corre los grupos del stack.
+    value: ${{ steps.parse.outputs.grupos }}
+  app:
+    description: Rama o SHA de andes/app.
+    value: ${{ steps.parse.outputs.app }}
+  api:
+    description: Rama o SHA de andes/api.
+    value: ${{ steps.parse.outputs.api }}
+  tests:
+    description: Rama o SHA de andes-test-integracion.
+    value: ${{ steps.parse.outputs.tests }}
+  matriculaciones:
+    description: Rama o SHA de andes/matriculaciones.
+    value: ${{ steps.parse.outputs.matriculaciones }}
+  monitoreo:
+    description: Rama o SHA de andes/monitoreo-app.
+    value: ${{ steps.parse.outputs.monitoreo }}
+  mobile:
+    description: Rama o SHA de andes/mobile-app.
+    value: ${{ steps.parse.outputs.mobile }}
+
+runs:
+  using: composite
+  steps:
+    - id: parse
+      shell: bash
+      env:
+        BODY: ${{ inputs.body }}
+        ORIGEN: ${{ inputs.origen }}
+        ORIGEN_REF: ${{ inputs.origen_ref }}
+      run: node "${{ github.action_path }}/index.js"

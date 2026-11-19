@@ -36,11 +36,26 @@ const connectToDB = async (uri) => {
 
 module.exports.connectToDB = connectToDB;
 
+module.exports.ensurePacienteTextIndex = async (db) => {
+    const col = db.collection('paciente');
+    const indexes = await col.indexes().catch(() => []);
+    const names = indexes.map((idx) => idx.name);
+    if (!names.includes('fuzzy_text')) {
+        await col.createIndex(
+            { documento_fuzzy: 'text' },
+            { name: 'fuzzy_text', background: true, default_language: 'english' },
+        );
+        return true;
+    }
+    return false;
+}
+
 module.exports.cleanDB = async (db) => {
     const colections = await db.collections();
     for (const colection of colections) {
         await colection.deleteMany({});
     }
+    await module.exports.ensurePacienteTextIndex(db);
 }
 
 const getObjectId = (name) => {
