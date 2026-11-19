@@ -23,13 +23,15 @@
         "host": "http://arc:8080",
         "aet": "PACS",
         "visualizador_host": "http://localhost:8888",
+        "reconcileMatchingModalities": ["CR", "DX"],
         "auth": {
             "clientId": "andes",
             "clientSecret": "1111111111111111111111111",
             "host": "http://keycloak:8880/auth"
         },
         "featureFlags": {
-            "usoIdDNI": true
+            "usoIdDNI": true,
+            "reconciliarEstudios": true
         }
     },
     {

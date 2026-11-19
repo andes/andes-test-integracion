@@ -10,6 +10,7 @@ const composeArgs = [
     '-f', 'docker/docker-compose-pacs.yml',
     '--env-file', 'docker/pacs/stack.env',
 ];
+const TZ = 'America/Argentina/Buenos_Aires';
 
 function sleep(ms) {
     Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
@@ -44,6 +45,28 @@ function pixelData() {
     return bytes.toString('base64');
 }
 
+function part(fecha, type) {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: TZ,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hourCycle: 'h23',
+    }).formatToParts(new Date(fecha));
+    return parts.find(item => item.type === type).value;
+}
+
+function dicomDate(fecha) {
+    return `${part(fecha, 'year')}${part(fecha, 'month')}${part(fecha, 'day')}`;
+}
+
+function dicomTime(fecha) {
+    return `${part(fecha, 'hour')}${part(fecha, 'minute')}${part(fecha, 'second')}`;
+}
+
 async function worklist(mongoUri, { prestacionId }) {
     const client = await connectToDB(mongoUri);
     const prestaciones = client.db().collection('prestaciones');
@@ -68,6 +91,7 @@ async function worklist(mongoUri, { prestacionId }) {
     const studyInstanceUID = valor('pacs-uid');
     const accessionNumber = valor('pacs-accessionNumber');
     const patientId = valor('pacs-pacienteIdDicom');
+    const studyDate = dicomDate(prestacion.ejecucion.fecha);
 
     const output = tools([
         'findscu', '-c', 'PACS@arc:11112', '-M', 'MWL',
@@ -85,18 +109,20 @@ async function worklist(mongoUri, { prestacionId }) {
         accessionNumber,
         patientId,
         patientName: tag(output, '0010,0010') || 'RUP^PACIENTE',
+        studyDate,
+        prestacionId,
     };
 }
 
 function enviarEstudio(estudio) {
-    const ahora = new Date();
-    const fecha = ahora.toISOString().slice(0, 10).replace(/-/g, '');
-    const hora = ahora.toISOString().slice(11, 19).replace(/:/g, '');
+    const studyInstanceUID = estudio.studyInstanceUID;
+    const fecha = estudio.studyDate || dicomDate(new Date());
+    const hora = dicomTime(new Date());
     const dataset = {
         '00080005': { vr: 'CS', Value: ['ISO_IR 100'] },
         '00080008': { vr: 'CS', Value: ['ORIGINAL', 'PRIMARY'] },
         '00080016': { vr: 'UI', Value: ['1.2.840.10008.5.1.4.1.1.1'] },
-        '00080018': { vr: 'UI', Value: [`${estudio.studyInstanceUID}.1`] },
+        '00080018': { vr: 'UI', Value: [`${studyInstanceUID}.1`] },
         '00080020': { vr: 'DA', Value: [fecha] },
         '00080030': { vr: 'TM', Value: [hora] },
         '00080050': { vr: 'SH', Value: [estudio.accessionNumber] },
@@ -104,8 +130,8 @@ function enviarEstudio(estudio) {
         '00081030': { vr: 'LO', Value: ['radiografia simple'] },
         '00100010': { vr: 'PN', Value: [{ Alphabetic: estudio.patientName }] },
         '00100020': { vr: 'LO', Value: [estudio.patientId] },
-        '0020000D': { vr: 'UI', Value: [estudio.studyInstanceUID] },
-        '0020000E': { vr: 'UI', Value: [`${estudio.studyInstanceUID}.2`] },
+        '0020000D': { vr: 'UI', Value: [studyInstanceUID] },
+        '0020000E': { vr: 'UI', Value: [`${studyInstanceUID}.2`] },
         '00200010': { vr: 'SH', Value: ['1'] },
         '00200011': { vr: 'IS', Value: ['1'] },
         '00200013': { vr: 'IS', Value: ['1'] },

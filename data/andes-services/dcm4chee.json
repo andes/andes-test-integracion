@@ -88,5 +88,75 @@
             "json": true,
             "body": "$.estudio"
         }
+    },
+    {
+        "name": "dcm4chee-buscar-series-estudio",
+        "type": "http-client",
+        "configuration": {
+            "url": {
+                "$apply": {
+                    "fn": "concat",
+                    "args": [
+                        "$.host",
+                        "/dcm4chee-arc/aets/",
+                        "$.aet",
+                        "/rs/series"
+                    ]
+                }
+            },
+            "method": "GET",
+            "headers": {
+                "Authorization": {
+                    "$apply": {
+                        "fn": "concat",
+                        "args": [
+                            "Bearer ",
+                            "$.token"
+                        ]
+                    }
+                },
+                "Accept": "application/dicom+json"
+            },
+            "params": {
+                "StudyInstanceUID": "$.studyUID",
+                "limit": "$.limit"
+            },
+            "json": true
+        }
+    },
+    {
+        "name": "dcm4chee-buscar-estudios",
+        "type": "http-client",
+        "configuration": {
+            "url": {
+                "$apply": {
+                    "fn": "concat",
+                    "args": [
+                        "$.host",
+                        "/dcm4chee-arc/aets/",
+                        "$.aet",
+                        "/rs/studies"
+                    ]
+                }
+            },
+            "method": "GET",
+            "headers": {
+                "Authorization": {
+                    "$apply": {
+                        "fn": "concat",
+                        "args": [
+                            "Bearer ",
+                            "$.token"
+                        ]
+                    }
+                },
+                "Accept": "application/dicom+json"
+            },
+            "params": {
+                "00100020": "$.patientID",
+                "00080020": "$.studyDate"
+            },
+            "json": true
+        }
     }
 ]
