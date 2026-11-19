@@ -1,0 +1,92 @@
+[
+    {
+        "name": "dcm4chee-login",
+        "type": "http-client",
+        "configuration": {
+            "url": {
+                "$apply": {
+                    "fn": "concat",
+                    "args": [
+                        "$.host",
+                        "/realms/dcm4che/protocol/openid-connect/token"
+                    ]
+                }
+            },
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "form": true,
+            "json": true,
+            "body": {
+                "grant_type": "client_credentials",
+                "client_id": "$.clientId",
+                "client_secret": "$.clientSecret"
+            }
+        }
+    },
+    {
+        "name": "dcm4chee-create-paciente",
+        "type": "http-client",
+        "configuration": {
+            "url": {
+                "$apply": {
+                    "fn": "concat",
+                    "args": [
+                        "$.host",
+                        "/dcm4chee-arc/aets/",
+                        "$.aet",
+                        "/rs/patients"
+                    ]
+                }
+            },
+            "method": "POST",
+            "headers": {
+                "Authorization": {
+                    "$apply": {
+                        "fn": "concat",
+                        "args": [
+                            "Bearer ",
+                            "$.token"
+                        ]
+                    }
+                },
+                "Content-Type": "application/dicom+json"
+            },
+            "json": true,
+            "body": "$.paciente"
+        }
+    },
+    {
+        "name": "dcm4chee-programar-estudio",
+        "type": "http-client",
+        "configuration": {
+            "url": {
+                "$apply": {
+                    "fn": "concat",
+                    "args": [
+                        "$.host",
+                        "/dcm4chee-arc/aets/",
+                        "$.aet",
+                        "/rs/mwlitems"
+                    ]
+                }
+            },
+            "method": "POST",
+            "headers": {
+                "Authorization": {
+                    "$apply": {
+                        "fn": "concat",
+                        "args": [
+                            "Bearer ",
+                            "$.token"
+                        ]
+                    }
+                },
+                "Content-Type": "application/dicom+json"
+            },
+            "json": true,
+            "body": "$.estudio"
+        }
+    }
+]

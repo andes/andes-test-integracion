@@ -19,6 +19,10 @@
     "dev:up": "node scripts/prepare.js develop up",
     "dev:reset": "node scripts/prepare.js develop reset",
     "dev:down": "node scripts/prepare.js develop down",
+    "pacs:up": "node scripts/prepare.js pacs up",
+    "pacs:reset": "node scripts/prepare.js pacs reset",
+    "pacs:down": "node scripts/prepare.js pacs down",
+    "pacs:test": "npx cypress run --spec cypress/e2e/apps/pacs/radiografia.spec.js -c baseUrl=http://localhost:8090 --env ENVIRONMENT=develop,MONGO_URI=mongodb://localhost:27067/andes,API_SERVER=http://localhost:8090",
     "report": "node scripts/reporter.js"
   },
   "repository": {

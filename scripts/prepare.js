@@ -1,6 +1,8 @@
 const action = process.argv[3];
 const type = process.argv[2] || 'develop';
 
+const pacsCompose = 'docker compose -p andes-pacs -f docker/docker-compose-pacs.yml --env-file docker/pacs/stack.env';
+
 const up = {
     production: [
         'npm run prod:down',
@@ -8,6 +10,10 @@ const up = {
     ],
     develop: [
         'docker-compose -f docker/docker-local.yml up -d',
+    ],
+    pacs: [
+        `${pacsCompose} up -d`,
+        'bash docker/pacs/setup.sh',
     ]
 }
 
@@ -17,6 +23,9 @@ const down = {
     ],
     develop: [
         'docker-compose -f docker/docker-local.yml down -v'
+    ],
+    pacs: [
+        `${pacsCompose} down -v`
     ]
 };
 
@@ -26,6 +35,9 @@ const reset = {
     ],
     develop: [
         'node scripts/seeder.js'
+    ],
+    pacs: [
+        'MONGO_URI=mongodb://localhost:27067/andes node scripts/seeder.js'
     ]
 };
 
@@ -40,7 +52,7 @@ function runCommands(cmds) {
     const { execSync } = require('child_process');
     for (let i = 0; i < cmds.length; i++) {
         console.log('-> ', cmds[i]);
-        const result = execSync(cmds[i]);
+        execSync(cmds[i], { stdio: 'inherit' });
     }
 }
 

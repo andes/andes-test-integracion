@@ -31,6 +31,7 @@ const { cleanDB, connectToDB, fetch } = require('./database');
 const { InitDatabase } = require('./database-initial');
 const { seedServices } = require('./seed-services');
 const { createElementosRequeridos } = require('./seed-elementos-rup-requeridos');
+const { worklist, enviarEstudio } = require('./pacs');
 
 module.exports = (on, config) => {
 
@@ -110,6 +111,12 @@ module.exports = (on, config) => {
         },
         'database:create:elementos-requeridos': (dto) => {
             return createElementosRequeridos(mongoUri, dto);
+        },
+        'pacs:worklist': (dto) => {
+            return worklist(mongoUri, dto);
+        },
+        'pacs:enviar-estudio': (estudio) => {
+            return enviarEstudio(estudio);
         }
     });
 
