@@ -1,20 +1,30 @@
 #!/usr/bin/env python3
-"""Lee el bloque Test del body y escribe los inputs de test.yml."""
+"""Lee el bloque Test del body y escribe los inputs de test.yml.
+
+El stack va primero. andes es el default. Cada stack tiene sus grupos.
+Un nombre de stack corre los grupos de ese stack. Un grupo elige dentro
+del stack al que pertenece. todos corre los grupos del stack, que es andes
+si no se nombró otro.
+"""
 
 import os
 import re
 import sys
 
-GRUPOS = (
-    "core",
-    "citas",
-    "rup-internacion",
-    "rup",
-    "apps",
-    "monitoreo",
-    "mobile",
-    "pacs",
-)
+STACKS = {
+    "andes": (
+        "core",
+        "citas",
+        "rup-internacion",
+        "rup",
+        "apps",
+        "monitoreo",
+        "mobile",
+    ),
+    "pacs": ("pacs",),
+    "recetar": (),
+}
+DEFAULT_STACK = "andes"
 RAMAS = (
     "app",
     "api",
@@ -24,6 +34,10 @@ RAMAS = (
     "mobile",
 )
 ORIGENES = ("api", "app", "mobile", "monitoreo", "matriculaciones")
+PREFIJOS = (
+    ("cypress/e2e/apps/pacs", "pacs"),
+    ("cypress/e2e/apps/recetar", "recetar"),
+)
 
 
 def escribir(valores):
@@ -70,6 +84,23 @@ def bloque_test(body):
     return contenido
 
 
+def grupos_de(stack):
+    if stack not in STACKS:
+        fallo(f"No conozco el stack {stack}.")
+    return STACKS[stack]
+
+
+def dueno_grupo(nombre):
+    return [stack for stack, grupos in STACKS.items() if nombre in grupos]
+
+
+def dueno_spec(path):
+    for prefijo, stack in PREFIJOS:
+        if path == prefijo or path.startswith(prefijo + "/"):
+            return stack
+    return DEFAULT_STACK
+
+
 def main():
     body = os.environ.get("BODY") or ""
     origen = (os.environ.get("ORIGEN") or "").strip()
@@ -80,14 +111,16 @@ def main():
         fallo("origen_ref viene vacío.")
 
     ramas = {nombre: "master" for nombre in RAMAS}
+    stacks = []
     pedidos = []
     specs = []
     todos = False
     vistos = set()
+    conocidos = {grupo for grupos in STACKS.values() for grupo in grupos}
 
     lineas = bloque_test(body)
     if lineas is None:
-        escribir({"run": "false", "spec": "", "grupos": "", **ramas})
+        escribir({"run": "false", "spec": "", "grupos": "", "stack": DEFAULT_STACK, **ramas})
         return
 
     for cruda in lineas:
@@ -106,17 +139,21 @@ def main():
         ref = ref.strip()
         if separador and not ref:
             fallo(f"A {nombre} le falta la rama.")
-        if nombre in GRUPOS or nombre in RAMAS:
+        if nombre in STACKS or nombre in conocidos or nombre in RAMAS:
             if nombre in vistos:
                 fallo(f"{nombre} está dos veces.")
             vistos.add(nombre)
-            if ref:
-                if nombre not in RAMAS:
-                    fallo(f"{nombre} es un grupo y no lleva rama.")
-                ramas[nombre] = ref
-            if nombre in GRUPOS:
+            if ref and nombre not in RAMAS:
+                fallo(f"{nombre} no lleva rama.")
+            if nombre in STACKS:
+                stacks.append(nombre)
+                continue
+            if nombre in conocidos:
                 pedidos.append(nombre)
-            elif not ref:
+                continue
+            if ref:
+                ramas[nombre] = ref
+            else:
                 fallo(f"{nombre} no es un grupo. Usá {nombre}: rama.")
             continue
         if "/" in nombre and not separador:
@@ -124,10 +161,38 @@ def main():
             continue
         fallo(f"No conozco {linea}.")
 
+    if len(stacks) > 1:
+        fallo("Una corrida lleva un solo stack.")
     if todos and (pedidos or specs):
-        fallo("todos va solo. Las ramas pueden ir en otra línea.")
+        fallo("todos va solo. El stack y las ramas pueden ir en otra línea.")
     if specs and pedidos:
         fallo("Una ruta va sola, sin grupos.")
+
+    if stacks:
+        stack = stacks[0]
+    elif pedidos:
+        duenos = []
+        for grupo in pedidos:
+            duenos.extend(dueno_grupo(grupo))
+        duenos = list(dict.fromkeys(duenos))
+        if len(duenos) > 1:
+            fallo("Los grupos son de stacks distintos.")
+        stack = duenos[0]
+    else:
+        stack = DEFAULT_STACK
+
+    for grupo in pedidos:
+        if grupo not in grupos_de(stack):
+            fallo(f"{grupo} no es un grupo de {stack}.")
+
+    if specs:
+        duenos = list(dict.fromkeys(dueno_spec(path) for path in specs))
+        if len(duenos) > 1:
+            fallo("Las rutas son de stacks distintos.")
+        if stacks and duenos[0] != stack:
+            fallo(f"La ruta es de {duenos[0]} y el stack es {stack}.")
+        if not stacks:
+            stack = duenos[0]
 
     if origen in ramas and ramas[origen] != "master":
         print(
@@ -137,18 +202,22 @@ def main():
     if origen in ramas:
         ramas[origen] = origen_ref
 
-    if todos:
-        escribir({"run": "true", "spec": "", "grupos": "", **ramas})
-        return
-    if specs:
-        escribir({"run": "true", "spec": ",".join(specs), "grupos": "", **ramas})
-        return
-    if pedidos:
-        orden = [nombre for nombre in GRUPOS if nombre in pedidos]
-        escribir({"run": "true", "spec": "", "grupos": ",".join(orden), **ramas})
+    if not (todos or stacks or pedidos or specs):
+        escribir({"run": "false", "spec": "", "grupos": "", "stack": stack, **ramas})
         return
 
-    escribir({"run": "false", "spec": "", "grupos": "", **ramas})
+    if not grupos_de(stack) and not specs:
+        fallo(f"El stack {stack} no tiene grupos.")
+
+    if specs:
+        escribir({"run": "true", "spec": ",".join(specs), "grupos": "", "stack": stack, **ramas})
+        return
+    if pedidos and not todos:
+        orden = [grupo for grupo in grupos_de(stack) if grupo in pedidos]
+        escribir({"run": "true", "spec": "", "grupos": ",".join(orden), "stack": stack, **ramas})
+        return
+
+    escribir({"run": "true", "spec": "", "grupos": "", "stack": stack, **ramas})
 
 
 if __name__ == "__main__":

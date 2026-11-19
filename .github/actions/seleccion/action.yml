@@ -14,13 +14,16 @@ inputs:
 
 outputs:
   run:
-    description: true si hay grupos, un spec o todos.
+    description: true si hay un stack, grupos, un spec o todos.
     value: ${{ steps.parse.outputs.run }}
+  stack:
+    description: andes, pacs o recetar. andes es el default.
+    value: ${{ steps.parse.outputs.stack }}
   spec:
-    description: Paths separados por coma. Vacío si corre por grupos.
+    description: Paths separados por coma. Vacío si corre por grupos del stack.
     value: ${{ steps.parse.outputs.spec }}
   grupos:
-    description: Grupos separados por coma. Vacío si corre la matriz o un spec.
+    description: Grupos separados por coma. Vacío corre los grupos del stack.
     value: ${{ steps.parse.outputs.grupos }}
   app:
     description: Rama o SHA de andes/app.

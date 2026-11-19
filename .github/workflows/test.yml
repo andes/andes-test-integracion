@@ -1,9 +1,9 @@
 name: Test de integración
 
-# Las imágenes se arman una vez. Cypress corre en un runner por grupo, cada uno
-# con su stack. spec vacío y grupos vacío disparan la matriz. spec es un archivo,
-# varios separados por coma, o una carpeta, y corre un solo job. grupos elige
-# celdas de la matriz, separadas por coma. Si vienen los dos, spec gana.
+# Las imágenes se arman una vez. Cypress corre en un runner por grupo.
+# El stack se elige primero: andes, pacs o recetar. andes es el default y trae
+# sus grupos. spec es un archivo, varios separados por coma, o una carpeta, y
+# corre un solo job. grupos elige dentro del stack. Si vienen los dos, spec gana.
 # La imagen de cada rama la publica su docker-image, llamado con workflow_call.
 # El tag es el SHA corto. Nginx copia app, matriculaciones, monitoreo y mobile.
 # Este corte no usa Cypress Cloud y no publica el informe fuera del artifact.
@@ -43,13 +43,18 @@ on:
         required: true
         default: master
         type: string
+      stack:
+        description: andes, pacs o recetar. andes es el default y trae sus grupos.
+        required: false
+        default: andes
+        type: string
       spec:
-        description: Vacío corre la suite por grupos. Si no, un spec, varios separados por coma, o una carpeta.
+        description: Vacío corre los grupos del stack. Si no, un spec, varios separados por coma, o una carpeta.
         required: false
         default: ""
         type: string
       grupos:
-        description: Vacío es la matriz, salvo que spec venga con valor. Si no, grupos separados por coma.
+        description: Vacío corre los grupos del stack, salvo que spec venga con valor. Si no, grupos separados por coma.
         required: false
         default: ""
         type: string
@@ -85,13 +90,18 @@ on:
         type: string
         default: master
         required: false
+      stack:
+        description: andes, pacs o recetar. andes es el default.
+        type: string
+        default: andes
+        required: false
       spec:
-        description: Un spec, varios separados por coma, o una carpeta. Vacío usa grupos.
+        description: Un spec, varios separados por coma, o una carpeta. Vacío usa los grupos del stack.
         type: string
         default: ""
         required: false
       grupos:
-        description: Grupos separados por coma. Vacío, con spec vacío, es la matriz.
+        description: Grupos del stack, separados por coma. Vacío, con spec vacío, corre los del stack.
         type: string
         default: ""
         required: false
@@ -159,32 +169,77 @@ jobs:
       - name: Armar la matriz
         id: lista
         env:
+          STACK: ${{ inputs.stack }}
           SPEC: ${{ inputs.spec }}
           GRUPOS: ${{ inputs.grupos }}
         run: |
           set -euo pipefail
-          mapa='[
-            {"grupo":"core","ruta":"cypress/e2e/core"},
-            {"grupo":"citas","ruta":"cypress/e2e/apps/citas"},
-            {"grupo":"rup-internacion","ruta":"cypress/e2e/apps/rup/internacion"},
-            {"grupo":"rup","ruta":"cypress/e2e/apps/rup/elementos-rup,cypress/e2e/apps/rup/punto-inicio,cypress/e2e/apps/rup/ejecucion,cypress/e2e/apps/rup/colonoscopia.spec.ts"},
-            {"grupo":"apps","ruta":"cypress/e2e/apps/auditoria,cypress/e2e/apps/com,cypress/e2e/apps/epidemiologia,cypress/e2e/apps/forms,cypress/e2e/apps/gestor-usuarios,cypress/e2e/apps/huds,cypress/e2e/apps/pantallas,cypress/e2e/apps/perinatal,cypress/e2e/apps/puco,cypress/e2e/apps/vacunacion,cypress/e2e/apps/visualizacion-informacion"},
-            {"grupo":"monitoreo","ruta":"cypress/e2e/monitoreo"},
-            {"grupo":"mobile","ruta":"cypress/e2e/apps/mobile"},
-            {"grupo":"pacs","ruta":"cypress/e2e/apps/pacs","opcional":true}
-          ]'
+          # andes es el default. Cada stack trae sus grupos. El mismo mapa está en parse.py.
+          mapa='{
+            "andes": [
+              {"grupo":"core","ruta":"cypress/e2e/core"},
+              {"grupo":"citas","ruta":"cypress/e2e/apps/citas"},
+              {"grupo":"rup-internacion","ruta":"cypress/e2e/apps/rup/internacion"},
+              {"grupo":"rup","ruta":"cypress/e2e/apps/rup/elementos-rup,cypress/e2e/apps/rup/punto-inicio,cypress/e2e/apps/rup/ejecucion,cypress/e2e/apps/rup/colonoscopia.spec.ts"},
+              {"grupo":"apps","ruta":"cypress/e2e/apps/auditoria,cypress/e2e/apps/com,cypress/e2e/apps/epidemiologia,cypress/e2e/apps/forms,cypress/e2e/apps/gestor-usuarios,cypress/e2e/apps/huds,cypress/e2e/apps/pantallas,cypress/e2e/apps/perinatal,cypress/e2e/apps/puco,cypress/e2e/apps/vacunacion,cypress/e2e/apps/visualizacion-informacion"},
+              {"grupo":"monitoreo","ruta":"cypress/e2e/monitoreo"},
+              {"grupo":"mobile","ruta":"cypress/e2e/apps/mobile"}
+            ],
+            "pacs": [
+              {"grupo":"pacs","ruta":"cypress/e2e/apps/pacs"}
+            ],
+            "recetar": []
+          }'
+          stack="${STACK:-andes}"
+          if ! jq -e --arg stack "$stack" 'has($stack)' <<<"$mapa" >/dev/null; then
+            echo "Stack desconocido: $stack" >&2
+            exit 1
+          fi
           if [[ -n "$SPEC" ]]; then
-            jq -n --arg spec "$SPEC" '{include:[{grupo:"spec", ruta:$spec}]}' > "$RUNNER_TEMP/matrix.json"
+            duenos=""
+            IFS=',' read -ra rutas <<< "$SPEC"
+            for ruta in "${rutas[@]}"; do
+              ruta="${ruta#"${ruta%%[![:space:]]*}"}"
+              ruta="${ruta%"${ruta##*[![:space:]]}"}"
+              este=andes
+              if [[ "$ruta" == cypress/e2e/apps/pacs || "$ruta" == cypress/e2e/apps/pacs/* ]]; then
+                este=pacs
+              elif [[ "$ruta" == cypress/e2e/apps/recetar || "$ruta" == cypress/e2e/apps/recetar/* ]]; then
+                este=recetar
+              fi
+              case " $duenos " in
+                *" $este "*) ;;
+                *) duenos="$duenos $este" ;;
+              esac
+            done
+            set -- $duenos
+            if [[ $# -gt 1 ]]; then
+              echo "Las rutas son de stacks distintos" >&2
+              exit 1
+            fi
+            dueno=$1
+            if [[ "$stack" != "andes" && "$stack" != "$dueno" ]]; then
+              echo "El spec es de $dueno y el stack es $stack" >&2
+              exit 1
+            fi
+            if [[ "$dueno" != "andes" ]]; then
+              stack=$dueno
+            fi
+            jq -n --arg stack "$stack" --arg spec "$SPEC" '{include:[{stack:$stack, grupo:"spec", ruta:$spec}]}' > "$RUNNER_TEMP/matrix.json"
           elif [[ -n "$GRUPOS" ]]; then
-            jq -n --argjson mapa "$mapa" --arg grupos "$GRUPOS" '
+            jq -n --argjson mapa "$mapa" --arg stack "$stack" --arg grupos "$GRUPOS" '
               ($grupos | split(",") | map(gsub("^\\s+|\\s+$";"")) | map(select(length > 0))) as $pedidos
               | if ($pedidos | length) == 0 then error("grupos no trae ningún nombre") else . end
-              | ($pedidos - ($mapa | map(.grupo))) as $mal
-              | if ($mal | length) > 0 then error("Grupo desconocido: \($mal | join(", "))") else . end
-              | {include: [$mapa[] | select(.grupo as $g | $pedidos | index($g) != null) | del(.opcional)]}
+              | ($mapa[$stack] | map(.grupo)) as $delstack
+              | ($pedidos - $delstack) as $mal
+              | if ($mal | length) > 0 then error("\($mal | join(", ")) no es un grupo de \($stack)") else . end
+              | {include: [$mapa[$stack][] | select(.grupo as $g | $pedidos | index($g) != null) | .stack = $stack]}
             ' > "$RUNNER_TEMP/matrix.json"
           else
-            jq -n --argjson mapa "$mapa" '{include:[$mapa[] | select(.opcional != true) | del(.opcional)]}' > "$RUNNER_TEMP/matrix.json"
+            jq -n --argjson mapa "$mapa" --arg stack "$stack" '
+              if ($mapa[$stack] | length) == 0 then error("el stack \($stack) no tiene grupos") else . end
+              | {include: [$mapa[$stack][] | .stack = $stack]}
+            ' > "$RUNNER_TEMP/matrix.json"
           fi
           {
             echo "matrix<<EOF"
@@ -265,25 +320,32 @@ jobs:
       # baseUrl y API_SERVER apuntan a nginx, que proxea /api/ hacia api:3002.
       - name: Levantar stack
         env:
-          GRUPO: ${{ matrix.grupo }}
-          RUTA: ${{ matrix.ruta }}
+          STACK: ${{ matrix.stack }}
         run: |
-          stack=andes
-          if [[ "$GRUPO" == "pacs" || "$RUTA" == *apps/pacs* ]]; then
-            stack=pacs
-          fi
-          echo "STACK=$stack" >> "$GITHUB_ENV"
-          if [[ "$stack" == "pacs" ]]; then
-            echo "MONGO_URI=mongodb://127.0.0.1:27067/andes" >> "$GITHUB_ENV"
-            echo "NGINX_URL=http://127.0.0.1:8090" >> "$GITHUB_ENV"
-            docker compose \
-              -p andes-pacs \
-              -f docker/docker-compose-pacs.yml \
-              --env-file docker/pacs/stack.env \
-              up -d
-            bash docker/pacs/setup.sh
-            exit 0
-          fi
+          echo "STACK=$STACK" >> "$GITHUB_ENV"
+          case "$STACK" in
+            pacs)
+              echo "MONGO_URI=mongodb://127.0.0.1:27067/andes" >> "$GITHUB_ENV"
+              echo "NGINX_URL=http://127.0.0.1:8090" >> "$GITHUB_ENV"
+              docker compose \
+                -p andes-pacs \
+                -f docker/docker-compose-pacs.yml \
+                --env-file docker/pacs/stack.env \
+                up -d
+              bash docker/pacs/setup.sh
+              exit 0
+              ;;
+            recetar)
+              echo "el stack recetar no está armado" >&2
+              exit 1
+              ;;
+            andes)
+              ;;
+            *)
+              echo "Stack desconocido: $STACK" >&2
+              exit 1
+              ;;
+          esac
           cat > "${RUNNER_TEMP}/compose.ports.yml" <<'EOF'
           services:
             db:
@@ -436,8 +498,13 @@ jobs:
       - name: Bajar stack
         if: always()
         run: |
-          if [[ "${STACK:-andes}" == "pacs" ]]; then
-            docker compose -p andes-pacs -f docker/docker-compose-pacs.yml --env-file docker/pacs/stack.env down -v --remove-orphans
-          elif [[ -f docker/docker-compose.yml ]]; then
-            docker compose -p andes-test -f docker/docker-compose.yml down -v --remove-orphans
-          fi
+          case "${STACK:-andes}" in
+            pacs)
+              docker compose -p andes-pacs -f docker/docker-compose-pacs.yml --env-file docker/pacs/stack.env down -v --remove-orphans
+              ;;
+            andes)
+              if [[ -f docker/docker-compose.yml ]]; then
+                docker compose -p andes-test -f docker/docker-compose.yml down -v --remove-orphans
+              fi
+              ;;
+          esac
