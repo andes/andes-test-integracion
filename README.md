@@ -36,6 +36,214 @@ Para un solo grupo de `andes`, agregar `-f grupos=mobile,monitoreo`. Para un spe
 
 App, api, mobile, monitoreo y matriculaciones llaman este workflow en cada push. La imagen de ese repo es el commit del PR. El resto queda en `master`. Para otra rama se descomenta la línea, por ejemplo `app: mi-rama`. El bloque elige un stack y, si hace falta, grupos de ese stack. `api`, `app` y `matriculaciones` no son stacks ni grupos. `todos` corre los grupos del stack, que es `andes` si no se nombró otro.
 
+### Personalizar los tests desde un Pull Request
+
+Los tests de integración se configuran desde la descripción del Pull Request, utilizando un bloque `Test`.
+
+El workflow del repositorio consumidor lee este bloque y determina qué stack, grupos o especificaciones ejecutar, así como las ramas de los componentes que se utilizarán.
+
+#### Formato
+
+Agregar `### Test` en la descripción del PR y debajo un bloque de código:
+
+```text
+### Test
+
+```
+andes
+mobile
+app: feature/mi-rama
+```
+```
+
+Cada línea representa una opción de configuración. No es YAML: no se utilizan claves, indentación ni listas YAML.
+
+#### Qué se puede configurar
+
+**1. Stack**
+
+Selecciona el contexto de ejecución:
+
+| Valor | Descripción |
+|---|---|
+| `andes` | Suite principal de ANDES. Es el valor por defecto. |
+| `pacs` | Suite de integración de PACS. |
+| `recetar` | Stack reservado para Recetar. Actualmente no tiene grupos ni tests configurados. |
+
+Seleccionar solamente un stack ejecuta todos sus grupos:
+
+```text
+### Test
+
+```
+pacs
+```
+```
+
+**2. Grupos**
+
+Permite ejecutar uno o varios grupos dentro del stack seleccionado.
+
+Grupos disponibles:
+
+| Stack | Grupos |
+|---|---|
+| `andes` | `core`, `citas`, `rup-internacion`, `rup`, `apps`, `monitoreo`, `mobile` |
+| `pacs` | `pacs` |
+
+Ejemplo: ejecutar solamente mobile y monitoreo:
+
+```text
+### Test
+
+```
+andes
+mobile
+monitoreo
+```
+```
+
+Si no se especifica un stack, el grupo determina automáticamente a qué stack pertenece.
+
+**3. Specs o directorios**
+
+También se puede seleccionar directamente un archivo, varios archivos o una carpeta de Cypress.
+
+Las rutas deben ser relativas a la raíz del repositorio de tests.
+
+Ejemplo:
+
+```text
+### Test
+
+```
+cypress/e2e/apps/mobile
+```
+```
+
+Varios archivos:
+
+```text
+### Test
+
+```
+cypress/e2e/apps/mobile/login.cy.ts
+cypress/e2e/apps/mobile/menu.cy.ts
+```
+```
+
+La selección por rutas no se combina con grupos. Todas las rutas deben pertenecer al mismo stack.
+
+También se pueden seleccionar los tests que todavía están en desarrollo:
+
+```text
+### Test
+
+```
+cypress/failing
+```
+```
+
+O los que están temporalmente excluidos:
+
+```text
+### Test
+
+```
+cypress/skipped
+```
+```
+
+**4. Ramas de los componentes**
+
+Se pueden indicar ramas o referencias Git específicas para utilizar versiones particulares de los componentes.
+
+Formato:
+
+```text
+componente: rama
+```
+
+Componentes disponibles:
+
+| Componente | Repositorio |
+|---|---|
+| `app` | `andes/app` |
+| `api` | `andes/api` |
+| `tests` | `andes/andes-test-integracion` |
+| `matriculaciones` | `andes/matriculaciones` |
+| `monitoreo` | `andes/monitoreo-app` |
+| `mobile` | `andes/mobile-app` |
+
+Si no se especifica una rama, se utiliza `master`.
+
+Ejemplo:
+
+```text
+### Test
+
+```
+andes
+mobile
+app: feature/nueva-interfaz
+tests: feature/nuevos-specs
+```
+```
+
+**Importante:** el repositorio que origina el Pull Request utiliza automáticamente el SHA del commit del PR. Si se especifica una rama para ese mismo componente, se ignora y prevalece el SHA del PR.
+
+#### Ejecutar todos los grupos
+
+La palabra `todos` permite indicar explícitamente que se quieren ejecutar todos los grupos del stack.
+
+```text
+### Test
+
+```
+andes
+todos
+```
+```
+
+También se puede utilizar únicamente:
+
+```text
+### Test
+
+```
+todos
+```
+```
+
+En ese caso se utiliza el stack `andes`.
+
+`todos` no se puede combinar con grupos ni rutas específicas. Sí puede combinarse con la selección de stack y ramas.
+
+#### Reglas importantes
+
+- Se admite un solo stack por ejecución.
+- Los grupos deben pertenecer al stack seleccionado.
+- Las rutas de specs deben pertenecer a un único stack.
+- No se pueden combinar grupos y rutas de specs.
+- Los nombres de grupos y stacks deben coincidir con los valores disponibles.
+- Las referencias Git deben ser válidas.
+- El bloque `Test` debe estar delimitado por triple backticks.
+- Si no existe el bloque `Test`, o está vacío, no se ejecuta la suite de integración.
+
+#### Ejemplos rápidos
+
+| Objetivo | Configuración |
+|---|---|
+| Todos los tests de ANDES | `andes` |
+| Todos los tests de PACS | `pacs` |
+| Solo mobile | `mobile` |
+| Core y citas | `core` + `citas` |
+| Todos los grupos de ANDES | `todos` |
+| Una carpeta específica | `cypress/e2e/apps/mobile` |
+| Tests con una rama alternativa de app | `app: feature/mi-rama` |
+
+La selección se procesa automáticamente al crear o actualizar el Pull Request. No es necesario ejecutar manualmente el workflow de integración.
+
 ## Local
 
 Hace falta Node 22. `npm ci`.
