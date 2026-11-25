@@ -45,12 +45,10 @@ El contenido del bloque se interpreta línea por línea. Cada línea representa 
 ```markdown
 ### Test
 
-```
 andes
 mobile
 monitoreo
 app: feature/mi-rama
-```
 ```
 
 #### Seleccionar un stack
@@ -60,9 +58,7 @@ El stack determina qué suite de integración ejecutar.
 ```markdown
 ### Test
 
-```
 pacs
-```
 ```
 
 Stacks disponibles:
@@ -80,12 +76,11 @@ Se pueden agregar varios grupos, uno por línea.
 ```markdown
 ### Test
 
-```
 andes
 mobile
 monitoreo
 ```
-```
+
 
 Grupos disponibles:
 
@@ -103,9 +98,7 @@ Se pueden seleccionar archivos individuales, varios archivos o directorios compl
 ```markdown
 ### Test
 
-```
 cypress/e2e/apps/mobile
-```
 ```
 
 Varios archivos:
@@ -113,10 +106,8 @@ Varios archivos:
 ```markdown
 ### Test
 
-```
 cypress/e2e/apps/mobile/login.cy.ts
 cypress/e2e/apps/mobile/menu.cy.ts
-```
 ```
 
 También se pueden ejecutar los tests pendientes o excluidos:
@@ -124,18 +115,15 @@ También se pueden ejecutar los tests pendientes o excluidos:
 ```markdown
 ### Test
 
-```
 cypress/failing
-```
 ```
 
 ```markdown
 ### Test
 
-```
 cypress/skipped
 ```
-```
+
 
 Las rutas se interpretan desde la raíz del repositorio de tests. No se pueden combinar rutas con grupos.
 
@@ -165,12 +153,10 @@ Ejemplo:
 ```markdown
 ### Test
 
-```
 andes
 mobile
 app: feature/nueva-interfaz
 tests: feature/nuevos-specs
-```
 ```
 
 Por defecto, los componentes utilizan la rama `master`.
@@ -184,10 +170,8 @@ Se puede utilizar `todos` para ejecutar todos los grupos del stack seleccionado.
 ```markdown
 ### Test
 
-```
 andes
 todos
-```
 ```
 
 También se puede omitir el stack:
@@ -195,9 +179,7 @@ También se puede omitir el stack:
 ```markdown
 ### Test
 
-```
 todos
-```
 ```
 
 En ese caso se utiliza `andes`.
