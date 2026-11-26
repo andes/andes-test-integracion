@@ -34,7 +34,157 @@ Para un solo grupo de `andes`, agregar `-f grupos=mobile,monitoreo`. Para un spe
 
 ## Desde un PR
 
-App, api, mobile, monitoreo y matriculaciones llaman este workflow en cada push. La imagen de ese repo es el commit del PR. El resto queda en `master`. Para otra rama se descomenta la línea, por ejemplo `app: mi-rama`. El bloque elige un stack y, si hace falta, grupos de ese stack. `api`, `app` y `matriculaciones` no son stacks ni grupos. `todos` corre los grupos del stack, que es `andes` si no se nombró otro.
+### Personalizar los tests desde un Pull Request
+
+Los tests se configuran desde la descripción del PR mediante un bloque `Test`.
+
+El contenido del bloque se interpreta línea por línea. Cada línea representa una opción de selección.
+
+#### Formato
+
+```markdown
+### Test
+
+andes
+mobile
+monitoreo
+app: feature/mi-rama
+```
+
+#### Seleccionar un stack
+
+El stack determina qué suite de integración ejecutar.
+
+```markdown
+### Test
+
+pacs
+```
+
+Stacks disponibles:
+
+| Stack | Descripción |
+|---|---|
+| `andes` | Suite principal de ANDES (default) |
+| `pacs` | Suite de integración PACS |
+| `recetar` | Reservado para Recetar |
+
+#### Seleccionar grupos
+
+Se pueden agregar varios grupos, uno por línea.
+
+```markdown
+### Test
+
+andes
+mobile
+monitoreo
+```
+
+
+Grupos disponibles:
+
+| Stack | Grupos |
+|---|---|
+| `andes` | `core`, `citas`, `rup-internacion`, `rup`, `apps`, `monitoreo`, `mobile` |
+| `pacs` | `pacs` |
+
+Si no se especifica el stack, se determina automáticamente a partir del grupo.
+
+#### Seleccionar specs o directorios
+
+Se pueden seleccionar archivos individuales, varios archivos o directorios completos.
+
+```markdown
+### Test
+
+cypress/e2e/apps/mobile
+```
+
+Varios archivos:
+
+```markdown
+### Test
+
+cypress/e2e/apps/mobile/login.cy.ts
+cypress/e2e/apps/mobile/menu.cy.ts
+```
+
+También se pueden ejecutar los tests pendientes o excluidos:
+
+```markdown
+### Test
+
+cypress/failing
+```
+
+```markdown
+### Test
+
+cypress/skipped
+```
+
+
+Las rutas se interpretan desde la raíz del repositorio de tests. No se pueden combinar rutas con grupos.
+
+#### Personalizar las ramas
+
+Se pueden indicar ramas específicas para los componentes de la integración.
+
+Formato:
+
+```text
+componente: rama
+```
+
+Componentes disponibles:
+
+| Componente | Repositorio |
+|---|---|
+| `app` | `andes/app` |
+| `api` | `andes/api` |
+| `tests` | `andes/andes-test-integracion` |
+| `matriculaciones` | `andes/matriculaciones` |
+| `monitoreo` | `andes/monitoreo-app` |
+| `mobile` | `andes/mobile-app` |
+
+Ejemplo:
+
+```markdown
+### Test
+
+andes
+mobile
+app: feature/nueva-interfaz
+tests: feature/nuevos-specs
+```
+
+Por defecto, los componentes utilizan la rama `master`.
+
+El repositorio que origina el PR utiliza automáticamente el SHA del commit que dispara el workflow. Si se especifica una rama para ese mismo componente, se ignora.
+
+#### Ejecutar todos los grupos
+
+Se puede utilizar `todos` para ejecutar todos los grupos del stack seleccionado.
+
+```markdown
+### Test
+
+andes
+todos
+```
+
+También se puede omitir el stack:
+
+```markdown
+### Test
+
+todos
+```
+
+En ese caso se utiliza `andes`.
+
+`todos` no se puede combinar con grupos ni rutas específicas. Sí admite la selección de stack y ramas.
 
 ## Local
 
