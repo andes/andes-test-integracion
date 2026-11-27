@@ -239,8 +239,8 @@ jobs:
               {"grupo":"core","ruta":"cypress/e2e/core"},
               {"grupo":"citas","ruta":"cypress/e2e/apps/citas"},
               {"grupo":"rup-internacion","ruta":"cypress/e2e/apps/rup/internacion"},
-              {"grupo":"rup","ruta":"cypress/e2e/apps/rup/elementos-rup,cypress/e2e/apps/rup/punto-inicio,cypress/e2e/apps/rup/ejecucion,cypress/e2e/apps/rup/colonoscopia.spec.ts"},
-              {"grupo":"apps","ruta":"cypress/e2e/apps/auditoria,cypress/e2e/apps/com,cypress/e2e/apps/epidemiologia,cypress/e2e/apps/forms,cypress/e2e/apps/gestor-usuarios,cypress/e2e/apps/huds,cypress/e2e/apps/pantallas,cypress/e2e/apps/perinatal,cypress/e2e/apps/puco,cypress/e2e/apps/vacunacion,cypress/e2e/apps/visualizacion-informacion"},
+              {"grupo":"rup","ruta":"cypress/e2e/apps/rup"},
+              {"grupo":"apps","ruta":"cypress/e2e/apps"},
               {"grupo":"monitoreo","ruta":"cypress/e2e/monitoreo"},
               {"grupo":"mobile","ruta":"cypress/e2e/apps/mobile"}
             ],
