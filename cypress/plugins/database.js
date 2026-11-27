@@ -30,7 +30,10 @@ const connectToDB = async (uri) => {
         });
         return client[connectionString];
     } catch (e) {
-        return false;
+        throw new Error(
+            `No se pudo conectar a MongoDB (${connectionString}): ${e.message}. `
+            + 'Para develop: npm run dev:up (puerto 27066) o MONGO_URI=mongodb://localhost:27017/andes',
+        );
     }
 };
 

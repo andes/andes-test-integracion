@@ -3734,5 +3734,14 @@
 		"semanticTag": "elemento de registro",
 		"conceptId": "2341000013106",
 		"term": "epicrisis médica"
+	},
+	{
+		"_id": {
+			"$oid": "65f34e1af7b4e4852242c49c"
+		},
+		"conceptId": "113091000",
+		"term": "imagenología por resonancia magnética",
+		"fsn": "resonancia magnética nuclear (procedimiento)",
+		"semanticTag": "procedimiento"
 	}
 ]
